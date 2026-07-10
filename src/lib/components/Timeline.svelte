@@ -285,10 +285,11 @@
 
 <svelte:window bind:scrollY bind:innerHeight={vh} bind:innerWidth={vw} />
 
+<!-- style:height はSSRでは付与しない（インラインstyle属性が厳格CSPに違反するため） -->
 <div
 	class="timeline"
 	class:single={columns === 1}
-	style:height="{height}px"
+	style:height={ready ? `${height}px` : undefined}
 	ondblclick={onDblClick}
 	role="presentation"
 >

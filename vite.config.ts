@@ -9,7 +9,9 @@ export default defineConfig({
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
 				runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter()
+			adapter: adapter(),
+			// 絶対パスで出力する（インラインbootスクリプトを外部化しても import() が解決できるように）
+			paths: { relative: false }
 		})
 	]
 });
