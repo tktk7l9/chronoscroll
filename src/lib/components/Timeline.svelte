@@ -245,6 +245,33 @@
 		applyZoom(pxPerDay * 2.2, e.clientY);
 	}
 
+	// 年代ジャンプ（era-chipタップ。ミニマップのないモバイルでの移動手段）
+	let jumpOpen = $state(false);
+	const jumpDecades = $derived.by(() => {
+		const out: number[] = [];
+		const first = Math.floor(Number(isoOf(maxDay).slice(0, 4)) / 10) * 10;
+		const last = Math.floor(Number(isoOf(minDay).slice(0, 4)) / 10) * 10;
+		for (let d = first; d >= last; d -= 10) out.push(d);
+		return out;
+	});
+	function jumpToDecade(decade: number | null): void {
+		jumpOpen = false;
+		if (decade === null) {
+			window.scrollTo({ top: 0 });
+			return;
+		}
+		jumpToDay(dayOf(`${Math.min(decade + 5, Number(isoOf(maxDay).slice(0, 4)))}-01-01`));
+	}
+	// パネル外クリックで閉じる
+	$effect(() => {
+		if (!jumpOpen) return;
+		const close = (e: PointerEvent) => {
+			if (!(e.target as HTMLElement).closest('.era-nav')) jumpOpen = false;
+		};
+		window.addEventListener('pointerdown', close);
+		return () => window.removeEventListener('pointerdown', close);
+	});
+
 	// キーボード操作: ↑↓=前後のイベントへ / +・-=ズーム
 	function focusCard(id: string): void {
 		const el = document.querySelector<HTMLButtonElement>(`.card[data-id="${id}"] .hit`);
@@ -333,9 +360,32 @@
 {/if}
 
 {#if ready}
-	<div class="era-chip" aria-hidden="true">
-		<span class="era-year">{centerLabel.year}</span>
-		{#if centerLabel.wareki}<span class="era-wareki">{centerLabel.wareki}</span>{/if}
+	<div class="era-nav">
+		<button
+			type="button"
+			class="era-chip"
+			aria-expanded={jumpOpen}
+			aria-label="年代へジャンプ（現在 {centerLabel.year}年）"
+			onclick={() => (jumpOpen = !jumpOpen)}
+		>
+			<span class="era-year">{centerLabel.year}</span>
+			{#if centerLabel.wareki}<span class="era-wareki">{centerLabel.wareki}</span>{/if}
+			<span class="era-caret" aria-hidden="true">▾</span>
+		</button>
+		{#if jumpOpen}
+			<div class="jump-panel" role="menu" aria-label="年代を選択">
+				<button type="button" class="jump-latest" role="menuitem" onclick={() => jumpToDecade(null)}>
+					最新へ
+				</button>
+				<div class="jump-grid">
+					{#each jumpDecades as d (d)}
+						<button type="button" role="menuitem" onclick={() => jumpToDecade(d)}>
+							{d}<span class="jump-s">s</span>
+						</button>
+					{/each}
+				</div>
+			</div>
+		{/if}
 	</div>
 {/if}
 
@@ -429,11 +479,14 @@
 		width: 20px;
 	}
 
-	.era-chip {
+	.era-nav {
 		position: fixed;
 		top: 112px;
 		left: 50%;
 		transform: translateX(-50%);
+		z-index: 6;
+	}
+	.era-chip {
 		display: flex;
 		align-items: baseline;
 		gap: 8px;
@@ -443,8 +496,66 @@
 		border: 1px solid var(--line);
 		border-radius: 999px;
 		box-shadow: var(--shadow);
-		z-index: 5;
-		pointer-events: none;
+		color: inherit;
+		cursor: pointer;
+		font-family: inherit;
+	}
+	.era-chip:hover {
+		border-color: var(--line-strong);
+	}
+	.era-caret {
+		font-size: 0.65rem;
+		color: var(--ink-muted);
+	}
+
+	.jump-panel {
+		position: absolute;
+		top: calc(100% + 8px);
+		left: 50%;
+		transform: translateX(-50%);
+		width: 264px;
+		padding: 10px;
+		background: var(--bg-elevated);
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		box-shadow: var(--shadow);
+	}
+	.jump-latest {
+		width: 100%;
+		margin-bottom: 8px;
+		padding: 7px 0;
+		font-family: inherit;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--accent);
+		background: color-mix(in srgb, var(--accent) 10%, transparent);
+		border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+		border-radius: 8px;
+		cursor: pointer;
+	}
+	.jump-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 6px;
+	}
+	.jump-grid button {
+		padding: 7px 0;
+		font-family: var(--font-serif);
+		font-size: 0.85rem;
+		font-variant-numeric: tabular-nums;
+		color: var(--ink);
+		background: transparent;
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		cursor: pointer;
+	}
+	.jump-grid button:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+	.jump-s {
+		font-size: 0.65rem;
+		color: var(--ink-muted);
 	}
 	.era-year {
 		font-family: var(--font-serif);
@@ -459,15 +570,23 @@
 
 	/* モバイルではカードと重ならないよう左下へ（右下はズームボタン） */
 	@media (max-width: 759px) {
-		.era-chip {
+		.era-nav {
 			top: auto;
 			bottom: 20px;
 			left: 14px;
 			transform: none;
+		}
+		.era-chip {
 			padding: 4px 14px;
 		}
 		.era-year {
 			font-size: 1.05rem;
+		}
+		.jump-panel {
+			top: auto;
+			bottom: calc(100% + 8px);
+			left: 0;
+			transform: none;
 		}
 	}
 </style>

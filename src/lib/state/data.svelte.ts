@@ -2,7 +2,7 @@
  * イベントデータのランタイムストア（IO層・カバレッジゲート対象外）。
  * overview を初期ロードし、可視範囲に応じて十年チャンクを遅延ロードする。
  */
-import { decadeKeysInRange } from '../chunks.ts';
+import { chunkKeysInRange } from '../chunks.ts';
 import { dayOf } from '../timescale.ts';
 import type { IndexMeta, NewsEvent } from '../types.ts';
 import { toPoints, type EventPoint } from '../viewport.ts';
@@ -16,7 +16,6 @@ export class TimelineData {
 	#events = new Map<string, NewsEvent>();
 	#loaded = new Set<string>();
 	#pending = new Set<string>();
-	#availableDecades: ReadonlySet<string> = new Set();
 
 	readonly points: EventPoint[] = $derived.by(() => {
 		void this.version;
@@ -34,7 +33,6 @@ export class TimelineData {
 				fetchJson<IndexMeta>('/data/index.json'),
 				fetchJson<NewsEvent[]>('/data/overview.json'),
 			]);
-			this.#availableDecades = new Set(meta.decades.map((d) => d.key));
 			this.#addEvents(overview);
 			this.meta = meta;
 		} catch (e) {
@@ -42,12 +40,13 @@ export class TimelineData {
 		}
 	}
 
-	/** 可視範囲+バッファに必要な十年チャンクをロードする（多重ロード防止付き） */
+	/** 可視範囲+バッファに必要なチャンクをロードする（多重ロード防止付き） */
 	ensureRange(fromDay: number, toDay: number): void {
-		for (const key of decadeKeysInRange(fromDay, toDay, this.#availableDecades)) {
+		if (!this.meta) return;
+		for (const key of chunkKeysInRange(this.meta.chunks, fromDay, toDay)) {
 			if (this.#loaded.has(key) || this.#pending.has(key)) continue;
 			this.#pending.add(key);
-			void fetchJson<NewsEvent[]>(`/data/decades/${key}.json`)
+			void fetchJson<NewsEvent[]>(`/data/chunks/${key}.json`)
 				.then((events) => {
 					this.#loaded.add(key);
 					this.#addEvents(events);

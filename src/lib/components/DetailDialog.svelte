@@ -73,6 +73,10 @@
 						<li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label} ↗</a></li>
 					{/each}
 				</ul>
+				<!-- 個別ページはcsr=falseの純静的HTML。__data.jsonを配信しないためフルリロードで遷移する -->
+				<p class="permalink">
+					<a href="/e/{ev.id}" data-sveltekit-reload>このできごとの個別ページ</a>
+				</p>
 			</footer>
 
 			<button type="button" class="close" onclick={() => dialog?.close()} aria-label="閉じる">
@@ -199,6 +203,14 @@
 	}
 	footer a {
 		font-size: 0.85rem;
+	}
+	.permalink {
+		margin: 10px 0 0;
+		font-size: 0.75rem;
+	}
+	.permalink a {
+		color: var(--ink-muted);
+		font-size: 0.75rem;
 	}
 
 	.close {

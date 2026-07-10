@@ -1,24 +1,19 @@
 import { isoOf } from './timescale.ts';
-
-export function decadeKeyOfYear(year: number): string {
-	return `${Math.floor(year / 10) * 10}s`;
-}
+import type { ChunkMeta } from './types.ts';
 
 /**
- * day範囲（fromDay=新しい側）に交差する十年チャンクのキーを新しい順に返す。
- * available が与えられたら実在するチャンクに絞る。
+ * day範囲（fromDay=新しい側）に交差するチャンクのキーを新しい順に返す。
+ * チャンクの粒度（十年/5年）は index.json のメタが決める。
  */
-export function decadeKeysInRange(
+export function chunkKeysInRange(
+	chunks: readonly ChunkMeta[],
 	fromDay: number,
 	toDay: number,
-	available?: ReadonlySet<string>,
 ): string[] {
 	const newestYear = Number(isoOf(Math.floor(fromDay)).slice(0, 4));
 	const oldestYear = Number(isoOf(Math.floor(toDay)).slice(0, 4));
-	const keys: string[] = [];
-	for (let d = Math.floor(newestYear / 10) * 10; d >= Math.floor(oldestYear / 10) * 10; d -= 10) {
-		const key = `${d}s`;
-		if (available === undefined || available.has(key)) keys.push(key);
-	}
-	return keys;
+	return chunks
+		.filter((c) => c.fromYear <= newestYear && c.toYear >= oldestYear)
+		.sort((a, b) => b.fromYear - a.fromYear)
+		.map((c) => c.key);
 }

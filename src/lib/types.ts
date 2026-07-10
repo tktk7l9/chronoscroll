@@ -41,8 +41,11 @@ export interface NewsEvent {
 	svg?: string;
 }
 
-export interface DecadeMeta {
+/** 遅延ロード用チャンク（基本は十年、件数が多い十年は5年に分割） */
+export interface ChunkMeta {
 	key: string;
+	fromYear: number;
+	toYear: number;
 	count: number;
 }
 
@@ -52,7 +55,7 @@ export interface IndexMeta {
 	minDate: string;
 	maxDate: string;
 	total: number;
-	decades: DecadeMeta[];
+	chunks: ChunkMeta[];
 }
 
 export const CATEGORIES: readonly Category[] = [

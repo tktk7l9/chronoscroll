@@ -1,7 +1,15 @@
 // SvelteKit(adapter-static) が prerendered HTML に埋め込むインラインの起動スクリプトを
 // 外部ファイルへ移す。厳格CSP（script-src 'self'・unsafe-inline なし）と両立させるため。
 // paths.relative=false 前提（コード内の参照が絶対パスなので移設しても解決できる）。
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import {
+	existsSync,
+	mkdirSync,
+	readFileSync,
+	readdirSync,
+	rmSync,
+	statSync,
+	writeFileSync,
+} from 'node:fs';
 import { join } from 'node:path';
 
 // ローカルは build/、Vercel上では adapter-static が .vercel/output/static に直接出力する
@@ -43,3 +51,15 @@ if (moved === 0) {
 	console.error('❌ インラインスクリプトが見つからなかった（SvelteKitの出力形式が変わった可能性）');
 	process.exit(1);
 }
+
+let removed = 0;
+for (const dir of CANDIDATES.filter((d) => existsSync(join(d, 'e')))) {
+	for (const name of readdirSync(join(dir, 'e'))) {
+		const p = join(dir, 'e', name);
+		if (statSync(p).isDirectory()) {
+			rmSync(p, { recursive: true });
+			removed++;
+		}
+	}
+}
+console.log(`__data.json削除: ${removed}件`);

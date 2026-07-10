@@ -1,6 +1,6 @@
 import type {
 	Category,
-	DecadeMeta,
+	ChunkMeta,
 	EventImage,
 	IndexMeta,
 	NewsEvent,
@@ -53,6 +53,9 @@ export function decadeKeyOf(year: number): string {
 	return `${Math.floor(year / 10) * 10}s`;
 }
 
+/** 1チャンクあたりの上限。超える十年は前半/後半の5年チャンクに分割する */
+export const MAX_EVENTS_PER_CHUNK = 1200;
+
 /** 日付昇順（同日はid順）の正準ソート */
 export function sortEvents(events: readonly NewsEvent[]): NewsEvent[] {
 	return [...events].sort((a, b) =>
@@ -60,13 +63,45 @@ export function sortEvents(events: readonly NewsEvent[]): NewsEvent[] {
 	);
 }
 
-export function chunkByDecade(events: readonly NewsEvent[]): Map<string, NewsEvent[]> {
-	const chunks = new Map<string, NewsEvent[]>();
+export interface Chunk {
+	meta: ChunkMeta;
+	events: NewsEvent[];
+}
+
+/**
+ * 十年単位にチャンクし、MAX_EVENTS_PER_CHUNK を超える十年は前半/後半の5年に分割する。
+ * キーは "1960s"（十年）/ "2020h1"・"2020h2"（5年前半/後半）。
+ */
+export function buildChunks(
+	events: readonly NewsEvent[],
+	maxPerChunk = MAX_EVENTS_PER_CHUNK,
+): Chunk[] {
+	const byDecade = new Map<number, NewsEvent[]>();
 	for (const ev of sortEvents(events)) {
-		const key = decadeKeyOf(Number(ev.date.slice(0, 4)));
-		const arr = chunks.get(key);
+		const decade = Math.floor(Number(ev.date.slice(0, 4)) / 10) * 10;
+		const arr = byDecade.get(decade);
 		if (arr) arr.push(ev);
-		else chunks.set(key, [ev]);
+		else byDecade.set(decade, [ev]);
+	}
+	const chunks: Chunk[] = [];
+	for (const [decade, evs] of byDecade) {
+		if (evs.length <= maxPerChunk) {
+			chunks.push({
+				meta: { key: `${decade}s`, fromYear: decade, toYear: decade + 9, count: evs.length },
+				events: evs,
+			});
+			continue;
+		}
+		const first = evs.filter((e) => Number(e.date.slice(0, 4)) < decade + 5);
+		const second = evs.filter((e) => Number(e.date.slice(0, 4)) >= decade + 5);
+		chunks.push({
+			meta: { key: `${decade}h1`, fromYear: decade, toYear: decade + 4, count: first.length },
+			events: first,
+		});
+		chunks.push({
+			meta: { key: `${decade}h2`, fromYear: decade + 5, toYear: decade + 9, count: second.length },
+			events: second,
+		});
 	}
 	return chunks;
 }
@@ -76,27 +111,30 @@ export function overviewSlice(events: readonly NewsEvent[], minImportance = 95):
 	return sortEvents(events.filter((e) => e.importance >= minImportance));
 }
 
+/** 検索テキストの上限文字数（索引サイズ抑制。要点は文頭に来るため実用上十分） */
+export const SEARCH_TEXT_MAX = 72;
+
 /** 検索worker用の軽量ドキュメント [id, date, text] */
 export function searchDocs(events: readonly NewsEvent[]): [string, string, string][] {
-	return sortEvents(events).map((e) => [e.id, e.date, e.summary]);
+	return sortEvents(events).map((e) => [
+		e.id,
+		e.date,
+		e.summary.length <= SEARCH_TEXT_MAX ? e.summary : e.summary.slice(0, SEARCH_TEXT_MAX),
+	]);
 }
 
-export type { DecadeMeta, IndexMeta };
+export type { ChunkMeta, IndexMeta };
 
 export function buildIndexMeta(events: readonly NewsEvent[], generatedAt: string): IndexMeta {
 	if (events.length === 0) {
-		return { generatedAt, minDate: '', maxDate: '', total: 0, decades: [] };
+		return { generatedAt, minDate: '', maxDate: '', total: 0, chunks: [] };
 	}
 	const sorted = sortEvents(events);
-	const decades = [...chunkByDecade(sorted).entries()].map(([key, evs]) => ({
-		key,
-		count: evs.length,
-	}));
 	return {
 		generatedAt,
 		minDate: sorted[0].date,
 		maxDate: sorted[sorted.length - 1].date,
 		total: sorted.length,
-		decades,
+		chunks: buildChunks(sorted).map((c) => c.meta),
 	};
 }

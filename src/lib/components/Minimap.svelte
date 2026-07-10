@@ -30,19 +30,20 @@
 		return Math.min(1, Math.max(0, (maxDay - day) / span));
 	}
 
-	// 十年ごとの密度セグメント（単一色相・濃淡のsequential表現）
+	// チャンクごとの密度セグメント（単一色相・濃淡のsequential表現）。
+	// 5年チャンクは件数を期間で正規化した密度で比較する
 	const segments = $derived.by(() => {
-		const max = Math.max(...meta.decades.map((d) => d.count));
-		return meta.decades.map((d) => {
-			const startYear = Number(d.key.slice(0, 4));
-			const from = Math.max(minDay, dayOf(`${startYear}-01-01`));
-			const to = Math.min(maxDay, dayOf(`${startYear + 9}-12-31`));
+		const density = (c: (typeof meta.chunks)[number]) => c.count / (c.toYear - c.fromYear + 1);
+		const max = Math.max(...meta.chunks.map(density));
+		return meta.chunks.map((c) => {
+			const from = Math.max(minDay, dayOf(`${c.fromYear}-01-01`));
+			const to = Math.min(maxDay, dayOf(`${c.toYear}-12-31`));
 			return {
-				key: d.key,
+				key: c.key,
 				top: pos(to) * 100,
 				height: (pos(from) - pos(to)) * 100,
-				intensity: 0.14 + 0.66 * (d.count / max),
-				label: `${startYear}年代 ${d.count}件`,
+				intensity: 0.14 + 0.66 * (density(c) / max),
+				label: `${c.fromYear}-${c.toYear} ${c.count}件`,
 			};
 		});
 	});

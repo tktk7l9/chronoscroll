@@ -11,16 +11,16 @@
  * 6. curated YAML 適用
  * 7. static/data/ へ JSON チャンク出力 + 統計レポート
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { EventImage, NewsEvent } from '../../src/lib/types.ts';
 import { classify, type ClassifySidecar } from '../lib/classify.ts';
 import { applyCurated, parseCuratedYaml, type CuratedEntry } from '../lib/curate.ts';
 import {
+	buildChunks,
 	buildEvent,
 	buildIndexMeta,
-	chunkByDecade,
 	overviewSlice,
 	searchDocs,
 	sortEvents,
@@ -58,7 +58,12 @@ function parseArgs(): Args {
 		const i = argv.indexOf(`--${name}`);
 		return i >= 0 ? Number(argv[i + 1]) : fallback;
 	};
-	return { from: get('from', 1868), to: get('to', 2026), offline: argv.includes('--offline') };
+	// 年ページは当年分も随時更新されるため、デフォルトの終端は実行時の年
+	return {
+		from: get('from', 1868),
+		to: get('to', new Date().getFullYear()),
+		offline: argv.includes('--offline'),
+	};
 }
 
 function loadJsonCache<T>(file: string, fallback: T): T {
@@ -294,15 +299,17 @@ async function main(): Promise<void> {
 	}
 
 	// 7. 出力
-	mkdirSync(join(OUT, 'decades'), { recursive: true });
+	rmSync(join(OUT, 'decades'), { recursive: true, force: true });
+	rmSync(join(OUT, 'chunks'), { recursive: true, force: true });
+	mkdirSync(join(OUT, 'chunks'), { recursive: true });
 	const meta = buildIndexMeta(events, new Date().toISOString());
 	writeFileSync(join(OUT, 'index.json'), JSON.stringify(meta));
 	writeFileSync(
 		join(OUT, 'overview.json'),
 		JSON.stringify(overviewSlice(events, OVERVIEW_MIN_IMPORTANCE)),
 	);
-	for (const [key, evs] of chunkByDecade(events)) {
-		writeFileSync(join(OUT, 'decades', `${key}.json`), JSON.stringify(evs));
+	for (const chunk of buildChunks(events)) {
+		writeFileSync(join(OUT, 'chunks', `${chunk.meta.key}.json`), JSON.stringify(chunk.events));
 	}
 	writeFileSync(join(OUT, 'search.json'), JSON.stringify(searchDocs(events)));
 
@@ -312,8 +319,8 @@ async function main(): Promise<void> {
 	console.log(`overview(≥${OVERVIEW_MIN_IMPORTANCE}): ${overviewSlice(events, OVERVIEW_MIN_IMPORTANCE).length}件`);
 	console.log(`画像付き: ${events.filter((e) => e.image).length}件`);
 	console.log(`curated: 上書き${curateResult.updated.length} / 追加${curateResult.added.length}`);
-	console.log('\n十年別件数:');
-	for (const d of meta.decades) console.log(`  ${d.key}: ${d.count}`);
+	console.log('\nチャンク別件数:');
+	for (const c of meta.chunks) console.log(`  ${c.key} (${c.fromYear}-${c.toYear}): ${c.count}`);
 	const catCount = new Map<string, number>();
 	const regCount = new Map<string, number>();
 	for (const e of events) {

@@ -1,0 +1,53 @@
+name: data-refresh
+
+# 毎月1日 21:00 UTC（JST 2日 6:00）にWikipediaからデータを再生成してPRを作る。
+# pipeline/.cache はActionsキャッシュで持ち回り、新規リンク分だけAPIを叩く。
+# ページビュー等のシグナルはキャッシュ分が古くなるが、注目度の相対順位への影響は軽微。
+on:
+  schedule:
+    - cron: '0 21 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/cache@v4
+        with:
+          path: pipeline/.cache
+          key: pipeline-cache-${{ github.run_id }}
+          restore-keys: |
+            pipeline-cache-
+      - run: npm ci
+      - run: npx tsx pipeline/run/build.ts
+      - run: npm run coverage
+      - run: npm run build
+      - name: PR作成（差分がある場合のみ）
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          BRANCH="data-refresh-$(date +%Y%m)"
+          git checkout -B "$BRANCH"
+          git add static/data
+          if git diff --cached --quiet; then
+            echo "データに変更なし"
+            exit 0
+          fi
+          git commit -m "data: 月次データ更新 $(date +%Y-%m)"
+          git push -f origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "data: 月次データ更新 $(date +%Y-%m)" \
+            --body "Wikipediaからの自動再生成です。統計（件数・チャンク内訳）をActionsログで確認してからマージしてください。" \
+            || echo "PRは既に存在します"

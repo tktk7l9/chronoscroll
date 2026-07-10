@@ -83,7 +83,7 @@ export interface ForcedDate {
 /** 「[[10月1日]]」「[[3月]] -」のような日付だけの行か（同日複数イベントの親）。リンクなし表記にも対応 */
 export function parseDateOnly(stripped: string): ForcedDate | null {
 	const m = stripped.match(
-		/^(?:\[\[)?(\d{1,2})月(?:(\d{1,2})日)?(?:\s*\(旧暦\))?(?:\]\])?\s*[-–—−‐]?\s*$/,
+		/^(?:\[\[)?(\d{1,2})月(?:(\d{1,2})日)?(\s*\(旧暦\))?(?:\]\])?\s*[-–—−‐]?\s*$/,
 	);
 	if (!m) return null;
 	const month = Number(m[1]);
@@ -91,7 +91,8 @@ export function parseDateOnly(stripped: string): ForcedDate | null {
 	if (m[2] !== undefined) {
 		const day = Number(m[2]);
 		if (day < 1 || day > 31) return null;
-		return { month, day, precision: 'day' };
+		// 旧暦の日付はグレゴリオ暦と最大1ヶ月程度ズレるため、日単位の精度は主張しない
+		return { month, day, precision: m[3] ? 'month' : 'day' };
 	}
 	return { month, day: null, precision: 'month' };
 }
@@ -118,17 +119,18 @@ export function parseBulletLine(
 	// 「[[M月D日]]（旧暦注記など） - 本文」/「[[M月]] - 本文」。リンクなし日付にも対応。
 	// ネスト行（forcedあり）でも自前の日付があればそちらを優先する
 	const dm = stripped.match(
-		/^(?:\[\[)?(\d{1,2})月(?:(\d{1,2})日)?(?:\s*\(旧暦\))?(?:\]\])?\s*(?:（[^）]*）|\([^)]*\))?\s*[-–—−‐]\s*(.*)$/,
+		/^(?:\[\[)?(\d{1,2})月(?:(\d{1,2})日)?(\s*\(旧暦\))?(?:\]\])?\s*(?:（[^）]*）|\([^)]*\))?\s*[-–—−‐]\s*(.*)$/,
 	);
 	if (dm) {
 		month = Number(dm[1]);
 		if (dm[2] !== undefined) {
 			day = Number(dm[2]);
-			precision = 'day';
+			// 旧暦日付は日単位の精度を主張しない（位置決めには使う）
+			precision = dm[3] ? 'month' : 'day';
 		} else {
 			precision = 'month';
 		}
-		body = dm[3];
+		body = dm[4];
 	}
 
 	// 日付レンジ表記（「[[10月22日]] - [[10月24日]] - 本文」）の2つ目の日付と、

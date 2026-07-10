@@ -1,8 +1,6 @@
 // chronoscroll 実ブラウザスモークテスト
 // 使い方: node e2e/smoke.mjs [baseUrl]   （デフォルト http://localhost:5199）
 // シナリオ: 初期表示 / ズーム / 詳細ダイアログ / フィルタ / 検索ジャンプ / URL復元 / モバイル
-import { chromium } from 'playwright-core';
-
 const base = process.argv[2] ?? 'http://localhost:5199';
 const results = [];
 const errors = [];
@@ -11,11 +9,26 @@ function assert(name, cond, detail = '') {
 	results.push({ name, ok: !!cond, detail: cond ? '' : detail });
 }
 
-const browser = await chromium.launch({ channel: 'chrome', headless: true });
+// ローカルはシステムChrome、CIは playwright パッケージ（chromiumバイナリ入り）を使う
+async function launchBrowser() {
+	try {
+		const { chromium } = await import('playwright');
+		return await chromium.launch({ headless: true });
+	} catch {
+		const { chromium } = await import('playwright-core');
+		return await chromium.launch({ channel: 'chrome', headless: true });
+	}
+}
+
+const browser = await launchBrowser();
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => {
-	if (m.type() === 'error' && !m.text().includes('_vercel/insights')) errors.push(m.text());
+	if (m.type() !== 'error') return;
+	// Vercel Analyticsはローカル/CI環境に存在しないため除外
+	if ((m.location()?.url ?? '').includes('_vercel/insights')) return;
+	if (m.text().includes('_vercel/insights')) return;
+	errors.push(`${m.text()} (${m.location()?.url ?? ''})`);
 });
 
 // 1. 初期表示（概観・注目ニュースのみ）
@@ -101,6 +114,29 @@ const singles = await page.evaluate(() => ({
 }));
 assert('モバイル: 全カードが1カラム', singles.cards > 0 && singles.cards === singles.single);
 assert('モバイル: ミニマップ非表示', !singles.minimapVisible);
+
+// 8. 年代ジャンプ: era-chipタップ → 十年選択で移動
+await page.locator('.era-chip').click();
+await page.waitForTimeout(300);
+const decadeBtn = page.locator('.jump-grid button', { hasText: '1900' }).first();
+await decadeBtn.click();
+await page.waitForTimeout(900);
+const jumpedEra = await page.locator('.era-chip .era-year').textContent();
+assert('年代ジャンプ: 1900年代へ移動', jumpedEra === '1905', `era=${jumpedEra}`);
+
+// 9. イベント個別ページ: prerenderされたHTMLが直接表示できる
+const firstId = await page.evaluate(async () => {
+	const overview = await (await fetch('/data/overview.json')).json();
+	return overview.find((e) => e.svg)?.id ?? overview[0].id;
+});
+await page.setViewportSize({ width: 1280, height: 800 });
+await page.goto(`${base}/e/${firstId}`, { waitUntil: 'networkidle' });
+const h1 = await page.locator('article h1').textContent().catch(() => null);
+assert('個別ページ: 記事が表示される', !!h1 && h1.length > 3, `h1=${h1}`);
+assert(
+	'個別ページ: 年表への導線がある',
+	(await page.locator('a.timeline-link').count()) === 1,
+);
 
 await browser.close();
 

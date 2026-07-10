@@ -125,6 +125,12 @@ describe('parseBulletLine', () => {
 		expect(ev?.text).toBe('府県廃合を完了（3府72県）。');
 	});
 
+	it('日付リンク自体が旧暦なら日単位の精度を主張しない', () => {
+		const ev = parseBulletLine('[[1月2日 (旧暦)]] - 何かが起きた。', 1870, 1);
+		expect(ev).toMatchObject({ month: 1, day: 2, precision: 'month' });
+		expect(parseDateOnly('[[1月2日 (旧暦)]]')).toEqual({ month: 1, day: 2, precision: 'month' });
+	});
+
 	it('月のみリンクは month precision', () => {
 		const ev = parseBulletLine('[[3月]] - 何かが起きた。', 1900, 1);
 		expect(ev?.month).toBe(3);

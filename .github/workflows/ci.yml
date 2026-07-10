@@ -19,3 +19,11 @@ jobs:
       - run: npm run typecheck
       - run: npm run coverage
       - run: npm run build
+      # 実ブラウザスモーク（本番同等のCSPヘッダー付きで配信して検証。
+      # SvelteKit更新でCSPハッシュがズレた場合もここで検知できる）
+      - run: npm i --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          node e2e/serve.mjs 5299 &
+          sleep 1
+          node e2e/smoke.mjs http://localhost:5299

@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import type { NewsEvent } from '../../src/lib/types.ts';
 import {
+	SEARCH_TEXT_MAX,
+	buildChunks,
 	buildEvent,
 	buildIndexMeta,
-	chunkByDecade,
 	decadeKeyOf,
 	overviewSlice,
 	searchDocs,
@@ -96,9 +97,27 @@ describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 	});
 
 	it('十年単位にチャンクする', () => {
-		const chunks = chunkByDecade(events);
-		expect([...chunks.keys()]).toEqual(['1870s', '1960s']);
-		expect(chunks.get('1960s')!.map((e) => e.id)).toEqual(['a', 'b']);
+		const chunks = buildChunks(events);
+		expect(chunks.map((c) => c.meta)).toEqual([
+			{ key: '1870s', fromYear: 1870, toYear: 1879, count: 1 },
+			{ key: '1960s', fromYear: 1960, toYear: 1969, count: 2 },
+		]);
+		expect(chunks[1].events.map((e) => e.id)).toEqual(['a', 'b']);
+	});
+
+	it('上限を超える十年は5年チャンクに分割する', () => {
+		const many = [
+			ev('x1', '2021-01-01'),
+			ev('x2', '2023-01-01'),
+			ev('x3', '2025-01-01'),
+			ev('x4', '2026-01-01'),
+		];
+		const chunks = buildChunks(many, 3);
+		expect(chunks.map((c) => c.meta.key)).toEqual(['2020h1', '2020h2']);
+		expect(chunks[0].events.map((e) => e.id)).toEqual(['x1', 'x2']);
+		expect(chunks[1].events.map((e) => e.id)).toEqual(['x3', 'x4']);
+		expect(chunks[0].meta).toMatchObject({ fromYear: 2020, toYear: 2024, count: 2 });
+		expect(chunks[1].meta).toMatchObject({ fromYear: 2025, toYear: 2029, count: 2 });
 	});
 
 	it('overviewSlice は閾値以上のみ', () => {
@@ -106,8 +125,11 @@ describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 		expect(overviewSlice(events, 100)).toEqual([]);
 	});
 
-	it('searchDocs は [id, date, summary] の軽量配列', () => {
+	it('searchDocs は [id, date, summary] の軽量配列（長文は切り詰め）', () => {
 		expect(searchDocs(events)[0]).toEqual(['c', '1872-10-14', 's-c']);
+		const long = { ...ev('l', '2000-01-01'), summary: 'あ'.repeat(200) };
+		const [, , text] = searchDocs([long])[0];
+		expect(text).toHaveLength(SEARCH_TEXT_MAX);
 	});
 });
 
@@ -119,7 +141,7 @@ describe('decadeKeyOf', () => {
 });
 
 describe('buildIndexMeta', () => {
-	it('範囲・件数・十年内訳を返す', () => {
+	it('範囲・件数・チャンク内訳を返す', () => {
 		const meta = buildIndexMeta(
 			[ev('a', '1964-10-10'), ev('b', '1872-10-14'), ev('c', '1964-11-01')],
 			'2026-07-10T00:00:00Z',
@@ -127,15 +149,15 @@ describe('buildIndexMeta', () => {
 		expect(meta.minDate).toBe('1872-10-14');
 		expect(meta.maxDate).toBe('1964-11-01');
 		expect(meta.total).toBe(3);
-		expect(meta.decades).toEqual([
-			{ key: '1870s', count: 1 },
-			{ key: '1960s', count: 2 },
+		expect(meta.chunks).toEqual([
+			{ key: '1870s', fromYear: 1870, toYear: 1879, count: 1 },
+			{ key: '1960s', fromYear: 1960, toYear: 1969, count: 2 },
 		]);
 	});
 
 	it('空配列は空メタ', () => {
 		const meta = buildIndexMeta([], 'now');
 		expect(meta.total).toBe(0);
-		expect(meta.decades).toEqual([]);
+		expect(meta.chunks).toEqual([]);
 	});
 });
