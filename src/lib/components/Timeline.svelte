@@ -285,10 +285,12 @@
 
 <svelte:window bind:scrollY bind:innerHeight={vh} bind:innerWidth={vw} />
 
-<!-- style:height はSSRでは付与しない（インラインstyle属性が厳格CSPに違反するため） -->
+<!-- style:height はSSRでは付与しない（インラインstyle属性が厳格CSPに違反するため）。
+     ready前はCSSのmin-heightプレースホルダでフッターを画面外に保ちCLSを防ぐ -->
 <div
 	class="timeline"
 	class:single={columns === 1}
+	class:is-ready={ready}
 	style:height={ready ? `${height}px` : undefined}
 	ondblclick={onDblClick}
 	role="presentation"
@@ -341,6 +343,10 @@
 	.timeline {
 		position: relative;
 		overflow: clip;
+	}
+	.timeline:not(.is-ready) {
+		/* 初期ズーム（全期間≈6画面分）の概算。ready後の実寸との差分はビューポート外で起きるためCLSに響かない */
+		min-height: 600vh;
 	}
 
 	.spine {
