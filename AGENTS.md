@@ -24,6 +24,14 @@
 
 ## セキュリティ / 公開
 - 厳格CSP（vercel.json）。画像のみ upload.wikimedia.org を許可。後から緩めない。
+- **SvelteKit×厳格CSPの3点セット**（どれか欠けると本番で真っ白になる）:
+  ① 起動インラインスクリプトは `scripts/externalize-inline.mjs`（post-build）で外部化。
+     Vercel上では adapter-static の出力先が `.vercel/output/static` になる点に注意。
+  ② `paths.relative: false`（外部化した起動スクリプト内の import() を絶対パスで解決）。
+  ③ `style-src-attr` のハッシュはSvelteKitルートアナウンサーの固定style属性
+     （position:absolute;...）のもの。**kitのバージョン更新でこの文字列が変わったら再計算**:
+     `node -e "..."` でsha256を出し vercel.json を更新（変わると console にCSP違反が出る）。
+- SSRでstyle:属性を出力しない（インラインstyle属性はCSP違反。Timelineのheightはready後に付与）。
 - **public化は publish-check スキル経由のみ**。それまで private。
 - 秘密情報・環境変数なし（公開APIのみ使用）。`.env` を作らない。
 
