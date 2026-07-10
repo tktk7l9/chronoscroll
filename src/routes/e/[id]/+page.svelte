@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ArtIcon from '$lib/components/ArtIcon.svelte';
+	import BrandMark from '$lib/components/BrandMark.svelte';
 	import { CATEGORY_LABELS, REGION_LABELS } from '$lib/types';
 	import { formatWareki } from '$lib/wareki';
 
@@ -35,7 +36,7 @@
 
 <header class="page-header">
 	<a class="brand" href="/">
-		<span aria-hidden="true">⌛</span>
+		<BrandMark size={19} />
 		<span class="brand-name">chronoscroll</span>
 		<span class="brand-sub">歴史ニュース年表</span>
 	</a>
@@ -69,7 +70,7 @@
 		<p class="summary">{ev.summary}</p>
 
 		<p class="cta">
-			<a class="timeline-link" href={timelineUrl} data-sveltekit-reload>⌛ 年表でこの位置を開く</a>
+			<a class="timeline-link" href={timelineUrl} data-sveltekit-reload>年表でこの位置を開く →</a>
 		</p>
 
 		<section class="sources">

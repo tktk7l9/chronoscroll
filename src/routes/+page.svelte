@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { afterNavigate, replaceState } from '$app/navigation';
+	import BrandMark from '$lib/components/BrandMark.svelte';
 	import DetailDialog from '$lib/components/DetailDialog.svelte';
 	import FilterBar from '$lib/components/FilterBar.svelte';
 	import SearchBox from '$lib/components/SearchBox.svelte';
@@ -97,7 +98,7 @@
 <header class="site-header">
 	<div class="row">
 		<a class="brand" href="/">
-			<span class="brand-mark" aria-hidden="true">⌛</span>
+			<BrandMark size={21} />
 			<span class="brand-name">chronoscroll</span>
 			<span class="brand-sub">歴史ニュース年表</span>
 		</a>
@@ -180,9 +181,6 @@
 		gap: 8px;
 		text-decoration: none;
 		color: inherit;
-	}
-	.brand-mark {
-		font-size: 1.05rem;
 	}
 	.brand-name {
 		font-family: var(--font-serif);
