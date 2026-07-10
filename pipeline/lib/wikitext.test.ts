@@ -197,6 +197,14 @@ describe('parseBulletLine', () => {
 			regionHint: 'japan',
 		});
 		expect(parseBulletLine('【アメリカ合衆国】大統領選挙。', 2021, 11)?.regionHint).toBe('world');
+		// タグが主語を兼ねるケースは語を本文へ戻す
+		expect(parseBulletLine('【日本】の皇族が成年を迎えた。', 2021, 12)?.text).toBe(
+			'日本の皇族が成年を迎えた。',
+		);
+		// 国旗テンプレート除去の残骸（先頭の助詞）は落とす
+		expect(parseBulletLine('{{BRA}}の前大統領が演説した。', 2023, 1)?.text).toBe(
+			'前大統領が演説した。',
+		);
 		expect(parseBulletLine('【世界・日本】共同声明。', 2021, 1)?.regionHint).toBe('both');
 		expect(parseBulletLine('【日本・アメリカ合衆国】首脳会談。', 2021, 1)?.regionHint).toBe('both');
 	});

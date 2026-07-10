@@ -1,0 +1,436 @@
+# tier2キュレーション: 概観〜年ズームに出る自動収集イベントの磨き上げ
+# （タイトル付与・重要度較正・分類確定・50点に追加SVG。要約は原文が硬い場合のみ差し替え）
+
+# --- 19世紀 ---
+- id: 1868-01-01-9fdfe136
+  title: クロマニョン人の人骨を発見
+  summary: フランス・ドルドーニュ県レゼジーの岩陰で、工事中に5体分の人骨が出土した。現生人類の直系にあたる「クロマニョン人」の発見であり、人類の起源研究の出発点のひとつとなった。
+  importance: 98.5
+  category: science
+  svg: art-cromagnon
+
+- id: 1869-01-01-c64ede2e
+  title: メンデレーエフが元素の周期表を発表
+  summary: ロシアの化学者メンデレーエフが、元素を原子量の順に並べると性質が周期的に変わることを発見し周期表を作成した。未発見の元素の存在と性質まで予言した、化学史上最大級の発明である。
+  importance: 99.9
+  category: science
+  svg: art-periodic-table
+
+- id: 1870-09-01-d057128f
+  title: セダンの戦い——ナポレオン3世が捕虜に
+  importance: 98.6
+  category: war
+
+- id: 1873-05-20-2b2dc8e6
+  title: ジーンズが生まれる
+  summary: リーバイ・ストラウスとジェイコブ・デイヴィスが、リベットでポケットを補強した作業ズボンの特許を取得した。ゴールドラッシュの労働着はやがて、世界でもっとも愛される衣服になる。
+  category: culture
+  svg: art-jeans
+
+- id: 1878-05-14-3ffb1053
+  title: 紀尾井坂の変——大久保利通が暗殺される
+  summary: 明治維新の立役者で内務卿の大久保利通が、東京・紀尾井坂で不平士族に襲撃され死亡した。西郷隆盛・木戸孝允に続く「維新の三傑」最後の一人の死で、維新の時代は区切りを迎えた。
+  importance: 98.5
+  category: politics
+
+- id: 1882-04-19-fb6f8369
+  title: チャールズ・ダーウィン死去
+
+- id: 1885-02-18-2b3684e9
+  title: 「ハックルベリー・フィンの冒険」出版
+  svg: art-huck-finn
+
+- id: 1885-07-06-e1c8f2ad
+  title: 狂犬病ワクチン、初めて人へ
+  summary: ルイ・パスツールが開発した狂犬病ワクチンが、狂犬に噛まれた少年に初めて接種され、少年は発症を免れた。感染症を予防するという近代医学の道を大きく開いた。
+  svg: art-rabies-vaccine
+
+- id: 1885-08-29-325be562
+  title: オートバイの発明
+  summary: ゴットリープ・ダイムラーが、ガソリンエンジンを木製の二輪車に載せた「ライトラート」の特許を取得した。世界初のオートバイとされる。
+  importance: 98
+  category: science
+  svg: art-motorcycle
+
+- id: 1886-01-05-5cf2f698
+  title: 「ジキル博士とハイド氏」出版
+  svg: art-jekyll-hyde
+
+- id: 1887-07-26-b6ad3514
+  title: エスペラント語が誕生
+  summary: ポーランドの眼科医ザメンホフが、国際共通語エスペラントの最初の文法書「Unua Libro」を出版した。「民族を超えて対話できる言葉を」という理想は今も世界中の話者に受け継がれている。
+  svg: art-esperanto
+
+- id: 1888-05-13-f2ed057b
+  title: ブラジルが奴隷制を廃止——米大陸から奴隷制が消える
+  importance: 99.5
+  svg: art-broken-chains
+
+- id: 1889-09-24-5f9782cf
+  title: メートル原器が定められる
+  summary: 第1回国際度量衡総会で、メートル原器とキログラム原器が正式に採用された。「世界共通のものさし」の誕生であり、科学と貿易の共通基盤となった。
+  importance: 99
+  category: science
+  svg: art-metre
+
+- id: 1893-12-16-aa00143c
+  title: 交響曲「新世界より」初演
+  category: culture
+
+- id: 1895-11-08-36119113
+  title: レントゲンがX線を発見
+  summary: ドイツの物理学者レントゲンが、物体を透過する未知の放射線を発見し「X線」と名付けた。人体の中を見るという医学の夢を実現し、第1回ノーベル物理学賞に輝いた。
+  importance: 99.8
+  svg: art-xray
+
+- id: 1895-11-27-c6ac92b9
+  title: ノーベル賞を生んだ遺言
+  summary: ダイナマイトの発明者アルフレッド・ノーベルが、遺産を「人類に最大の貢献をした人々」に贈るという遺言状に署名した。この遺言からノーベル賞が生まれた。
+  importance: 99.3
+  svg: art-nobel
+
+- id: 1896-06-04-a77a42ad
+  title: 若きフォード、最初の自動車を作る
+  summary: エジソン照明会社の技師だったヘンリー・フォードが、自作の四輪自動車「クワドリシクル」の試走に成功した。後に流れ作業による大量生産で、自動車を大衆のものに変えていく。
+  category: science
+  svg: art-early-car
+
+- id: 1900-12-14-029a7775
+  title: プランクが量子仮説を提唱
+  summary: マックス・プランクが、エネルギーは連続ではなく「量子」というとびとびの単位でやり取りされるという仮説を発表した。量子力学という20世紀物理学の扉を開いた日とされる。
+  importance: 99.6
+  svg: art-quantum
+
+# --- 1900-1945 ---
+- id: 1902-05-08-55ff2d04
+  title: プレー火山噴火——サンピエール壊滅
+  svg: art-pelee
+
+- id: 1906-01-01-a5357844
+  title: 世界初のプラスチック「ベークライト」発明
+  summary: ベルギー出身の化学者ベークランドが、世界初の完全人工合成樹脂ベークライトを発明した。プラスチック時代の幕開けである。
+  svg: art-plastic
+
+- id: 1911-07-24-9fa1a6bb
+  title: マチュ・ピチュ遺跡を発見
+  svg: art-machu-picchu
+
+- id: 1911-08-21-0cf7eabf
+  title: 「モナ・リザ」盗まれる
+  summary: ルーヴル美術館から「モナ・リザ」が忽然と消えた。犯人は同館で働いていたイタリア人ペルージャ。2年後に絵が戻るまでの大騒動が、この絵を世界一有名な絵画に押し上げた。
+  svg: art-monalisa
+
+- id: 1911-12-14-34216173
+  title: アムンセン隊、人類初の南極点到達
+  importance: 99.7
+  svg: art-south-pole
+
+- id: 1913-05-29-52dbb64f
+  title: 「春の祭典」初演——伝説の大騒動
+  summary: パリでストラヴィンスキーのバレエ音楽「春の祭典」が初演された。前衛的な音楽と振付に客席は賛否で大混乱。20世紀音楽の始まりを告げる伝説の一夜となった。
+  svg: art-rite-of-spring
+
+- id: 1913-11-14-6fe69c2f
+  title: 「失われた時を求めて」刊行始まる
+
+- id: 1918-07-17-270b08e0
+  title: ロマノフ家の処刑——ロシア帝室の最期
+  importance: 99
+
+- id: 1918-09-29-1e9a6b2b
+  title: 原敬内閣が成立——初の本格的政党内閣
+  importance: 98.5
+
+- id: 1919-01-15-5cffc09e
+  title: ローザ・ルクセンブルク虐殺される
+
+- id: 1920-09-16-485ad0f1
+  title: ウォール街爆破事件——世界初の車爆弾
+
+- id: 1922-01-11-15148265
+  title: インスリン、初めて糖尿病患者へ
+  summary: カナダ・トロントの病院で、重症糖尿病の少年に世界で初めてインスリンが投与された。それまで「死の病」だった糖尿病が、共に生きられる病へと変わった瞬間である。
+  importance: 99.6
+  category: science
+  svg: art-insulin
+
+- id: 1922-02-02-a43c95ab
+  title: ジョイス「ユリシーズ」出版
+  category: culture
+
+- id: 1926-01-26-b93167b6
+  title: ベアード、テレビの公開実験に成功
+  importance: 99.5
+
+- id: 1928-09-28-71194675
+  title: ペニシリンの発見
+  summary: アレクサンダー・フレミングが、実験中に混入したアオカビが細菌を溶かすことに気づき、ペニシリンを発見した。抗生物質の時代を開き、数え切れない命を救うことになる偶然だった。
+  importance: 99.8
+  svg: art-penicillin
+
+- id: 1930-03-12-1a8f22f9
+  title: ガンディー、塩の行進を始める
+  importance: 99.5
+  category: politics
+  svg: art-salt-march
+
+- id: 1938-10-30-643f0aaa
+  title: ラジオドラマ「宇宙戦争」が全米を騒がせる
+  summary: オーソン・ウェルズ演出のラジオドラマ「宇宙戦争」が、臨時ニュース仕立ての火星人襲来を放送。真に受けた聴取者が騒ぎになったと報じられ、メディアの影響力を象徴する事件として語り継がれる。
+  category: culture
+  svg: art-war-of-worlds
+
+- id: 1939-08-15-6206248f
+  title: 映画「オズの魔法使」プレミア上映
+  svg: art-wizard-of-oz
+
+- id: 1942-06-14-9bfd91a6
+  title: アンネ、日記を書き始める
+  summary: ナチス占領下のアムステルダムの隠れ家で、13歳のアンネ・フランクが日記を書き始めた。「アンネの日記」は戦後、ホロコーストの記憶を伝える世界的な証言となった。
+  category: culture
+  svg: art-anne-diary
+
+- id: 1942-11-22-4b347b70
+  title: スターリングラードで独軍包囲される
+
+- id: 1943-07-10-ddaaa12b
+  title: 連合軍、シチリア島に上陸
+
+# --- 戦後〜1980s ---
+- id: 1948-05-14-e6669ec0
+  title: イスラエル建国宣言
+  summary: ベン＝グリオンがテルアビブでイスラエルの独立を宣言した。ユダヤ人国家の誕生は、同時に今日まで続く中東紛争の起点ともなった。
+  importance: 99.8
+  region: world
+  svg: art-israel-founding
+
+- id: 1948-12-10-67c619b3
+  title: 世界人権宣言を採択
+  summary: 国連総会がパリで世界人権宣言を採択した。「すべての人間は、生まれながらにして自由であり、尊厳と権利について平等である」——二度の大戦への反省から生まれた人類共通の約束である。
+  importance: 99.8
+  svg: art-human-rights
+
+- id: 1952-02-21-50e8494f
+  title: ベンガル語運動——言語を守った犠牲
+  summary: 東パキスタン（現バングラデシュ）で、ベンガル語の公用語化を求める学生デモに警官隊が発砲した。この日はやがて、UNESCOの「国際母語デー」となる。
+
+- id: 1953-01-01-7cbe1f39
+  title: DNAの二重らせん構造を解明
+  summary: ワトソンとクリックが、フランクリンのX線回折データを手がかりにDNAの二重らせん構造を突き止めた。遺伝の仕組みが分子の言葉で説明され、生命科学の新時代が始まった。
+  importance: 99.9
+  category: science
+  region: world
+  svg: art-dna
+
+- id: 1953-01-01-db411b75
+  title: 水俣で猫の不審死が相次ぐ——公害の前兆
+  summary: 熊本県水俣市の漁村で、猫が狂ったように死ぬ現象が相次いだ。工場排水の有機水銀による水俣病の前兆だったが、公式確認まではさらに3年を要した。
+  importance: 99.3
+  category: disaster
+  svg: art-minamata
+
+- id: 1953-05-29-4f09e056
+  title: エベレスト初登頂
+  summary: ニュージーランドのヒラリーとシェルパのテンジン・ノルゲイが、世界最高峰エベレスト（8,848m）の頂に人類として初めて立った。
+  importance: 99.6
+  svg: art-everest
+
+- id: 1954-09-06-aef6a158
+  title: 「七人の侍」ヴェネツィアで銀獅子賞
+  summary: ヴェネツィア国際映画祭で黒澤明「七人の侍」と溝口健二「山椒大夫」が揃って銀獅子賞を受賞した。日本映画の黄金期を世界に印象づけた。
+  svg: art-seven-samurai
+
+- id: 1955-12-01-2a82ccf7
+  title: マザー・テレサ「聖なる子供の家」開設
+
+- id: 1958-02-06-143eb1e7
+  title: ミュンヘンの悲劇——マンUの選手たちが遭難
+
+- id: 1958-08-03-823b1b29
+  title: 原潜ノーチラス、北極点の海中を通過
+  svg: art-nautilus
+
+- id: 1958-10-21-9b5d84be
+  title: 神様、仏様、稲尾様——西鉄、奇跡の日本一
+  summary: プロ野球日本シリーズで西鉄ライオンズが巨人相手に3連敗からの4連勝で日本一に。ひとりで4勝を挙げた稲尾和久を讃える「神様、仏様、稲尾様」が流行語になった。
+
+- id: 1958-11-10-da7c496f
+  title: ボサノヴァ誕生
+  summary: リオ・デ・ジャネイロでジョアン・ジルベルトが「シェガ・ヂ・サウダージ」を録音した。囁くような歌と新しいギターのリズム——ボサノヴァの誕生である。
+  category: culture
+  svg: art-bossa-nova
+
+- id: 1961-04-03-dd9e61be
+  title: NHK朝の連続テレビ小説が始まる
+
+- id: 1963-04-07-9cd840f5
+  title: NHK大河ドラマが始まる
+
+- id: 1963-11-22-b85a2ca9
+  title: ケネディ大統領、ダラスで暗殺される
+  summary: アメリカのケネディ大統領がテキサス州ダラスをパレード中に狙撃され死亡した。46歳の若き大統領の死は世界に衝撃を与え、暗殺の真相をめぐる議論は今も続く。
+  importance: 99.9
+  category: politics
+  svg: art-jfk
+
+- id: 1965-10-06-56365544
+  title: 日本初のカラーテレビアニメ「ジャングル大帝」
+
+- id: 1969-08-27-cd627205
+  title: 「男はつらいよ」第1作公開
+  summary: 渥美清主演・山田洋次監督の松竹映画「男はつらいよ」が公開された。フーテンの寅さんの物語は以後26年・全48作続き、「世界最長の映画シリーズ」となった。
+  svg: art-torasan
+
+- id: 1974-06-13-aaa6b7a1
+  title: 西ドイツW杯開幕——クライフとベッケンバウアー
+  importance: 96
+  svg: art-world-cup
+
+- id: 1974-10-30-06867c25
+  title: キンシャサの奇跡——アリ、王座奪還
+  summary: ザイールのキンシャサで、モハメド・アリが無敗の王者ジョージ・フォアマンを8回KOで破り、7年ぶりに世界ヘビー級王座を奪還した。「ランブル・イン・ザ・ジャングル」と呼ばれる伝説の一戦。
+  svg: art-rumble-jungle
+
+- id: 1979-12-01-034250de
+  title: プログラミング言語C++が生まれる
+  importance: 95
+
+- id: 1982-08-17-84931fbd
+  title: 世界初のCDが製造される
+  summary: オランダのフィリップス工場で世界初のコンパクトディスクがプレスされた。第1号はABBAのアルバム。音楽はレコードからデジタルの時代へと動き出した。
+  category: science
+  svg: art-compact-disc
+
+# --- 1989-2026 ---
+- id: 1989-12-03-dc1bf184
+  title: マルタ会談——冷戦の終結を宣言
+  summary: 地中海のマルタ島で、ブッシュ米大統領とゴルバチョフソ連最高会議議長が会談し、44年続いた冷戦の終結を宣言した。ヤルタからマルタへ——戦後世界の枠組みが変わった。
+  importance: 99.7
+  svg: art-cold-war-end
+
+- id: 1990-08-31-e14866c6
+  title: ドイツ再統一条約に調印
+  importance: 99
+
+- id: 1990-12-23-e0a51eec
+  title: オグリキャップ、奇跡のラストラン
+  summary: 有馬記念で、衰えたと言われた「芦毛の怪物」オグリキャップが武豊を背に優勝。中山競馬場に「オグリコール」が鳴り響いた。競馬ブームの頂点を刻むラストランだった。
+  category: sports
+  svg: art-race-horse
+
+- id: 1991-08-06-eaa5612d
+  title: 世界初のWebサイトが公開される
+  summary: CERNのティム・バーナーズ＝リーが、World Wide Webの仕組みを説明する世界初のWebサイトを公開した。インターネットが研究者の道具から人類のインフラへ変わる出発点となった。
+  category: science
+  svg: art-www
+
+- id: 1991-10-05-13cc8fcc
+  title: Linux誕生
+  summary: フィンランドの学生リーナス・トーバルズが、自作OSカーネル「Linux」をインターネットで公開した。趣味のプロジェクトは、世界のサーバーとスマートフォンを動かすOSに成長する。
+  importance: 99.6
+  category: science
+  svg: art-linux
+
+- id: 1991-11-24-7602b2b0
+  title: フレディ・マーキュリー死去
+  importance: 95
+  category: culture
+  svg: art-rock-legend
+
+- id: 1994-07-01-a53f0811
+  title: 彗星が木星に衝突する
+  summary: シューメーカー・レヴィ第9彗星の分裂核が次々と木星に衝突し、地球サイズの衝突痕が観測された。天体衝突の脅威を人類が目の当たりにした初めての出来事だった。
+  importance: 98
+  category: science
+  svg: art-comet-jupiter
+
+- id: 1995-05-23-68f93ac9
+  title: プログラミング言語Java発表
+  importance: 95
+  category: science
+  region: world
+
+- id: 1995-10-04-c8467cf5
+  title: 「新世紀エヴァンゲリオン」放送開始
+  importance: 96
+
+- id: 1997-09-06-0f23c8f6
+  title: 北野武「HANA-BI」金獅子賞
+  importance: 95
+  category: culture
+  region: japan
+
+- id: 2001-01-01-edf4ebe8
+  title: 21世紀が始まる
+  importance: 96
+  region: world
+  svg: art-millennium
+
+- id: 2008-06-08-1134ebe1
+  title: 秋葉原通り魔事件
+  importance: 96
+  region: japan
+
+- id: 2011-05-02-1e0a34eb
+  title: ビンラディン容疑者を殺害
+  summary: 9.11同時多発テロの首謀者、アルカイダ指導者ウサマ・ビンラディンが、パキスタンの潜伏先で米軍特殊部隊に殺害された。10年に及ぶ追跡の終着点だった。
+  importance: 99.6
+
+- id: 2012-08-25-323181e6
+  title: ボイジャー1号、人工物として初めて太陽圏を出る
+  summary: 1977年に打ち上げられた探査機ボイジャー1号が、太陽圏を離脱して恒星間空間へ入った。人類が作った物体として、もっとも遠くへ旅した存在である。
+  importance: 99
+  category: science
+  svg: art-voyager
+
+- id: 2014-06-29-a7bd0dce
+  title: ISILが「国家」樹立を宣言
+  importance: 99
+  category: war
+
+- id: 2014-07-17-d84a4342
+  title: マレーシア航空17便、ウクライナ上空で撃墜される
+  importance: 98.5
+  category: war
+
+- id: 2017-11-15-0ee31902
+  title: ジンバブエ政変——ムガベ37年体制の終焉
+  importance: 96
+
+- id: 2022-06-15-5c7a9b5e
+  title: Internet Explorer、27年の歴史に幕
+  importance: 93
+  category: science
+
+- id: 2022-06-24-97b0d02e
+  title: 米最高裁、中絶の権利を49年ぶりに覆す
+  svg: art-roe-wade
+
+- id: 2022-11-20-1fd69a03
+  title: W杯カタール大会開幕——中東初開催
+  importance: 96
+
+- id: 2023-01-08-26f1bebc
+  title: ブラジル議会襲撃事件
+  importance: 95
+
+- id: 2025-02-10-584afba6
+  title: トランプ関税——鉄鋼・アルミに25%
+  importance: 95
+  category: economy
+
+- id: 2025-05-08-323be35d
+  title: 初のアメリカ出身ローマ教皇が誕生
+  importance: 98
+  category: society
+  svg: art-conclave
+
+- id: 2025-09-02-5377015e
+  title: 米グーグルに独禁法違反の是正措置
+  importance: 95
+  category: economy
+
+- id: 2026-05-23-6b67a920
+  title: カンヌ映画祭、日本人俳優に初の女優賞
+  importance: 96
+  svg: art-cannes

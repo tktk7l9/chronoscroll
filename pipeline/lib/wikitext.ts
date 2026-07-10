@@ -147,7 +147,11 @@ export function parseBulletLine(
 		const hasOther = /・/.test(inner) ? inner.split('・').some((s) => !/日本/.test(s)) : !hasJapan;
 		regionHint = hasJapan && hasOther ? 'both' : hasJapan ? 'japan' : 'world';
 		body = body.slice(tag[0].length);
+		// 「【ブラジル】の前大統領が…」のようにタグが主語を兼ねる場合は語を本文に残す
+		if (body.startsWith('の')) body = inner + body;
 	}
+	// 国旗テンプレート（{{BRA}}等）の除去で先頭に残った助詞「の」は落とす
+	body = body.replace(/^の/, '');
 
 	const { text, links } = replaceLinks(body);
 	const clean = text
