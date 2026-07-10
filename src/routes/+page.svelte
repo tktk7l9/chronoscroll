@@ -8,8 +8,6 @@
 	import SearchBox from '$lib/components/SearchBox.svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
-	import ZoomControls from '$lib/components/ZoomControls.svelte';
-	import { zoomLevelLabel } from '$lib/lod';
 	import type { SearchHit } from '$lib/search';
 	import { timelineData } from '$lib/state/data.svelte';
 	import type { NewsEvent } from '$lib/types';
@@ -26,7 +24,6 @@
 	let routerReady = $state(false);
 
 	const selected = $derived(selectedId !== null ? (timelineData.byId(selectedId) ?? null) : null);
-	const zoomLabel = $derived(view.pxPerDay !== null ? zoomLevelLabel(view.pxPerDay) : '概観');
 
 	onMount(() => {
 		void timelineData.init();
@@ -130,8 +127,6 @@
 		/>
 	{/if}
 </main>
-
-<ZoomControls level={zoomLabel} onzoom={(f) => timeline?.zoomStep(f)} />
 
 <DetailDialog ev={selected} onclose={() => (selectedId = null)} />
 

@@ -1,5 +1,49 @@
 import { describe, expect, it } from 'vitest';
-import { importanceThreshold, tickStepYears, zoomLevelLabel } from './lod.ts';
+import {
+	ZOOM_STOPS,
+	importanceThreshold,
+	tToZoom,
+	tickStepYears,
+	zoomLevelLabel,
+	zoomToT,
+} from './lod.ts';
+import { MAX_PX_PER_DAY, MIN_PX_PER_DAY } from './timescale.ts';
+
+describe('zoomToT / tToZoom', () => {
+	it('端点が0と1に対応する', () => {
+		expect(zoomToT(MIN_PX_PER_DAY)).toBe(0);
+		expect(zoomToT(MAX_PX_PER_DAY)).toBe(1);
+		expect(tToZoom(0)).toBeCloseTo(MIN_PX_PER_DAY);
+		expect(tToZoom(1)).toBeCloseTo(MAX_PX_PER_DAY);
+	});
+
+	it('往復変換できる（対数スケール）', () => {
+		for (const px of [0.1, 1, 8, 50]) {
+			expect(tToZoom(zoomToT(px))).toBeCloseTo(px);
+		}
+	});
+
+	it('範囲外はクランプされる', () => {
+		expect(zoomToT(0.001)).toBe(0);
+		expect(zoomToT(1000)).toBe(1);
+		expect(tToZoom(-1)).toBeCloseTo(MIN_PX_PER_DAY);
+		expect(tToZoom(2)).toBeCloseTo(MAX_PX_PER_DAY);
+	});
+});
+
+describe('ZOOM_STOPS', () => {
+	it('各目盛りの代表値はそのレベル帯に属する', () => {
+		for (const s of ZOOM_STOPS) {
+			expect(zoomLevelLabel(s.pxPerDay)).toBe(s.label);
+		}
+	});
+
+	it('目盛りはズームイン方向へ単調増加', () => {
+		for (let i = 1; i < ZOOM_STOPS.length; i++) {
+			expect(ZOOM_STOPS[i].pxPerDay).toBeGreaterThan(ZOOM_STOPS[i - 1].pxPerDay);
+		}
+	});
+});
 
 describe('importanceThreshold', () => {
 	// 実データ相当: 約1.5万件 / 158年 ≈ 0.26件/日

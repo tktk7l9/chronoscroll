@@ -37,8 +37,16 @@ await page.waitForTimeout(900);
 const initialCards = await page.locator('.card').count();
 assert('初期表示: カードが描画される', initialCards > 3, `cards=${initialCards}`);
 assert(
-	'初期表示: 概観レベル表示',
-	(await page.locator('.zoomctl .level').textContent())?.includes('概観'),
+	'初期表示: 概観レベル表示（ズームゲージ）',
+	(await page.locator('.zoomctl .stop.active').textContent())?.includes('概観'),
+);
+// ズームアウトの下限に達すると−ボタンがdisabledになる（可動域の可視化）
+await page.click('button[aria-label="ズームアウト"]');
+await page.click('button[aria-label="ズームアウト"]');
+await page.waitForTimeout(300);
+assert(
+	'ズームゲージ: 下限で−がdisabledになる',
+	await page.locator('button[aria-label="ズームアウト"]').isDisabled(),
 );
 
 // 2. ズームイン → URLのzが増え、レベル表示が変わる

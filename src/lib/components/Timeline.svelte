@@ -21,6 +21,7 @@
 	import type { TimelineData } from '../state/data.svelte.ts';
 	import EventCard from './EventCard.svelte';
 	import Minimap from './Minimap.svelte';
+	import ZoomControls from './ZoomControls.svelte';
 
 	const CARD_H_NORMAL = 112;
 	const CARD_H_BIG = 158;
@@ -357,6 +358,10 @@
 		{maxDay}
 		onjump={jumpToDay}
 	/>
+{/if}
+
+{#if ready}
+	<ZoomControls {pxPerDay} onzoomto={(px) => void applyZoom(px, vh / 2)} />
 {/if}
 
 {#if ready}
