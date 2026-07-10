@@ -1,0 +1,453 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+	<!--
+		chronoscroll オリジナルSVGピクトグラム集
+		スタイル規約:
+		- viewBox 0 0 96 96 / 余白 ~8px
+		- stroke: currentColor（カテゴリ色を継承） / stroke-width 3.5 基調 / round cap+join
+		- 塗りは fill="currentColor" + fill-opacity 0.12〜0.2 の面のみ（2トーン）
+		- 文字・商標・実在ロゴは使わない
+	-->
+
+	<!-- 1868 明治維新: 海から昇る朝日 -->
+	<symbol id="art-meiji-ishin" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="48" cy="52" r="16" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M48 22v-10M69 31l7-7M27 31l-7-7M76 52h10M10 52h10"/>
+		<path d="M8 66c8 0 8 6 16 6s8-6 16-6 8 6 16 6 8-6 16-6 8 6 16 6" stroke-width="3"/>
+		<path d="M8 80c8 0 8 6 16 6s8-6 16-6 8 6 16 6 8-6 16-6 8 6 16 6" stroke-width="3" opacity="0.5"/>
+	</symbol>
+
+	<!-- 1869 スエズ運河開通: 両岸の間を進む汽船 -->
+	<symbol id="art-suez-canal" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M10 14v28l12 8v32M86 14v28l-12 8v32"/>
+		<path d="M36 62h24l-4 10H40z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M44 62V48h8v14M48 48v-8"/>
+		<path d="M48 40c4-3 2-6 0-8" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1872 新橋-横浜 鉄道開業: 蒸気機関車の正面と煙 -->
+	<symbol id="art-first-railway" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="30" y="34" width="36" height="34" rx="6" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M38 34v-8h20v8M44 26v-6h8v6"/>
+		<circle cx="40" cy="58" r="4"/>
+		<circle cx="56" cy="58" r="4"/>
+		<path d="M30 44h36M24 76l8-8M72 76l-8-8M20 82h56"/>
+		<path d="M62 16c5-2 4-7 8-8" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1876 ベル電話発明: 燭台型電話機 -->
+	<symbol id="art-bell-telephone" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="48" cy="22" r="9" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M48 31v26M40 57h16l4 14H36zM36 84h24"/>
+		<path d="M68 34c6 4 6 12 2 17M76 28c9 7 9 20 3 27" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1889 大日本帝国憲法発布: 勅書の巻物と印 -->
+	<symbol id="art-meiji-constitution" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M28 16h40v56l-6 8H28a8 8 0 0 1-8-8V24a8 8 0 0 1 8-8z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M68 16a8 8 0 0 1 8 8v4h-8"/>
+		<path d="M32 32h28M32 42h28M32 52h18"/>
+		<circle cx="58" cy="64" r="7" fill="currentColor" fill-opacity="0.25"/>
+	</symbol>
+
+	<!-- 1889 エッフェル塔完成 -->
+	<symbol id="art-eiffel-tower" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 10 34 62c-3 10-8 16-14 20h56c-6-4-11-10-14-20L48 10z"/>
+		<path d="M38 46h20M34 62h28M28 82c6-8 34-8 40 0" stroke-width="3"/>
+		<path d="M48 10v6" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1894 日清戦争: 交差する旧式軍刀 -->
+	<symbol id="art-sino-japanese-war" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M22 18l40 44M74 18L34 62"/>
+		<path d="M56 68l10 10M40 68L30 78M62 62l8-2M34 62l-8-2" stroke-width="3"/>
+		<circle cx="48" cy="44" r="26" stroke-width="3" opacity="0.35"/>
+	</symbol>
+
+	<!-- 1895 映画の誕生: 映写機とフィルム -->
+	<symbol id="art-cinema-birth" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="34" cy="26" r="12" fill="currentColor" fill-opacity="0.12"/>
+		<circle cx="58" cy="26" r="12" fill="currentColor" fill-opacity="0.12"/>
+		<circle cx="34" cy="26" r="4"/>
+		<circle cx="58" cy="26" r="4"/>
+		<rect x="26" y="42" width="40" height="26" rx="5"/>
+		<path d="M66 50l16-8v24l-16-8M26 78h40" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1898 ラジウム発見: 放射する試験管 -->
+	<symbol id="art-radium-discovery" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M40 14h16M44 14v30l-12 22a10 10 0 0 0 9 15h14a10 10 0 0 0 9-15L52 44V14"/>
+		<path d="M40 62h16" stroke-width="3"/>
+		<circle cx="48" cy="70" r="4" fill="currentColor" fill-opacity="0.3"/>
+		<path d="M14 22l8 6M82 22l-8 6M12 46h10M84 46H74" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1903 ライト兄弟 初動力飛行: 複葉機（側面） -->
+	<symbol id="art-wright-flyer" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M14 30h48M14 50h48"/>
+		<path d="M20 30v20M38 30v20M56 30v20" stroke-width="3"/>
+		<path d="M56 40h24M80 32v16" stroke-width="3.5"/>
+		<circle cx="30" cy="40" r="4" stroke-width="3"/>
+		<path d="M22 58c0 5 5 8 10 8h14" stroke-width="3"/>
+		<path d="M10 78h44M62 78h10" stroke-width="3" opacity="0.5"/>
+		<path d="M70 20l8-8" stroke-width="3" opacity="0.6" stroke-dasharray="2 5"/>
+	</symbol>
+
+	<!-- 1904 日露戦争: 戦艦と波 -->
+	<symbol id="art-russo-japanese-war" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M14 58h68l-8 14H24z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M34 58V44h28v14M44 44v-8h8v8M48 36V24M48 24l14 6-14 6" stroke-width="3"/>
+		<path d="M10 82c8 0 8 5 16 5s8-5 16-5 8 5 16 5 8-5 16-5 8 5 12 5" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1905 特殊相対性理論: 歪む時計と光線 -->
+	<symbol id="art-relativity" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<ellipse cx="48" cy="48" rx="30" ry="24" transform="rotate(-12 48 48)"/>
+		<path d="M48 34v14l10 6" stroke-width="3"/>
+		<path d="M12 78L84 18" stroke-width="3" opacity="0.6" stroke-dasharray="2 7"/>
+		<circle cx="84" cy="18" r="4" fill="currentColor" fill-opacity="0.3"/>
+	</symbol>
+
+	<!-- 1912 タイタニック沈没: 傾く客船と氷山 -->
+	<symbol id="art-titanic" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M12 50l50 12-6 14-40-10z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M24 46l24 6M28 38l4 8M40 41l4 8M52 44l4 8" stroke-width="3"/>
+		<path d="M70 26l14 26-22 4z"/>
+		<path d="M8 84c8 0 8 5 16 5s8-5 16-5 8 5 16 5 8-5 16-5 8 5 16 5" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1914 第一次世界大戦勃発: 兵士のヘルメットと鉄条網 -->
+	<symbol id="art-ww1" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M20 52a28 14 0 0 1 56 0z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M30 44a18 18 0 0 1 36 0" stroke-width="3"/>
+		<path d="M10 72h76" stroke-width="3"/>
+		<path d="M22 66l8 12M30 66l-8 12M58 66l8 12M66 66l-8 12" stroke-width="3" opacity="0.7"/>
+	</symbol>
+
+	<!-- 1918 第一次世界大戦終結: オリーブをくわえた鳩 -->
+	<symbol id="art-ww1-armistice" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M40 44c-2-12 8-24 22-24-2 6 0 10 6 12l14 4-12 6c-2 16-14 26-30 24l-18 12 6-16c-8-2-14-8-16-16 8 2 16 2 28-2z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M62 26c-8 4-10 12-8 18" stroke-width="3" opacity="0.7"/>
+		<path d="M18 22c6 0 10 4 10 10-6 0-10-4-10-10z" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1923 関東大震災: 割れた地面と傾く家 -->
+	<symbol id="art-kanto-earthquake" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M20 58l-6-24 16 4-4-16" stroke-width="3" opacity="0.7"/>
+		<path d="M30 70l10-14 10 14v14H30z" fill="currentColor" fill-opacity="0.12" transform="rotate(-8 40 70)"/>
+		<path d="M58 62l12-12 12 12v20H58z" fill="currentColor" fill-opacity="0.12" transform="rotate(6 70 68)"/>
+		<path d="M8 88h80M40 88l6-8 4 8M62 88l8-6 8 6" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1927 リンドバーグ大西洋単独無着陸横断: 単葉機と波 -->
+	<symbol id="art-lindbergh" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M30 40h36l14-8-8 14H26z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M26 46l-10 4M56 46l6 12h10" stroke-width="3"/>
+		<circle cx="24" cy="42" r="3" stroke-width="3"/>
+		<path d="M8 76c8 0 8 5 16 5s8-5 16-5 8 5 16 5 8-5 16-5 8 5 16 5" stroke-width="3" opacity="0.6"/>
+		<path d="M62 24l14-10" stroke-width="3" stroke-dasharray="2 6" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1929 世界恐慌: 暴落するチャート -->
+	<symbol id="art-great-depression" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M14 14v68h68" stroke-width="3"/>
+		<path d="M22 40l14-12 10 8 12-16 8 6 14 38" />
+		<path d="M80 64l0 12h-12" />
+		<path d="M22 74h44" stroke-width="3" opacity="0.4" stroke-dasharray="3 6"/>
+	</symbol>
+
+	<!-- 1931 満州事変: 断ち切られた線路 -->
+	<symbol id="art-manchurian-incident" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M26 86L44 46M70 86L52 46" stroke-width="3"/>
+		<path d="M30 78h38M35 66h28M40 54h18" stroke-width="3"/>
+		<path d="M44 46l-6-14 10 6 2-12 6 10 8-6-6 16" fill="currentColor" fill-opacity="0.12"/>
+	</symbol>
+
+	<!-- 1936 二・二六事件: 雪の降る門 -->
+	<symbol id="art-226-incident" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M20 84V44h56v40M20 44l-8 10M76 44l8 10M28 44V32h40v12" stroke-width="3.5"/>
+		<path d="M48 56v28M34 62v22M62 62v22" stroke-width="3" opacity="0.7"/>
+		<circle cx="24" cy="18" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="46" cy="12" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="68" cy="20" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="82" cy="32" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="12" cy="30" r="2.5" fill="currentColor" stroke="none"/>
+	</symbol>
+
+	<!-- 1939 第二次世界大戦勃発: 戦車 -->
+	<symbol id="art-ww2-outbreak" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M18 62a12 12 0 0 1 12-12h36a12 12 0 0 1 12 12 12 12 0 0 1-12 12H30a12 12 0 0 1-12-12z" fill="currentColor" fill-opacity="0.12"/>
+		<circle cx="32" cy="62" r="4" stroke-width="3"/>
+		<circle cx="48" cy="62" r="4" stroke-width="3"/>
+		<circle cx="64" cy="62" r="4" stroke-width="3"/>
+		<path d="M36 50v-8h20v8M56 46h26" stroke-width="3.5"/>
+	</symbol>
+
+	<!-- 1941 真珠湾攻撃: 急降下する機影と軍艦 -->
+	<symbol id="art-pearl-harbor" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M70 12l-18 24M78 22l-14 18" stroke-width="3"/>
+		<path d="M64 14l12-4-2 12" stroke-width="3"/>
+		<path d="M14 66h56l-8 12H22z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M32 66V54h20v12M40 54v-8" stroke-width="3"/>
+		<path d="M8 86c10 0 10 5 20 5s10-5 20-5 10 5 20 5 10-5 20-5" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1945 広島原爆投下: ドームの残骸 -->
+	<symbol id="art-hiroshima" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M32 40a16 16 0 0 1 32 0" stroke-width="3"/>
+		<path d="M34 40c0-10 6-16 14-16s14 6 14 16" stroke-width="3" opacity="0.5"/>
+		<path d="M36 40v14M60 40v14M28 54v30M68 54v30M28 54h40" stroke-width="3.5"/>
+		<path d="M36 62v22M46 62v22M56 62v22" stroke-width="3" opacity="0.6"/>
+		<path d="M16 84h64" stroke-width="3.5"/>
+	</symbol>
+
+	<!-- 1945 終戦・玉音放送: 真空管ラジオ -->
+	<symbol id="art-shusen" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="16" y="34" width="64" height="42" rx="8" fill="currentColor" fill-opacity="0.1"/>
+		<circle cx="36" cy="55" r="11" stroke-width="3"/>
+		<path d="M36 48v7l5 4" stroke-width="3"/>
+		<path d="M56 46h16M56 55h16M56 64h10" stroke-width="3"/>
+		<path d="M28 34l24-20" stroke-width="3"/>
+		<path d="M8 88h80" stroke-width="3" opacity="0.4"/>
+	</symbol>
+
+	<!-- 1946 日本国憲法公布: 開かれた法典と鳩 -->
+	<symbol id="art-kenpou" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 30c-8-6-20-6-30-2v46c10-4 22-4 30 2 8-6 20-6 30-2V28c-10-4-22-4-30 2z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M48 30v46" stroke-width="3"/>
+		<path d="M26 40h14M26 50h14M56 40h14M56 50h14" stroke-width="3" opacity="0.7"/>
+		<path d="M56 16c4-6 12-8 18-4-4 2-4 6-2 8l-8 2z" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1953 テレビ放送開始: ブラウン管テレビ -->
+	<symbol id="art-tv-broadcast" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="14" y="34" width="68" height="46" rx="8"/>
+		<rect x="22" y="42" width="40" height="30" rx="4" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="72" cy="50" r="4" stroke-width="3"/>
+		<path d="M68 64h8" stroke-width="3"/>
+		<path d="M34 34L20 16M62 34l14-18" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1957 スプートニク1号: アンテナ付き人工衛星 -->
+	<symbol id="art-sputnik" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="40" cy="40" r="15" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M52 51l26 26M50 29l22-16M29 52L12 76M51 40h30" stroke-width="3"/>
+		<circle cx="78" cy="78" r="2.5" fill="currentColor" stroke="none"/>
+		<path d="M64 70a30 30 0 0 1-40-40" stroke-width="3" opacity="0.4" stroke-dasharray="2 7"/>
+	</symbol>
+
+	<!-- 1958 東京タワー完成 -->
+	<symbol id="art-tokyo-tower" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 8v8M44 16h8l10 40c4 12 10 18 16 22H18c6-4 12-10 16-22z"/>
+		<path d="M38 42h20M32 60h32" stroke-width="3"/>
+		<path d="M32 60c8 10 24 10 32 0" stroke-width="3" opacity="0.6"/>
+		<path d="M26 86h44" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1964 東海道新幹線開業: 0系の先頭形状 -->
+	<symbol id="art-shinkansen" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M10 64c0-18 12-34 34-34h24a18 18 0 0 1 18 18v16z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M10 64h76" stroke-width="3.5"/>
+		<path d="M22 50c10-2 40-2 54 0" stroke-width="3" opacity="0.7"/>
+		<circle cx="30" cy="74" r="5" stroke-width="3"/>
+		<circle cx="52" cy="74" r="5" stroke-width="3"/>
+		<circle cx="74" cy="74" r="5" stroke-width="3"/>
+		<path d="M8 86h80" stroke-width="3" opacity="0.4"/>
+	</symbol>
+
+	<!-- 1964 東京オリンピック開幕: 聖火トーチ -->
+	<symbol id="art-tokyo-olympics-1964" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 14c8 6 12 12 8 20-2 5-8 6-8 12 0-6-6-7-8-12-4-8 0-14 8-20z" fill="currentColor" fill-opacity="0.2"/>
+		<path d="M30 46h36l-6 10H36z"/>
+		<path d="M40 56l4 26h8l4-26" stroke-width="3.5"/>
+		<path d="M20 36c4-4 6-8 6-14M76 36c-4-4-6-8-6-14" stroke-width="3" opacity="0.5"/>
+	</symbol>
+
+	<!-- 1969 アポロ11号 月面着陸: 着陸船と地球 -->
+	<symbol id="art-apollo11" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M36 30h24l4 16H32z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M40 30v-8h16v8M36 46l-8 18M60 46l8 18M24 64h8M64 64h8" stroke-width="3.5"/>
+		<path d="M10 84c14-8 62-8 76 0" stroke-width="3.5"/>
+		<circle cx="30" cy="78" r="1.6" fill="currentColor" stroke="none"/>
+		<circle cx="60" cy="76" r="1.6" fill="currentColor" stroke="none"/>
+		<circle cx="78" cy="16" r="8" stroke-width="3"/>
+		<path d="M72 14c3 3 9 3 12 4" stroke-width="2.5" opacity="0.7"/>
+	</symbol>
+
+	<!-- 1970 大阪万博: パビリオンと祝祭の旗 -->
+	<symbol id="art-expo70" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M16 82V52a32 20 0 0 1 64 0v30" stroke-width="3.5"/>
+		<path d="M16 52a32 20 0 0 0 64 0" stroke-width="3" opacity="0.6"/>
+		<path d="M48 32V12l14 5-14 5" stroke-width="3.5"/>
+		<path d="M30 82V64h12v18M56 70h10" stroke-width="3"/>
+		<path d="M8 82h80" stroke-width="3.5"/>
+	</symbol>
+
+	<!-- 1972 沖縄返還: 島々と結ばれる手 -->
+	<symbol id="art-okinawa-return" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M20 24c6-4 14-2 16 4 2 5-2 10-8 10s-12-6-8-14z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M62 18c8-2 14 4 12 10-2 5-8 7-13 4-5-2-6-11 1-14z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M18 62c8-8 18-8 24 0l6 6M78 62c-8-8-18-8-24 0l-6 6" stroke-width="3.5"/>
+		<path d="M42 68l6 6 6-6" stroke-width="3.5"/>
+		<path d="M8 86h80" stroke-width="3" opacity="0.4"/>
+	</symbol>
+
+	<!-- 1973 オイルショック: 枯れる油と価格上昇 -->
+	<symbol id="art-oil-shock" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M40 20c10 12 16 20 16 28a16 16 0 0 1-32 0c0-8 6-16 16-28z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M33 50a8 8 0 0 0 7 8" stroke-width="3" opacity="0.7"/>
+		<path d="M62 78l10-12 8 6 8-14" stroke-width="3.5"/>
+		<path d="M84 56l4 0v6" stroke-width="3.5"/>
+		<path d="M16 84h44" stroke-width="3" opacity="0.4"/>
+	</symbol>
+
+	<!-- 1986 チェルノブイリ原発事故: 冷却塔と放射線 -->
+	<symbol id="art-chernobyl" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M30 84c-4-20-4-34 4-46h28c8 12 8 26 4 46z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M34 38c8-4 20-4 28 0" stroke-width="3" opacity="0.6"/>
+		<circle cx="48" cy="20" r="3" fill="currentColor" stroke="none"/>
+		<path d="M48 20l-8-12M48 20l8-12M48 20v-14" stroke-width="3" opacity="0.7"/>
+		<path d="M40 62h16M48 54v16" stroke-width="3" opacity="0.7"/>
+		<path d="M16 84h64" stroke-width="3.5"/>
+	</symbol>
+
+	<!-- 1989 昭和から平成へ: めくれる暦 -->
+	<symbol id="art-heisei" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="18" y="22" width="60" height="58" rx="8"/>
+		<path d="M18 38h60M32 22V12M64 22V12" stroke-width="3.5"/>
+		<path d="M78 52c-16 2-26 12-28 28h28z" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="38" cy="54" r="3" fill="currentColor" stroke="none"/>
+		<circle cx="38" cy="68" r="3" fill="currentColor" stroke="none"/>
+	</symbol>
+
+	<!-- 1989 ベルリンの壁崩壊: 崩れる壁 -->
+	<symbol id="art-berlin-wall" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M10 30h26v54H10zM60 30h26v54H60z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M10 48h26M60 48h26M10 66h26M60 66h26M23 30v18M73 30v18M18 48v18M78 48v18M23 66v18M73 66v18" stroke-width="3" opacity="0.6"/>
+		<path d="M44 26l6 10-4 10 6 10-4 10 6 12" stroke-width="3.5"/>
+		<circle cx="52" cy="16" r="3" fill="currentColor" stroke="none"/>
+		<circle cx="40" cy="52" r="2" fill="currentColor" stroke="none"/>
+		<circle cx="56" cy="64" r="2" fill="currentColor" stroke="none"/>
+	</symbol>
+
+	<!-- 1991 ソ連崩壊: 降ろされる旗 -->
+	<symbol id="art-soviet-dissolution" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M24 10v76M18 86h12" stroke-width="3.5"/>
+		<path d="M24 46l36-6-8 10 8 10-36-6z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M24 14h6M78 26l-10 10M78 36l-10-10" stroke-width="3" opacity="0.7"/>
+		<path d="M24 46v14" stroke-width="3" opacity="0.5" stroke-dasharray="2 5"/>
+	</symbol>
+
+	<!-- 1995 阪神・淡路大震災: 折れた高架道路 -->
+	<symbol id="art-hanshin-earthquake" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M8 40h34l12 22 34-8" stroke-width="3.5"/>
+		<path d="M8 50h30M62 68l26-6" stroke-width="3" opacity="0.6"/>
+		<path d="M20 50v34M50 60l4 24M74 64v20" stroke-width="3.5"/>
+		<path d="M42 40l12 22" stroke-width="3" opacity="0.6"/>
+		<path d="M8 88h80" stroke-width="3"/>
+		<path d="M30 24l-4-10M48 22l2-12M64 26l6-10" stroke-width="3" opacity="0.5"/>
+	</symbol>
+
+	<!-- 1995 Windows 95発売: ウィンドウとカーソル -->
+	<symbol id="art-windows95" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="14" y="18" width="68" height="52" rx="6"/>
+		<path d="M14 30h68M24 24h2M32 24h2M40 24h2" stroke-width="3"/>
+		<rect x="22" y="38" width="24" height="18" rx="3" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M54 42h20M54 50h20M54 58h12" stroke-width="3" opacity="0.7"/>
+		<path d="M58 60l16 16-2-8 8-2z" fill="currentColor" fill-opacity="0.25"/>
+		<path d="M34 78h28" stroke-width="3" opacity="0.5"/>
+	</symbol>
+
+	<!-- 2001 アメリカ同時多発テロ: 追悼の二筋の光 -->
+	<symbol id="art-september11" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M34 84V30l6-6v60M62 84V30l-6-6v60" stroke-width="3.5"/>
+		<path d="M37 12v8M59 12v8" stroke-width="3" opacity="0.6"/>
+		<path d="M14 84h68" stroke-width="3.5"/>
+		<path d="M22 84c4-6 10-10 14-10M74 84c-4-6-10-10-14-10" stroke-width="3" opacity="0.6"/>
+		<circle cx="48" cy="70" r="3" fill="currentColor" stroke="none" opacity="0.7"/>
+	</symbol>
+
+	<!-- 2007 iPhone発表: スマートフォン -->
+	<symbol id="art-iphone" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="30" y="10" width="36" height="76" rx="9"/>
+		<rect x="36" y="22" width="24" height="48" rx="2" fill="currentColor" fill-opacity="0.12"/>
+		<circle cx="48" cy="78" r="3.5" stroke-width="3"/>
+		<path d="M44 16h8" stroke-width="3"/>
+		<path d="M14 34c3-6 3-14 0-20M20 32c2-5 2-11 0-16M82 34c-3-6-3-14 0-20M76 32c-2-5-2-11 0-16" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 2008 リーマン・ショック: 崩れる銀行 -->
+	<symbol id="art-lehman-shock" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M14 36l34-18 34 18" stroke-width="3.5"/>
+		<path d="M22 42v30M38 42v30M58 42v30M74 42v30M14 78h52" stroke-width="3.5"/>
+		<path d="M66 78l18-14M84 64l-4 12M84 64l-12-2" stroke-width="3.5"/>
+		<path d="M22 36h52" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 2011 東日本大震災: 大波と列島 -->
+	<symbol id="art-tohoku-earthquake" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M14 60c0-22 12-38 30-38-6 8-8 16-4 22 4-10 14-14 24-10-8 4-10 10-8 16 6-4 14-2 18 4-22-4-38 2-46 14z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M10 78c10 0 10 6 20 6s10-6 20-6 10 6 20 6 10-6 16-6" stroke-width="3.5"/>
+		<path d="M64 24l8-4 6 6-2 8" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 2012 ヒッグス粒子発見: 粒子の衝突 -->
+	<symbol id="art-higgs" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="48" cy="48" r="5" fill="currentColor" fill-opacity="0.3"/>
+		<path d="M10 48h28M58 48h28" stroke-width="3.5"/>
+		<path d="M53 43l20-20M43 43L23 23M53 53l20 20M43 53L23 73" stroke-width="3" opacity="0.7"/>
+		<circle cx="73" cy="23" r="3" fill="currentColor" stroke="none"/>
+		<circle cx="23" cy="23" r="3" fill="currentColor" stroke="none"/>
+		<circle cx="73" cy="73" r="3" fill="currentColor" stroke="none"/>
+		<circle cx="23" cy="73" r="3" fill="currentColor" stroke="none"/>
+		<circle cx="48" cy="48" r="18" stroke-width="3" opacity="0.4" stroke-dasharray="3 6"/>
+	</symbol>
+
+	<!-- 2019 令和改元: 梅の花（万葉集「梅花の宴」より） -->
+	<symbol id="art-reiwa" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="48" cy="30" r="10" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="65" cy="42" r="10" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="59" cy="62" r="10" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="37" cy="62" r="10" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="31" cy="42" r="10" fill="currentColor" fill-opacity="0.15"/>
+		<circle cx="48" cy="48" r="5"/>
+		<path d="M48 43v-8M52 51l7 5M44 51l-7 5" stroke-width="2.5" opacity="0.7"/>
+	</symbol>
+
+	<!-- 2020 新型コロナ パンデミック: ウイルスと地球 -->
+	<symbol id="art-covid19" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="48" cy="48" r="20" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M48 28v-12M48 68v12M28 48H16M68 48h12M34 34l-8-8M62 34l8-8M34 62l-8 8M62 62l8 8" stroke-width="3.5"/>
+		<circle cx="48" cy="14" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="48" cy="82" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="14" cy="48" r="2.5" fill="currentColor" stroke="none"/>
+		<circle cx="82" cy="48" r="2.5" fill="currentColor" stroke="none"/>
+		<path d="M38 44c4 6 16 6 20 0M42 52h12" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 2021 東京2020開催: 無観客のスタジアム -->
+	<symbol id="art-tokyo2020" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M12 56c0-12 16-22 36-22s36 10 36 22" stroke-width="3.5"/>
+		<path d="M12 56v10c0 10 16 18 36 18s36-8 36-18V56" stroke-width="3.5"/>
+		<path d="M12 60c10 8 62 8 72 0" stroke-width="3" opacity="0.5"/>
+		<path d="M48 34V16l12 4-12 4" stroke-width="3.5"/>
+	</symbol>
+
+	<!-- 2022 ロシアのウクライナ侵攻: ひまわりと鳩 -->
+	<symbol id="art-ukraine-invasion" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="40" cy="46" r="9" fill="currentColor" fill-opacity="0.25"/>
+		<path d="M40 33v-8M40 67v-8M27 46h-8M61 46h-8M31 37l-6-6M55 37l6-6M31 55l-6 6M49 55l6 6" stroke-width="3.5"/>
+		<path d="M40 67v18" stroke-width="3.5"/>
+		<path d="M40 78c-6-2-10 0-12 4" stroke-width="3" opacity="0.7"/>
+		<path d="M62 18c6-4 12-2 14 2-4 2-4 6-2 8-6 2-12-2-12-10z" stroke-width="3"/>
+		<path d="M70 30c2 6 8 8 14 6" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 2022 安倍元首相銃撃: 献花 -->
+	<symbol id="art-abe-shooting" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 40c-6-8-4-18 4-24 8 6 10 16 4 24z" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M40 46c-8-4-10-12-6-20 8 2 12 8 12 16M56 46c8-4 10-12 6-20-8 2-12 8-12 16" stroke-width="3"/>
+		<path d="M48 46v18" stroke-width="3.5"/>
+		<path d="M34 64h28l-4 20H38z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M34 64h28" stroke-width="3.5"/>
+	</symbol>
+</svg>

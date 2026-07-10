@@ -1,0 +1,106 @@
+/* ================= design tokens ================= */
+:root {
+	color-scheme: light dark;
+
+	/* 紙面(editorial archive)調のニュートラル */
+	--bg: #f7f5f0;
+	--bg-elevated: #fffdf8;
+	--ink: #1f1c17;
+	--ink-muted: #6e675c;
+	--line: #d9d3c7;
+	--line-strong: #b5ad9d;
+	--spine: #8a8272;
+	--accent: #b3541e;
+	--focus: #2563eb;
+
+	/* カテゴリ別アクセント */
+	--cat-politics: #3d5a80;
+	--cat-economy: #1f7a5c;
+	--cat-culture: #9c4d8f;
+	--cat-science: #2277a8;
+	--cat-sports: #c96f1f;
+	--cat-disaster: #b3362b;
+	--cat-society: #6b7280;
+	--cat-war: #7f1d1d;
+
+	--radius: 10px;
+	--shadow: 0 1px 2px rgb(31 28 23 / 0.08), 0 4px 16px rgb(31 28 23 / 0.06);
+	--font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+	--font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+}
+
+:root[data-theme="dark"] {
+	--bg: #171511;
+	--bg-elevated: #211e19;
+	--ink: #eae5da;
+	--ink-muted: #9b9384;
+	--line: #3a362e;
+	--line-strong: #55503f;
+	--spine: #6e675c;
+	--accent: #e0824a;
+	--focus: #60a5fa;
+	--shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--bg: #171511;
+		--bg-elevated: #211e19;
+		--ink: #eae5da;
+		--ink-muted: #9b9384;
+		--line: #3a362e;
+		--line-strong: #55503f;
+		--spine: #6e675c;
+		--accent: #e0824a;
+		--focus: #60a5fa;
+		--shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+	}
+}
+
+/* ================= base ================= */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: var(--bg);
+	color: var(--ink);
+	font-family: var(--font-sans);
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+	display: contents;
+}
+
+a {
+	color: var(--accent);
+}
+
+button {
+	font-family: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--focus);
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

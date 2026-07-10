@@ -1,0 +1,407 @@
+# chronoscroll トップ50キュレーション
+# 自動生成イベントを id で上書きする（title/summary/importance/svg/分類/日付精度）
+# importance: 100 = 最遠ズーム（概観）で必ず表示される層。全件オリジナルSVG付き。
+
+- id: 1868-02-08-13b8b41d
+  title: 明治維新——新政府が王政復古を世界に宣言
+  summary: 王政復古の大号令を経て成立した明治新政府が、諸外国公使に天皇親政の開始を通告し、開国和親の方針を宣言した。武家政権の終わりとともに、日本の近代国家への歩みが始まった。
+  importance: 100
+  svg: art-meiji-ishin
+  category: politics
+  region: japan
+
+- id: 1869-11-17-9a56a6bc
+  title: スエズ運河が開通
+  summary: 地中海と紅海を結ぶ全長約160kmのスエズ運河が、10年の難工事を経て開通した。ヨーロッパとアジアを結ぶ航路は大幅に短縮され、世界の海運と貿易の姿を一変させた。
+  importance: 100
+  svg: art-suez-canal
+  category: economy
+  region: world
+
+- id: 1872-10-14-098bca3d
+  title: 新橋–横浜間に日本初の鉄道が開業
+  summary: 明治5年、新橋–横浜間29kmを約53分で結ぶ日本初の鉄道が正式開業した。陸蒸気と呼ばれた汽車は文明開化の象徴として人々を驚かせ、この日は後に「鉄道の日」となった。
+  importance: 100
+  svg: art-first-railway
+  category: science
+  region: japan
+
+- id: 1876-03-10-397763b3
+  title: ベルが電話の実用化に成功
+  summary: 「ワトソン君、ちょっとこっちに来てくれないか」——グラハム・ベルが世界初の実用的な電話通話に成功した。人の声が電線を伝わる時代が、この一言から幕を開けた。
+  importance: 100
+  svg: art-bell-telephone
+  category: science
+  region: world
+
+- id: 1889-02-11-c4d09e8e
+  title: 大日本帝国憲法を発布
+  summary: アジア初の近代成文憲法として大日本帝国憲法が発布された。天皇主権のもとに帝国議会や裁判所の制度が整えられ、日本は立憲国家としての体裁を整えた。
+  importance: 100
+  svg: art-meiji-constitution
+  category: politics
+  region: japan
+
+- id: 1889-03-31-c70f6fd5
+  title: エッフェル塔が完成
+  summary: パリ万国博覧会に合わせ、高さ300mの鉄塔が完成した。当時世界一の高さを誇り、「醜い鉄の塊」と賛否を巻き起こしながらも、やがてパリそのものの象徴となった。
+  importance: 100
+  svg: art-eiffel-tower
+  category: culture
+  region: world
+
+- id: 1894-08-01-c83f0c49
+  title: 日清戦争が開戦
+  summary: 朝鮮半島をめぐる対立から、日本と清が相互に宣戦布告した。近代日本初の本格的な対外戦争は翌年の下関条約締結まで続き、東アジアの勢力図を大きく塗り替えた。
+  importance: 100
+  svg: art-sino-japanese-war
+  category: war
+  region: both
+
+- id: 1895-12-28-eab508c7
+  title: リュミエール兄弟が世界初の映画興行
+  summary: パリのグラン・カフェで、リュミエール兄弟がシネマトグラフによる世界初の有料映画上映を行った。「映画」という20世紀最大の娯楽と芸術の歴史が、ここから始まった。
+  importance: 100
+  svg: art-cinema-birth
+  category: culture
+  region: world
+
+- id: 1898-12-26-db659829
+  title: キュリー夫妻がラジウムを発見
+  summary: ピエールとマリのキュリー夫妻が、新元素ラジウムの発見を発表した。放射能研究の扉を開く成果であり、マリは後に女性初のノーベル賞受賞者となった。
+  importance: 100
+  svg: art-radium-discovery
+  category: science
+  region: world
+
+- id: 1903-12-17-8fe33c91
+  title: ライト兄弟が人類初の動力飛行
+  summary: 米ノースカロライナ州キティホークの砂丘で、ライト兄弟のフライヤー号が人類初の動力飛行に成功した。最初の飛行はわずか12秒・36m——だが空の時代はここから始まった。
+  importance: 100
+  svg: art-wright-flyer
+  category: science
+  region: world
+
+- id: 1904-02-04-3854e92f
+  title: 日露戦争が始まる
+  summary: 御前会議で対露交渉の打ち切りと軍事行動の開始が決定された。数日後の旅順口攻撃をもって日露戦争が始まり、新興国日本と大国ロシアの戦いは世界の注目を集めた。
+  importance: 100
+  svg: art-russo-japanese-war
+  category: war
+  region: both
+
+- id: 1905-06-30-18f5d965
+  title: アインシュタインが特殊相対性理論を発表
+  summary: 26歳の特許局員アインシュタインが論文「運動物体の電気力学について」を発表。時間と空間は絶対ではないという洞察は物理学の常識を覆し、「奇跡の年」の代表的成果となった。
+  importance: 100
+  svg: art-relativity
+  category: science
+  region: world
+
+- id: 1912-04-14-7c89b5cd
+  title: タイタニック号が沈没
+  summary: 「不沈船」と謳われた豪華客船タイタニック号が、処女航海中に氷山と衝突し北大西洋に沈んだ。1,500人以上が犠牲となり、海難史上最悪級の事故として記憶されている。
+  importance: 100
+  svg: art-titanic
+  category: disaster
+  region: world
+
+- id: 1914-07-28-717607be
+  title: 第一次世界大戦が勃発
+  summary: サラエボ事件を引き金に、オーストリア＝ハンガリーがセルビアへ宣戦布告した。同盟の網が連鎖してヨーロッパ全体が戦火に包まれ、人類初の世界大戦へと拡大していった。
+  importance: 100
+  svg: art-ww1
+  category: war
+  region: world
+
+- id: 1918-11-11-7c1b62dd
+  title: 第一次世界大戦が終結
+  summary: 連合国とドイツが休戦協定に調印し、4年余りに及んだ大戦が終わった。犠牲者は軍民あわせて1,600万人以上。世界は「二度と戦争を繰り返さない」ための模索を始める。
+  importance: 100
+  svg: art-ww1-armistice
+  category: war
+  region: world
+
+- id: 1923-09-01-3eedb04e
+  title: 関東大震災が発生
+  summary: 9月1日午前11時58分、M7.9の地震が関東南部を直撃した。昼食時の火災が被害を拡大し、死者・行方不明者は約10万5千人に及んだ。この日は後に「防災の日」と定められた。
+  importance: 100
+  svg: art-kanto-earthquake
+  category: disaster
+  region: japan
+
+- id: 1927-05-21-b4e70bb6
+  title: リンドバーグが大西洋単独無着陸横断
+  summary: スピリット・オブ・セントルイス号でニューヨークからパリまで約5,800kmを33時間半で飛行。世界初の大西洋単独無着陸横断は、大西洋を「飛んで渡れる海」に変えた。
+  importance: 100
+  svg: art-lindbergh
+  category: science
+  region: world
+
+- id: 1929-10-24-b6eff5a3
+  title: ウォール街株価大暴落——世界恐慌へ
+  summary: 「暗黒の木曜日」、ニューヨーク証券取引所で株価が大暴落した。恐慌は瞬く間に世界へ波及し、失業と保護主義の連鎖が1930年代の世界を長く揺さぶり続けた。
+  importance: 100
+  svg: art-great-depression
+  category: economy
+  region: world
+
+- id: 1931-09-18-17940576
+  title: 柳条湖事件——満州事変が勃発
+  summary: 奉天郊外の柳条湖で南満州鉄道の線路が爆破された。関東軍はこれを口実に軍事行動を拡大し、満州事変からやがて15年に及ぶ戦争の時代へと突き進んでいく。
+  importance: 100
+  svg: art-manchurian-incident
+  category: war
+  region: both
+
+- id: 1936-02-26-0a83bd9b
+  title: 二・二六事件
+  summary: 雪の東京で、陸軍青年将校らが約1,500名の兵を率いて首相官邸などを襲撃し、高橋是清蔵相らを殺害した。クーデターは鎮圧されたが、軍部の発言力は決定的に強まった。
+  importance: 100
+  svg: art-226-incident
+  category: war
+  region: japan
+
+- id: 1939-09-01-7583d835
+  title: 第二次世界大戦が勃発
+  summary: ナチス・ドイツがポーランドへ侵攻を開始した。英仏の対独宣戦布告が続き、第一次大戦の終結からわずか20年で、世界は再び大戦の渦に飲み込まれていった。
+  importance: 100
+  svg: art-ww2-outbreak
+  category: war
+  region: world
+
+- id: 1941-12-08-97e6f8cb
+  title: 真珠湾攻撃——太平洋戦争開戦
+  summary: 日本軍がハワイ真珠湾の米艦隊を奇襲し、同時にマレー半島へ上陸した。日本は米英に宣戦布告し、太平洋戦争が始まった。「トラ・トラ・トラ」の暗号電文は奇襲成功を告げた。
+  importance: 100
+  svg: art-pearl-harbor
+  category: war
+  region: both
+
+- id: 1945-08-01-02e05b66
+  title: 広島に原子爆弾投下
+  date: "1945-08-06"
+  precision: day
+  summary: 8月6日午前8時15分、米軍のB-29が広島市に世界初の原子爆弾を投下した。市街は一瞬で壊滅し、その年のうちに約14万人が亡くなったと推計される。3日後には長崎にも投下された。
+  importance: 100
+  svg: art-hiroshima
+  category: war
+  region: japan
+
+- id: 1945-08-15-a6282730
+  title: 終戦——玉音放送
+  summary: 正午、昭和天皇による玉音放送でポツダム宣言の受諾が国民に伝えられた。日中戦争から8年、太平洋戦争から3年8か月に及んだ戦争が終わり、日本は焦土からの再出発を迎えた。
+  importance: 100
+  svg: art-shusen
+  category: war
+  region: japan
+
+- id: 1946-11-03-2065018b
+  title: 日本国憲法を公布
+  summary: 国民主権・戦争放棄・基本的人権の尊重を三原則とする日本国憲法が公布された。施行は翌1947年5月3日。公布日の11月3日は「文化の日」となった。
+  importance: 100
+  svg: art-kenpou
+  category: politics
+  region: japan
+
+- id: 1953-02-01-84936241
+  title: NHKがテレビ本放送を開始
+  summary: 東京・内幸町の東京放送会館から、日本初のテレビ本放送が始まった。当初の受信契約はわずか866件。街頭テレビにプロレス中継を見る人垣ができ、テレビの時代が幕を開けた。
+  importance: 100
+  svg: art-tv-broadcast
+  category: culture
+  region: japan
+
+- id: 1957-10-04-e3fdcc7a
+  title: スプートニク1号——宇宙時代の幕開け
+  summary: ソ連が世界初の人工衛星スプートニク1号の打ち上げに成功した。上空から届く「ピーッ」という電波音は西側諸国に衝撃を与え、米ソの宇宙開発競争が始まった。
+  importance: 100
+  svg: art-sputnik
+  category: science
+  region: world
+
+- id: 1958-12-23-334d8850
+  title: 東京タワーが完成
+  summary: 高さ333m、当時世界一の自立式鉄塔として東京タワーが完成した。戦後復興を遂げた東京の新しいシンボルとなり、テレビ放送の総合電波塔として首都の空に立ち続ける。
+  importance: 100
+  svg: art-tokyo-tower
+  category: culture
+  region: japan
+
+- id: 1964-10-01-eaaaeaf5
+  title: 東海道新幹線が開業
+  summary: 世界初の高速鉄道として、東京–新大阪間515kmを「ひかり」が4時間で結んだ。オリンピック開幕の9日前に走り出した夢の超特急は、高度経済成長の象徴となった。
+  importance: 100
+  svg: art-shinkansen
+  category: science
+  region: japan
+
+- id: 1964-10-10-e99097eb
+  title: 東京オリンピック開幕
+  summary: アジアで初めてのオリンピックが東京で開会した。93の国と地域が参加し、敗戦から19年で復興を遂げた日本の姿を世界に示した。開会式の10月10日は後に「体育の日」となった。
+  importance: 100
+  svg: art-tokyo-olympics-1964
+  category: sports
+  region: japan
+
+- id: 1969-07-20-87c1bf64
+  title: アポロ11号が月面着陸
+  summary: アームストロング船長が人類として初めて月面に降り立った。「一人の人間には小さな一歩だが、人類にとっては偉大な飛躍である」——月面からの中継を世界中が見守った。
+  importance: 100
+  svg: art-apollo11
+  category: science
+  region: world
+
+- id: 1970-03-14-656fea20
+  title: 大阪万博が開幕
+  summary: 「人類の進歩と調和」をテーマに、アジア初の万国博覧会が千里丘陵で開幕した。183日間の会期に約6,422万人が来場し、日本の高度経済成長の頂点を刻む祭典となった。
+  importance: 100
+  svg: art-expo70
+  category: culture
+  region: japan
+
+- id: 1972-05-15-b5649356
+  title: 沖縄が日本に返還
+  summary: 27年間のアメリカ統治を経て、沖縄の施政権が日本に返還され沖縄県が発足した。ただし広大な米軍基地はそのまま残り、基地問題は今日まで続く課題となっている。
+  importance: 100
+  svg: art-okinawa-return
+  category: politics
+  region: japan
+
+- id: 1973-10-17-c0c14e5c
+  title: オイルショックが発生
+  summary: 第四次中東戦争を機に、アラブ産油国が原油の減産と大幅値上げを決定した。狂乱物価とモノ不足——トイレットペーパー騒動——が起き、日本の高度経済成長は終焉を迎えた。
+  importance: 100
+  svg: art-oil-shock
+  category: economy
+  region: both
+
+- id: 1986-04-26-e47c5ef2
+  title: チェルノブイリ原発事故
+  summary: ソ連（現ウクライナ）のチェルノブイリ原子力発電所4号炉が試験運転中に爆発した。史上最悪の原子力事故となり、放射性物質はヨーロッパ全域へ拡散した。
+  importance: 100
+  svg: art-chernobyl
+  category: disaster
+  region: world
+
+- id: 1989-01-07-df6d1213
+  title: 昭和が終わる——平成へ
+  summary: 昭和天皇が87歳で崩御し、戦前・戦後の激動を貫いた62年の「昭和」が終わった。翌日、皇太子明仁親王が即位し、新元号「平成」の時代が始まった。
+  importance: 100
+  svg: art-heisei
+  category: society
+  region: japan
+
+- id: 1989-11-10-50619ea3
+  title: ベルリンの壁が崩壊
+  date: "1989-11-09"
+  precision: day
+  summary: 東ドイツの出国規制緩和の発表を受け、市民が検問所に殺到し壁を越えた。ハンマーで壁を打ち壊す人々の映像は冷戦終結の象徴となり、翌年のドイツ統一へと流れが決まった。
+  importance: 100
+  svg: art-berlin-wall
+  category: politics
+  region: world
+
+- id: 1991-12-25-97cf6e8d
+  title: ソビエト連邦が崩壊
+  summary: ゴルバチョフ大統領が辞任し、クレムリンから赤旗が降ろされた。69年続いた社会主義の超大国は15の共和国へと分かれ、米ソ冷戦の時代は名実ともに終わった。
+  importance: 100
+  svg: art-soviet-dissolution
+  category: politics
+  region: world
+
+- id: 1995-01-17-2fd6404c
+  title: 阪神・淡路大震災
+  summary: 1月17日午前5時46分、M7.3の直下型地震が阪神地域を直撃した。死者6,434人、全壊家屋約10万5千棟。高速道路の倒壊映像は日本の防災意識を根本から変え、「ボランティア元年」という言葉も生まれた。
+  importance: 100
+  svg: art-hanshin-earthquake
+  category: disaster
+  region: japan
+
+- id: 1995-11-23-8a73b54f
+  title: Windows 95日本語版が発売
+  summary: 深夜の秋葉原に長蛇の列ができる社会現象となった。インターネット接続機能を標準搭載したこのOSをきっかけに、パソコンとネットが一般家庭へ一気に普及していく。
+  importance: 100
+  svg: art-windows95
+  category: science
+  region: japan
+
+- id: 2001-09-11-038f51ad
+  title: アメリカ同時多発テロ
+  summary: ハイジャックされた旅客機2機がニューヨークの世界貿易センタービルに突入、国防総省にも1機が突入し、約3,000人が犠牲になった。米国は「テロとの戦い」へ突き進み、世界の安全保障観は一変した。
+  importance: 100
+  svg: art-september11
+  category: war
+  region: world
+
+- id: 2007-01-09-e68c1122
+  title: 初代iPhone発表
+  summary: スティーブ・ジョブズが「本日、アップルは電話を再発明する」と初代iPhoneを発表した。電話・音楽・インターネットをひとつにした一枚板の端末は、スマートフォン時代の起点となった。
+  importance: 100
+  svg: art-iphone
+  category: science
+  region: world
+
+- id: 2008-09-15-e06d57d8
+  title: リーマン・ショック
+  summary: 米大手投資銀行リーマン・ブラザーズが経営破綻した。負債総額約6,000億ドルは史上最大。サブプライム問題に端を発した金融危機は、瞬く間に世界同時不況へと拡大した。
+  importance: 100
+  svg: art-lehman-shock
+  category: economy
+  region: world
+
+- id: 2011-03-11-8f5c114a
+  title: 東日本大震災
+  summary: 3月11日午後2時46分、国内観測史上最大となるM9.0の地震が発生した。巨大津波が東北沿岸を襲い、福島第一原発事故も重なって、死者・行方不明者は2万2千人を超えた。
+  importance: 100
+  svg: art-tohoku-earthquake
+  category: disaster
+  region: japan
+
+- id: 2012-07-04-7e857f84
+  title: ヒッグス粒子とみられる新粒子を発見
+  summary: CERNの大型ハドロン衝突型加速器の実験で、「神の粒子」とも呼ばれるヒッグス粒子とみられる新粒子が発見された。物質が質量を持つ仕組みの解明に迫る、素粒子物理学の金字塔となった。
+  importance: 100
+  svg: art-higgs
+  category: science
+  region: world
+
+- id: 2019-05-01-617b427c
+  title: 令和が始まる
+  summary: 皇太子徳仁親王が第126代天皇に即位し、元号が「令和」に改まった。出典は万葉集・梅花の歌の序文で、漢籍ではなく国書に由来する元号は史上初めてとなった。
+  importance: 100
+  svg: art-reiwa
+  category: society
+  region: japan
+
+- id: 2020-03-11-3fe40b2e
+  title: WHOがパンデミックを宣言
+  summary: WHOが新型コロナウイルス感染症の世界的大流行（パンデミック）を宣言した。都市封鎖、マスク、リモートワーク——世界中の暮らしと経済が一変する数年間の始まりだった。
+  importance: 100
+  svg: art-covid19
+  category: disaster
+  region: world
+
+- id: 2021-07-23-fa647dbd
+  title: 東京2020オリンピック開幕
+  summary: 新型コロナの影響で1年延期された東京オリンピックが開幕した。ほとんどの会場が無観客という五輪史上初の異例の大会は、それでも世界のアスリートの舞台であり続けた。
+  importance: 100
+  svg: art-tokyo2020
+  category: sports
+  region: japan
+
+- id: 2022-02-24-5161292b
+  title: ロシアがウクライナへ全面侵攻
+  summary: ロシア軍がウクライナ各地への攻撃を開始し、第二次大戦後のヨーロッパで最大規模の戦争となった。エネルギーや食料の供給網を通じて、その影響は世界全体に及んでいる。
+  importance: 100
+  svg: art-ukraine-invasion
+  category: war
+  region: world
+
+- id: 2022-07-08-da42120b
+  title: 安倍元首相、銃撃され死去
+  summary: 参議院選挙の街頭演説中、奈良市の大和西大寺駅前で安倍晋三元首相が銃撃され、死亡が確認された。憲政史上最長の在任記録を持つ首相経験者の非業の死は、内外に大きな衝撃を与えた。
+  importance: 100
+  svg: art-abe-shooting
+  category: society
+  region: japan
