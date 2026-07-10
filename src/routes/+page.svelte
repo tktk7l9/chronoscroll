@@ -87,6 +87,9 @@
 	<meta property="og:image" content="https://chronoscroll.vercel.app/ogp.png" />
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary_large_image" />
+	<!-- 初期データをJS起動と並列で取得する -->
+	<link rel="preload" href="/data/index.json" as="fetch" crossorigin="anonymous" />
+	<link rel="preload" href="/data/overview.json" as="fetch" crossorigin="anonymous" />
 </svelte:head>
 
 <header class="site-header">

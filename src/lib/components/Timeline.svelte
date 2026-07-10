@@ -139,9 +139,18 @@
 		}
 	});
 
-	// 可視範囲のチャンク遅延ロード
+	// 可視範囲のチャンク遅延ロード。
+	// 初期表示は overview だけで描けるため、LCPと帯域を奪い合わないよう少し遅らせる
+	let chunkLoadingEnabled = $state(false);
 	$effect(() => {
-		if (ready) data.ensureRange(range.fromDay + bufferDays, range.toDay - bufferDays);
+		if (!ready) return;
+		const t = setTimeout(() => (chunkLoadingEnabled = true), 900);
+		return () => clearTimeout(t);
+	});
+	$effect(() => {
+		if (ready && chunkLoadingEnabled) {
+			data.ensureRange(range.fromDay + bufferDays, range.toDay - bufferDays);
+		}
 	});
 
 	// ビュー変更を親へ通知（デバウンス）

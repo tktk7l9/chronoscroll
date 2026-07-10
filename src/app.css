@@ -18,7 +18,7 @@
 	--cat-economy: #1f7a5c;
 	--cat-culture: #9c4d8f;
 	--cat-science: #2277a8;
-	--cat-sports: #c96f1f;
+	--cat-sports: #a4570f;
 	--cat-disaster: #b3362b;
 	--cat-society: #6b7280;
 	--cat-war: #7f1d1d;
@@ -40,6 +40,15 @@
 	--accent: #e0824a;
 	--focus: #60a5fa;
 	--shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+	/* ダーク面(#211e19)でテキストコントラスト4.5:1以上を満たす明色版 */
+	--cat-politics: #6ea3e0;
+	--cat-economy: #3cba85;
+	--cat-culture: #d678c6;
+	--cat-science: #3fb0e8;
+	--cat-sports: #e6913a;
+	--cat-disaster: #ef6f5e;
+	--cat-society: #b3a48c;
+	--cat-war: #d16a6a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,6 +63,14 @@
 		--accent: #e0824a;
 		--focus: #60a5fa;
 		--shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+		--cat-politics: #6ea3e0;
+		--cat-economy: #3cba85;
+		--cat-culture: #d678c6;
+		--cat-science: #3fb0e8;
+		--cat-sports: #e6913a;
+		--cat-disaster: #ef6f5e;
+		--cat-society: #b3a48c;
+		--cat-war: #d16a6a;
 	}
 }
 
