@@ -457,6 +457,13 @@
 		border: 2px solid var(--bg);
 		box-shadow: 0 0 0 1px var(--line-strong);
 		z-index: 1;
+		animation: dot-in 0.22s cubic-bezier(0.34, 1.4, 0.64, 1) backwards;
+	}
+	@keyframes dot-in {
+		from {
+			opacity: 0;
+			transform: translate(-50%, -50%) scale(0.4);
+		}
 	}
 	.dot[data-cat='politics'] { --cat-color: var(--cat-politics); }
 	.dot[data-cat='economy'] { --cat-color: var(--cat-economy); }
@@ -474,6 +481,12 @@
 		width: 30px;
 		background: var(--line-strong);
 		transform: translateY(-50%);
+		animation: connector-in 0.28s ease-out backwards;
+	}
+	@keyframes connector-in {
+		from {
+			opacity: 0;
+		}
 	}
 	.connector.right { left: calc(50% + 5px); }
 	.connector.left { right: calc(50% + 5px); }
@@ -524,6 +537,22 @@
 		border: 1px solid var(--line);
 		border-radius: 12px;
 		box-shadow: var(--shadow);
+		transform-origin: top center;
+		animation: panel-pop 0.18s cubic-bezier(0.22, 1.2, 0.36, 1) backwards;
+	}
+	@keyframes panel-pop {
+		from {
+			opacity: 0;
+			transform: translateX(-50%) translateY(-4px) scale(0.94);
+		}
+	}
+	.jump-grid button,
+	.jump-latest {
+		transition: color 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+	}
+	.jump-grid button:active,
+	.jump-latest:active {
+		transform: scale(0.94);
 	}
 	.jump-latest {
 		width: 100%;
@@ -592,6 +621,14 @@
 			bottom: calc(100% + 8px);
 			left: 0;
 			transform: none;
+			transform-origin: bottom left;
+			animation-name: panel-pop-mobile;
+		}
+	}
+	@keyframes panel-pop-mobile {
+		from {
+			opacity: 0;
+			transform: translateY(4px) scale(0.94);
 		}
 	}
 </style>

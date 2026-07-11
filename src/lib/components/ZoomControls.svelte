@@ -194,6 +194,7 @@
 		border-radius: 6px;
 		background: color-mix(in srgb, var(--accent) 30%, transparent);
 		pointer-events: none;
+		transition: height 0.12s ease-out;
 	}
 	.notch {
 		position: absolute;
@@ -216,6 +217,19 @@
 		border: 2.5px solid var(--accent);
 		box-shadow: var(--shadow);
 		pointer-events: none;
+		transition: bottom 0.12s ease-out;
+	}
+	.track:active .thumb {
+		transition: bottom 0.03s linear;
+	}
+	.zbtn {
+		transition: border-color 0.12s ease, transform 0.08s ease, opacity 0.15s ease;
+	}
+	.zbtn:active:not(:disabled) {
+		transform: scale(0.92);
+	}
+	.stop {
+		transition: color 0.12s ease;
 	}
 
 	@media (max-width: 759px) {

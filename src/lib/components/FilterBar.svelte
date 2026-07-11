@@ -115,6 +115,16 @@
 		border-color: var(--chip-color);
 		color: var(--ink);
 	}
+	.chip:active {
+		transform: scale(0.94);
+	}
+	.chip {
+		transition:
+			background 0.12s ease,
+			color 0.12s ease,
+			border-color 0.12s ease,
+			transform 0.08s ease;
+	}
 	.chip.on {
 		background: var(--chip-color);
 		border-color: var(--chip-color);

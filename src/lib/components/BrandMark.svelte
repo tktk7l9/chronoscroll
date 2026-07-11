@@ -39,4 +39,33 @@
 	.dot-c {
 		fill: var(--cat-economy);
 	}
+
+	/* ブランド（リンク）ホバーで砂時計の砂が落ちる遊び */
+	:global(.brand:hover) .dot-a {
+		animation: sand-fall 0.7s ease-in;
+	}
+	:global(.brand:hover) .dot-b {
+		animation: sand-fall 0.7s ease-in 0.12s;
+	}
+	:global(.brand:hover) .dot-c {
+		animation: sand-fall 0.7s ease-in 0.24s;
+	}
+	@keyframes sand-fall {
+		0% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		55% {
+			transform: translateY(14px);
+			opacity: 0;
+		}
+		56% {
+			transform: translateY(-10px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
 </style>

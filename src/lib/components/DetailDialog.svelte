@@ -7,12 +7,31 @@
 	let { ev = null, onclose }: { ev: NewsEvent | null; onclose: () => void } = $props();
 
 	let dialog = $state<HTMLDialogElement>();
+	let closing = $state(false);
 
 	$effect(() => {
 		if (!dialog) return;
-		if (ev && !dialog.open) dialog.showModal();
-		else if (!ev && dialog.open) dialog.close();
+		if (ev && !dialog.open) {
+			closing = false;
+			dialog.showModal();
+		} else if (!ev && dialog.open) {
+			dialog.close();
+		}
 	});
+
+	/** 閉幕アニメーションを流してから close する（reduced-motion時は即時） */
+	function requestClose(): void {
+		if (!dialog?.open || closing) return;
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			dialog.close();
+			return;
+		}
+		closing = true;
+		setTimeout(() => {
+			closing = false;
+			dialog?.close();
+		}, 170);
+	}
 
 	const dateLabel = $derived.by(() => {
 		if (!ev) return '';
@@ -26,9 +45,14 @@
 
 <dialog
 	bind:this={dialog}
+	class:closing
 	onclose={() => onclose()}
+	oncancel={(e) => {
+		e.preventDefault();
+		requestClose();
+	}}
 	onclick={(e) => {
-		if (e.target === dialog) dialog?.close();
+		if (e.target === dialog) requestClose();
 	}}
 >
 	{#if ev}
@@ -79,7 +103,7 @@
 				</p>
 			</footer>
 
-			<button type="button" class="close" onclick={() => dialog?.close()} aria-label="閉じる">
+			<button type="button" class="close" onclick={requestClose} aria-label="閉じる">
 				×
 			</button>
 		</article>
@@ -100,6 +124,65 @@
 	dialog::backdrop {
 		background: rgb(20 16 10 / 0.55);
 		backdrop-filter: blur(2px);
+	}
+
+	/* 開閉アニメーション（transform/opacityのみ・compositor合成） */
+	dialog[open] {
+		animation: dialog-in 0.26s cubic-bezier(0.22, 1.1, 0.36, 1);
+	}
+	dialog[open]::backdrop {
+		animation: backdrop-in 0.22s ease-out;
+	}
+	dialog.closing {
+		animation: dialog-out 0.17s ease-in forwards;
+	}
+	dialog.closing::backdrop {
+		animation: backdrop-out 0.17s ease-in forwards;
+	}
+	@keyframes dialog-in {
+		from {
+			opacity: 0;
+			transform: translateY(14px) scale(0.965);
+		}
+	}
+	@keyframes dialog-out {
+		to {
+			opacity: 0;
+			transform: translateY(8px) scale(0.975);
+		}
+	}
+	@keyframes backdrop-in {
+		from {
+			opacity: 0;
+		}
+	}
+	@keyframes backdrop-out {
+		to {
+			opacity: 0;
+		}
+	}
+
+	/* 中身のステージング（開いた瞬間に上から順に立ち上がる） */
+	article > :global(*) {
+		animation: content-rise 0.34s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+	article > :global(*:nth-child(2)) {
+		animation-delay: 0.05s;
+	}
+	article > :global(*:nth-child(3)) {
+		animation-delay: 0.09s;
+	}
+	article > :global(*:nth-child(4)) {
+		animation-delay: 0.13s;
+	}
+	article > :global(*:nth-child(5)) {
+		animation-delay: 0.17s;
+	}
+	@keyframes content-rise {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
 	}
 
 	article {

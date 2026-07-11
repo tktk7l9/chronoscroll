@@ -58,6 +58,14 @@
 		position: absolute;
 		width: min(38vw, 360px);
 		--cat-color: var(--cat-society);
+		/* 出現時のみの軽いフェードアップ（exitなし=仮想化のアンマウントを妨げない） */
+		animation: card-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+	@keyframes card-in {
+		from {
+			opacity: 0;
+			transform: translateY(6px) scale(0.985);
+		}
 	}
 	.card[data-cat='politics'] { --cat-color: var(--cat-politics); }
 	.card[data-cat='economy'] { --cat-color: var(--cat-economy); }
@@ -92,6 +100,10 @@
 	.hit:hover {
 		transform: translateY(-1px);
 		box-shadow: 0 2px 4px rgb(31 28 23 / 0.1), 0 8px 24px rgb(31 28 23 / 0.1);
+	}
+	.hit:active {
+		transform: translateY(0) scale(0.99);
+		transition-duration: 0.06s;
 	}
 
 	.card.highlighted .hit {

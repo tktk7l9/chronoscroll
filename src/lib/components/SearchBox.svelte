@@ -161,6 +161,20 @@
 		box-shadow: var(--shadow);
 		padding: 6px;
 		z-index: 20;
+		transform-origin: top right;
+		animation: results-in 0.16s cubic-bezier(0.22, 1.1, 0.36, 1) backwards;
+	}
+	@keyframes results-in {
+		from {
+			opacity: 0;
+			transform: translateY(-4px) scale(0.97);
+		}
+	}
+	input {
+		transition: width 0.2s ease, border-color 0.15s ease;
+	}
+	input:focus {
+		width: min(300px, 44vw);
 	}
 
 	.hint {
