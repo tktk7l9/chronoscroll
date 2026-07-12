@@ -14,6 +14,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { OVERVIEW_MIN_IMPORTANCE } from '../../src/lib/lod.ts';
 import type { EventImage, NewsEvent } from '../../src/lib/types.ts';
 import { classify, type ClassifySidecar } from '../lib/classify.ts';
 import { applyCurated, parseCuratedYaml, type CuratedEntry } from '../lib/curate.ts';
@@ -44,8 +45,8 @@ const SIDECAR_PATH = join(ROOT, 'pipeline', 'sidecar', 'classify.json');
 
 /** 画像を取得・格納する importance 下限 */
 const IMAGE_MIN_IMPORTANCE = 60;
-/** overview.json に入れる importance 下限 */
-const OVERVIEW_MIN_IMPORTANCE = 97;
+// overview.json に入れる importance 下限は src/lib/lod.ts の OVERVIEW_MIN_IMPORTANCE を使う
+// （フロント側のチャンク先読み抑制ロジックと一致させる必要があるため一元管理）
 
 interface Args {
 	from: number;

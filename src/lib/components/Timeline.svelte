@@ -2,7 +2,7 @@
 	import { tick } from 'svelte';
 	import type { FilterState } from '../filters.ts';
 	import { isFiltering, matchesFilter } from '../filters.ts';
-	import { importanceThreshold, tickStepYears } from '../lod.ts';
+	import { importanceThreshold, needsChunkData, tickStepYears } from '../lod.ts';
 	import { layoutCards } from '../layout.ts';
 	import {
 		clampPxPerDay,
@@ -72,9 +72,11 @@
 		for (const p of pts) if (matchesFilter(p.ev, filter)) n++;
 		return Math.max(0.005, n / pts.length);
 	});
-	const threshold = $derived(
-		importanceThreshold(pxPerDay, data.eventsPerDay * filterSelectivity),
-	);
+	const adjustedEventsPerDay = $derived(data.eventsPerDay * filterSelectivity);
+	const threshold = $derived(importanceThreshold(pxPerDay, adjustedEventsPerDay));
+	// 概観〜十年ズームではoverview.jsonの閾値を上回るためチャンクを読んでも何も増えない。
+	// 実際に必要になるまでチャンクのフェッチ自体を止め、初期の無駄な帯域を避ける
+	const chunksNeeded = $derived(needsChunkData(pxPerDay, adjustedEventsPerDay));
 	const range = $derived(visibleDayRange(scale, scrollY, vh));
 	const bufferDays = $derived(vh / pxPerDay);
 	const visible = $derived(
@@ -149,7 +151,7 @@
 		return () => clearTimeout(t);
 	});
 	$effect(() => {
-		if (ready && chunkLoadingEnabled) {
+		if (ready && chunkLoadingEnabled && chunksNeeded) {
 			data.ensureRange(range.fromDay + bufferDays, range.toDay - bufferDays);
 		}
 	});

@@ -604,20 +604,26 @@
 		<path d="M70 42l-8 4v8" stroke-width="3" opacity="0.6"/>
 	</symbol>
 
-	<!-- 1911 マチュ・ピチュ発見: 山と段々の石組み -->
+	<!-- 1911 マチュ・ピチュ発見: 山肌の段々畑と石組みの遺跡 -->
 	<symbol id="art-machu-picchu" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-		<path d="M28 84c-4-30 4-52 20-68 16 16 24 38 20 68" stroke-width="3.5"/>
-		<path d="M14 84c2-16 8-28 16-36M82 84c-2-16-8-28-16-36" stroke-width="3" opacity="0.6"/>
-		<path d="M36 62h24M40 72h16M34 52h28" stroke-width="3"/>
+		<path d="M48 12L80 84H16z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M42 46h12M38 56h20M33 66h30M28 76h40" stroke-width="3" opacity="0.65"/>
+		<rect x="36" y="76" width="9" height="8" stroke-width="3"/>
+		<rect x="51" y="76" width="9" height="8" stroke-width="3"/>
 		<path d="M10 84h76" stroke-width="3.5"/>
 	</symbol>
 
-	<!-- 1911 モナ・リザ盗難: 空の額縁 -->
+	<!-- 1911 モナ・リザ盗難: 肖像の輪郭だけが残る空の額縁 -->
 	<symbol id="art-monalisa" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
 		<rect x="20" y="12" width="56" height="72" rx="4"/>
 		<rect x="28" y="20" width="40" height="56" rx="2" stroke-width="3" opacity="0.5"/>
-		<path d="M40 66c0-8 3-12 8-14 5 2 8 6 8 14" stroke-width="3" stroke-dasharray="3 5" opacity="0.6"/>
-		<circle cx="48" cy="44" r="7" stroke-width="3" stroke-dasharray="3 5" opacity="0.6"/>
+		<path
+			d="M48 34a10 10 0 0 1 10 10c0 5-2 8-3 12H41c-1-4-3-7-3-12a10 10 0 0 1 10-10z"
+			stroke-width="3"
+			stroke-dasharray="3 5"
+			opacity="0.6"
+		/>
+		<path d="M39 66c2-4 6-6 9-6s7 2 9 6" stroke-width="3" stroke-dasharray="3 5" opacity="0.6"/>
 		<path d="M60 34l10-10M70 34l-10-10" stroke-width="3"/>
 	</symbol>
 
@@ -811,20 +817,26 @@
 		<path d="M26 36c4-8 12-14 22-14M70 60c-4 8-12 14-22 14" stroke-width="3" opacity="0.5"/>
 	</symbol>
 
-	<!-- 1989 マルタ会談・冷戦終結: 交差する旗と鳩 -->
+	<!-- 1989 マルタ会談・冷戦終結: 割れた壁の間に昇る朝日 -->
 	<symbol id="art-cold-war-end" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-		<path d="M26 84L36 34M70 84L60 34" stroke-width="3.5"/>
-		<path d="M36 36h-16v14h16zM60 36h16v14H60z" fill="currentColor" fill-opacity="0.12"/>
-		<path d="M48 26c-2-8 4-14 12-14-1 4 1 6 4 7l6 2-6 3c-1 8-8 12-16 10" fill="currentColor" fill-opacity="0.15" stroke-width="3"/>
-		<path d="M8 84h80" stroke-width="3" opacity="0.4"/>
+		<path d="M10 30h24v50H10zM62 30h24v50H62z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M10 46h24M10 62h24M62 46h24M62 62h24M22 30v50M74 30v50" stroke-width="3" opacity="0.6"/>
+		<circle cx="48" cy="24" r="8" fill="currentColor" fill-opacity="0.2"/>
+		<path d="M48 8v6M33 16l4.5 4.5M63 16l-4.5 4.5" stroke-width="3"/>
+		<path d="M34 80h28" stroke-width="3.5"/>
 	</symbol>
 
-	<!-- 1990 オグリキャップ: 疾走する馬 -->
+	<!-- 1990 オグリキャップ: 疾走する馬（横向きギャロップ・線画のみ） -->
 	<symbol id="art-race-horse" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-		<path d="M20 56c0-14 10-24 26-24l8-12 6 4-2 10c8 2 14 8 16 18l4 8-10 2-6-8" stroke-width="3.5"/>
-		<path d="M24 56l-8 22M36 60l-4 20M58 58l6 20M46 60v20" stroke-width="3.5"/>
-		<path d="M50 20l8-8" stroke-width="3" opacity="0.6"/>
-		<path d="M8 44h8M6 54h8" stroke-width="3" opacity="0.5"/>
+		<path d="M50 48Q36 38 24 44"/>
+		<path d="M50 48Q56 32 70 24L78 30"/>
+		<path d="M66 22l4-8l5 6" stroke-width="3"/>
+		<path d="M50 52L58 66L62 80"/>
+		<path d="M46 50L50 64L52 80"/>
+		<path d="M26 46L16 60L10 74"/>
+		<path d="M30 48L24 62L20 78"/>
+		<path d="M24 44Q10 40 6 50" stroke-width="3" opacity="0.6"/>
+		<path d="M4 86h14M26 86h10" stroke-width="3" opacity="0.4"/>
 	</symbol>
 
 	<!-- 1991 世界初のWebサイト: 地球とリンク -->

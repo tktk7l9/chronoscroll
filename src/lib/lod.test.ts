@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+	OVERVIEW_MIN_IMPORTANCE,
 	ZOOM_STOPS,
 	importanceThreshold,
+	needsChunkData,
 	tToZoom,
 	tickStepYears,
 	zoomLevelLabel,
@@ -88,5 +90,38 @@ describe('tickStepYears', () => {
 		expect(tickStepYears(0.06)).toBe(10);
 		expect(tickStepYears(0.15)).toBe(5);
 		expect(tickStepYears(1)).toBe(1);
+	});
+});
+
+describe('needsChunkData', () => {
+	// 実データ相当: 27,014件 / 158年 ≈ 0.467件/日
+	const eventsPerDay = 0.467;
+
+	it('概観〜十年ズームでは閾値がoverview.jsonのカットオフを上回るため不要', () => {
+		expect(needsChunkData(0.077, eventsPerDay)).toBe(false); // 概観
+		expect(needsChunkData(0.42, eventsPerDay)).toBe(false); // 十年
+	});
+
+	it('年ズーム以降は閾値が下回るため必要になる', () => {
+		expect(needsChunkData(3.1, eventsPerDay)).toBe(true); // 年
+		expect(needsChunkData(17.9, eventsPerDay)).toBe(true); // 月
+		expect(needsChunkData(62, eventsPerDay)).toBe(true); // 日
+	});
+
+	it('境界: importanceThresholdがちょうどカットオフのときは不要（未満のみ必要）', () => {
+		expect(needsChunkData(1, eventsPerDay, importanceThreshold(1, eventsPerDay))).toBe(false);
+	});
+
+	it('カスタムのoverviewMinImportanceを指定できる', () => {
+		// カットオフを引き上げるほど「閾値がそれを下回る」ズームが広がり、必要判定されやすくなる
+		expect(needsChunkData(0.42, eventsPerDay, 99.5)).toBe(true);
+		// 逆にカットオフを下げれば、同じズームでも不要のまま
+		expect(needsChunkData(0.42, eventsPerDay, 50)).toBe(false);
+	});
+
+	it('OVERVIEW_MIN_IMPORTANCEはデフォルト値と一致する', () => {
+		expect(needsChunkData(3.1, eventsPerDay)).toBe(
+			importanceThreshold(3.1, eventsPerDay) < OVERVIEW_MIN_IMPORTANCE,
+		);
 	});
 });

@@ -9,6 +9,13 @@ import { MAX_PX_PER_DAY, MIN_PX_PER_DAY } from './timescale.ts';
 export const MIN_PX_PER_EVENT = 110;
 
 /**
+ * overview.json に収録する importance の下限。
+ * pipeline（overview.json生成）とフロント（この閾値を下回るまでチャンク先読みを
+ * 抑制する判断）の両方が参照する、両者で一致させるべき唯一の値。
+ */
+export const OVERVIEW_MIN_IMPORTANCE = 97;
+
+/**
  * このズーム（px/日）で表示すべき importance の下限。
  * fraction = 表示したい件数割合 = (pxPerDay / minPxPerEvent) / eventsPerDay
  */
@@ -64,4 +71,18 @@ export function tickStepYears(pxPerDay: number): number {
 	if (pxPerYear >= 40) return 5;
 	if (pxPerYear >= 18) return 10;
 	return 50;
+}
+
+/**
+ * このズームで、十年/5年チャンクの詳細データが実際に画面へ寄与するか。
+ * overview.json は importanceThreshold が OVERVIEW_MIN_IMPORTANCE を下回るまで
+ * 何も追加で表示させないため、それまではチャンクのフェッチ自体が無駄になる
+ * （概観〜十年ズーム全域が該当。実測でチャンク8件・約2.5MBの無駄フェッチだった）。
+ */
+export function needsChunkData(
+	pxPerDay: number,
+	eventsPerDay: number,
+	overviewMinImportance = OVERVIEW_MIN_IMPORTANCE,
+): boolean {
+	return importanceThreshold(pxPerDay, eventsPerDay) < overviewMinImportance;
 }
