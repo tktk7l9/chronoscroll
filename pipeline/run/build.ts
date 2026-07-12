@@ -9,7 +9,8 @@
  * 4. 上位イベントの代表画像取得（キャッシュ）
  * 5. ルールベース分類 + sidecar 上書き
  * 6. curated YAML 適用
- * 7. static/data/ へ JSON チャンク出力 + 統計レポート
+ * 7. 関連イベントの算出（同じ出典を持つイベント同士を結びつける）
+ * 8. static/data/ へ JSON チャンク出力 + 統計レポート
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -26,6 +27,7 @@ import {
 	searchDocs,
 	sortEvents,
 } from '../lib/emit.ts';
+import { computeRelated, MAX_RELATED } from '../lib/related.ts';
 import { linkScore, percentileByDecade, rawScore } from '../lib/score.ts';
 import { eventDateAndId, parseYearPage, type RawEvent } from '../lib/wikitext.ts';
 import { duplicateIds } from '../lib/dedupe.ts';
@@ -337,7 +339,30 @@ async function main(): Promise<void> {
 		console.warn(`⚠️ curatedでidが一致しない: ${curateResult.unmatched.join(', ')}`);
 	}
 
-	// 7. 出力
+	// 7. 関連イベントの算出（同じWikipedia実体を出典に持つイベント同士を結びつける）。
+	// curatedのrelatedIds（手動指定）を優先し、自動算出分で不足を補う。
+	const eventsById = new Map(events.map((e) => [e.id, e]));
+	const manualRelatedIds = new Map(
+		curatedForDedupe
+			.filter((e) => e.relatedIds && e.relatedIds.length > 0)
+			.map((e) => [e.id, e.relatedIds!]),
+	);
+	const algoRelated = computeRelated(events);
+	let relatedCount = 0;
+	events = events.map((ev) => {
+		const manual = (manualRelatedIds.get(ev.id) ?? [])
+			.map((id) => eventsById.get(id))
+			.filter((e): e is NewsEvent => e !== undefined && e.id !== ev.id)
+			.map((e) => ({ id: e.id, date: e.date, title: e.title }));
+		const seen = new Set(manual.map((r) => r.id));
+		const algo = (algoRelated.get(ev.id) ?? []).filter((r) => !seen.has(r.id));
+		const related = [...manual, ...algo].slice(0, MAX_RELATED);
+		if (related.length === 0) return ev;
+		relatedCount++;
+		return { ...ev, related };
+	});
+
+	// 8. 出力
 	rmSync(join(OUT, 'decades'), { recursive: true, force: true });
 	rmSync(join(OUT, 'chunks'), { recursive: true, force: true });
 	mkdirSync(join(OUT, 'chunks'), { recursive: true });
@@ -358,6 +383,7 @@ async function main(): Promise<void> {
 	console.log(`overview(≥${OVERVIEW_MIN_IMPORTANCE}): ${overviewSlice(events, OVERVIEW_MIN_IMPORTANCE).length}件`);
 	console.log(`画像付き: ${events.filter((e) => e.image).length}件`);
 	console.log(`curated: 上書き${curateResult.updated.length} / 追加${curateResult.added.length}`);
+	console.log(`関連イベント付き: ${relatedCount}件（うち手動指定 ${manualRelatedIds.size}件のイベントに設定）`);
 	console.log('\nチャンク別件数:');
 	for (const c of meta.chunks) console.log(`  ${c.key} (${c.fromYear}-${c.toYear}): ${c.count}`);
 	const catCount = new Map<string, number>();

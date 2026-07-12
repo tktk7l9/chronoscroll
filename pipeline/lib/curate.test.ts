@@ -113,4 +113,21 @@ describe('applyCurated', () => {
 		expect(unmatched).toEqual(['ghost']);
 		expect(events).toHaveLength(1);
 	});
+
+	it('relatedIdsはNewsEventへ直接コピーされない（related組み立てはrelated.tsが担当するため）', () => {
+		const { events } = applyCurated(
+			[ev('a')],
+			[{ id: 'a', title: '新タイトル', relatedIds: ['b', 'c'] }],
+		);
+		expect(events[0]).not.toHaveProperty('relatedIds');
+		expect(events[0].title).toBe('新タイトル');
+	});
+
+	it('新規エントリのrelatedIdsもNewsEventへ直接コピーされない', () => {
+		const { events } = applyCurated(
+			[],
+			[{ id: 'new1', date: '2000-01-01', title: 'T', summary: 'S', relatedIds: ['x'] }],
+		);
+		expect(events[0]).not.toHaveProperty('relatedIds');
+	});
 });

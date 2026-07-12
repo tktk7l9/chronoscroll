@@ -128,7 +128,11 @@
 	{/if}
 </main>
 
-<DetailDialog ev={selected} onclose={() => (selectedId = null)} />
+<DetailDialog
+	ev={selected}
+	onclose={() => (selectedId = null)}
+	onselectrelated={(id) => (selectedId = id)}
+/>
 
 <footer class="site-footer">
 	<p>

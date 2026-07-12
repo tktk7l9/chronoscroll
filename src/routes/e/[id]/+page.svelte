@@ -73,6 +73,22 @@
 			<a class="timeline-link" href={timelineUrl} data-sveltekit-reload>年表でこの位置を開く →</a>
 		</p>
 
+		{#if ev.related && ev.related.length > 0}
+			<section class="related">
+				<h2>関連するできごと</h2>
+				<ul>
+					{#each ev.related as r (r.id)}
+						<li>
+							<a href="/e/{r.id}">
+								<time datetime={r.date}>{r.date.slice(0, 7).replace('-', '.')}</time>
+								<span class="rtitle">{r.title}</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</section>
+		{/if}
+
 		<section class="sources">
 			<h2>出典・引用元</h2>
 			<ul>
@@ -233,6 +249,48 @@
 		border-radius: 999px;
 		font-size: 0.9rem;
 		font-weight: 600;
+	}
+
+	.related {
+		margin: 0 0 26px;
+		padding-top: 18px;
+		border-top: 1px solid var(--line);
+	}
+	.related h2 {
+		margin: 0 0 8px;
+		font-size: 0.78rem;
+		color: var(--ink-muted);
+	}
+	.related ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+	.related a {
+		display: flex;
+		align-items: baseline;
+		gap: 10px;
+		padding: 6px 8px;
+		margin: 0 -8px;
+		border-radius: 8px;
+		text-decoration: none;
+		color: inherit;
+	}
+	.related a:hover {
+		background: color-mix(in srgb, var(--cat-color) 10%, transparent);
+	}
+	.related time {
+		flex: none;
+		font-size: 0.72rem;
+		color: var(--ink-muted);
+		font-variant-numeric: tabular-nums;
+	}
+	.rtitle {
+		font-size: 0.85rem;
+		line-height: 1.5;
 	}
 
 	.sources h2 {

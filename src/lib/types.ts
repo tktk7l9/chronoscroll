@@ -24,6 +24,13 @@ export interface EventImage {
 	credit: string;
 }
 
+/** 関連イベントへの参照。詳細ダイアログ/個別ページで即座にリンクを描画できるよう非正規化して埋め込む */
+export interface RelatedRef {
+	id: string;
+	date: string;
+	title: string;
+}
+
 export interface NewsEvent {
 	id: string;
 	/** ISO yyyy-mm-dd（precision が month/year の場合は 01 埋め） */
@@ -39,6 +46,8 @@ export interface NewsEvent {
 	image?: EventImage;
 	/** スプライトの symbol id（トップ層のみ） */
 	svg?: string;
+	/** 同じ実体を出典に持つ、または手動で結びつけた関連イベント（重要度順・最大数件） */
+	related?: RelatedRef[];
 }
 
 /** 遅延ロード用チャンク（基本は十年、件数が多い十年は5年に分割） */

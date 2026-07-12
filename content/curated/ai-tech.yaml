@@ -13,6 +13,7 @@
   svg: art-turing
   sources:
     - { label: "Wikipedia: チューリング・テスト", url: "https://ja.wikipedia.org/wiki/チューリング・テスト" }
+  relatedIds: ["1956-06-18-ai-dartmouth", "1966-01-01-ai-eliza", "2022-11-30-ai-chatgpt"]
 
 - id: 1956-06-18-ai-dartmouth
   date: "1956-06-18"
@@ -25,6 +26,7 @@
   svg: art-ai-birth
   sources:
     - { label: "Wikipedia: ダートマス会議", url: "https://ja.wikipedia.org/wiki/ダートマス会議_(人工知能)" }
+  relatedIds: ["1950-10-01-ai-turing-test", "1966-01-01-ai-eliza", "2012-10-01-ai-alexnet"]
 
 - id: 1966-01-01-ai-eliza
   date: "1966-01-01"
@@ -36,6 +38,7 @@
   importance: 92
   sources:
     - { label: "Wikipedia: ELIZA", url: "https://ja.wikipedia.org/wiki/ELIZA" }
+  relatedIds: ["1950-10-01-ai-turing-test", "2022-06-11-ai-lamda", "2022-11-30-ai-chatgpt"]
 
 - id: 1969-10-29-ai-arpanet
   date: "1969-10-29"
@@ -46,6 +49,7 @@
   importance: 98
   sources:
     - { label: "Wikipedia: ARPANET", url: "https://ja.wikipedia.org/wiki/ARPANET" }
+  relatedIds: ["1998-09-04-ai-google", "1991-08-06-eaa5612d", "1991-10-05-13cc8fcc"]
 
 # --- 1990s〜2000s ---
 - id: 1997-05-11-d05df6c0
@@ -54,6 +58,7 @@
   importance: 99
   category: science
   svg: art-deep-blue
+  relatedIds: ["2011-02-16-ai-watson", "2016-03-09-ai-alphago"]
 
 - id: 1998-09-04-ai-google
   date: "1998-09-04"
@@ -64,6 +69,7 @@
   importance: 97.5
   sources:
     - { label: "Wikipedia: Google", url: "https://ja.wikipedia.org/wiki/Google" }
+  relatedIds: ["1969-10-29-ai-arpanet", "2005-02-14-ai-youtube", "2023-12-06-ai-gemini"]
 
 - id: 2004-02-04-ai-facebook
   date: "2004-02-04"
@@ -74,6 +80,7 @@
   importance: 96
   sources:
     - { label: "Wikipedia: Facebook", url: "https://ja.wikipedia.org/wiki/Facebook" }
+  relatedIds: ["2006-07-15-ai-twitter", "2021-10-28-ai-meta"]
 
 - id: 2005-02-14-ai-youtube
   date: "2005-02-14"
@@ -84,6 +91,7 @@
   importance: 95
   sources:
     - { label: "Wikipedia: YouTube", url: "https://ja.wikipedia.org/wiki/YouTube" }
+  relatedIds: ["1998-09-04-ai-google", "2024-02-15-ai-sora"]
 
 - id: 2006-07-15-ai-twitter
   date: "2006-07-15"
@@ -94,6 +102,7 @@
   importance: 93
   sources:
     - { label: "Wikipedia: Twitter", url: "https://ja.wikipedia.org/wiki/Twitter" }
+  relatedIds: ["2004-02-04-ai-facebook"]
 
 - id: 2009-01-03-ai-bitcoin
   date: "2009-01-03"
@@ -115,6 +124,7 @@
   importance: 95
   sources:
     - { label: "Wikipedia: ワトソン (コンピュータ)", url: "https://ja.wikipedia.org/wiki/ワトソン_(コンピュータ)" }
+  relatedIds: ["1997-05-11-d05df6c0", "2016-03-09-ai-alphago"]
 
 - id: 2012-10-01-ai-alexnet
   date: "2012-10-01"
@@ -126,6 +136,7 @@
   importance: 97.5
   sources:
     - { label: "Wikipedia: AlexNet", url: "https://ja.wikipedia.org/wiki/AlexNet" }
+  relatedIds: ["1956-06-18-ai-dartmouth", "2017-06-12-ai-transformer", "2014-06-10-ai-gan"]
 
 - id: 2014-06-10-ai-gan
   date: "2014-06-10"
@@ -136,6 +147,7 @@
   importance: 95
   sources:
     - { label: "Wikipedia: 敵対的生成ネットワーク", url: "https://ja.wikipedia.org/wiki/敵対的生成ネットワーク" }
+  relatedIds: ["2012-10-01-ai-alexnet", "2021-01-05-ai-dalle", "2022-08-22-ai-stablediffusion"]
 
 - id: 2016-03-09-ai-alphago
   date: "2016-03-09"
@@ -147,6 +159,7 @@
   svg: art-alphago
   sources:
     - { label: "Wikipedia: AlphaGo対李世ドル", url: "https://ja.wikipedia.org/wiki/AlphaGo対李世乭" }
+  relatedIds: ["1997-05-11-d05df6c0", "2011-02-16-ai-watson", "2020-11-30-ai-alphafold"]
 
 - id: 2017-06-12-ai-transformer
   date: "2017-06-12"
@@ -157,6 +170,7 @@
   importance: 99.3
   sources:
     - { label: "Wikipedia: Transformer (機械学習モデル)", url: "https://ja.wikipedia.org/wiki/Transformer_(機械学習モデル)" }
+  relatedIds: ["2012-10-01-ai-alexnet", "2018-10-11-ai-bert", "2019-02-14-ai-gpt2", "2022-11-30-ai-chatgpt"]
 
 - id: 2018-10-11-ai-bert
   date: "2018-10-11"
@@ -167,6 +181,7 @@
   importance: 93
   sources:
     - { label: "Wikipedia: BERT (言語モデル)", url: "https://ja.wikipedia.org/wiki/BERT_(言語モデル)" }
+  relatedIds: ["2017-06-12-ai-transformer", "2019-02-14-ai-gpt2"]
 
 - id: 2019-02-14-ai-gpt2
   date: "2019-02-14"
@@ -177,6 +192,7 @@
   importance: 94
   sources:
     - { label: "Wikipedia: GPT-2", url: "https://ja.wikipedia.org/wiki/GPT-2" }
+  relatedIds: ["2017-06-12-ai-transformer", "2020-05-28-ai-gpt3", "2022-11-30-ai-chatgpt"]
 
 - id: 2020-05-28-ai-gpt3
   date: "2020-05-28"
@@ -187,6 +203,7 @@
   importance: 97
   sources:
     - { label: "Wikipedia: GPT-3", url: "https://ja.wikipedia.org/wiki/GPT-3" }
+  relatedIds: ["2019-02-14-ai-gpt2", "2022-11-30-ai-chatgpt", "2021-06-29-ai-copilot", "2023-03-14-ai-gpt4"]
 
 - id: 2020-11-30-ai-alphafold
   date: "2020-11-30"
@@ -198,6 +215,7 @@
   svg: art-alphafold
   sources:
     - { label: "Wikipedia: AlphaFold", url: "https://ja.wikipedia.org/wiki/AlphaFold" }
+  relatedIds: ["2016-03-09-ai-alphago", "2024-10-08-ai-nobel-physics"]
 
 # --- 生成AIの時代 ---
 - id: 2021-01-05-ai-dalle
@@ -209,6 +227,7 @@
   importance: 96
   sources:
     - { label: "Wikipedia: DALL-E", url: "https://ja.wikipedia.org/wiki/DALL-E" }
+  relatedIds: ["2014-06-10-ai-gan", "2022-04-06-ai-dalle2", "2022-07-12-ai-midjourney"]
 
 - id: 2021-06-29-ai-copilot
   date: "2021-06-29"
@@ -219,6 +238,7 @@
   importance: 94
   sources:
     - { label: "Wikipedia: GitHub Copilot", url: "https://ja.wikipedia.org/wiki/GitHub_Copilot" }
+  relatedIds: ["2020-05-28-ai-gpt3", "2022-11-30-ai-chatgpt"]
 
 - id: 2021-10-28-ai-meta
   date: "2021-10-28"
@@ -229,6 +249,7 @@
   importance: 92
   sources:
     - { label: "Wikipedia: メタ (企業)", url: "https://ja.wikipedia.org/wiki/メタ_(企業)" }
+  relatedIds: ["2004-02-04-ai-facebook", "2022-06-11-ai-lamda"]
 
 - id: 2022-04-06-ai-dalle2
   date: "2022-04-06"
@@ -239,6 +260,7 @@
   importance: 94
   sources:
     - { label: "Wikipedia: DALL-E", url: "https://ja.wikipedia.org/wiki/DALL-E" }
+  relatedIds: ["2021-01-05-ai-dalle", "2022-07-12-ai-midjourney", "2022-08-22-ai-stablediffusion", "2024-02-15-ai-sora"]
 
 - id: 2022-06-11-ai-lamda
   date: "2022-06-11"
@@ -249,6 +271,7 @@
   importance: 90
   sources:
     - { label: "Wikipedia: LaMDA", url: "https://ja.wikipedia.org/wiki/LaMDA" }
+  relatedIds: ["1966-01-01-ai-eliza", "2021-10-28-ai-meta", "2022-11-30-ai-chatgpt"]
 
 - id: 2022-07-12-ai-midjourney
   date: "2022-07-12"
@@ -259,6 +282,7 @@
   importance: 95
   sources:
     - { label: "Wikipedia: Midjourney", url: "https://ja.wikipedia.org/wiki/Midjourney" }
+  relatedIds: ["2022-04-06-ai-dalle2", "2022-08-22-ai-stablediffusion"]
 
 - id: 2022-08-22-ai-stablediffusion
   date: "2022-08-22"
@@ -269,6 +293,7 @@
   importance: 97.5
   sources:
     - { label: "Wikipedia: Stable Diffusion", url: "https://ja.wikipedia.org/wiki/Stable_Diffusion" }
+  relatedIds: ["2014-06-10-ai-gan", "2022-04-06-ai-dalle2", "2022-07-12-ai-midjourney"]
 
 - id: 2022-11-30-ai-chatgpt
   date: "2022-11-30"
@@ -280,6 +305,7 @@
   svg: art-chatgpt
   sources:
     - { label: "Wikipedia: ChatGPT", url: "https://ja.wikipedia.org/wiki/ChatGPT" }
+  relatedIds: ["2020-05-28-ai-gpt3", "2023-03-14-ai-gpt4", "2017-06-12-ai-transformer", "2023-11-17-ai-altman-ousted"]
 
 - id: 2023-02-24-ai-llama
   date: "2023-02-24"
@@ -290,6 +316,7 @@
   importance: 94
   sources:
     - { label: "Wikipedia: LLaMA", url: "https://ja.wikipedia.org/wiki/LLaMA" }
+  relatedIds: ["2022-11-30-ai-chatgpt", "2025-01-27-ai-deepseek"]
 
 - id: 2023-03-14-ai-gpt4
   date: "2023-03-14"
@@ -300,6 +327,7 @@
   importance: 99
   sources:
     - { label: "Wikipedia: GPT-4", url: "https://ja.wikipedia.org/wiki/GPT-4" }
+  relatedIds: ["2020-05-28-ai-gpt3", "2022-11-30-ai-chatgpt", "2024-09-12-ai-o1"]
 
 - id: 2023-03-22-ai-pause-letter
   date: "2023-03-22"
@@ -310,6 +338,7 @@
   importance: 93
   sources:
     - { label: "Wikipedia: 人工知能の規制", url: "https://ja.wikipedia.org/wiki/人工知能の規制" }
+  relatedIds: ["2023-03-14-ai-gpt4", "2023-11-01-ai-bletchley", "2024-03-13-ai-eu-act"]
 
 - id: 2023-04-10-ai-altman-japan
   date: "2023-04-10"
@@ -320,6 +349,7 @@
   importance: 92
   sources:
     - { label: "Wikipedia: サム・アルトマン", url: "https://ja.wikipedia.org/wiki/サム・アルトマン" }
+  relatedIds: ["2023-11-17-ai-altman-ousted", "2023-05-19-ai-hiroshima-process"]
 
 - id: 2023-05-19-ai-hiroshima-process
   date: "2023-05-19"
@@ -330,6 +360,7 @@
   importance: 96
   sources:
     - { label: "Wikipedia: 第49回先進国首脳会議", url: "https://ja.wikipedia.org/wiki/第49回先進国首脳会議" }
+  relatedIds: ["2023-04-10-ai-altman-japan", "2023-11-01-ai-bletchley", "2024-03-13-ai-eu-act", "2025-02-10-ai-paris-summit"]
 
 - id: 2023-11-01-ai-bletchley
   date: "2023-11-01"
@@ -340,6 +371,7 @@
   importance: 94
   sources:
     - { label: "Wikipedia: AI安全性サミット", url: "https://ja.wikipedia.org/wiki/AI安全性サミット" }
+  relatedIds: ["2023-05-19-ai-hiroshima-process", "2024-03-13-ai-eu-act", "2025-02-10-ai-paris-summit", "2023-03-22-ai-pause-letter"]
 
 - id: 2023-11-17-ai-altman-ousted
   date: "2023-11-17"
@@ -350,6 +382,7 @@
   importance: 96
   sources:
     - { label: "Wikipedia: サム・アルトマン", url: "https://ja.wikipedia.org/wiki/サム・アルトマン" }
+  relatedIds: ["2023-04-10-ai-altman-japan", "2022-11-30-ai-chatgpt"]
 
 - id: 2023-12-06-ai-gemini
   date: "2023-12-06"
@@ -360,6 +393,7 @@
   importance: 95
   sources:
     - { label: "Wikipedia: Gemini (言語モデル)", url: "https://ja.wikipedia.org/wiki/Gemini_(言語モデル)" }
+  relatedIds: ["2022-11-30-ai-chatgpt", "2023-03-14-ai-gpt4", "1998-09-04-ai-google"]
 
 - id: 2024-02-15-ai-sora
   date: "2024-02-15"
@@ -370,6 +404,7 @@
   importance: 96
   sources:
     - { label: "Wikipedia: Sora (人工知能)", url: "https://ja.wikipedia.org/wiki/Sora_(人工知能)" }
+  relatedIds: ["2022-11-30-ai-chatgpt", "2022-04-06-ai-dalle2", "2005-02-14-ai-youtube"]
 
 - id: 2024-03-13-ai-eu-act
   date: "2024-03-13"
@@ -380,6 +415,7 @@
   importance: 97
   sources:
     - { label: "Wikipedia: 人工知能法", url: "https://ja.wikipedia.org/wiki/人工知能法" }
+  relatedIds: ["2023-05-19-ai-hiroshima-process", "2023-11-01-ai-bletchley", "2023-03-22-ai-pause-letter"]
 
 - id: 2024-09-12-ai-o1
   date: "2024-09-12"
@@ -390,6 +426,7 @@
   importance: 94
   sources:
     - { label: "Wikipedia: OpenAI o1", url: "https://ja.wikipedia.org/wiki/OpenAI_o1" }
+  relatedIds: ["2023-03-14-ai-gpt4", "2022-11-30-ai-chatgpt"]
 
 - id: 2024-10-08-ai-nobel-physics
   date: "2024-10-08"
@@ -400,6 +437,7 @@
   importance: 98
   sources:
     - { label: "Wikipedia: ジェフリー・ヒントン", url: "https://ja.wikipedia.org/wiki/ジェフリー・ヒントン" }
+  relatedIds: ["2020-11-30-ai-alphafold", "2017-06-12-ai-transformer"]
 
 - id: 2025-01-27-ai-deepseek
   date: "2025-01-27"
@@ -410,6 +448,7 @@
   importance: 97.5
   sources:
     - { label: "Wikipedia: DeepSeek", url: "https://ja.wikipedia.org/wiki/DeepSeek" }
+  relatedIds: ["2022-11-30-ai-chatgpt", "2023-02-24-ai-llama", "2023-03-14-ai-gpt4"]
 
 - id: 2025-02-10-ai-paris-summit
   date: "2025-02-10"
@@ -420,3 +459,4 @@
   importance: 90
   sources:
     - { label: "Wikipedia: 人工知能の規制", url: "https://ja.wikipedia.org/wiki/人工知能の規制" }
+  relatedIds: ["2023-05-19-ai-hiroshima-process", "2023-11-01-ai-bletchley", "2024-03-13-ai-eu-act"]

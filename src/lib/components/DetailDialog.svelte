@@ -4,7 +4,12 @@
 	import { formatWareki } from '../wareki.ts';
 	import ArtIcon from './ArtIcon.svelte';
 
-	let { ev = null, onclose }: { ev: NewsEvent | null; onclose: () => void } = $props();
+	let {
+		ev = null,
+		onclose,
+		onselectrelated,
+	}: { ev: NewsEvent | null; onclose: () => void; onselectrelated: (id: string) => void } =
+		$props();
 
 	let dialog = $state<HTMLDialogElement>();
 	let closing = $state(false);
@@ -89,6 +94,26 @@
 			{/if}
 
 			<p class="summary">{ev.summary}</p>
+
+			{#if ev.related && ev.related.length > 0}
+				<section class="related">
+					<h3>関連するできごと</h3>
+					<ul>
+						{#each ev.related as r (r.id)}
+							<li>
+								<button
+									type="button"
+									class="related-link"
+									onclick={() => onselectrelated(r.id)}
+								>
+									<time datetime={r.date}>{r.date.slice(0, 7).replace('-', '.')}</time>
+									<span class="related-title">{r.title}</span>
+								</button>
+							</li>
+						{/each}
+					</ul>
+				</section>
+			{/if}
 
 			<footer>
 				<h3>出典・引用元</h3>
@@ -268,6 +293,60 @@
 		margin: 0 0 18px;
 		line-height: 1.9;
 		font-size: 0.95rem;
+	}
+
+	.related {
+		margin: 0 0 20px;
+		padding-top: 16px;
+		border-top: 1px solid var(--line);
+	}
+	.related h3 {
+		margin: 0 0 8px;
+		font-size: 0.75rem;
+		color: var(--ink-muted);
+		font-weight: 600;
+	}
+	.related ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+	.related-link {
+		display: flex;
+		align-items: baseline;
+		gap: 10px;
+		width: 100%;
+		padding: 7px 8px;
+		margin: 0 -8px;
+		border: none;
+		border-radius: 8px;
+		background: transparent;
+		color: inherit;
+		font-family: inherit;
+		text-align: left;
+		cursor: pointer;
+		transition: background 0.12s ease;
+	}
+	.related-link:hover {
+		background: color-mix(in srgb, var(--cat-color) 10%, transparent);
+	}
+	.related-link time {
+		flex: none;
+		font-size: 0.72rem;
+		color: var(--ink-muted);
+		font-variant-numeric: tabular-nums;
+	}
+	.related-title {
+		font-size: 0.85rem;
+		line-height: 1.5;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	footer h3 {
