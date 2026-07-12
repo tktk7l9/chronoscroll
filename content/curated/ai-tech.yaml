@@ -1,0 +1,422 @@
+# AI・コンピューティング史のキュレーション（Wikipedia年ページに載らない重要マイルストーンを補完）
+# ほぼ全て新規追加（date+title+summaryが揃うとapplyCuratedが新規イベントとして生成する）
+
+# --- AI前史〜古典 ---
+- id: 1950-10-01-ai-turing-test
+  date: "1950-10-01"
+  precision: month
+  title: チューリング「機械は考えることができるか」
+  summary: アラン・チューリングが論文「計算する機械と知性」を発表し、機械が人間と区別できない対話をできるかを問う「イミテーション・ゲーム」（チューリングテスト）を提案した。人工知能という探求の出発点である。
+  category: science
+  region: world
+  importance: 99
+  svg: art-turing
+  sources:
+    - { label: "Wikipedia: チューリング・テスト", url: "https://ja.wikipedia.org/wiki/チューリング・テスト" }
+
+- id: 1956-06-18-ai-dartmouth
+  date: "1956-06-18"
+  precision: month
+  title: ダートマス会議——「人工知能」の誕生
+  summary: 米ダートマス大学で、マッカーシー、ミンスキー、シャノンらが集う夏季研究会が開かれた。提案書で初めて「人工知能（Artificial Intelligence）」という言葉が使われ、AIが学問分野として産声を上げた。
+  category: science
+  region: world
+  importance: 99.2
+  svg: art-ai-birth
+  sources:
+    - { label: "Wikipedia: ダートマス会議", url: "https://ja.wikipedia.org/wiki/ダートマス会議_(人工知能)" }
+
+- id: 1966-01-01-ai-eliza
+  date: "1966-01-01"
+  precision: year
+  title: 対話プログラムELIZA誕生
+  summary: MITのワイゼンバウムが、精神科医を模して人と対話するプログラムELIZAを発表した。単純な言い換えにもかかわらず人々が心を開いたことは、後のチャットボット時代を先取りする発見だった。
+  category: science
+  region: world
+  importance: 92
+  sources:
+    - { label: "Wikipedia: ELIZA", url: "https://ja.wikipedia.org/wiki/ELIZA" }
+
+- id: 1969-10-29-ai-arpanet
+  date: "1969-10-29"
+  title: ARPANETで最初の通信——インターネットの産声
+  summary: UCLAとスタンフォード研究所の間で、ARPANETによる最初のメッセージ送信が行われた。送れたのは「LO」の2文字でシステムはクラッシュしたが、これがインターネットの始まりとなった。
+  category: science
+  region: world
+  importance: 98
+  sources:
+    - { label: "Wikipedia: ARPANET", url: "https://ja.wikipedia.org/wiki/ARPANET" }
+
+# --- 1990s〜2000s ---
+- id: 1997-05-11-d05df6c0
+  title: ディープ・ブルー、チェス世界王者を破る
+  summary: IBMのチェス専用コンピューター「ディープ・ブルー」が、世界チャンピオンのガルリ・カスパロフに勝ち越した。機械が知的ゲームの頂点で人間を上回った歴史的瞬間として世界に衝撃を与えた。
+  importance: 99
+  category: science
+  svg: art-deep-blue
+
+- id: 1998-09-04-ai-google
+  date: "1998-09-04"
+  title: Google設立
+  summary: スタンフォード大学の大学院生ラリー・ペイジとセルゲイ・ブリンが、検索エンジンの会社Googleを設立した。「世界中の情報を整理する」という使命は、その後のインターネットの姿を決定づけた。
+  category: economy
+  region: world
+  importance: 97.5
+  sources:
+    - { label: "Wikipedia: Google", url: "https://ja.wikipedia.org/wiki/Google" }
+
+- id: 2004-02-04-ai-facebook
+  date: "2004-02-04"
+  title: Facebook誕生
+  summary: ハーバード大学の学生マーク・ザッカーバーグが、学内交流サイト「TheFacebook」を公開した。SNSは人のつながり方を変え、後に世界人口の半数近くが使うサービスへ成長する。
+  category: economy
+  region: world
+  importance: 96
+  sources:
+    - { label: "Wikipedia: Facebook", url: "https://ja.wikipedia.org/wiki/Facebook" }
+
+- id: 2005-02-14-ai-youtube
+  date: "2005-02-14"
+  title: YouTube設立
+  summary: PayPal出身の3人が動画共有サイトYouTubeを設立した。「誰もが放送局になれる」時代が始まり、翌年Googleが買収。映像文化とメディアの構造を根本から変えた。
+  category: culture
+  region: world
+  importance: 95
+  sources:
+    - { label: "Wikipedia: YouTube", url: "https://ja.wikipedia.org/wiki/YouTube" }
+
+- id: 2006-07-15-ai-twitter
+  date: "2006-07-15"
+  title: Twitter公開
+  summary: 140文字の短文を投稿するサービスTwitterが一般公開された。速報とつぶやきが交差する「世界の今」のインフラとなり、報道や政治のあり方まで変えていった。
+  category: culture
+  region: world
+  importance: 93
+  sources:
+    - { label: "Wikipedia: Twitter", url: "https://ja.wikipedia.org/wiki/Twitter" }
+
+- id: 2009-01-03-ai-bitcoin
+  date: "2009-01-03"
+  title: ビットコイン誕生——最初のブロックが生成される
+  summary: 正体不明の「サトシ・ナカモト」が設計した暗号通貨ビットコインの最初のブロック（ジェネシスブロック）が生成された。国家に依らない通貨という実験は、ブロックチェーン技術の起点となった。
+  category: economy
+  region: world
+  importance: 96.5
+  sources:
+    - { label: "Wikipedia: ビットコイン", url: "https://ja.wikipedia.org/wiki/ビットコイン" }
+
+# --- 深層学習の時代 ---
+- id: 2011-02-16-ai-watson
+  date: "2011-02-16"
+  title: IBMワトソン、クイズ王を破る
+  summary: IBMの質問応答システム「ワトソン」が、米クイズ番組「ジェパディ!」で歴代最強の人間チャンピオン2人を破った。自然言語を扱うAIの実力を全米のお茶の間に見せつけた。
+  category: science
+  region: world
+  importance: 95
+  sources:
+    - { label: "Wikipedia: ワトソン (コンピュータ)", url: "https://ja.wikipedia.org/wiki/ワトソン_(コンピュータ)" }
+
+- id: 2012-10-01-ai-alexnet
+  date: "2012-10-01"
+  precision: month
+  title: AlexNet、画像認識で圧勝——深層学習ブームの号砲
+  summary: ヒントン研究室のAlexNetが、画像認識コンテストILSVRCで従来手法に圧倒的な差をつけて優勝した。GPUで訓練した深層ニューラルネットワークの威力が実証され、第3次AIブームが始まった。
+  category: science
+  region: world
+  importance: 97.5
+  sources:
+    - { label: "Wikipedia: AlexNet", url: "https://ja.wikipedia.org/wiki/AlexNet" }
+
+- id: 2014-06-10-ai-gan
+  date: "2014-06-10"
+  title: GAN（敵対的生成ネットワーク）発表
+  summary: イアン・グッドフェローらが、生成器と識別器を競わせて学習するGANを発表した。「実在しない人の顔」を作れるこの技術は、生成AIという分野の扉を開いた。
+  category: science
+  region: world
+  importance: 95
+  sources:
+    - { label: "Wikipedia: 敵対的生成ネットワーク", url: "https://ja.wikipedia.org/wiki/敵対的生成ネットワーク" }
+
+- id: 2016-03-09-ai-alphago
+  date: "2016-03-09"
+  title: AlphaGo、イ・セドル九段を破る
+  summary: Google DeepMindの囲碁AI「AlphaGo」が、世界最強棋士の一人イ・セドル九段との五番勝負に4勝1敗で勝利した。「あと10年は不可能」とされた囲碁での勝利は、深層学習の到達点として世界を驚かせた。
+  category: science
+  region: world
+  importance: 99.8
+  svg: art-alphago
+  sources:
+    - { label: "Wikipedia: AlphaGo対李世ドル", url: "https://ja.wikipedia.org/wiki/AlphaGo対李世乭" }
+
+- id: 2017-06-12-ai-transformer
+  date: "2017-06-12"
+  title: Transformer論文「Attention Is All You Need」発表
+  summary: Googleの研究者らが、注意機構だけで系列を処理するTransformerを発表した。この設計がGPTやBERTなど後の大規模言語モデルすべての土台となり、生成AI時代を用意した。
+  category: science
+  region: world
+  importance: 99.3
+  sources:
+    - { label: "Wikipedia: Transformer (機械学習モデル)", url: "https://ja.wikipedia.org/wiki/Transformer_(機械学習モデル)" }
+
+- id: 2018-10-11-ai-bert
+  date: "2018-10-11"
+  title: BERT発表——検索を変えた言語モデル
+  summary: Googleが双方向Transformerによる言語理解モデルBERTを発表した。文脈を双方向から読む事前学習は自然言語処理の標準となり、Google検索にも組み込まれた。
+  category: science
+  region: world
+  importance: 93
+  sources:
+    - { label: "Wikipedia: BERT (言語モデル)", url: "https://ja.wikipedia.org/wiki/BERT_(言語モデル)" }
+
+- id: 2019-02-14-ai-gpt2
+  date: "2019-02-14"
+  title: GPT-2発表——「危険すぎる」と段階公開
+  summary: OpenAIが文章生成モデルGPT-2を発表したが、偽情報への悪用を懸念して当初は縮小版のみを公開した。生成AIのリスクが本格的に議論される契機となった。
+  category: science
+  region: world
+  importance: 94
+  sources:
+    - { label: "Wikipedia: GPT-2", url: "https://ja.wikipedia.org/wiki/GPT-2" }
+
+- id: 2020-05-28-ai-gpt3
+  date: "2020-05-28"
+  title: GPT-3発表——1750億パラメータの言語モデル
+  summary: OpenAIが1750億パラメータの言語モデルGPT-3を発表した。例示だけで多様なタスクをこなす「文脈内学習」を示し、規模の拡大がもたらす能力の飛躍を印象づけた。
+  category: science
+  region: world
+  importance: 97
+  sources:
+    - { label: "Wikipedia: GPT-3", url: "https://ja.wikipedia.org/wiki/GPT-3" }
+
+- id: 2020-11-30-ai-alphafold
+  date: "2020-11-30"
+  title: AlphaFold2、タンパク質構造予測を「解決」
+  summary: DeepMindのAlphaFold2が、構造予測コンテストCASP14で実験に匹敵する精度を達成した。生物学50年の難問への回答は、創薬や基礎研究のあり方を変え、後のノーベル化学賞にもつながった。
+  category: science
+  region: world
+  importance: 98.5
+  svg: art-alphafold
+  sources:
+    - { label: "Wikipedia: AlphaFold", url: "https://ja.wikipedia.org/wiki/AlphaFold" }
+
+# --- 生成AIの時代 ---
+- id: 2021-01-05-ai-dalle
+  date: "2021-01-05"
+  title: DALL-E発表——文章から画像を生成
+  summary: OpenAIが、テキストの指示から画像を生成するDALL-Eを発表した。「アボカドの形のアームチェア」が生成できることに世界が驚き、画像生成AIの時代が幕を開けた。
+  category: science
+  region: world
+  importance: 96
+  sources:
+    - { label: "Wikipedia: DALL-E", url: "https://ja.wikipedia.org/wiki/DALL-E" }
+
+- id: 2021-06-29-ai-copilot
+  date: "2021-06-29"
+  title: GitHub Copilot発表——AIがコードを書く
+  summary: GitHubとOpenAIが、コードを提案するAIペアプログラマー「Copilot」を発表した。プログラミングという知的労働そのものがAIに支援される時代の始まりだった。
+  category: science
+  region: world
+  importance: 94
+  sources:
+    - { label: "Wikipedia: GitHub Copilot", url: "https://ja.wikipedia.org/wiki/GitHub_Copilot" }
+
+- id: 2021-10-28-ai-meta
+  date: "2021-10-28"
+  title: Facebookが「Meta」に社名変更
+  summary: Facebookが社名をMetaに変更し、メタバースへの注力を宣言した。SNSの巨人による大転換は、仮想空間ブームの象徴となった。
+  category: economy
+  region: world
+  importance: 92
+  sources:
+    - { label: "Wikipedia: メタ (企業)", url: "https://ja.wikipedia.org/wiki/メタ_(企業)" }
+
+- id: 2022-04-06-ai-dalle2
+  date: "2022-04-06"
+  title: DALL-E 2発表——写実的な画像生成へ
+  summary: OpenAIが解像度と写実性を大きく高めたDALL-E 2を発表した。プロのイラストに迫る生成画像は、クリエイティブ産業に期待と不安を同時に呼び起こした。
+  category: science
+  region: world
+  importance: 94
+  sources:
+    - { label: "Wikipedia: DALL-E", url: "https://ja.wikipedia.org/wiki/DALL-E" }
+
+- id: 2022-06-11-ai-lamda
+  date: "2022-06-11"
+  title: 「AIに意識が宿った」——LaMDA騒動
+  summary: Googleのエンジニアが対話AI「LaMDA」に意識があると主張し、停職処分となった。専門家は否定したが、AIと意識をめぐる議論が一般社会にまで広がる出来事となった。
+  category: science
+  region: world
+  importance: 90
+  sources:
+    - { label: "Wikipedia: LaMDA", url: "https://ja.wikipedia.org/wiki/LaMDA" }
+
+- id: 2022-07-12-ai-midjourney
+  date: "2022-07-12"
+  title: Midjourneyオープンベータ公開
+  summary: 画像生成AI「Midjourney」が一般公開された。同年、これで生成した絵画が米国の品評会で優勝し「AIアートは芸術か」という論争を世界に巻き起こした。
+  category: culture
+  region: world
+  importance: 95
+  sources:
+    - { label: "Wikipedia: Midjourney", url: "https://ja.wikipedia.org/wiki/Midjourney" }
+
+- id: 2022-08-22-ai-stablediffusion
+  date: "2022-08-22"
+  title: Stable Diffusion公開——画像生成AIの民主化
+  summary: Stability AIが画像生成モデルStable Diffusionをオープンソースで公開した。誰でも手元のPCで画像を生成できるようになり、生成AIの爆発的普及と激しい議論の両方を加速させた。
+  category: science
+  region: world
+  importance: 97.5
+  sources:
+    - { label: "Wikipedia: Stable Diffusion", url: "https://ja.wikipedia.org/wiki/Stable_Diffusion" }
+
+- id: 2022-11-30-ai-chatgpt
+  date: "2022-11-30"
+  title: ChatGPT公開——生成AI時代の幕開け
+  summary: OpenAIが対話型AI「ChatGPT」を公開した。わずか2か月で利用者1億人という史上最速の普及を遂げ、仕事・教育・創作のあり方を一変させる生成AIブームの起点となった。
+  category: science
+  region: world
+  importance: 100
+  svg: art-chatgpt
+  sources:
+    - { label: "Wikipedia: ChatGPT", url: "https://ja.wikipedia.org/wiki/ChatGPT" }
+
+- id: 2023-02-24-ai-llama
+  date: "2023-02-24"
+  title: Meta、LLaMAを研究者向けに公開
+  summary: Metaが大規模言語モデルLLaMAを発表した。程なくモデルが流出しオープンなLLM開発が世界中で加速。「オープン対クローズド」というAI開発の構図を生んだ。
+  category: science
+  region: world
+  importance: 94
+  sources:
+    - { label: "Wikipedia: LLaMA", url: "https://ja.wikipedia.org/wiki/LLaMA" }
+
+- id: 2023-03-14-ai-gpt4
+  date: "2023-03-14"
+  title: GPT-4発表
+  summary: OpenAIが画像も理解できる大規模言語モデルGPT-4を発表した。司法試験で上位10%に入る性能は「AIが専門職の水準に達した」ことを象徴する出来事として受け止められた。
+  category: science
+  region: world
+  importance: 99
+  sources:
+    - { label: "Wikipedia: GPT-4", url: "https://ja.wikipedia.org/wiki/GPT-4" }
+
+- id: 2023-03-22-ai-pause-letter
+  date: "2023-03-22"
+  title: 「AI開発を一時停止せよ」公開書簡
+  summary: マスク氏ら著名人・研究者1000人以上が、GPT-4を超えるAIの開発を6か月停止するよう求める公開書簡を発表した。急速な進歩への社会の戸惑いを象徴する出来事となった。
+  category: society
+  region: world
+  importance: 93
+  sources:
+    - { label: "Wikipedia: 人工知能の規制", url: "https://ja.wikipedia.org/wiki/人工知能の規制" }
+
+- id: 2023-04-10-ai-altman-japan
+  date: "2023-04-10"
+  title: OpenAIアルトマンCEO来日、岸田首相と面会
+  summary: OpenAIのサム・アルトマンCEOが来日し、岸田首相と面会。日本への進出拡大とオフィス開設の意向を表明した。ChatGPTブームのなか、日本のAI政策が動き出す転機となった。
+  category: politics
+  region: japan
+  importance: 92
+  sources:
+    - { label: "Wikipedia: サム・アルトマン", url: "https://ja.wikipedia.org/wiki/サム・アルトマン" }
+
+- id: 2023-05-19-ai-hiroshima-process
+  date: "2023-05-19"
+  title: G7広島サミットで「広島AIプロセス」始動
+  summary: 広島で開かれたG7サミットで、生成AIの国際ルール作り「広島AIプロセス」の立ち上げが合意された。日本が議長国としてAIガバナンスの国際枠組みを主導する取り組みとなった。
+  category: politics
+  region: both
+  importance: 96
+  sources:
+    - { label: "Wikipedia: 第49回先進国首脳会議", url: "https://ja.wikipedia.org/wiki/第49回先進国首脳会議" }
+
+- id: 2023-11-01-ai-bletchley
+  date: "2023-11-01"
+  title: 英ブレッチリー・パークでAI安全性サミット
+  summary: 暗号解読の聖地ブレッチリー・パークで初のAI安全性サミットが開かれ、米中含む28か国がフロンティアAIのリスクに関する「ブレッチリー宣言」に署名した。
+  category: politics
+  region: world
+  importance: 94
+  sources:
+    - { label: "Wikipedia: AI安全性サミット", url: "https://ja.wikipedia.org/wiki/AI安全性サミット" }
+
+- id: 2023-11-17-ai-altman-ousted
+  date: "2023-11-17"
+  title: OpenAIアルトマンCEO電撃解任——5日後に復帰
+  summary: OpenAIの取締役会がアルトマンCEOを突然解任した。社員の大半が退職を示唆する事態となり、わずか5日後に復帰。AI業界の中心企業の統治をめぐる騒動は世界の注目を集めた。
+  category: economy
+  region: world
+  importance: 96
+  sources:
+    - { label: "Wikipedia: サム・アルトマン", url: "https://ja.wikipedia.org/wiki/サム・アルトマン" }
+
+- id: 2023-12-06-ai-gemini
+  date: "2023-12-06"
+  title: Google、Geminiを発表
+  summary: Googleがテキスト・画像・音声を統合的に扱うマルチモーダルAI「Gemini」を発表した。ChatGPTに対抗する本命として、巨大IT企業のAI開発競争を象徴する存在となった。
+  category: science
+  region: world
+  importance: 95
+  sources:
+    - { label: "Wikipedia: Gemini (言語モデル)", url: "https://ja.wikipedia.org/wiki/Gemini_(言語モデル)" }
+
+- id: 2024-02-15-ai-sora
+  date: "2024-02-15"
+  title: OpenAI、動画生成AI「Sora」を発表
+  summary: OpenAIが、文章から最長1分の高品質動画を生成する「Sora」を発表した。実写と見分けがつかないデモ映像は、映像制作の未来とディープフェイクへの懸念を同時に突きつけた。
+  category: science
+  region: world
+  importance: 96
+  sources:
+    - { label: "Wikipedia: Sora (人工知能)", url: "https://ja.wikipedia.org/wiki/Sora_(人工知能)" }
+
+- id: 2024-03-13-ai-eu-act
+  date: "2024-03-13"
+  title: EU、世界初の包括的AI規制法を可決
+  summary: 欧州議会が、リスクに応じてAIを規制する世界初の包括的な法律「AI法」を可決した。禁止されるAIの類型や生成AIの透明性義務を定め、世界のAI規制の基準点となった。
+  category: politics
+  region: world
+  importance: 97
+  sources:
+    - { label: "Wikipedia: 人工知能法", url: "https://ja.wikipedia.org/wiki/人工知能法" }
+
+- id: 2024-09-12-ai-o1
+  date: "2024-09-12"
+  title: OpenAI、推論モデル「o1」を発表
+  summary: OpenAIが、答える前に時間をかけて「考える」推論特化モデルo1を発表した。数学オリンピックや博士級の科学問題で飛躍的な成績を示し、スケーリングの新たな軸を開いた。
+  category: science
+  region: world
+  importance: 94
+  sources:
+    - { label: "Wikipedia: OpenAI o1", url: "https://ja.wikipedia.org/wiki/OpenAI_o1" }
+
+- id: 2024-10-08-ai-nobel-physics
+  date: "2024-10-08"
+  title: ノーベル物理学賞にAI研究者——ホップフィールドとヒントン
+  summary: ニューラルネットワークの基礎を築いたジョン・ホップフィールドとジェフリー・ヒントンにノーベル物理学賞が贈られた。翌日には化学賞もAlphaFoldのハサビスらが受賞し、「AIのノーベル賞」として歴史に刻まれた。
+  category: science
+  region: world
+  importance: 98
+  sources:
+    - { label: "Wikipedia: ジェフリー・ヒントン", url: "https://ja.wikipedia.org/wiki/ジェフリー・ヒントン" }
+
+- id: 2025-01-27-ai-deepseek
+  date: "2025-01-27"
+  title: DeepSeekショック——NVIDIA株が史上最大の下落
+  summary: 中国のDeepSeekが低コストで高性能なAIモデルを公開したことを受け、NVIDIAの時価総額が1日で約6,000億ドル減少する米国株史上最大の下落を記録した。AI覇権と半導体投資の前提を揺るがした。
+  category: economy
+  region: world
+  importance: 97.5
+  sources:
+    - { label: "Wikipedia: DeepSeek", url: "https://ja.wikipedia.org/wiki/DeepSeek" }
+
+- id: 2025-02-10-ai-paris-summit
+  date: "2025-02-10"
+  title: パリAIアクションサミット開催
+  summary: パリで各国首脳や企業トップが集うAIアクションサミットが開かれた。安全性中心だった国際議論が投資と競争力へ軸足を移し、米英が共同宣言への署名を見送るなど各国の路線の違いも露わになった。
+  category: politics
+  region: world
+  importance: 90
+  sources:
+    - { label: "Wikipedia: 人工知能の規制", url: "https://ja.wikipedia.org/wiki/人工知能の規制" }

@@ -49,14 +49,14 @@ export async function apiPost(
 export const JA_WIKI_API = 'https://ja.wikipedia.org/w/api.php';
 export const WIKIDATA_API = 'https://www.wikidata.org/w/api.php';
 
-/** 年ページの wikitext を取得 */
-export async function fetchYearWikitext(year: number): Promise<string | null> {
+/** 任意ページの wikitext を取得（存在しなければ null） */
+export async function fetchPageWikitext(page: string): Promise<string | null> {
 	const json = (await apiPost(JA_WIKI_API, {
 		action: 'parse',
-		page: `${year}年`,
+		page,
 		prop: 'wikitext',
 	}).catch((e) => {
-		console.warn(`  ${year}年: 取得失敗 (${e})`);
+		console.warn(`  ${page}: 取得失敗 (${e})`);
 		return null;
 	})) as { parse?: { wikitext?: string } } | null;
 	return json?.parse?.wikitext ?? null;

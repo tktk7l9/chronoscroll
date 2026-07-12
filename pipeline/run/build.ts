@@ -27,12 +27,13 @@ import {
 } from '../lib/emit.ts';
 import { linkScore, percentileByDecade, rawScore } from '../lib/score.ts';
 import { eventDateAndId, parseYearPage, type RawEvent } from '../lib/wikitext.ts';
+import { duplicateIds } from '../lib/dedupe.ts';
 import {
 	fetchPageImages,
 	fetchPageviews,
+	fetchPageWikitext,
 	fetchQids,
 	fetchSitelinkCounts,
-	fetchYearWikitext,
 } from './api.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -77,24 +78,35 @@ function saveJsonCache(file: string, data: unknown): void {
 	writeFileSync(p, JSON.stringify(data));
 }
 
-async function loadYearTexts(args: Args): Promise<Map<number, string>> {
+/**
+ * 年ページのシリーズ（「YYYY年」「YYYY年の日本」）を取得する。
+ * 存在しない年は .missing マーカーを置いて次回以降のAPI呼び出しを省く。
+ */
+async function loadSeries(
+	args: Args,
+	suffix: string,
+	cacheDir: string,
+): Promise<Map<number, string>> {
 	const texts = new Map<number, string>();
-	mkdirSync(join(CACHE, 'years'), { recursive: true });
+	mkdirSync(join(CACHE, cacheDir), { recursive: true });
 	for (let y = args.from; y <= args.to; y++) {
-		const p = join(CACHE, 'years', `${y}.wikitext`);
+		const p = join(CACHE, cacheDir, `${y}.wikitext`);
+		const missing = join(CACHE, cacheDir, `${y}.missing`);
 		if (existsSync(p)) {
 			texts.set(y, readFileSync(p, 'utf8'));
 			continue;
 		}
-		if (args.offline) continue;
-		process.stdout.write(`fetch ${y}年 ...\r`);
-		const wt = await fetchYearWikitext(y);
+		if (existsSync(missing) || args.offline) continue;
+		process.stdout.write(`fetch ${y}${suffix} ...\r`);
+		const wt = await fetchPageWikitext(`${y}${suffix}`);
 		if (wt !== null) {
 			writeFileSync(p, wt);
 			texts.set(y, wt);
+		} else {
+			writeFileSync(missing, '');
 		}
 	}
-	console.log(`年ページ: ${texts.size}件`);
+	console.log(`${suffix}ページ: ${texts.size}件`);
 	return texts;
 }
 
@@ -218,11 +230,18 @@ async function main(): Promise<void> {
 	const args = parseArgs();
 	const today = new Date().toISOString().slice(0, 10);
 
-	// 1-2. 取得 + パース
-	const texts = await loadYearTexts(args);
+	// 1-2. 取得 + パース（「YYYY年」+「YYYY年の日本」の2シリーズ）
+	const texts = await loadSeries(args, '年', 'years');
+	const textsJp = await loadSeries(args, '年の日本', 'years-jp');
 	const raws: RawEvent[] = [];
 	for (const [year, wt] of texts) {
 		raws.push(...parseYearPage(wt, year));
+	}
+	for (const [year, wt] of textsJp) {
+		// 日本の年ページ由来は地域ヒントを japan に（タグ明示があればそちらを尊重）
+		raws.push(
+			...parseYearPage(wt, year).map((r) => ({ ...r, regionHint: r.regionHint ?? ('japan' as const) })),
+		);
 	}
 	// 未来の予定イベントは除外
 	const rawEvents = raws.filter((r) => eventDateAndId(r).date <= today);
@@ -256,14 +275,34 @@ async function main(): Promise<void> {
 	// 同一idの重複（同日同文）は除去
 	const seen = new Set<string>();
 	const unique = scored.filter((s) => (seen.has(s.id) ? false : (seen.add(s.id), true)));
+
+	// 近似重複（同日+本文の文字bigram類似度が高いもの。2シリーズに同じできごとが
+	// 別文面で載るケースを吸収する。先頭リンクが揃うとは限らないため文面で判定する）を集約。
+	// curatedが参照するidは必ず残す
+	const curatedForDedupe = loadCurated();
+	const protectedIds = new Set(curatedForDedupe.map((e) => e.id));
+	const dropIds = duplicateIds(
+		unique.map((s) => ({
+			id: s.id,
+			date: eventDateAndId(s.raw).date,
+			text: s.raw.text,
+			textLength: s.raw.text.length,
+			score: s.rawScore,
+			links: s.raw.links.map((l) => l.target),
+		})),
+		protectedIds,
+	);
+	const deduped = unique.filter((s) => !dropIds.has(s.id));
+	console.log(`近似重複の集約: ${dropIds.size}件を除去 → ${deduped.length}件`);
+
 	const importance = percentileByDecade(
-		unique.map((s) => ({ id: s.id, year: s.raw.year, raw: s.rawScore })),
+		deduped.map((s) => ({ id: s.id, year: s.raw.year, raw: s.rawScore })),
 	);
 
 	// 4. 画像
 	const imageTitles = [
 		...new Set(
-			unique
+			deduped
 				.filter((s) => (importance.get(s.id) ?? 0) >= IMAGE_MIN_IMPORTANCE && s.raw.links.length > 0)
 				.map((s) => s.raw.links[0].target),
 		),
@@ -274,7 +313,7 @@ async function main(): Promise<void> {
 	const sidecar = existsSync(SIDECAR_PATH)
 		? (JSON.parse(readFileSync(SIDECAR_PATH, 'utf8')) as ClassifySidecar)
 		: {};
-	let events: NewsEvent[] = unique.map((s) => {
+	let events: NewsEvent[] = deduped.map((s) => {
 		const imp = importance.get(s.id) ?? 0;
 		const cls = classify(s.id, s.raw.text, sidecar, s.raw.regionHint);
 		const image =
@@ -291,8 +330,7 @@ async function main(): Promise<void> {
 	});
 
 	// 6. curated 適用
-	const curated = loadCurated();
-	const curateResult = applyCurated(events, curated);
+	const curateResult = applyCurated(events, curatedForDedupe);
 	events = sortEvents(curateResult.events);
 	if (curateResult.unmatched.length > 0) {
 		console.warn(`⚠️ curatedでidが一致しない: ${curateResult.unmatched.join(', ')}`);

@@ -906,6 +906,65 @@
 		<path d="M36 84h24" stroke-width="3.5"/>
 	</symbol>
 
+	<!-- 1950 チューリングテスト: 人と機械の対話 -->
+	<symbol id="art-turing" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M10 22h34v22H26l-8 8v-8h-8z" fill="currentColor" fill-opacity="0.1"/>
+		<circle cx="21" cy="33" r="2" fill="currentColor" stroke="none"/>
+		<circle cx="28" cy="33" r="2" fill="currentColor" stroke="none"/>
+		<circle cx="35" cy="33" r="2" fill="currentColor" stroke="none"/>
+		<rect x="52" y="48" width="34" height="22" rx="4" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M70 70v8l8-8M69 48v-6M65 42h8" stroke-width="3"/>
+		<path d="M60 59c2-3 4-3 6 0M72 59c2-3 4-3 6 0" stroke-width="3"/>
+		<path d="M44 62l8-6M52 34l-8 6" stroke-width="3" stroke-dasharray="2 5" opacity="0.6"/>
+	</symbol>
+
+	<!-- 1956 ダートマス会議・AI誕生: 芽吹く回路 -->
+	<symbol id="art-ai-birth" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="48" cy="58" r="18" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M48 40V16M48 24l-10-8M48 24l10-8" stroke-width="3.5"/>
+		<circle cx="38" cy="16" r="3" fill="currentColor" fill-opacity="0.3"/>
+		<circle cx="58" cy="16" r="3" fill="currentColor" fill-opacity="0.3"/>
+		<circle cx="48" cy="12" r="3" fill="currentColor" fill-opacity="0.3"/>
+		<path d="M30 58h-14M66 58h14M36 72l-8 10M60 72l8 10" stroke-width="3"/>
+		<circle cx="48" cy="58" r="6" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1997 ディープ・ブルー: チェスのナイト -->
+	<symbol id="art-deep-blue" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M34 78c0-16 2-26 10-32-6 0-10-4-10-10 0-10 10-18 22-18l-2 8 8 4c6 4 8 12 8 22 0 12-4 20-8 26z" fill="currentColor" fill-opacity="0.12"/>
+		<circle cx="56" cy="32" r="2.5" fill="currentColor" stroke="none"/>
+		<path d="M28 78h44l-4 8H32z" stroke-width="3.5"/>
+		<path d="M14 24h6v6M14 40h6M76 12h6v6" stroke-width="3" opacity="0.5"/>
+	</symbol>
+
+	<!-- 2016 AlphaGo: 碁盤と石 -->
+	<symbol id="art-alphago" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="14" y="14" width="68" height="68" rx="6"/>
+		<path d="M14 37h68M14 60h68M37 14v68M60 14v68" stroke-width="3" opacity="0.5"/>
+		<circle cx="37" cy="37" r="8" fill="currentColor" fill-opacity="0.85" stroke="none"/>
+		<circle cx="60" cy="60" r="8" stroke-width="3"/>
+		<circle cx="60" cy="37" r="8" stroke-width="3"/>
+		<path d="M70 22l4-4" stroke-width="3" opacity="0.6"/>
+	</symbol>
+
+	<!-- 2022 ChatGPT・生成AI: 輝く対話 -->
+	<symbol id="art-chatgpt" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M16 20h64a0 0 0 0 1 0 0v40a8 8 0 0 1-8 8H40l-14 14V68h-10a8 8 0 0 1-8-8V28a8 8 0 0 1 8-8z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M48 30l3.5 9.5L61 43l-9.5 3.5L48 56l-3.5-9.5L35 43l9.5-3.5z" fill="currentColor" fill-opacity="0.25"/>
+		<path d="M64 30l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" stroke-width="2.5"/>
+		<path d="M30 34l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" stroke-width="2.5" opacity="0.7"/>
+	</symbol>
+
+	<!-- 2020 AlphaFold: タンパク質のリボン -->
+	<symbol id="art-alphafold" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M20 70c-6-10-2-22 8-26s20 2 22 12 12 14 20 8 10-18 2-26" stroke-width="4"/>
+		<path d="M28 76c-2 4-6 6-10 6M74 20c2-4 6-6 10-6" stroke-width="3" opacity="0.6"/>
+		<circle cx="20" cy="70" r="3.5" fill="currentColor" fill-opacity="0.3"/>
+		<circle cx="50" cy="56" r="3.5" fill="currentColor" fill-opacity="0.3"/>
+		<circle cx="72" cy="38" r="3.5" fill="currentColor" fill-opacity="0.3"/>
+		<path d="M34 40l-6-8M56 68l8 6" stroke-width="3" stroke-dasharray="2 5" opacity="0.5"/>
+	</symbol>
+
 	<!-- 2001 21世紀の始まり: 0時の時計と花火 -->
 	<symbol id="art-millennium" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
 		<circle cx="48" cy="56" r="24"/>
