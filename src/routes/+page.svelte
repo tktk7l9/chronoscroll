@@ -8,10 +8,20 @@
 	import SearchBox from '$lib/components/SearchBox.svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
+	import { formatCount, formatJpDate } from '$lib/coverage';
 	import type { SearchHit } from '$lib/search';
 	import { timelineData } from '$lib/state/data.svelte';
 	import type { NewsEvent } from '$lib/types';
 	import { DEFAULT_URL_STATE, parseUrlState, serializeUrlState } from '$lib/url-state';
+	// 収録件数と期間はビルド時に確定させる（実行時のfetch待ちにしないことで
+	// pop-in/CLSを避け、prerender済みHTMLとOGP/descriptionにも実数を載せる）
+	import { maxDate, minDate, total } from '../../static/data/index.json';
+
+	const coverage = {
+		count: formatCount(total),
+		from: formatJpDate(minDate),
+		to: formatJpDate(maxDate),
+	};
 
 	const initial = browser ? parseUrlState(new URLSearchParams(location.search)) : DEFAULT_URL_STATE;
 
@@ -73,13 +83,13 @@
 	<title>chronoscroll — 歴史ニュースの縦スクロール年表</title>
 	<meta
 		name="description"
-		content="1868年（明治）から現在までの国内外の歴史ニュース13,000件超を、ズームで詳しさが変わる縦スクロール年表で。"
+		content="{coverage.from}から{coverage.to}までの国内外の歴史ニュース全{coverage.count}件を、ズームで詳しさが変わる縦スクロール年表で。"
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="chronoscroll — 歴史ニュースの縦スクロール年表" />
 	<meta
 		property="og:description"
-		content="1868年（明治）から現在までの歴史ニュース13,000件超。ズームするほど歴史が細かく見える無限スクロール年表。"
+		content="歴史ニュース全{coverage.count}件（{coverage.from}〜{coverage.to}）。ズームするほど歴史が細かく見える無限スクロール年表。"
 	/>
 	<meta property="og:url" content="https://chronoscroll.vercel.app/" />
 	<meta property="og:image" content="https://chronoscroll.vercel.app/ogp.png" />
@@ -107,6 +117,16 @@
 	<div class="row filters">
 		<FilterBar bind:filter />
 	</div>
+	<p class="coverage">
+		<span class="vh">収録データ: </span>
+		<span class="cov-count">全{coverage.count}件</span>
+		<span class="cov-sep" aria-hidden="true">·</span>
+		<time datetime={minDate}>{coverage.from}</time>
+		<span aria-hidden="true">〜</span>
+		<span class="vh">から</span>
+		<time datetime={maxDate}>{coverage.to}</time>
+		<span class="vh">まで</span>
+	</p>
 </header>
 
 <main>
@@ -170,6 +190,8 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
+		/* 狭い画面では検索欄が縮んで収まるようにする（テーマ切替がはみ出すのを防ぐ） */
+		min-width: 0;
 	}
 	.row.filters {
 		justify-content: flex-start;
@@ -180,6 +202,8 @@
 		gap: 8px;
 		text-decoration: none;
 		color: inherit;
+		/* 縮小はツール側（検索欄）に寄せ、サイト名は常に全文表示する */
+		flex: none;
 	}
 	.brand-name {
 		font-family: var(--font-serif);
@@ -195,6 +219,37 @@
 	.brand-name {
 		white-space: nowrap;
 	}
+
+	/* 収録データの範囲。値はビルド時に確定しているため高さは固定＝CLSなし */
+	.coverage {
+		display: flex;
+		align-items: baseline;
+		gap: 5px;
+		margin: 0;
+		font-size: 0.7rem;
+		line-height: 1.4;
+		color: var(--ink-muted);
+		white-space: nowrap;
+		font-variant-numeric: tabular-nums;
+	}
+	.cov-count {
+		color: var(--ink);
+		font-weight: 600;
+	}
+	.cov-sep {
+		color: var(--line-strong);
+	}
+	.vh {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
 	@media (max-width: 560px) {
 		.brand-sub {
 			display: none;
@@ -205,10 +260,14 @@
 		.site-header {
 			padding: 8px 12px;
 		}
+		.coverage {
+			font-size: 0.66rem;
+			gap: 4px;
+		}
 	}
 
 	main {
-		padding-top: 96px;
+		padding-top: 118px;
 	}
 
 	.error {

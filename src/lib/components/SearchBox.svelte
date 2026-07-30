@@ -131,10 +131,16 @@
 <style>
 	.searchbox {
 		position: relative;
+		/* 親がflexのとき、min-width:auto（=入力欄の固定幅）が縮小の下限になり、
+		   狭い画面でヘッダーの他要素を押し出してしまう。0を許して検索欄側で吸収する */
+		min-width: 0;
 	}
 
 	input {
 		width: min(260px, 38vw);
+		/* 縮小された .searchbox に追従する。幅に余裕がある間は上のwidthが効くので見た目は不変 */
+		max-width: 100%;
+		min-width: 0;
 		padding: 7px 12px;
 		font-size: 0.85rem;
 		font-family: inherit;
@@ -152,7 +158,9 @@
 		position: absolute;
 		top: calc(100% + 8px);
 		right: 0;
-		width: min(430px, 92vw);
+		/* right:0 は「検索欄の右端」基準なので、92vw では検索欄の右にあるテーマ切替＋左右余白の分だけ
+		   画面左へはみ出し、日付の先頭桁が欠ける。ビューポート幅からその分（72px）を引いて収める */
+		width: min(430px, calc(100vw - 72px));
 		max-height: 55vh;
 		overflow-y: auto;
 		background: var(--bg-elevated);

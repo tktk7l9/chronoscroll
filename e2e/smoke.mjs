@@ -1,6 +1,8 @@
 // chronoscroll 実ブラウザスモークテスト
 // 使い方: node e2e/smoke.mjs [baseUrl]   （デフォルト http://localhost:5199）
-// シナリオ: 初期表示 / ズーム / 詳細ダイアログ / フィルタ / 検索ジャンプ / URL復元 / モバイル
+// シナリオ: 初期表示 / 収録データ行 / ズーム / 詳細ダイアログ / フィルタ / 検索ジャンプ / URL復元 / モバイル
+import { readFileSync } from 'node:fs';
+
 const base = process.argv[2] ?? 'http://localhost:5199';
 const results = [];
 const errors = [];
@@ -40,6 +42,21 @@ assert(
 	'初期表示: 概観レベル表示（ズームゲージ）',
 	(await page.locator('.zoomctl .stop.active').textContent())?.includes('概観'),
 );
+// 収録データ行: index.json の実数がヘッダーに出ている（ビルド時に焼き込まれるのでfetch待ちなし）
+const meta = JSON.parse(readFileSync('static/data/index.json', 'utf8'));
+const covText = (await page.locator('.coverage').textContent())?.replace(/\s+/g, ' ') ?? '';
+const jp = (iso) => {
+	const [y, m, d] = iso.split('-');
+	return `${Number(y)}年${Number(m)}月${Number(d)}日`;
+};
+assert(
+	'収録データ: 総件数と期間が表示される',
+	covText.includes(`全${meta.total.toLocaleString('en-US')}件`) &&
+		covText.includes(jp(meta.minDate)) &&
+		covText.includes(jp(meta.maxDate)),
+	`text=${covText}`,
+);
+
 // ズームアウトの下限に達すると−ボタンがdisabledになる（可動域の可視化）
 await page.click('button[aria-label="ズームアウト"]');
 await page.click('button[aria-label="ズームアウト"]');
@@ -119,9 +136,68 @@ const singles = await page.evaluate(() => ({
 		const m = document.querySelector('.minimap');
 		return m ? getComputedStyle(m).display !== 'none' : false;
 	})(),
+	// 収録データ行はモバイルでも常時表示し、かつ横あふれを起こさない
+	coverageVisible: (() => {
+		const c = document.querySelector('.coverage');
+		return c ? getComputedStyle(c).display !== 'none' && c.getBoundingClientRect().height > 0 : false;
+	})(),
+	coverageFits: (() => {
+		const c = document.querySelector('.coverage');
+		if (!c) return false;
+		const r = document.createRange();
+		r.selectNodeContents(c);
+		return r.getBoundingClientRect().width <= c.getBoundingClientRect().width;
+	})(),
 }));
 assert('モバイル: 全カードが1カラム', singles.cards > 0 && singles.cards === singles.single);
 assert('モバイル: ミニマップ非表示', !singles.minimapVisible);
+assert('モバイル: 収録データ行が表示される', singles.coverageVisible);
+assert('モバイル: 収録データ行が1行に収まる', singles.coverageFits);
+
+// 7b. 狭幅（320px）: ヘッダーの全要素がコンテンツ box 内に収まる
+await page.setViewportSize({ width: 320, height: 640 });
+await page.waitForTimeout(500);
+const narrow = await page.evaluate(() => {
+	const header = document.querySelector('.site-header');
+	const cs = getComputedStyle(header);
+	const box = header.getBoundingClientRect();
+	const left = box.left + parseFloat(cs.paddingLeft);
+	const right = box.right - parseFloat(cs.paddingRight);
+	const over = [];
+	for (const sel of ['.brand', '.tools', '.tools input', '.tools button', '.coverage']) {
+		const el = document.querySelector(sel);
+		if (!el) continue;
+		const r = el.getBoundingClientRect();
+		// 0.5px はサブピクセル丸めの許容
+		if (r.right > right + 0.5 || r.left < left - 0.5) {
+			over.push(`${sel} [${Math.round(r.left)},${Math.round(r.right)}]`);
+		}
+	}
+	return { over, bound: [Math.round(left), Math.round(right)] };
+});
+assert(
+	'狭幅320px: ヘッダー要素が横にはみ出さない',
+	narrow.over.length === 0,
+	`overflow=${narrow.over.join(' ')} bound=${narrow.bound.join('..')}`,
+);
+
+// 7c. 狭幅の検索候補が画面左にはみ出さない（日付の先頭桁が欠けない）
+await page.fill('input[type=search]', '新幹線');
+await page.waitForSelector('.results .hit', { timeout: 25000 });
+const dropdown = await page.evaluate(() => {
+	const r = document.querySelector('.results').getBoundingClientRect();
+	return { left: Math.round(r.left), date: document.querySelector('.results .hit .date')?.textContent };
+});
+assert(
+	'狭幅320px: 検索候補が画面内に収まる',
+	dropdown.left >= 4 && /^\d{4}\./.test(dropdown.date ?? ''),
+	`left=${dropdown.left} date=${dropdown.date}`,
+);
+await page.fill('input[type=search]', '');
+
+// 以降のシナリオは従来のモバイル寸法で続ける
+await page.setViewportSize({ width: 390, height: 720 });
+await page.waitForTimeout(500);
 
 // 8. 年代ジャンプ: era-chipタップ → 十年選択で移動
 await page.locator('.era-chip').click();
