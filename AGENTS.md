@@ -9,6 +9,9 @@
   `static/data/` にJSONチャンクとして**コミットする**（デプロイ時にWikipediaを叩かない）。
 - `content/curated/*.yaml` がトップ層イベントを id で上書き（要約リライト・SVG割当・重要度補正）。
   自動生成データを直接編集しない。手直しは必ず curated 層で行う。
+- `content/affiliate/books.yaml` はアフィリエイト書籍リンク（id→BookRef[]）。`NewsEvent`には一切
+  マージせず、`static/data/books.json`として独立経路で配信する（CC BY-SA由来データを汚さないため）。
+- `src/lib/sponsor.ts`の`CURRENT_SPONSOR`が自前スポンサー枠の設定値（未契約時は`null`で非表示）。
 
 ## Svelte 5 の注意（訓練データより新しい）
 - **runesモード強制**（vite.config.ts）。`$state` / `$derived` / `$effect` / `$props` を使う。

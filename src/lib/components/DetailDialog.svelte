@@ -1,15 +1,22 @@
 <script lang="ts">
-	import type { NewsEvent } from '../types.ts';
+	import type { BookRef, NewsEvent } from '../types.ts';
 	import { CATEGORY_LABELS, REGION_LABELS } from '../types.ts';
 	import { formatWareki } from '../wareki.ts';
 	import ArtIcon from './ArtIcon.svelte';
+	import BookLinks from './BookLinks.svelte';
+	import SponsorSlot from './SponsorSlot.svelte';
 
 	let {
 		ev = null,
+		books = [],
 		onclose,
 		onselectrelated,
-	}: { ev: NewsEvent | null; onclose: () => void; onselectrelated: (id: string) => void } =
-		$props();
+	}: {
+		ev: NewsEvent | null;
+		books?: BookRef[];
+		onclose: () => void;
+		onselectrelated: (id: string) => void;
+	} = $props();
 
 	let dialog = $state<HTMLDialogElement>();
 	let closing = $state(false);
@@ -127,6 +134,9 @@
 					<a href="/e/{ev.id}" data-sveltekit-reload>このできごとの個別ページ</a>
 				</p>
 			</footer>
+
+			<BookLinks {books} headingLevel="h3" />
+			<SponsorSlot />
 
 			<button type="button" class="close" onclick={requestClose} aria-label="閉じる">
 				×

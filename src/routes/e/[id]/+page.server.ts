@@ -4,7 +4,7 @@
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
-import type { NewsEvent } from '$lib/types';
+import type { BookRef, NewsEvent } from '$lib/types';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
 export const prerender = true;
@@ -17,6 +17,7 @@ interface Cache {
 }
 
 let cache: Cache | null = null;
+let booksIndex: Record<string, BookRef[]> | null = null;
 
 function loadAll(): Cache {
 	if (!cache) {
@@ -36,6 +37,13 @@ function loadAll(): Cache {
 	return cache;
 }
 
+function loadBooks(): Record<string, BookRef[]> {
+	if (!booksIndex) {
+		booksIndex = JSON.parse(readFileSync('static/data/books.json', 'utf8')) as Record<string, BookRef[]>;
+	}
+	return booksIndex;
+}
+
 export const entries: EntryGenerator = () => [...loadAll().byId.keys()].map((id) => ({ id }));
 
 export const load: PageServerLoad = ({ params }) => {
@@ -45,5 +53,6 @@ export const load: PageServerLoad = ({ params }) => {
 	const i = indexOf.get(ev.id)!;
 	const pick = (e: NewsEvent | undefined) =>
 		e ? { id: e.id, title: e.title, date: e.date } : null;
-	return { ev, prev: pick(sorted[i - 1]), next: pick(sorted[i + 1]) };
+	const books = loadBooks()[ev.id] ?? [];
+	return { ev, books, prev: pick(sorted[i - 1]), next: pick(sorted[i + 1]) };
 };

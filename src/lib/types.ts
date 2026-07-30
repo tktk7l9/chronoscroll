@@ -31,6 +31,18 @@ export interface RelatedRef {
 	title: string;
 }
 
+/**
+ * アフィリエイト書籍リンク（content/affiliate/books.yaml 由来）。
+ * NewsEvent には一切マージしない。static/data/books.json として別経路で配信する。
+ */
+export interface BookRef {
+	title: string;
+	author?: string;
+	store: 'amazon' | 'rakuten';
+	asin?: string;
+	url?: string;
+}
+
 export interface NewsEvent {
 	id: string;
 	/** ISO yyyy-mm-dd（precision が month/year の場合は 01 埋め） */

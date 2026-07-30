@@ -4,7 +4,7 @@
  */
 import { chunkKeysInRange } from '../chunks.ts';
 import { dayOf } from '../timescale.ts';
-import type { IndexMeta, NewsEvent } from '../types.ts';
+import type { BookRef, IndexMeta, NewsEvent } from '../types.ts';
 import { toPoints, type EventPoint } from '../viewport.ts';
 
 export class TimelineData {
@@ -16,6 +16,7 @@ export class TimelineData {
 	#events = new Map<string, NewsEvent>();
 	#loaded = new Set<string>();
 	#pending = new Set<string>();
+	#books: Record<string, BookRef[]> = {};
 
 	readonly points: EventPoint[] = $derived.by(() => {
 		void this.version;
@@ -38,6 +39,17 @@ export class TimelineData {
 		} catch (e) {
 			this.loadError = String(e);
 		}
+		// books.json は年表の主データとは独立に取得する。失敗してもloadErrorは発火させない
+		// （書籍リンクが出ないだけに留め、年表全体を巻き込んで真っ白にしない）
+		void fetchJson<Record<string, BookRef[]>>('/data/books.json')
+			.then((books) => {
+				this.#books = books;
+			})
+			.catch(() => {});
+	}
+
+	booksById(id: string): BookRef[] {
+		return this.#books[id] ?? [];
 	}
 
 	/** 可視範囲+バッファに必要なチャンクをロードする（多重ロード防止付き） */

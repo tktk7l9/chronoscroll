@@ -17,6 +17,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { OVERVIEW_MIN_IMPORTANCE } from '../../src/lib/lod.ts';
 import type { EventImage, NewsEvent } from '../../src/lib/types.ts';
+import { buildBooksIndex, parseBooksYaml, unmatchedBookIds } from '../lib/books.ts';
 import { classify, type ClassifySidecar } from '../lib/classify.ts';
 import { applyCurated, parseCuratedYaml, type CuratedEntry } from '../lib/curate.ts';
 import {
@@ -43,6 +44,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CACHE = join(ROOT, 'pipeline', '.cache');
 const OUT = join(ROOT, 'static', 'data');
 const CURATED_DIR = join(ROOT, 'content', 'curated');
+const BOOKS_PATH = join(ROOT, 'content', 'affiliate', 'books.yaml');
 const SIDECAR_PATH = join(ROOT, 'pipeline', 'sidecar', 'classify.json');
 
 /** 画像を取得・格納する importance 下限 */
@@ -362,6 +364,14 @@ async function main(): Promise<void> {
 		return { ...ev, related };
 	});
 
+	// アフィリエイト書籍リンク（NewsEventにはマージせず別経路で出力）
+	const bookEntries = existsSync(BOOKS_PATH) ? parseBooksYaml(readFileSync(BOOKS_PATH, 'utf8')) : [];
+	const booksIndex = buildBooksIndex(bookEntries);
+	const unmatchedBooks = unmatchedBookIds(bookEntries, new Set(events.map((e) => e.id)));
+	if (unmatchedBooks.length > 0) {
+		console.warn(`⚠️ books.yamlでidが一致しない: ${unmatchedBooks.join(', ')}`);
+	}
+
 	// 8. 出力
 	rmSync(join(OUT, 'decades'), { recursive: true, force: true });
 	rmSync(join(OUT, 'chunks'), { recursive: true, force: true });
@@ -376,6 +386,7 @@ async function main(): Promise<void> {
 		writeFileSync(join(OUT, 'chunks', `${chunk.meta.key}.json`), JSON.stringify(chunk.events));
 	}
 	writeFileSync(join(OUT, 'search.json'), JSON.stringify(searchDocs(events)));
+	writeFileSync(join(OUT, 'books.json'), JSON.stringify(booksIndex));
 
 	// レポート
 	console.log('\n=== 統計 ===');

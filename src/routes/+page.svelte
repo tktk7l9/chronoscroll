@@ -34,6 +34,7 @@
 	let routerReady = $state(false);
 
 	const selected = $derived(selectedId !== null ? (timelineData.byId(selectedId) ?? null) : null);
+	const selectedBooks = $derived(selectedId !== null ? timelineData.booksById(selectedId) : []);
 
 	onMount(() => {
 		void timelineData.init();
@@ -150,6 +151,7 @@
 
 <DetailDialog
 	ev={selected}
+	books={selectedBooks}
 	onclose={() => (selectedId = null)}
 	onselectrelated={(id) => (selectedId = id)}
 />

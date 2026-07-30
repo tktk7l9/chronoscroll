@@ -1,6 +1,8 @@
 <script lang="ts">
 	import ArtIcon from '$lib/components/ArtIcon.svelte';
+	import BookLinks from '$lib/components/BookLinks.svelte';
 	import BrandMark from '$lib/components/BrandMark.svelte';
+	import SponsorSlot from '$lib/components/SponsorSlot.svelte';
 	import { CATEGORY_LABELS, REGION_LABELS } from '$lib/types';
 	import { formatWareki } from '$lib/wareki';
 
@@ -97,6 +99,9 @@
 				{/each}
 			</ul>
 		</section>
+
+		<BookLinks books={data.books} headingLevel="h2" />
+		<SponsorSlot />
 
 		<nav class="neighbors" aria-label="前後のできごと">
 			{#if data.prev}

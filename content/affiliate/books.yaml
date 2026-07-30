@@ -1,0 +1,61 @@
+# イベントID → 関連書籍（Amazon/楽天アフィリエイト）。
+# content/curated/*.yaml とは別経路（static/data/books.json）で配信する。
+# NewsEvent（CC BY-SA 4.0で公開）には一切マージしない。
+#
+# store: amazon の場合は asin（推奨）または url を指定する。
+# store: rakuten の場合は生成済みの完全な url を指定する。
+# asinはWeb検索でタイトル・著者とともに実在を確認済み（2026-07-13時点）。
+# 実運用時は src/lib/books.ts の AMAZON_ASSOC_TAG（Amazon Associates審査通過後に差し替え）を反映する。
+# 初回シードとして少数のみ投入。
+
+- id: 1868-02-08-13b8b41d
+  books:
+    - title: 明治維新（岩波文庫）
+      author: 遠山 茂樹
+      store: amazon
+      asin: "4003816412"
+    - title: 明治維新【電子書籍】（楽天Kobo）
+      author: 遠山茂樹
+      store: rakuten
+      url: "https://hb.afl.rakuten.co.jp/ichiba/55bca153.41d15735.55bca154.91d06cdf/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakutenkobo-ebooks%2F5731c687ef1f3e32a13fdd0669b41f4a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+
+- id: 1956-06-18-ai-dartmouth
+  books:
+    - title: AI原論——神の支配と人間の自由（講談社選書メチエ）
+      author: 西垣 通
+      store: amazon
+      asin: "4062586754"
+    - title: AI原論　神の支配と人間の自由（講談社選書メチエ・楽天）
+      author: 西垣 通
+      store: rakuten
+      url: "https://hb.afl.rakuten.co.jp/ichiba/55bc9b1f.a6acded9.55bc9b20.950c57b3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F15362329%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+
+- id: 2016-03-09-ai-alphago
+  books:
+    - title: 最強囲碁AI アルファ碁 解体新書 増補改訂版
+      author: "大槻 知史（監修: 三宅 陽一郎）"
+      store: amazon
+      asin: "4798157775"
+    - title: 最強囲碁AI アルファ碁 解体新書 増補改訂版（楽天）
+      author: "大槻 知史"
+      store: rakuten
+      url: "https://hb.afl.rakuten.co.jp/ichiba/55bc9b1f.a6acded9.55bc9b20.950c57b3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F15502968%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+
+- id: 2022-11-30-ai-chatgpt
+  books:
+    - title: チャットＧＰＴvs.人類（文春新書）
+      author: 平 和博
+      store: amazon
+      asin: "4166614134"
+    - title: チャットGPTvs.人類（文春新書・楽天）
+      author: 平 和博
+      store: rakuten
+      url: "https://hb.afl.rakuten.co.jp/ichiba/55bc9b1f.a6acded9.55bc9b20.950c57b3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F17516942%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+    - title: 生成ＡＩ「ChatGPT」を支える技術はどのようにビジネスを変え、人間の創造性を揺るがすのか？
+      author: 小林 雅一
+      store: amazon
+      asin: "4478118183"
+    - title: 生成AI「ChatGPT」を支える技術は...（楽天）
+      author: 小林 雅一
+      store: rakuten
+      url: "https://hb.afl.rakuten.co.jp/ichiba/55bc9b1f.a6acded9.55bc9b20.950c57b3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F17506375%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
