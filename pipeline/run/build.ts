@@ -8,7 +8,7 @@
  * 3. リンク先の Qid / sitelink数 取得（キャッシュ）→ 十年内パーセンタイルで importance
  * 4. 上位イベントの代表画像取得（キャッシュ）
  * 5. ルールベース分類 + sidecar 上書き
- * 6. curated YAML 適用
+ * 6. curated YAML + 特集YAML 適用
  * 7. 関連イベントの算出（同じ出典を持つイベント同士を結びつける）
  * 8. static/data/ へ JSON チャンク出力 + 統計レポート
  */
@@ -19,6 +19,15 @@ import { OVERVIEW_MIN_IMPORTANCE } from '../../src/lib/lod.ts';
 import type { EventImage, NewsEvent } from '../../src/lib/types.ts';
 import { buildBooksIndex, parseBooksYaml, unmatchedBookIds } from '../lib/books.ts';
 import { classify, type ClassifySidecar } from '../lib/classify.ts';
+import {
+	buildCollectionDetail,
+	collectionCuratedEntries,
+	eventCollectionIndex,
+	parseCollectionYaml,
+	toCollectionMeta,
+	unmatchedCollectionIds,
+	type CollectionSource,
+} from '../lib/collections.ts';
 import { applyCurated, parseCuratedYaml, type CuratedEntry } from '../lib/curate.ts';
 import {
 	buildChunks,
@@ -44,6 +53,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CACHE = join(ROOT, 'pipeline', '.cache');
 const OUT = join(ROOT, 'static', 'data');
 const CURATED_DIR = join(ROOT, 'content', 'curated');
+const COLLECTIONS_DIR = join(ROOT, 'content', 'collections');
 const BOOKS_PATH = join(ROOT, 'content', 'affiliate', 'books.yaml');
 const SIDECAR_PATH = join(ROOT, 'pipeline', 'sidecar', 'classify.json');
 
@@ -227,6 +237,15 @@ function loadCurated(): CuratedEntry[] {
 	return entries;
 }
 
+/** 特集（テーマ別の読み物）を1ファイル1本で読む。表示順はファイル名順 */
+function loadCollections(): CollectionSource[] {
+	if (!existsSync(COLLECTIONS_DIR)) return [];
+	return readdirSync(COLLECTIONS_DIR)
+		.filter((f) => /\.ya?ml$/.test(f))
+		.sort()
+		.map((f) => parseCollectionYaml(readFileSync(join(COLLECTIONS_DIR, f), 'utf8')));
+}
+
 function percent(n: number, total: number): string {
 	return `${((n / total) * 100).toFixed(1)}%`;
 }
@@ -284,8 +303,12 @@ async function main(): Promise<void> {
 	// 近似重複（同日+本文の文字bigram類似度が高いもの。2シリーズに同じできごとが
 	// 別文面で載るケースを吸収する。先頭リンクが揃うとは限らないため文面で判定する）を集約。
 	// curatedが参照するidは必ず残す
-	const curatedForDedupe = loadCurated();
-	const protectedIds = new Set(curatedForDedupe.map((e) => e.id));
+	// 特集のentriesはCuratedEntryと同型なので、curated層と同じ経路にまとめて流す。
+	// これで新規イベント生成・部分上書き・重複除去からのid保護・relatedIdsの手動指定が
+	// 特集でもそのまま効く（特集を後ろに置くので、同じidは特集側が後勝ち）
+	const collectionSources = loadCollections();
+	const curatedEntries = [...loadCurated(), ...collectionCuratedEntries(collectionSources)];
+	const protectedIds = new Set(curatedEntries.map((e) => e.id));
 	const dropIds = duplicateIds(
 		unique.map((s) => ({
 			id: s.id,
@@ -335,7 +358,7 @@ async function main(): Promise<void> {
 	});
 
 	// 6. curated 適用
-	const curateResult = applyCurated(events, curatedForDedupe);
+	const curateResult = applyCurated(events, curatedEntries);
 	events = sortEvents(curateResult.events);
 	if (curateResult.unmatched.length > 0) {
 		console.warn(`⚠️ curatedでidが一致しない: ${curateResult.unmatched.join(', ')}`);
@@ -345,7 +368,7 @@ async function main(): Promise<void> {
 	// curatedのrelatedIds（手動指定）を優先し、自動算出分で不足を補う。
 	const eventsById = new Map(events.map((e) => [e.id, e]));
 	const manualRelatedIds = new Map(
-		curatedForDedupe
+		curatedEntries
 			.filter((e) => e.relatedIds && e.relatedIds.length > 0)
 			.map((e) => [e.id, e.relatedIds!]),
 	);
@@ -372,10 +395,20 @@ async function main(): Promise<void> {
 		console.warn(`⚠️ books.yamlでidが一致しない: ${unmatchedBooks.join(', ')}`);
 	}
 
+	// 特集（NewsEvent本体は再生成済みのものを引き当てて別経路で配信する）
+	const finalById = new Map(events.map((e) => [e.id, e]));
+	const unmatchedCollections = unmatchedCollectionIds(collectionSources, new Set(finalById.keys()));
+	for (const { slug, ids } of unmatchedCollections) {
+		console.warn(`⚠️ 特集(${slug})でidが一致しない: ${ids.join(', ')}`);
+	}
+	const collectionDetails = collectionSources.map((s) => buildCollectionDetail(s, finalById));
+
 	// 8. 出力
 	rmSync(join(OUT, 'decades'), { recursive: true, force: true });
 	rmSync(join(OUT, 'chunks'), { recursive: true, force: true });
+	rmSync(join(OUT, 'collections'), { recursive: true, force: true });
 	mkdirSync(join(OUT, 'chunks'), { recursive: true });
+	mkdirSync(join(OUT, 'collections'), { recursive: true });
 	const meta = buildIndexMeta(events, new Date().toISOString());
 	writeFileSync(join(OUT, 'index.json'), JSON.stringify(meta));
 	writeFileSync(
@@ -387,6 +420,16 @@ async function main(): Promise<void> {
 	}
 	writeFileSync(join(OUT, 'search.json'), JSON.stringify(searchDocs(events)));
 	writeFileSync(join(OUT, 'books.json'), JSON.stringify(booksIndex));
+	writeFileSync(
+		join(OUT, 'collections.json'),
+		JSON.stringify({
+			collections: collectionDetails.map(toCollectionMeta),
+			byEvent: eventCollectionIndex(collectionDetails),
+		}),
+	);
+	for (const detail of collectionDetails) {
+		writeFileSync(join(OUT, 'collections', `${detail.slug}.json`), JSON.stringify(detail));
+	}
 
 	// レポート
 	console.log('\n=== 統計 ===');
@@ -395,6 +438,10 @@ async function main(): Promise<void> {
 	console.log(`画像付き: ${events.filter((e) => e.image).length}件`);
 	console.log(`curated: 上書き${curateResult.updated.length} / 追加${curateResult.added.length}`);
 	console.log(`関連イベント付き: ${relatedCount}件（うち手動指定 ${manualRelatedIds.size}件のイベントに設定）`);
+	console.log(`特集: ${collectionDetails.length}本`);
+	for (const d of collectionDetails) {
+		console.log(`  ${d.slug}: ${d.count}件 (${d.fromDate} 〜 ${d.toDate}) ${d.title}`);
+	}
 	console.log('\nチャンク別件数:');
 	for (const c of meta.chunks) console.log(`  ${c.key} (${c.fromYear}-${c.toYear}): ${c.count}`);
 	const catCount = new Map<string, number>();

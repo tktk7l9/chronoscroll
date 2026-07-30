@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { BookRef, NewsEvent } from '../types.ts';
+	import type { BookRef, CollectionMeta, NewsEvent } from '../types.ts';
 	import { CATEGORY_LABELS, REGION_LABELS } from '../types.ts';
+	import { formatEventDate } from '../coverage.ts';
 	import { formatWareki } from '../wareki.ts';
 	import ArtIcon from './ArtIcon.svelte';
 	import BookLinks from './BookLinks.svelte';
@@ -9,11 +10,13 @@
 	let {
 		ev = null,
 		books = [],
+		collections = [],
 		onclose,
 		onselectrelated,
 	}: {
 		ev: NewsEvent | null;
 		books?: BookRef[];
+		collections?: CollectionMeta[];
 		onclose: () => void;
 		onselectrelated: (id: string) => void;
 	} = $props();
@@ -45,13 +48,7 @@
 		}, 170);
 	}
 
-	const dateLabel = $derived.by(() => {
-		if (!ev) return '';
-		const [y, m, d] = ev.date.split('-');
-		if (ev.precision === 'year') return `${y}年`;
-		if (ev.precision === 'month') return `${y}年${Number(m)}月`;
-		return `${y}年${Number(m)}月${Number(d)}日`;
-	});
+	const dateLabel = $derived(ev ? formatEventDate(ev.date, ev.precision) : '');
 	const wareki = $derived(ev ? formatWareki(ev.date) : null);
 </script>
 
@@ -101,6 +98,16 @@
 			{/if}
 
 			<p class="summary">{ev.summary}</p>
+
+			{#if collections.length > 0}
+				<p class="collections">
+					<span class="col-label">収録特集</span>
+					{#each collections as c (c.slug)}
+						<!-- 特集ページはcsr=falseの純静的HTML。フルリロードで遷移する -->
+						<a href="/c/{c.slug}" data-sveltekit-reload>{c.title}</a>
+					{/each}
+				</p>
+			{/if}
 
 			{#if ev.related && ev.related.length > 0}
 				<section class="related">
@@ -303,6 +310,31 @@
 		margin: 0 0 18px;
 		line-height: 1.9;
 		font-size: 0.95rem;
+	}
+
+	.collections {
+		margin: 0 0 18px;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.col-label {
+		font-size: 0.7rem;
+		color: var(--ink-muted);
+	}
+	.collections a {
+		padding: 4px 12px;
+		font-size: 0.78rem;
+		font-weight: 600;
+		border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+		background: color-mix(in srgb, var(--accent) 8%, transparent);
+		border-radius: 999px;
+		text-decoration: none;
+		color: inherit;
+	}
+	.collections a:hover {
+		border-color: var(--accent);
 	}
 
 	.related {

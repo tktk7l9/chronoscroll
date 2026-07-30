@@ -52,13 +52,21 @@ if (moved === 0) {
 	process.exit(1);
 }
 
+// csr=false のルート（/e/[id]・/c・/c/[slug]）は __data.json を配信しないので削除する。
+// 遷移側は data-sveltekit-reload でフルリロードさせている。
 let removed = 0;
-for (const dir of CANDIDATES.filter((d) => existsSync(join(d, 'e')))) {
-	for (const name of readdirSync(join(dir, 'e'))) {
-		const p = join(dir, 'e', name);
-		if (statSync(p).isDirectory()) {
-			rmSync(p, { recursive: true });
-			removed++;
+for (const dir of CANDIDATES.filter((d) => existsSync(d))) {
+	for (const section of ['e', 'c']) {
+		const base = join(dir, section);
+		if (!existsSync(base)) continue;
+		for (const name of readdirSync(base)) {
+			const p = join(base, name);
+			// [param]ルートは <section>/<param>/__data.json、インデックスルートは
+			// <section>/__data.json に出るため、ディレクトリと直下のファイルの両方を見る
+			if (statSync(p).isDirectory() || name === '__data.json') {
+				rmSync(p, { recursive: true });
+				removed++;
+			}
 		}
 	}
 }

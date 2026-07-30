@@ -24,7 +24,7 @@ describe('normalizeDateParam', () => {
 describe('parseUrlState', () => {
 	it('全パラメータを読む', () => {
 		const s = parseUrlState(
-			new URLSearchParams('t=1964-10&z=2.5&r=japan&c=politics&q=五輪&e=abc'),
+			new URLSearchParams('t=1964-10&z=2.5&r=japan&c=politics&q=五輪&e=abc&k=anime'),
 		);
 		expect(s.centerDate).toBe('1964-10-15');
 		expect(s.pxPerDay).toBe(2.5);
@@ -32,6 +32,13 @@ describe('parseUrlState', () => {
 		expect(s.filter.categories).toEqual(new Set(['politics']));
 		expect(s.query).toBe('五輪');
 		expect(s.selectedId).toBe('abc');
+		expect(s.collection).toBe('anime');
+	});
+
+	it('slugとして不正なkは無視する', () => {
+		expect(parseUrlState(new URLSearchParams('k=../secret')).collection).toBeNull();
+		expect(parseUrlState(new URLSearchParams('k=')).collection).toBeNull();
+		expect(parseUrlState(new URLSearchParams('k=Anime')).collection).toBeNull();
 	});
 
 	it('空のURLはデフォルト状態', () => {
@@ -57,9 +64,11 @@ describe('serializeUrlState', () => {
 			filter: {
 				regions: new Set(['japan' as const]),
 				categories: new Set(['politics' as const]),
+				collectionIds: null,
 			},
 			query: '五輪',
 			selectedId: 'abc',
+			collection: 'anime',
 		};
 		const roundTrip = parseUrlState(serializeUrlState(s));
 		expect(roundTrip).toEqual(s);

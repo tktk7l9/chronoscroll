@@ -28,8 +28,12 @@ createServer((req, res) => {
 		res.writeHead(403);
 		return res.end();
 	}
-	if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
-	if (!existsSync(file) && existsSync(`${file}.html`)) file = `${file}.html`;
+	// cleanUrls相当。`/c` のように同名の .html とディレクトリ（/c/anime用）が並ぶ場合は
+	// Vercelと同じく .html を優先する（Vercelは出力ファイルからルート表を作るため衝突しない）
+	if (!existsSync(file) || statSync(file).isDirectory()) {
+		if (existsSync(`${file}.html`)) file = `${file}.html`;
+		else if (existsSync(join(file, 'index.html'))) file = join(file, 'index.html');
+	}
 	if (!existsSync(file)) {
 		res.writeHead(404);
 		return res.end('not found');

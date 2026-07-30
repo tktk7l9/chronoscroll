@@ -21,8 +21,9 @@
 	function toggleCategory(c: Category): void {
 		filter = { ...filter, categories: toggleIn(filter.categories, c) };
 	}
+	// 地域/カテゴリのチップだけを戻す。特集の絞り込みは専用バナー側で解除する
 	function clearAll(): void {
-		filter = { regions: null, categories: null };
+		filter = { ...filter, regions: null, categories: null };
 	}
 
 	const anyActive = $derived(filter.regions !== null || filter.categories !== null);

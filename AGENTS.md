@@ -11,6 +11,14 @@
   自動生成データを直接編集しない。手直しは必ず curated 層で行う。
 - `content/affiliate/books.yaml` はアフィリエイト書籍リンク（id→BookRef[]）。`NewsEvent`には一切
   マージせず、`static/data/books.json`として独立経路で配信する（CC BY-SA由来データを汚さないため）。
+- `content/collections/<slug>.yaml` が**特集**（テーマ別の読み物）。1ファイル1本で、メタ情報＋
+  `entries`（curated と同型）を持つ。entries は curated 層と同じ経路に流すので、既存イベントの
+  参照・部分上書きだけでなく **新規イベントの書き起こしもここで行う**（`date`+`title`+`summary`が
+  揃えば新規追加。`importance`は省略すると100になるので必ず明示し、本編を汚さないよう40〜60に振る）。
+  出力は `static/data/collections.json`（一覧＋イベントid→slugの逆引き）と
+  `static/data/collections/<slug>.json`（収録イベント本体つき）の2系統。
+  年表側は `?k=<slug>` で絞り込む。**特集の絞り込み中はLODを効かせない**（低importanceに
+  振ってある収録イベントが閾値に負けて1件も出なくなるため。Timeline.svelteの`threshold`参照）。
 - `src/lib/sponsor.ts`の`CURRENT_SPONSOR`が自前スポンサー枠の設定値（未契約時は`null`で非表示）。
 
 ## Svelte 5 の注意（訓練データより新しい）

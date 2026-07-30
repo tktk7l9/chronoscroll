@@ -73,7 +73,12 @@
 		return Math.max(0.005, n / pts.length);
 	});
 	const adjustedEventsPerDay = $derived(data.eventsPerDay * filterSelectivity);
-	const threshold = $derived(importanceThreshold(pxPerDay, adjustedEventsPerDay));
+	// 特集の絞り込み中はLODを効かせない。特集の収録イベントは本編を汚さないよう
+	// importanceを低めに振ってあるので、密度補正だけでは閾値に負けて1件も出なくなる。
+	// 件数は特集1本ぶん（数十件）に限られるため、間引きはcapDensityだけで足りる
+	const threshold = $derived(
+		filter.collectionIds !== null ? 0 : importanceThreshold(pxPerDay, adjustedEventsPerDay),
+	);
 	// 概観〜十年ズームではoverview.jsonの閾値を上回るためチャンクを読んでも何も増えない。
 	// 実際に必要になるまでチャンクのフェッチ自体を止め、初期の無駄な帯域を避ける
 	const chunksNeeded = $derived(needsChunkData(pxPerDay, adjustedEventsPerDay));
@@ -150,8 +155,10 @@
 		const t = setTimeout(() => (chunkLoadingEnabled = true), 900);
 		return () => clearTimeout(t);
 	});
+	// 特集の絞り込み中は詳細JSONに収録イベントが全件入っているため、チャンクを読んでも
+	// 表示は1件も増えない（フィルタで落ちる）。最大で数MBの無駄フェッチになるので止める
 	$effect(() => {
-		if (ready && chunkLoadingEnabled && chunksNeeded) {
+		if (ready && chunkLoadingEnabled && chunksNeeded && filter.collectionIds === null) {
 			data.ensureRange(range.fromDay + bufferDays, range.toDay - bufferDays);
 		}
 	});

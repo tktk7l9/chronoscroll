@@ -987,4 +987,96 @@
 		<circle cx="76" cy="20" r="2" fill="currentColor" stroke="none"/>
 		<circle cx="48" cy="10" r="2" fill="currentColor" stroke="none"/>
 	</symbol>
+
+	<!-- ================= 特集（コレクション）のカバー ================= -->
+
+	<!-- 特集カバー アニメの歴史: フィルムストリップと再生の三角 -->
+	<symbol id="art-collection-anime" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="11" y="22" width="74" height="52" rx="6" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M11 35h74M11 61h74" stroke-width="3"/>
+		<rect x="18" y="26" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="34" y="26" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="50" y="26" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="66" y="26" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="18" y="65" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="34" y="65" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="50" y="65" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<rect x="66" y="65" width="7" height="5" rx="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+		<path d="M42 40v16l14-8z" fill="currentColor" fill-opacity="0.28" stroke-width="3"/>
+	</symbol>
+
+	<!-- 特集カバー ブレイクダンスの歴史: 逆立ちで脚を開いた回転（ヘッドスピン） -->
+	<symbol id="art-collection-breaking" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M22 80h52" stroke-width="3" opacity="0.5"/>
+		<circle cx="48" cy="69" r="8" fill="currentColor" fill-opacity="0.15"/>
+		<path d="M48 61V40"/>
+		<path d="M48 40 33 25M48 40 63 25"/>
+		<path d="M45 58 34 67M51 58 62 67" stroke-width="3"/>
+		<path d="M24 67q-3-6-2-13M72 67q3-6 2-13" stroke-width="2.5" stroke-dasharray="3 4" opacity="0.5"/>
+	</symbol>
+
+	<!-- 特集カバー 観葉植物の歴史: 鉢と2枚の葉 -->
+	<symbol id="art-collection-houseplant" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M33 63h30l-4 21H37z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M28 63h40" stroke-width="3.5"/>
+		<path d="M48 63V33"/>
+		<path d="M48 47c-12 0-19-6-19-15 11-2 19 5 19 15z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M48 41c12 0 19-6 19-15-11-2-19 5-19 15z" fill="currentColor" fill-opacity="0.12"/>
+	</symbol>
+
+	<!-- ================= 特集の収録イベント ================= -->
+
+	<!-- 1973 ブレイクビーツの発明: ターンテーブルとトーンアーム -->
+	<symbol id="art-turntable" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="42" cy="54" r="27" fill="currentColor" fill-opacity="0.1"/>
+		<circle cx="42" cy="54" r="15" stroke-width="2.5" opacity="0.5"/>
+		<circle cx="42" cy="54" r="4.5"/>
+		<path d="M78 19 70 43l-10 8"/>
+		<circle cx="78" cy="19" r="3.5" fill="currentColor" stroke="none"/>
+	</symbol>
+
+	<!-- 1983 フラッシュダンス: 映画のカチンコ -->
+	<symbol id="art-clapperboard" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<rect x="16" y="40" width="64" height="36" rx="4" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M15 26 76 17l3 13L18 39z" fill="currentColor" fill-opacity="0.16"/>
+		<path d="M31 22 34 35M46 20 49 33M61 18 64 31" stroke-width="2.5" opacity="0.6"/>
+		<path d="M29 53h22M29 63h34" stroke-width="3" opacity="0.5"/>
+	</symbol>
+
+	<!-- 2024 パリ五輪ブレイキン: メダル -->
+	<symbol id="art-breaking-olympic" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M33 14 45 38M63 14 51 38"/>
+		<circle cx="48" cy="57" r="21" fill="currentColor" fill-opacity="0.12"/>
+		<circle cx="48" cy="57" r="12" stroke-width="2.5" opacity="0.5"/>
+		<path d="M48 49l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="currentColor" fill-opacity="0.3" stroke-width="2.5"/>
+	</symbol>
+
+	<!-- 1829 ウォードの箱: ガラスケースの中の植物 -->
+	<symbol id="art-wardian-case" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M21 43 48 22l27 21v33H21z" fill="currentColor" fill-opacity="0.1"/>
+		<path d="M48 22v20M21 43h54" stroke-width="2.5" opacity="0.5"/>
+		<path d="M21 76h54" stroke-width="3.5"/>
+		<path d="M48 76V60"/>
+		<path d="M48 64c-7 0-11-4-11-9 6-1 11 3 11 9z" fill="currentColor" fill-opacity="0.18" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1855 シダ狂時代: シダの葉 -->
+	<symbol id="art-fern" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 84V22"/>
+		<path d="M48 72c-11 0-17-5-18-13 9-1 16 4 18 13z" fill="currentColor" fill-opacity="0.12" stroke-width="3"/>
+		<path d="M48 72c11 0 17-5 18-13-9-1-16 4-18 13z" fill="currentColor" fill-opacity="0.12" stroke-width="3"/>
+		<path d="M48 54c-9 0-14-4-15-11 8-1 13 3 15 11z" fill="currentColor" fill-opacity="0.12" stroke-width="3"/>
+		<path d="M48 54c9 0 14-4 15-11-8-1-13 3-15 11z" fill="currentColor" fill-opacity="0.12" stroke-width="3"/>
+		<path d="M48 38c-6 0-10-3-11-8 6-1 10 2 11 8z" fill="currentColor" fill-opacity="0.12" stroke-width="3"/>
+		<path d="M48 38c6 0 10-3 11-8-6-1-10 2-11 8z" fill="currentColor" fill-opacity="0.12" stroke-width="3"/>
+	</symbol>
+
+	<!-- 1970年代の観葉植物ブーム: 切れ込みの入ったモンステラの葉 -->
+	<symbol id="art-monstera" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M48 86V54"/>
+		<path d="M48 54c-18 0-30-13-30-30 17-2 30 11 30 30z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M48 54c18 0 30-13 30-30-17-2-30 11-30 30z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M33 32h9M28 42h11M38 24h5" stroke-width="2.5" opacity="0.55"/>
+		<path d="M63 32h-9M68 42H57M58 24h-5" stroke-width="2.5" opacity="0.55"/>
+	</symbol>
 </svg>

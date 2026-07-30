@@ -57,14 +57,15 @@ assert(
 	`text=${covText}`,
 );
 
-// ズームアウトの下限に達すると−ボタンがdisabledになる（可動域の可視化）
-await page.click('button[aria-label="ズームアウト"]');
-await page.click('button[aria-label="ズームアウト"]');
+// ズームアウトの下限に達すると−ボタンがdisabledになる（可動域の可視化）。
+// 初期ズームは収録期間から算出されるため必要なクリック数は変わる。上限つきで押し切る
+const zoomOut = page.locator('button[aria-label="ズームアウト"]');
+for (let i = 0; i < 8 && !(await zoomOut.isDisabled()); i++) {
+	await zoomOut.click();
+	await page.waitForTimeout(120);
+}
 await page.waitForTimeout(300);
-assert(
-	'ズームゲージ: 下限で−がdisabledになる',
-	await page.locator('button[aria-label="ズームアウト"]').isDisabled(),
-);
+assert('ズームゲージ: 下限で−がdisabledになる', await zoomOut.isDisabled());
 
 // 2. ズームイン → URLのzが増え、レベル表示が変わる
 await page.click('button[aria-label="ズームイン"]');
@@ -220,6 +221,114 @@ assert('個別ページ: 記事が表示される', !!h1 && h1.length > 3, `h1=$
 assert(
 	'個別ページ: 年表への導線がある',
 	(await page.locator('a.timeline-link').count()) === 1,
+);
+
+// 10. 特集: 一覧ページ（prerender・JSなし）
+const collectionsIndex = JSON.parse(readFileSync('static/data/collections.json', 'utf8'));
+await page.goto(`${base}/c`, { waitUntil: 'networkidle' });
+const cardCount = await page.locator('.cards .card').count();
+assert(
+	'特集一覧: 全特集がカードで並ぶ',
+	cardCount === collectionsIndex.collections.length,
+	`cards=${cardCount} expected=${collectionsIndex.collections.length}`,
+);
+
+// 11. 特集: 個別ページが年代順の読み物になっている
+const anime = collectionsIndex.collections.find((c) => c.slug === 'anime');
+await page.goto(`${base}/c/anime`, { waitUntil: 'networkidle' });
+const cTitle = await page.locator('article h1').textContent();
+assert('特集ページ: 見出しが出る', cTitle === anime.title, `h1=${cTitle}`);
+const itemCount = await page.locator('.items li').count();
+assert(
+	'特集ページ: 収録件数どおりの項目が並ぶ',
+	itemCount === anime.count,
+	`items=${itemCount} expected=${anime.count}`,
+);
+const itemDates = await page.locator('.items li time').evaluateAll((els) =>
+	els.map((e) => e.getAttribute('datetime')),
+);
+assert(
+	'特集ページ: 項目が古い順に並ぶ',
+	itemDates.every((d, i) => i === 0 || itemDates[i - 1] <= d),
+	`dates=${itemDates.slice(0, 4).join(',')}`,
+);
+assert(
+	'特集ページ: 各項目が個別ページへリンクする',
+	(await page.locator('.items li h2 a[href^="/e/"]').count()) === anime.count,
+);
+
+// 12. 特集: 個別ページから特集への逆リンク（内部リンクの回遊）
+const animeFirstId = await page.locator('.items li h2 a').first().getAttribute('href');
+await page.goto(base + animeFirstId, { waitUntil: 'networkidle' });
+assert(
+	'個別ページ: 収録されている特集へのリンクがある',
+	(await page.locator('.collections a[href="/c/anime"]').count()) === 1,
+);
+
+// 13. 年表連動: ?k=<slug> で特集の収録イベントだけが並ぶ
+const animeIds = new Set(
+	JSON.parse(readFileSync('static/data/collections/anime.json', 'utf8')).events.map((e) => e.id),
+);
+await page.goto(`${base}/?k=anime&t=${anime.toDate}&z=0.0688`, { waitUntil: 'networkidle' });
+await page.waitForTimeout(1400);
+const shownIds = await page.locator('.card').evaluateAll((els) =>
+	els.map((e) => e.getAttribute('data-id')),
+);
+assert(
+	'年表連動: 特集のイベントだけが描画される',
+	shownIds.length > 0 && shownIds.every((id) => id === null || animeIds.has(id)),
+	`shown=${shownIds.length} 外部=${shownIds.filter((id) => id && !animeIds.has(id)).length}`,
+);
+assert(
+	'年表連動: 特集バナーが出る',
+	(await page.locator('.collection-banner .cb-title').textContent()) === anime.title,
+);
+
+// 特集の収録イベントはimportanceを低く振ってあるため、LODを外さないと1件も出ない。
+// 可視範囲に入る収録イベントが実際に全部描かれることを確かめる（低importance分も含めて）
+const breaking = JSON.parse(readFileSync('static/data/collections/breaking.json', 'utf8'));
+await page.goto(`${base}/?k=breaking&t=${breaking.toDate}&z=0.1396`, { waitUntil: 'networkidle' });
+await page.waitForTimeout(1500);
+const shownBreaking = await page.locator('.card').evaluateAll((els) =>
+	els.map((e) => e.getAttribute('data-id')),
+);
+const breakingIds = new Set(breaking.events.map((e) => e.id));
+assert(
+	'年表連動: importanceの低い収録イベントもLODで消えない',
+	shownBreaking.length > 0 && shownBreaking.every((id) => id === null || breakingIds.has(id)),
+	`shown=${shownBreaking.length}`,
+);
+
+// 14. 年表連動: バナーの解除でkが消え通常表示に戻る
+await page.locator('.collection-banner .cb-clear').click();
+await page.waitForTimeout(700);
+assert(
+	'年表連動: 解除でURLからkが消える',
+	!new URL(page.url()).searchParams.has('k'),
+	`url=${page.url()}`,
+);
+assert('年表連動: 解除後は特集バナーが消える', (await page.locator('.collection-banner').count()) === 0);
+
+// 15. ヘッダーの特集導線（320pxでも溢れない）
+await page.setViewportSize({ width: 320, height: 640 });
+await page.goto(base + '/', { waitUntil: 'networkidle' });
+await page.waitForTimeout(400);
+assert('ヘッダー: 特集へのリンクがある', (await page.locator('.nav-link[href="/c"]').count()) === 1);
+const narrowOverflow = await page.evaluate(() => {
+	const header = document.querySelector('.site-header');
+	const box = header.getBoundingClientRect();
+	const pad = parseFloat(getComputedStyle(header).paddingRight);
+	const bad = [];
+	for (const el of header.querySelectorAll('.brand, .nav-link, .tools, .coverage')) {
+		const r = el.getBoundingClientRect();
+		if (r.right > box.right - pad + 1) bad.push(`${el.className}:${Math.round(r.right)}`);
+	}
+	return bad;
+});
+assert(
+	'狭幅320px: 特集リンク追加後もヘッダーが溢れない',
+	narrowOverflow.length === 0,
+	narrowOverflow.join(' '),
 );
 
 await browser.close();

@@ -62,6 +62,36 @@ export interface NewsEvent {
 	related?: RelatedRef[];
 }
 
+/**
+ * 特集（テーマ別にイベントを束ねた読み物）のメタ情報。
+ * content/collections/<slug>.yaml 由来で、static/data/collections.json に載る。
+ */
+export interface CollectionMeta {
+	slug: string;
+	title: string;
+	/** 一覧カードと本文冒頭に出す1〜2文 */
+	lead: string;
+	/** meta description 用 */
+	description: string;
+	/** スプライトの symbol id */
+	icon?: string;
+	count: number;
+	/** 収録イベントの最古/最新の日付（ISO） */
+	fromDate: string;
+	toDate: string;
+}
+
+/** static/data/collections/<slug>.json の中身。メタ + 収録イベント本体（日付昇順） */
+export interface CollectionDetail extends CollectionMeta {
+	events: NewsEvent[];
+}
+
+/** static/data/collections.json。一覧と、イベントid→所属slugの逆引き */
+export interface CollectionsIndex {
+	collections: CollectionMeta[];
+	byEvent: Record<string, string[]>;
+}
+
 /** 遅延ロード用チャンク（基本は十年、件数が多い十年は5年に分割） */
 export interface ChunkMeta {
 	key: string;

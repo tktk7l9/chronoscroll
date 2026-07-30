@@ -3,18 +3,14 @@
 	import BookLinks from '$lib/components/BookLinks.svelte';
 	import BrandMark from '$lib/components/BrandMark.svelte';
 	import SponsorSlot from '$lib/components/SponsorSlot.svelte';
+	import { formatEventDate } from '$lib/coverage';
 	import { CATEGORY_LABELS, REGION_LABELS } from '$lib/types';
 	import { formatWareki } from '$lib/wareki';
 
 	let { data } = $props();
 
 	const ev = $derived(data.ev);
-	const dateLabel = $derived.by(() => {
-		const [y, m, d] = ev.date.split('-');
-		if (ev.precision === 'year') return `${y}年`;
-		if (ev.precision === 'month') return `${y}年${Number(m)}月`;
-		return `${y}年${Number(m)}月${Number(d)}日`;
-	});
+	const dateLabel = $derived(formatEventDate(ev.date, ev.precision));
 	const wareki = $derived(formatWareki(ev.date));
 	const timelineUrl = $derived(`/?t=${ev.date}&z=8&e=${ev.id}`);
 	const canonical = $derived(`https://chronoscroll.vercel.app/e/${ev.id}`);
@@ -74,6 +70,22 @@
 		<p class="cta">
 			<a class="timeline-link" href={timelineUrl} data-sveltekit-reload>年表でこの位置を開く →</a>
 		</p>
+
+		{#if data.collections.length > 0}
+			<section class="collections">
+				<h2>収録されている特集</h2>
+				<ul>
+					{#each data.collections as c (c.slug)}
+						<li>
+							<a href="/c/{c.slug}">
+								<span class="ctitle">{c.title}</span>
+								<span class="ccount">全{c.count}件</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</section>
+		{/if}
 
 		{#if ev.related && ev.related.length > 0}
 			<section class="related">
@@ -254,6 +266,46 @@
 		border-radius: 999px;
 		font-size: 0.9rem;
 		font-weight: 600;
+	}
+
+	.collections {
+		margin: 0 0 26px;
+	}
+	.collections h2 {
+		margin: 0 0 8px;
+		font-size: 0.78rem;
+		color: var(--ink-muted);
+	}
+	.collections ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.collections a {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 8px;
+		padding: 6px 14px;
+		border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+		background: color-mix(in srgb, var(--accent) 8%, transparent);
+		border-radius: 999px;
+		text-decoration: none;
+		color: inherit;
+	}
+	.collections a:hover {
+		border-color: var(--accent);
+	}
+	.ctitle {
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+	.ccount {
+		font-size: 0.7rem;
+		color: var(--ink-muted);
+		font-variant-numeric: tabular-nums;
 	}
 
 	.related {

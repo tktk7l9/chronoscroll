@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatCount, formatJpDate } from './coverage.ts';
+import { formatCount, formatEventDate, formatJpDate } from './coverage.ts';
 
 describe('formatCount', () => {
 	it('3桁ごとに区切る', () => {
@@ -28,5 +28,19 @@ describe('formatJpDate', () => {
 	it('月日のゼロ埋めを外す', () => {
 		expect(formatJpDate('1964-10-10')).toBe('1964年10月10日');
 		expect(formatJpDate('2011-03-11')).toBe('2011年3月11日');
+	});
+});
+
+describe('formatEventDate', () => {
+	it('precisionがdayなら年月日まで出す', () => {
+		expect(formatEventDate('1963-01-01', 'day')).toBe('1963年1月1日');
+	});
+
+	it('precisionがmonthなら埋めた日を見せない', () => {
+		expect(formatEventDate('1950-10-01', 'month')).toBe('1950年10月');
+	});
+
+	it('precisionがyearなら年だけ出す', () => {
+		expect(formatEventDate('1975-01-01', 'year')).toBe('1975年');
 	});
 });

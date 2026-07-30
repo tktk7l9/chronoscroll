@@ -9,6 +9,7 @@
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import { formatCount, formatJpDate } from '$lib/coverage';
+	import { withCollection } from '$lib/filters';
 	import type { SearchHit } from '$lib/search';
 	import { timelineData } from '$lib/state/data.svelte';
 	import type { NewsEvent } from '$lib/types';
@@ -32,9 +33,18 @@
 	let highlightId = $state<string | null>(null);
 	let timeline = $state<ReturnType<typeof Timeline>>();
 	let routerReady = $state(false);
+	let collectionSlug = $state<string | null>(initial.collection);
 
 	const selected = $derived(selectedId !== null ? (timelineData.byId(selectedId) ?? null) : null);
 	const selectedBooks = $derived(selectedId !== null ? timelineData.booksById(selectedId) : []);
+	const selectedCollections = $derived(
+		selectedId !== null ? timelineData.collectionsByEvent(selectedId) : [],
+	);
+	const activeCollection = $derived(
+		collectionSlug !== null
+			? (timelineData.collections.find((c) => c.slug === collectionSlug) ?? null)
+			: null,
+	);
 
 	onMount(() => {
 		void timelineData.init();
@@ -52,7 +62,22 @@
 		}
 	});
 
-	// URL同期（表示位置・ズーム・フィルタ・選択）
+	// 特集の絞り込み。id集合は詳細JSON（イベント本体つき）から解決するので、
+	// これ1回の取得でチャンクを読まずに特集の全件が年表に並ぶ
+	$effect(() => {
+		const slug = collectionSlug;
+		if (slug === null) {
+			if (filter.collectionIds !== null) filter = withCollection(filter, null);
+			return;
+		}
+		void timelineData.loadCollection(slug).then((detail) => {
+			if (collectionSlug !== slug) return;
+			// 取得に失敗したら絞り込まない（年表は通常表示のまま）
+			filter = withCollection(filter, detail && new Set(detail.events.map((e) => e.id)));
+		});
+	});
+
+	// URL同期（表示位置・ズーム・フィルタ・選択・特集）
 	$effect(() => {
 		if (!routerReady) return;
 		const params = serializeUrlState({
@@ -61,6 +86,7 @@
 			filter,
 			query,
 			selectedId,
+			collection: collectionSlug,
 		});
 		const qs = params.toString();
 		replaceState(qs !== '' ? `?${qs}` : location.pathname, {});
@@ -111,11 +137,24 @@
 			<span class="brand-sub">歴史ニュース年表</span>
 		</a>
 		<div class="tools">
+			<!-- /c は csr=false の純静的ページなのでフルリロードで遷移する -->
+			<a class="nav-link" href="/c" data-sveltekit-reload>特集</a>
 			<SearchBox bind:query onjump={onJump} />
 			<ThemeToggle />
 		</div>
 	</div>
 	<div class="row filters">
+		{#if collectionSlug !== null}
+			<p class="collection-banner">
+				<span class="cb-label">特集</span>
+				<a class="cb-title" href="/c/{collectionSlug}" data-sveltekit-reload>
+					{activeCollection ? activeCollection.title : collectionSlug}
+				</a>
+				<button type="button" class="cb-clear" onclick={() => (collectionSlug = null)}>
+					解除
+				</button>
+			</p>
+		{/if}
 		<FilterBar bind:filter />
 	</div>
 	<p class="coverage">
@@ -152,6 +191,7 @@
 <DetailDialog
 	ev={selected}
 	books={selectedBooks}
+	collections={selectedCollections}
 	onclose={() => (selectedId = null)}
 	onselectrelated={(id) => (selectedId = id)}
 />
@@ -197,6 +237,69 @@
 	}
 	.row.filters {
 		justify-content: flex-start;
+		gap: 10px;
+		/* FilterBar自体が横スクロールするので、この行は決して折り返さない
+		   （折り返すとヘッダー高が変わり main の padding-top とズレる） */
+		flex-wrap: nowrap;
+		min-width: 0;
+	}
+
+	.nav-link {
+		flex: none;
+		font-size: 0.78rem;
+		color: var(--ink-muted);
+		text-decoration: none;
+		padding: 3px 2px;
+	}
+	.nav-link:hover {
+		color: var(--accent);
+	}
+
+	.collection-banner {
+		flex: none;
+		display: flex;
+		align-items: center;
+		gap: 7px;
+		margin: 0;
+		padding: 3px 4px 3px 8px;
+		border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--accent) 10%, transparent);
+		font-size: 0.75rem;
+		max-width: 62%;
+	}
+	.cb-label {
+		flex: none;
+		font-size: 0.65rem;
+		font-weight: 700;
+		color: var(--accent);
+		letter-spacing: 0.04em;
+	}
+	.cb-title {
+		color: inherit;
+		text-decoration: none;
+		font-weight: 600;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.cb-title:hover {
+		text-decoration: underline;
+	}
+	.cb-clear {
+		flex: none;
+		padding: 2px 9px;
+		font-family: inherit;
+		font-size: 0.68rem;
+		color: var(--ink-muted);
+		background: var(--bg-elevated);
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		cursor: pointer;
+	}
+	.cb-clear:hover {
+		color: var(--ink);
+		border-color: var(--line-strong);
 	}
 	.brand {
 		display: inline-flex;

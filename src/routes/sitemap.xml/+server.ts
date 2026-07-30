@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync } from 'node:fs';
-import type { NewsEvent } from '$lib/types';
+import type { CollectionsIndex, NewsEvent } from '$lib/types';
 
 export const prerender = true;
 
@@ -12,7 +12,15 @@ export function GET(): Response {
 			ids.push(e.id);
 		}
 	}
-	const urls = [`${BASE}/`, ...ids.map((id) => `${BASE}/e/${id}`)];
+	const { collections } = JSON.parse(
+		readFileSync('static/data/collections.json', 'utf8'),
+	) as CollectionsIndex;
+	const urls = [
+		`${BASE}/`,
+		`${BASE}/c`,
+		...collections.map((c) => `${BASE}/c/${c.slug}`),
+		...ids.map((id) => `${BASE}/e/${id}`),
+	];
 	const xml =
 		'<?xml version="1.0" encoding="UTF-8"?>' +
 		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +

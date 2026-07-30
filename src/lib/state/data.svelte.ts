@@ -3,8 +3,16 @@
  * overview を初期ロードし、可視範囲に応じて十年チャンクを遅延ロードする。
  */
 import { chunkKeysInRange } from '../chunks.ts';
+import { collectionDetailPath } from '../collections.ts';
 import { dayOf } from '../timescale.ts';
-import type { BookRef, IndexMeta, NewsEvent } from '../types.ts';
+import type {
+	BookRef,
+	CollectionDetail,
+	CollectionMeta,
+	CollectionsIndex,
+	IndexMeta,
+	NewsEvent,
+} from '../types.ts';
 import { toPoints, type EventPoint } from '../viewport.ts';
 
 export class TimelineData {
@@ -12,11 +20,15 @@ export class TimelineData {
 	/** チャンクロードごとに増える。points再計算のトリガ */
 	version = $state(0);
 	loadError = $state<string | null>(null);
+	/** 特集の一覧（メタのみ）。取得前は空配列 */
+	collections = $state<CollectionMeta[]>([]);
 
 	#events = new Map<string, NewsEvent>();
 	#loaded = new Set<string>();
 	#pending = new Set<string>();
 	#books: Record<string, BookRef[]> = {};
+	#collectionsByEvent: Record<string, string[]> = {};
+	#collectionDetails = new Map<string, CollectionDetail>();
 
 	readonly points: EventPoint[] = $derived.by(() => {
 		void this.version;
@@ -39,17 +51,49 @@ export class TimelineData {
 		} catch (e) {
 			this.loadError = String(e);
 		}
-		// books.json は年表の主データとは独立に取得する。失敗してもloadErrorは発火させない
-		// （書籍リンクが出ないだけに留め、年表全体を巻き込んで真っ白にしない）
+		// books.json / collections.json は年表の主データとは独立に取得する。
+		// 失敗してもloadErrorは発火させない（該当の飾りが出ないだけに留め、
+		// 年表全体を巻き込んで真っ白にしない）
 		void fetchJson<Record<string, BookRef[]>>('/data/books.json')
 			.then((books) => {
 				this.#books = books;
+			})
+			.catch(() => {});
+		void fetchJson<CollectionsIndex>('/data/collections.json')
+			.then((index) => {
+				this.#collectionsByEvent = index.byEvent;
+				this.collections = index.collections;
 			})
 			.catch(() => {});
 	}
 
 	booksById(id: string): BookRef[] {
 		return this.#books[id] ?? [];
+	}
+
+	/** このイベントが収録されている特集（未取得なら空配列） */
+	collectionsByEvent(id: string): CollectionMeta[] {
+		const slugs = this.#collectionsByEvent[id] ?? [];
+		return slugs
+			.map((slug) => this.collections.find((c) => c.slug === slug))
+			.filter((c): c is CollectionMeta => c !== undefined);
+	}
+
+	/**
+	 * 特集の収録イベントを取り込む。詳細JSONに本体が全件入っているので、
+	 * これ1回でチャンクを読まずに特集の絞り込み表示ができる。
+	 */
+	async loadCollection(slug: string): Promise<CollectionDetail | null> {
+		const cached = this.#collectionDetails.get(slug);
+		if (cached) return cached;
+		try {
+			const detail = await fetchJson<CollectionDetail>(collectionDetailPath(slug));
+			this.#collectionDetails.set(slug, detail);
+			this.#addEvents(detail.events);
+			return detail;
+		} catch {
+			return null;
+		}
 	}
 
 	/** 可視範囲+バッファに必要なチャンクをロードする（多重ロード防止付き） */

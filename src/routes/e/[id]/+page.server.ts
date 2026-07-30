@@ -4,7 +4,7 @@
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
-import type { BookRef, NewsEvent } from '$lib/types';
+import type { BookRef, CollectionMeta, CollectionsIndex, NewsEvent } from '$lib/types';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
 export const prerender = true;
@@ -18,6 +18,7 @@ interface Cache {
 
 let cache: Cache | null = null;
 let booksIndex: Record<string, BookRef[]> | null = null;
+let collectionsIndex: CollectionsIndex | null = null;
 
 function loadAll(): Cache {
 	if (!cache) {
@@ -44,6 +45,19 @@ function loadBooks(): Record<string, BookRef[]> {
 	return booksIndex;
 }
 
+/** このイベントを収録している特集（テーマ側への内部リンクを張るため） */
+function loadCollections(id: string): CollectionMeta[] {
+	if (!collectionsIndex) {
+		collectionsIndex = JSON.parse(
+			readFileSync('static/data/collections.json', 'utf8'),
+		) as CollectionsIndex;
+	}
+	const slugs = collectionsIndex.byEvent[id] ?? [];
+	return slugs
+		.map((slug) => collectionsIndex!.collections.find((c) => c.slug === slug))
+		.filter((c): c is CollectionMeta => c !== undefined);
+}
+
 export const entries: EntryGenerator = () => [...loadAll().byId.keys()].map((id) => ({ id }));
 
 export const load: PageServerLoad = ({ params }) => {
@@ -54,5 +68,11 @@ export const load: PageServerLoad = ({ params }) => {
 	const pick = (e: NewsEvent | undefined) =>
 		e ? { id: e.id, title: e.title, date: e.date } : null;
 	const books = loadBooks()[ev.id] ?? [];
-	return { ev, books, prev: pick(sorted[i - 1]), next: pick(sorted[i + 1]) };
+	return {
+		ev,
+		books,
+		collections: loadCollections(ev.id),
+		prev: pick(sorted[i - 1]),
+		next: pick(sorted[i + 1]),
+	};
 };

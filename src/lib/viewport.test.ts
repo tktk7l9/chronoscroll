@@ -63,6 +63,7 @@ describe('queryVisible', () => {
 		const got = queryVisible(pts, dayOf('2001-01-01'), dayOf('1999-01-01'), 0, {
 			regions: new Set(['world' as const]),
 			categories: null,
+			collectionIds: null,
 		});
 		expect(got.map((p) => p.ev.id)).toEqual(['w']);
 	});
@@ -82,7 +83,7 @@ describe('queryVisible (pinned)', () => {
 			dayOf('2026-01-01'),
 			dayOf('1899-01-01'),
 			60,
-			{ regions: new Set(['world' as const]), categories: null },
+			{ regions: new Set(['world' as const]), categories: null, collectionIds: null },
 			'd',
 		);
 		expect(got.map((p) => p.ev.id)).toContain('d');
