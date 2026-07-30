@@ -223,6 +223,27 @@ assert(
 	(await page.locator('a.timeline-link').count()) === 1,
 );
 
+// 個別ページのCTA（?t=&z=&e=）で年表を開くと詳細が開く。
+// ディープリンクではデータ到着前に selectedId が確定するため、
+// data.byId() が version を追跡していないと永久にnullのままになる（退行の再発防止）
+const ctaHref = await page.locator('a.timeline-link').getAttribute('href');
+await page.goto(base + ctaHref, { waitUntil: 'networkidle' });
+await page.waitForTimeout(1200);
+assert(
+	'ディープリンク: ?e=で詳細ダイアログが開く',
+	await page.evaluate(() => document.querySelector('dialog')?.open ?? false),
+	`href=${ctaHref}`,
+);
+
+// 特集に収録されたイベントを?e=で直接開くと、ダイアログにも特集チップが出る
+// （collections.json は年表の主データより後に届くので、到着後に再評価される必要がある）
+await page.goto(`${base}/?t=1979-04-07&z=8&e=1979-04-07-a6ab5dff`, { waitUntil: 'networkidle' });
+await page.waitForTimeout(1600);
+assert(
+	'詳細ダイアログ: 収録されている特集チップが出る',
+	(await page.locator('dialog .collections a[href="/c/anime"]').count()) === 1,
+);
+
 // 10. 特集: 一覧ページ（prerender・JSなし）
 const collectionsIndex = JSON.parse(readFileSync('static/data/collections.json', 'utf8'));
 await page.goto(`${base}/c`, { waitUntil: 'networkidle' });

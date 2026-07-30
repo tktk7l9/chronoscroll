@@ -6,9 +6,9 @@
 
 ![概観ズーム: 注目ニュースとSVGピクトグラム](docs/screenshots/overview.png)
 
-| 詳細ダイアログ | ダークモード（モバイル） |
-|---|---|
-| ![詳細ダイアログ](docs/screenshots/detail.png) | ![ダークモード](docs/screenshots/dark-mobile.png) |
+| 詳細ダイアログ | 特集ページ | ダークモード（モバイル） |
+|---|---|---|
+| ![詳細ダイアログ](docs/screenshots/detail.png) | ![特集ページ](docs/screenshots/collection.png) | ![ダークモード](docs/screenshots/dark-mobile.png) |
 
 ## 特徴
 
@@ -67,5 +67,5 @@ npm run data:build # データ再生成（Wikipedia取得・要ネットワー�
 - Lighthouse: **mobile 99/100/100/100・desktop 100/100/100/100**（本番URL実測 2026-07-12、LCP 2.0s・CLS 0）
 - Mozilla Observatory: **A+（score 120・10/10）**
 - テスト: 287件 / `src/lib`・`pipeline/lib` 純関数層 カバレッジ100%（CIゲート）
-- 実ブラウザスモーク: 35シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
+- 実ブラウザスモーク: 37シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
 - npm audit: 0件

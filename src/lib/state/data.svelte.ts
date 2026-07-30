@@ -57,22 +57,31 @@ export class TimelineData {
 		void fetchJson<Record<string, BookRef[]>>('/data/books.json')
 			.then((books) => {
 				this.#books = books;
+				this.version++;
 			})
 			.catch(() => {});
 		void fetchJson<CollectionsIndex>('/data/collections.json')
 			.then((index) => {
 				this.#collectionsByEvent = index.byEvent;
 				this.collections = index.collections;
+				this.version++;
 			})
 			.catch(() => {});
 	}
 
 	booksById(id: string): BookRef[] {
+		void this.version;
 		return this.#books[id] ?? [];
 	}
 
-	/** このイベントが収録されている特集（未取得なら空配列） */
+	/**
+	 * このイベントが収録されている特集（未取得なら空配列）。
+	 * version を先に読むのが必須。#collectionsByEvent が素のオブジェクトである上に、
+	 * 未取得時は slugs が空で .map のコールバックが走らず this.collections も読まれないため、
+	 * 何も追跡せず collections.json 到着後も再評価されない。
+	 */
 	collectionsByEvent(id: string): CollectionMeta[] {
+		void this.version;
 		const slugs = this.#collectionsByEvent[id] ?? [];
 		return slugs
 			.map((slug) => this.collections.find((c) => c.slug === slug))
@@ -114,7 +123,14 @@ export class TimelineData {
 		}
 	}
 
+	/**
+	 * イベントを引く。#events は素のMapで追跡できないため version を読む。
+	 * これが無いと `$derived(data.byId(id))` がチャンク到着で再評価されず、
+	 * ?e=<id> のディープリンク（個別ページの「年表でこの位置を開く」）で
+	 * 詳細が永久にnullのままになる。
+	 */
 	byId(id: string): NewsEvent | undefined {
+		void this.version;
 		return this.#events.get(id);
 	}
 

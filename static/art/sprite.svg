@@ -1015,13 +1015,16 @@
 		<path d="M24 67q-3-6-2-13M72 67q3-6 2-13" stroke-width="2.5" stroke-dasharray="3 4" opacity="0.5"/>
 	</symbol>
 
-	<!-- 特集カバー 観葉植物の歴史: 鉢と2枚の葉 -->
+	<!-- 特集カバー 観葉植物の歴史: 鉢と切れ込みのある葉。
+	     切れ込みを入れて既存の art-abe-shooting（献花）と silhouette が混ざらないようにする -->
 	<symbol id="art-collection-houseplant" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-		<path d="M33 63h30l-4 21H37z" fill="currentColor" fill-opacity="0.12"/>
-		<path d="M28 63h40" stroke-width="3.5"/>
-		<path d="M48 63V33"/>
-		<path d="M48 47c-12 0-19-6-19-15 11-2 19 5 19 15z" fill="currentColor" fill-opacity="0.12"/>
-		<path d="M48 41c12 0 19-6 19-15-11-2-19 5-19 15z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M34 64h28l-4 20H38z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M29 64h38" stroke-width="3.5"/>
+		<path d="M48 64V34"/>
+		<path d="M48 48c-12 0-19-6-19-15 11-2 19 5 19 15z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M48 42c12 0 19-6 19-15-11-2-19 5-19 15z" fill="currentColor" fill-opacity="0.12"/>
+		<path d="M34 36h9M31 43h11" stroke-width="2.5" opacity="0.6"/>
+		<path d="M62 30h-9M65 37H54" stroke-width="2.5" opacity="0.6"/>
 	</symbol>
 
 	<!-- ================= 特集の収録イベント ================= -->
