@@ -11,6 +11,8 @@
 
 	const c = $derived(data.detail);
 	const canonical = $derived(`https://chronoscroll.vercel.app/c/${c.slug}`);
+	// 特集ごとのOGP画像（scripts/gen-ogp.mjs が実データから生成してコミットしてある）
+	const ogImage = $derived(`https://chronoscroll.vercel.app/ogp/c-${c.slug}.png`);
 	const spanLabel = $derived(`${c.fromDate.slice(0, 4)}年〜${c.toDate.slice(0, 4)}年`);
 	// 年表側は特集を ?k=<slug> で絞り込む。期間が画面に収まる初期ズームも一緒に渡す
 	const onTimeline = $derived(timelineHref(c.slug, c.fromDate, c.toDate));
@@ -24,7 +26,7 @@
 	<meta property="og:title" content="{c.title} | chronoscroll" />
 	<meta property="og:description" content={c.description} />
 	<meta property="og:url" content={canonical} />
-	<meta property="og:image" content="https://chronoscroll.vercel.app/ogp.png" />
+	<meta property="og:image" content={ogImage} />
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>

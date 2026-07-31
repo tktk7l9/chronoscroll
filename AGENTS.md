@@ -19,6 +19,10 @@
   `static/data/collections/<slug>.json`（収録イベント本体つき）の2系統。
   年表側は `?k=<slug>` で絞り込む。**特集の絞り込み中はLODを効かせない**（低importanceに
   振ってある収録イベントが閾値に負けて1件も出なくなるため。Timeline.svelteの`threshold`参照）。
+- OGP画像は**実データから生成してコミットする**（配信時に生成しない）。`npm run build` のあと
+  `npm run ogp` で `static/ogp.png`（テンプレ: `static/ogp-src.html`）と特集ごとの
+  `static/ogp/c-<slug>.png`（テンプレ: `static/ogp-collection-src.html`・collections.jsonから描画）を再生成。
+  **特集を追加/改題したら必ず再生成する**（画像が無いとSNS共有時に404になる）。
 - `src/lib/sponsor.ts`の`CURRENT_SPONSOR`が自前スポンサー枠の設定値（未契約時は`null`で非表示）。
 
 ## Svelte 5 の注意（訓練データより新しい）

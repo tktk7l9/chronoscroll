@@ -254,11 +254,27 @@ assert(
 	`cards=${cardCount} expected=${collectionsIndex.collections.length}`,
 );
 
+// 10b. 特集: 全特集にOGP画像が存在する（SNS共有時に404にならない）
+for (const c of collectionsIndex.collections) {
+	const res = await page.request.get(`${base}/ogp/c-${c.slug}.png`);
+	assert(
+		`OGP: /ogp/c-${c.slug}.png が配信される`,
+		res.status() === 200,
+		`status=${res.status()}`,
+	);
+}
+
 // 11. 特集: 個別ページが年代順の読み物になっている
 const anime = collectionsIndex.collections.find((c) => c.slug === 'anime');
 await page.goto(`${base}/c/anime`, { waitUntil: 'networkidle' });
 const cTitle = await page.locator('article h1').textContent();
 assert('特集ページ: 見出しが出る', cTitle === anime.title, `h1=${cTitle}`);
+assert(
+	'特集ページ: og:imageが特集ごとの画像を指す',
+	(await page.locator('meta[property="og:image"]').getAttribute('content'))?.endsWith(
+		'/ogp/c-anime.png',
+	),
+);
 const itemCount = await page.locator('.items li').count();
 assert(
 	'特集ページ: 収録件数どおりの項目が並ぶ',

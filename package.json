@@ -13,7 +13,8 @@
 		"typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && tsc --noEmit -p pipeline",
 		"test": "vitest run",
 		"coverage": "vitest run --coverage",
-		"data:build": "tsx pipeline/run/build.ts"
+		"data:build": "tsx pipeline/run/build.ts",
+		"ogp": "node scripts/gen-ogp.mjs"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.10",
