@@ -91,12 +91,14 @@
 
 			{#if ev.image}
 				<figure>
+					<!-- モーダルを開いた時点で必ず可視なので lazy にはしない。
+					     デコードを別スレッドに逃がして開閉アニメーションを止めない -->
 					<img
 						src={ev.image.src}
 						width={ev.image.width}
 						height={ev.image.height}
 						alt=""
-						loading="lazy"
+						decoding="async"
 					/>
 					<figcaption>
 						<a href={ev.image.credit} target="_blank" rel="noopener noreferrer">
@@ -294,16 +296,18 @@
 	figure {
 		margin: 0 0 14px;
 	}
-	/* 幅を広げたぶん、画像は引き伸ばさず実寸内で中央に置く（左右に余白帯を作らない） */
+	/* width:100% は「読み込み前に箱を確保する」ための指定。
+	   width/height属性の比率から高さが確定するので、画像到着で本文が飛ばない。
+	   width:auto にすると縦横とも不定になり箱が0pxに潰れる（＝ガタつきの原因）。
+	   実際の見た目は object-fit が決める: scale-down で小さい画像は拡大せず中央に置き、
+	   はみ出す画像だけ縮める。余った領域は背景を敷かないので余白帯として見えない */
 	img {
 		display: block;
-		width: auto;
+		width: 100%;
 		height: auto;
-		max-width: 100%;
 		max-height: 340px;
-		margin: 0 auto;
+		object-fit: scale-down;
 		border-radius: 8px;
-		background: color-mix(in srgb, var(--ink) 6%, transparent);
 	}
 	figcaption {
 		margin-top: 4px;

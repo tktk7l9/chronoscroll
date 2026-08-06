@@ -138,6 +138,33 @@ assert(
 	`${scrollBefore} -> ${await page.evaluate(() => window.scrollY)}`,
 );
 
+// 3b. 画像の枠を読み込み前に確保しているか。
+// imgのCSSを width:auto 系にすると縦横とも不定になり箱が0pxに潰れ、
+// 画像の到着で本文が一気に下へ飛ぶ（ガタつく）。画像を握って未到着の状態で測る
+const imageEventId = await page.evaluate(async () => {
+	const evs = await (await fetch('/data/overview.json')).json();
+	return (evs.events ?? evs).find((e) => e.image && e.image.width >= 400 && e.image.height >= 300)?.id;
+});
+await page.route('**upload.wikimedia.org**', async (route) => {
+	await new Promise((r) => setTimeout(r, 8000));
+	// 計測後に unroute / 画面遷移するので、その時点で握っていたリクエストは捨てて良い
+	await route.abort().catch(() => {});
+});
+await page.goto(base + `/?e=${imageEventId}`, { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(1800);
+const reserved = await page.evaluate(() => {
+	const img = document.querySelector('dialog img');
+	if (!img) return null;
+	const r = img.getBoundingClientRect();
+	return { w: Math.round(r.width), h: Math.round(r.height), loaded: img.complete };
+});
+assert(
+	'詳細: 画像の枠を読み込み前に確保する（到着で本文が飛ばない）',
+	reserved && !reserved.loaded && reserved.w > 100 && reserved.h > 100,
+	`id=${imageEventId} ${JSON.stringify(reserved)}`,
+);
+await page.unroute('**upload.wikimedia.org**');
+
 // 4. フィルタ: 災害のみ → 表示カードが全て災害カテゴリ
 await page.goto(base + '/?t=1923-09&z=2&c=disaster', { waitUntil: 'networkidle' });
 await page.waitForTimeout(1200);
