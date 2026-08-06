@@ -85,11 +85,57 @@ assert(
 	'詳細: URLにeが反映される',
 	(await page.evaluate(() => location.search)).includes('e='),
 );
+
+// モーダル表示中は背景（年表）が動かないこと。
+// ①バックドロップ上のホイール ②モーダル内スクロールの末端からの連鎖 ③⌘+ホイールのズーム
+const dlgBox = await page.evaluate(() => {
+	const r = document.querySelector('dialog').getBoundingClientRect();
+	return { x: r.x, y: r.y, w: r.width, h: r.height };
+});
+assert('詳細: モーダルが十分に広い', dlgBox.w >= 780, `w=${dlgBox.w}`);
+
+const scrollBefore = await page.evaluate(() => window.scrollY);
+await page.mouse.move(60, 400);
+await page.mouse.wheel(0, 600);
+await page.waitForTimeout(300);
+await page.mouse.move(Math.round(dlgBox.x + dlgBox.w / 2), Math.round(dlgBox.y + dlgBox.h / 2));
+for (let i = 0; i < 2; i++) {
+	await page.mouse.wheel(0, 3000);
+	await page.waitForTimeout(300);
+}
+const scrollAfter = await page.evaluate(() => window.scrollY);
+assert(
+	'詳細: 表示中は背景がスクロールしない',
+	scrollAfter === scrollBefore,
+	`${scrollBefore} -> ${scrollAfter}`,
+);
+
+const zoomHBefore = await page.evaluate(
+	() => document.querySelector('.timeline').getBoundingClientRect().height,
+);
+await page.keyboard.down('Meta');
+await page.mouse.wheel(0, -300);
+await page.keyboard.up('Meta');
+await page.waitForTimeout(400);
+const zoomHAfter = await page.evaluate(
+	() => document.querySelector('.timeline').getBoundingClientRect().height,
+);
+assert(
+	'詳細: 表示中は⌘+ホイールで背景がズームしない',
+	zoomHAfter === zoomHBefore,
+	`${zoomHBefore} -> ${zoomHAfter}`,
+);
+
 await page.keyboard.press('Escape');
 await page.waitForTimeout(300);
 assert(
 	'詳細: Escで閉じてURLからeが消える',
 	!(await page.evaluate(() => location.search)).includes('e='),
+);
+assert(
+	'詳細: 閉じた後もスクロール位置が保たれる',
+	(await page.evaluate(() => window.scrollY)) === scrollBefore,
+	`${scrollBefore} -> ${await page.evaluate(() => window.scrollY)}`,
 );
 
 // 4. フィルタ: 災害のみ → 表示カードが全て災害カテゴリ

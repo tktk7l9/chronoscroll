@@ -202,10 +202,16 @@
 		return pxPerDay;
 	}
 
+	/** 詳細モーダル表示中は年表の操作を受け付けない（背面が動いて見えるため） */
+	function modalOpen(): boolean {
+		return document.querySelector('dialog[open]') !== null;
+	}
+
 	// ctrl/⌘ + ホイールでズーム（passive:false が必要なので手動で登録）
 	$effect(() => {
 		const onWheel = (e: WheelEvent) => {
 			if (!e.ctrlKey && !e.metaKey) return;
+			if (modalOpen()) return;
 			e.preventDefault();
 			applyZoom(pxPerDay * Math.exp(-e.deltaY * 0.0022), e.clientY);
 		};
@@ -224,7 +230,7 @@
 	}
 	$effect(() => {
 		const start = (e: TouchEvent) => {
-			if (e.touches.length === 2) pinch = measure(e);
+			if (e.touches.length === 2 && !modalOpen()) pinch = measure(e);
 		};
 		const move = (e: TouchEvent) => {
 			if (!pinch || e.touches.length !== 2) return;

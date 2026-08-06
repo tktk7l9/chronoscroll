@@ -87,6 +87,16 @@ body {
 	padding: 0;
 }
 
+html {
+	/* モーダル表示中にスクロールバーが消えても横幅が動かないよう常に溝を確保する */
+	scrollbar-gutter: stable;
+}
+
+/* モーダル表示中は背面の年表を固定する（DetailDialogが付け外しする） */
+html.modal-open {
+	overflow: hidden;
+}
+
 body {
 	background: var(--bg);
 	color: var(--ink);

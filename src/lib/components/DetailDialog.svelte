@@ -34,6 +34,17 @@
 		}
 	});
 
+	// showModal() は背面ページのスクロールを止めない（バックドロップ上のホイールが素通りする）。
+	// 表示中は html を overflow:hidden にして年表を固定する。スクロール位置は保たれる。
+	// 別のできごとへ切り替えても再実行しないよう、boolean を派生させて依存にする
+	const isOpen = $derived(ev !== null);
+	$effect(() => {
+		if (!isOpen) return;
+		const root = document.documentElement;
+		root.classList.add('modal-open');
+		return () => root.classList.remove('modal-open');
+	});
+
 	/** 閉幕アニメーションを流してから close する（reduced-motion時は即時） */
 	function requestClose(): void {
 		if (!dialog?.open || closing) return;
@@ -154,8 +165,10 @@
 
 <style>
 	dialog {
-		width: min(92vw, 600px);
+		width: min(94vw, 820px);
 		max-height: 86dvh;
+		/* 中身を最後までスクロールしても背面へ連鎖させない */
+		overscroll-behavior: contain;
 		padding: 0;
 		border: 1px solid var(--line);
 		border-radius: 14px;
@@ -229,7 +242,7 @@
 
 	article {
 		position: relative;
-		padding: 26px 28px 22px;
+		padding: 28px 34px 24px;
 		--cat-color: var(--cat-society);
 	}
 	article[data-cat='politics'] { --cat-color: var(--cat-politics); }
@@ -281,12 +294,14 @@
 	figure {
 		margin: 0 0 14px;
 	}
+	/* 幅を広げたぶん、画像は引き伸ばさず実寸内で中央に置く（左右に余白帯を作らない） */
 	img {
 		display: block;
-		width: 100%;
+		width: auto;
 		height: auto;
-		max-height: 320px;
-		object-fit: contain;
+		max-width: 100%;
+		max-height: 340px;
+		margin: 0 auto;
 		border-radius: 8px;
 		background: color-mix(in srgb, var(--ink) 6%, transparent);
 	}
