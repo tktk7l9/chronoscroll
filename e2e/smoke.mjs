@@ -141,16 +141,17 @@ assert(
 // 3b. 画像の枠を読み込み前に確保しているか。
 // imgのCSSを width:auto 系にすると縦横とも不定になり箱が0pxに潰れ、
 // 画像の到着で本文が一気に下へ飛ぶ（ガタつく）。画像を握って未到着の状態で測る
-const imageEventId = await page.evaluate(async () => {
+const imageEvent = await page.evaluate(async () => {
 	const evs = await (await fetch('/data/overview.json')).json();
-	return (evs.events ?? evs).find((e) => e.image && e.image.width >= 400 && e.image.height >= 300)?.id;
+	const e = (evs.events ?? evs).find((x) => x.image && x.image.width >= 400 && x.image.height >= 300);
+	return { id: e?.id, date: e?.date };
 });
 await page.route('**upload.wikimedia.org**', async (route) => {
 	await new Promise((r) => setTimeout(r, 8000));
 	// 計測後に unroute / 画面遷移するので、その時点で握っていたリクエストは捨てて良い
 	await route.abort().catch(() => {});
 });
-await page.goto(base + `/?e=${imageEventId}`, { waitUntil: 'domcontentloaded' });
+await page.goto(base + `/?e=${imageEvent.id}`, { waitUntil: 'domcontentloaded' });
 await page.waitForTimeout(1800);
 const reserved = await page.evaluate(() => {
 	const img = document.querySelector('dialog img');
@@ -161,8 +162,50 @@ const reserved = await page.evaluate(() => {
 assert(
 	'詳細: 画像の枠を読み込み前に確保する（到着で本文が飛ばない）',
 	reserved && !reserved.loaded && reserved.w > 100 && reserved.h > 100,
-	`id=${imageEventId} ${JSON.stringify(reserved)}`,
+	`id=${imageEvent.id} ${JSON.stringify(reserved)}`,
 );
+await page.unroute('**upload.wikimedia.org**');
+
+// 3c. ホバー先読み: 詳細を開く前に画像を取っておく（開いた直後の空白待ちを消す）。
+// 実回線1.6Mbps相当での実測はクリック→表示 1726ms → 174ms(1.5秒ホバー時)。
+// 外部への実通信に依存しないよう、画像は1pxのPNGを返して回数だけ数える
+const PNG_1PX = Buffer.from(
+	'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+	'base64',
+);
+let imageHits = 0;
+await page.route('**upload.wikimedia.org**', async (route) => {
+	imageHits++;
+	await route.fulfill({ status: 200, contentType: 'image/png', body: PNG_1PX }).catch(() => {});
+});
+await page.goto(base + `/?t=${imageEvent.date}&z=8`, { waitUntil: 'networkidle' });
+const cardSel = `[data-id="${imageEvent.id}"] .hit`;
+await page.waitForSelector(cardSel, { timeout: 20000 });
+await page.waitForTimeout(500);
+
+// 年表を横切っただけのカードまで取ると通信の無駄なので、留まるまでは動かない
+imageHits = 0;
+await page.hover(cardSel);
+await page.waitForTimeout(60);
+await page.mouse.move(5, 5);
+await page.waitForTimeout(400);
+assert('先読み: 横切っただけでは取りに行かない', imageHits === 0, `hits=${imageHits}`);
+
+await page.hover(cardSel);
+await page.waitForTimeout(500);
+assert('先読み: ホバーが続くと画像を先に取りに行く', imageHits === 1, `hits=${imageHits}`);
+
+await page.click(cardSel);
+await page.waitForTimeout(150);
+assert(
+	'先読み: 開いた時には画像が載っている',
+	await page.evaluate(() => {
+		const img = document.querySelector('dialog img');
+		return !!img && img.complete && img.naturalWidth > 0;
+	}),
+);
+await page.keyboard.press('Escape');
+await page.waitForTimeout(200);
 await page.unroute('**upload.wikimedia.org**');
 
 // 4. フィルタ: 災害のみ → 表示カードが全て災害カテゴリ

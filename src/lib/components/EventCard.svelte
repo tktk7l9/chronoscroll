@@ -1,3 +1,15 @@
+<script module lang="ts">
+	import { createImagePreloader, prefersReducedData, type ConnectionLike } from '../preload.ts';
+
+	// カード間で共有する（同じ画像を二度取りに行かない・予約は常に1件）
+	const preloader = createImagePreloader((url) => {
+		new Image().src = url;
+	}, {
+		skip: () =>
+			prefersReducedData((navigator as Navigator & { connection?: ConnectionLike }).connection),
+	});
+</script>
+
 <script lang="ts">
 	import type { NewsEvent } from '../types.ts';
 	import { CATEGORY_LABELS } from '../types.ts';
@@ -39,7 +51,16 @@
 	style:top="{top}px"
 	style:height="{height}px"
 >
-	<button type="button" class="hit" onclick={() => onselect(ev)}>
+	<!-- 詳細を開く前に画像を取っておく（ホバー/フォーカスで予約・押下で即時） -->
+	<button
+		type="button"
+		class="hit"
+		onclick={() => onselect(ev)}
+		onpointerenter={() => preloader.schedule(ev.image?.src)}
+		onpointerleave={() => preloader.cancel()}
+		onpointerdown={() => preloader.preloadNow(ev.image?.src)}
+		onfocus={() => preloader.schedule(ev.image?.src)}
+	>
 		{#if ev.svg}
 			<span class="art"><ArtIcon id={ev.svg} size={64} /></span>
 		{/if}
