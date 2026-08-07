@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { OVERVIEW_MIN_IMPORTANCE } from '../../src/lib/lod.ts';
 import type { EventImage, NewsEvent } from '../../src/lib/types.ts';
 import { buildBooksIndex, parseBooksYaml, unmatchedBookIds } from '../lib/books.ts';
+import { isVolatileYear } from '../lib/cache-policy.ts';
 import { classify, type ClassifySidecar } from '../lib/classify.ts';
 import {
 	buildCollectionDetail,
@@ -96,32 +97,48 @@ function saveJsonCache(file: string, data: unknown): void {
 /**
  * 年ページのシリーズ（「YYYY年」「YYYY年の日本」）を取得する。
  * 存在しない年は .missing マーカーを置いて次回以降のAPI呼び出しを省く。
+ *
+ * ただし当年・前年（isVolatileYear）はキャッシュも .missing も無視して必ず取り直す。
+ * 当年のページは日々できごとが追記されるので、キャッシュを使うと取得日以降が
+ * 永久に載らなくなる（月次リフレッシュが「変更なし」を返し続ける状態になっていた）。
  */
 async function loadSeries(
 	args: Args,
 	suffix: string,
 	cacheDir: string,
+	today: string,
 ): Promise<Map<number, string>> {
 	const texts = new Map<number, string>();
 	mkdirSync(join(CACHE, cacheDir), { recursive: true });
+	let refreshed = 0;
 	for (let y = args.from; y <= args.to; y++) {
 		const p = join(CACHE, cacheDir, `${y}.wikitext`);
 		const missing = join(CACHE, cacheDir, `${y}.missing`);
-		if (existsSync(p)) {
-			texts.set(y, readFileSync(p, 'utf8'));
-			continue;
+		// --offline はネットワークを一切使わない指定なので、揮発年でもキャッシュに従う
+		const volatile = isVolatileYear(y, today) && !args.offline;
+		if (!volatile) {
+			if (existsSync(p)) {
+				texts.set(y, readFileSync(p, 'utf8'));
+				continue;
+			}
+			if (existsSync(missing) || args.offline) continue;
 		}
-		if (existsSync(missing) || args.offline) continue;
 		process.stdout.write(`fetch ${y}${suffix} ...\r`);
 		const wt = await fetchPageWikitext(`${y}${suffix}`);
 		if (wt !== null) {
 			writeFileSync(p, wt);
 			texts.set(y, wt);
+			if (volatile) refreshed++;
+		} else if (existsSync(p)) {
+			// 通信失敗もページ不在も null で返るため、既存キャッシュがあるなら残す
+			// （一時的な失敗で当年ぶんのできごとを丸ごと落とさない）
+			console.warn(`  ${y}${suffix}: 取り直しに失敗。キャッシュを使う`);
+			texts.set(y, readFileSync(p, 'utf8'));
 		} else {
 			writeFileSync(missing, '');
 		}
 	}
-	console.log(`${suffix}ページ: ${texts.size}件`);
+	console.log(`${suffix}ページ: ${texts.size}件（うち${refreshed}件は当年/前年として取り直し）`);
 	return texts;
 }
 
@@ -255,8 +272,8 @@ async function main(): Promise<void> {
 	const today = new Date().toISOString().slice(0, 10);
 
 	// 1-2. 取得 + パース（「YYYY年」+「YYYY年の日本」の2シリーズ）
-	const texts = await loadSeries(args, '年', 'years');
-	const textsJp = await loadSeries(args, '年の日本', 'years-jp');
+	const texts = await loadSeries(args, '年', 'years', today);
+	const textsJp = await loadSeries(args, '年の日本', 'years-jp', today);
 	const raws: RawEvent[] = [];
 	for (const [year, wt] of texts) {
 		raws.push(...parseYearPage(wt, year));
