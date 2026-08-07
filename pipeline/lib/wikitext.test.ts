@@ -316,3 +316,41 @@ describe('eventDateAndId', () => {
 		).toBe('1900-01-01');
 	});
 });
+
+describe('パースし損ねていた日付表記', () => {
+	it('「：」区切りの行から日付を取る（1953年の日本ページなど1ページ丸ごとこの表記）', () => {
+		const ev = parseBulletLine('1月13日：[[エルサルバドル大地震]]発生。M7.8。', 2001, 1);
+		expect(ev).toMatchObject({ month: 1, day: 13, precision: 'day' });
+		expect(ev?.text).toBe('エルサルバドル大地震発生。M7.8。');
+	});
+
+	it('日付レンジは開始日に畳む（「～」「〜」「から」）', () => {
+		expect(
+			parseBulletLine('[[8月25日]]～[[8月26日|26日]]: [[明治17年の台風]]による被害', 1884, 8),
+		).toMatchObject({ month: 8, day: 25, precision: 'day' });
+		expect(
+			parseBulletLine('[[3月6日]]〜[[3月15日]] - ドイツ軍が攻勢をかける', 1945, 3),
+		).toMatchObject({ month: 3, day: 6, precision: 'day' });
+		expect(
+			parseBulletLine('4月12日から[[4月14日|14日]] - ダブリンで会談', 1943, 4),
+		).toMatchObject({ month: 4, day: 12, precision: 'day' });
+	});
+
+	it('レンジを畳んでも本文に2つ目の日付を残さない', () => {
+		expect(parseBulletLine('[[3月6日]]〜[[3月15日]] - ドイツ軍が攻勢', 1945, 3)?.text).toBe(
+			'ドイツ軍が攻勢',
+		);
+	});
+
+	it('「日付不明 -」の行は本文からその印を落とす（月の精度は保つ）', () => {
+		const ev = parseBulletLine('日付不明 - コンドーム自販機の登場。大阪市に設置。', 1969, 6);
+		expect(ev).toMatchObject({ month: 6, day: null, precision: 'month' });
+		expect(ev?.text).toBe('コンドーム自販機の登場。大阪市に設置。');
+	});
+
+	it('日付でない「：」は区切りとして誤認しない', () => {
+		const ev = parseBulletLine('[[瀬戸内海]]サメ騒動：漁師がサメに襲われる', 1992, 3);
+		expect(ev?.text).toBe('瀬戸内海サメ騒動：漁師がサメに襲われる');
+		expect(ev?.day).toBe(null);
+	});
+});

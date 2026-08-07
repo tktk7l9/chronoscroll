@@ -74,6 +74,24 @@ export function replaceLinks(text: string): { text: string; links: WikiLink[] } 
 	return { text: out, links };
 }
 
+/**
+ * 日付と本文の区切り。ダッシュ類のほかに全角/半角コロンもある
+ * （2001年や1953年の日本ページなどは1ページ丸ごと「M月D日：本文」表記）。
+ */
+const SEP = '[-–—−‐：:]';
+
+/**
+ * 「8月25日～8月26日 - 本文」のような期間表記を開始日だけに畳む。
+ * 畳まないと日付として解析されず、月初（precision=month）に落ちてしまう。
+ * 2つ目の日付は「[[8月26日|26日]]」のように月が省略されたリンクのこともある。
+ */
+export function collapseDateRange(text: string): string {
+	return text.replace(
+		/^((?:\[\[)?\d{1,2}月\d{1,2}日(?:\]\])?)\s*(?:[〜～~]|から)\s*(?:\[\[)?(?:\d{1,2}月)?\d{1,2}日(?:\|[^\]|]*)?(?:\]\])?/,
+		'$1',
+	);
+}
+
 export interface ForcedDate {
 	month: number | null;
 	day: number | null;
@@ -104,7 +122,7 @@ export function parseBulletLine(
 	sectionMonth: number | null,
 	forced?: ForcedDate,
 ): RawEvent | null {
-	const stripped = stripMarkup(content).trim();
+	const stripped = collapseDateRange(stripMarkup(content).trim());
 	if (stripped === '') return null;
 
 	let month = forced ? forced.month : sectionMonth;
@@ -119,7 +137,9 @@ export function parseBulletLine(
 	// 「[[M月D日]]（旧暦注記など） - 本文」/「[[M月]] - 本文」。リンクなし日付にも対応。
 	// ネスト行（forcedあり）でも自前の日付があればそちらを優先する
 	const dm = stripped.match(
-		/^(?:\[\[)?(\d{1,2})月(?:(\d{1,2})日)?(\s*\(旧暦\))?(?:\]\])?\s*(?:（[^）]*）|\([^)]*\))?\s*[-–—−‐]\s*(.*)$/,
+		new RegExp(
+			`^(?:\\[\\[)?(\\d{1,2})月(?:(\\d{1,2})日)?(\\s*\\(旧暦\\))?(?:\\]\\])?\\s*(?:（[^）]*）|\\([^)]*\\))?\\s*${SEP}\\s*(.*)$`,
+		),
 	);
 	if (dm) {
 		month = Number(dm[1]);
@@ -134,9 +154,12 @@ export function parseBulletLine(
 	}
 
 	// 日付レンジ表記（「[[10月22日]] - [[10月24日]] - 本文」）の2つ目の日付と、
-	// 「夏 - 」のような季節プレフィックスを除去
-	body = body.replace(/^(?:\[\[)?\d{1,2}月\d{1,2}日(?:\]\])?\s*[-–—−‐]\s*/, '');
-	body = body.replace(/^(春|夏|秋|冬|年初|年央|年末|上半期|下半期)\s*[-–—−‐]\s*/, '');
+	// 「夏 - 」のような季節プレフィックス・「日付不明 - 」の印を除去
+	body = body.replace(new RegExp(`^(?:\\[\\[)?\\d{1,2}月\\d{1,2}日(?:\\]\\])?\\s*${SEP}\\s*`), '');
+	body = body.replace(
+		new RegExp(`^(春|夏|秋|冬|年初|年央|年末|上半期|下半期|日付不明)\\s*${SEP}\\s*`),
+		'',
+	);
 
 	// 先頭の「【日本】」「【世界・アメリカ合衆国】」等のタグは地域ヒントとして回収
 	let regionHint: RawEvent['regionHint'];
