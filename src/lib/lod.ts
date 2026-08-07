@@ -18,6 +18,12 @@ export const OVERVIEW_MIN_IMPORTANCE = 97;
 /**
  * このズーム（px/日）で表示すべき importance の下限。
  * fraction = 表示したい件数割合 = (pxPerDay / minPxPerEvent) / eventsPerDay
+ *
+ * eventsPerDay は「最大ズームなら fraction が1に達する」水準で頭打ちにする。
+ * 可視範囲の局所密度を渡すようになった結果、2020年代（約1.67件/日）では最大ズームでも
+ * 閾値が48程度までしか下がらず、下位の約半数がどのズーム・スクロール位置でも
+ * 表示されない状態になっていた。密度が高い区間の間引きは capDensity が担当し、
+ * こちらは「ズームしきれば必ず見える」ことを保証する。
  */
 export function importanceThreshold(
 	pxPerDay: number,
@@ -25,7 +31,8 @@ export function importanceThreshold(
 	minPxPerEvent = MIN_PX_PER_EVENT,
 ): number {
 	if (eventsPerDay <= 0) return 0;
-	const fraction = pxPerDay / minPxPerEvent / eventsPerDay;
+	const density = Math.min(eventsPerDay, MAX_PX_PER_DAY / minPxPerEvent);
+	const fraction = pxPerDay / minPxPerEvent / density;
 	const threshold = 100 * (1 - fraction);
 	return Math.min(100, Math.max(0, threshold));
 }

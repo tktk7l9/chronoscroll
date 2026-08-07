@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
+	import { eventsPerDayInRange } from '../chunks.ts';
 	import type { FilterState } from '../filters.ts';
 	import { isFiltering, matchesFilter } from '../filters.ts';
 	import { importanceThreshold, needsChunkData, tickStepYears } from '../lod.ts';
@@ -63,6 +64,8 @@
 	});
 	const height = $derived(totalHeight(scale));
 	const columns = $derived(vw >= 760 ? 2 : (1 as 1 | 2));
+	const range = $derived(visibleDayRange(scale, scrollY, vh));
+	const bufferDays = $derived(vh / pxPerDay);
 	// フィルタ適用中は密度が下がるため、フィルタ通過率でLOD閾値を補正する
 	const filterSelectivity = $derived.by(() => {
 		if (!isFiltering(filter)) return 1;
@@ -72,7 +75,15 @@
 		for (const p of pts) if (matchesFilter(p.ev, filter)) n++;
 		return Math.max(0.005, n / pts.length);
 	});
-	const adjustedEventsPerDay = $derived(data.eventsPerDay * filterSelectivity);
+	// LODの密度は「いま見ている時代」の実密度を使う。全期間平均(0.375件/日)だと
+	// 十年ごとの実密度が0.14〜1.67と12倍違うため、明治期はスカスカ・2000年代以降は
+	// 詰まりすぎ（閾値を通った件数の7割以上をcapDensityが捨てる）状態になる
+	const localEventsPerDay = $derived(
+		data.meta
+			? eventsPerDayInRange(data.meta.chunks, range.fromDay + bufferDays, range.toDay - bufferDays)
+			: data.eventsPerDay,
+	);
+	const adjustedEventsPerDay = $derived(localEventsPerDay * filterSelectivity);
 	// 特集の絞り込み中はLODを効かせない。特集の収録イベントは本編を汚さないよう
 	// importanceを低めに振ってあるので、密度補正だけでは閾値に負けて1件も出なくなる。
 	// 件数は特集1本ぶん（数十件）に限られるため、間引きはcapDensityだけで足りる
@@ -82,8 +93,6 @@
 	// 概観〜十年ズームではoverview.jsonの閾値を上回るためチャンクを読んでも何も増えない。
 	// 実際に必要になるまでチャンクのフェッチ自体を止め、初期の無駄な帯域を避ける
 	const chunksNeeded = $derived(needsChunkData(pxPerDay, adjustedEventsPerDay));
-	const range = $derived(visibleDayRange(scale, scrollY, vh));
-	const bufferDays = $derived(vh / pxPerDay);
 	const visible = $derived(
 		ready
 			? queryVisible(

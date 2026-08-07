@@ -69,6 +69,18 @@ describe('importanceThreshold', () => {
 		expect(importanceThreshold(96, eventsPerDay)).toBe(0);
 	});
 
+	it('密度の高い時代でも最大ズームなら全件表示になる（永久に見えないイベントを作らない）', () => {
+		// 2020年代の実密度は約1.67件/日。局所密度をそのまま使うと最大ズームでも
+		// 閾値が48程度までしか下がらず、下位の約半数がどのズームでも表示されなくなる
+		expect(importanceThreshold(MAX_PX_PER_DAY, 1.67)).toBe(0);
+		expect(importanceThreshold(MAX_PX_PER_DAY, 100)).toBe(0);
+	});
+
+	it('密度をクランプしてもズームアウト方向の単調性は保つ', () => {
+		expect(importanceThreshold(3.1, 1.67)).toBeGreaterThan(importanceThreshold(17.9, 1.67));
+		expect(importanceThreshold(17.9, 1.67)).toBeGreaterThan(importanceThreshold(62, 1.67));
+	});
+
 	it('eventsPerDay=0 のガード', () => {
 		expect(importanceThreshold(1, 0)).toBe(0);
 	});
