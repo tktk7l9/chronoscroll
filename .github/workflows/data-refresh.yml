@@ -41,8 +41,14 @@ jobs:
           BRANCH="data-refresh-$(date +%Y%m)"
           git checkout -B "$BRANCH"
           git add static/data
-          if git diff --cached --quiet; then
-            echo "データに変更なし"
+          # index.json の generatedAt はビルドごとに必ず変わる（アプリは読まない）。
+          # 素の diff で判定すると「中身は同じなのに毎月PRが出る」状態になり、
+          # 本当にデータが増えた月との区別がつかなくなるので、この値だけ無視する。
+          OTHER=$(git diff --cached --name-only | grep -v '^static/data/index\.json$' || true)
+          NEW_META=$(git show :static/data/index.json | jq -S 'del(.generatedAt)')
+          OLD_META=$(git show HEAD:static/data/index.json | jq -S 'del(.generatedAt)')
+          if [ -z "$OTHER" ] && [ "$NEW_META" = "$OLD_META" ]; then
+            echo "データに変更なし（generatedAtのみ）"
             exit 0
           fi
           git commit -m "data: 月次データ更新 $(date +%Y-%m)"
