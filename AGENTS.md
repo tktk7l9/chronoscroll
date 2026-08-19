@@ -85,3 +85,18 @@
 
 ## コミット粒度
 - 機能単位で小さく。テストとセットで green の状態でコミットする。
+
+## Cursor Cloud specific instructions
+- 依存インストールは起動時の update script（`npm ci`）で自動実行済み。標準コマンドは
+  README とルート `package.json` の `scripts` を参照（`npm run dev` / `test` / `coverage`
+  / `typecheck` / `build`）。
+- **データ生成やビルドにネットワークは不要**。`static/data/` に JSON が commit 済みで、
+  `npm run dev` も `npm run build` もそれをそのまま配信する。`npm run data:build`（Wikipedia
+  取得）は月次データ更新時のみで、通常の開発・検証では走らせない。
+- e2e スモーク（`node e2e/smoke.mjs <baseUrl>`）は事前に `npm run build` で `build/` を作り、
+  別プロセスで `node e2e/serve.mjs <port>`（本番同等CSPで配信）を起動してから実行する。
+  ブラウザは `playwright`（`npm i --no-save playwright && npx playwright install --with-deps chromium`）
+  かシステム Chrome（`playwright-core` の `channel: 'chrome'`）を使う。どちらも未導入だと
+  スモークだけ失敗するが、`dev`/`test`/`build` には影響しない。
+- GUI 確認は `npm run dev`（Vite・デフォルト5173）を起動してブラウザで開く。中身は
+  `?t=/z=/s=/k=` の URL 状態で復元されるので、共有された URL をそのまま開けば同じ表示になる。
