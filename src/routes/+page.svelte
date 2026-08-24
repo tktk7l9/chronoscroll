@@ -180,6 +180,7 @@
 			initialCenter={initial.centerDate}
 			initialPxPerDay={initial.pxPerDay}
 			{highlightId}
+			locked={selected !== null}
 			{onselect}
 			onviewchange={(center, pxPerDay) => {
 				view = { center, pxPerDay };

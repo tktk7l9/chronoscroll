@@ -19,6 +19,7 @@
 	import type { NewsEvent } from '../types.ts';
 	import { capDensity, queryVisible } from '../viewport.ts';
 	import { formatWareki } from '../wareki.ts';
+	import { takeCtrlWheel, takePinchMove } from '../zoom-gestures.ts';
 	import type { TimelineData } from '../state/data.svelte.ts';
 	import EventCard from './EventCard.svelte';
 	import Minimap from './Minimap.svelte';
@@ -35,6 +36,7 @@
 		initialCenter = null,
 		initialPxPerDay = null,
 		highlightId = null,
+		locked = false,
 		onselect,
 		onviewchange,
 	}: {
@@ -43,6 +45,8 @@
 		initialCenter?: string | null;
 		initialPxPerDay?: number | null;
 		highlightId?: string | null;
+		/** 詳細モーダル表示中。ズームは掛けないがブラウザのページズームは止める */
+		locked?: boolean;
 		onselect: (ev: NewsEvent) => void;
 		onviewchange?: (centerIso: string, pxPerDay: number) => void;
 	} = $props();
@@ -211,17 +215,11 @@
 		return pxPerDay;
 	}
 
-	/** 詳細モーダル表示中は年表の操作を受け付けない（背面が動いて見えるため） */
-	function modalOpen(): boolean {
-		return document.querySelector('dialog[open]') !== null;
-	}
-
 	// ctrl/⌘ + ホイールでズーム（passive:false が必要なので手動で登録）
 	$effect(() => {
+		const isLocked = locked;
 		const onWheel = (e: WheelEvent) => {
-			if (!e.ctrlKey && !e.metaKey) return;
-			if (modalOpen()) return;
-			e.preventDefault();
+			if (!takeCtrlWheel(e, isLocked)) return;
 			applyZoom(pxPerDay * Math.exp(-e.deltaY * 0.0022), e.clientY);
 		};
 		window.addEventListener('wheel', onWheel, { passive: false });
@@ -238,14 +236,17 @@
 		};
 	}
 	$effect(() => {
+		const isLocked = locked;
 		const start = (e: TouchEvent) => {
-			if (e.touches.length === 2 && !modalOpen()) pinch = measure(e);
+			if (e.touches.length === 2 && !isLocked) pinch = measure(e);
 		};
 		const move = (e: TouchEvent) => {
-			if (!pinch || e.touches.length !== 2) return;
-			e.preventDefault();
-			const m = measure(e);
+			if (!takePinchMove(e.touches.length, isLocked, pinch !== null, () => e.preventDefault())) {
+				return;
+			}
 			const prev = pinch;
+			if (!prev) return;
+			const m = measure(e);
 			pinch = m;
 			void applyZoom(pxPerDay * (m.dist / prev.dist), m.midY).then(() => {
 				window.scrollBy(0, prev.midY - m.midY);
@@ -304,10 +305,11 @@
 	}
 
 	$effect(() => {
+		const isLocked = locked;
 		const onKey = (e: KeyboardEvent) => {
 			const target = e.target as HTMLElement | null;
 			if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return;
-			if (document.querySelector('dialog[open]')) return;
+			if (isLocked) return;
 			if (e.key === '+' || e.key === '=') {
 				e.preventDefault();
 				zoomStep(2);
