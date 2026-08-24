@@ -101,7 +101,9 @@ export interface ForcedDate {
 /** 「[[10月1日]]」「[[3月]] -」のような日付だけの行か（同日複数イベントの親）。リンクなし表記にも対応 */
 export function parseDateOnly(stripped: string): ForcedDate | null {
 	const m = stripped.match(
-		/^(?:\[\[)?(\d{1,2})月(?:(\d{1,2})日)?(\s*\(旧暦\))?(?:\]\])?\s*[-–—−‐]?\s*$/,
+		new RegExp(
+			`^(?:\\[\\[)?(\\d{1,2})月(?:(\\d{1,2})日)?(\\s*\\(旧暦\\))?(?:\\]\\])?\\s*${SEP}?\\s*$`,
+		),
 	);
 	if (!m) return null;
 	const month = Number(m[1]);

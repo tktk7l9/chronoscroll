@@ -125,6 +125,20 @@ assert(
 	zoomHAfter === zoomHBefore,
 	`${zoomHBefore} -> ${zoomHAfter}`,
 );
+const wheelStolen = await page.evaluate(() => {
+	const e = new WheelEvent('wheel', {
+		deltaY: -300,
+		ctrlKey: true,
+		bubbles: true,
+		cancelable: true,
+	});
+	window.dispatchEvent(e);
+	return e.defaultPrevented;
+});
+assert(
+	'詳細: 表示中もctrl+ホイールは preventDefault する（ブラウザのページズームを止める）',
+	wheelStolen === true,
+);
 
 await page.keyboard.press('Escape');
 await page.waitForTimeout(300);

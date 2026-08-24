@@ -215,6 +215,8 @@ describe('parseDateOnly', () => {
 		expect(parseDateOnly('[[10月1日]]')).toEqual({ month: 10, day: 1, precision: 'day' });
 		expect(parseDateOnly('[[3月]] -')).toEqual({ month: 3, day: null, precision: 'month' });
 		expect(parseDateOnly('10月1日')).toEqual({ month: 10, day: 1, precision: 'day' });
+		expect(parseDateOnly('[[10月1日]]：')).toEqual({ month: 10, day: 1, precision: 'day' });
+		expect(parseDateOnly('10月1日:')).toEqual({ month: 10, day: 1, precision: 'day' });
 	});
 
 	it('本文がある行や不正な日付は null', () => {
@@ -277,6 +279,19 @@ describe('parseYearPage', () => {
 		const events = parseYearPage(p, 1964);
 		expect(events).toHaveLength(1);
 		expect(events[0].text).toBe('通常のできごと。');
+	});
+
+	it('コロン区切りの日付のみ親でもネスト行をその日のイベントとして取る', () => {
+		const p = [
+			'== できごと ==',
+			'=== 1月 ===',
+			'* [[1月13日]]：',
+			'** [[エルサルバドル大地震]]発生。',
+		].join('\n');
+		const events = parseYearPage(p, 2001);
+		expect(events).toHaveLength(1);
+		expect(events[0]).toMatchObject({ month: 1, day: 13, precision: 'day' });
+		expect(events[0].text).toBe('エルサルバドル大地震発生。');
 	});
 
 	it('できごとセクションがないページは空配列', () => {
