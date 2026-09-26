@@ -1223,6 +1223,7 @@ Workers & Pages → `chronoscroll` → Settings → Builds → GitHub `tktk7l9/c
 - Build command: `npm run build && node scripts/r2-sync.mjs`
 - Deploy command: `npx wrangler deploy`
 - Build variables and secrets: `R2_ACCESS_KEY_ID`（secret）・`R2_SECRET_ACCESS_KEY`（secret）・`NODE_VERSION=24`
+- Branch control で Preview builds を無効化（非 production ブランチのビルドは走らせない）
 
 - [ ] **Step 2: 本人が PR をマージする**
 

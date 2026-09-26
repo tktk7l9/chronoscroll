@@ -35,6 +35,11 @@
   `static/ogp/c-<slug>.png`（テンプレ: `static/ogp-collection-src.html`・collections.jsonから描画）を再生成。
   **特集を追加/改題したら必ず再生成する**（画像が無いとSNS共有時に404になる）。
 - `src/lib/sponsor.ts`の`CURRENT_SPONSOR`が自前スポンサー枠の設定値（未契約時は`null`で非表示）。
+- 手元から `wrangler deploy` すると gitignore 対象の `static/art-preview.html`・`static/ogp-src.html` も
+  配信されるので、本番デプロイは Workers Builds（clean checkout）に任せる。
+- `npm run build` の後は `build/e` が `build-e/` に移るので、ローカル確認は `vite preview` でなく
+  `node e2e/serve.mjs <port>` を使う。
+- R2 同期成功後に `wrangler deploy` が失敗したら再ビルドする（CSS ハッシュ不整合の窓が延びる）。
 
 ## Svelte 5 の注意（訓練データより新しい）
 - **runesモード強制**（vite.config.ts）。`$state` / `$derived` / `$effect` / `$props` を使う。
@@ -62,6 +67,7 @@
 - SSRでstyle:属性を出力しない（インラインstyle属性はCSP違反。Timelineのheightはready後に付与）。
 - **public化は publish-check スキル経由のみ**。それまで private。
 - 秘密情報・環境変数なし（公開APIのみ使用）。`.env` を作らない。
+  例外＝R2 同期の鍵 `.env.r2`（gitignore 済み・Workers Builds では secret）。
 
 ## パイプラインの落とし穴（実装時に踏んだもの）
 - **当年・前年の年ページはキャッシュしてはいけない**（`pipeline/lib/cache-policy.ts` の `isVolatileYear`）。

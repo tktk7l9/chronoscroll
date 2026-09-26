@@ -68,8 +68,8 @@ npm run data:build # データ再生成（Wikipedia取得・要ネットワー�
 - Lighthouse: **mobile 98/100/100/100・desktop 100/100/100/100**（本番URL実測 2026-07-30・mobile perfはmedian-of-3、LCP 2.3s・CLS 0・TBT 0ms）
   - 特集ページ（JSなしの静的HTML）は mobile **`/c` 99・`/c/anime` 100**（LCP 0.9〜1.1s・CLS 0）
 - Mozilla Observatory: **A+（score 120・10/10）**（2026-07-30再スキャン）
-- テスト: 319件 / `src/lib`・`pipeline/lib` 純関数層 カバレッジ100%（CIゲート）
-- 実ブラウザスモーク: 53シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
+- テスト: 351件 / `src/lib`・`pipeline/lib`・`worker`・`scripts/lib` 純関数層 カバレッジ100%（CIゲート）
+- 実ブラウザスモーク: 54シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
 - npm audit: 0件
 
 ## デプロイ（Cloudflare Workers）
@@ -78,4 +78,5 @@ npm run data:build # データ再生成（Wikipedia取得・要ネットワー�
 - ビルド: `npm run build` → `build/`（静的アセット）と `build-e/`（`/e/` の HTML・R2 配信）
 - R2 同期: `npm run r2:sync`（`.env.r2` に `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY`。差分だけ上がる）
 - Workers Builds のコマンド: build `npm run build && node scripts/r2-sync.mjs` / deploy `npx wrangler deploy`
+- Branch control で Preview builds を無効化（非 production ブランチのビルドは走らせない）
 - 月次データ更新（`data-refresh.yml`）は PR をマージするだけで上記が走る
