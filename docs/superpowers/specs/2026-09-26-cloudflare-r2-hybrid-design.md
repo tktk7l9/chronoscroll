@@ -120,3 +120,11 @@ GET それ以外       → 静的アセット（build/ から e/ を除いた 94
 - `src/routes/e/[id]/+page.server.ts`（prerender の読み込みはビルド時のみ・現状維持）
 - `pipeline/`・`content/`・`static/data/`・`data-refresh.yml`
 - Svelte 側の UI・CSP の `style-src-attr` ハッシュ運用（AGENTS.md の3点セット）
+
+## 2026-09-26 初回デプロイ結果
+
+- アセット数: `build/` 93ファイル（うち `_headers` は設定扱いで除外・92ファイルが Workers Assets にアップロード）・`build-e/` 27,137 ページ。
+- R2 初回同期: `put 27137 / del 0 / skip 0`（失敗0）・所要 5分51秒（00:00:36→00:06:27）。2回目は `put 0 / del 0 / skip 27137` で冪等性を確認。
+- `wrangler deploy`: `https://chronoscroll.saitotakuya0719.workers.dev` を公開（Worker Startup Time 1ms・Version 30b401af-9d76-41ff-9cb1-a39167c262ef）。
+- 本番検証（Step 4）: `/e/` 3本とも 200+ETag・top 200+CSP・`/c`・`/c/anime` 200・`/data/index.json` 200+Cache-Control・存在しない `/e/` は404・`.html` は301リダイレクト・beacon 1件、全項目 Expected 通り。
+- 実ブラウザスモーク（Step 5）: 1回目 53/54（「検索: ジャンプ先がハイライトされる」が本番初回のコールドレイテンシで一過性に不合格）、2回目 54/54 で全通過・再現せず。
