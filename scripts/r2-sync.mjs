@@ -2,6 +2,7 @@
 // 使い方: node --env-file=.env.r2 scripts/r2-sync.mjs [--dry-run]
 // 環境変数: R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY（必須）、R2_BUCKET / R2_ACCOUNT_ID（任意）
 // R2 の manifest.json（キー → sha256）と突き合わせ、変わったものだけ PUT・消えたものは DELETE。
+// DELETE 失敗時は manifest に古いハッシュを残し、次回実行時に再試行する。
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
@@ -79,17 +80,24 @@ async function uploader() {
 }
 await Promise.all(Array.from({ length: CONCURRENCY }, uploader));
 
+const failedDel = new Set();
 for (let i = 0; i < plan.del.length; i += 1000) {
-	await s3.send(
+	const res = await s3.send(
 		new DeleteObjectsCommand({
 			Bucket: BUCKET,
 			Delete: { Objects: plan.del.slice(i, i + 1000).map((Key) => ({ Key })), Quiet: true },
 		}),
 	);
+	for (const { Key, Code, Message } of res.Errors ?? []) {
+		failedDel.add(Key);
+		console.error(`DELETE 失敗: ${Key}: ${Code} ${Message}`);
+	}
 }
 
-// 成功した分だけ manifest に反映する（失敗分は次回また put の対象になる）
+// 成功した分だけ manifest に反映する（PUT失敗分は次回また put の対象に、
+// DELETE失敗分は remote の古いハッシュを残して次回また del の対象になる）
 const manifest = Object.fromEntries(Object.entries(local).filter(([key]) => !failed.has(key)));
+for (const key of failedDel) manifest[key] = remote[key];
 await s3.send(
 	new PutObjectCommand({
 		Bucket: BUCKET,
@@ -99,7 +107,7 @@ await s3.send(
 	}),
 );
 console.log(`manifest 更新（${Object.keys(manifest).length} 件）`);
-if (failed.size) {
-	console.error(`${failed.size} 件失敗。再実行で再送される`);
+if (failed.size || failedDel.size) {
+	console.error(`PUT失敗 ${failed.size} 件・DELETE失敗 ${failedDel.size} 件。再実行で再送・再削除される`);
 	process.exit(1);
 }
