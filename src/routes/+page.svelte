@@ -10,6 +10,7 @@
 	import Timeline from '$lib/components/Timeline.svelte';
 	import { formatCount, formatJpDate } from '$lib/coverage';
 	import { withCollection } from '$lib/filters';
+	import { absoluteUrl } from '$lib/site';
 	import type { SearchHit } from '$lib/search';
 	import { timelineData } from '$lib/state/data.svelte';
 	import type { NewsEvent } from '$lib/types';
@@ -118,8 +119,8 @@
 		property="og:description"
 		content="歴史ニュース全{coverage.count}件（{coverage.from}〜{coverage.to}）。ズームするほど歴史が細かく見える無限スクロール年表。"
 	/>
-	<meta property="og:url" content="https://chronoscroll.vercel.app/" />
-	<meta property="og:image" content="https://chronoscroll.vercel.app/ogp.png" />
+	<meta property="og:url" content={absoluteUrl('/')} />
+	<meta property="og:image" content={absoluteUrl('/ogp.png')} />
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<!-- 初期データをJS起動と並列で取得する。

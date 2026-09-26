@@ -1,9 +1,8 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import type { CollectionsIndex, NewsEvent } from '$lib/types';
+import { SITE_ORIGIN as BASE } from '$lib/site';
 
 export const prerender = true;
-
-const BASE = 'https://chronoscroll.vercel.app';
 
 export function GET(): Response {
 	const ids: string[] = [];

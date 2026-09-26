@@ -4,15 +4,16 @@
 	import BrandMark from '$lib/components/BrandMark.svelte';
 	import SponsorSlot from '$lib/components/SponsorSlot.svelte';
 	import { formatCount, formatEventDate } from '$lib/coverage';
+	import { absoluteUrl } from '$lib/site';
 	import { CATEGORY_LABELS } from '$lib/types';
 	import { formatWareki } from '$lib/wareki';
 
 	let { data } = $props();
 
 	const c = $derived(data.detail);
-	const canonical = $derived(`https://chronoscroll.vercel.app/c/${c.slug}`);
+	const canonical = $derived(absoluteUrl(`/c/${c.slug}`));
 	// 特集ごとのOGP画像（scripts/gen-ogp.mjs が実データから生成してコミットしてある）
-	const ogImage = $derived(`https://chronoscroll.vercel.app/ogp/c-${c.slug}.png`);
+	const ogImage = $derived(absoluteUrl(`/ogp/c-${c.slug}.png`));
 	const spanLabel = $derived(`${c.fromDate.slice(0, 4)}年〜${c.toDate.slice(0, 4)}年`);
 	// 年表側は特集を ?k=<slug> で絞り込む。期間が画面に収まる初期ズームも一緒に渡す
 	const onTimeline = $derived(timelineHref(c.slug, c.fromDate, c.toDate));

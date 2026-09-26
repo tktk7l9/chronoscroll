@@ -4,6 +4,7 @@
 	import BrandMark from '$lib/components/BrandMark.svelte';
 	import SponsorSlot from '$lib/components/SponsorSlot.svelte';
 	import { formatEventDate } from '$lib/coverage';
+	import { absoluteUrl } from '$lib/site';
 	import { CATEGORY_LABELS, REGION_LABELS } from '$lib/types';
 	import { formatWareki } from '$lib/wareki';
 
@@ -13,7 +14,7 @@
 	const dateLabel = $derived(formatEventDate(ev.date, ev.precision));
 	const wareki = $derived(formatWareki(ev.date));
 	const timelineUrl = $derived(`/?t=${ev.date}&z=8&e=${ev.id}`);
-	const canonical = $derived(`https://chronoscroll.vercel.app/e/${ev.id}`);
+	const canonical = $derived(absoluteUrl(`/e/${ev.id}`));
 	const metaDescription = $derived(
 		ev.summary.length > 130 ? `${ev.summary.slice(0, 129)}…` : ev.summary,
 	);
@@ -27,7 +28,7 @@
 	<meta property="og:title" content="{ev.title}（{dateLabel}）" />
 	<meta property="og:description" content={metaDescription} />
 	<meta property="og:url" content={canonical} />
-	<meta property="og:image" content="https://chronoscroll.vercel.app/ogp.png" />
+	<meta property="og:image" content={absoluteUrl('/ogp.png')} />
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary" />
 </svelte:head>

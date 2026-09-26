@@ -75,7 +75,7 @@
 	document.getElementById('lead').textContent = c.lead;
 	document.getElementById('count').textContent = '全' + c.count + '件';
 	document.getElementById('span').textContent = c.fromDate.slice(0, 4) + '年 〜 ' + c.toDate.slice(0, 4) + '年';
-	document.getElementById('url').textContent = 'chronoscroll.vercel.app/c/' + c.slug;
+	document.getElementById('url').textContent = 'chronoscroll.saitotakuya0719.workers.dev/c/' + c.slug;
 	if (c.icon) {
 		const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
 		use.setAttribute('href', '/art/sprite.svg#' + c.icon);
