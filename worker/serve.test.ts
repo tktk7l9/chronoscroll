@@ -88,11 +88,13 @@ describe('handle', () => {
 		const res = await handle(req('/e/2011-03-11-quake.html?k=anime'), env);
 		expect(res.status).toBe(301);
 		expect(res.headers.get('location')).toBe('https://x.test/e/2011-03-11-quake?k=anime');
+		expect(res.headers.get('x-frame-options')).toBe('DENY');
 	});
 	it('GET/HEAD 以外は 405', async () => {
 		const res = await handle(req('/e/2011-03-11-quake', { method: 'POST' }), env);
 		expect(res.status).toBe(405);
 		expect(res.headers.get('allow')).toBe('GET, HEAD');
+		expect(res.headers.get('x-frame-options')).toBe('DENY');
 	});
 	it('R2 の例外は 503', async () => {
 		const res = await handle(req('/e/2011-03-11-quake'), { PAGES: bucket({}, { throws: true }) });

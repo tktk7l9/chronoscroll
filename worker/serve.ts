@@ -1,6 +1,8 @@
 // /e/<id> を R2 から返す。静的アセットの無料枠（20,000 ファイル）に収めるため、
 // 27,000 本超のイベント個別ページ（prerender 済み HTML）だけを R2 に置いている。
-// それ以外のパスは wrangler.jsonc の assets が先に解決するのでここには来ない。
+// /e/* は Worker が先に受ける。それ以外は静的アセットが先に解決し、無いパスは
+// Worker に落ちて notFound() が 404 を返す（build/404.html を置いていないため。
+// wrangler.jsonc の not_found_handling 参照）。
 import securityHeaders from '../config/security-headers.json';
 
 export type Resolution =
@@ -60,11 +62,20 @@ function notFound(): Response {
 
 export async function handle(request: Request, env: Env): Promise<Response> {
 	if (request.method !== 'GET' && request.method !== 'HEAD') {
-		return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
+		const headers = pageHeaders(null, false);
+		headers.set('Allow', 'GET, HEAD');
+		headers.set('Content-Type', 'text/plain; charset=utf-8');
+		return new Response('Method Not Allowed', { status: 405, headers });
 	}
 	const url = new URL(request.url);
 	const r = resolve(url.pathname);
-	if (r.kind === 'redirect') return Response.redirect(`${url.origin}${r.location}${url.search}`, 301);
+	if (r.kind === 'redirect') {
+		const headers = pageHeaders(null, false);
+		headers.delete('Content-Type');
+		headers.set('Location', `${url.origin}${r.location}${url.search}`);
+		return new Response(null, { status: 301, headers });
+	}
+	// build/404.html を置いていないため、静的アセットで解決できないパスはここに落ちて notFound() が 404 を返す
 	if (r.kind === 'notFound') return notFound();
 
 	let obj: PageObject | null;
