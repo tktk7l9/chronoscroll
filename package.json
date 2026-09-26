@@ -10,13 +10,14 @@
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && tsc --noEmit -p pipeline",
+    "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && tsc --noEmit -p pipeline && tsc --noEmit -p worker",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "data:build": "tsx pipeline/run/build.ts",
     "ogp": "node scripts/gen-ogp.mjs"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260926.1",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.3",
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
@@ -30,7 +31,8 @@
     "tsx": "^4.23.12",
     "typescript": "^6.0.3",
     "vite": "^8.2.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "wrangler": "^4.141.0"
   },
   "dependencies": {
     "minisearch": "^7.2.0"
