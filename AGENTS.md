@@ -5,7 +5,11 @@
 （自動生成の収集対象は1868（明治）〜。それ以前は特集の書き起こし分）。
 
 ## アーキテクチャ
-- **SvelteKit + adapter-static**（サーバーなし・全ページprerender）。Vercelにデプロイ。
+- **SvelteKit + adapter-static**（全ページprerender）。**Cloudflare Workers** にデプロイ（`wrangler.jsonc`）。
+  `build/` のうち `/e/` 以外（約94ファイル）は静的アセット、`/e/<id>`（27,000本超）は `build-e/` → R2 バケット
+  `chronoscroll-pages` に `scripts/r2-sync.mjs` で差分同期し、`worker/serve.ts` が R2 から返す
+  （無料枠「20,000ファイル/バージョン」に収めるための分担）。R2 の鍵は `.env.r2`（gitignore）と
+  Workers Builds の secret にだけ置く。ホストは https://chronoscroll.saitotakuya0719.workers.dev
 - データは**ビルド時パイプライン**（`pipeline/`）で ja.wikipedia 年ページから生成し、
   `static/data/` にJSONチャンクとして**コミットする**（デプロイ時にWikipediaを叩かない）。
 - **LODの閾値は可視範囲の局所密度で決まる**（`chunks.ts` の `eventsPerDayInRange`）。実密度は
@@ -45,14 +49,16 @@
 - ネットワークを触るコードは `pipeline/run/` に隔離し、ロジックは fixture でテストする。
 
 ## セキュリティ / 公開
-- 厳格CSP（vercel.json）。画像のみ upload.wikimedia.org を許可。後から緩めない。
+- 厳格CSP（config/security-headers.json）。画像のみ upload.wikimedia.org を許可。後から緩めない。
+- セキュリティヘッダーの正本は `config/security-headers.json`。`static/_headers`（静的アセット用）は
+  `scripts/write-headers.mjs` が生成する**生成物**で、手で編集しない（`scripts/lib/headers.test.mjs` がドリフトを止める）。
+  Worker（`/e/*`）と `e2e/serve.mjs` も同じ JSON を読む。
 - **SvelteKit×厳格CSPの3点セット**（どれか欠けると本番で真っ白になる）:
   ① 起動インラインスクリプトは `scripts/externalize-inline.mjs`（post-build）で外部化。
-     Vercel上では adapter-static の出力先が `.vercel/output/static` になる点に注意。
   ② `paths.relative: false`（外部化した起動スクリプト内の import() を絶対パスで解決）。
   ③ `style-src-attr` のハッシュはSvelteKitルートアナウンサーの固定style属性
      （position:absolute;...）のもの。**kitのバージョン更新でこの文字列が変わったら再計算**:
-     `node -e "..."` でsha256を出し vercel.json を更新（変わると console にCSP違反が出る）。
+     `node -e "..."` でsha256を出し config/security-headers.json を更新（変わると console にCSP違反が出る）。
 - SSRでstyle:属性を出力しない（インラインstyle属性はCSP違反。Timelineのheightはready後に付与）。
 - **public化は publish-check スキル経由のみ**。それまで private。
 - 秘密情報・環境変数なし（公開APIのみ使用）。`.env` を作らない。

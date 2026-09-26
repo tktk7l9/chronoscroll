@@ -49,6 +49,8 @@ GET それ以外       → 静的アセット（build/ から e/ を除いた 94
 }
 ```
 
+- `assets.directory` は `./build`。`npm run build` の最後に `scripts/split-pages.mjs` が `build/e` を
+  `build-e/` へ退避するため、デプロイ時点の `./build` に `e/` は含まれない（R2 配信分は静的アセットから完全に外れる）。
 - ホストは `chronoscroll.saitotakuya0719.workers.dev`（他の移行済みアプリと同じ・独自ドメインは今回なし）。
 - Worker は GET / HEAD だけ受ける。他のメソッドは 405（`Allow: GET, HEAD`）。
 - `/e/` 配下のパス:
@@ -66,7 +68,7 @@ GET それ以外       → 静的アセット（build/ から e/ を除いた 94
 ### `scripts/r2-sync.mjs`
 
 - `@aws-sdk/client-s3` を devDependency に追加し、S3 互換 API（`https://<account_id>.r2.cloudflarestorage.com`・region `auto`）で R2 を操作する。
-- 入力: `build/e/*.html`。各ファイルの sha256 を計算し、R2 の `manifest.json`（`{ "e/<id>.html": "<sha256>" }`）と突き合わせる。
+- 入力: `build-e/*.html`（`scripts/split-pages.mjs` が `npm run build` の最後に `build/e` を移す。`wrangler deploy` が `build/` を丸ごとアセットにするため）。各ファイルの sha256 を計算し、R2 の `manifest.json`（`{ "e/<id>.html": "<sha256>" }`）と突き合わせる。
 - 出力: 変わった／新しいキーだけ PUT（`Content-Type: text/html; charset=utf-8`・並列 32）、ローカルに無いキーは DELETE、最後に manifest を書き戻す。冪等。
 - 差分計算は純関数 `planSync(local, remote) → { put: string[], del: string[] }`（`scripts/lib/r2-plan.mjs`）に分離してテストする。
 - フラグ: `--dry-run`（計画だけ表示）。終了時に put/del/skip の件数を出す。manifest が無ければ全件 PUT（初回）。
@@ -89,7 +91,7 @@ GET それ以外       → 静的アセット（build/ から e/ を除いた 94
   3. `e2e/serve.mjs`（CI の本番同等配信）— vercel.json の代わりに JSON を読む。
 - `_headers` には加えて `/data/*` に `Cache-Control: public, max-age=3600, stale-while-revalidate=86400`、`/_app/immutable/*` に `Cache-Control: public, max-age=31536000, immutable`。
 - CSP の変更は計測の差し替え分だけ: `script-src 'self' https://static.cloudflareinsights.com`、`connect-src 'self' https://cloudflareinsights.com`。他は現行のまま（`style-src-attr` のハッシュ含む）。
-- `@vercel/analytics` を削除し、`+layout.svelte` の動的 import を **Cloudflare Web Analytics のビーコン**（`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"<token>"}'>`）に差し替える。トークンは非秘密だが 32 桁 hex なので `gitleaks:allow` を付ける。**SRI は付けない**（バージョン無し URL を Cloudflare が差し替える運用のため）。
+- `@vercel/analytics` を削除し、`+layout.svelte` の動的 import を **Cloudflare Web Analytics のビーコン**（`<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"<token>"}'>`）に差し替える。トークンは非秘密だが 32 桁 hex なので `gitleaks:allow` を付ける。**SRI は付けない**（バージョン無し URL を Cloudflare が差し替える運用のため）。
 - `e2e/smoke.mjs` のコンソール無視条件 `_vercel/insights` を `cloudflareinsights.com` に変える。
 - サイト URL は `src/lib/site.ts` の `SITE_ORIGIN = 'https://chronoscroll.saitotakuya0719.workers.dev'` 1定数に寄せ、canonical・`og:url`・`og:image`・sitemap の BASE・`static/robots.txt` の Sitemap 行（静的ファイルなので直接書き換え）から参照する。
 - `vercel.json` は削除する。
@@ -103,7 +105,7 @@ GET それ以外       → 静的アセット（build/ から e/ を除いた 94
 - `vitest.config.ts` の include に `worker/**/*.test.ts` と `scripts/**/*.test.mjs` を、coverage の include と 100% threshold に `worker/*.ts` と `scripts/lib/*.mjs` を追加。
 - `handle` のテストは R2 バインディングの最小フェイク（`get(key, opts)` が `{ body, httpEtag, writeHttpMetadata }` または body なしオブジェクト／null を返す）で 200・304・404・405・301（`.html`・末尾スラッシュ）・HEAD を通す。
 - ドリフト検知: `static/_headers` が `scripts/write-headers.mjs` の出力と一致することをテスト（`config/` と `static/_headers` のどちらかだけ直した状態を止める）。
-- CI の実ブラウザスモーク 37 本は無変更（`e2e/serve.mjs` が build/ を配信するので R2 なしで動く）。
+- CI の実ブラウザスモーク 54 本は無変更（`e2e/serve.mjs` が build/ を配信するので R2 なしで動く）。
 - ローカル動作確認: `wrangler dev` + `wrangler r2 object put chronoscroll-pages/e/<id>.html --file build/e/<id>.html --local` で 2〜3 ページ入れて `/e/` の経路（200/304/301/404）を通す。
 - 本番検証: `sitemap.xml` から `/e/` の実 URL を数件拾って叩く（トップの 200 は保証にならない — [[feedback_opennext_ssg_incremental_cache]] の教訓）+ 既存の `node e2e/smoke.mjs <本番URL>` を1回。
 

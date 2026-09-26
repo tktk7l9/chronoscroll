@@ -48,7 +48,7 @@
 **Interfaces:**
 - Produces: `renderHeadersFile(security: Record<string,string>): string`、`CACHE_RULES: [path, cacheControl][]`（`scripts/lib/headers.mjs`）。`config/security-headers.json` の形は `{ "<Header-Name>": "<value>", ... }`（6 キー）。Task 3 が CSP の値を変え、Task 4 の Worker が同じ JSON を import する。
 
-- [ ] **Step 1: JSON を作る（値は vercel.json からそのまま）**
+- [x] **Step 1: JSON を作る（値は vercel.json からそのまま）**
 
 `config/security-headers.json`:
 
@@ -63,7 +63,7 @@
 }
 ```
 
-- [ ] **Step 2: vitest に `scripts/lib` を載せる**
+- [x] **Step 2: vitest に `scripts/lib` を載せる**
 
 `vitest.config.ts` を次のように変える（include に 2 パターン、coverage include と thresholds に 2 エントリを追加）:
 
@@ -98,7 +98,7 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 3: 失敗するテストを書く**
+- [x] **Step 3: 失敗するテストを書く**
 
 `scripts/lib/headers.test.mjs`:
 
@@ -131,12 +131,12 @@ describe('renderHeadersFile', () => {
 });
 ```
 
-- [ ] **Step 4: 失敗を確認する**
+- [x] **Step 4: 失敗を確認する**
 
 Run: `npx vitest run scripts/lib/headers.test.mjs`
 Expected: FAIL — `Failed to load ./headers.mjs`（モジュールが無い）
 
-- [ ] **Step 5: 実装する**
+- [x] **Step 5: 実装する**
 
 `scripts/lib/headers.mjs`:
 
@@ -177,12 +177,12 @@ console.log('static/_headers を生成');
 
 Run: `node scripts/write-headers.mjs`（`static/_headers` ができる）
 
-- [ ] **Step 6: テストが通ることを確認する**
+- [x] **Step 6: テストが通ることを確認する**
 
 Run: `npx vitest run scripts/lib/headers.test.mjs`
 Expected: PASS（3 件）
 
-- [ ] **Step 7: e2e/serve.mjs と build スクリプトを JSON に向ける・vercel.json を消す**
+- [x] **Step 7: e2e/serve.mjs と build スクリプトを JSON に向ける・vercel.json を消す**
 
 `e2e/serve.mjs` の 1〜11 行目を次に置き換える:
 
@@ -213,12 +213,12 @@ const securityHeaders = JSON.parse(readFileSync('config/security-headers.json', 
 
 `git rm vercel.json`
 
-- [ ] **Step 8: 全体が green か確認する**
+- [x] **Step 8: 全体が green か確認する**
 
 Run: `npm run coverage && npm run build && ls build/_headers`
 Expected: 既存 287 件＋3 件 PASS・thresholds を満たす・`build/_headers` が存在
 
-- [ ] **Step 9: コミット**
+- [x] **Step 9: コミット**
 
 ```bash
 git add config/security-headers.json scripts/lib/headers.mjs scripts/lib/headers.test.mjs scripts/write-headers.mjs static/_headers e2e/serve.mjs vitest.config.ts package.json vercel.json
@@ -246,7 +246,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 **Interfaces:**
 - Produces: `SITE_ORIGIN: string`（末尾スラッシュなし）、`absoluteUrl(path: string): string`。
 
-- [ ] **Step 1: 失敗するテストを書く**
+- [x] **Step 1: 失敗するテストを書く**
 
 `src/lib/site.test.ts`:
 
@@ -268,12 +268,12 @@ describe('site', () => {
 });
 ```
 
-- [ ] **Step 2: 失敗を確認する**
+- [x] **Step 2: 失敗を確認する**
 
 Run: `npx vitest run src/lib/site.test.ts`
 Expected: FAIL — `Failed to resolve import "./site"`
 
-- [ ] **Step 3: 実装する**
+- [x] **Step 3: 実装する**
 
 `src/lib/site.ts`:
 
@@ -289,12 +289,12 @@ export function absoluteUrl(path: string): string {
 }
 ```
 
-- [ ] **Step 4: テストが通ることを確認する**
+- [x] **Step 4: テストが通ることを確認する**
 
 Run: `npx vitest run src/lib/site.test.ts`
 Expected: PASS（2 件）
 
-- [ ] **Step 5: 9 箇所の参照を置き換える**
+- [x] **Step 5: 9 箇所の参照を置き換える**
 
 `src/routes/+page.svelte`（`<script>` に `import { absoluteUrl } from '$lib/site';` を足し、121〜122 行目を）:
 
@@ -341,12 +341,12 @@ import { SITE_ORIGIN as BASE } from '$lib/site';
 Sitemap: https://chronoscroll.saitotakuya0719.workers.dev/sitemap.xml
 ```
 
-- [ ] **Step 6: 旧 URL が残っていないことと型・ビルドを確認する**
+- [x] **Step 6: 旧 URL が残っていないことと型・ビルドを確認する**
 
 Run: `grep -rn "chronoscroll.vercel.app" src static scripts e2e; npm run typecheck && npm run build && grep -c "workers.dev" build/sitemap.xml && grep -o 'rel="canonical" href="[^"]*"' build/e/$(ls build/e | head -1)`
 Expected: grep は 0 件（終了コード 1）・typecheck OK・sitemap の URL が新ホスト・canonical が新ホスト
 
-- [ ] **Step 7: コミット**
+- [x] **Step 7: コミット**
 
 ```bash
 git add src/lib/site.ts src/lib/site.test.ts src/routes static/robots.txt
@@ -370,7 +370,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 **Interfaces:**
 - Consumes: Task 1 の `config/security-headers.json` と `node scripts/write-headers.mjs`。
 
-- [ ] **Step 1: ドリフト検知テストが先に落ちる状態を作る（CSP を変える）**
+- [x] **Step 1: ドリフト検知テストが先に落ちる状態を作る（CSP を変える）**
 
 `config/security-headers.json` の `Content-Security-Policy` を:
 
@@ -381,12 +381,12 @@ default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; sty
 Run: `npx vitest run scripts/lib/headers.test.mjs`
 Expected: FAIL — ドリフト検知（`static/_headers` が古い）
 
-- [ ] **Step 2: `_headers` を再生成して green に戻す**
+- [x] **Step 2: `_headers` を再生成して green に戻す**
 
 Run: `node scripts/write-headers.mjs && npx vitest run scripts/lib/headers.test.mjs`
 Expected: PASS
 
-- [ ] **Step 3: ビーコンを app.html に入れ、Vercel Analytics を外す**
+- [x] **Step 3: ビーコンを app.html に入れ、Vercel Analytics を外す**
 
 `src/app.html` の `</head>` 直前に 1 行（`gitleaks:allow` は同じ行に置く。`type="module"` は Cloudflare の発行スニペットどおり）:
 
@@ -407,7 +407,7 @@ Expected: PASS
 
 Run: `npm uninstall @vercel/analytics`
 
-- [ ] **Step 4: smoke のコンソール無視条件を差し替える**
+- [x] **Step 4: smoke のコンソール無視条件を差し替える**
 
 `e2e/smoke.mjs` の 29〜32 行目を:
 
@@ -417,17 +417,17 @@ Run: `npm uninstall @vercel/analytics`
 	if (m.text().includes('cloudflareinsights.com')) return;
 ```
 
-- [ ] **Step 5: 確認する**
+- [x] **Step 5: 確認する**
 
 Run: `grep -rn "vercel" src e2e package.json; npm run typecheck && npm run coverage && npm run build && grep -c "beacon.min.js" build/index.html build/e/$(ls build/e | head -1)`
 Expected: grep は 0 件・typecheck/coverage OK・両 HTML に beacon が 1 回ずつ（externalize-inline.mjs は属性なし `<script>` しか動かさないので残る）
 
-- [ ] **Step 6: 実ブラウザスモークを回す**
+- [x] **Step 6: 実ブラウザスモークを回す**
 
 Run: `(node e2e/serve.mjs 5299 & sleep 1; node e2e/smoke.mjs http://localhost:5299; kill %1)`
 Expected: 37/37 PASS・CSP 違反のコンソールエラーなし
 
-- [ ] **Step 7: コミット**
+- [x] **Step 7: コミット**
 
 ```bash
 git add src/app.html src/routes/+layout.svelte config/security-headers.json static/_headers e2e/smoke.mjs package.json package-lock.json
@@ -452,7 +452,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 - Consumes: `config/security-headers.json`（Task 1）。
 - Produces: `resolve(pathname: string): Resolution`、`pageHeaders(etag: string | null, cacheable: boolean): Headers`、`handle(request: Request, env: Env): Promise<Response>`、`interface PagesBucket { get(key, options?) }`、`interface Env { PAGES: PagesBucket }`。R2 のキーは `e/<id>.html`（Task 5 の同期先と一致させる）。
 
-- [ ] **Step 1: 依存と tsconfig を入れる**
+- [x] **Step 1: 依存と tsconfig を入れる**
 
 Run: `npm i -D wrangler@^4.141.0 @cloudflare/workers-types@^5.20260926.1`
 
@@ -481,7 +481,7 @@ Run: `npm i -D wrangler@^4.141.0 @cloudflare/workers-types@^5.20260926.1`
 "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && tsc --noEmit -p pipeline && tsc --noEmit -p worker",
 ```
 
-- [ ] **Step 2: 失敗するテストを書く**
+- [x] **Step 2: 失敗するテストを書く**
 
 `worker/serve.test.ts`:
 
@@ -591,12 +591,12 @@ describe('handle', () => {
 });
 ```
 
-- [ ] **Step 3: 失敗を確認する**
+- [x] **Step 3: 失敗を確認する**
 
 Run: `npx vitest run worker/serve.test.ts`
 Expected: FAIL — `Failed to resolve import "./serve"`
 
-- [ ] **Step 4: 実装する**
+- [x] **Step 4: 実装する**
 
 `worker/serve.ts`:
 
@@ -733,22 +733,22 @@ export default {
 }
 ```
 
-- [ ] **Step 5: テストと型が通ることを確認する**
+- [x] **Step 5: テストと型が通ることを確認する**
 
 Run: `npx vitest run worker/serve.test.ts && npm run typecheck`
 Expected: PASS（15 件）・typecheck OK（`ExportedHandler` は workers-types から解決）
 
-- [ ] **Step 6: カバレッジ 100% を確認する**
+- [x] **Step 6: カバレッジ 100% を確認する**
 
 Run: `npm run coverage`
 Expected: `worker/serve.ts` が 100/100/100/100・thresholds を満たす（`worker/index.ts` は Task 1 で coverage の exclude 済み）
 
-- [ ] **Step 7: `wrangler deploy --dry-run` でアセット数を確認する**
+- [x] **Step 7: `wrangler deploy --dry-run` でアセット数を確認する**
 
 Run: `npx wrangler deploy --dry-run --outdir /tmp/cs-dry 2>&1 | tail -20`
 Expected: エラーなし・Worker サイズ表示（アセット数の確認は Task 5 で `build/e` を分離してから）
 
-- [ ] **Step 8: コミット**
+- [x] **Step 8: コミット**
 
 ```bash
 git add worker wrangler.jsonc package.json package-lock.json
@@ -774,7 +774,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 - Consumes: Task 4 のキー規約 `e/<id>.html`。
 - Produces: `planSync(local, remote): { put: string[]; del: string[]; skip: string[] }`、`sha256(buf: Buffer|string): string`、`parseManifest(text: string): Record<string,string>`。R2 の `manifest.json`（`{ "e/<id>.html": "<sha256 hex>" }`）。CLI: `node --env-file=.env.r2 scripts/r2-sync.mjs [--dry-run]`。`npm run build` の後は `build/`（アセット 94 ファイル）と `build-e/<id>.html`（27,137 ファイル）に分かれている＝`wrangler deploy` は `build/` を丸ごとアセットにするので、R2 配信分を先に外す。
 
-- [ ] **Step 1: 失敗するテストを書く**
+- [x] **Step 1: 失敗するテストを書く**
 
 `scripts/lib/r2-plan.test.mjs`:
 
@@ -815,12 +815,12 @@ describe('parseManifest', () => {
 });
 ```
 
-- [ ] **Step 2: 失敗を確認する**
+- [x] **Step 2: 失敗を確認する**
 
 Run: `npx vitest run scripts/lib/r2-plan.test.mjs`
 Expected: FAIL — `Failed to load ./r2-plan.mjs`
 
-- [ ] **Step 3: 純関数を実装する**
+- [x] **Step 3: 純関数を実装する**
 
 `scripts/lib/r2-plan.mjs`:
 
@@ -856,12 +856,12 @@ export function parseManifest(text) {
 }
 ```
 
-- [ ] **Step 4: テストが通ることを確認する**
+- [x] **Step 4: テストが通ることを確認する**
 
 Run: `npx vitest run scripts/lib/r2-plan.test.mjs`
 Expected: PASS（6 件）
 
-- [ ] **Step 5: 同期スクリプトを書く**
+- [x] **Step 5: 同期スクリプトを書く**
 
 Run: `npm i -D @aws-sdk/client-s3@^3.1141.0`
 
@@ -1010,17 +1010,17 @@ if (existsSync('build/e')) {
 
 `.gitignore`: `/build` の下に `/build-e` を追加し、末尾の `.env.r2` 行を削除（`.env.*` が既に無視している。`git check-ignore .env.r2` で確認）。
 
-- [ ] **Step 6: ビルドの分離と dry-run を確認する（鍵は表示しない）**
+- [x] **Step 6: ビルドの分離と dry-run を確認する（鍵は表示しない）**
 
 Run: `npm run build && npm run deploy:check && node --env-file=.env.r2 scripts/r2-sync.mjs --dry-run && (node e2e/serve.mjs 5299 & sleep 1; node e2e/smoke.mjs http://localhost:5299; kill %1)`
 Expected: `assets: 94 前後 / pages: 27137`・`local 27137 / remote 0 → put 27137 / del 0 / skip 0（dry-run）`・スモーク 37/37（`/e/` を `build-e/` から返せている）
 
-- [ ] **Step 7: 全テスト・カバレッジ**
+- [x] **Step 7: 全テスト・カバレッジ**
 
 Run: `npm run coverage`
 Expected: PASS・`scripts/lib/*.mjs` 100%
 
-- [ ] **Step 8: コミット**
+- [x] **Step 8: コミット**
 
 ```bash
 git add scripts/lib/r2-plan.mjs scripts/lib/r2-plan.test.mjs scripts/r2-sync.mjs scripts/split-pages.mjs e2e/serve.mjs package.json package-lock.json .gitignore
@@ -1038,7 +1038,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 **Interfaces:**
 - Consumes: Task 4 の Worker・wrangler.jsonc、Task 1 の `_headers`。
 
-- [ ] **Step 1: ローカル R2 に 2 ページ入れる**
+- [x] **Step 1: ローカル R2 に 2 ページ入れる**
 
 ```bash
 ID1=$(ls build-e | head -1 | sed 's/\.html$//'); ID2=$(ls build-e | sed -n 2p | sed 's/\.html$//')
@@ -1047,11 +1047,11 @@ npx wrangler r2 object put "chronoscroll-pages/e/$ID2.html" --file "build-e/$ID2
 echo "$ID1 $ID2"
 ```
 
-- [ ] **Step 2: dev サーバを起動する（バックグラウンド・後で止める）**
+- [x] **Step 2: dev サーバを起動する（バックグラウンド・後で止める）**
 
 Run: `npx wrangler dev --port 8788 > /tmp/cs-dev.log 2>&1 &` → `until grep -q "Ready on" /tmp/cs-dev.log; do sleep 1; done`
 
-- [ ] **Step 3: 経路を全部叩く**
+- [x] **Step 3: 経路を全部叩く**
 
 ```bash
 B=http://localhost:8788
@@ -1083,7 +1083,7 @@ Expected:
 - data 200 と chunk 200 とも `cc=public, max-age=3600, stale-while-revalidate=86400`（`/data/*` がネストにも効くことの確認。効いていなければ `CACHE_RULES` に `/data/chunks/*` を足して Task 1 のテストと `_headers` を更新）
 - immutable 200 `cc=public, max-age=31536000, immutable`
 
-- [ ] **Step 4: 止める**
+- [x] **Step 4: 止める**
 
 Run: `kill %1`（または `pkill -f "wrangler dev --port 8788"`）
 
@@ -1096,12 +1096,12 @@ Run: `kill %1`（または `pkill -f "wrangler dev --port 8788"`）
 **Interfaces:**
 - Consumes: Task 5 の `npm run r2:sync`、Task 4 の wrangler.jsonc。
 
-- [ ] **Step 1: クリーンビルドしてアセット数を確認する**
+- [x] **Step 1: クリーンビルドしてアセット数を確認する**
 
 Run: `rm -rf build build-e && npm run build && npm run deploy:check`
 Expected: `assets: 94 前後 / pages: 27137`（20,000 未満）
 
-- [ ] **Step 2: 初回同期（約 10 分・鍵は表示されない）**
+- [x] **Step 2: 初回同期（約 10 分・鍵は表示されない）**
 
 Run: `npm run r2:sync 2>&1 | tail -5`
 Expected: `put 27000/27137` … `manifest 更新（27137 件）`・失敗 0
@@ -1109,12 +1109,12 @@ Expected: `put 27000/27137` … `manifest 更新（27137 件）`・失敗 0
 Run: `npm run r2:sync`（2 回目）
 Expected: `put 0 / del 0 / skip 27137`（冪等の確認）
 
-- [ ] **Step 3: デプロイする**
+- [x] **Step 3: デプロイする**
 
 Run: `npx wrangler deploy 2>&1 | tail -15`
 Expected: `Uploaded chronoscroll`・`https://chronoscroll.saitotakuya0719.workers.dev` が表示される・アップロードされたアセットが 100 未満（`build/e` は Task 5 の分離で含まれない）
 
-- [ ] **Step 4: 本番を sitemap の実 URL で検証する**
+- [x] **Step 4: 本番を sitemap の実 URL で検証する**
 
 ```bash
 H=https://chronoscroll.saitotakuya0719.workers.dev
@@ -1129,12 +1129,12 @@ curl -s "$H/" | grep -c beacon.min.js
 
 Expected: `/e/` 3 本とも 200・ETag あり／top 200 CSP あり／c・c/anime 200／data 200 + Cache-Control／missing 404／`.html` は 301／beacon 1
 
-- [ ] **Step 5: 実ブラウザスモークを本番で回す**
+- [x] **Step 5: 実ブラウザスモークを本番で回す**
 
 Run: `node e2e/smoke.mjs https://chronoscroll.saitotakuya0719.workers.dev`
 Expected: 37/37 PASS（ビーコンの console は無視条件で落ちない）
 
-- [ ] **Step 6: 結果を記録する**
+- [x] **Step 6: 結果を記録する**
 
 `docs/superpowers/specs/2026-09-26-cloudflare-r2-hybrid-design.md` の末尾に「## 2026-09-26 初回デプロイ結果」として、アセット数・同期件数・所要時間・検証結果を 5 行で追記してコミット:
 
@@ -1155,7 +1155,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 - Modify: `docs/superpowers/specs/2026-09-26-cloudflare-r2-hybrid-design.md`（3 節の `defer` → `type="module"`、2 節に `build-e/` 分離を追記）
 - Modify: `docs/superpowers/plans/2026-09-26-cloudflare-r2-hybrid.md`（チェックボックスを埋める）
 
-- [ ] **Step 1: AGENTS.md を直す**
+- [x] **Step 1: AGENTS.md を直す**
 
 7〜8 行目の「SvelteKit + adapter-static（サーバーなし・全ページprerender）。Vercelにデプロイ。」を:
 
@@ -1177,7 +1177,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 
 51 行目「Vercel上では adapter-static の出力先が `.vercel/output/static` になる点に注意。」は削除。
 
-- [ ] **Step 2: README にデプロイ節を足す**
+- [x] **Step 2: README にデプロイ節を足す**
 
 `README.md` の末尾:
 
@@ -1191,11 +1191,11 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 - 月次データ更新（`data-refresh.yml`）は PR をマージするだけで上記が走る
 ```
 
-- [ ] **Step 3: spec を実装に合わせる**
+- [x] **Step 3: spec を実装に合わせる**
 
 3 節の `<script defer src=...>` を `<script type="module" src=...>` に、2 節の「入力: `build/e/*.html`」を「入力: `build-e/*.html`（`scripts/split-pages.mjs` が `npm run build` の最後に `build/e` を移す。`wrangler deploy` が `build/` を丸ごとアセットにするため）」に直す。
 
-- [ ] **Step 4: コミットして push・PR**
+- [x] **Step 4: コミットして push・PR**
 
 ```bash
 git add AGENTS.md README.md docs/superpowers/specs/2026-09-26-cloudflare-r2-hybrid-design.md

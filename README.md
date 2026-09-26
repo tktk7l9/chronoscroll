@@ -71,3 +71,11 @@ npm run data:build # データ再生成（Wikipedia取得・要ネットワー�
 - テスト: 319件 / `src/lib`・`pipeline/lib` 純関数層 カバレッジ100%（CIゲート）
 - 実ブラウザスモーク: 53シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
 - npm audit: 0件
+
+## デプロイ（Cloudflare Workers）
+
+- 本番: https://chronoscroll.saitotakuya0719.workers.dev（main への push で Workers Builds が自動デプロイ）
+- ビルド: `npm run build` → `build/`（静的アセット）と `build-e/`（`/e/` の HTML・R2 配信）
+- R2 同期: `npm run r2:sync`（`.env.r2` に `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY`。差分だけ上がる）
+- Workers Builds のコマンド: build `npm run build && node scripts/r2-sync.mjs` / deploy `npx wrangler deploy`
+- 月次データ更新（`data-refresh.yml`）は PR をマージするだけで上記が走る
