@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "node scripts/write-headers.mjs && vite build && node scripts/externalize-inline.mjs",
+    "build": "node scripts/write-headers.mjs && vite build && node scripts/externalize-inline.mjs && node scripts/split-pages.mjs",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -14,9 +14,12 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "data:build": "tsx pipeline/run/build.ts",
-    "ogp": "node scripts/gen-ogp.mjs"
+    "ogp": "node scripts/gen-ogp.mjs",
+    "r2:sync": "node --env-file=.env.r2 scripts/r2-sync.mjs",
+    "deploy:check": "echo assets: $(find build -type f | wc -l) / pages: $(ls build-e | wc -l)"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1141.0",
     "@cloudflare/workers-types": "^5.20260926.1",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.3",

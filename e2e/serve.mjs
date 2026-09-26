@@ -23,8 +23,11 @@ const types = {
 
 createServer((req, res) => {
 	const path = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
-	let file = resolve(join(root, path === '/' ? 'index.html' : path));
-	if (!file.startsWith(root)) {
+	// /e/<id> は R2 配信分（build-e/）から。本番では Worker が R2 から返す経路に相当する
+	const isPage = path.startsWith('/e/');
+	const base = isPage ? resolve('build-e') : root;
+	let file = resolve(join(base, isPage ? path.slice('/e'.length) : path === '/' ? 'index.html' : path));
+	if (!file.startsWith(base)) {
 		res.writeHead(403);
 		return res.end();
 	}
