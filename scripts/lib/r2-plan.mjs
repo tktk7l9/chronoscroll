@@ -18,6 +18,12 @@ export function planSync(local, remote) {
 	return { put: put.sort(), del: del.sort(), skip: skip.sort() };
 }
 
+/** 大量削除の安全弁。local が空、または del が remote の 10% を超えるなら止める（--allow-mass-delete で解除） */
+export function isMassDelete(plan, localCount, remoteCount) {
+	if (remoteCount === 0) return false;
+	return localCount === 0 || plan.del.length > remoteCount * 0.1;
+}
+
 /** manifest が無い・壊れている・配列のときは空＝全件 PUT に倒す（削除はしない） */
 export function parseManifest(text) {
 	try {

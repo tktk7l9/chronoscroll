@@ -1,8 +1,9 @@
 // build-e/*.html（scripts/split-pages.mjs が build/e から移したもの）を R2 バケットへ差分同期する（S3 互換 API）。
-// 使い方: node --env-file=.env.r2 scripts/r2-sync.mjs [--dry-run]
+// 使い方: node --env-file=.env.r2 scripts/r2-sync.mjs [--dry-run] [--allow-mass-delete]
 // 環境変数: R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY（必須）、R2_BUCKET / R2_ACCOUNT_ID（任意）
 // R2 の manifest.json（キー → sha256）と突き合わせ、変わったものだけ PUT・消えたものは DELETE。
 // DELETE 失敗時は manifest に古いハッシュを残し、次回実行時に再試行する。
+// --allow-mass-delete: local が空、または del が remote の 10% を超える「大量削除」を検知したときの安全弁を解除する。
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
@@ -11,7 +12,14 @@ import {
 	PutObjectCommand,
 	S3Client,
 } from '@aws-sdk/client-s3';
-import { parseManifest, planSync, sha256 } from './lib/r2-plan.mjs';
+import { isMassDelete, parseManifest, planSync, sha256 } from './lib/r2-plan.mjs';
+
+// Workers Builds のプレビュービルド（main 以外）では本番バケットを触らない。
+// WORKERS_CI と WORKERS_CI_BRANCH は Workers Builds が既定で注入する。
+if (process.env.WORKERS_CI && process.env.WORKERS_CI_BRANCH && process.env.WORKERS_CI_BRANCH !== 'main') {
+	console.log(`非 production ブランチ（${process.env.WORKERS_CI_BRANCH}）: R2 同期をスキップ`);
+	process.exit(0);
+}
 
 const ACCOUNT_ID = process.env.R2_ACCOUNT_ID ?? '17fd86bd10e0418c9c8e62644699c879';
 const BUCKET = process.env.R2_BUCKET ?? 'chronoscroll-pages';
@@ -54,6 +62,10 @@ console.log(
 	`local ${Object.keys(local).length} / remote ${Object.keys(remote).length} → ` +
 		`put ${plan.put.length} / del ${plan.del.length} / skip ${plan.skip.length}${dryRun ? '（dry-run）' : ''}`,
 );
+if (isMassDelete(plan, Object.keys(local).length, Object.keys(remote).length) && !process.argv.includes('--allow-mass-delete')) {
+	console.error(`大量削除の疑い（local ${Object.keys(local).length} / del ${plan.del.length} / remote ${Object.keys(remote).length}）。意図した削除なら --allow-mass-delete を付けて再実行`);
+	process.exit(1);
+}
 if (dryRun) process.exit(0);
 
 let next = 0;
