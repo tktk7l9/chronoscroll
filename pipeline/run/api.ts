@@ -2,7 +2,7 @@
  * Wikimedia API クライアント（IO層・カバレッジゲート対象外）。
  * - User-Agent 明示・maxlag・直列スロットリング・リトライ
  */
-import { nextDelay, retryDelayMs } from '../lib/throttle.ts';
+import { nextDelay, retryDelayMs, isRetryableError } from '../lib/throttle.ts';
 
 const UA = 'chronoscroll-pipeline/0.1 (https://github.com/tktk7l9/chronoscroll)';
 const MIN_INTERVAL_MS = 150;
@@ -42,6 +42,8 @@ export async function apiPost(
 			}
 			return json;
 		} catch (e) {
+			// 無いページ（missingtitle）などは何度送っても同じ＝即座に諦めて呼び出し側に任せる
+			if (!isRetryableError(e instanceof Error ? e.message : String(e))) throw e;
 			const delay = retryDelayMs(attempt, retryAfterSec);
 			if (delay === null) throw e;
 			console.warn(`  リトライ ${attempt + 1} (${delay}ms待機): ${e}`);

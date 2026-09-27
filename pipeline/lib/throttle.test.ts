@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { nextDelay, retryDelayMs } from './throttle.ts';
+import { nextDelay, retryDelayMs, isRetryableError } from './throttle.ts';
 
 describe('nextDelay', () => {
 	it('間隔が空いていれば待機不要', () => {
@@ -41,5 +41,23 @@ describe('retryDelayMs', () => {
 	it('Retry-After が不正なら無視する', () => {
 		expect(retryDelayMs(0, NaN)).toBe(2000);
 		expect(retryDelayMs(0, -5)).toBe(2000);
+	});
+});
+
+describe('isRetryableError', () => {
+	it('レート制限・過負荷・ネットワーク断は再試行する', () => {
+		expect(isRetryableError('HTTP 429')).toBe(true);
+		expect(isRetryableError('HTTP 503')).toBe(true);
+		expect(isRetryableError('maxlag')).toBe(true);
+		expect(isRetryableError('fetch failed')).toBe(true);
+		expect(isRetryableError('read ECONNRESET')).toBe(true);
+		expect(isRetryableError('The operation was aborted due to timeout')).toBe(true);
+	});
+
+	it('存在しないページなどの API エラーや 4xx は再試行しない', () => {
+		expect(isRetryableError("API error: missingtitle The page you specified doesn't exist.")).toBe(false);
+		expect(isRetryableError('HTTP 404 (https://ja.wikipedia.org/w/api.php)')).toBe(false);
+		expect(isRetryableError('HTTP 400 (x)')).toBe(false);
+		expect(isRetryableError('API error: invalidtitle Bad title')).toBe(false);
 	});
 });
