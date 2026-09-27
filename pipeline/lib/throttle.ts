@@ -24,3 +24,18 @@ export function retryDelayMs(attempt: number, retryAfterSec?: number): number | 
 	}
 	return backoff;
 }
+
+/**
+ * 再試行に意味があるエラーか。レート制限（429）・過負荷（503/maxlag）・ネットワーク断は
+ * 待てば通るので再試行する。存在しないページ（missingtitle）などの API エラーや 4xx は
+ * 何度送っても同じなので即座に諦める（2026-09-27 の月次更新で、無い年ページ 36 件に
+ * 6 回×最長 60 秒の再試行を掛けて 2 時間を溶かしたため）。
+ */
+export function isRetryableError(message: string): boolean {
+	if (/^HTTP (429|503)\b/.test(message)) return true;
+	if (/^HTTP \d{3}\b/.test(message)) return false;
+	if (message.startsWith('API error:')) return false;
+	if (message === 'maxlag') return true;
+	// fetch の失敗（fetch failed / ECONNRESET / timeout / aborted など）は一律ネットワーク扱い
+	return true;
+}

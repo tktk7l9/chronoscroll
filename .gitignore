@@ -24,10 +24,11 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 pipeline/.cache/*
 # 月次 cron では Actions キャッシュが7日で消えて毎回全件取り直しになるため、
-# 変化の少ないキャッシュ3本は種としてコミットする（pageviews は60日平均なので毎回取り直す）
+# キャッシュ4本を種としてコミットする（pageviews は60日平均だが全件取り直すと80分超＝新規タイトル分だけ取る）
 !pipeline/.cache/qids.json
 !pipeline/.cache/sitelinks.json
 !pipeline/.cache/images.json
+!pipeline/.cache/pageviews.json
 static/art-preview.html
 static/ogp-src.html
 coverage/
