@@ -2,11 +2,10 @@
  * Wikimedia API クライアント（IO層・カバレッジゲート対象外）。
  * - User-Agent 明示・maxlag・直列スロットリング・リトライ
  */
-import { nextDelay } from '../lib/throttle.ts';
+import { nextDelay, retryDelayMs } from '../lib/throttle.ts';
 
 const UA = 'chronoscroll-pipeline/0.1 (https://github.com/tktk7l9/chronoscroll)';
 const MIN_INTERVAL_MS = 150;
-const RETRY_DELAYS_MS = [1000, 3000, 9000];
 
 let lastRequestAt = 0;
 
@@ -23,13 +22,18 @@ export async function apiPost(
 	const body = new URLSearchParams({ ...params, format: 'json', formatversion: '2', maxlag: '5' });
 	for (let attempt = 0; ; attempt++) {
 		await throttled();
+		let retryAfterSec: number | undefined;
 		try {
 			const res = await fetch(endpoint, {
 				method: 'POST',
 				headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded' },
 				body: body.toString(),
 			});
-			if (res.status === 429 || res.status === 503) throw new Error(`HTTP ${res.status}`);
+			if (res.status === 429 || res.status === 503) {
+				// レート制限。Retry-After（秒）があれば retryDelayMs がそれを優先する
+				retryAfterSec = Number(res.headers.get('retry-after') ?? '');
+				throw new Error(`HTTP ${res.status}`);
+			}
 			if (!res.ok) throw new Error(`HTTP ${res.status} (${endpoint})`);
 			const json = (await res.json()) as { error?: { code?: string; info?: string } };
 			if (json.error) {
@@ -38,9 +42,9 @@ export async function apiPost(
 			}
 			return json;
 		} catch (e) {
-			if (attempt >= RETRY_DELAYS_MS.length) throw e;
-			const delay = RETRY_DELAYS_MS[attempt];
-			console.warn(`  リトライ ${attempt + 1}/${RETRY_DELAYS_MS.length} (${delay}ms待機): ${e}`);
+			const delay = retryDelayMs(attempt, retryAfterSec);
+			if (delay === null) throw e;
+			console.warn(`  リトライ ${attempt + 1} (${delay}ms待機): ${e}`);
 			await new Promise((r) => setTimeout(r, delay));
 		}
 	}

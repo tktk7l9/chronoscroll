@@ -40,7 +40,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           BRANCH="data-refresh-$(date +%Y%m)"
           git checkout -B "$BRANCH"
-          git add static/data
+          git add static/data pipeline/.cache/qids.json pipeline/.cache/sitelinks.json pipeline/.cache/images.json
           # index.json の generatedAt はビルドごとに必ず変わる（アプリは読まない）。
           # 素の diff で判定すると「中身は同じなのに毎月PRが出る」状態になり、
           # 本当にデータが増えた月との区別がつかなくなるので、この値だけ無視する。
