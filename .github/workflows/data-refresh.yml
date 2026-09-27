@@ -53,7 +53,13 @@ jobs:
           fi
           git commit -m "data: 月次データ更新 $(date +%Y-%m)"
           git push -f origin "$BRANCH"
-          gh pr create --base main --head "$BRANCH" \
-            --title "data: 月次データ更新 $(date +%Y-%m)" \
-            --body "Wikipediaからの自動再生成です。統計（件数・チャンク内訳）をActionsログで確認してからマージしてください。" \
-            || echo "PRは既に存在します"
+          # 既存 PR があれば作らない。無いのに作れなければ失敗させる（2026-09-27 に
+          # 「GitHub Actions is not permitted to create or approve pull requests」が
+          # `|| echo` で握りつぶされ、PR が無いまま success になっていた）
+          if [ -n "$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number')" ]; then
+            echo "PRは既に存在します"
+          else
+            gh pr create --base main --head "$BRANCH" \
+              --title "data: 月次データ更新 $(date +%Y-%m)" \
+              --body "Wikipediaからの自動再生成です。統計（件数・チャンク内訳）をActionsログで確認してからマージしてください。"
+          fi
