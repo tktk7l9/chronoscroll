@@ -1,5 +1,5 @@
 // build/ を本番同等の条件で配信する検証用サーバ。
-// - vercel.json のセキュリティヘッダー（CSP含む）を適用 → CSP退行をCIで検知できる
+// - config/security-headers.json のセキュリティヘッダー（CSP含む）を適用 → CSP退行をCIで検知できる
 // - cleanUrls 相当（拡張子なしパスに .html を解決）
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
@@ -7,7 +7,7 @@ import { extname, join, resolve } from 'node:path';
 
 const port = Number(process.argv[2] ?? 5299);
 const root = resolve('build');
-const vercelHeaders = JSON.parse(readFileSync('vercel.json', 'utf8')).headers[0].headers;
+const securityHeaders = JSON.parse(readFileSync('config/security-headers.json', 'utf8'));
 
 const types = {
 	'.html': 'text/html; charset=utf-8',
@@ -23,8 +23,11 @@ const types = {
 
 createServer((req, res) => {
 	const path = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
-	let file = resolve(join(root, path === '/' ? 'index.html' : path));
-	if (!file.startsWith(root)) {
+	// /e/<id> は R2 配信分（build-e/）から。本番では Worker が R2 から返す経路に相当する
+	const isPage = path.startsWith('/e/');
+	const base = isPage ? resolve('build-e') : root;
+	let file = resolve(join(base, isPage ? path.slice('/e'.length) : path === '/' ? 'index.html' : path));
+	if (!file.startsWith(base)) {
 		res.writeHead(403);
 		return res.end();
 	}
@@ -38,7 +41,7 @@ createServer((req, res) => {
 		res.writeHead(404);
 		return res.end('not found');
 	}
-	for (const h of vercelHeaders) res.setHeader(h.key, h.value);
+	for (const [name, value] of Object.entries(securityHeaders)) res.setHeader(name, value);
 	res.setHeader('Content-Type', types[extname(file)] ?? 'application/octet-stream');
 	res.end(readFileSync(file));
 }).listen(port, () => console.log(`serving build/ with CSP headers on http://localhost:${port}`));

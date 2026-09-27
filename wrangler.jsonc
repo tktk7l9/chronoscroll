@@ -1,0 +1,33 @@
+/**
+ * chronoscroll — Cloudflare Workers（静的アセット + R2）
+ * https://developers.cloudflare.com/workers/static-assets/
+ *
+ * build/ のうち /e/ 以外（94 ファイル）を静的アセットとして配信し、
+ * /e/<id>（27,000 本超の prerender 済み HTML）だけ Worker が R2 から返す。
+ * 無料枠の「20,000 ファイル/バージョン」に収めるための分担で、HTML は
+ * scripts/r2-sync.mjs が build/e から R2 バケットへ差分同期する。
+ * セキュリティヘッダーの正本は config/security-headers.json（_headers と Worker が読む）。
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "chronoscroll",
+	"main": "worker/index.ts",
+	"compatibility_date": "2026-09-26",
+	"assets": {
+		"directory": "./build",
+		"binding": "ASSETS",
+		// build/404.html は無いので実質 Worker の notFound() が 404 を返す
+		"not_found_handling": "404-page",
+		// /e/* だけ Worker が先に受ける。他は静的アセットが先に解決される
+		"run_worker_first": ["/e/*"],
+	},
+	"r2_buckets": [
+		{
+			"binding": "PAGES",
+			"bucket_name": "chronoscroll-pages",
+		},
+	],
+	"observability": {
+		"enabled": true,
+	},
+}

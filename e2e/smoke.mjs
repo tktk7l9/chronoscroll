@@ -27,9 +27,9 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => {
 	if (m.type() !== 'error') return;
-	// Vercel Analyticsはローカル/CI環境に存在しないため除外
-	if ((m.location()?.url ?? '').includes('_vercel/insights')) return;
-	if (m.text().includes('_vercel/insights')) return;
+	// Cloudflare Web Analytics のビーコンはローカル/CI のホスト名では拒否されるため除外
+	if ((m.location()?.url ?? '').includes('cloudflareinsights.com')) return;
+	if (m.text().includes('cloudflareinsights.com')) return;
 	errors.push(`${m.text()} (${m.location()?.url ?? ''})`);
 });
 

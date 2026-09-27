@@ -1,0 +1,105 @@
+import { readFileSync } from 'node:fs';
+import { describe, expect, it } from 'vitest';
+import { handle, pageHeaders, resolve, type PagesBucket } from './serve';
+
+const security = JSON.parse(readFileSync('config/security-headers.json', 'utf8')) as Record<string, string>;
+
+/** R2 バインディングの最小フェイク。ETag は本文の長さ。If-None-Match が一致すれば本文なしで返す */
+function bucket(pages: Record<string, string>, opts: { throws?: boolean } = {}): PagesBucket {
+	return {
+		async get(key, options) {
+			if (opts.throws) throw new Error('r2 down');
+			const html = pages[key];
+			if (html === undefined) return null;
+			const httpEtag = `"${html.length}"`;
+			if (options?.onlyIf?.get('if-none-match') === httpEtag) return { httpEtag };
+			return { httpEtag, body: new Response(html).body! };
+		},
+	};
+}
+
+const env = { PAGES: bucket({ 'e/2011-03-11-quake.html': '<h1>quake</h1>' }) };
+const req = (path: string, init?: RequestInit) => new Request(`https://x.test${path}`, init);
+
+describe('resolve', () => {
+	it('/e/<id> は R2 キー e/<id>.html', () => {
+		expect(resolve('/e/2011-03-11-quake')).toEqual({ kind: 'page', key: 'e/2011-03-11-quake.html' });
+	});
+	it('.html 付きと末尾スラッシュは素の URL へリダイレクト', () => {
+		expect(resolve('/e/2011-03-11-quake.html')).toEqual({ kind: 'redirect', location: '/e/2011-03-11-quake' });
+		expect(resolve('/e/2011-03-11-quake/')).toEqual({ kind: 'redirect', location: '/e/2011-03-11-quake' });
+		expect(resolve('/e/2011-03-11-quake.html/')).toEqual({ kind: 'redirect', location: '/e/2011-03-11-quake' });
+	});
+	it('id の文字種に合わないものは 404', () => {
+		for (const p of ['/e/', '/e/../x', '/e/.hidden', '/e/a/b', '/e/%2e%2e', '/e/x.html/y', '/e/.html', '/e//', '/other']) {
+			expect(resolve(p), p).toEqual({ kind: 'notFound' });
+		}
+	});
+});
+
+describe('pageHeaders', () => {
+	it('セキュリティヘッダー一式 + HTML + キャッシュ + ETag', () => {
+		const h = pageHeaders('"abc"', true);
+		for (const [k, v] of Object.entries(security)) expect(h.get(k)).toBe(v);
+		expect(h.get('content-type')).toBe('text/html; charset=utf-8');
+		expect(h.get('cache-control')).toBe('public, max-age=3600, stale-while-revalidate=86400');
+		expect(h.get('etag')).toBe('"abc"');
+	});
+	it('cacheable=false は no-store・ETag なし', () => {
+		const h = pageHeaders(null, false);
+		expect(h.get('cache-control')).toBe('no-store');
+		expect(h.has('etag')).toBe(false);
+	});
+});
+
+describe('handle', () => {
+	it('存在するページは 200 で本文と ETag を返す', async () => {
+		const res = await handle(req('/e/2011-03-11-quake'), env);
+		expect(res.status).toBe(200);
+		expect(await res.text()).toBe('<h1>quake</h1>');
+		expect(res.headers.get('etag')).toBe('"14"');
+		expect(res.headers.get('content-security-policy')).toBe(security['Content-Security-Policy']);
+	});
+	it('If-None-Match が一致すれば 304（本文なし・ETag あり）', async () => {
+		const res = await handle(req('/e/2011-03-11-quake', { headers: { 'if-none-match': '"14"' } }), env);
+		expect(res.status).toBe(304);
+		expect(res.headers.get('etag')).toBe('"14"');
+		expect(await res.text()).toBe('');
+	});
+	it('HEAD は本文なし', async () => {
+		const res = await handle(req('/e/2011-03-11-quake', { method: 'HEAD' }), env);
+		expect(res.status).toBe(200);
+		expect(res.headers.get('etag')).toBe('"14"');
+		expect(await res.text()).toBe('');
+	});
+	it('無いページは 404 HTML（no-store・セキュリティヘッダー付き）', async () => {
+		const res = await handle(req('/e/1999-01-01-nothing'), env);
+		expect(res.status).toBe(404);
+		expect(res.headers.get('content-type')).toBe('text/html; charset=utf-8');
+		expect(res.headers.get('cache-control')).toBe('no-store');
+		expect(res.headers.get('x-frame-options')).toBe('DENY');
+		expect(await res.text()).toContain('href="/"');
+	});
+	it('パーセントエンコードは 404', async () => {
+		const res = await handle(req('/e/%2e%2e/manifest.json'), env);
+		expect(res.status).toBe(404);
+	});
+	it('クエリを保ったまま 301', async () => {
+		const res = await handle(req('/e/2011-03-11-quake.html?k=anime'), env);
+		expect(res.status).toBe(301);
+		expect(res.headers.get('location')).toBe('https://x.test/e/2011-03-11-quake?k=anime');
+		expect(res.headers.get('x-frame-options')).toBe('DENY');
+	});
+	it('GET/HEAD 以外は 405', async () => {
+		const res = await handle(req('/e/2011-03-11-quake', { method: 'POST' }), env);
+		expect(res.status).toBe(405);
+		expect(res.headers.get('allow')).toBe('GET, HEAD');
+		expect(res.headers.get('x-frame-options')).toBe('DENY');
+	});
+	it('R2 の例外は 503', async () => {
+		const res = await handle(req('/e/2011-03-11-quake'), { PAGES: bucket({}, { throws: true }) });
+		expect(res.status).toBe(503);
+		expect(res.headers.get('retry-after')).toBe('30');
+		expect(res.headers.get('x-frame-options')).toBe('DENY');
+	});
+});

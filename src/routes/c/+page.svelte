@@ -2,10 +2,11 @@
 	import ArtIcon from '$lib/components/ArtIcon.svelte';
 	import BrandMark from '$lib/components/BrandMark.svelte';
 	import { formatCount } from '$lib/coverage';
+	import { absoluteUrl } from '$lib/site';
 
 	let { data } = $props();
 
-	const canonical = 'https://chronoscroll.vercel.app/c';
+	const canonical = absoluteUrl('/c');
 	const description =
 		'アニメ、ブレイクダンス、観葉植物、AI──テーマごとに歴史のできごとを年代順に束ねた特集の一覧。';
 
@@ -22,7 +23,7 @@
 	<meta property="og:title" content="特集一覧 | chronoscroll" />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={canonical} />
-	<meta property="og:image" content="https://chronoscroll.vercel.app/ogp.png" />
+	<meta property="og:image" content={absoluteUrl('/ogp.png')} />
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
