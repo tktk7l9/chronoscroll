@@ -14,7 +14,7 @@
 		padding: 74px 82px;
 		display: flex; flex-direction: column;
 	}
-	/* 左端の背骨＝年表のガイド */
+	/* The spine on the left edge = the timeline guide */
 	.spine { position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: #b3541e; }
 	.brand {
 		display: flex; align-items: center; gap: 14px;
@@ -81,7 +81,7 @@
 		use.setAttribute('href', '/art/sprite.svg#' + c.icon);
 		document.getElementById('icon').appendChild(use);
 	}
-	// 描画完了の合図（スクショ側が待つ）
+	// Signal that rendering is complete (the screenshot side waits for it)
 	document.body.dataset.ready = '1';
 })();
 </script>

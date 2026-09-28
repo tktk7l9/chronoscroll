@@ -1,6 +1,6 @@
-// chronoscroll 実ブラウザスモーク: アクション実行+スクリーンショット+コンソールエラー収集
-// 使い方: node e2e/shot.mjs <url> <out.png> "<actions>"
-// actions: カンマ区切り。 scroll:600 / zoomin:400 / click:<selector> / type:<selector>:<text>
+// chronoscroll real-browser smoke: run actions + take a screenshot + collect console errors
+// Usage: node e2e/shot.mjs <url> <out.png> "<actions>"
+// actions: comma-separated. scroll:600 / zoomin:400 / click:<selector> / type:<selector>:<text>
 //          press:<key> / wait:800 / mobile / eval:<js>
 import { chromium } from 'playwright-core';
 

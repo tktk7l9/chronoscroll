@@ -1,114 +1,114 @@
-# このリポジトリについて（AI/Claude向け）
+# About this repository (for AI/Claude)
 
-歴史ニュースを縦の無限スクロール年表で見る静的Webアプリ **chronoscroll**。
-1829〜現在の国内外ニュースを、ズームレベルに応じた重要度LODで表示する
-（自動生成の収集対象は1868（明治）〜。それ以前は特集の書き起こし分）。
+**chronoscroll** is a static web app for browsing historical news on an infinitely scrolling vertical timeline.
+It shows domestic and international news from 1829 to the present, with an importance-based LOD that depends on the zoom level
+(automatic collection covers 1868 (Meiji) onward; earlier events are the ones written up for collections).
 
-## アーキテクチャ
-- **SvelteKit + adapter-static**（全ページprerender）。**Cloudflare Workers** にデプロイ（`wrangler.jsonc`）。
-  `build/` のうち `/e/` 以外（約94ファイル）は静的アセット、`/e/<id>`（27,000本超）は `build-e/` → R2 バケット
-  `chronoscroll-pages` に `scripts/r2-sync.mjs` で差分同期し、`worker/serve.ts` が R2 から返す
-  （無料枠「20,000ファイル/バージョン」に収めるための分担）。R2 の鍵は `.env.r2`（gitignore）と
-  Workers Builds の secret にだけ置く。ホストは https://chronoscroll.saitotakuya0719.workers.dev
-- データは**ビルド時パイプライン**（`pipeline/`）で ja.wikipedia 年ページから生成し、
-  `static/data/` にJSONチャンクとして**コミットする**（デプロイ時にWikipediaを叩かない）。
-- **LODの閾値は可視範囲の局所密度で決まる**（`chunks.ts` の `eventsPerDayInRange`）。実密度は
-  十年ごとに0.14〜1.67件/日と12倍違うので、全期間平均を使うと明治期がスカスカ・2000年代以降は
-  詰まりすぎになる。密度は `index.json` のチャンク件数から出すので追加データは要らない。
-  なお `importanceThreshold` は密度を `MAX_PX_PER_DAY / MIN_PX_PER_EVENT` で頭打ちにする。
-  これが無いと高密度時代では最大ズームでも閾値が0まで下がらず、下位の約半数が
-  **どのズーム・スクロール位置でも表示されない**（密集区間の間引きは capDensity の担当）。
-- `content/curated/*.yaml` がトップ層イベントを id で上書き（要約リライト・SVG割当・重要度補正）。
-  自動生成データを直接編集しない。手直しは必ず curated 層で行う。
-- `content/affiliate/books.yaml` はアフィリエイト書籍リンク（id→BookRef[]）。`NewsEvent`には一切
-  マージせず、`static/data/books.json`として独立経路で配信する（CC BY-SA由来データを汚さないため）。
-- `content/collections/<slug>.yaml` が**特集**（テーマ別の読み物）。1ファイル1本で、メタ情報＋
-  `entries`（curated と同型）を持つ。entries は curated 層と同じ経路に流すので、既存イベントの
-  参照・部分上書きだけでなく **新規イベントの書き起こしもここで行う**（`date`+`title`+`summary`が
-  揃えば新規追加。`importance`は省略すると100になるので必ず明示し、本編を汚さないよう40〜60に振る）。
-  出力は `static/data/collections.json`（一覧＋イベントid→slugの逆引き）と
-  `static/data/collections/<slug>.json`（収録イベント本体つき）の2系統。
-  年表側は `?k=<slug>` で絞り込む。**特集の絞り込み中はLODを効かせない**（低importanceに
-  振ってある収録イベントが閾値に負けて1件も出なくなるため。Timeline.svelteの`threshold`参照）。
-- OGP画像は**実データから生成してコミットする**（配信時に生成しない）。`npm run build` のあと
-  `npm run ogp` で `static/ogp.png`（テンプレ: `static/ogp-src.html`）と特集ごとの
-  `static/ogp/c-<slug>.png`（テンプレ: `static/ogp-collection-src.html`・collections.jsonから描画）を再生成。
-  **特集を追加/改題したら必ず再生成する**（画像が無いとSNS共有時に404になる）。
-- `src/lib/sponsor.ts`の`CURRENT_SPONSOR`が自前スポンサー枠の設定値（未契約時は`null`で非表示）。
-- 手元から `wrangler deploy` すると gitignore 対象の `static/art-preview.html`・`static/ogp-src.html` も
-  配信されるので、本番デプロイは Workers Builds（clean checkout）に任せる。
-- `npm run build` の後は `build/e` が `build-e/` に移るので、ローカル確認は `vite preview` でなく
-  `node e2e/serve.mjs <port>` を使う。
-- R2 同期成功後に `wrangler deploy` が失敗したら再ビルドする（CSS ハッシュ不整合の窓が延びる）。
+## Architecture
+- **SvelteKit + adapter-static** (every page prerendered). Deployed to **Cloudflare Workers** (`wrangler.jsonc`).
+  Everything in `build/` except `/e/` (about 94 files) is static assets; `/e/<id>` (27,000+ pages) goes to `build-e/` → R2 bucket
+  `chronoscroll-pages`, diff-synced by `scripts/r2-sync.mjs`, and `worker/serve.ts` serves it from R2
+  (the split keeps us within the free tier's "20,000 files per version"). The R2 keys live only in `.env.r2` (gitignored) and
+  the Workers Builds secrets. Host: https://chronoscroll.saitotakuya0719.workers.dev
+- Data is generated from the ja.wikipedia year pages by a **build-time pipeline** (`pipeline/`) and
+  **committed** to `static/data/` as JSON chunks (deploys never hit Wikipedia).
+- **The LOD threshold is driven by the local density of the visible range** (`eventsPerDayInRange` in `chunks.ts`). The actual density
+  varies 12x by decade, from 0.14 to 1.67 events/day, so the all-time average would make the Meiji era sparse and the 2000s onward
+  overcrowded. The density comes from the chunk counts in `index.json`, so no extra data is needed.
+  Note that `importanceThreshold` caps the density at `MAX_PX_PER_DAY / MIN_PX_PER_EVENT`.
+  Without this, in high-density eras the threshold never drops to 0 even at max zoom, and roughly the lower half
+  **is never shown at any zoom or scroll position** (thinning dense stretches is capDensity's job).
+- `content/curated/*.yaml` overrides top-tier events by id (rewritten summaries, SVG assignment, importance adjustments).
+  Never edit the auto-generated data directly. Always make manual fixes in the curated layer.
+- `content/affiliate/books.yaml` holds affiliate book links (id → BookRef[]). They are never
+  merged into `NewsEvent`; they are served through a separate path as `static/data/books.json` (to keep the CC BY-SA-derived data clean).
+- `content/collections/<slug>.yaml` is a **collection (特集)** (a themed reading list). One file per collection, with metadata +
+  `entries` (same shape as curated). Entries flow through the same path as the curated layer, so besides
+  referencing and partially overriding existing events, **new events are also written up here** (an entry with `date` + `title` + `summary`
+  is added as new. `importance` defaults to 100 if omitted, so always set it explicitly, to 40-60 so it does not pollute the main timeline).
+  Output goes two ways: `static/data/collections.json` (the listing + reverse lookup of event id → slug) and
+  `static/data/collections/<slug>.json` (with the included event bodies).
+  The timeline filters with `?k=<slug>`. **LOD is not applied while filtering by a collection** (otherwise the included events, which are given
+  low importance, lose to the threshold and none appear; see `threshold` in Timeline.svelte).
+- OGP images are **generated from real data and committed** (not generated at serve time). After `npm run build`,
+  `npm run ogp` regenerates `static/ogp.png` (template: `static/ogp-src.html`) and the per-collection
+  `static/ogp/c-<slug>.png` (template: `static/ogp-collection-src.html`, rendered from collections.json).
+  **Always regenerate after adding or renaming a collection** (without the image, social shares hit a 404).
+- `CURRENT_SPONSOR` in `src/lib/sponsor.ts` is the setting for the self-hosted sponsor slot (`null` hides it when there is no contract).
+- Running `wrangler deploy` locally also serves the gitignored `static/art-preview.html` and `static/ogp-src.html`,
+  so leave production deploys to Workers Builds (clean checkout).
+- After `npm run build`, `build/e` moves to `build-e/`, so for local checks use `node e2e/serve.mjs <port>`
+  instead of `vite preview`.
+- If `wrangler deploy` fails after a successful R2 sync, rebuild (otherwise the window of CSS hash mismatch grows).
 
-## Svelte 5 の注意（訓練データより新しい）
-- **runesモード強制**（vite.config.ts）。`$state` / `$derived` / `$effect` / `$props` を使う。
-  `export let` や `$:` リアクティブ文は使わない。イベントは `onclick={...}`（`on:click` ではない）。
-- svelte.config.js は存在せず、adapter等は **vite.config.ts の sveltekit() オプション**に集約。
-- トランジションは WAAPI ベースで厳格CSPと両立する（styleタグ注入をしないこと）。
+## Svelte 5 notes (newer than the training data)
+- **Runes mode is enforced** (vite.config.ts). Use `$state` / `$derived` / `$effect` / `$props`.
+  Do not use `export let` or `$:` reactive statements. Events are `onclick={...}` (not `on:click`).
+- There is no svelte.config.js; the adapter etc. are consolidated in **the sveltekit() options in vite.config.ts**.
+- Transitions are WAAPI-based and compatible with the strict CSP (do not inject style tags).
 
-## テスト方針（lib 100%）
-- `src/lib/*.ts`（純ロジック）と `pipeline/lib/**`（パース・スコアリング等の純関数）は
-  **カバレッジ100%ゲート**（vitest.config.ts thresholds）。CIで作動する。
-- UIコンポーネント（`src/lib/components/`）とIOスクリプト（`pipeline/run/`）はゲート対象外。
-- ネットワークを触るコードは `pipeline/run/` に隔離し、ロジックは fixture でテストする。
+## Testing policy (lib 100%)
+- `src/lib/*.ts` (pure logic) and `pipeline/lib/**` (pure functions for parsing, scoring, etc.) are under a
+  **100% coverage gate** (vitest.config.ts thresholds). It runs in CI.
+- UI components (`src/lib/components/`) and IO scripts (`pipeline/run/`) are excluded from the gate.
+- Isolate code that touches the network in `pipeline/run/`, and test the logic with fixtures.
 
-## セキュリティ / 公開
-- 厳格CSP（config/security-headers.json）。画像のみ upload.wikimedia.org を許可。後から緩めない。
-- セキュリティヘッダーの正本は `config/security-headers.json`。`static/_headers`（静的アセット用）は
-  `scripts/write-headers.mjs` が生成する**生成物**で、手で編集しない（`scripts/lib/headers.test.mjs` がドリフトを止める）。
-  Worker（`/e/*`）と `e2e/serve.mjs` も同じ JSON を読む。
-- **SvelteKit×厳格CSPの3点セット**（どれか欠けると本番で真っ白になる）:
-  ① 起動インラインスクリプトは `scripts/externalize-inline.mjs`（post-build）で外部化。
-  ② `paths.relative: false`（外部化した起動スクリプト内の import() を絶対パスで解決）。
-  ③ `style-src-attr` のハッシュはSvelteKitルートアナウンサーの固定style属性
-     （position:absolute;...）のもの。**kitのバージョン更新でこの文字列が変わったら再計算**:
-     `node -e "..."` でsha256を出し config/security-headers.json を更新（変わると console にCSP違反が出る）。
-- SSRでstyle:属性を出力しない（インラインstyle属性はCSP違反。Timelineのheightはready後に付与）。
-- **public化は publish-check スキル経由のみ**。それまで private。
-- 秘密情報・環境変数なし（公開APIのみ使用）。`.env` を作らない。
-  例外＝R2 同期の鍵 `.env.r2`（gitignore 済み・Workers Builds では secret）。
+## Security / publishing
+- Strict CSP (config/security-headers.json). Only images are allowed from upload.wikimedia.org. Do not loosen it later.
+- The source of truth for security headers is `config/security-headers.json`. `static/_headers` (for static assets) is
+  a **generated file** produced by `scripts/write-headers.mjs`; do not edit it by hand (`scripts/lib/headers.test.mjs` stops drift).
+  The Worker (`/e/*`) and `e2e/serve.mjs` read the same JSON.
+- **The SvelteKit × strict CSP trio** (missing any one leaves production blank):
+  ① The inline boot script is externalized by `scripts/externalize-inline.mjs` (post-build).
+  ② `paths.relative: false` (import() inside the externalized boot script resolves via absolute paths).
+  ③ The `style-src-attr` hash is for the fixed style attribute of SvelteKit's route announcer
+     (position:absolute;...). **Recompute it if this string changes after a kit version update**:
+     compute the sha256 with `node -e "..."` and update config/security-headers.json (if it changes, CSP violations show up in the console).
+- Do not emit style: attributes during SSR (inline style attributes violate the CSP; Timeline's height is added after ready).
+- **Make it public only through the publish-check skill**. Private until then.
+- No secrets or environment variables (only public APIs are used). Do not create `.env`.
+  Exception = the R2 sync keys in `.env.r2` (gitignored; a secret on Workers Builds).
 
-## パイプラインの落とし穴（実装時に踏んだもの）
-- **当年・前年の年ページはキャッシュしてはいけない**（`pipeline/lib/cache-policy.ts` の `isVolatileYear`）。
-  年ページは当年分が日々追記されるため、`.cache/years*/YYYY.wikitext` を使い回すと
-  「取得した日以降のできごとが永久に載らない」状態になる。実際に2026-07-10のキャッシュのまま
-  07-30にビルドされ、maxDateが07-10で止まっていた。data-refresh.yml はActionsキャッシュを
-  復元するので、月次PRが当年について永久に「変更なし」を返し続ける形で表面化する。
-  `--offline` 指定時のみキャッシュに従う。取得失敗（通信断もページ不在も null で返る）の際は
-  既存キャッシュへフォールバックし、当年ぶんを丸ごと落とさない。
-- 日付と本文の区切りは `-–—−‐` だけでなく**全角/半角コロン**もある（2001年や1953年の日本ページは
-  1ページ丸ごと「M月D日：本文」表記）。`wikitext.ts` の `SEP` に集約してある。
-  「8月25日～8月26日 - 本文」の期間表記は `collapseDateRange` で開始日に畳んでから解析する
-  （畳まないと日付として解析されず月初に落ちる）。この2つの対応で誤日付が347件→151件になった。
-  残りは「2月3日に○○が起きた」のように日付が文に溶けた形が中心で、誤爆リスクが高いので未対応。
-- `prop=pageviews` は50件バッチでも**1レスポンスに全ページ分は入らない**。`continue` を辿ること。
-  さらに特定タイトルが `pvi-cached-error-title` で失敗するとバッチ全体がエラーになる → 当該タイトルを除外してリトライ。
-- ja版Wikidata項目は記事分割の粒度により**日本の重大事件ほど sitelinks が過小**（関東大震災=3言語版）。
-  ページビューを併用する理由がこれ。
-- 年ページの「できごと」は `* [[10月1日]]` （日付のみ親）+ `**`（子）で同日複数イベントを表す。
-  区切りは `-` 以外に `–` `—` `−` `‐`(U+2010) がある。1995年だけ見出しが「出来事・事柄」。
-- SVGスプライトは `static/art/sprite.svg` に `<symbol>` 集約、`<use href="/art/sprite.svg#id">` 参照。
-  curated の `svg:` はこの symbol id と1:1で対応させる。
+## Pipeline pitfalls (ones we hit while implementing)
+- **Never cache the current or previous year's year pages** (`isVolatileYear` in `pipeline/lib/cache-policy.ts`).
+  The current year's page gets new entries daily, so reusing `.cache/years*/YYYY.wikitext`
+  leads to "events after the fetch date never show up". In practice a build on 07-30 used the
+  2026-07-10 cache, and maxDate stayed at 07-10. data-refresh.yml restores the Actions cache,
+  so it surfaces as the monthly PR returning "no changes" for the current year forever.
+  The cache is followed only with `--offline`. On fetch failure (both network errors and missing pages return null),
+  fall back to the existing cache so the current year is not dropped entirely.
+- The separator between date and body is not only `-–—−‐` but also **full-width/half-width colons** (the 2001 page and the 1953 Japan page
+  use 「M月D日：本文」 throughout). This is consolidated in `SEP` in `wikitext.ts`.
+  Range notation like 「8月25日～8月26日 - 本文」 is collapsed to the start date by `collapseDateRange` before parsing
+  (otherwise the date is not parsed and falls back to the start of the month). These two fixes cut wrong dates from 347 to 151.
+  The rest are mostly dates melted into the sentence, like 「2月3日に○○が起きた」, which have a high false-positive risk, so they are not handled.
+- `prop=pageviews` **does not return all pages in one response** even with batches of 50. Follow `continue`.
+  Also, if a particular title fails with `pvi-cached-error-title`, the whole batch errors → exclude that title and retry.
+- Because of how ja.wikipedia splits articles, ja Wikidata items **have too few sitelinks, especially for serious Japanese incidents** (関東大震災 = 3 language editions).
+  This is why page views are used as well.
+- The 「できごと」 section of a year page expresses multiple events on the same day as `* [[10月1日]]` (date-only parent) + `**` (children).
+  Separators besides `-` include `–` `—` `−` `‐` (U+2010). Only 1995 uses the heading 「出来事・事柄」.
+- SVG sprites are consolidated as `<symbol>`s in `static/art/sprite.svg` and referenced with `<use href="/art/sprite.svg#id">`.
+  curated `svg:` maps 1:1 to these symbol ids.
 
-## データのライセンス
-- イベント要約は Wikipedia 由来（**CC BY-SA 4.0**）。各イベントに出典リンクを持ち、
-  aboutページとREADMEで帰属表示する。static/data/ もこのライセンスに従う。
+## Data license
+- Event summaries come from Wikipedia (**CC BY-SA 4.0**). Each event carries source links,
+  and attribution is shown on the about page and in the README. static/data/ follows this license too.
 
-## コミット粒度
-- 機能単位で小さく。テストとセットで green の状態でコミットする。
+## Commit granularity
+- Small, per feature. Commit in a green state together with the tests.
 
 ## Cursor Cloud specific instructions
-- 依存インストールは起動時の update script（`npm ci`）で自動実行済み。標準コマンドは
-  README とルート `package.json` の `scripts` を参照（`npm run dev` / `test` / `coverage`
-  / `typecheck` / `build`）。
-- **データ生成やビルドにネットワークは不要**。`static/data/` に JSON が commit 済みで、
-  `npm run dev` も `npm run build` もそれをそのまま配信する。`npm run data:build`（Wikipedia
-  取得）は月次データ更新時のみで、通常の開発・検証では走らせない。
-- e2e スモーク（`node e2e/smoke.mjs <baseUrl>`）は事前に `npm run build` で `build/` を作り、
-  別プロセスで `node e2e/serve.mjs <port>`（本番同等CSPで配信）を起動してから実行する。
-  ブラウザは `playwright`（`npm i --no-save playwright && npx playwright install --with-deps chromium`）
-  かシステム Chrome（`playwright-core` の `channel: 'chrome'`）を使う。どちらも未導入だと
-  スモークだけ失敗するが、`dev`/`test`/`build` には影響しない。
-- GUI 確認は `npm run dev`（Vite・デフォルト5173）を起動してブラウザで開く。中身は
-  `?t=/z=/s=/k=` の URL 状態で復元されるので、共有された URL をそのまま開けば同じ表示になる。
+- Dependencies are installed automatically by the startup update script (`npm ci`). For standard commands see
+  the README and `scripts` in the root `package.json` (`npm run dev` / `test` / `coverage`
+  / `typecheck` / `build`).
+- **Data generation and builds need no network**. The JSON is committed in `static/data/`, and
+  both `npm run dev` and `npm run build` serve it as is. `npm run data:build` (fetching from Wikipedia)
+  is only for the monthly data update; do not run it for normal development or verification.
+- For the e2e smoke test (`node e2e/smoke.mjs <baseUrl>`), first create `build/` with `npm run build`,
+  start `node e2e/serve.mjs <port>` (serves with production-equivalent CSP) in a separate process, then run it.
+  For the browser use `playwright` (`npm i --no-save playwright && npx playwright install --with-deps chromium`)
+  or the system Chrome (`channel: 'chrome'` in `playwright-core`). If neither is installed,
+  only the smoke test fails; `dev`/`test`/`build` are unaffected.
+- For GUI checks, start `npm run dev` (Vite, default 5173) and open it in a browser. The contents are
+  restored from the `?t=/z=/s=/k=` URL state, so opening a shared URL as is gives the same view.

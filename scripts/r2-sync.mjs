@@ -1,9 +1,9 @@
-// build-e/*.html（scripts/split-pages.mjs が build/e から移したもの）を R2 バケットへ差分同期する（S3 互換 API）。
-// 使い方: node --env-file=.env.r2 scripts/r2-sync.mjs [--dry-run] [--allow-mass-delete]
-// 環境変数: R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY（必須）、R2_BUCKET / R2_ACCOUNT_ID（任意）
-// R2 の manifest.json（キー → sha256）と突き合わせ、変わったものだけ PUT・消えたものは DELETE。
-// DELETE 失敗時は manifest に古いハッシュを残し、次回実行時に再試行する。
-// --allow-mass-delete: local が空、または del が remote の 10% を超える「大量削除」を検知したときの安全弁を解除する。
+// Diff-sync build-e/*.html (moved from build/e by scripts/split-pages.mjs) to the R2 bucket (S3-compatible API).
+// Usage: node --env-file=.env.r2 scripts/r2-sync.mjs [--dry-run] [--allow-mass-delete]
+// Env vars: R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY (required), R2_BUCKET / R2_ACCOUNT_ID (optional)
+// Compare against manifest.json in R2 (key → sha256): PUT only what changed, DELETE what disappeared.
+// If a DELETE fails, the old hash stays in the manifest and it is retried on the next run.
+// --allow-mass-delete: disables the safety valve that trips on "mass deletion" (local is empty, or del exceeds 10% of remote).
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
@@ -14,8 +14,8 @@ import {
 } from '@aws-sdk/client-s3';
 import { isMassDelete, parseManifest, planSync, sha256 } from './lib/r2-plan.mjs';
 
-// Workers Builds のプレビュービルド（main 以外）では本番バケットを触らない。
-// WORKERS_CI と WORKERS_CI_BRANCH は Workers Builds が既定で注入する。
+// Preview builds on Workers Builds (anything but main) must not touch the production bucket.
+// WORKERS_CI and WORKERS_CI_BRANCH are injected by Workers Builds by default.
 if (process.env.WORKERS_CI && process.env.WORKERS_CI_BRANCH && process.env.WORKERS_CI_BRANCH !== 'main') {
 	console.log(`非 production ブランチ（${process.env.WORKERS_CI_BRANCH}）: R2 同期をスキップ`);
 	process.exit(0);
@@ -106,8 +106,8 @@ for (let i = 0; i < plan.del.length; i += 1000) {
 	}
 }
 
-// 成功した分だけ manifest に反映する（PUT失敗分は次回また put の対象に、
-// DELETE失敗分は remote の古いハッシュを残して次回また del の対象になる）
+// Reflect only the successful ones in the manifest (failed PUTs become put targets again next time,
+// failed DELETEs keep the old hash from remote and become del targets again next time)
 const manifest = Object.fromEntries(Object.entries(local).filter(([key]) => !failed.has(key)));
 for (const key of failedDel) manifest[key] = remote[key];
 await s3.send(

@@ -13,10 +13,10 @@
 
 	const c = $derived(data.detail);
 	const canonical = $derived(absoluteUrl(`/c/${c.slug}`));
-	// 特集ごとのOGP画像（scripts/gen-ogp.mjs が実データから生成してコミットしてある）
+	// Per-collection OGP image (generated from real data by scripts/gen-ogp.mjs and committed)
 	const ogImage = $derived(absoluteUrl(`/ogp/c-${c.slug}.png`));
 	const spanLabel = $derived(`${c.fromDate.slice(0, 4)}年〜${c.toDate.slice(0, 4)}年`);
-	// 年表側は特集を ?k=<slug> で絞り込む。期間が画面に収まる初期ズームも一緒に渡す
+	// The timeline filters by collection with ?k=<slug>. Also pass an initial zoom at which the period fits on screen
 	const onTimeline = $derived(timelineHref(c.slug, c.fromDate, c.toDate));
 </script>
 
@@ -53,7 +53,7 @@
 		<p class="meta">全{formatCount(c.count)}件 · {spanLabel}</p>
 
 		<p class="cta">
-			<!-- 年表(/)はcsr有効なルート。特集ページはcsr=falseなのでフルリロードで渡す -->
+			<!-- The timeline (/) is a csr-enabled route. Collection pages have csr=false, so hand off with a full reload -->
 			<a class="timeline-link" href={onTimeline} data-sveltekit-reload>年表で通して見る →</a>
 		</p>
 
@@ -210,7 +210,7 @@
 	.items li[data-cat='disaster'] { --cat-color: var(--cat-disaster); }
 	.items li[data-cat='war'] { --cat-color: var(--cat-war); }
 
-	/* 左端の縦線＝年表の背骨を思わせるガイド */
+	/* A vertical line on the left edge = a guide evoking the timeline's spine */
 	.items li::before {
 		content: '';
 		position: absolute;

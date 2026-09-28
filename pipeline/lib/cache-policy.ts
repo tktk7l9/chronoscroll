@@ -1,13 +1,13 @@
 /**
- * 年ページ wikitext のキャッシュ方針。
+ * Caching policy for year-page wikitext.
  *
- * 年ページは過去の年でも編集され続けるが、内容が実質固まるのは翌々年あたり。
- * 一方、当年のページは日々できごとが追記されるため、キャッシュを使うと
- * 「取得した日以降のできごとが永久に載らない」状態になる（実際に起きた）。
- * 前年も、12月のできごとが年明けに追記されるので同じ扱いにする。
+ * Year pages keep being edited even for past years, but their content settles around two years later.
+ * On the other hand, events are appended to the current year's page daily, so using the cache
+ * leads to "events after the fetch date never show up" (this actually happened).
+ * The previous year gets the same treatment, since December events are appended after New Year.
  */
 
-/** この年の wikitext はキャッシュを無視して取り直すべきか（today は ISO 日付） */
+/** Whether this year's wikitext should ignore the cache and be refetched (today is an ISO date) */
 export function isVolatileYear(year: number, today: string): boolean {
 	return year >= Number(today.slice(0, 4)) - 1;
 }

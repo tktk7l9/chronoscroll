@@ -2,7 +2,7 @@
 :root {
 	color-scheme: light dark;
 
-	/* 紙面(editorial archive)調のニュートラル */
+	/* Neutral palette in a print (editorial archive) style */
 	--bg: #f7f5f0;
 	--bg-elevated: #fffdf8;
 	--ink: #1f1c17;
@@ -13,7 +13,7 @@
 	--accent: #b3541e;
 	--focus: #2563eb;
 
-	/* カテゴリ別アクセント */
+	/* Per-category accents */
 	--cat-politics: #3d5a80;
 	--cat-economy: #1f7a5c;
 	--cat-culture: #9c4d8f;
@@ -40,7 +40,7 @@
 	--accent: #e0824a;
 	--focus: #60a5fa;
 	--shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
-	/* ダーク面(#211e19)でテキストコントラスト4.5:1以上を満たす明色版 */
+	/* Lighter variants that meet 4.5:1+ text contrast on the dark surface (#211e19) */
 	--cat-politics: #6ea3e0;
 	--cat-economy: #3cba85;
 	--cat-culture: #d678c6;
@@ -88,11 +88,11 @@ body {
 }
 
 html {
-	/* モーダル表示中にスクロールバーが消えても横幅が動かないよう常に溝を確保する */
+	/* Always reserve the gutter so the width does not shift when the scrollbar disappears while a modal is open */
 	scrollbar-gutter: stable;
 }
 
-/* モーダル表示中は背面の年表を固定する（DetailDialogが付け外しする） */
+/* Lock the timeline behind while a modal is open (DetailDialog toggles this) */
 html.modal-open {
 	overflow: hidden;
 }

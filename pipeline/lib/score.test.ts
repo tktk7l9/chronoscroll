@@ -48,9 +48,9 @@ describe('linkScore', () => {
 	});
 
 	it('ページビューがsitelinksを補完する（ja記事分割バイアス対策）', () => {
-		// sitelinks=3 でも 1500view/日 なら 150相当（CAP）まで引き上がる
+		// Even with sitelinks=3, 1500 views/day lifts it up to the 150 equivalent (CAP)
 		expect(linkScore('関東大震災', 3, 1, 1500)).toBe(SITELINK_CAP);
-		// 両方低ければ低いまま
+		// If both are low, it stays low
 		expect(linkScore('マイナー記事', 3, 1, 20)).toBe(3);
 	});
 });

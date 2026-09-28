@@ -78,7 +78,7 @@
 		}
 	}
 
-	/** グローバルショートカット「/」で検索へ */
+	/** Global shortcut "/" focuses search */
 	$effect(() => {
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -144,14 +144,14 @@
 <style>
 	.searchbox {
 		position: relative;
-		/* 親がflexのとき、min-width:auto（=入力欄の固定幅）が縮小の下限になり、
-		   狭い画面でヘッダーの他要素を押し出してしまう。0を許して検索欄側で吸収する */
+		/* When the parent is flex, min-width:auto (= the input's fixed width) becomes the shrink floor,
+		   pushing other header elements out on narrow screens. Allow 0 and absorb it in the search field */
 		min-width: 0;
 	}
 
 	input {
 		width: min(260px, 38vw);
-		/* 縮小された .searchbox に追従する。幅に余裕がある間は上のwidthが効くので見た目は不変 */
+		/* Follows the shrunken .searchbox. While there is room, the width above applies, so the look is unchanged */
 		max-width: 100%;
 		min-width: 0;
 		padding: 7px 12px;
@@ -171,8 +171,8 @@
 		position: absolute;
 		top: calc(100% + 8px);
 		right: 0;
-		/* right:0 は「検索欄の右端」基準なので、92vw では検索欄の右にあるテーマ切替＋左右余白の分だけ
-		   画面左へはみ出し、日付の先頭桁が欠ける。ビューポート幅からその分（72px）を引いて収める */
+		/* right:0 is relative to "the right edge of the search field", so at 92vw it overflows the left edge of the screen by
+		   the theme toggle to its right plus side margins, cutting off the first digits of dates. Subtract that (72px) from the viewport width to fit */
 		width: min(430px, calc(100vw - 72px));
 		max-height: 55vh;
 		overflow-y: auto;

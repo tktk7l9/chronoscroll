@@ -102,7 +102,7 @@ describe('capDensity', () => {
 	});
 
 	it('同じ帯に密集したイベントは重要度上位のみ残す', () => {
-		// 1px/日: 3日間に3件、minPx=100 → 帯あたり1件なら最重要のみ
+		// 1px/day: 3 events in 3 days, minPx=100 → with 1 per band, only the most important
 		const pts = toPoints([
 			ev('low', '2000-01-01', 10),
 			ev('high', '2000-01-02', 90),

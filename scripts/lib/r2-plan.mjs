@@ -1,4 +1,4 @@
-// R2 同期の差分計算（純関数）。I/O は scripts/r2-sync.mjs が持つ。
+// Diff calculation for the R2 sync (pure function). I/O lives in scripts/r2-sync.mjs.
 import { createHash } from 'node:crypto';
 
 /** @param {Buffer | string} data */
@@ -7,8 +7,8 @@ export function sha256(data) {
 }
 
 /**
- * @param {Record<string, string>} local  キー → sha256（ビルド成果物）
- * @param {Record<string, string>} remote キー → sha256（R2 の manifest.json）
+ * @param {Record<string, string>} local  key → sha256 (build output)
+ * @param {Record<string, string>} remote key → sha256 (manifest.json in R2)
  */
 export function planSync(local, remote) {
 	const put = [];
@@ -18,13 +18,13 @@ export function planSync(local, remote) {
 	return { put: put.sort(), del: del.sort(), skip: skip.sort() };
 }
 
-/** 大量削除の安全弁。local が空、または del が remote の 10% を超えるなら止める（--allow-mass-delete で解除） */
+/** Safety valve against mass deletion. Stop if local is empty or del exceeds 10% of remote (override with --allow-mass-delete) */
 export function isMassDelete(plan, localCount, remoteCount) {
 	if (remoteCount === 0) return false;
 	return localCount === 0 || plan.del.length > remoteCount * 0.1;
 }
 
-/** manifest が無い・壊れている・配列のときは空＝全件 PUT に倒す（削除はしない） */
+/** If the manifest is missing, broken, or an array, treat it as empty = PUT everything (never delete) */
 export function parseManifest(text) {
 	try {
 		const v = JSON.parse(text);

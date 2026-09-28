@@ -5,10 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="color-scheme" content="light dark" />
 		%sveltekit.head%
-		<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "cf62303813104660bbb08da280e9673d"}'></script><!-- Cloudflare Web Analytics（トークンは非秘密） gitleaks:allow -->
+		<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "cf62303813104660bbb08da280e9673d"}'></script><!-- Cloudflare Web Analytics (the token is not secret) gitleaks:allow -->
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<!-- inline style属性は厳格CSP(style-src 'self')で禁止のため app.css の .app-shell を使う -->
+		<!-- Inline style attributes are forbidden by the strict CSP (style-src 'self'), so use .app-shell in app.css -->
 		<div class="app-shell">%sveltekit.body%</div>
 	</body>
 </html>

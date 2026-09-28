@@ -34,10 +34,10 @@ describe('chunkKeysInRange', () => {
 	});
 });
 
-/** 1日1件ちょうどの十年チャンク（1960-01-01〜1970-01-01 は3653日） */
+/** Decade chunk with exactly 1 event per day (1960-01-01 to 1970-01-01 is 3653 days) */
 const dense: ChunkMeta[] = [
 	{ key: '1960s', fromYear: 1960, toYear: 1969, count: 3653 },
-	// 1970-01-01〜1980-01-01 は3652日。3倍の密度にする
+	// 1970-01-01 to 1980-01-01 is 3652 days. Triple the density
 	{ key: '1970s', fromYear: 1970, toYear: 1979, count: 3652 * 3 },
 ];
 
@@ -52,14 +52,14 @@ describe('eventsPerDayInRange', () => {
 	});
 
 	it('密度の違うチャンクにまたがると重なり日数で加重平均する', () => {
-		// 1969-01-01〜1971-01-01 は 1960s に365日・1970s に365日かかる → (1+3)/2
+		// 1969-01-01 to 1971-01-01 spans 365 days in the 1960s and 365 days in the 1970s → (1+3)/2
 		expect(
 			eventsPerDayInRange(dense, dayOf('1971-01-01'), dayOf('1969-01-01')),
 		).toBeCloseTo(2, 2);
 	});
 
 	it('収録範囲の外へはみ出してもデータのある部分の密度で薄まらない', () => {
-		// 1969-01-01〜1975-01-01 のうちデータは1970-01-01までの365日しかない
+		// Of 1969-01-01 to 1975-01-01, data only covers the 365 days up to 1970-01-01
 		expect(
 			eventsPerDayInRange([dense[0]], dayOf('1975-01-01'), dayOf('1969-01-01')),
 		).toBeCloseTo(1, 5);

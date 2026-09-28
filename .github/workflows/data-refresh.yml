@@ -1,8 +1,8 @@
 name: data-refresh
 
-# 毎月1日 21:00 UTC（JST 2日 6:00）にWikipediaからデータを再生成してPRを作る。
-# pipeline/.cache はActionsキャッシュで持ち回り、新規リンク分だけAPIを叩く。
-# ページビュー等のシグナルはキャッシュ分が古くなるが、注目度の相対順位への影響は軽微。
+# On the 1st of every month at 21:00 UTC (JST 6:00 on the 2nd), regenerate the data from Wikipedia and open a PR.
+# pipeline/.cache is carried over via the Actions cache, so the API is only hit for new links.
+# Signals such as page views get stale for cached entries, but the effect on the relative ranking of prominence is minor.
 on:
   schedule:
     - cron: '0 21 1 * *'
@@ -41,9 +41,9 @@ jobs:
           BRANCH="data-refresh-$(date +%Y%m)"
           git checkout -B "$BRANCH"
           git add static/data pipeline/.cache/qids.json pipeline/.cache/sitelinks.json pipeline/.cache/images.json pipeline/.cache/pageviews.json
-          # index.json の generatedAt はビルドごとに必ず変わる（アプリは読まない）。
-          # 素の diff で判定すると「中身は同じなのに毎月PRが出る」状態になり、
-          # 本当にデータが増えた月との区別がつかなくなるので、この値だけ無視する。
+          # generatedAt in index.json always changes on every build (the app does not read it).
+          # Judging by a plain diff would open a PR every month "even though the content is the same",
+          # making it impossible to tell the months when data actually grew, so ignore only this value.
           OTHER=$(git diff --cached --name-only | grep -v '^static/data/index\.json$' || true)
           NEW_META=$(git show :static/data/index.json | jq -S 'del(.generatedAt)')
           OLD_META=$(git show HEAD:static/data/index.json | jq -S 'del(.generatedAt)')
@@ -53,9 +53,9 @@ jobs:
           fi
           git commit -m "data: 月次データ更新 $(date +%Y-%m)"
           git push -f origin "$BRANCH"
-          # 既存 PR があれば作らない。無いのに作れなければ失敗させる（2026-09-27 に
-          # 「GitHub Actions is not permitted to create or approve pull requests」が
-          # `|| echo` で握りつぶされ、PR が無いまま success になっていた）
+          # Do not create a PR if one already exists. If none exists and creation fails, fail the job (on 2026-09-27,
+          # "GitHub Actions is not permitted to create or approve pull requests" was
+          # swallowed by `|| echo`, and the job succeeded with no PR)
           if [ -n "$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number')" ]; then
             echo "PRは既に存在します"
           else

@@ -34,7 +34,7 @@ describe('collectionDetailPath / collectionPath', () => {
 
 describe('fitZoom', () => {
 	it('目標高さを期間で割った値を返す', () => {
-		// 1000日ちょうどの期間
+		// A period of exactly 1000 days
 		const z = fitZoom('2000-01-01', '2002-09-27');
 		expect(z).toBeCloseTo(TARGET_SPAN_PX / 1000, 6);
 	});

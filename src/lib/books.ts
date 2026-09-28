@@ -1,12 +1,12 @@
 import type { BookRef } from './types.ts';
 
-/** Amazon アソシエイト・トラッキングID。審査通過後はこの1箇所を差し替える */
+/** Amazon Associates tracking ID. Replace it in this one place after approval */
 export const AMAZON_ASSOC_TAG = 'PLACEHOLDER-22';
 
-/** 1イベントあたりに表示する書籍リンクの上限 */
+/** Max number of book links shown per event */
 export const MAX_BOOKS_PER_EVENT = 4;
 
-/** BookRef から実際に遷移させるアフィリエイトURLを解決する */
+/** Resolve the affiliate URL a BookRef actually navigates to */
 export function resolveBookUrl(book: BookRef): string {
 	if (book.store === 'amazon') {
 		if (book.asin) return `https://www.amazon.co.jp/dp/${book.asin}?tag=${AMAZON_ASSOC_TAG}`;
@@ -22,7 +22,7 @@ function appendAmazonTag(url: string): string {
 	return `${url}${sep}tag=${AMAZON_ASSOC_TAG}`;
 }
 
-/** 表示件数を上限で切り詰める */
+/** Truncate to the display limit */
 export function limitBooks(books: readonly BookRef[], max = MAX_BOOKS_PER_EVENT): BookRef[] {
 	return books.slice(0, max);
 }

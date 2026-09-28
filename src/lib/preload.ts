@@ -1,39 +1,39 @@
 /**
- * 詳細モーダルの画像先読み。
+ * Image prefetch for the detail modal.
  *
- * 画像はモーダルを開いてから取りに行くため、開いた直後は枠が空のまま待たされる
- * （実測で1.6Mbps時 約1.2秒）。カードにポインタが乗った時点で取っておけば、
- * 開いた時にはキャッシュに載っている。
+ * Images are fetched only after the modal opens, so right after opening the frame sits empty
+ * (measured at about 1.2s on 1.6 Mbps). Fetching when the pointer lands on a card means
+ * the image is already in the cache when it opens.
  *
- * ただし年表を横切っただけのカードまで取ると通信の無駄なので、一定時間留まって
- * から動く。同じURLは一度しか取りに行かない。
+ * But fetching for cards the pointer merely crosses on the timeline wastes traffic, so it only starts
+ * after dwelling for a while. The same URL is fetched only once.
  */
 
-/** navigator.connection のうち先読み判断に使う部分だけ */
+/** Only the part of navigator.connection used to decide on prefetching */
 export interface ConnectionLike {
 	saveData?: boolean;
 	effectiveType?: string;
 }
 
 export interface ImagePreloader {
-	/** ホバー開始。dwellMs 留まったら取りに行く */
+	/** Hover start. Fetch after dwelling dwellMs */
 	schedule(url: string | null | undefined): void;
-	/** クリック直前など、待たずに取りに行く */
+	/** Fetch without waiting, e.g. right before a click */
 	preloadNow(url: string | null | undefined): void;
-	/** ホバー離脱。予約済みの先読みを取り消す */
+	/** Hover end. Cancel the pending prefetch */
 	cancel(): void;
 }
 
 export interface PreloaderOptions {
-	/** 取りに行くまでにホバーを継続する時間（既定120ms） */
+	/** How long the hover must last before fetching (default 120ms) */
 	dwellMs?: number;
-	/** true を返す間は先読みしない */
+	/** No prefetching while this returns true */
 	skip?: () => boolean;
 }
 
 /**
- * データセーバー指定または低速回線では先読みしない。
- * connection 未対応のブラウザ（Safari等）は undefined が来るので先読みする。
+ * Do not prefetch with Data Saver on or on a slow connection.
+ * Browsers without connection support (Safari etc.) give undefined, so prefetch.
  */
 export function prefersReducedData(connection: ConnectionLike | undefined): boolean {
 	if (!connection) return false;
@@ -57,7 +57,7 @@ export function createImagePreloader(
 		}
 	}
 
-	/** 取りに行くべきURLか（未指定・取得済み・先読み無効なら false） */
+	/** Whether the URL should be fetched (false if unset, already fetched, or prefetch disabled) */
 	function wanted(url: string | null | undefined): url is string {
 		if (!url || requested.has(url)) return false;
 		return !options.skip?.();

@@ -7,10 +7,10 @@ export interface SponsorConfig {
 	alt: string;
 }
 
-/** 未契約時は null。SponsorSlot はこの値がnull（または不正）なら何も描画しない */
+/** null when there is no contract. SponsorSlot renders nothing when this is null (or invalid) */
 export const CURRENT_SPONSOR: SponsorConfig | null = null;
 
-/** CSPのimg-src 'self'を保つためのガード。同一オリジンの絶対パスのみ許可する */
+/** Guard to keep CSP img-src 'self'. Only same-origin absolute paths are allowed */
 export function isSelfHostedPath(src: string): boolean {
 	return src.startsWith('/') && !src.startsWith('//');
 }

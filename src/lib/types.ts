@@ -24,7 +24,7 @@ export interface EventImage {
 	credit: string;
 }
 
-/** 関連イベントへの参照。詳細ダイアログ/個別ページで即座にリンクを描画できるよう非正規化して埋め込む */
+/** Reference to a related event. Denormalized and embedded so the detail dialog / detail page can render links immediately */
 export interface RelatedRef {
 	id: string;
 	date: string;
@@ -32,8 +32,8 @@ export interface RelatedRef {
 }
 
 /**
- * アフィリエイト書籍リンク（content/affiliate/books.yaml 由来）。
- * NewsEvent には一切マージしない。static/data/books.json として別経路で配信する。
+ * Affiliate book links (from content/affiliate/books.yaml).
+ * Never merged into NewsEvent. Served through a separate path as static/data/books.json.
  */
 export interface BookRef {
 	title: string;
@@ -45,54 +45,54 @@ export interface BookRef {
 
 export interface NewsEvent {
 	id: string;
-	/** ISO yyyy-mm-dd（precision が month/year の場合は 01 埋め） */
+	/** ISO yyyy-mm-dd (padded with 01 when precision is month/year) */
 	date: string;
 	precision: Precision;
 	title: string;
 	summary: string;
 	category: Category;
 	region: Region;
-	/** 注目度 0-100。ズームLODの表示閾値に使う */
+	/** Prominence 0-100. Used as the display threshold for zoom LOD */
 	importance: number;
 	sources: EventSource[];
 	image?: EventImage;
-	/** スプライトの symbol id（トップ層のみ） */
+	/** Sprite symbol id (top tier only) */
 	svg?: string;
-	/** 同じ実体を出典に持つ、または手動で結びつけた関連イベント（重要度順・最大数件） */
+	/** Related events that cite the same entity or were linked manually (by importance, a few at most) */
 	related?: RelatedRef[];
 }
 
 /**
- * 特集（テーマ別にイベントを束ねた読み物）のメタ情報。
- * content/collections/<slug>.yaml 由来で、static/data/collections.json に載る。
+ * Metadata for a collection (a themed reading list that groups events).
+ * Comes from content/collections/<slug>.yaml and is included in static/data/collections.json.
  */
 export interface CollectionMeta {
 	slug: string;
 	title: string;
-	/** 一覧カードと本文冒頭に出す1〜2文 */
+	/** One or two sentences shown on the listing card and at the top of the body */
 	lead: string;
-	/** meta description 用 */
+	/** For the meta description */
 	description: string;
-	/** スプライトの symbol id */
+	/** Sprite symbol id */
 	icon?: string;
 	count: number;
-	/** 収録イベントの最古/最新の日付（ISO） */
+	/** Oldest/newest date of the included events (ISO) */
 	fromDate: string;
 	toDate: string;
 }
 
-/** static/data/collections/<slug>.json の中身。メタ + 収録イベント本体（日付昇順） */
+/** Contents of static/data/collections/<slug>.json. Metadata + included event bodies (ascending by date) */
 export interface CollectionDetail extends CollectionMeta {
 	events: NewsEvent[];
 }
 
-/** static/data/collections.json。一覧と、イベントid→所属slugの逆引き */
+/** static/data/collections.json. The listing and a reverse lookup of event id → slugs it belongs to */
 export interface CollectionsIndex {
 	collections: CollectionMeta[];
 	byEvent: Record<string, string[]>;
 }
 
-/** 遅延ロード用チャンク（基本は十年、件数が多い十年は5年に分割） */
+/** Lazy-load chunk (a decade by default; decades with many events are split into 5 years) */
 export interface ChunkMeta {
 	key: string;
 	fromYear: number;
@@ -100,7 +100,7 @@ export interface ChunkMeta {
 	count: number;
 }
 
-/** static/data/index.json のメタ情報 */
+/** Metadata of static/data/index.json */
 export interface IndexMeta {
 	generatedAt: string;
 	minDate: string;

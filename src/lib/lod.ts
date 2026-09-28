@@ -1,29 +1,29 @@
 /**
- * セマンティックズームのLOD（詳細度）。
- * importance は十年内パーセンタイル（0-100・ほぼ一様分布）なので、
- * 「画面上のイベント密度が一定になる」閾値を連続的に計算できる。
+ * Semantic-zoom LOD (level of detail).
+ * importance is a within-decade percentile (0-100, nearly uniform), so
+ * the threshold that keeps "the on-screen event density constant" can be computed continuously.
  */
 import { MAX_PX_PER_DAY, MIN_PX_PER_DAY } from './timescale.ts';
 
-/** 表示イベント1件あたりに確保したい縦px（小さいほど密に出す） */
+/** Vertical px to reserve per displayed event (smaller shows more densely) */
 export const MIN_PX_PER_EVENT = 110;
 
 /**
- * overview.json に収録する importance の下限。
- * pipeline（overview.json生成）とフロント（この閾値を下回るまでチャンク先読みを
- * 抑制する判断）の両方が参照する、両者で一致させるべき唯一の値。
+ * Minimum importance included in overview.json.
+ * The single value that both the pipeline (generating overview.json) and the front end (deciding to suppress
+ * chunk prefetch until the threshold drops below it) refer to and must agree on.
  */
 export const OVERVIEW_MIN_IMPORTANCE = 97;
 
 /**
- * このズーム（px/日）で表示すべき importance の下限。
- * fraction = 表示したい件数割合 = (pxPerDay / minPxPerEvent) / eventsPerDay
+ * Minimum importance to show at this zoom (px/day).
+ * fraction = share of events to show = (pxPerDay / minPxPerEvent) / eventsPerDay
  *
- * eventsPerDay は「最大ズームなら fraction が1に達する」水準で頭打ちにする。
- * 可視範囲の局所密度を渡すようになった結果、2020年代（約1.67件/日）では最大ズームでも
- * 閾値が48程度までしか下がらず、下位の約半数がどのズーム・スクロール位置でも
- * 表示されない状態になっていた。密度が高い区間の間引きは capDensity が担当し、
- * こちらは「ズームしきれば必ず見える」ことを保証する。
+ * eventsPerDay is capped at the level where "fraction reaches 1 at maximum zoom".
+ * After switching to passing the local density of the visible range, in the 2020s (about 1.67 events/day) the threshold
+ * only dropped to about 48 even at maximum zoom, and roughly the lower half was never shown at any zoom or
+ * scroll position. Thinning of dense stretches is handled by capDensity;
+ * this guarantees that "zooming in far enough always shows it".
  */
 export function importanceThreshold(
 	pxPerDay: number,
@@ -39,7 +39,7 @@ export function importanceThreshold(
 
 export type ZoomLevel = '概観' | '十年' | '年' | '月' | '日';
 
-/** ズームレベルの表示名（px/日の帯で判定） */
+/** Display name of the zoom level (judged by px/day band) */
 export function zoomLevelLabel(pxPerDay: number): ZoomLevel {
 	if (pxPerDay < 0.15) return '概観';
 	if (pxPerDay < 1.2) return '十年';
@@ -48,21 +48,21 @@ export function zoomLevelLabel(pxPerDay: number): ZoomLevel {
 	return '日';
 }
 
-/** ズームゲージ用: pxPerDay → 0..1（対数スケール、0=最小ズーム/概観・1=最大ズーム/日） */
+/** For the zoom gauge: pxPerDay → 0..1 (log scale, 0 = min zoom/overview, 1 = max zoom/day) */
 export function zoomToT(pxPerDay: number): number {
 	const lo = Math.log(MIN_PX_PER_DAY);
 	const hi = Math.log(MAX_PX_PER_DAY);
 	return Math.min(1, Math.max(0, (Math.log(pxPerDay) - lo) / (hi - lo)));
 }
 
-/** ズームゲージ用: 0..1 → pxPerDay */
+/** For the zoom gauge: 0..1 → pxPerDay */
 export function tToZoom(t: number): number {
 	const lo = Math.log(MIN_PX_PER_DAY);
 	const hi = Math.log(MAX_PX_PER_DAY);
 	return Math.exp(lo + Math.min(1, Math.max(0, t)) * (hi - lo));
 }
 
-/** ゲージの目盛り: 各ズームレベルの代表値（レベル帯の対数中央） */
+/** Gauge ticks: a representative value per zoom level (log center of the level band) */
 export const ZOOM_STOPS: readonly { label: ZoomLevel; pxPerDay: number }[] = [
 	{ label: '概観', pxPerDay: 0.077 },
 	{ label: '十年', pxPerDay: 0.42 },
@@ -71,7 +71,7 @@ export const ZOOM_STOPS: readonly { label: ZoomLevel; pxPerDay: number }[] = [
 	{ label: '日', pxPerDay: 62 },
 ] as const;
 
-/** 目盛りの刻み（年数）。ズームに応じて 50年→10年→5年→1年 */
+/** Tick step (years). 50 → 10 → 5 → 1 years depending on zoom */
 export function tickStepYears(pxPerDay: number): number {
 	const pxPerYear = pxPerDay * 365.25;
 	if (pxPerYear >= 180) return 1;
@@ -81,10 +81,10 @@ export function tickStepYears(pxPerDay: number): number {
 }
 
 /**
- * このズームで、十年/5年チャンクの詳細データが実際に画面へ寄与するか。
- * overview.json は importanceThreshold が OVERVIEW_MIN_IMPORTANCE を下回るまで
- * 何も追加で表示させないため、それまではチャンクのフェッチ自体が無駄になる
- * （概観〜十年ズーム全域が該当。実測でチャンク8件・約2.5MBの無駄フェッチだった）。
+ * Whether the detailed data of decade/5-year chunks actually contributes to the screen at this zoom.
+ * overview.json shows nothing additional until importanceThreshold drops below OVERVIEW_MIN_IMPORTANCE,
+ * so until then fetching chunks is pure waste
+ * (this covers the whole overview-to-decade zoom range; measured at 8 chunks, about 2.5 MB of wasted fetches).
  */
 export function needsChunkData(
 	pxPerDay: number,

@@ -1,4 +1,4 @@
-/** 前回実行時刻から最低間隔を守るために必要な待機ミリ秒を返す（IOはrun側） */
+/** Return the wait in milliseconds needed to keep the minimum interval since the last run (IO lives on the run side) */
 export function nextDelay(lastAt: number, now: number, minIntervalMs: number): number {
 	const elapsed = now - lastAt;
 	return elapsed >= minIntervalMs ? 0 : minIntervalMs - elapsed;
@@ -10,11 +10,11 @@ const RETRY_CAP_MS = 60_000;
 const RETRY_AFTER_CAP_MS = 120_000;
 
 /**
- * 429/503/maxlag 後の待機ミリ秒。attempt は 0 始まり。
- * 指数バックオフ（2秒×3^n・上限60秒）で 6 回まで。サーバーが Retry-After（秒）を返したら
- * そちらを優先する（上限120秒）。諦めるときは null。
- * 2026-09-01 の月次更新が「1/3/9秒の3回」で ja.wikipedia の 429 に負けて落ちたため、
- * IO を持たない純関数として切り出した。
+ * Wait in milliseconds after 429/503/maxlag. attempt starts at 0.
+ * Exponential backoff (2s × 3^n, max 60s) up to 6 times. If the server returns Retry-After (seconds),
+ * prefer that (max 120s). Returns null when giving up.
+ * Extracted as a pure function with no IO because the 2026-09-01 monthly update failed,
+ * losing to ja.wikipedia's 429 with "3 retries of 1/3/9 seconds".
  */
 export function retryDelayMs(attempt: number, retryAfterSec?: number): number | null {
 	if (attempt >= RETRY_MAX_ATTEMPTS) return null;
@@ -26,16 +26,16 @@ export function retryDelayMs(attempt: number, retryAfterSec?: number): number | 
 }
 
 /**
- * 再試行に意味があるエラーか。レート制限（429）・過負荷（503/maxlag）・ネットワーク断は
- * 待てば通るので再試行する。存在しないページ（missingtitle）などの API エラーや 4xx は
- * 何度送っても同じなので即座に諦める（2026-09-27 の月次更新で、無い年ページ 36 件に
- * 6 回×最長 60 秒の再試行を掛けて 2 時間を溶かしたため）。
+ * Whether retrying the error makes sense. Rate limits (429), overload (503/maxlag), and network drops
+ * go through if we wait, so retry them. API errors such as missing pages (missingtitle) and 4xx
+ * are the same no matter how often they are sent, so give up immediately (the 2026-09-27 monthly update
+ * burned 2 hours retrying 36 missing year pages 6 times each with up to 60s waits).
  */
 export function isRetryableError(message: string): boolean {
 	if (/^HTTP (429|503)\b/.test(message)) return true;
 	if (/^HTTP \d{3}\b/.test(message)) return false;
 	if (message.startsWith('API error:')) return false;
 	if (message === 'maxlag') return true;
-	// fetch の失敗（fetch failed / ECONNRESET / timeout / aborted など）は一律ネットワーク扱い
+	// fetch failures (fetch failed / ECONNRESET / timeout / aborted, etc.) are all treated as network errors
 	return true;
 }

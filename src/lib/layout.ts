@@ -1,30 +1,30 @@
 /**
- * タイムラインカードの配置。中央スパインの左右（モバイルは片側）に、
- * 時間軸上の理想位置へできるだけ近く、重ならないように置く。
+ * Placement of timeline cards. They go on the left and right of the center spine (one side on mobile),
+ * as close as possible to their ideal position on the time axis, without overlapping.
  */
 
 export interface LayoutInput {
 	id: string;
-	/** 時間軸上の理想y（イベントの日時に対応する点） */
+	/** Ideal y on the time axis (the point corresponding to the event's date) */
 	y: number;
 	height: number;
 }
 
 export interface PlacedCard {
 	id: string;
-	/** カード上端のy */
+	/** y of the card's top edge */
 	top: number;
 	side: 'left' | 'right';
-	/** スパイン上の点のy（コネクタ描画用） */
+	/** y of the point on the spine (for drawing the connector) */
 	dotY: number;
 }
 
-/** カード上端は点よりこのpxだけ上に置く（点がカード見出し付近に来る） */
+/** Place the card's top edge this many px above the point (so the point sits near the card heading) */
 const DOT_OFFSET = 14;
 
 /**
- * y昇順（画面上→下）で渡すこと。
- * 2カラム時は「より上に置ける側」を選び、同点なら左右交互。
+ * Pass items in ascending y (top to bottom of the screen).
+ * With two columns, pick "the side where it can go higher"; on a tie, alternate left and right.
  */
 export function layoutCards(
 	items: readonly LayoutInput[],

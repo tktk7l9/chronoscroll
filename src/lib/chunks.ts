@@ -2,8 +2,8 @@ import { dayOf, isoOf } from './timescale.ts';
 import type { ChunkMeta } from './types.ts';
 
 /**
- * day範囲（fromDay=新しい側）に交差するチャンクのキーを新しい順に返す。
- * チャンクの粒度（十年/5年）は index.json のメタが決める。
+ * Return the keys of chunks that intersect the day range (fromDay = the newer side), newest first.
+ * The chunk granularity (decade / 5 years) is determined by the metadata in index.json.
  */
 export function chunkKeysInRange(
 	chunks: readonly ChunkMeta[],
@@ -19,14 +19,14 @@ export function chunkKeysInRange(
 }
 
 /**
- * 可視範囲の「局所」イベント密度（件/日）。
+ * The "local" event density (events/day) in the visible range.
  *
- * LODの閾値は密度で決まるが、実際の密度は十年ごとに1870年代0.14〜2020年代1.67と
- * 12倍違う。全期間平均を使うと明治期はスカスカ・2000年代以降は詰まりすぎになるため、
- * index.json が既に持っているチャンクごとの件数から、いま見ている範囲の密度を出す。
+ * The LOD threshold is driven by density, but the actual density varies 12x by decade, from 0.14 in the 1870s to 1.67 in the 2020s.
+ * Using the all-time average makes the Meiji era sparse and the 2000s onward overcrowded, so
+ * derive the density of the range currently in view from the per-chunk counts index.json already has.
  *
- * 収録範囲の外へはみ出した部分は分母に数えない（データの無い側で薄まると
- * 閾値が下がりすぎるため）。データが1件も無い範囲では0を返す。
+ * Parts that extend beyond the covered range are not counted in the denominator (diluting it with the side that has no data
+ * would push the threshold too low). Returns 0 for a range with no data at all.
  */
 export function eventsPerDayInRange(
 	chunks: readonly ChunkMeta[],

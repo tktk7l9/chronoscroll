@@ -1,14 +1,14 @@
-// Cloudflare Workers 静的アセット用 `_headers` の生成ロジック（純関数）。
-// 正本は config/security-headers.json。Worker（/e/*）と e2e/serve.mjs も同じ JSON を読む。
+// Generation logic (pure function) for `_headers` used by Cloudflare Workers static assets.
+// The source of truth is config/security-headers.json. The Worker (/e/*) and e2e/serve.mjs read the same JSON.
 // https://developers.cloudflare.com/workers/static-assets/headers/
 
-/** パス別の Cache-Control。Vercel 時代の vercel.json と同じ値 + immutable アセット */
+/** Cache-Control per path. Same values as vercel.json from the Vercel days + immutable assets */
 export const CACHE_RULES = [
 	['/data/*', 'public, max-age=3600, stale-while-revalidate=86400'],
 	['/_app/immutable/*', 'public, max-age=31536000, immutable'],
 ];
 
-/** @param {Record<string, string>} security ヘッダー名 → 値 */
+/** @param {Record<string, string>} security header name → value */
 export function renderHeadersFile(security) {
 	const lines = [
 		'# 生成物: config/security-headers.json から scripts/write-headers.mjs が作る。手で編集しない。',

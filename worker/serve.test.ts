@@ -4,7 +4,7 @@ import { handle, pageHeaders, resolve, type PagesBucket } from './serve';
 
 const security = JSON.parse(readFileSync('config/security-headers.json', 'utf8')) as Record<string, string>;
 
-/** R2 バインディングの最小フェイク。ETag は本文の長さ。If-None-Match が一致すれば本文なしで返す */
+/** Minimal fake of the R2 binding. The ETag is the body length. Returns without a body if If-None-Match matches */
 function bucket(pages: Record<string, string>, opts: { throws?: boolean } = {}): PagesBucket {
 	return {
 		async get(key, options) {

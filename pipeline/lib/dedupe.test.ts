@@ -81,7 +81,7 @@ describe('linkOverlap', () => {
 });
 
 describe('duplicateIds', () => {
-	// 実データで確認された重複ペア（「YYYY年」「YYYY年の日本」の両ページに載っていた表現違い）
+	// Duplicate pairs confirmed in real data (different wordings that appeared on both 「YYYY年」 and 「YYYY年の日本」 pages)
 	it('同日+類似文面はスコアが高い方を残す（実データ再現: 長崎原爆投下）', () => {
 		const drop = duplicateIds([
 			c('a', '1945-08-09', '午前11時02分、米軍が長崎市への原子爆弾投下。', ['長崎市', '原子爆弾'], 90),
@@ -110,7 +110,7 @@ describe('duplicateIds', () => {
 		expect(drop.size).toBe(1);
 	});
 
-	// containmentは高いがJaccardは閾値未満のケース: リンク先が重なっていれば重複と判定する
+	// Case with high containment but Jaccard below the threshold: judged a duplicate if the link targets overlap
 	it('短い見出し文が長い説明文に包含される場合、リンクが重なれば重複と判定する（実データ再現: 阪神・淡路大震災）', () => {
 		const drop = duplicateIds([
 			c('short', '1995-01-17', '兵庫県南部地震（阪神・淡路大震災）', ['兵庫県南部地震', '阪神・淡路大震災'], 40),
@@ -125,8 +125,8 @@ describe('duplicateIds', () => {
 		expect(drop).toEqual(new Set(['short']));
 	});
 
-	// これが今回の設計変更の核心: containmentだけで判定すると、同日に成立した
-	// 別々の法律を誤って同一視してしまう。リンク先の実体が異なれば重複としない。
+	// This is the core of this design change: judging by containment alone would wrongly treat
+	// separate laws enacted on the same day as the same. If the link target entities differ, it is not a duplicate.
 	it('定型文が支配的な短文同士でも、リンク先の実体が異なれば重複としない（実データ再現: 同日成立の別法案）', () => {
 		const drop = duplicateIds([
 			c(
@@ -192,7 +192,7 @@ describe('duplicateIds', () => {
 		const dropLoose = duplicateIds(items, new Set(), 0.3);
 		const dropStrict = duplicateIds(items, new Set(), 0.99);
 		expect(dropLoose.size).toBeGreaterThan(0);
-		// 高いJaccard閾値でもcontainment経路(リンクなし同士はlinkOverlap=0で不成立)は通らない
+		// Even with a high Jaccard threshold, the containment path does not pass (without links on either side, linkOverlap=0 fails)
 		expect(dropStrict.size).toBe(0);
 	});
 

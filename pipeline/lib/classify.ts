@@ -1,6 +1,6 @@
 import type { Category, Region } from '../../src/lib/types.ts';
 
-/** 先勝ちの優先順位付きカテゴリルール */
+/** Category rules in priority order (first match wins) */
 const CATEGORY_RULES: readonly [Category, RegExp][] = [
 	[
 		'disaster',
@@ -38,7 +38,7 @@ const JAPAN_RE =
 const WORLD_RE =
 	/アメリカ|米国|米軍|米大統領|訪米|イギリス|英国|フランス|ドイツ|プロイセン|イタリア|スペイン|ポルトガル|オランダ|ベルギー|スイス|デンマーク|スウェーデン|ノルウェー|フィンランド|アイルランド|アイスランド|チェコ|スロバキア|ルーマニア|ブルガリア|セルビア|ユーゴ|クロアチア|ロシア|ソ連|ソビエト|中国|中華|清国|清朝|韓国|朝鮮|台湾|インド|パキスタン|バングラデシュ|スリランカ|ネパール|ベトナム|フィリピン|インドネシア|マレーシア|シンガポール|ミャンマー|ビルマ|カンボジア|ラオス|モンゴル|タイ|アフガニスタン|イラン|イラク|イスラエル|パレスチナ|サウジアラビア|シリア|レバノン|ヨルダン|クウェート|エジプト|リビア|チュニジア|アルジェリア|モロッコ|エチオピア|ケニア|ナイジェリア|ガーナ|スーダン|トルコ|ギリシャ|オーストリア|ハンガリー|ポーランド|ウクライナ|ブラジル|アルゼンチン|チリ|ペルー|コロンビア|ベネズエラ|メキシコ|キューバ|カナダ|オーストラリア|ニュージーランド|南アフリカ|ヨーロッパ|欧州|アフリカ|中東|中南米|バチカン|ローマ教皇|国際連合|国際連盟|国連|NATO|EU\b|EC\b|WHO|IMF|オリンピック委員会|パリ|ロンドン|ニューヨーク|ワシントン|ベルリン|モスクワ|北京|上海|ソウル|ローマ|ウィーン|ジュネー[ヴブ]|香港|世界初|世界で/;
 
-/** カタカナ4文字以上の連なり（外国人名・外来組織名のシグナル） */
+/** A run of 4+ katakana characters (a signal of foreign personal or organization names) */
 const KATAKANA_RUN_RE = /[ァ-ヴー]{4,}/;
 
 export function classifyCategory(text: string): Category {
@@ -65,8 +65,8 @@ export interface Classification {
 export type ClassifySidecar = Record<string, Partial<Classification>>;
 
 /**
- * ルールベース分類に、本文タグ由来の地域ヒント（あれば優先）と
- * サイドカー（人手/Claude一括分類の確定値・最優先）を適用する
+ * Apply to the rule-based classification the region hint from body tags (preferred if present) and
+ * the sidecar (final values from manual/Claude batch classification, highest priority)
  */
 export function classify(
 	id: string,

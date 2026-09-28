@@ -10,7 +10,7 @@ export default defineConfig({
 				runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 			adapter: adapter(),
-			// 絶対パスで出力する（インラインbootスクリプトを外部化しても import() が解決できるように）
+			// Emit absolute paths (so import() still resolves after the inline boot script is externalized)
 			paths: { relative: false }
 		})
 	]

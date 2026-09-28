@@ -3,20 +3,20 @@ import { dayOf } from './timescale.ts';
 import type { FilterState } from './filters.ts';
 import { matchesFilter } from './filters.ts';
 
-/** day number を前計算したイベント。day降順（新しい→古い）で保持する */
+/** Event with a precomputed day number. Kept in descending day order (newest → oldest) */
 export interface EventPoint {
 	ev: NewsEvent;
 	day: number;
 }
 
-/** イベント一覧を day 降順（新しい順）の EventPoint[] にする */
+/** Turn the event list into EventPoint[] in descending day order (newest first) */
 export function toPoints(events: readonly NewsEvent[]): EventPoint[] {
 	return events
 		.map((ev) => ({ ev, day: dayOf(ev.date) }))
 		.sort((a, b) => (a.day === b.day ? (a.ev.id < b.ev.id ? -1 : 1) : b.day - a.day));
 }
 
-/** day降順配列内で、day <= fromDay となる最初のindex */
+/** In the descending-day array, the first index with day <= fromDay */
 export function firstIndexAtOrBelow(points: readonly EventPoint[], fromDay: number): number {
 	let lo = 0;
 	let hi = points.length;
@@ -29,10 +29,10 @@ export function firstIndexAtOrBelow(points: readonly EventPoint[], fromDay: numb
 }
 
 /**
- * ピクセル密度の上限でさらに間引く。
- * LOD閾値は全体平均密度ベースなので、イベントが時間的に密集する区間では
- * カードが理想位置から大きく押し流される。重要度の高い順に採用し、
- * 縦方向 minPx 以内に maxPerBand 件を超えないようにする。
+ * Thin further by a cap on pixel density.
+ * The LOD threshold is based on the overall average density, so in stretches where events cluster in time
+ * cards get pushed far from their ideal positions. Accept in order of importance and
+ * do not exceed maxPerBand events within minPx vertically.
  */
 export function capDensity(
 	points: readonly EventPoint[],
@@ -59,9 +59,9 @@ export function capDensity(
 }
 
 /**
- * 可視範囲 [toDay, fromDay]（fromDayが新しい側）かつ importance >= threshold
- * かつフィルタに合致するイベントを返す。
- * pinnedId のイベントは範囲内なら閾値・フィルタに関わらず含める（検索ジャンプ先の保証）。
+ * Return events within the visible range [toDay, fromDay] (fromDay is the newer side) with importance >= threshold
+ * that match the filter.
+ * The pinnedId event is included if within range regardless of threshold and filter (guarantees the search jump target).
  */
 export function queryVisible(
 	points: readonly EventPoint[],

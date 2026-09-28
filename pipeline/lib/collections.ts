@@ -4,10 +4,10 @@ import type { CuratedEntry } from './curate.ts';
 import { sortEvents } from './emit.ts';
 
 /**
- * content/collections/<slug>.yaml の中身。
- * entries は CuratedEntry と同型にしてあり、build.ts が curated 層へそのまま流す。
- * これで「新規イベントの生成」「既存イベントの部分上書き」「近似重複除去からのid保護」
- * 「relatedIdsの手動指定」が全て既存経路のまま成立する。
+ * Contents of content/collections/<slug>.yaml.
+ * entries has the same shape as CuratedEntry, and build.ts passes it straight to the curated layer.
+ * That way "creating new events", "partially overriding existing events", "id protection from near-duplicate removal",
+ * and "manually specifying relatedIds" all work through the existing paths.
  */
 export interface CollectionSource {
 	slug: string;
@@ -18,7 +18,7 @@ export interface CollectionSource {
 	entries: CuratedEntry[];
 }
 
-/** URLに乗るslug。/c/<slug> と ?k=<slug> の両方で使う */
+/** The slug used in URLs. Used for both /c/<slug> and ?k=<slug> */
 export const COLLECTION_SLUG_RE = /^[a-z0-9-]+$/;
 
 function requireString(value: unknown, label: string): string {
@@ -29,7 +29,7 @@ function requireString(value: unknown, label: string): string {
 }
 
 export function parseCollectionYaml(yamlText: string): CollectionSource {
-	// js-yaml は空入力そのものを投げるため、先に自前のメッセージで弾く
+	// js-yaml throws on empty input itself, so reject it first with our own message
 	if (yamlText.trim() === '') throw new Error('特集YAMLが空です');
 	const data = load(yamlText);
 	if (data == null || typeof data !== 'object' || Array.isArray(data)) {
@@ -64,7 +64,7 @@ export function parseCollectionYaml(yamlText: string): CollectionSource {
 	};
 }
 
-/** 全特集のentriesを平坦化する。build.tsがcurated層と結合して同じ経路に流す */
+/** Flatten the entries of all collections. build.ts joins them with the curated layer and sends them down the same path */
 export function collectionCuratedEntries(
 	sources: readonly CollectionSource[],
 ): CuratedEntry[] {
@@ -72,9 +72,9 @@ export function collectionCuratedEntries(
 }
 
 /**
- * 特集1本を、収録イベント本体つきの配信用データに組み立てる。
- * 同一idの重複指定は最初の1件に畳み、存在しないidは黙って落とす
- * （typo検出は unmatchedCollectionIds が担当する）。
+ * Assemble one collection into data for serving, with the included event bodies.
+ * Duplicate ids collapse to the first one, and ids that do not exist are silently dropped
+ * (typo detection is handled by unmatchedCollectionIds).
  */
 export function buildCollectionDetail(
 	source: CollectionSource,
@@ -106,13 +106,13 @@ export function buildCollectionDetail(
 	};
 }
 
-/** 配信用データから一覧用のメタだけを取り出す（イベント本体を落とす） */
+/** Take only the listing metadata from the serving data (drop the event bodies) */
 export function toCollectionMeta(detail: CollectionDetail): CollectionMeta {
 	const { events: _events, ...meta } = detail;
 	return meta;
 }
 
-/** イベントid → 所属する特集slug[] の逆引き。個別ページの「収録されている特集」に使う */
+/** Reverse lookup event id → collection slug[] it belongs to. Used for "collections that include this" on the detail page */
 export function eventCollectionIndex(
 	details: readonly CollectionDetail[],
 ): Record<string, string[]> {
@@ -126,8 +126,8 @@ export function eventCollectionIndex(
 }
 
 /**
- * 最終的なイベントid集合に存在しない参照を特集ごとに返す（typo検出用）。
- * 月次のWikipedia再生成で自動生成id（本文のハッシュ）が変わった場合もここに出る。
+ * Return, per collection, references that do not exist in the final set of event ids (for typo detection).
+ * Auto-generated ids (hashes of the text) that changed in the monthly Wikipedia regeneration also show up here.
  */
 export function unmatchedCollectionIds(
 	sources: readonly CollectionSource[],

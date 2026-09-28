@@ -1,6 +1,6 @@
 /**
- * イベント個別ページ（全件prerender・JSなしの純静的HTML）。
- * ロングテールSEOの入口として、各イベントに検索エンジンが辿れるURLを与える。
+ * Event detail page (all prerendered, pure static HTML without JS).
+ * As an entry point for long-tail SEO, gives each event a URL that search engines can follow.
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
@@ -45,7 +45,7 @@ function loadBooks(): Record<string, BookRef[]> {
 	return booksIndex;
 }
 
-/** このイベントを収録している特集（テーマ側への内部リンクを張るため） */
+/** Collections that include this event (to link to the theme side internally) */
 function loadCollections(id: string): CollectionMeta[] {
 	if (!collectionsIndex) {
 		collectionsIndex = JSON.parse(

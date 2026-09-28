@@ -34,9 +34,9 @@
 		}
 	});
 
-	// showModal() は背面ページのスクロールを止めない（バックドロップ上のホイールが素通りする）。
-	// 表示中は html を overflow:hidden にして年表を固定する。スクロール位置は保たれる。
-	// 別のできごとへ切り替えても再実行しないよう、boolean を派生させて依存にする
+	// showModal() does not stop the background page from scrolling (wheel events over the backdrop pass through).
+	// While open, set html to overflow:hidden to lock the timeline. The scroll position is kept.
+	// Derive a boolean and depend on it so switching to another event does not re-run this
 	const isOpen = $derived(ev !== null);
 	$effect(() => {
 		if (!isOpen) return;
@@ -45,7 +45,7 @@
 		return () => root.classList.remove('modal-open');
 	});
 
-	/** 閉幕アニメーションを流してから close する（reduced-motion時は即時） */
+	/** Play the closing animation, then close (immediately with reduced motion) */
 	function requestClose(): void {
 		if (!dialog?.open || closing) return;
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -91,8 +91,8 @@
 
 			{#if ev.image}
 				<figure>
-					<!-- モーダルを開いた時点で必ず可視なので lazy にはしない。
-					     デコードを別スレッドに逃がして開閉アニメーションを止めない -->
+					<!-- It is always visible when the modal opens, so do not make it lazy.
+					     Move decoding off the main thread so it does not stall the open/close animation -->
 					<img
 						src={ev.image.src}
 						width={ev.image.width}
@@ -116,7 +116,7 @@
 				<p class="collections">
 					<span class="col-label">収録特集</span>
 					{#each collections as c (c.slug)}
-						<!-- 特集ページはcsr=falseの純静的HTML。フルリロードで遷移する -->
+						<!-- Collection pages are pure static HTML with csr=false. Navigate with a full reload -->
 						<a href="/c/{c.slug}" data-sveltekit-reload>{c.title}</a>
 					{/each}
 				</p>
@@ -149,7 +149,7 @@
 						<li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label} ↗</a></li>
 					{/each}
 				</ul>
-				<!-- 個別ページはcsr=falseの純静的HTML。__data.jsonを配信しないためフルリロードで遷移する -->
+				<!-- Detail pages are pure static HTML with csr=false. They do not serve __data.json, so navigate with a full reload -->
 				<p class="permalink">
 					<a href="/e/{ev.id}" data-sveltekit-reload>このできごとの個別ページ</a>
 				</p>
@@ -169,7 +169,7 @@
 	dialog {
 		width: min(94vw, 820px);
 		max-height: 86dvh;
-		/* 中身を最後までスクロールしても背面へ連鎖させない */
+		/* Do not chain scrolling to the background even after scrolling to the end of the content */
 		overscroll-behavior: contain;
 		padding: 0;
 		border: 1px solid var(--line);
@@ -183,7 +183,7 @@
 		backdrop-filter: blur(2px);
 	}
 
-	/* 開閉アニメーション（transform/opacityのみ・compositor合成） */
+	/* Open/close animation (transform/opacity only, composited) */
 	dialog[open] {
 		animation: dialog-in 0.26s cubic-bezier(0.22, 1.1, 0.36, 1);
 	}
@@ -219,7 +219,7 @@
 		}
 	}
 
-	/* 中身のステージング（開いた瞬間に上から順に立ち上がる） */
+	/* Staging of the contents (they rise in order from top to bottom as soon as it opens) */
 	article > :global(*) {
 		animation: content-rise 0.34s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 	}
@@ -296,11 +296,11 @@
 	figure {
 		margin: 0 0 14px;
 	}
-	/* width:100% は「読み込み前に箱を確保する」ための指定。
-	   width/height属性の比率から高さが確定するので、画像到着で本文が飛ばない。
-	   width:auto にすると縦横とも不定になり箱が0pxに潰れる（＝ガタつきの原因）。
-	   実際の見た目は object-fit が決める: scale-down で小さい画像は拡大せず中央に置き、
-	   はみ出す画像だけ縮める。余った領域は背景を敷かないので余白帯として見えない */
+	/* width:100% is there to "reserve the box before loading".
+	   The height is fixed by the ratio of the width/height attributes, so the text does not jump when the image arrives.
+	   width:auto leaves both dimensions undetermined and collapses the box to 0px (= the cause of the jank).
+	   The actual look is decided by object-fit: scale-down keeps small images unscaled and centered,
+	   and shrinks only images that overflow. The leftover area has no background, so it does not show as a blank band */
 	img {
 		display: block;
 		width: 100%;

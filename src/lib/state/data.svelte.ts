@@ -1,6 +1,6 @@
 /**
- * イベントデータのランタイムストア（IO層・カバレッジゲート対象外）。
- * overview を初期ロードし、可視範囲に応じて十年チャンクを遅延ロードする。
+ * Runtime store for event data (IO layer, excluded from the coverage gate).
+ * Loads overview initially and lazy-loads decade chunks based on the visible range.
  */
 import { chunkKeysInRange } from '../chunks.ts';
 import { collectionDetailPath } from '../collections.ts';
@@ -17,10 +17,10 @@ import { toPoints, type EventPoint } from '../viewport.ts';
 
 export class TimelineData {
 	meta = $state<IndexMeta | null>(null);
-	/** チャンクロードごとに増える。points再計算のトリガ */
+	/** Incremented on every chunk load. Trigger for recomputing points */
 	version = $state(0);
 	loadError = $state<string | null>(null);
-	/** 特集の一覧（メタのみ）。取得前は空配列 */
+	/** List of collections (metadata only). Empty array before fetching */
 	collections = $state<CollectionMeta[]>([]);
 
 	#events = new Map<string, NewsEvent>();
@@ -51,9 +51,9 @@ export class TimelineData {
 		} catch (e) {
 			this.loadError = String(e);
 		}
-		// books.json / collections.json は年表の主データとは独立に取得する。
-		// 失敗してもloadErrorは発火させない（該当の飾りが出ないだけに留め、
-		// 年表全体を巻き込んで真っ白にしない）
+		// books.json / collections.json are fetched independently of the timeline's main data.
+		// A failure does not trigger loadError (only that decoration is missing;
+		// it does not take down the whole timeline and leave it blank)
 		void fetchJson<Record<string, BookRef[]>>('/data/books.json')
 			.then((books) => {
 				this.#books = books;
@@ -75,10 +75,10 @@ export class TimelineData {
 	}
 
 	/**
-	 * このイベントが収録されている特集（未取得なら空配列）。
-	 * version を先に読むのが必須。#collectionsByEvent が素のオブジェクトである上に、
-	 * 未取得時は slugs が空で .map のコールバックが走らず this.collections も読まれないため、
-	 * 何も追跡せず collections.json 到着後も再評価されない。
+	 * Collections that include this event (empty array if not fetched yet).
+	 * Reading version first is required. #collectionsByEvent is a plain object, and
+	 * before fetching, slugs is empty, so the .map callback never runs and this.collections is never read;
+	 * nothing is tracked and it is not re-evaluated after collections.json arrives.
 	 */
 	collectionsByEvent(id: string): CollectionMeta[] {
 		void this.version;
@@ -89,8 +89,8 @@ export class TimelineData {
 	}
 
 	/**
-	 * 特集の収録イベントを取り込む。詳細JSONに本体が全件入っているので、
-	 * これ1回でチャンクを読まずに特集の絞り込み表示ができる。
+	 * Take in the events of a collection. The detail JSON contains all their bodies, so
+	 * this single call enables the collection-filtered view without loading chunks.
 	 */
 	async loadCollection(slug: string): Promise<CollectionDetail | null> {
 		const cached = this.#collectionDetails.get(slug);
@@ -105,7 +105,7 @@ export class TimelineData {
 		}
 	}
 
-	/** 可視範囲+バッファに必要なチャンクをロードする（多重ロード防止付き） */
+	/** Load the chunks needed for the visible range + buffer (guarded against duplicate loads) */
 	ensureRange(fromDay: number, toDay: number): void {
 		if (!this.meta) return;
 		for (const key of chunkKeysInRange(this.meta.chunks, fromDay, toDay)) {
@@ -117,30 +117,30 @@ export class TimelineData {
 					this.#addEvents(events);
 				})
 				.catch(() => {
-					// 失敗時はpendingを解除して次回リトライ
+					// On failure, clear pending so it retries next time
 				})
 				.finally(() => this.#pending.delete(key));
 		}
 	}
 
 	/**
-	 * イベントを引く。#events は素のMapで追跡できないため version を読む。
-	 * これが無いと `$derived(data.byId(id))` がチャンク到着で再評価されず、
-	 * ?e=<id> のディープリンク（個別ページの「年表でこの位置を開く」）で
-	 * 詳細が永久にnullのままになる。
+	 * Look up an event. #events is a plain Map that cannot be tracked, so read version.
+	 * Without this, `$derived(data.byId(id))` is not re-evaluated when a chunk arrives, and
+	 * with a ?e=<id> deep link (「年表でこの位置を開く」 on the detail page)
+	 * the detail stays null forever.
 	 */
 	byId(id: string): NewsEvent | undefined {
 		void this.version;
 		return this.#events.get(id);
 	}
 
-	/** 検索ジャンプ用: idの日付から必要チャンクをロードして返す */
+	/** For search jumps: load the needed chunk from the id's date and return the event */
 	async loadById(id: string, date: string): Promise<NewsEvent | undefined> {
 		const existing = this.#events.get(id);
 		if (existing) return existing;
 		const day = dayOf(date);
 		this.ensureRange(day, day);
-		// ensureRangeは非同期。該当チャンクのロード完了を待つ
+		// ensureRange is async. Wait for the relevant chunk to finish loading
 		for (let i = 0; i < 100 && !this.#events.has(id); i++) {
 			await new Promise((r) => setTimeout(r, 50));
 		}

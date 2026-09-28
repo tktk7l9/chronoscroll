@@ -1,14 +1,14 @@
 import { load } from 'js-yaml';
 import type { NewsEvent } from '../../src/lib/types.ts';
 
-/** content/curated/*.yaml の1エントリ。既存イベントの上書き、または新規追加 */
+/** One entry of content/curated/*.yaml. Overrides an existing event or adds a new one */
 export interface CuratedEntry extends Partial<Omit<NewsEvent, 'id' | 'related'>> {
 	id: string;
 	/**
-	 * 明示的に結びつけたい他イベントのid一覧（自動算出の関連付けを上書き・補強する）。
-	 * NewsEvent.related（RelatedRef[]）とは型が異なるため別フィールドとして持ち、
-	 * applyCuratedでは通常フィールドと違い自動でイベントへ書き込まない
-	 * （related の最終組み立てはpipeline/lib/related.tsが担う）。
+	 * Ids of other events to link explicitly (overrides and reinforces the automatic linking).
+	 * Its type differs from NewsEvent.related (RelatedRef[]), so it is kept as a separate field, and
+	 * unlike normal fields, applyCurated does not write it into the event automatically
+	 * (the final assembly of related is done by pipeline/lib/related.ts).
 	 */
 	relatedIds?: readonly string[];
 }
@@ -30,11 +30,11 @@ export interface CurateResult {
 	events: NewsEvent[];
 	updated: string[];
 	added: string[];
-	/** idが既存イベントに一致せず、新規追加の必須項目も足りないもの */
+	/** Entries whose id matches no existing event and that lack the required fields for a new event */
 	unmatched: string[];
 }
 
-/** 生成イベントへcurated層を適用する。既存idは部分上書き、完全なエントリは新規追加 */
+/** Apply the curated layer to the generated events. Existing ids are partially overridden; complete entries are added as new */
 export function applyCurated(
 	events: readonly NewsEvent[],
 	entries: readonly CuratedEntry[],
@@ -45,7 +45,7 @@ export function applyCurated(
 	const unmatched: string[] = [];
 
 	for (const entry of entries) {
-		// relatedIds は NewsEvent の直接フィールドではないため通常コピーの対象から外す
+		// relatedIds is not a direct field of NewsEvent, so exclude it from the normal copy
 		const { id, relatedIds: _relatedIds, ...fields } = entry;
 		const existing = byId.get(id);
 		if (existing) {

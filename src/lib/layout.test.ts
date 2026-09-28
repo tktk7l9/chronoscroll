@@ -11,7 +11,7 @@ describe('layoutCards', () => {
 			1,
 		);
 		expect(placed.every((p) => p.side === 'right')).toBe(true);
-		// b は a と重ならず下に押し出される
+		// b does not overlap a and is pushed down
 		expect(placed[1].top).toBeGreaterThanOrEqual(placed[0].top + 80);
 	});
 
@@ -30,7 +30,7 @@ describe('layoutCards', () => {
 			2,
 		);
 		expect(placed[0].side).not.toBe(placed[1].side);
-		// 反対側なのでほぼ理想位置に置ける
+		// On the opposite side, so it can go almost at its ideal position
 		expect(placed[1].top).toBeLessThan(placed[0].top + 80);
 	});
 
@@ -44,7 +44,7 @@ describe('layoutCards', () => {
 			2,
 		);
 		const c = placed[2];
-		// cはbの側（先に空く方）へ
+		// c goes to b's side (the one that frees up first)
 		expect(c.side).toBe(placed[1].side);
 		expect(c.top).toBeGreaterThanOrEqual(placed[1].top + 80);
 	});
@@ -71,7 +71,7 @@ describe('layoutCards', () => {
 			],
 			2,
 		);
-		// 両カードとも両側が空いている（同点）→ index順で right, left
+		// Both sides are free for both cards (tie) → right, left in index order
 		expect(placed[0].side).toBe('right');
 		expect(placed[1].side).toBe('left');
 	});
