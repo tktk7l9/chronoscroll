@@ -6,5 +6,5 @@ import { existsSync, renameSync, rmSync } from 'node:fs';
 if (existsSync('build/e')) {
 	rmSync('build-e', { recursive: true, force: true });
 	renameSync('build/e', 'build-e');
-	console.log('build/e → build-e/（R2 配信分をアセットから分離）');
+	console.log('build/e -> build-e/ (splitting R2-served pages out of the assets)');
 }

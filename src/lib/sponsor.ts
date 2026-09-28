@@ -18,13 +18,13 @@ export function isSelfHostedPath(src: string): boolean {
 export function validateSponsor(config: SponsorConfig): string[] {
 	const errors: string[] = [];
 	if (!isSelfHostedPath(config.imageSrc)) {
-		errors.push('imageSrcは自己ホストの絶対パスである必要があります');
+		errors.push('imageSrc must be a self-hosted absolute path');
 	}
 	if (config.imageWidth <= 0 || config.imageHeight <= 0) {
-		errors.push('imageWidth/imageHeightは正の数である必要があります');
+		errors.push('imageWidth/imageHeight must be positive');
 	}
 	if (!/^https?:\/\//.test(config.href)) {
-		errors.push('hrefは絶対URLである必要があります');
+		errors.push('href must be an absolute URL');
 	}
 	return errors;
 }

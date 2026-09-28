@@ -26,7 +26,7 @@ const events = [
 ];
 
 describe('toPoints', () => {
-	it('day降順（新しい順）・同日はid昇順', () => {
+	it('day descending (newest first), same day by id ascending', () => {
 		expect(toPoints(events).map((p) => p.ev.id)).toEqual(['c', 'd', 'b', 'a']);
 		expect(toPoints([ev('z2', '2000-01-01'), ev('z1', '2000-01-01')]).map((p) => p.ev.id)).toEqual([
 			'z1',
@@ -37,7 +37,7 @@ describe('toPoints', () => {
 
 describe('firstIndexAtOrBelow', () => {
 	const points = toPoints(events);
-	it('fromDay以下の最初のindexを返す', () => {
+	it('returns the first index at or below fromDay', () => {
 		expect(firstIndexAtOrBelow(points, dayOf('2026-01-01'))).toBe(0);
 		expect(firstIndexAtOrBelow(points, dayOf('2000-12-31'))).toBe(0);
 		expect(firstIndexAtOrBelow(points, dayOf('1975-01-01'))).toBe(2);
@@ -48,17 +48,17 @@ describe('firstIndexAtOrBelow', () => {
 describe('queryVisible', () => {
 	const points = toPoints(events);
 
-	it('範囲内のイベントのみ返す', () => {
+	it('returns only events in range', () => {
 		const got = queryVisible(points, dayOf('1960-01-01'), dayOf('1940-01-01'), 0, EMPTY_FILTER);
 		expect(got.map((p) => p.ev.id)).toEqual(['b']);
 	});
 
-	it('importance閾値で間引く', () => {
+	it('thins out by the importance threshold', () => {
 		const got = queryVisible(points, dayOf('2026-01-01'), dayOf('1899-01-01'), 60, EMPTY_FILTER);
 		expect(got.map((p) => p.ev.id)).toEqual(['c', 'a']);
 	});
 
-	it('フィルタが適用される', () => {
+	it('applies filters', () => {
 		const pts = toPoints([ev('j', '2000-01-01', 50, 'japan'), ev('w', '2000-01-02', 50, 'world')]);
 		const got = queryVisible(pts, dayOf('2001-01-01'), dayOf('1999-01-01'), 0, {
 			regions: new Set(['world' as const]),
@@ -68,7 +68,7 @@ describe('queryVisible', () => {
 		expect(got.map((p) => p.ev.id)).toEqual(['w']);
 	});
 
-	it('範囲外で早期break（古い側の境界）', () => {
+	it('breaks early out of range (older boundary)', () => {
 		const got = queryVisible(points, dayOf('2026-01-01'), dayOf('2000-01-01'), 0, EMPTY_FILTER);
 		expect(got.map((p) => p.ev.id)).toEqual(['c', 'd']);
 	});
@@ -77,7 +77,7 @@ describe('queryVisible', () => {
 describe('queryVisible (pinned)', () => {
 	const points = toPoints(events);
 
-	it('pinnedIdは閾値以下でもフィルタ外でも含まれる', () => {
+	it('includes pinnedId even below the threshold or outside the filter', () => {
 		const got = queryVisible(
 			points,
 			dayOf('2026-01-01'),
@@ -91,7 +91,7 @@ describe('queryVisible (pinned)', () => {
 });
 
 describe('capDensity', () => {
-	it('pinnedIdは密集していても必ず残る', () => {
+	it('always keeps pinnedId even when crowded', () => {
 		const pts = toPoints([
 			ev('low', '2000-01-01', 10),
 			ev('high', '2000-01-02', 90),
@@ -101,7 +101,7 @@ describe('capDensity', () => {
 		expect(got.map((p) => p.ev.id)).toEqual(['low']);
 	});
 
-	it('同じ帯に密集したイベントは重要度上位のみ残す', () => {
+	it('keeps only the most important events crowded in the same band', () => {
 		// 1px/day: 3 events in 3 days, minPx=100 → with 1 per band, only the most important
 		const pts = toPoints([
 			ev('low', '2000-01-01', 10),
@@ -112,7 +112,7 @@ describe('capDensity', () => {
 		expect(got.map((p) => p.ev.id)).toEqual(['high']);
 	});
 
-	it('maxPerBand=2 なら上位2件まで', () => {
+	it('keeps up to the top 2 with maxPerBand=2', () => {
 		const pts = toPoints([
 			ev('low', '2000-01-01', 10),
 			ev('high', '2000-01-02', 90),
@@ -122,7 +122,7 @@ describe('capDensity', () => {
 		expect(got.map((p) => p.ev.id).sort()).toEqual(['high', 'mid']);
 	});
 
-	it('十分に離れたイベントは全て残り、day降順が保たれる', () => {
+	it('keeps all well-separated events in day-descending order', () => {
 		const pts = toPoints([
 			ev('a', '2000-01-01', 10),
 			ev('b', '2001-01-01', 90),
@@ -132,7 +132,7 @@ describe('capDensity', () => {
 		expect(got.map((p) => p.ev.id)).toEqual(['c', 'b', 'a']);
 	});
 
-	it('空配列はそのまま', () => {
+	it('returns an empty array unchanged', () => {
 		expect(capDensity([], 1, 100, 2)).toEqual([]);
 	});
 });

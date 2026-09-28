@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { layoutCards } from './layout.ts';
 
 describe('layoutCards', () => {
-	it('1カラムでは全て右側に積む', () => {
+	it('stacks everything on the right in one column', () => {
 		const placed = layoutCards(
 			[
 				{ id: 'a', y: 100, height: 80 },
@@ -15,13 +15,13 @@ describe('layoutCards', () => {
 		expect(placed[1].top).toBeGreaterThanOrEqual(placed[0].top + 80);
 	});
 
-	it('離れたカードは理想位置（点の少し上）に置かれる', () => {
+	it('places distant cards at the ideal position (slightly above the dot)', () => {
 		const placed = layoutCards([{ id: 'a', y: 500, height: 80 }], 2);
 		expect(placed[0].top).toBe(486);
 		expect(placed[0].dotY).toBe(500);
 	});
 
-	it('2カラムでは近接カードが左右に分かれる', () => {
+	it('splits nearby cards left and right in two columns', () => {
 		const placed = layoutCards(
 			[
 				{ id: 'a', y: 100, height: 80 },
@@ -34,7 +34,7 @@ describe('layoutCards', () => {
 		expect(placed[1].top).toBeLessThan(placed[0].top + 80);
 	});
 
-	it('両側が埋まっていたら空きの早い側に押し出す', () => {
+	it('pushes to the side that frees up first when both are taken', () => {
 		const placed = layoutCards(
 			[
 				{ id: 'a', y: 100, height: 200 },
@@ -49,7 +49,7 @@ describe('layoutCards', () => {
 		expect(c.top).toBeGreaterThanOrEqual(placed[1].top + 80);
 	});
 
-	it('右側が先に空く場合は右に置く', () => {
+	it('places on the right when the right frees up first', () => {
 		const placed = layoutCards(
 			[
 				{ id: 'x', y: 100, height: 40 },
@@ -63,7 +63,7 @@ describe('layoutCards', () => {
 		expect(placed[2].side).toBe('right');
 	});
 
-	it('同点なら左右交互', () => {
+	it('alternates left and right on a tie', () => {
 		const placed = layoutCards(
 			[
 				{ id: 'a', y: 100, height: 40 },

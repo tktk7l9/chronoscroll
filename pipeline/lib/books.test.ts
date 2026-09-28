@@ -3,7 +3,7 @@ import type { BookRef } from '../../src/lib/types.ts';
 import { buildBooksIndex, parseBooksYaml, unmatchedBookIds, type BookEntry } from './books.ts';
 
 describe('parseBooksYaml', () => {
-	it('配列をパースする', () => {
+	it('parses an array', () => {
 		const entries = parseBooksYaml(
 			'- id: a\n  books:\n    - title: T\n      store: rakuten\n      url: https://x/1\n',
 		);
@@ -12,53 +12,53 @@ describe('parseBooksYaml', () => {
 		]);
 	});
 
-	it('空ファイルやnullドキュメントは空配列', () => {
+	it('an empty file or null document yields an empty array', () => {
 		expect(parseBooksYaml('')).toEqual([]);
 		expect(parseBooksYaml('  \n')).toEqual([]);
 		expect(parseBooksYaml('~\n')).toEqual([]);
 	});
 
-	it('配列でなければエラー', () => {
-		expect(() => parseBooksYaml('id: a')).toThrow('配列');
+	it('errors when not an array', () => {
+		expect(() => parseBooksYaml('id: a')).toThrow('must be an array');
 	});
 
-	it('idがなければエラー', () => {
+	it('errors without id', () => {
 		expect(() => parseBooksYaml('- books: []')).toThrow('id');
 	});
 
-	it('idが空文字ならエラー', () => {
+	it('errors when id is empty', () => {
 		expect(() => parseBooksYaml('- id: ""\n  books: []')).toThrow('id');
 	});
 
-	it('booksがなければエラー', () => {
-		expect(() => parseBooksYaml('- id: a')).toThrow('書籍リストが空です');
+	it('errors without books', () => {
+		expect(() => parseBooksYaml('- id: a')).toThrow('book list is empty');
 	});
 
-	it('booksが空配列ならエラー', () => {
-		expect(() => parseBooksYaml('- id: a\n  books: []')).toThrow('書籍リストが空です');
+	it('errors when books is an empty array', () => {
+		expect(() => parseBooksYaml('- id: a\n  books: []')).toThrow('book list is empty');
 	});
 
-	it('書籍にtitleがなければエラー', () => {
+	it('errors when a book has no title', () => {
 		expect(() =>
 			parseBooksYaml('- id: a\n  books:\n    - store: rakuten\n      url: https://x/1\n'),
-		).toThrow('title がありません');
+		).toThrow('has no title');
 	});
 
-	it('書籍のtitleが空文字ならエラー', () => {
+	it('errors when a book title is empty', () => {
 		expect(() =>
 			parseBooksYaml('- id: a\n  books:\n    - title: ""\n      store: rakuten\n      url: https://x/1\n'),
-		).toThrow('title がありません');
+		).toThrow('has no title');
 	});
 
-	it('URLを解決できない書籍はエラー（resolveBookUrlの理由を含む）', () => {
+	it('errors on a book whose URL cannot be resolved (includes the resolveBookUrl reason)', () => {
 		expect(() => parseBooksYaml('- id: a\n  books:\n    - title: T\n      store: amazon\n')).toThrow(
-			'asin か url が必要です',
+			'needs asin or url',
 		);
 	});
 });
 
 describe('buildBooksIndex', () => {
-	it('単一id・単一書籍', () => {
+	it('single id, single book', () => {
 		const entries: BookEntry[] = [
 			{ id: 'a', books: [{ title: 'T', store: 'rakuten', url: 'https://x/1' }] },
 		];
@@ -67,7 +67,7 @@ describe('buildBooksIndex', () => {
 		});
 	});
 
-	it('同じidが複数回出てくる場合は順番に結合する', () => {
+	it('concatenates in order when the same id appears more than once', () => {
 		const entries: BookEntry[] = [
 			{ id: 'a', books: [{ title: 'T1', store: 'rakuten', url: 'https://x/1' }] },
 			{ id: 'a', books: [{ title: 'T2', store: 'rakuten', url: 'https://x/2' }] },
@@ -75,7 +75,7 @@ describe('buildBooksIndex', () => {
 		expect(buildBooksIndex(entries).a.map((b) => b.title)).toEqual(['T1', 'T2']);
 	});
 
-	it('複数idを個別に持つ', () => {
+	it('keeps multiple ids separately', () => {
 		const entries: BookEntry[] = [
 			{ id: 'a', books: [{ title: 'T1', store: 'rakuten', url: 'https://x/1' }] },
 			{ id: 'b', books: [{ title: 'T2', store: 'rakuten', url: 'https://x/2' }] },
@@ -84,11 +84,11 @@ describe('buildBooksIndex', () => {
 		expect(Object.keys(index)).toEqual(['a', 'b']);
 	});
 
-	it('空入力は空オブジェクト', () => {
+	it('empty input yields an empty object', () => {
 		expect(buildBooksIndex([])).toEqual({});
 	});
 
-	it('amazon書籍はurlを解決済みの形にする', () => {
+	it('resolves the url of amazon books', () => {
 		const entries: BookEntry[] = [{ id: 'a', books: [{ title: 'T', store: 'amazon', asin: 'X1' }] }];
 		const result = buildBooksIndex(entries).a[0] as BookRef;
 		expect(result.url).toContain('/dp/X1?tag=');
@@ -96,7 +96,7 @@ describe('buildBooksIndex', () => {
 });
 
 describe('unmatchedBookIds', () => {
-	it('validIdsに存在しないidを返す', () => {
+	it('returns ids not in validIds', () => {
 		const entries: BookEntry[] = [
 			{ id: 'a', books: [{ title: 'T', store: 'rakuten', url: 'https://x/1' }] },
 			{ id: 'ghost', books: [{ title: 'T', store: 'rakuten', url: 'https://x/2' }] },
@@ -104,7 +104,7 @@ describe('unmatchedBookIds', () => {
 		expect(unmatchedBookIds(entries, new Set(['a']))).toEqual(['ghost']);
 	});
 
-	it('全て一致すれば空配列', () => {
+	it('returns an empty array when all match', () => {
 		const entries: BookEntry[] = [
 			{ id: 'a', books: [{ title: 'T', store: 'rakuten', url: 'https://x/1' }] },
 		];

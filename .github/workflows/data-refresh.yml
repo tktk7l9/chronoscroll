@@ -32,7 +32,7 @@ jobs:
       - run: npx tsx pipeline/run/build.ts
       - run: npm run coverage
       - run: npm run build
-      - name: PR作成（差分がある場合のみ）
+      - name: Create PR (only when there is a diff)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -48,7 +48,7 @@ jobs:
           NEW_META=$(git show :static/data/index.json | jq -S 'del(.generatedAt)')
           OLD_META=$(git show HEAD:static/data/index.json | jq -S 'del(.generatedAt)')
           if [ -z "$OTHER" ] && [ "$NEW_META" = "$OLD_META" ]; then
-            echo "データに変更なし（generatedAtのみ）"
+            echo "No data changes (only generatedAt)"
             exit 0
           fi
           git commit -m "data: 月次データ更新 $(date +%Y-%m)"
@@ -57,7 +57,7 @@ jobs:
           # "GitHub Actions is not permitted to create or approve pull requests" was
           # swallowed by `|| echo`, and the job succeeded with no PR)
           if [ -n "$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number')" ]; then
-            echo "PRは既に存在します"
+            echo "PR already exists"
           else
             gh pr create --base main --head "$BRANCH" \
               --title "data: 月次データ更新 $(date +%Y-%m)" \

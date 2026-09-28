@@ -23,35 +23,35 @@ export const COLLECTION_SLUG_RE = /^[a-z0-9-]+$/;
 
 function requireString(value: unknown, label: string): string {
 	if (typeof value !== 'string' || value === '') {
-		throw new Error(`特集の${label}が空です`);
+		throw new Error(`Collection ${label} is empty`);
 	}
 	return value;
 }
 
 export function parseCollectionYaml(yamlText: string): CollectionSource {
 	// js-yaml throws on empty input itself, so reject it first with our own message
-	if (yamlText.trim() === '') throw new Error('特集YAMLが空です');
+	if (yamlText.trim() === '') throw new Error('Collection YAML is empty');
 	const data = load(yamlText);
 	if (data == null || typeof data !== 'object' || Array.isArray(data)) {
-		throw new Error('特集YAMLはマッピング（slug/title/...）である必要があります');
+		throw new Error('Collection YAML must be a mapping (slug/title/...)');
 	}
 	const raw = data as Record<string, unknown>;
 	const slug = requireString(raw.slug, 'slug');
 	if (!COLLECTION_SLUG_RE.test(slug)) {
-		throw new Error(`特集のslugは英小文字・数字・ハイフンのみ使えます: ${slug}`);
+		throw new Error(`Collection slug may contain only lowercase letters, digits and hyphens: ${slug}`);
 	}
 	const title = requireString(raw.title, `title(${slug})`);
 	const lead = requireString(raw.lead, `lead(${slug})`);
 	const description = requireString(raw.description, `description(${slug})`);
 	if (raw.icon !== undefined && (typeof raw.icon !== 'string' || raw.icon === '')) {
-		throw new Error(`特集のicon(${slug})が空です`);
+		throw new Error(`Collection icon(${slug}) is empty`);
 	}
 	if (!Array.isArray(raw.entries) || raw.entries.length === 0) {
-		throw new Error(`特集(${slug})のentriesが空です`);
+		throw new Error(`Collection (${slug}) entries is empty`);
 	}
 	for (const entry of raw.entries as { id?: unknown }[]) {
 		if (typeof entry?.id !== 'string' || entry.id === '') {
-			throw new Error(`特集(${slug})のエントリに id がありません: ${JSON.stringify(entry)}`);
+			throw new Error(`Collection (${slug}) entry has no id: ${JSON.stringify(entry)}`);
 		}
 	}
 	return {
@@ -90,7 +90,7 @@ export function buildCollectionDetail(
 		events.push(ev);
 	}
 	if (events.length === 0) {
-		throw new Error(`特集(${source.slug})に収録できるイベントが1件もありません`);
+		throw new Error(`Collection (${source.slug}) has no events to include`);
 	}
 	const sorted = sortEvents(events);
 	return {

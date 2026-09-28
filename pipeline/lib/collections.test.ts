@@ -47,7 +47,7 @@ function source(over: Partial<CollectionSource> = {}): CollectionSource {
 }
 
 describe('parseCollectionYaml', () => {
-	it('メタとentriesをパースする', () => {
+	it('parses meta and entries', () => {
 		expect(parseCollectionYaml(YAML)).toEqual({
 			slug: 'anime',
 			title: 'アニメの歴史',
@@ -58,7 +58,7 @@ describe('parseCollectionYaml', () => {
 		});
 	});
 
-	it('iconは省略できる', () => {
+	it('icon is optional', () => {
 		const parsed = parseCollectionYaml(
 			'slug: a\ntitle: T\nlead: L\ndescription: D\nentries:\n  - id: x\n',
 		);
@@ -66,46 +66,46 @@ describe('parseCollectionYaml', () => {
 		expect('icon' in parsed).toBe(false);
 	});
 
-	it('空ファイルはエラー', () => {
-		expect(() => parseCollectionYaml('')).toThrow('空です');
-		expect(() => parseCollectionYaml('  \n')).toThrow('空です');
+	it('errors on an empty file', () => {
+		expect(() => parseCollectionYaml('')).toThrow('is empty');
+		expect(() => parseCollectionYaml('  \n')).toThrow('is empty');
 	});
 
-	it('マッピングでなければエラー', () => {
-		expect(() => parseCollectionYaml('~\n')).toThrow('マッピング');
-		expect(() => parseCollectionYaml('- id: a')).toThrow('マッピング');
+	it('errors when not a mapping', () => {
+		expect(() => parseCollectionYaml('~\n')).toThrow('mapping');
+		expect(() => parseCollectionYaml('- id: a')).toThrow('mapping');
 	});
 
-	it('slugが無い・空ならエラー', () => {
-		expect(() => parseCollectionYaml('title: T')).toThrow('slugが空です');
-		expect(() => parseCollectionYaml('slug: ""\ntitle: T')).toThrow('slugが空です');
+	it('errors when slug is missing or empty', () => {
+		expect(() => parseCollectionYaml('title: T')).toThrow('slug is empty');
+		expect(() => parseCollectionYaml('slug: ""\ntitle: T')).toThrow('slug is empty');
 	});
 
-	it('slugに使えない文字があればエラー', () => {
-		expect(() => parseCollectionYaml('slug: Anime_1\ntitle: T')).toThrow('ハイフンのみ');
+	it('errors on invalid characters in slug', () => {
+		expect(() => parseCollectionYaml('slug: Anime_1\ntitle: T')).toThrow('only lowercase letters, digits and hyphens');
 	});
 
-	it('title/lead/descriptionが無ければエラー', () => {
-		expect(() => parseCollectionYaml('slug: a')).toThrow('title(a)が空です');
-		expect(() => parseCollectionYaml('slug: a\ntitle: T')).toThrow('lead(a)が空です');
+	it('errors when title/lead/description is missing', () => {
+		expect(() => parseCollectionYaml('slug: a')).toThrow('title(a) is empty');
+		expect(() => parseCollectionYaml('slug: a\ntitle: T')).toThrow('lead(a) is empty');
 		expect(() => parseCollectionYaml('slug: a\ntitle: T\nlead: L')).toThrow(
-			'description(a)が空です',
+			'description(a) is empty',
 		);
 	});
 
-	it('iconが空文字や文字列以外ならエラー', () => {
+	it('errors when icon is empty or not a string', () => {
 		const head = 'slug: a\ntitle: T\nlead: L\ndescription: D\n';
-		expect(() => parseCollectionYaml(`${head}icon: ""`)).toThrow('icon(a)が空です');
-		expect(() => parseCollectionYaml(`${head}icon: 3`)).toThrow('icon(a)が空です');
+		expect(() => parseCollectionYaml(`${head}icon: ""`)).toThrow('icon(a) is empty');
+		expect(() => parseCollectionYaml(`${head}icon: 3`)).toThrow('icon(a) is empty');
 	});
 
-	it('entriesが無い・空配列ならエラー', () => {
+	it('errors when entries is missing or empty', () => {
 		const head = 'slug: a\ntitle: T\nlead: L\ndescription: D\n';
-		expect(() => parseCollectionYaml(head)).toThrow('entriesが空です');
-		expect(() => parseCollectionYaml(`${head}entries: []`)).toThrow('entriesが空です');
+		expect(() => parseCollectionYaml(head)).toThrow('entries is empty');
+		expect(() => parseCollectionYaml(`${head}entries: []`)).toThrow('entries is empty');
 	});
 
-	it('entryにidが無い・空文字ならエラー', () => {
+	it('errors when an entry has no id or an empty id', () => {
 		const head = 'slug: a\ntitle: T\nlead: L\ndescription: D\n';
 		expect(() => parseCollectionYaml(`${head}entries:\n  - date: "2000-01-01"`)).toThrow('id');
 		expect(() => parseCollectionYaml(`${head}entries:\n  - id: ""`)).toThrow('id');
@@ -113,7 +113,7 @@ describe('parseCollectionYaml', () => {
 });
 
 describe('collectionCuratedEntries', () => {
-	it('全特集のentriesを平坦化する', () => {
+	it('flattens entries of all collections', () => {
 		expect(
 			collectionCuratedEntries([
 				source({ entries: [{ id: 'a' }] }),
@@ -129,7 +129,7 @@ describe('buildCollectionDetail', () => {
 		['b', ev('b', '1917-06-30')],
 	]);
 
-	it('日付昇順に並べ、期間と件数を付ける', () => {
+	it('sorts by date ascending and adds span and count', () => {
 		const detail = buildCollectionDetail(source(), byId);
 		expect(detail.events.map((e) => e.id)).toEqual(['b', 'a']);
 		expect(detail.count).toBe(2);
@@ -138,12 +138,12 @@ describe('buildCollectionDetail', () => {
 		expect(detail.title).toBe('アニメの歴史');
 	});
 
-	it('iconは有るときだけ付く', () => {
+	it('adds icon only when present', () => {
 		expect('icon' in buildCollectionDetail(source(), byId)).toBe(false);
 		expect(buildCollectionDetail(source({ icon: 'art-x' }), byId).icon).toBe('art-x');
 	});
 
-	it('存在しないidは落とし、重複指定は畳む', () => {
+	it('drops unknown ids and collapses duplicates', () => {
 		const detail = buildCollectionDetail(
 			source({ entries: [{ id: 'a' }, { id: 'a' }, { id: 'zzz' }] }),
 			byId,
@@ -151,15 +151,15 @@ describe('buildCollectionDetail', () => {
 		expect(detail.events.map((e) => e.id)).toEqual(['a']);
 	});
 
-	it('1件も解決できなければエラー', () => {
+	it('errors when no entry resolves', () => {
 		expect(() => buildCollectionDetail(source({ entries: [{ id: 'zzz' }] }), byId)).toThrow(
-			'1件もありません',
+			'has no events',
 		);
 	});
 });
 
 describe('toCollectionMeta', () => {
-	it('イベント本体を落とす', () => {
+	it('drops the event bodies', () => {
 		const byId = new Map([['a', ev('a', '2000-01-01')]]);
 		const meta = toCollectionMeta(buildCollectionDetail(source({ entries: [{ id: 'a' }] }), byId));
 		expect('events' in meta).toBe(false);
@@ -169,7 +169,7 @@ describe('toCollectionMeta', () => {
 });
 
 describe('eventCollectionIndex', () => {
-	it('イベントid→slug[]を作り、複数所属を結合する', () => {
+	it('builds event id -> slug[] and merges multiple memberships', () => {
 		const byId = new Map([
 			['a', ev('a', '2000-01-01')],
 			['b', ev('b', '2001-01-01')],
@@ -183,7 +183,7 @@ describe('eventCollectionIndex', () => {
 });
 
 describe('unmatchedCollectionIds', () => {
-	it('存在しないidを特集ごとに返す', () => {
+	it('returns unknown ids per collection', () => {
 		expect(
 			unmatchedCollectionIds(
 				[

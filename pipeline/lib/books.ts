@@ -12,17 +12,17 @@ export function parseBooksYaml(yamlText: string): BookEntry[] {
 	if (yamlText.trim() === '') return [];
 	const data = load(yamlText);
 	if (data == null) return [];
-	if (!Array.isArray(data)) throw new Error('books YAMLは配列である必要があります');
+	if (!Array.isArray(data)) throw new Error('books YAML must be an array');
 	for (const entry of data as { id?: unknown; books?: unknown }[]) {
 		if (typeof entry?.id !== 'string' || entry.id === '') {
-			throw new Error(`booksエントリに id がありません: ${JSON.stringify(entry)}`);
+			throw new Error(`books entry has no id: ${JSON.stringify(entry)}`);
 		}
 		if (!Array.isArray(entry.books) || entry.books.length === 0) {
-			throw new Error(`books(${entry.id})の書籍リストが空です`);
+			throw new Error(`books(${entry.id}) book list is empty`);
 		}
 		for (const book of entry.books as { title?: unknown }[]) {
 			if (typeof book?.title !== 'string' || book.title === '') {
-				throw new Error(`books(${entry.id})の書籍に title がありません: ${JSON.stringify(book)}`);
+				throw new Error(`books(${entry.id}) book has no title: ${JSON.stringify(book)}`);
 			}
 			try {
 				resolveBookUrl(book as BookRef);

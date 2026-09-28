@@ -132,13 +132,13 @@ async function loadSeries(
 		} else if (existsSync(p)) {
 			// Both a network failure and a missing page return null, so keep the existing cache if there is one
 			// (do not drop the whole current year's events because of a transient failure)
-			console.warn(`  ${y}${suffix}: 取り直しに失敗。キャッシュを使う`);
+			console.warn(`  ${y}${suffix}: refetch failed, using the cache`);
 			texts.set(y, readFileSync(p, 'utf8'));
 		} else {
 			writeFileSync(missing, '');
 		}
 	}
-	console.log(`${suffix}ページ: ${texts.size}件（うち${refreshed}件は当年/前年として取り直し）`);
+	console.log(`${suffix} pages: ${texts.size} (${refreshed} refetched as current/previous year)`);
 	return texts;
 }
 
@@ -151,7 +151,7 @@ async function resolveSitelinks(
 
 	const unknownTitles = targets.filter((t) => !(t in qidCache));
 	if (unknownTitles.length > 0 && !offline) {
-		console.log(`Qid解決: ${unknownTitles.length}件`);
+		console.log(`Resolving Qids: ${unknownTitles.length}`);
 		let done = 0;
 		for (let i = 0; i < unknownTitles.length; i += 500) {
 			const part = unknownTitles.slice(i, i + 500);
@@ -166,7 +166,7 @@ async function resolveSitelinks(
 	const qids = [...new Set(Object.values(qidCache).filter((q): q is string => q !== null))];
 	const unknownQids = qids.filter((q) => !(q in slCache));
 	if (unknownQids.length > 0 && !offline) {
-		console.log(`sitelink数取得: ${unknownQids.length}件`);
+		console.log(`Fetching sitelink counts: ${unknownQids.length}`);
 		let done = 0;
 		for (let i = 0; i < unknownQids.length; i += 500) {
 			const part = unknownQids.slice(i, i + 500);
@@ -193,7 +193,7 @@ async function resolvePageviews(
 	const cache = loadJsonCache<Record<string, number>>('pageviews.json', {});
 	const unknown = targets.filter((t) => !(t in cache));
 	if (unknown.length > 0 && !offline) {
-		console.log(`ページビュー取得: ${unknown.length}件`);
+		console.log(`Fetching page views: ${unknown.length}`);
 		let done = 0;
 		for (let i = 0; i < unknown.length; i += 500) {
 			const part = unknown.slice(i, i + 500);
@@ -216,7 +216,7 @@ async function resolveImages(
 	>('images.json', {});
 	const unknown = titles.filter((t) => !(t in cache));
 	if (unknown.length > 0 && !offline) {
-		console.log(`画像取得: ${unknown.length}件`);
+		console.log(`Fetching images: ${unknown.length}`);
 		let done = 0;
 		for (let i = 0; i < unknown.length; i += 500) {
 			const part = unknown.slice(i, i + 500);
@@ -286,7 +286,7 @@ async function main(): Promise<void> {
 	}
 	// Exclude future scheduled events
 	const rawEvents = raws.filter((r) => eventDateAndId(r).date <= today);
-	console.log(`パース: ${rawEvents.length}件のイベント`);
+	console.log(`Parsed: ${rawEvents.length} events`);
 
 	// 3. Scoring (max(sitelinks, pageviews-equivalent) × IDF decay × place-name decay)
 	const targets = [...new Set(rawEvents.flatMap((r) => r.links.map((l) => l.target)))];
@@ -338,7 +338,7 @@ async function main(): Promise<void> {
 		protectedIds,
 	);
 	const deduped = unique.filter((s) => !dropIds.has(s.id));
-	console.log(`近似重複の集約: ${dropIds.size}件を除去 → ${deduped.length}件`);
+	console.log(`Near-duplicate merge: removed ${dropIds.size} -> ${deduped.length}`);
 
 	const importance = percentileByDecade(
 		deduped.map((s) => ({ id: s.id, year: s.raw.year, raw: s.rawScore })),
@@ -378,7 +378,7 @@ async function main(): Promise<void> {
 	const curateResult = applyCurated(events, curatedEntries);
 	events = sortEvents(curateResult.events);
 	if (curateResult.unmatched.length > 0) {
-		console.warn(`⚠️ curatedでidが一致しない: ${curateResult.unmatched.join(', ')}`);
+		console.warn(`⚠️ curated ids with no match: ${curateResult.unmatched.join(', ')}`);
 	}
 
 	// 7. Compute related events (link events whose sources point to the same Wikipedia entity).
@@ -409,14 +409,14 @@ async function main(): Promise<void> {
 	const booksIndex = buildBooksIndex(bookEntries);
 	const unmatchedBooks = unmatchedBookIds(bookEntries, new Set(events.map((e) => e.id)));
 	if (unmatchedBooks.length > 0) {
-		console.warn(`⚠️ books.yamlでidが一致しない: ${unmatchedBooks.join(', ')}`);
+		console.warn(`⚠️ books.yaml ids with no match: ${unmatchedBooks.join(', ')}`);
 	}
 
 	// Collections (look up the regenerated NewsEvent bodies and serve them through a separate path)
 	const finalById = new Map(events.map((e) => [e.id, e]));
 	const unmatchedCollections = unmatchedCollectionIds(collectionSources, new Set(finalById.keys()));
 	for (const { slug, ids } of unmatchedCollections) {
-		console.warn(`⚠️ 特集(${slug})でidが一致しない: ${ids.join(', ')}`);
+		console.warn(`⚠️ collection (${slug}) ids with no match: ${ids.join(', ')}`);
 	}
 	const collectionDetails = collectionSources.map((s) => buildCollectionDetail(s, finalById));
 
@@ -449,17 +449,17 @@ async function main(): Promise<void> {
 	}
 
 	// Report
-	console.log('\n=== 統計 ===');
-	console.log(`総件数: ${events.length} (期間 ${meta.minDate} 〜 ${meta.maxDate})`);
-	console.log(`overview(≥${OVERVIEW_MIN_IMPORTANCE}): ${overviewSlice(events, OVERVIEW_MIN_IMPORTANCE).length}件`);
-	console.log(`画像付き: ${events.filter((e) => e.image).length}件`);
-	console.log(`curated: 上書き${curateResult.updated.length} / 追加${curateResult.added.length}`);
-	console.log(`関連イベント付き: ${relatedCount}件（うち手動指定 ${manualRelatedIds.size}件のイベントに設定）`);
-	console.log(`特集: ${collectionDetails.length}本`);
+	console.log('\n=== Stats ===');
+	console.log(`Total: ${events.length} (range ${meta.minDate} to ${meta.maxDate})`);
+	console.log(`overview(>=${OVERVIEW_MIN_IMPORTANCE}): ${overviewSlice(events, OVERVIEW_MIN_IMPORTANCE).length}`);
+	console.log(`With image: ${events.filter((e) => e.image).length}`);
+	console.log(`curated: updated ${curateResult.updated.length} / added ${curateResult.added.length}`);
+	console.log(`With related events: ${relatedCount} (manual relations set on ${manualRelatedIds.size} events)`);
+	console.log(`Collections: ${collectionDetails.length}`);
 	for (const d of collectionDetails) {
-		console.log(`  ${d.slug}: ${d.count}件 (${d.fromDate} 〜 ${d.toDate}) ${d.title}`);
+		console.log(`  ${d.slug}: ${d.count} (${d.fromDate} to ${d.toDate}) ${d.title}`);
 	}
-	console.log('\nチャンク別件数:');
+	console.log('\nCount per chunk:');
 	for (const c of meta.chunks) console.log(`  ${c.key} (${c.fromYear}-${c.toYear}): ${c.count}`);
 	const catCount = new Map<string, number>();
 	const regCount = new Map<string, number>();
@@ -467,13 +467,13 @@ async function main(): Promise<void> {
 		catCount.set(e.category, (catCount.get(e.category) ?? 0) + 1);
 		regCount.set(e.region, (regCount.get(e.region) ?? 0) + 1);
 	}
-	console.log('\nカテゴリ分布:');
+	console.log('\nCategory distribution:');
 	for (const [c, n] of [...catCount].sort((a, b) => b[1] - a[1]))
 		console.log(`  ${c}: ${n} (${percent(n, events.length)})`);
-	console.log('\n地域分布:');
+	console.log('\nRegion distribution:');
 	for (const [r, n] of [...regCount].sort((a, b) => b[1] - a[1]))
 		console.log(`  ${r}: ${n} (${percent(n, events.length)})`);
-	console.log('\nimportance上位20:');
+	console.log('\nTop 20 by importance:');
 	for (const e of [...events].sort((a, b) => b.importance - a.importance).slice(0, 20))
 		console.log(`  [${e.importance}] ${e.date} ${e.title} (${e.category}/${e.region})`);
 }

@@ -17,10 +17,10 @@ export function parseCuratedYaml(yamlText: string): CuratedEntry[] {
 	if (yamlText.trim() === '') return [];
 	const data = load(yamlText);
 	if (data == null) return [];
-	if (!Array.isArray(data)) throw new Error('curated YAMLは配列である必要があります');
+	if (!Array.isArray(data)) throw new Error('curated YAML must be an array');
 	for (const entry of data) {
 		if (typeof entry?.id !== 'string' || entry.id === '') {
-			throw new Error(`curatedエントリに id がありません: ${JSON.stringify(entry)}`);
+			throw new Error(`curated entry has no id: ${JSON.stringify(entry)}`);
 		}
 	}
 	return data as CuratedEntry[];

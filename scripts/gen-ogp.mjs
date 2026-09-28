@@ -10,7 +10,7 @@ import { extname, join, resolve } from 'node:path';
 const port = Number(process.argv[2] ?? 5399);
 const root = resolve('build');
 if (!existsSync(root)) {
-	console.error('❌ build/ がありません。先に npm run build を実行してください');
+	console.error('❌ build/ is missing. Run npm run build first');
 	process.exit(1);
 }
 
@@ -71,4 +71,4 @@ for (const c of collections) {
 
 await browser.close();
 server.close();
-console.log(`\n${collections.length + 1}枚を生成しました`);
+console.log(`\nGenerated ${collections.length + 1} images`);

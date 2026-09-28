@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { classify, classifyCategory, classifyRegion } from './classify.ts';
 
 describe('classifyCategory', () => {
-	it('各カテゴリの代表例を分類する', () => {
+	it('classifies a representative example of each category', () => {
 		expect(classifyCategory('関東大震災が発生。')).toBe('disaster');
 		expect(classifyCategory('太平洋戦争が開戦。')).toBe('war');
 		expect(classifyCategory('東京オリンピック開幕。')).toBe('sports');
@@ -12,49 +12,49 @@ describe('classifyCategory', () => {
 		expect(classifyCategory('新内閣が発足。')).toBe('politics');
 	});
 
-	it('優先順位: 災害は戦争より先に判定される', () => {
+	it('priority: disaster is checked before war', () => {
 		expect(classifyCategory('空襲による大火災が発生。')).toBe('disaster');
 	});
 
-	it('どれにも該当しなければ society', () => {
+	it('society when nothing matches', () => {
 		expect(classifyCategory('三億円事件が起きる。')).toBe('society');
 	});
 });
 
 describe('classifyRegion', () => {
-	it('日本の地名・制度で japan', () => {
+	it('japan for Japanese places and institutions', () => {
 		expect(classifyRegion('東京で市電が開業。')).toBe('japan');
 		expect(classifyRegion('神奈川県で何かが起きた。')).toBe('japan');
 	});
 
-	it('外国名・国際機関で world', () => {
+	it('world for foreign names and international bodies', () => {
 		expect(classifyRegion('アメリカで大統領選挙。')).toBe('world');
 		expect(classifyRegion('国際連合が発足。')).toBe('world');
 	});
 
-	it('両方含めば both', () => {
+	it('both when it contains both', () => {
 		expect(classifyRegion('日本とアメリカが条約に調印。')).toBe('both');
 	});
 
-	it('手がかりなし: カタカナ4連続以上は world、なければ japan', () => {
+	it('no clue: world for 4+ consecutive katakana, otherwise japan', () => {
 		expect(classifyRegion('レントゲンがエックス線を発見。')).toBe('world');
 		expect(classifyRegion('電話交換業務が始まる。')).toBe('japan');
 	});
 });
 
-describe('classify (サイドカー上書き)', () => {
-	it('サイドカーがなければルールベースの結果', () => {
+describe('classify (sidecar override)', () => {
+	it('rule-based result without a sidecar', () => {
 		expect(classify('id1', '新内閣が発足。')).toEqual({ category: 'politics', region: 'japan' });
 	});
 
-	it('regionHintはルールベースより優先、サイドカーはさらに優先', () => {
+	it('regionHint beats rules and the sidecar beats both', () => {
 		expect(classify('id1', '新内閣が発足。', {}, 'world').region).toBe('world');
 		expect(classify('id1', '新内閣が発足。', { id1: { region: 'both' } }, 'world').region).toBe(
 			'both',
 		);
 	});
 
-	it('サイドカーが部分上書きする', () => {
+	it('the sidecar partially overrides', () => {
 		const sidecar = { id1: { category: 'society' as const } };
 		expect(classify('id1', '新内閣が発足。', sidecar)).toEqual({
 			category: 'society',
@@ -62,7 +62,7 @@ describe('classify (サイドカー上書き)', () => {
 		});
 	});
 
-	it('サイドカーが region のみ上書き（category はルールベース）', () => {
+	it('the sidecar overrides only region (category stays rule-based)', () => {
 		const sidecar = { id1: { region: 'both' as const } };
 		expect(classify('id1', '新内閣が発足。', sidecar)).toEqual({
 			category: 'politics',
@@ -70,7 +70,7 @@ describe('classify (サイドカー上書き)', () => {
 		});
 	});
 
-	it('サイドカーで両方上書きもできる', () => {
+	it('the sidecar can override both', () => {
 		const sidecar = { id1: { category: 'war' as const, region: 'world' as const } };
 		expect(classify('id1', '何かが起きた。', sidecar)).toEqual({
 			category: 'war',

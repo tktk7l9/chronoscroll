@@ -25,24 +25,24 @@ function ev(region: NewsEvent['region'], category: NewsEvent['category'], id = '
 }
 
 describe('matchesFilter', () => {
-	it('空フィルタは全て合致', () => {
+	it('an empty filter matches everything', () => {
 		expect(matchesFilter(ev('japan', 'politics'), EMPTY_FILTER)).toBe(true);
 	});
 
-	it('地域フィルタ: both はどの選択にも合致する', () => {
+	it('region filter: both matches any selection', () => {
 		const japanOnly = { regions: new Set(['japan' as const]), categories: null, collectionIds: null };
 		expect(matchesFilter(ev('japan', 'politics'), japanOnly)).toBe(true);
 		expect(matchesFilter(ev('world', 'politics'), japanOnly)).toBe(false);
 		expect(matchesFilter(ev('both', 'politics'), japanOnly)).toBe(true);
 	});
 
-	it('カテゴリフィルタ', () => {
+	it('category filter', () => {
 		const f = { regions: null, categories: new Set(['culture' as const]), collectionIds: null };
 		expect(matchesFilter(ev('japan', 'culture'), f)).toBe(true);
 		expect(matchesFilter(ev('japan', 'politics'), f)).toBe(false);
 	});
 
-	it('地域×カテゴリの複合', () => {
+	it('region x category combined', () => {
 		const f = {
 			regions: new Set(['world' as const]),
 			categories: new Set(['war' as const]),
@@ -54,15 +54,15 @@ describe('matchesFilter', () => {
 	});
 });
 
-describe('特集フィルタ', () => {
+describe('collection filter', () => {
 	const inAnime = withCollection(EMPTY_FILTER, new Set(['a', 'b']));
 
-	it('特集に含まれるidだけ合致する', () => {
+	it('matches only ids in the collection', () => {
 		expect(matchesFilter(ev('japan', 'culture', 'a'), inAnime)).toBe(true);
 		expect(matchesFilter(ev('japan', 'culture', 'zzz'), inAnime)).toBe(false);
 	});
 
-	it('地域・カテゴリの選択と併用できる', () => {
+	it('combines with region and category selections', () => {
 		const f = withCollection(
 			{ regions: null, categories: new Set(['culture' as const]), collectionIds: null },
 			new Set(['a']),
@@ -72,7 +72,7 @@ describe('特集フィルタ', () => {
 		expect(matchesFilter(ev('japan', 'culture', 'b'), f)).toBe(false);
 	});
 
-	it('withCollectionはnullで解除でき、他の選択は保つ', () => {
+	it('withCollection clears with null and keeps other selections', () => {
 		const withRegion = { ...inAnime, regions: new Set(['japan' as const]) };
 		const cleared = withCollection(withRegion, null);
 		expect(cleared.collectionIds).toBeNull();
@@ -81,7 +81,7 @@ describe('特集フィルタ', () => {
 });
 
 describe('isFiltering', () => {
-	it('どちらかが非nullならtrue', () => {
+	it('true when either is non-null', () => {
 		expect(isFiltering(EMPTY_FILTER)).toBe(false);
 		expect(isFiltering({ regions: new Set(['japan']), categories: null, collectionIds: null })).toBe(
 			true,
@@ -94,7 +94,7 @@ describe('isFiltering', () => {
 });
 
 describe('serializeFilter / parseFilter', () => {
-	it('往復できる', () => {
+	it('round-trips', () => {
 		const f = {
 			regions: new Set(['japan' as const]),
 			categories: new Set(['politics' as const, 'culture' as const]),
@@ -108,12 +108,12 @@ describe('serializeFilter / parseFilter', () => {
 		expect(parsed.categories).toEqual(new Set(['culture', 'politics']));
 	});
 
-	it('nullは空文字に、空文字はnullに', () => {
+	it('null becomes an empty string and an empty string becomes null', () => {
 		expect(serializeFilter(EMPTY_FILTER)).toEqual({ r: '', c: '' });
 		expect(parseFilter('', '')).toEqual(EMPTY_FILTER);
 	});
 
-	it('不正な値は無視する', () => {
+	it('ignores invalid values', () => {
 		expect(parseFilter('mars,japan', 'nonsense')).toEqual({
 			regions: new Set(['japan']),
 			categories: null,
@@ -123,16 +123,16 @@ describe('serializeFilter / parseFilter', () => {
 });
 
 describe('toggleIn', () => {
-	it('null（全て）から1つ選択', () => {
+	it('selects one from null (all)', () => {
 		expect(toggleIn(null, 'japan')).toEqual(new Set(['japan']));
 	});
 
-	it('追加と削除', () => {
+	it('adds and removes', () => {
 		expect(toggleIn(new Set(['japan']), 'world')).toEqual(new Set(['japan', 'world']));
 		expect(toggleIn(new Set(['japan', 'world']), 'japan')).toEqual(new Set(['world']));
 	});
 
-	it('最後の1つを外すと null（全て）に戻る', () => {
+	it('removing the last one goes back to null (all)', () => {
 		expect(toggleIn(new Set(['japan']), 'japan')).toBeNull();
 	});
 });

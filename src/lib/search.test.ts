@@ -9,23 +9,23 @@ import {
 } from './search.ts';
 
 describe('bigramTokenize', () => {
-	it('日本語はbigramに分解する', () => {
+	it('splits Japanese into bigrams', () => {
 		expect(bigramTokenize('東京五輪')).toEqual(['東京', '京五', '五輪']);
 	});
 
-	it('英数字は単語のまま（小文字化）', () => {
+	it('keeps alphanumerics as words (lowercased)', () => {
 		expect(bigramTokenize('iPhone 15 発売')).toEqual(['iphone', '15', '発売']);
 	});
 
-	it('1文字の run はそのまま', () => {
+	it('keeps a one-character run as is', () => {
 		expect(bigramTokenize('雪 が 降る')).toEqual(['雪', 'が', '降る']);
 	});
 
-	it('句読点・括弧は区切りとして扱う', () => {
+	it('treats punctuation and brackets as separators', () => {
 		expect(bigramTokenize('開戦。終戦')).toEqual(['開戦', '終戦']);
 	});
 
-	it('空文字は空配列', () => {
+	it('empty string yields an empty array', () => {
 		expect(bigramTokenize('')).toEqual([]);
 	});
 });
@@ -39,23 +39,23 @@ describe('buildSearchIndex / runQuery', () => {
 	const byId = new Map(docs.map((d) => [d[0], d] as const));
 	const mini = buildSearchIndex(docs);
 
-	it('日本語クエリでヒットする', () => {
+	it('matches a Japanese query', () => {
 		const hits = runQuery(mini, byId, 'オリンピック');
 		expect(hits.map((h) => h.id).sort()).toEqual(['e1', 'e3']);
 		expect(hits[0].text).toContain('オリンピック');
 	});
 
-	it('AND検索で絞り込める', () => {
+	it('narrows with AND search', () => {
 		const hits = runQuery(mini, byId, '新幹線 開業');
 		expect(hits.map((h) => h.id)).toEqual(['e2']);
 	});
 
-	it('空クエリ・ヒットなしは空配列', () => {
+	it('empty query or no hits yields an empty array', () => {
 		expect(runQuery(mini, byId, '  ')).toEqual([]);
 		expect(runQuery(mini, byId, '存在しないもの')).toEqual([]);
 	});
 
-	it('limitで件数を制限する', () => {
+	it('limits the count with limit', () => {
 		expect(runQuery(mini, byId, 'オリンピック', 1)).toHaveLength(1);
 	});
 });
