@@ -101,6 +101,14 @@ export default defineConfig({
 					functions: 100,
 					lines: 100,
 				},
+				// UI layer (components, state store, search worker, routes): reached level minus 2 points
+				// so it cannot regress. Branch counts include Svelte template branches, hence the lower bar
+				"src/{lib/components,lib/state,lib/workers,routes}/**": {
+					statements: 97,
+					branches: 83,
+					functions: 97,
+					lines: 98,
+				},
 			},
 		},
 	},
