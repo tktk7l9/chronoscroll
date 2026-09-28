@@ -41,6 +41,9 @@
     "minisearch": "^7.2.0"
   },
   "overrides": {
-    "cookie": "^0.7.2"
+    "cookie": "^0.7.2",
+    "miniflare": {
+      "undici": "7.30.0"
+    }
   }
 }
