@@ -117,7 +117,7 @@ describe('createImagePreloader', () => {
 		vi.advanceTimersByTime(500);
 		expect(load).not.toHaveBeenCalled();
 
-		// 設定が変わったら以降は先読みする（取得済み扱いにはしない）
+		// Once the setting changes, prefetch from then on (not treated as already fetched)
 		saving = false;
 		p.schedule('a.jpg');
 		vi.advanceTimersByTime(120);

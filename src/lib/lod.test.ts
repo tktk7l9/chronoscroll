@@ -48,7 +48,7 @@ describe('ZOOM_STOPS', () => {
 });
 
 describe('importanceThreshold', () => {
-	// 実データ相当: 約1.5万件 / 158年 ≈ 0.26件/日
+	// Equivalent to real data: about 15,000 events / 158 years ≈ 0.26 events/day
 	const eventsPerDay = 0.26;
 
 	it('概観ズームではほぼ最上位のみ', () => {
@@ -70,8 +70,8 @@ describe('importanceThreshold', () => {
 	});
 
 	it('密度の高い時代でも最大ズームなら全件表示になる（永久に見えないイベントを作らない）', () => {
-		// 2020年代の実密度は約1.67件/日。局所密度をそのまま使うと最大ズームでも
-		// 閾値が48程度までしか下がらず、下位の約半数がどのズームでも表示されなくなる
+		// The actual density of the 2020s is about 1.67 events/day. Using the local density as is, even at max zoom
+		// the threshold only drops to about 48, and roughly the lower half is never shown at any zoom
 		expect(importanceThreshold(MAX_PX_PER_DAY, 1.67)).toBe(0);
 		expect(importanceThreshold(MAX_PX_PER_DAY, 100)).toBe(0);
 	});
@@ -106,18 +106,18 @@ describe('tickStepYears', () => {
 });
 
 describe('needsChunkData', () => {
-	// 実データ相当: 27,014件 / 158年 ≈ 0.467件/日
+	// Equivalent to real data: 27,014 events / 158 years ≈ 0.467 events/day
 	const eventsPerDay = 0.467;
 
 	it('概観〜十年ズームでは閾値がoverview.jsonのカットオフを上回るため不要', () => {
-		expect(needsChunkData(0.077, eventsPerDay)).toBe(false); // 概観
-		expect(needsChunkData(0.42, eventsPerDay)).toBe(false); // 十年
+		expect(needsChunkData(0.077, eventsPerDay)).toBe(false); // overview (概観)
+		expect(needsChunkData(0.42, eventsPerDay)).toBe(false); // decade (十年)
 	});
 
 	it('年ズーム以降は閾値が下回るため必要になる', () => {
-		expect(needsChunkData(3.1, eventsPerDay)).toBe(true); // 年
-		expect(needsChunkData(17.9, eventsPerDay)).toBe(true); // 月
-		expect(needsChunkData(62, eventsPerDay)).toBe(true); // 日
+		expect(needsChunkData(3.1, eventsPerDay)).toBe(true); // year (年)
+		expect(needsChunkData(17.9, eventsPerDay)).toBe(true); // month (月)
+		expect(needsChunkData(62, eventsPerDay)).toBe(true); // day (日)
 	});
 
 	it('境界: importanceThresholdがちょうどカットオフのときは不要（未満のみ必要）', () => {
@@ -125,9 +125,9 @@ describe('needsChunkData', () => {
 	});
 
 	it('カスタムのoverviewMinImportanceを指定できる', () => {
-		// カットオフを引き上げるほど「閾値がそれを下回る」ズームが広がり、必要判定されやすくなる
+		// The higher the cutoff, the wider the range of zooms where "the threshold drops below it", so it is more likely judged necessary
 		expect(needsChunkData(0.42, eventsPerDay, 99.5)).toBe(true);
-		// 逆にカットオフを下げれば、同じズームでも不要のまま
+		// Conversely, lowering the cutoff keeps it unnecessary at the same zoom
 		expect(needsChunkData(0.42, eventsPerDay, 50)).toBe(false);
 	});
 

@@ -1,6 +1,6 @@
-// build/e（27,000 本超のイベント個別ページ）を build-e/ へ移す。
-// wrangler deploy は build/ を丸ごと静的アセットにするため、無料枠（20,000 ファイル）を
-// 超えないよう R2 で配信する分をアセットから外す。R2 への同期は scripts/r2-sync.mjs。
+// Move build/e (27,000+ per-event pages) to build-e/.
+// wrangler deploy turns all of build/ into static assets, so to stay under the free tier (20,000 files)
+// the part served from R2 is removed from the assets. Syncing to R2 is done by scripts/r2-sync.mjs.
 import { existsSync, renameSync, rmSync } from 'node:fs';
 
 if (existsSync('build/e')) {

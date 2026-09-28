@@ -21,7 +21,7 @@
 	function toggleCategory(c: Category): void {
 		filter = { ...filter, categories: toggleIn(filter.categories, c) };
 	}
-	// 地域/カテゴリのチップだけを戻す。特集の絞り込みは専用バナー側で解除する
+	// Reset only the region/category chips. The collection filter is cleared from its own banner
 	function clearAll(): void {
 		filter = { ...filter, regions: null, categories: null };
 	}

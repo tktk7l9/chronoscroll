@@ -197,11 +197,11 @@ describe('parseBulletLine', () => {
 			regionHint: 'japan',
 		});
 		expect(parseBulletLine('【アメリカ合衆国】大統領選挙。', 2021, 11)?.regionHint).toBe('world');
-		// タグが主語を兼ねるケースは語を本文へ戻す
+		// When the tag doubles as the subject, put the word back into the body
 		expect(parseBulletLine('【日本】の皇族が成年を迎えた。', 2021, 12)?.text).toBe(
 			'日本の皇族が成年を迎えた。',
 		);
-		// 国旗テンプレート除去の残骸（先頭の助詞）は落とす
+		// Drop the leftovers from flag-template removal (a leading particle)
 		expect(parseBulletLine('{{BRA}}の前大統領が演説した。', 2023, 1)?.text).toBe(
 			'前大統領が演説した。',
 		);

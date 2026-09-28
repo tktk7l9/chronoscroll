@@ -1,6 +1,6 @@
 /**
- * 特集の個別ページ（全件prerender・JSなしの純静的HTML）。
- * テーマ単位のまとまった読み物として、個別イベントページへの内部リンクを束ねる。
+ * Collection detail page (all prerendered, pure static HTML without JS).
+ * As a coherent themed read, it bundles internal links to the event pages.
  */
 import { readFileSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
@@ -26,7 +26,7 @@ export const entries: EntryGenerator = () =>
 export const load: PageServerLoad = ({ params }) => {
 	const { collections } = loadIndex();
 	const i = collections.findIndex((c) => c.slug === params.slug);
-	// slug は entries 由来だが、パス組み立てに使う前に必ず形式と存在の両方を確かめる
+	// slug comes from entries, but always check both its format and existence before using it to build a path
 	if (i === -1 || !isCollectionSlug(params.slug)) error(404, '特集が見つかりません');
 	const detail = JSON.parse(
 		readFileSync(`static/data/collections/${params.slug}.json`, 'utf8'),

@@ -1,14 +1,14 @@
 import type { Category, NewsEvent, Region } from './types.ts';
 import { CATEGORIES } from './types.ts';
 
-/** null = 全て許可。Setは選択されたもののみ許可 */
+/** null = allow everything. A Set allows only the selected items */
 export interface FilterState {
 	regions: ReadonlySet<Region> | null;
 	categories: ReadonlySet<Category> | null;
 	/**
-	 * 特集で絞り込み中のイベントid集合。
-	 * URLにはid列ではなく slug（?k=）が乗り、id集合は collections.json から解決するため
-	 * serializeFilter/parseFilter の対象にはしない（url-state.ts が slug を持つ）。
+	 * Set of event ids when filtering by a collection.
+	 * The URL carries the slug (?k=) rather than the ids, and the id set is resolved from collections.json, so
+	 * it is not handled by serializeFilter/parseFilter (url-state.ts holds the slug).
 	 */
 	collectionIds: ReadonlySet<string> | null;
 }
@@ -22,7 +22,7 @@ export const EMPTY_FILTER: FilterState = {
 export function matchesFilter(ev: NewsEvent, f: FilterState): boolean {
 	if (f.collectionIds !== null && !f.collectionIds.has(ev.id)) return false;
 	if (f.regions !== null) {
-		// both のイベントは japan/world どちらの選択にも合致する
+		// Events with both match either the japan or world selection
 		const hit = ev.region === 'both' ? f.regions.size > 0 : f.regions.has(ev.region);
 		if (!hit) return false;
 	}
@@ -34,7 +34,7 @@ export function isFiltering(f: FilterState): boolean {
 	return f.regions !== null || f.categories !== null || f.collectionIds !== null;
 }
 
-/** 特集の絞り込みを差し替える（解除は null）。地域/カテゴリの選択はそのまま残す */
+/** Replace the collection filter (null clears it). The region/category selection is kept as is */
 export function withCollection(
 	f: FilterState,
 	collectionIds: ReadonlySet<string> | null,
@@ -42,7 +42,7 @@ export function withCollection(
 	return { ...f, collectionIds };
 }
 
-/** URL用: "japan" / "politics,culture" のようなCSV。null⇔空文字 */
+/** For URLs: CSV like "japan" / "politics,culture". null ⇔ empty string */
 export function serializeFilter(f: FilterState): { r: string; c: string } {
 	return {
 		r: f.regions === null ? '' : [...f.regions].sort().join(','),
@@ -62,7 +62,7 @@ export function parseFilter(r: string, c: string): FilterState {
 	};
 }
 
-/** チップのトグル操作。全解除で null（=全て表示）に戻す */
+/** Chip toggle. Clearing everything returns to null (= show all) */
 export function toggleIn<T>(current: ReadonlySet<T> | null, value: T): ReadonlySet<T> | null {
 	const next = new Set(current ?? []);
 	if (next.has(value)) next.delete(value);

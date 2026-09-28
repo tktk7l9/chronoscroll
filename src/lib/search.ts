@@ -1,8 +1,8 @@
 import MiniSearch from 'minisearch';
 
 /**
- * 日本語対応トークナイザ。
- * 英数字の連なりは1単語、それ以外（CJK等）は文字bigramに分解する。
+ * Tokenizer that handles Japanese.
+ * Runs of alphanumerics are one word; everything else (CJK etc.) is split into character bigrams.
  */
 export function bigramTokenize(text: string): string[] {
 	const tokens: string[] = [];
@@ -19,7 +19,7 @@ export function bigramTokenize(text: string): string[] {
 	return tokens;
 }
 
-/** 検索ドキュメント: pipelineのsearch.jsonの1行 [id, date, text] */
+/** Search document: one row of the pipeline's search.json [id, date, text] */
 export type SearchDoc = [id: string, date: string, text: string];
 
 export interface SearchHit {

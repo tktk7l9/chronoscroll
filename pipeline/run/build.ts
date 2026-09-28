@@ -1,16 +1,16 @@
 /**
- * データビルドのオーケストレーター（IO層・カバレッジゲート対象外）。
+ * Orchestrator for the data build (IO layer, excluded from the coverage gate).
  *
  *   npx tsx pipeline/run/build.ts [--from 1868] [--to 2026] [--offline]
  *
- * 1. 年ページ wikitext 取得（キャッシュ: pipeline/.cache/years/）
- * 2. パース → RawEvent[]
- * 3. リンク先の Qid / sitelink数 取得（キャッシュ）→ 十年内パーセンタイルで importance
- * 4. 上位イベントの代表画像取得（キャッシュ）
- * 5. ルールベース分類 + sidecar 上書き
- * 6. curated YAML + 特集YAML 適用
- * 7. 関連イベントの算出（同じ出典を持つイベント同士を結びつける）
- * 8. static/data/ へ JSON チャンク出力 + 統計レポート
+ * 1. Fetch year-page wikitext (cache: pipeline/.cache/years/)
+ * 2. Parse → RawEvent[]
+ * 3. Fetch Qids / sitelink counts of linked articles (cached) → importance as a within-decade percentile
+ * 4. Fetch representative images for top events (cached)
+ * 5. Rule-based classification + sidecar overrides
+ * 6. Apply curated YAML + collection YAML
+ * 7. Compute related events (link events that share the same source)
+ * 8. Emit JSON chunks to static/data/ + stats report
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -58,10 +58,10 @@ const COLLECTIONS_DIR = join(ROOT, 'content', 'collections');
 const BOOKS_PATH = join(ROOT, 'content', 'affiliate', 'books.yaml');
 const SIDECAR_PATH = join(ROOT, 'pipeline', 'sidecar', 'classify.json');
 
-/** 画像を取得・格納する importance 下限 */
+/** Minimum importance for fetching and storing an image */
 const IMAGE_MIN_IMPORTANCE = 60;
-// overview.json に入れる importance 下限は src/lib/lod.ts の OVERVIEW_MIN_IMPORTANCE を使う
-// （フロント側のチャンク先読み抑制ロジックと一致させる必要があるため一元管理）
+// The minimum importance for overview.json uses OVERVIEW_MIN_IMPORTANCE in src/lib/lod.ts
+// (managed in one place because it must match the front end's chunk-prefetch suppression logic)
 
 interface Args {
 	from: number;
@@ -75,7 +75,7 @@ function parseArgs(): Args {
 		const i = argv.indexOf(`--${name}`);
 		return i >= 0 ? Number(argv[i + 1]) : fallback;
 	};
-	// 年ページは当年分も随時更新されるため、デフォルトの終端は実行時の年
+	// Year pages keep being updated for the current year too, so the default end is the year at run time
 	return {
 		from: get('from', 1868),
 		to: get('to', new Date().getFullYear()),
@@ -95,12 +95,12 @@ function saveJsonCache(file: string, data: unknown): void {
 }
 
 /**
- * 年ページのシリーズ（「YYYY年」「YYYY年の日本」）を取得する。
- * 存在しない年は .missing マーカーを置いて次回以降のAPI呼び出しを省く。
+ * Fetch a series of year pages ("YYYY年" / "YYYY年の日本").
+ * Years that do not exist get a .missing marker so later runs skip the API call.
  *
- * ただし当年・前年（isVolatileYear）はキャッシュも .missing も無視して必ず取り直す。
- * 当年のページは日々できごとが追記されるので、キャッシュを使うと取得日以降が
- * 永久に載らなくなる（月次リフレッシュが「変更なし」を返し続ける状態になっていた）。
+ * However, the current and previous year (isVolatileYear) ignore both the cache and .missing and are always refetched.
+ * Events are appended to the current year's page daily, so using the cache would mean anything after
+ * the fetch date never shows up (the monthly refresh kept returning "no changes").
  */
 async function loadSeries(
 	args: Args,
@@ -114,7 +114,7 @@ async function loadSeries(
 	for (let y = args.from; y <= args.to; y++) {
 		const p = join(CACHE, cacheDir, `${y}.wikitext`);
 		const missing = join(CACHE, cacheDir, `${y}.missing`);
-		// --offline はネットワークを一切使わない指定なので、揮発年でもキャッシュに従う
+		// --offline means no network at all, so follow the cache even for volatile years
 		const volatile = isVolatileYear(y, today) && !args.offline;
 		if (!volatile) {
 			if (existsSync(p)) {
@@ -130,8 +130,8 @@ async function loadSeries(
 			texts.set(y, wt);
 			if (volatile) refreshed++;
 		} else if (existsSync(p)) {
-			// 通信失敗もページ不在も null で返るため、既存キャッシュがあるなら残す
-			// （一時的な失敗で当年ぶんのできごとを丸ごと落とさない）
+			// Both a network failure and a missing page return null, so keep the existing cache if there is one
+			// (do not drop the whole current year's events because of a transient failure)
 			console.warn(`  ${y}${suffix}: 取り直しに失敗。キャッシュを使う`);
 			texts.set(y, readFileSync(p, 'utf8'));
 		} else {
@@ -254,7 +254,7 @@ function loadCurated(): CuratedEntry[] {
 	return entries;
 }
 
-/** 特集（テーマ別の読み物）を1ファイル1本で読む。表示順はファイル名順 */
+/** Read collections (themed reading lists), one per file. Display order is file-name order */
 function loadCollections(): CollectionSource[] {
 	if (!existsSync(COLLECTIONS_DIR)) return [];
 	return readdirSync(COLLECTIONS_DIR)
@@ -271,7 +271,7 @@ async function main(): Promise<void> {
 	const args = parseArgs();
 	const today = new Date().toISOString().slice(0, 10);
 
-	// 1-2. 取得 + パース（「YYYY年」+「YYYY年の日本」の2シリーズ）
+	// 1-2. Fetch + parse (two series: "YYYY年" + "YYYY年の日本")
 	const texts = await loadSeries(args, '年', 'years', today);
 	const textsJp = await loadSeries(args, '年の日本', 'years-jp', today);
 	const raws: RawEvent[] = [];
@@ -279,16 +279,16 @@ async function main(): Promise<void> {
 		raws.push(...parseYearPage(wt, year));
 	}
 	for (const [year, wt] of textsJp) {
-		// 日本の年ページ由来は地域ヒントを japan に（タグ明示があればそちらを尊重）
+		// Events from the Japan year pages get the region hint japan (an explicit tag takes precedence)
 		raws.push(
 			...parseYearPage(wt, year).map((r) => ({ ...r, regionHint: r.regionHint ?? ('japan' as const) })),
 		);
 	}
-	// 未来の予定イベントは除外
+	// Exclude future scheduled events
 	const rawEvents = raws.filter((r) => eventDateAndId(r).date <= today);
 	console.log(`パース: ${rawEvents.length}件のイベント`);
 
-	// 3. スコアリング（max(sitelinks, pageviews換算) × IDF減衰 × 地名減衰）
+	// 3. Scoring (max(sitelinks, pageviews-equivalent) × IDF decay × place-name decay)
 	const targets = [...new Set(rawEvents.flatMap((r) => r.links.map((l) => l.target)))];
 	const sitelinks = await resolveSitelinks(targets, args.offline);
 	const pageviews = await resolvePageviews(targets, args.offline);
@@ -313,16 +313,16 @@ async function main(): Promise<void> {
 			),
 		};
 	});
-	// 同一idの重複（同日同文）は除去
+	// Remove exact duplicates with the same id (same date, same text)
 	const seen = new Set<string>();
 	const unique = scored.filter((s) => (seen.has(s.id) ? false : (seen.add(s.id), true)));
 
-	// 近似重複（同日+本文の文字bigram類似度が高いもの。2シリーズに同じできごとが
-	// 別文面で載るケースを吸収する。先頭リンクが揃うとは限らないため文面で判定する）を集約。
-	// curatedが参照するidは必ず残す
-	// 特集のentriesはCuratedEntryと同型なので、curated層と同じ経路にまとめて流す。
-	// これで新規イベント生成・部分上書き・重複除去からのid保護・relatedIdsの手動指定が
-	// 特集でもそのまま効く（特集を後ろに置くので、同じidは特集側が後勝ち）
+	// Merge near-duplicates (same date + high character-bigram similarity of the text. This absorbs cases where the
+	// same event appears in both series with different wording. Judged by text because the leading links do not always match).
+	// Ids referenced by curated are always kept
+	// Collection entries have the same shape as CuratedEntry, so they flow through the same path as the curated layer.
+	// That way creating new events, partial overrides, id protection from dedupe, and manual relatedIds
+	// all work for collections as-is (collections come last, so for the same id the collection wins)
 	const collectionSources = loadCollections();
 	const curatedEntries = [...loadCurated(), ...collectionCuratedEntries(collectionSources)];
 	const protectedIds = new Set(curatedEntries.map((e) => e.id));
@@ -344,7 +344,7 @@ async function main(): Promise<void> {
 		deduped.map((s) => ({ id: s.id, year: s.raw.year, raw: s.rawScore })),
 	);
 
-	// 4. 画像
+	// 4. Images
 	const imageTitles = [
 		...new Set(
 			deduped
@@ -354,7 +354,7 @@ async function main(): Promise<void> {
 	];
 	const images = await resolveImages(imageTitles, args.offline);
 
-	// 5. 分類 + 6. 組み立て
+	// 5. Classification + 6. Assembly
 	const sidecar = existsSync(SIDECAR_PATH)
 		? (JSON.parse(readFileSync(SIDECAR_PATH, 'utf8')) as ClassifySidecar)
 		: {};
@@ -374,15 +374,15 @@ async function main(): Promise<void> {
 		});
 	});
 
-	// 6. curated 適用
+	// 6. Apply curated
 	const curateResult = applyCurated(events, curatedEntries);
 	events = sortEvents(curateResult.events);
 	if (curateResult.unmatched.length > 0) {
 		console.warn(`⚠️ curatedでidが一致しない: ${curateResult.unmatched.join(', ')}`);
 	}
 
-	// 7. 関連イベントの算出（同じWikipedia実体を出典に持つイベント同士を結びつける）。
-	// curatedのrelatedIds（手動指定）を優先し、自動算出分で不足を補う。
+	// 7. Compute related events (link events whose sources point to the same Wikipedia entity).
+	// curated relatedIds (manual) take precedence; the automatically computed ones fill the rest.
 	const eventsById = new Map(events.map((e) => [e.id, e]));
 	const manualRelatedIds = new Map(
 		curatedEntries
@@ -404,7 +404,7 @@ async function main(): Promise<void> {
 		return { ...ev, related };
 	});
 
-	// アフィリエイト書籍リンク（NewsEventにはマージせず別経路で出力）
+	// Affiliate book links (not merged into NewsEvent; emitted through a separate path)
 	const bookEntries = existsSync(BOOKS_PATH) ? parseBooksYaml(readFileSync(BOOKS_PATH, 'utf8')) : [];
 	const booksIndex = buildBooksIndex(bookEntries);
 	const unmatchedBooks = unmatchedBookIds(bookEntries, new Set(events.map((e) => e.id)));
@@ -412,7 +412,7 @@ async function main(): Promise<void> {
 		console.warn(`⚠️ books.yamlでidが一致しない: ${unmatchedBooks.join(', ')}`);
 	}
 
-	// 特集（NewsEvent本体は再生成済みのものを引き当てて別経路で配信する）
+	// Collections (look up the regenerated NewsEvent bodies and serve them through a separate path)
 	const finalById = new Map(events.map((e) => [e.id, e]));
 	const unmatchedCollections = unmatchedCollectionIds(collectionSources, new Set(finalById.keys()));
 	for (const { slug, ids } of unmatchedCollections) {
@@ -420,7 +420,7 @@ async function main(): Promise<void> {
 	}
 	const collectionDetails = collectionSources.map((s) => buildCollectionDetail(s, finalById));
 
-	// 8. 出力
+	// 8. Output
 	rmSync(join(OUT, 'decades'), { recursive: true, force: true });
 	rmSync(join(OUT, 'chunks'), { recursive: true, force: true });
 	rmSync(join(OUT, 'collections'), { recursive: true, force: true });
@@ -448,7 +448,7 @@ async function main(): Promise<void> {
 		writeFileSync(join(OUT, 'collections', `${detail.slug}.json`), JSON.stringify(detail));
 	}
 
-	// レポート
+	// Report
 	console.log('\n=== 統計 ===');
 	console.log(`総件数: ${events.length} (期間 ${meta.minDate} 〜 ${meta.maxDate})`);
 	console.log(`overview(≥${OVERVIEW_MIN_IMPORTANCE}): ${overviewSlice(events, OVERVIEW_MIN_IMPORTANCE).length}件`);

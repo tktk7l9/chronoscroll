@@ -13,7 +13,7 @@ export function wikipediaUrl(title: string): string {
 	return `https://ja.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`;
 }
 
-/** カードに出す短いタイトル（末尾の句点を落として切り詰め） */
+/** Short title shown on the card (drop the trailing 「。」 and truncate) */
 export function truncateTitle(text: string, max = 48): string {
 	const t = text.replace(/。$/, '');
 	return t.length <= max ? t : `${t.slice(0, max - 1)}…`;
@@ -53,10 +53,10 @@ export function decadeKeyOf(year: number): string {
 	return `${Math.floor(year / 10) * 10}s`;
 }
 
-/** 1チャンクあたりの上限。超える十年は前半/後半の5年チャンクに分割する */
+/** Max events per chunk. A decade exceeding it is split into first-half/second-half 5-year chunks */
 export const MAX_EVENTS_PER_CHUNK = 1200;
 
-/** 日付昇順（同日はid順）の正準ソート */
+/** Canonical sort by ascending date (same date by id) */
 export function sortEvents(events: readonly NewsEvent[]): NewsEvent[] {
 	return [...events].sort((a, b) =>
 		a.date === b.date ? (a.id < b.id ? -1 : 1) : a.date < b.date ? -1 : 1,
@@ -69,8 +69,8 @@ export interface Chunk {
 }
 
 /**
- * 十年単位にチャンクし、MAX_EVENTS_PER_CHUNK を超える十年は前半/後半の5年に分割する。
- * キーは "1960s"（十年）/ "2020h1"・"2020h2"（5年前半/後半）。
+ * Chunk by decade; a decade exceeding MAX_EVENTS_PER_CHUNK is split into first-half/second-half 5-year chunks.
+ * Keys are "1960s" (decade) / "2020h1", "2020h2" (first/second 5-year half).
  */
 export function buildChunks(
 	events: readonly NewsEvent[],
@@ -106,15 +106,15 @@ export function buildChunks(
 	return chunks;
 }
 
-/** 初期ロード用: 重要度が閾値以上のイベントのみ */
+/** For the initial load: only events at or above the importance threshold */
 export function overviewSlice(events: readonly NewsEvent[], minImportance = 95): NewsEvent[] {
 	return sortEvents(events.filter((e) => e.importance >= minImportance));
 }
 
-/** 検索テキストの上限文字数（索引サイズ抑制。要点は文頭に来るため実用上十分） */
+/** Max characters of search text (keeps the index small; the key point comes at the start, so this is enough in practice) */
 export const SEARCH_TEXT_MAX = 72;
 
-/** 検索worker用の軽量ドキュメント [id, date, text] */
+/** Lightweight document for the search worker [id, date, text] */
 export function searchDocs(events: readonly NewsEvent[]): [string, string, string][] {
 	return sortEvents(events).map((e) => [
 		e.id,

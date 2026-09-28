@@ -1,8 +1,8 @@
-// /e/<id> を R2 から返す。静的アセットの無料枠（20,000 ファイル）に収めるため、
-// 27,000 本超のイベント個別ページ（prerender 済み HTML）だけを R2 に置いている。
-// /e/* は Worker が先に受ける。それ以外は静的アセットが先に解決し、無いパスは
-// Worker に落ちて notFound() が 404 を返す（build/404.html を置いていないため。
-// wrangler.jsonc の not_found_handling 参照）。
+// Serve /e/<id> from R2. To fit the static-asset free tier (20,000 files),
+// only the 27,000+ per-event pages (prerendered HTML) live in R2.
+// /e/* hits the Worker first. Everything else is resolved by static assets first, and missing paths
+// fall through to the Worker, where notFound() returns 404 (because there is no build/404.html;
+// see not_found_handling in wrangler.jsonc).
 import securityHeaders from '../config/security-headers.json';
 
 export type Resolution =
@@ -10,7 +10,7 @@ export type Resolution =
 	| { kind: 'page'; key: string }
 	| { kind: 'notFound' };
 
-/** R2 の get が返すもののうち使う部分。R2Object（本文なし）と R2ObjectBody の両方を受ける */
+/** The part of what R2 get returns that we use. Accepts both R2Object (no body) and R2ObjectBody */
 export interface PageObject {
 	httpEtag: string;
 	body?: ReadableStream;
@@ -24,8 +24,8 @@ export interface Env {
 	PAGES: PagesBucket;
 }
 
-// イベント id は日付で始まり英数字・ドット・ハイフン・アンダースコアだけ（27,137 件で実測）。
-// 先頭ドットを許さないので `..` は通らない。`%` や `/` も通らない。
+// Event ids start with a date and contain only alphanumerics, dots, hyphens, and underscores (measured on 27,137 events).
+// A leading dot is not allowed, so `..` cannot pass. Neither can `%` or `/`.
 const ID = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 const CACHE_PAGE = 'public, max-age=3600, stale-while-revalidate=86400';
 const NOT_FOUND_HTML =
@@ -75,12 +75,12 @@ export async function handle(request: Request, env: Env): Promise<Response> {
 		headers.set('Location', `${url.origin}${r.location}${url.search}`);
 		return new Response(null, { status: 301, headers });
 	}
-	// build/404.html を置いていないため、静的アセットで解決できないパスはここに落ちて notFound() が 404 を返す
+	// There is no build/404.html, so paths not resolved by static assets fall through here and notFound() returns 404
 	if (r.kind === 'notFound') return notFound();
 
 	let obj: PageObject | null;
 	try {
-		// onlyIf に要求ヘッダーを渡すと If-None-Match 等を R2 が評価し、一致すれば本文なしで返る
+		// Passing the request headers to onlyIf makes R2 evaluate If-None-Match etc. and return without a body on a match
 		obj = await env.PAGES.get(r.key, { onlyIf: request.headers });
 	} catch {
 		const h = pageHeaders(null, false);

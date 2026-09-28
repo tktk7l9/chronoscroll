@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { createImagePreloader, prefersReducedData, type ConnectionLike } from '../preload.ts';
 
-	// カード間で共有する（同じ画像を二度取りに行かない・予約は常に1件）
+	// Shared across cards (never fetch the same image twice; at most one pending reservation)
 	const preloader = createImagePreloader((url) => {
 		new Image().src = url;
 	}, {
@@ -51,7 +51,7 @@
 	style:top="{top}px"
 	style:height="{height}px"
 >
-	<!-- 詳細を開く前に画像を取っておく（ホバー/フォーカスで予約・押下で即時） -->
+	<!-- Fetch the image before the detail opens (reserve on hover/focus, immediately on press) -->
 	<button
 		type="button"
 		class="hit"
@@ -79,7 +79,7 @@
 		position: absolute;
 		width: min(38vw, 360px);
 		--cat-color: var(--cat-society);
-		/* 出現時のみの軽いフェードアップ（exitなし=仮想化のアンマウントを妨げない） */
+		/* Light fade-up on appearance only (no exit = does not block unmounting by virtualization) */
 		animation: card-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 	}
 	@keyframes card-in {

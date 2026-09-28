@@ -23,8 +23,8 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 pipeline/.cache/*
-# 月次 cron では Actions キャッシュが7日で消えて毎回全件取り直しになるため、
-# キャッシュ4本を種としてコミットする（pageviews は60日平均だが全件取り直すと80分超＝新規タイトル分だけ取る）
+# The monthly cron loses the Actions cache after 7 days and refetches everything each time,
+# so commit the 4 caches as a seed (pageviews is a 60-day average, but refetching everything takes 80+ min = fetch only new titles)
 !pipeline/.cache/qids.json
 !pipeline/.cache/sitelinks.json
 !pipeline/.cache/images.json

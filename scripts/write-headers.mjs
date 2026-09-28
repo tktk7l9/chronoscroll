@@ -1,4 +1,4 @@
-// config/security-headers.json → static/_headers。npm run build の先頭で実行する。
+// config/security-headers.json → static/_headers. Runs at the start of npm run build.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { renderHeadersFile } from './lib/headers.mjs';
 

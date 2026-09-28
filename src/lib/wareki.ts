@@ -3,7 +3,7 @@ export interface Wareki {
 	year: number;
 }
 
-/** 新しい順。start は各元号の開始日（グレゴリオ暦） */
+/** Newest first. start is the first day of each era (Gregorian calendar) */
 const ERAS: readonly { name: string; start: string }[] = [
 	{ name: '令和', start: '2019-05-01' },
 	{ name: '平成', start: '1989-01-08' },
@@ -12,7 +12,7 @@ const ERAS: readonly { name: string; start: string }[] = [
 	{ name: '明治', start: '1868-01-25' },
 ] as const;
 
-/** ISO日付を和暦に変換する。明治より前（1868-01-24以前）は null */
+/** Convert an ISO date to the Japanese era calendar (和暦). null before Meiji (on or before 1868-01-24) */
 export function toWareki(isoDate: string): Wareki | null {
 	for (const era of ERAS) {
 		if (isoDate >= era.start) {
@@ -22,7 +22,7 @@ export function toWareki(isoDate: string): Wareki | null {
 	return null;
 }
 
-/** 「昭和39年」「令和元年」の形式。明治より前は null */
+/** Format like 「昭和39年」 / 「令和元年」. null before Meiji */
 export function formatWareki(isoDate: string): string | null {
 	const w = toWareki(isoDate);
 	if (w === null) return null;

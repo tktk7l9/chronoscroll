@@ -1,6 +1,6 @@
 <script lang="ts">
-	// chronoscrollのロゴマーク: 砂時計の中を年表のドット（カテゴリ色）が落ちていく。
-	// 線はcurrentColor、ドットはテーマのカテゴリ色変数を参照するのでdark/lightに自動追従する。
+	// chronoscroll logo mark: timeline dots (category colors) fall through an hourglass.
+	// Strokes use currentColor and dots reference the theme's category color variables, so it follows dark/light automatically.
 	let { size = 22 }: { size?: number } = $props();
 </script>
 
@@ -40,7 +40,7 @@
 		fill: var(--cat-economy);
 	}
 
-	/* ブランド（リンク）ホバーで砂時計の砂が落ちる遊び */
+	/* A bit of fun: the hourglass sand falls when the brand (link) is hovered */
 	:global(.brand:hover) .dot-a {
 		animation: sand-fall 0.7s ease-in;
 	}

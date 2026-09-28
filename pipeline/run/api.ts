@@ -1,6 +1,6 @@
 /**
- * Wikimedia API クライアント（IO層・カバレッジゲート対象外）。
- * - User-Agent 明示・maxlag・直列スロットリング・リトライ
+ * Wikimedia API client (IO layer, excluded from the coverage gate).
+ * - Explicit User-Agent, maxlag, serial throttling, retries
  */
 import { nextDelay, retryDelayMs, isRetryableError } from '../lib/throttle.ts';
 
@@ -30,7 +30,7 @@ export async function apiPost(
 				body: body.toString(),
 			});
 			if (res.status === 429 || res.status === 503) {
-				// レート制限。Retry-After（秒）があれば retryDelayMs がそれを優先する
+				// Rate limited. If Retry-After (seconds) is present, retryDelayMs prefers it
 				retryAfterSec = Number(res.headers.get('retry-after') ?? '');
 				throw new Error(`HTTP ${res.status}`);
 			}
@@ -42,7 +42,7 @@ export async function apiPost(
 			}
 			return json;
 		} catch (e) {
-			// 無いページ（missingtitle）などは何度送っても同じ＝即座に諦めて呼び出し側に任せる
+			// Missing pages (missingtitle) etc. are the same no matter how often we retry = give up immediately and leave it to the caller
 			if (!isRetryableError(e instanceof Error ? e.message : String(e))) throw e;
 			const delay = retryDelayMs(attempt, retryAfterSec);
 			if (delay === null) throw e;
@@ -55,7 +55,7 @@ export async function apiPost(
 export const JA_WIKI_API = 'https://ja.wikipedia.org/w/api.php';
 export const WIKIDATA_API = 'https://www.wikidata.org/w/api.php';
 
-/** 任意ページの wikitext を取得（存在しなければ null） */
+/** Fetch the wikitext of any page (null if it does not exist) */
 export async function fetchPageWikitext(page: string): Promise<string | null> {
 	const json = (await apiPost(JA_WIKI_API, {
 		action: 'parse',
@@ -87,7 +87,7 @@ interface QueryPagesResponse {
 	};
 }
 
-/** 元タイトル → normalized/redirects を辿った最終タイトルの対応表 */
+/** Map from original title → final title after following normalized/redirects */
 function resolveTitleMap(titles: readonly string[], q: QueryPagesResponse['query']): Map<string, string> {
 	const norm = new Map((q?.normalized ?? []).map((n) => [n.from, n.to]));
 	const redir = new Map((q?.redirects ?? []).map((r) => [r.from, r.to]));
@@ -104,7 +104,7 @@ function resolveTitleMap(titles: readonly string[], q: QueryPagesResponse['query
 	return map;
 }
 
-/** タイトル群 → Wikidata Qid（見つからなければ null） */
+/** Titles → Wikidata Qid (null if not found) */
 export async function fetchQids(titles: readonly string[]): Promise<Map<string, string | null>> {
 	const result = new Map<string, string | null>();
 	for (const batch of chunk(titles, 50)) {
@@ -125,7 +125,7 @@ export async function fetchQids(titles: readonly string[]): Promise<Map<string, 
 	return result;
 }
 
-/** Qid群 → sitelink数（言語版数） */
+/** Qids → sitelink count (number of language editions) */
 export async function fetchSitelinkCounts(qids: readonly string[]): Promise<Map<string, number>> {
 	const result = new Map<string, number>();
 	for (const batch of chunk(qids, 50)) {
@@ -143,11 +143,11 @@ export async function fetchSitelinkCounts(qids: readonly string[]): Promise<Map<
 }
 
 /**
- * タイトル群 → 直近60日の1日平均ページビュー（ja.wikipedia）。
- * - prop=pageviews は1レスポンスで一部のページ分しか返さないため、continue を辿る
- * - 特定タイトルが pvi-cached-error 等で失敗するとバッチ全体がエラーになるため、
- *   エラーメッセージから当該タイトルを抜いてリトライする（失敗タイトルは0扱い）
- * - それでも失敗したバッチはスキップ（キャッシュに入れず次回再試行）
+ * Titles → average daily page views over the last 60 days (ja.wikipedia).
+ * - prop=pageviews returns only some pages per response, so follow continue
+ * - If a particular title fails with pvi-cached-error etc., the whole batch errors out, so
+ *   extract that title from the error message and retry (failed titles count as 0)
+ * - Batches that still fail are skipped (not cached, retried next time)
  */
 export async function fetchPageviews(titles: readonly string[]): Promise<Map<string, number>> {
 	const result = new Map<string, number>();
@@ -204,11 +204,11 @@ export interface PageImage {
 	src: string;
 	width: number;
 	height: number;
-	/** Commonsのファイル名（File:なし） */
+	/** Commons file name (without File:) */
 	name: string;
 }
 
-/** タイトル群 → 代表画像サムネイル */
+/** Titles → representative thumbnail image */
 export async function fetchPageImages(
 	titles: readonly string[],
 ): Promise<Map<string, PageImage | null>> {

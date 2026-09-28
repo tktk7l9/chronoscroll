@@ -1,10 +1,10 @@
 /**
- * 関連イベントの算出。
- * イベントの出典（sources）はWikipediaの実在記事へのリンクなので、
- * 「同じ記事を出典に持つ2件のイベント」は高い確度で本当に関連している
- * （dedupeの近似重複判定と違い、記事タイトルという厳密な識別子で結びつけるため
- * 「同日に成立した別々の法律」のような定型文由来の誤結合は起きない）。
- * 地名・国名など文脈的すぎるリンク（score.tsのisGeoLikeTarget）は関連付けの鍵から除外する。
+ * Computing related events.
+ * An event's sources are links to real Wikipedia articles, so
+ * "two events that cite the same article" are very likely truly related
+ * (unlike dedupe's near-duplicate check, they are linked by an exact identifier, the article title, so
+ * false links from boilerplate such as "separate laws enacted on the same day" do not happen).
+ * Links that are too contextual, such as place and country names (isGeoLikeTarget in score.ts), are excluded from the linking keys.
  */
 import type { NewsEvent, RelatedRef } from '../../src/lib/types.ts';
 import { isGeoLikeTarget } from './score.ts';
@@ -13,7 +13,7 @@ export const MAX_RELATED = 4;
 
 const YEAR_SOURCE_RE = /^Wikipedia: \d{4}年$/;
 
-/** buildEvent が組み立てる Wikipedia URL からページの正規タイトルを復元する */
+/** Recover the page's canonical title from the Wikipedia URL that buildEvent assembles */
 export function articleTitleFromUrl(url: string): string | null {
 	const m = url.match(/\/wiki\/(.+)$/);
 	if (!m) return null;
@@ -25,9 +25,9 @@ export function articleTitleFromUrl(url: string): string | null {
 }
 
 /**
- * イベントが言及する実体のタイトル集合。
- * 年ページ自体への出典（`Wikipedia: YYYY年`）と地名的な記事は除外する。
- * URLから復元するため、表記揺れのあるラベル（[[target|label]]のlabel側）に左右されない。
+ * The set of entity titles an event mentions.
+ * Sources pointing to the year page itself (`Wikipedia: YYYY年`) and place-name-like articles are excluded.
+ * Because titles are recovered from URLs, they are not affected by label variations (the label side of [[target|label]]).
  */
 export function entityTitles(ev: Pick<NewsEvent, 'sources'>): string[] {
 	const titles: string[] = [];
@@ -42,9 +42,9 @@ export function entityTitles(ev: Pick<NewsEvent, 'sources'>): string[] {
 type RelatableEvent = Pick<NewsEvent, 'id' | 'date' | 'title' | 'importance' | 'sources'>;
 
 /**
- * 同じ実体を出典に持つイベント同士を結びつける。
- * 各イベントについて、実体を共有する他イベントのうち重要度上位 maxRelated 件を返す
- * （同率は日付昇順）。共有する実体がなければMapにエントリを作らない。
+ * Link events that cite the same entity.
+ * For each event, return the top maxRelated other events by importance among those sharing an entity
+ * (ties by ascending date). If no entity is shared, no Map entry is created.
  */
 export function computeRelated(
 	events: readonly RelatableEvent[],

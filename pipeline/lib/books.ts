@@ -2,7 +2,7 @@ import { load } from 'js-yaml';
 import { resolveBookUrl } from '../../src/lib/books.ts';
 import type { BookRef } from '../../src/lib/types.ts';
 
-/** content/affiliate/books.yaml の1エントリ */
+/** One entry of content/affiliate/books.yaml */
 export interface BookEntry {
 	id: string;
 	books: BookRef[];
@@ -34,7 +34,7 @@ export function parseBooksYaml(yamlText: string): BookEntry[] {
 	return data as BookEntry[];
 }
 
-/** id → 解決済みURL付きBookRef[] のマップを組み立てる（同一idは順番に結合） */
+/** Build a map of id → BookRef[] with resolved URLs (same ids are concatenated in order) */
 export function buildBooksIndex(entries: readonly BookEntry[]): Record<string, BookRef[]> {
 	const index: Record<string, BookRef[]> = {};
 	for (const entry of entries) {
@@ -44,7 +44,7 @@ export function buildBooksIndex(entries: readonly BookEntry[]): Record<string, B
 	return index;
 }
 
-/** 最終的なイベントid集合に存在しないbooksエントリのidを返す（typo検出用） */
+/** Return ids of books entries that do not exist in the final set of event ids (for typo detection) */
 export function unmatchedBookIds(
 	entries: readonly BookEntry[],
 	validIds: ReadonlySet<string>,

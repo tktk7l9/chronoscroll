@@ -1,6 +1,6 @@
 /**
- * 全文検索ワーカー（IO層・カバレッジゲート対象外）。
- * 初回クエリで search.json を取得して MiniSearch 索引を構築する。
+ * Full-text search worker (IO layer, excluded from the coverage gate).
+ * Fetches search.json on the first query and builds the MiniSearch index.
  */
 import type MiniSearch from 'minisearch';
 import { buildSearchIndex, runQuery, type SearchDoc, type SearchHit } from '../search.ts';

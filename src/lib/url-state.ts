@@ -3,17 +3,17 @@ import type { FilterState } from './filters.ts';
 import { EMPTY_FILTER, parseFilter, serializeFilter } from './filters.ts';
 import { clampPxPerDay } from './timescale.ts';
 
-/** URLに保持する共有可能な表示状態 */
+/** Shareable view state kept in the URL */
 export interface UrlState {
-	/** ビューポート中心の日付 (yyyy-mm-dd)。null=デフォルト（最新） */
+	/** Date at the center of the viewport (yyyy-mm-dd). null = default (latest) */
 	centerDate: string | null;
-	/** ズーム (px/日)。null=デフォルト */
+	/** Zoom (px/day). null = default */
 	pxPerDay: number | null;
 	filter: FilterState;
 	query: string;
-	/** 詳細表示中のイベントid */
+	/** Id of the event shown in detail */
 	selectedId: string | null;
-	/** 絞り込み中の特集slug。id集合はcollections.jsonから解決するのでURLにはslugだけ乗せる */
+	/** Slug of the collection being filtered by. The id set is resolved from collections.json, so only the slug goes in the URL */
 	collection: string | null;
 }
 
@@ -26,7 +26,7 @@ export const DEFAULT_URL_STATE: UrlState = {
 	collection: null,
 };
 
-/** "1964" → 年央、"1964-10" → 月央、"1964-10-10" → そのまま */
+/** "1964" → middle of the year, "1964-10" → middle of the month, "1964-10-10" → as is */
 export function normalizeDateParam(t: string): string | null {
 	if (/^\d{4}$/.test(t)) return `${t}-07-01`;
 	if (/^\d{4}-\d{2}$/.test(t)) return `${t}-15`;
@@ -49,7 +49,7 @@ export function parseUrlState(params: URLSearchParams): UrlState {
 	};
 }
 
-/** デフォルト値は省略してクエリを組み立てる */
+/** Build the query, omitting default values */
 export function serializeUrlState(s: UrlState): URLSearchParams {
 	const params = new URLSearchParams();
 	if (s.centerDate !== null) params.set('t', s.centerDate);

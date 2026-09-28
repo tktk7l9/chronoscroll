@@ -1,6 +1,6 @@
 /**
- * ja.wikipedia「YYYY年」ページの wikitext から「できごと」を抽出する純関数群。
- * ネットワークは触らない（fixtureでテスト可能）。
+ * Pure functions that extract "できごと" (events) from the wikitext of ja.wikipedia "YYYY年" pages.
+ * No network access (testable with fixtures).
  */
 
 export interface WikiLink {
@@ -13,15 +13,15 @@ export interface RawEvent {
 	month: number | null;
 	day: number | null;
 	precision: 'day' | 'month' | 'year';
-	/** プレーンテキスト化した本文 */
+	/** Body converted to plain text */
 	text: string;
-	/** 本文中の内部リンク（日付・年リンクは除外済み） */
+	/** Internal links in the body (date and year links already excluded) */
 	links: WikiLink[];
-	/** 本文先頭の「【日本】」等のタグから得た地域ヒント */
+	/** Region hint taken from a leading tag such as 「【日本】」 in the body */
 	regionHint?: 'japan' | 'world' | 'both';
 }
 
-/** 「== できごと ==」セクションの中身だけを取り出す（「出来事・事柄」等の変種も許容） */
+/** Extract only the contents of the "== できごと ==" section (variants such as 「出来事・事柄」 are allowed) */
 export function extractEventsSection(wikitext: string): string | null {
 	const m = wikitext.match(/^==\s*(?:できごと|出来事)[^=\n]*==\s*$/m);
 	if (!m || m.index === undefined) return null;
@@ -31,7 +31,7 @@ export function extractEventsSection(wikitext: string): string | null {
 	return next && next.index !== undefined ? rest.slice(0, next.index) : rest;
 }
 
-/** 日付リンクや年リンクなど、スコアリングに使わないリンクか */
+/** Whether a link is not used for scoring, e.g. date links and year links */
 export function isDateLikeTarget(target: string): boolean {
 	return (
 		/^\d{1,2}月(\d{1,2}日)?(\s*\(旧暦\))?$/.test(target) ||
@@ -41,16 +41,16 @@ export function isDateLikeTarget(target: string): boolean {
 	);
 }
 
-/** {{仮リンク|label|...}} → label、その他テンプレート・ref・コメント・強調を除去 */
+/** {{仮リンク|label|...}} → label; strip other templates, refs, comments, and emphasis */
 export function stripMarkup(wikitext: string): string {
 	let s = wikitext;
 	s = s.replace(/<!--[\s\S]*?-->/g, '');
 	s = s.replace(/<ref[^>]*\/>/gi, '');
 	s = s.replace(/<ref[^>]*>[\s\S]*?<\/ref>/gi, '');
-	// その他のHTMLタグ（<sup>等）はタグのみ除去して中身を残す
+	// Other HTML tags (<sup> etc.): strip only the tags and keep the contents
 	s = s.replace(/<\/?[a-z][^>]*>/gi, '');
 	s = s.replace(/\{\{仮リンク\|([^|{}]*)[^{}]*\}\}/g, '$1');
-	// ネストしたテンプレートを内側から除去
+	// Strip nested templates from the inside out
 	let prev = '';
 	while (prev !== s) {
 		prev = s;
@@ -60,12 +60,12 @@ export function stripMarkup(wikitext: string): string {
 	return s;
 }
 
-/** [[target|label]] / [[target]] をラベルに置換しつつリンクを収集する */
+/** Replace [[target|label]] / [[target]] with the label while collecting the links */
 export function replaceLinks(text: string): { text: string; links: WikiLink[] } {
 	const links: WikiLink[] = [];
 	const out = text.replace(/\[\[([^[\]|]*)(?:\|([^[\]]*))?\]\]/g, (_, target: string, label?: string) => {
 		const t = target.trim();
-		// ファイル・カテゴリリンクは本文ごと除去
+		// File and category links are removed along with their text
 		if (/^(?:ファイル|File|画像|Image|Category|カテゴリ):/i.test(t)) return '';
 		const l = (label ?? t).trim();
 		if (!isDateLikeTarget(t)) links.push({ target: t, label: l });
@@ -75,15 +75,15 @@ export function replaceLinks(text: string): { text: string; links: WikiLink[] } 
 }
 
 /**
- * 日付と本文の区切り。ダッシュ類のほかに全角/半角コロンもある
- * （2001年や1953年の日本ページなどは1ページ丸ごと「M月D日：本文」表記）。
+ * Separator between the date and the body. Besides dashes, full-width/half-width colons also occur
+ * (e.g. the 2001 page and the 1953 Japan page use 「M月D日：本文」 throughout).
  */
 const SEP = '[-–—−‐：:]';
 
 /**
- * 「8月25日～8月26日 - 本文」のような期間表記を開始日だけに畳む。
- * 畳まないと日付として解析されず、月初（precision=month）に落ちてしまう。
- * 2つ目の日付は「[[8月26日|26日]]」のように月が省略されたリンクのこともある。
+ * Collapse range notations such as 「8月25日～8月26日 - 本文」 to just the start date.
+ * Without this the date is not parsed and falls back to the start of the month (precision=month).
+ * The second date may also be a link with the month omitted, such as 「[[8月26日|26日]]」.
  */
 export function collapseDateRange(text: string): string {
 	return text.replace(
@@ -98,7 +98,7 @@ export interface ForcedDate {
 	precision: RawEvent['precision'];
 }
 
-/** 「[[10月1日]]」「[[3月]] -」のような日付だけの行か（同日複数イベントの親）。リンクなし表記にも対応 */
+/** Whether the line is date-only, like 「[[10月1日]]」 or 「[[3月]] -」 (parent of multiple same-day events). Also handles unlinked dates */
 export function parseDateOnly(stripped: string): ForcedDate | null {
 	const m = stripped.match(
 		new RegExp(
@@ -111,13 +111,13 @@ export function parseDateOnly(stripped: string): ForcedDate | null {
 	if (m[2] !== undefined) {
 		const day = Number(m[2]);
 		if (day < 1 || day > 31) return null;
-		// 旧暦の日付はグレゴリオ暦と最大1ヶ月程度ズレるため、日単位の精度は主張しない
+		// Old-calendar (旧暦) dates can be off from the Gregorian calendar by up to about a month, so do not claim day precision
 		return { month, day, precision: m[3] ? 'month' : 'day' };
 	}
 	return { month, day: null, precision: 'month' };
 }
 
-/** 箇条書き1行を解析する（先頭の「* 」は除去済みで渡す） */
+/** Parse one bullet line (passed with the leading 「* 」 already removed) */
 export function parseBulletLine(
 	content: string,
 	year: number,
@@ -136,8 +136,8 @@ export function parseBulletLine(
 			: 'month';
 	let body = stripped;
 
-	// 「[[M月D日]]（旧暦注記など） - 本文」/「[[M月]] - 本文」。リンクなし日付にも対応。
-	// ネスト行（forcedあり）でも自前の日付があればそちらを優先する
+	// 「[[M月D日]]（old-calendar note etc.） - 本文」 / 「[[M月]] - 本文」. Also handles unlinked dates.
+	// Even for nested lines (with forced), prefer the line's own date if it has one
 	const dm = stripped.match(
 		new RegExp(
 			`^(?:\\[\\[)?(\\d{1,2})月(?:(\\d{1,2})日)?(\\s*\\(旧暦\\))?(?:\\]\\])?\\s*(?:（[^）]*）|\\([^)]*\\))?\\s*${SEP}\\s*(.*)$`,
@@ -147,7 +147,7 @@ export function parseBulletLine(
 		month = Number(dm[1]);
 		if (dm[2] !== undefined) {
 			day = Number(dm[2]);
-			// 旧暦日付は日単位の精度を主張しない（位置決めには使う）
+			// Old-calendar dates do not claim day precision (still used for positioning)
 			precision = dm[3] ? 'month' : 'day';
 		} else {
 			precision = 'month';
@@ -155,15 +155,15 @@ export function parseBulletLine(
 		body = dm[4];
 	}
 
-	// 日付レンジ表記（「[[10月22日]] - [[10月24日]] - 本文」）の2つ目の日付と、
-	// 「夏 - 」のような季節プレフィックス・「日付不明 - 」の印を除去
+	// Remove the second date of a date range (「[[10月22日]] - [[10月24日]] - 本文」),
+	// season prefixes such as 「夏 - 」, and the 「日付不明 - 」 (date unknown) marker
 	body = body.replace(new RegExp(`^(?:\\[\\[)?\\d{1,2}月\\d{1,2}日(?:\\]\\])?\\s*${SEP}\\s*`), '');
 	body = body.replace(
 		new RegExp(`^(春|夏|秋|冬|年初|年央|年末|上半期|下半期|日付不明)\\s*${SEP}\\s*`),
 		'',
 	);
 
-	// 先頭の「【日本】」「【世界・アメリカ合衆国】」等のタグは地域ヒントとして回収
+	// Collect leading tags such as 「【日本】」 or 「【世界・アメリカ合衆国】」 as a region hint
 	let regionHint: RawEvent['regionHint'];
 	const tag = body.match(/^【([^】]{1,24})】\s*/);
 	if (tag) {
@@ -172,10 +172,10 @@ export function parseBulletLine(
 		const hasOther = /・/.test(inner) ? inner.split('・').some((s) => !/日本/.test(s)) : !hasJapan;
 		regionHint = hasJapan && hasOther ? 'both' : hasJapan ? 'japan' : 'world';
 		body = body.slice(tag[0].length);
-		// 「【ブラジル】の前大統領が…」のようにタグが主語を兼ねる場合は語を本文に残す
+		// When the tag doubles as the subject, as in 「【ブラジル】の前大統領が…」, keep the word in the body
 		if (body.startsWith('の')) body = inner + body;
 	}
-	// 国旗テンプレート（{{BRA}}等）の除去で先頭に残った助詞「の」は落とす
+	// Drop the particle 「の」 left at the start after removing a flag template ({{BRA}} etc.)
 	body = body.replace(/^の/, '');
 
 	const { text, links } = replaceLinks(body);
@@ -190,17 +190,17 @@ export function parseBulletLine(
 	return { year, month, day, precision, text: clean, links, ...(regionHint ? { regionHint } : {}) };
 }
 
-/** 年ページのwikitext全体から RawEvent[] を得る */
+/** Get RawEvent[] from the whole wikitext of a year page */
 export function parseYearPage(wikitext: string, year: number): RawEvent[] {
 	const section = extractEventsSection(wikitext);
 	if (section === null) return [];
 
 	const events: RawEvent[] = [];
 	let sectionMonth: number | null = null;
-	/** 直前の「*」が日付のみだった場合、その日付（続く「**」がイベント本体） */
+	/** If the preceding 「*」 was date-only, that date (the following 「**」 is the event body) */
 	let pendingDate: ForcedDate | null = null;
 
-	// 複数行にまたがるHTMLコメントを先に除去（コメントアウトされた箇条書きを拾わない）
+	// Remove multi-line HTML comments first (so commented-out bullets are not picked up)
 	for (const line of section.replace(/<!--[\s\S]*?-->/g, '').split('\n')) {
 		const heading = line.match(/^===+\s*(.+?)\s*===+\s*$/);
 		if (heading) {
@@ -211,7 +211,7 @@ export function parseYearPage(wikitext: string, year: number): RawEvent[] {
 		}
 		const sub = line.match(/^\*\*(?!\*)\s*(.*)$/);
 		if (sub) {
-			// 日付のみの親に続くネストは、その日付のイベント。それ以外のネストは親の補足なので無視
+			// A nested line following a date-only parent is an event on that date. Other nested lines are supplements to the parent and are ignored
 			if (pendingDate) {
 				const ev = parseBulletLine(sub[1], year, sectionMonth, pendingDate);
 				if (ev) events.push(ev);
@@ -232,7 +232,7 @@ export function parseYearPage(wikitext: string, year: number): RawEvent[] {
 	return events;
 }
 
-/** 32bit FNV-1a。安定したイベントIDに使う */
+/** 32-bit FNV-1a. Used for stable event IDs */
 export function fnv1a(input: string): string {
 	let hash = 0x811c9dc5;
 	for (let i = 0; i < input.length; i++) {
@@ -242,7 +242,7 @@ export function fnv1a(input: string): string {
 	return (hash >>> 0).toString(16).padStart(8, '0');
 }
 
-/** RawEvent → ISO日付（month/year precisionは01埋め）とID */
+/** RawEvent → ISO date (month/year precision padded with 01) and ID */
 export function eventDateAndId(ev: RawEvent): { date: string; id: string } {
 	const mm = String(ev.month ?? 1).padStart(2, '0');
 	const dd = String(ev.day ?? 1).padStart(2, '0');

@@ -1,6 +1,6 @@
-// chronoscroll 実ブラウザスモークテスト
-// 使い方: node e2e/smoke.mjs [baseUrl]   （デフォルト http://localhost:5199）
-// シナリオ: 初期表示 / 収録データ行 / ズーム / 詳細ダイアログ / フィルタ / 検索ジャンプ / URL復元 / モバイル
+// chronoscroll real-browser smoke test
+// Usage: node e2e/smoke.mjs [baseUrl]   (default http://localhost:5199)
+// Scenarios: initial view / coverage row / zoom / detail dialog / filters / search jump / URL restore / mobile
 import { readFileSync } from 'node:fs';
 
 const base = process.argv[2] ?? 'http://localhost:5199';
@@ -11,7 +11,7 @@ function assert(name, cond, detail = '') {
 	results.push({ name, ok: !!cond, detail: cond ? '' : detail });
 }
 
-// ローカルはシステムChrome、CIは playwright パッケージ（chromiumバイナリ入り）を使う
+// Locally use the system Chrome; CI uses the playwright package (which ships the chromium binary)
 async function launchBrowser() {
 	try {
 		const { chromium } = await import('playwright');
@@ -27,13 +27,13 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => {
 	if (m.type() !== 'error') return;
-	// Cloudflare Web Analytics のビーコンはローカル/CI のホスト名では拒否されるため除外
+	// The Cloudflare Web Analytics beacon is rejected on local/CI host names, so exclude it
 	if ((m.location()?.url ?? '').includes('cloudflareinsights.com')) return;
 	if (m.text().includes('cloudflareinsights.com')) return;
 	errors.push(`${m.text()} (${m.location()?.url ?? ''})`);
 });
 
-// 1. 初期表示（概観・注目ニュースのみ）
+// 1. Initial view (overview, prominent news only)
 await page.goto(base + '/', { waitUntil: 'networkidle' });
 await page.waitForTimeout(900);
 const initialCards = await page.locator('.card').count();
@@ -42,7 +42,7 @@ assert(
 	'初期表示: 概観レベル表示（ズームゲージ）',
 	(await page.locator('.zoomctl .stop.active').textContent())?.includes('概観'),
 );
-// 収録データ行: index.json の実数がヘッダーに出ている（ビルド時に焼き込まれるのでfetch待ちなし）
+// Coverage row: the real numbers from index.json are in the header (baked in at build time, so no waiting on fetch)
 const meta = JSON.parse(readFileSync('static/data/index.json', 'utf8'));
 const covText = (await page.locator('.coverage').textContent())?.replace(/\s+/g, ' ') ?? '';
 const jp = (iso) => {
@@ -57,8 +57,8 @@ assert(
 	`text=${covText}`,
 );
 
-// ズームアウトの下限に達すると−ボタンがdisabledになる（可動域の可視化）。
-// 初期ズームは収録期間から算出されるため必要なクリック数は変わる。上限つきで押し切る
+// At the zoom-out limit the − button becomes disabled (making the range of motion visible).
+// The initial zoom is derived from the covered period, so the number of clicks needed varies. Press through with a cap
 const zoomOut = page.locator('button[aria-label="ズームアウト"]');
 for (let i = 0; i < 8 && !(await zoomOut.isDisabled()); i++) {
 	await zoomOut.click();
@@ -67,7 +67,7 @@ for (let i = 0; i < 8 && !(await zoomOut.isDisabled()); i++) {
 await page.waitForTimeout(300);
 assert('ズームゲージ: 下限で−がdisabledになる', await zoomOut.isDisabled());
 
-// 2. ズームイン → URLのzが増え、レベル表示が変わる
+// 2. Zoom in → z in the URL increases and the level label changes
 await page.click('button[aria-label="ズームイン"]');
 await page.click('button[aria-label="ズームイン"]');
 await page.click('button[aria-label="ズームイン"]');
@@ -75,7 +75,7 @@ await page.waitForTimeout(800);
 const zParam = new URLSearchParams(await page.evaluate(() => location.search)).get('z');
 assert('ズーム: URLにzが反映される', zParam !== null && Number(zParam) > 0.2, `z=${zParam}`);
 
-// 3. イベントクリック → 詳細ダイアログ（出典リンクあり）
+// 3. Click an event → detail dialog (with source links)
 await page.locator('.card .hit').first().click();
 await page.waitForTimeout(500);
 assert('詳細: ダイアログが開く', await page.evaluate(() => document.querySelector('dialog')?.open));
@@ -86,8 +86,8 @@ assert(
 	(await page.evaluate(() => location.search)).includes('e='),
 );
 
-// モーダル表示中は背景（年表）が動かないこと。
-// ①バックドロップ上のホイール ②モーダル内スクロールの末端からの連鎖 ③⌘+ホイールのズーム
+// While the modal is open, the background (timeline) must not move.
+// ① wheel over the backdrop ② chaining from the end of scrolling inside the modal ③ ⌘+wheel zoom
 const dlgBox = await page.evaluate(() => {
 	const r = document.querySelector('dialog').getBoundingClientRect();
 	return { x: r.x, y: r.y, w: r.width, h: r.height };
@@ -152,9 +152,9 @@ assert(
 	`${scrollBefore} -> ${await page.evaluate(() => window.scrollY)}`,
 );
 
-// 3b. 画像の枠を読み込み前に確保しているか。
-// imgのCSSを width:auto 系にすると縦横とも不定になり箱が0pxに潰れ、
-// 画像の到着で本文が一気に下へ飛ぶ（ガタつく）。画像を握って未到着の状態で測る
+// 3b. Whether the image box is reserved before loading.
+// With width:auto-style CSS on img, both dimensions are undetermined and the box collapses to 0px,
+// so the text jumps down all at once when the image arrives (jank). Measure while holding the image back so it has not arrived
 const imageEvent = await page.evaluate(async () => {
 	const evs = await (await fetch('/data/overview.json')).json();
 	const e = (evs.events ?? evs).find((x) => x.image && x.image.width >= 400 && x.image.height >= 300);
@@ -162,7 +162,7 @@ const imageEvent = await page.evaluate(async () => {
 });
 await page.route('**upload.wikimedia.org**', async (route) => {
 	await new Promise((r) => setTimeout(r, 8000));
-	// 計測後に unroute / 画面遷移するので、その時点で握っていたリクエストは捨てて良い
+	// After measuring we unroute / navigate away, so requests held at that point can be dropped
 	await route.abort().catch(() => {});
 });
 await page.goto(base + `/?e=${imageEvent.id}`, { waitUntil: 'domcontentloaded' });
@@ -180,9 +180,9 @@ assert(
 );
 await page.unroute('**upload.wikimedia.org**');
 
-// 3c. ホバー先読み: 詳細を開く前に画像を取っておく（開いた直後の空白待ちを消す）。
-// 実回線1.6Mbps相当での実測はクリック→表示 1726ms → 174ms(1.5秒ホバー時)。
-// 外部への実通信に依存しないよう、画像は1pxのPNGを返して回数だけ数える
+// 3c. Hover prefetch: fetch the image before the detail opens (removes the blank wait right after opening).
+// Measured on a real 1.6 Mbps-equivalent line: click → display went from 1726ms → 174ms (with a 1.5s hover).
+// To avoid depending on real external traffic, images return a 1px PNG and we only count requests
 const PNG_1PX = Buffer.from(
 	'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
 	'base64',
@@ -197,7 +197,7 @@ const cardSel = `[data-id="${imageEvent.id}"] .hit`;
 await page.waitForSelector(cardSel, { timeout: 20000 });
 await page.waitForTimeout(500);
 
-// 年表を横切っただけのカードまで取ると通信の無駄なので、留まるまでは動かない
+// Fetching for cards the pointer merely crosses on the timeline wastes traffic, so nothing happens until it dwells
 imageHits = 0;
 await page.hover(cardSel);
 await page.waitForTimeout(60);
@@ -222,7 +222,7 @@ await page.keyboard.press('Escape');
 await page.waitForTimeout(200);
 await page.unroute('**upload.wikimedia.org**');
 
-// 4. フィルタ: 災害のみ → 表示カードが全て災害カテゴリ
+// 4. Filter: disaster only → every visible card is in the disaster category
 await page.goto(base + '/?t=1923-09&z=2&c=disaster', { waitUntil: 'networkidle' });
 await page.waitForTimeout(1200);
 const cats = await page.evaluate(() =>
@@ -234,7 +234,7 @@ assert(
 	`cats=${JSON.stringify([...new Set(cats)])} n=${cats.length}`,
 );
 
-// 5. 検索 → ジャンプ → ハイライト
+// 5. Search → jump → highlight
 await page.goto(base + '/', { waitUntil: 'networkidle' });
 await page.fill('input[type=search]', '東海道新幹線');
 await page.waitForSelector('.results .hit', { timeout: 20000 });
@@ -245,7 +245,7 @@ assert(
 	(await page.locator('.card.highlighted').count()) === 1,
 );
 
-// 6. URL復元: 共有URLで位置・ズーム・フィルタが再現される
+// 6. URL restore: a shared URL reproduces position, zoom, and filters
 await page.goto(base + '/?t=1964-10-10&z=8&r=japan', { waitUntil: 'networkidle' });
 await page.waitForTimeout(1200);
 const eraYear = await page.locator('.era-chip .era-year').textContent();
@@ -257,7 +257,7 @@ assert(
 	),
 );
 
-// 7. モバイル: 1カラム + ミニマップ非表示
+// 7. Mobile: one column + minimap hidden
 await page.setViewportSize({ width: 390, height: 720 });
 await page.waitForTimeout(900);
 const singles = await page.evaluate(() => ({
@@ -267,7 +267,7 @@ const singles = await page.evaluate(() => ({
 		const m = document.querySelector('.minimap');
 		return m ? getComputedStyle(m).display !== 'none' : false;
 	})(),
-	// 収録データ行はモバイルでも常時表示し、かつ横あふれを起こさない
+	// The coverage row is always shown on mobile too, without horizontal overflow
 	coverageVisible: (() => {
 		const c = document.querySelector('.coverage');
 		return c ? getComputedStyle(c).display !== 'none' && c.getBoundingClientRect().height > 0 : false;
@@ -285,7 +285,7 @@ assert('モバイル: ミニマップ非表示', !singles.minimapVisible);
 assert('モバイル: 収録データ行が表示される', singles.coverageVisible);
 assert('モバイル: 収録データ行が1行に収まる', singles.coverageFits);
 
-// 7b. 狭幅（320px）: ヘッダーの全要素がコンテンツ box 内に収まる
+// 7b. Narrow width (320px): every header element fits within the content box
 await page.setViewportSize({ width: 320, height: 640 });
 await page.waitForTimeout(500);
 const narrow = await page.evaluate(() => {
@@ -299,7 +299,7 @@ const narrow = await page.evaluate(() => {
 		const el = document.querySelector(sel);
 		if (!el) continue;
 		const r = el.getBoundingClientRect();
-		// 0.5px はサブピクセル丸めの許容
+		// 0.5px tolerance for subpixel rounding
 		if (r.right > right + 0.5 || r.left < left - 0.5) {
 			over.push(`${sel} [${Math.round(r.left)},${Math.round(r.right)}]`);
 		}
@@ -312,7 +312,7 @@ assert(
 	`overflow=${narrow.over.join(' ')} bound=${narrow.bound.join('..')}`,
 );
 
-// 7c. 狭幅の検索候補が画面左にはみ出さない（日付の先頭桁が欠けない）
+// 7c. At narrow widths, search suggestions do not overflow the left edge (the first digits of dates are not cut off)
 await page.fill('input[type=search]', '新幹線');
 await page.waitForSelector('.results .hit', { timeout: 25000 });
 const dropdown = await page.evaluate(() => {
@@ -326,11 +326,11 @@ assert(
 );
 await page.fill('input[type=search]', '');
 
-// 以降のシナリオは従来のモバイル寸法で続ける
+// The following scenarios continue at the usual mobile size
 await page.setViewportSize({ width: 390, height: 720 });
 await page.waitForTimeout(500);
 
-// 8. 年代ジャンプ: era-chipタップ → 十年選択で移動
+// 8. Era jump: tap era-chip → move by choosing a decade
 await page.locator('.era-chip').click();
 await page.waitForTimeout(300);
 const decadeBtn = page.locator('.jump-grid button', { hasText: '1900' }).first();
@@ -360,7 +360,7 @@ assert(
 		!(await page.evaluate(() => document.activeElement?.classList.contains('era-chip'))),
 );
 
-// 9. イベント個別ページ: prerenderされたHTMLが直接表示できる
+// 9. Event detail page: the prerendered HTML can be shown directly
 const firstId = await page.evaluate(async () => {
 	const overview = await (await fetch('/data/overview.json')).json();
 	return overview.find((e) => e.svg)?.id ?? overview[0].id;
@@ -374,9 +374,9 @@ assert(
 	(await page.locator('a.timeline-link').count()) === 1,
 );
 
-// 個別ページのCTA（?t=&z=&e=）で年表を開くと詳細が開く。
-// ディープリンクではデータ到着前に selectedId が確定するため、
-// data.byId() が version を追跡していないと永久にnullのままになる（退行の再発防止）
+// Opening the timeline from the detail page's CTA (?t=&z=&e=) opens the detail.
+// With a deep link, selectedId is settled before the data arrives, so
+// if data.byId() does not track version, it stays null forever (regression guard)
 const ctaHref = await page.locator('a.timeline-link').getAttribute('href');
 await page.goto(base + ctaHref, { waitUntil: 'networkidle' });
 await page.waitForTimeout(1200);
@@ -386,8 +386,8 @@ assert(
 	`href=${ctaHref}`,
 );
 
-// 特集に収録されたイベントを?e=で直接開くと、ダイアログにも特集チップが出る
-// （collections.json は年表の主データより後に届くので、到着後に再評価される必要がある）
+// Opening an event included in a collection directly with ?e= also shows the collection chip in the dialog
+// (collections.json arrives after the timeline's main data, so it must be re-evaluated after arrival)
 await page.goto(`${base}/?t=1979-04-07&z=8&e=1979-04-07-a6ab5dff`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(1600);
 assert(
@@ -395,7 +395,7 @@ assert(
 	(await page.locator('dialog .collections a[href="/c/anime"]').count()) === 1,
 );
 
-// 10. 特集: 一覧ページ（prerender・JSなし）
+// 10. Collections: listing page (prerendered, no JS)
 const collectionsIndex = JSON.parse(readFileSync('static/data/collections.json', 'utf8'));
 await page.goto(`${base}/c`, { waitUntil: 'networkidle' });
 const cardCount = await page.locator('.cards .card').count();
@@ -405,7 +405,7 @@ assert(
 	`cards=${cardCount} expected=${collectionsIndex.collections.length}`,
 );
 
-// 10b. 特集: 全特集にOGP画像が存在する（SNS共有時に404にならない）
+// 10b. Collections: every collection has an OGP image (no 404 when shared on social media)
 for (const c of collectionsIndex.collections) {
 	const res = await page.request.get(`${base}/ogp/c-${c.slug}.png`);
 	assert(
@@ -415,7 +415,7 @@ for (const c of collectionsIndex.collections) {
 	);
 }
 
-// 11. 特集: 個別ページが年代順の読み物になっている
+// 11. Collections: the detail page reads in chronological order
 const anime = collectionsIndex.collections.find((c) => c.slug === 'anime');
 await page.goto(`${base}/c/anime`, { waitUntil: 'networkidle' });
 const cTitle = await page.locator('article h1').textContent();
@@ -445,7 +445,7 @@ assert(
 	(await page.locator('.items li h2 a[href^="/e/"]').count()) === anime.count,
 );
 
-// 12. 特集: 個別ページから特集への逆リンク（内部リンクの回遊）
+// 12. Collections: back-links from detail pages to collections (internal link circulation)
 const animeFirstId = await page.locator('.items li h2 a').first().getAttribute('href');
 await page.goto(base + animeFirstId, { waitUntil: 'networkidle' });
 assert(
@@ -453,7 +453,7 @@ assert(
 	(await page.locator('.collections a[href="/c/anime"]').count()) === 1,
 );
 
-// 13. 年表連動: ?k=<slug> で特集の収録イベントだけが並ぶ
+// 13. Timeline integration: ?k=<slug> shows only the collection's events
 const animeIds = new Set(
 	JSON.parse(readFileSync('static/data/collections/anime.json', 'utf8')).events.map((e) => e.id),
 );
@@ -472,8 +472,8 @@ assert(
 	(await page.locator('.collection-banner .cb-title').textContent()) === anime.title,
 );
 
-// 特集の収録イベントはimportanceを低く振ってあるため、LODを外さないと1件も出ない。
-// 可視範囲に入る収録イベントが実際に全部描かれることを確かめる（低importance分も含めて）
+// Collection events are given low importance, so none appear unless LOD is turned off.
+// Verify that every collection event within the visible range is actually drawn (including the low-importance ones)
 const breaking = JSON.parse(readFileSync('static/data/collections/breaking.json', 'utf8'));
 await page.goto(`${base}/?k=breaking&t=${breaking.toDate}&z=0.1396`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(1500);
@@ -487,7 +487,7 @@ assert(
 	`shown=${shownBreaking.length}`,
 );
 
-// 14. 年表連動: バナーの解除でkが消え通常表示に戻る
+// 14. Timeline integration: clearing via the banner removes k and returns to the normal view
 await page.locator('.collection-banner .cb-clear').click();
 await page.waitForTimeout(700);
 assert(
@@ -497,7 +497,7 @@ assert(
 );
 assert('年表連動: 解除後は特集バナーが消える', (await page.locator('.collection-banner').count()) === 0);
 
-// 15. ヘッダーの特集導線（320pxでも溢れない）
+// 15. Header link to collections (does not overflow even at 320px)
 await page.setViewportSize({ width: 320, height: 640 });
 await page.goto(base + '/', { waitUntil: 'networkidle' });
 await page.waitForTimeout(400);

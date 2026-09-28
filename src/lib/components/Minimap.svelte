@@ -11,9 +11,9 @@
 		onjump,
 	}: {
 		meta: IndexMeta;
-		/** 可視範囲（新しい側） */
+		/** Visible range (newer side) */
 		fromDay: number;
-		/** 可視範囲（古い側） */
+		/** Visible range (older side) */
 		toDay: number;
 		minDay: number;
 		maxDay: number;
@@ -25,13 +25,13 @@
 
 	const span = $derived(Math.max(1, maxDay - minDay));
 
-	/** day → レール内の割合位置（0=上端=最新） */
+	/** day → fractional position in the rail (0 = top = newest) */
 	function pos(day: number): number {
 		return Math.min(1, Math.max(0, (maxDay - day) / span));
 	}
 
-	// チャンクごとの密度セグメント（単一色相・濃淡のsequential表現）。
-	// 5年チャンクは件数を期間で正規化した密度で比較する
+	// Per-chunk density segments (single hue, sequential light-to-dark encoding).
+	// 5-year chunks are compared by density normalized by their period
 	const segments = $derived.by(() => {
 		const density = (c: (typeof meta.chunks)[number]) => c.count / (c.toYear - c.fromYear + 1);
 		const max = Math.max(...meta.chunks.map(density));
@@ -53,7 +53,7 @@
 		Math.max(0.8, (pos(Math.max(toDay, minDay)) - pos(Math.min(fromDay, maxDay))) * 100),
 	);
 
-	// 50年ごとの目盛りラベル
+	// Tick labels every 50 years
 	const labels = $derived.by(() => {
 		const out: { year: number; top: number }[] = [];
 		const minYear = Number(isoOf(minDay).slice(0, 4));

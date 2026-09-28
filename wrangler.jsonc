@@ -1,12 +1,12 @@
 /**
- * chronoscroll — Cloudflare Workers（静的アセット + R2）
+ * chronoscroll — Cloudflare Workers (static assets + R2)
  * https://developers.cloudflare.com/workers/static-assets/
  *
- * build/ のうち /e/ 以外（94 ファイル）を静的アセットとして配信し、
- * /e/<id>（27,000 本超の prerender 済み HTML）だけ Worker が R2 から返す。
- * 無料枠の「20,000 ファイル/バージョン」に収めるための分担で、HTML は
- * scripts/r2-sync.mjs が build/e から R2 バケットへ差分同期する。
- * セキュリティヘッダーの正本は config/security-headers.json（_headers と Worker が読む）。
+ * Everything in build/ except /e/ (94 files) is served as static assets,
+ * and only /e/<id> (27,000+ prerendered HTML pages) is returned by the Worker from R2.
+ * This split keeps us within the free tier's "20,000 files per version"; the HTML is
+ * diff-synced from build/e to the R2 bucket by scripts/r2-sync.mjs.
+ * The source of truth for security headers is config/security-headers.json (read by _headers and the Worker).
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
@@ -16,9 +16,9 @@
 	"assets": {
 		"directory": "./build",
 		"binding": "ASSETS",
-		// build/404.html は無いので実質 Worker の notFound() が 404 を返す
+		// There is no build/404.html, so in practice the Worker's notFound() returns the 404
 		"not_found_handling": "404-page",
-		// /e/* だけ Worker が先に受ける。他は静的アセットが先に解決される
+		// Only /e/* hits the Worker first. Everything else is resolved by static assets first
 		"run_worker_first": ["/e/*"],
 	},
 	"r2_buckets": [

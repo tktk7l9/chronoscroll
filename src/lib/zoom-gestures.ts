@@ -1,7 +1,7 @@
 /**
- * 年表のズーム操作は window に載せる（ctrl/⌘+ホイールをブラウザから奪うため）。
- * 詳細モーダル表示中は年表ズームは掛けないが、preventDefault は必ず行う。
- * 先に return するとブラウザのページズームが走り、閉じたあとも残る。
+ * Timeline zoom gestures are attached to window (to take ctrl/⌘+wheel away from the browser).
+ * While the detail modal is open, timeline zoom is not applied, but preventDefault is always called.
+ * Returning early lets the browser's page zoom run, and it persists after closing.
  */
 
 export interface CtrlWheelLike {
@@ -11,8 +11,8 @@ export interface CtrlWheelLike {
 }
 
 /**
- * ctrl/⌘+ホイールなら preventDefault し、年表ズームを掛けてよいかを返す。
- * 修飾なしは無視（通常スクロールに任せる）。
+ * For ctrl/⌘+wheel, call preventDefault and return whether timeline zoom may be applied.
+ * Without a modifier, ignore it (leave it to normal scrolling).
  */
 export function takeCtrlWheel(e: CtrlWheelLike, locked: boolean): boolean {
 	if (!e.ctrlKey && !e.metaKey) return false;
@@ -21,8 +21,8 @@ export function takeCtrlWheel(e: CtrlWheelLike, locked: boolean): boolean {
 }
 
 /**
- * 2本指の touchmove なら、ピンチ中またはロック中は preventDefault する。
- * 戻り値は年表ピンチを掛けてよいか（ロック中・未開始は false）。
+ * For a two-finger touchmove, call preventDefault while pinching or locked.
+ * Returns whether a timeline pinch may be applied (false while locked or not started).
  */
 export function takePinchMove(
 	touchCount: number,

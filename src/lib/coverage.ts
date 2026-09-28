@@ -1,27 +1,27 @@
 /**
- * 収録データの概要（総件数・収録期間）とイベント日付の表示フォーマッタ。
- * 収録期間の値は static/data/index.json 由来で、ビルド時に確定させてSSR HTMLへ焼き込む。
+ * Summary of the covered data (total count, covered period) and a formatter for event dates.
+ * The period comes from static/data/index.json and is fixed at build time and baked into the SSR HTML.
  */
 import type { Precision } from './types.ts';
 
 /**
- * 27014 → 「27,014」。
- * Intl/toLocaleString を使わないのは、SSR(Node)とクライアント(ブラウザ)の
- * ICUデータ差で桁区切りがズレるとハイドレーション不一致になるため。
+ * 27014 → "27,014".
+ * Intl/toLocaleString is not used because differences in ICU data between SSR (Node) and the client (browser)
+ * could shift the digit grouping and cause a hydration mismatch.
  */
 export function formatCount(n: number): string {
 	return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-/** ISO yyyy-mm-dd → 「1868年1月1日」（月日のゼロ埋めは外す） */
+/** ISO yyyy-mm-dd → 「1868年1月1日」 (zero padding of month and day removed) */
 export function formatJpDate(iso: string): string {
 	const [y, m, d] = iso.split('-');
 	return `${Number(y)}年${Number(m)}月${Number(d)}日`;
 }
 
 /**
- * イベントの日付ラベル。precision が粗いイベントは埋めた 01 を見せない
- * （month → 「1963年1月」、year → 「1963年」）。
+ * Date label of an event. Events with coarse precision do not show the padded 01
+ * (month → 「1963年1月」, year → 「1963年」).
  */
 export function formatEventDate(iso: string, precision: Precision): string {
 	const [y, m, d] = iso.split('-');

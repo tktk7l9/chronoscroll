@@ -1,6 +1,6 @@
-// SvelteKit(adapter-static) が prerendered HTML に埋め込むインラインの起動スクリプトを
-// 外部ファイルへ移す。厳格CSP（script-src 'self'・unsafe-inline なし）と両立させるため。
-// paths.relative=false 前提（コード内の参照が絶対パスなので移設しても解決できる）。
+// Move the inline boot script that SvelteKit (adapter-static) embeds in prerendered HTML
+// into an external file, to stay compatible with the strict CSP (script-src 'self', no unsafe-inline).
+// Assumes paths.relative=false (references in the code are absolute paths, so they still resolve after the move).
 import {
 	existsSync,
 	mkdirSync,
@@ -12,7 +12,7 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 
-// ローカルは build/、Vercel上では adapter-static が .vercel/output/static に直接出力する
+// Locally this is build/; on Vercel, adapter-static writes directly to .vercel/output/static
 const CANDIDATES = ['build', '.vercel/output/static'];
 
 function fnv1a(input) {
@@ -52,8 +52,8 @@ if (moved === 0) {
 	process.exit(1);
 }
 
-// csr=false のルート（/e/[id]・/c・/c/[slug]）は __data.json を配信しないので削除する。
-// 遷移側は data-sveltekit-reload でフルリロードさせている。
+// Routes with csr=false (/e/[id], /c, /c/[slug]) do not serve __data.json, so delete it.
+// Navigations to them force a full reload via data-sveltekit-reload.
 let removed = 0;
 for (const dir of CANDIDATES.filter((d) => existsSync(d))) {
 	for (const section of ['e', 'c']) {
@@ -61,8 +61,8 @@ for (const dir of CANDIDATES.filter((d) => existsSync(d))) {
 		if (!existsSync(base)) continue;
 		for (const name of readdirSync(base)) {
 			const p = join(base, name);
-			// [param]ルートは <section>/<param>/__data.json、インデックスルートは
-			// <section>/__data.json に出るため、ディレクトリと直下のファイルの両方を見る
+			// [param] routes emit <section>/<param>/__data.json and index routes emit
+			// <section>/__data.json, so check both the directories and the files directly inside
 			if (statSync(p).isDirectory() || name === '__data.json') {
 				rmSync(p, { recursive: true });
 				removed++;

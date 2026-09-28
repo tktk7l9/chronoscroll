@@ -45,7 +45,7 @@
 		initialCenter?: string | null;
 		initialPxPerDay?: number | null;
 		highlightId?: string | null;
-		/** 詳細モーダル表示中。ズームは掛けないがブラウザのページズームは止める */
+		/** The detail modal is open. Timeline zoom is not applied, but the browser's page zoom is still blocked */
 		locked?: boolean;
 		onselect: (ev: NewsEvent) => void;
 		onviewchange?: (centerIso: string, pxPerDay: number) => void;
@@ -70,7 +70,7 @@
 	const columns = $derived(vw >= 760 ? 2 : (1 as 1 | 2));
 	const range = $derived(visibleDayRange(scale, scrollY, vh));
 	const bufferDays = $derived(vh / pxPerDay);
-	// フィルタ適用中は密度が下がるため、フィルタ通過率でLOD閾値を補正する
+	// Filtering lowers the density, so correct the LOD threshold by the filter pass rate
 	const filterSelectivity = $derived.by(() => {
 		if (!isFiltering(filter)) return 1;
 		const pts = data.points;
@@ -79,23 +79,23 @@
 		for (const p of pts) if (matchesFilter(p.ev, filter)) n++;
 		return Math.max(0.005, n / pts.length);
 	});
-	// LODの密度は「いま見ている時代」の実密度を使う。全期間平均(0.375件/日)だと
-	// 十年ごとの実密度が0.14〜1.67と12倍違うため、明治期はスカスカ・2000年代以降は
-	// 詰まりすぎ（閾値を通った件数の7割以上をcapDensityが捨てる）状態になる
+	// LOD density uses the actual density of "the era in view". The all-time average (0.375 events/day)
+	// would be off by 12x, since the actual density per decade ranges from 0.14 to 1.67, making the Meiji era sparse and the 2000s onward
+	// overcrowded (capDensity discarding 70%+ of the events that passed the threshold)
 	const localEventsPerDay = $derived(
 		data.meta
 			? eventsPerDayInRange(data.meta.chunks, range.fromDay + bufferDays, range.toDay - bufferDays)
 			: data.eventsPerDay,
 	);
 	const adjustedEventsPerDay = $derived(localEventsPerDay * filterSelectivity);
-	// 特集の絞り込み中はLODを効かせない。特集の収録イベントは本編を汚さないよう
-	// importanceを低めに振ってあるので、密度補正だけでは閾値に負けて1件も出なくなる。
-	// 件数は特集1本ぶん（数十件）に限られるため、間引きはcapDensityだけで足りる
+	// Do not apply LOD while filtering by a collection. Collection events are given low importance
+	// so they do not pollute the main timeline, so density correction alone would let the threshold hide every one of them.
+	// The count is limited to one collection (a few dozen events), so thinning by capDensity alone is enough
 	const threshold = $derived(
 		filter.collectionIds !== null ? 0 : importanceThreshold(pxPerDay, adjustedEventsPerDay),
 	);
-	// 概観〜十年ズームではoverview.jsonの閾値を上回るためチャンクを読んでも何も増えない。
-	// 実際に必要になるまでチャンクのフェッチ自体を止め、初期の無駄な帯域を避ける
+	// From overview to decade zoom, the threshold is above the overview.json threshold, so loading chunks adds nothing.
+	// Stop fetching chunks until they are actually needed to avoid wasting bandwidth at startup
 	const chunksNeeded = $derived(needsChunkData(pxPerDay, adjustedEventsPerDay));
 	const visible = $derived(
 		ready
@@ -109,7 +109,7 @@
 				)
 			: [],
 	);
-	// 密集区間ではカードが押し流されないよう、ピクセル密度でさらに間引く
+	// In dense stretches, thin further by pixel density so cards are not pushed away
 	const capped = $derived(
 		capDensity(visible, pxPerDay, CARD_H_NORMAL * 0.95, columns, highlightId ?? undefined),
 	);
@@ -147,7 +147,7 @@
 		return { year: iso.slice(0, 4), wareki: formatWareki(iso) };
 	});
 
-	// 初期化: メタ到着後に初期ズーム・初期位置を適用
+	// Initialization: apply the initial zoom and position once the metadata arrives
 	$effect(() => {
 		if (ready || !data.meta || vh === 0) return;
 		pxPerDay = clampPxPerDay(initialPxPerDay ?? (vh * 6) / Math.max(1, maxDay - minDay));
@@ -160,23 +160,23 @@
 		}
 	});
 
-	// 可視範囲のチャンク遅延ロード。
-	// 初期表示は overview だけで描けるため、LCPと帯域を奪い合わないよう少し遅らせる
+	// Lazy-load chunks for the visible range.
+	// The initial view can be drawn from overview alone, so delay slightly to avoid competing with LCP for bandwidth
 	let chunkLoadingEnabled = $state(false);
 	$effect(() => {
 		if (!ready) return;
 		const t = setTimeout(() => (chunkLoadingEnabled = true), 900);
 		return () => clearTimeout(t);
 	});
-	// 特集の絞り込み中は詳細JSONに収録イベントが全件入っているため、チャンクを読んでも
-	// 表示は1件も増えない（フィルタで落ちる）。最大で数MBの無駄フェッチになるので止める
+	// While filtering by a collection, the detail JSON already contains every included event, so loading chunks
+	// adds nothing to the display (it is filtered out). That would be up to several MB of wasted fetches, so stop it
 	$effect(() => {
 		if (ready && chunkLoadingEnabled && chunksNeeded && filter.collectionIds === null) {
 			data.ensureRange(range.fromDay + bufferDays, range.toDay - bufferDays);
 		}
 	});
 
-	// ビュー変更を親へ通知（デバウンス）
+	// Notify the parent of view changes (debounced)
 	$effect(() => {
 		if (!ready) return;
 		const center = isoOf(Math.round(clampDay(yToDay(scale, scrollY + vh / 2))));
@@ -185,7 +185,7 @@
 		return () => clearTimeout(t);
 	});
 
-	// ズーム反映後の高さがDOMに乗ってから scrollTo する（先に呼ぶと文書高さでクランプされる）
+	// scrollTo only after the height from the zoom is in the DOM (calling it earlier clamps to the document height)
 	async function applyZoom(newPx: number, anchorViewportY: number): Promise<void> {
 		const r = zoomAt(scale, window.scrollY, anchorViewportY, newPx);
 		pxPerDay = r.scale.pxPerDay;
@@ -193,12 +193,12 @@
 		window.scrollTo({ top: r.scrollTop });
 	}
 
-	/** ±ボタン等から: ビューポート中央を基準に倍率ズーム */
+	/** From the ± buttons etc.: zoom by a factor around the center of the viewport */
 	export function zoomStep(factor: number): void {
 		void applyZoom(pxPerDay * factor, vh / 2);
 	}
 
-	/** 検索からのジャンプ。文脈が見えるよう「年」レベル以上にズームインしてから移動 */
+	/** Jump from search. Zoom in to at least the "year" level so the context is visible, then move */
 	export async function jumpTo(dateIso: string, minPx = 8): Promise<void> {
 		if (pxPerDay < minPx) pxPerDay = clampPxPerDay(minPx);
 		await tick();
@@ -206,7 +206,7 @@
 		window.scrollTo({ top: dayToY(scale, day) - vh / 2, behavior: 'instant' });
 	}
 
-	/** ミニマップからのジャンプ（ズーム維持） */
+	/** Jump from the minimap (keeps the zoom) */
 	function jumpToDay(day: number): void {
 		window.scrollTo({ top: dayToY(scale, clampDay(day)) - vh / 2, behavior: 'instant' });
 	}
@@ -215,7 +215,7 @@
 		return pxPerDay;
 	}
 
-	// ctrl/⌘ + ホイールでズーム（passive:false が必要なので手動で登録）
+	// ctrl/⌘ + wheel zooms (registered manually because passive:false is required)
 	$effect(() => {
 		const isLocked = locked;
 		const onWheel = (e: WheelEvent) => {
@@ -226,7 +226,7 @@
 		return () => window.removeEventListener('wheel', onWheel);
 	});
 
-	// ピンチズーム
+	// Pinch zoom
 	let pinch: { dist: number; midY: number } | null = null;
 	function measure(e: TouchEvent): { dist: number; midY: number } {
 		const [a, b] = [e.touches[0], e.touches[1]];
@@ -271,7 +271,7 @@
 		applyZoom(pxPerDay * 2.2, e.clientY);
 	}
 
-	// 年代ジャンプ（era-chipタップ。ミニマップのないモバイルでの移動手段）
+	// Era jump (era-chip tap; the way to move around on mobile, which has no minimap)
 	let jumpOpen = $state(false);
 	const jumpDecades = $derived.by(() => {
 		const out: number[] = [];
@@ -289,7 +289,7 @@
 		jumpToDay(dayOf(`${Math.min(decade + 5, Number(isoOf(maxDay).slice(0, 4)))}-01-01`));
 	}
 	let eraChip = $state<HTMLButtonElement>();
-	// パネル外クリックで閉じる。Escape でも閉じてボタンへフォーカスを戻す（SHIG 60）
+	// Close on click outside the panel. Escape also closes and returns focus to the button (SHIG 60)
 	$effect(() => {
 		if (!jumpOpen) return;
 		const close = (e: PointerEvent) => {
@@ -314,7 +314,7 @@
 		};
 	});
 
-	// キーボード操作: ↑↓=前後のイベントへ / +・-=ズーム
+	// Keyboard: ↑↓ = previous/next event / + and - = zoom
 	function focusCard(id: string): void {
 		const el = document.querySelector<HTMLButtonElement>(`.card[data-id="${id}"] .hit`);
 		el?.focus({ preventScroll: true });
@@ -355,8 +355,8 @@
 
 <svelte:window bind:scrollY bind:innerHeight={vh} bind:innerWidth={vw} />
 
-<!-- style:height はSSRでは付与しない（インラインstyle属性が厳格CSPに違反するため）。
-     ready前はCSSのmin-heightプレースホルダでフッターを画面外に保ちCLSを防ぐ -->
+<!-- style:height is not added during SSR (inline style attributes violate the strict CSP).
+     Before ready, a CSS min-height placeholder keeps the footer off screen to prevent CLS -->
 <div
 	class="timeline"
 	class:single={columns === 1}
@@ -443,7 +443,7 @@
 		overflow: clip;
 	}
 	.timeline:not(.is-ready) {
-		/* 初期ズーム（全期間≈6画面分）の概算。ready後の実寸との差分はビューポート外で起きるためCLSに響かない */
+		/* Approximation of the initial zoom (whole period ≈ 6 screens). The difference from the real size after ready happens outside the viewport, so it does not affect CLS */
 		min-height: 600vh;
 	}
 
@@ -645,7 +645,7 @@
 		color: var(--ink-muted);
 	}
 
-	/* モバイルではカードと重ならないよう左下へ（右下はズームボタン） */
+	/* On mobile, move to the bottom left so it does not overlap cards (the bottom right has the zoom buttons) */
 	@media (max-width: 759px) {
 		.era-nav {
 			top: auto;

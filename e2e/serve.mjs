@@ -1,6 +1,6 @@
-// build/ を本番同等の条件で配信する検証用サーバ。
-// - config/security-headers.json のセキュリティヘッダー（CSP含む）を適用 → CSP退行をCIで検知できる
-// - cleanUrls 相当（拡張子なしパスに .html を解決）
+// Verification server that serves build/ under production-equivalent conditions.
+// - Applies the security headers (including CSP) from config/security-headers.json → CI catches CSP regressions
+// - Equivalent to cleanUrls (resolves extensionless paths to .html)
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, resolve } from 'node:path';
@@ -23,7 +23,7 @@ const types = {
 
 createServer((req, res) => {
 	const path = decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname);
-	// /e/<id> は R2 配信分（build-e/）から。本番では Worker が R2 から返す経路に相当する
+	// /e/<id> comes from the R2-served part (build-e/). In production this corresponds to the Worker returning it from R2
 	const isPage = path.startsWith('/e/');
 	const base = isPage ? resolve('build-e') : root;
 	let file = resolve(join(base, isPage ? path.slice('/e'.length) : path === '/' ? 'index.html' : path));
@@ -31,8 +31,8 @@ createServer((req, res) => {
 		res.writeHead(403);
 		return res.end();
 	}
-	// cleanUrls相当。`/c` のように同名の .html とディレクトリ（/c/anime用）が並ぶ場合は
-	// Vercelと同じく .html を優先する（Vercelは出力ファイルからルート表を作るため衝突しない）
+	// Equivalent to cleanUrls. When a same-named .html and a directory sit side by side, as with `/c` (the directory is for /c/anime),
+	// prefer the .html like Vercel does (Vercel builds its route table from the output files, so they do not collide)
 	if (!existsSync(file) || statSync(file).isDirectory()) {
 		if (existsSync(`${file}.html`)) file = `${file}.html`;
 		else if (existsSync(join(file, 'index.html'))) file = join(file, 'index.html');

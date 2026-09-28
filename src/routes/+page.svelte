@@ -15,8 +15,8 @@
 	import { timelineData } from '$lib/state/data.svelte';
 	import type { NewsEvent } from '$lib/types';
 	import { DEFAULT_URL_STATE, parseUrlState, serializeUrlState } from '$lib/url-state';
-	// 収録件数と期間はビルド時に確定させる（実行時のfetch待ちにしないことで
-	// pop-in/CLSを避け、prerender済みHTMLとOGP/descriptionにも実数を載せる）
+	// The count and period are fixed at build time (not waiting on a runtime fetch
+	// avoids pop-in/CLS and puts the real numbers into the prerendered HTML and OGP/description)
 	import { maxDate, minDate, total } from '../../static/data/index.json';
 
 	const coverage = {
@@ -51,20 +51,20 @@
 		void timelineData.init();
 	});
 
-	// replaceState はルーター初期化前に呼べないため、初回ナビゲーション完了後に解禁
+	// replaceState cannot be called before the router initializes, so enable it after the first navigation completes
 	afterNavigate(() => {
 		routerReady = true;
 	});
 
-	// 共有ディープリンクで未ロードのイベントが選択されていたら、該当チャンクをロード
+	// If a shared deep link selects an event that is not loaded yet, load its chunk
 	$effect(() => {
 		if (selectedId !== null && selected === null && timelineData.meta) {
 			void timelineData.loadById(selectedId, selectedId.slice(0, 10));
 		}
 	});
 
-	// 特集の絞り込み。id集合は詳細JSON（イベント本体つき）から解決するので、
-	// これ1回の取得でチャンクを読まずに特集の全件が年表に並ぶ
+	// Filter by collection. The id set is resolved from the detail JSON (with event bodies), so
+	// this single fetch lines up every event of the collection on the timeline without loading chunks
 	$effect(() => {
 		const slug = collectionSlug;
 		if (slug === null) {
@@ -73,12 +73,12 @@
 		}
 		void timelineData.loadCollection(slug).then((detail) => {
 			if (collectionSlug !== slug) return;
-			// 取得に失敗したら絞り込まない（年表は通常表示のまま）
+			// If fetching fails, do not filter (the timeline stays in its normal view)
 			filter = withCollection(filter, detail && new Set(detail.events.map((e) => e.id)));
 		});
 	});
 
-	// URL同期（表示位置・ズーム・フィルタ・選択・特集）
+	// URL sync (position, zoom, filters, selection, collection)
 	$effect(() => {
 		if (!routerReady) return;
 		const params = serializeUrlState({
@@ -123,9 +123,9 @@
 	<meta property="og:image" content={absoluteUrl('/ogp.png')} />
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<!-- 初期データをJS起動と並列で取得する。
-	     crossorigin属性は付けない（same-originのfetch()とcredentialsモードを一致させないと
-	     preloadが未消費になり二重取得+接続保持でnetworkidleが来なくなる） -->
+	<!-- Fetch the initial data in parallel with JS startup.
+	     No crossorigin attribute (unless the credentials mode matches the same-origin fetch(),
+	     the preload goes unused, causing a double fetch + a held connection so networkidle never comes) -->
 	<link rel="preload" href="/data/index.json" as="fetch" />
 	<link rel="preload" href="/data/overview.json" as="fetch" />
 </svelte:head>
@@ -138,7 +138,7 @@
 			<span class="brand-sub">歴史ニュース年表</span>
 		</a>
 		<div class="tools">
-			<!-- /c は csr=false の純静的ページなのでフルリロードで遷移する -->
+			<!-- /c is a pure static page with csr=false, so navigate with a full reload -->
 			<a class="nav-link" href="/c" data-sveltekit-reload>特集</a>
 			<SearchBox bind:query onjump={onJump} />
 			<ThemeToggle />
@@ -244,14 +244,14 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		/* 狭い画面では検索欄が縮んで収まるようにする（テーマ切替がはみ出すのを防ぐ） */
+		/* On narrow screens let the search field shrink to fit (prevents the theme toggle from overflowing) */
 		min-width: 0;
 	}
 	.row.filters {
 		justify-content: flex-start;
 		gap: 10px;
-		/* FilterBar自体が横スクロールするので、この行は決して折り返さない
-		   （折り返すとヘッダー高が変わり main の padding-top とズレる） */
+		/* FilterBar scrolls horizontally itself, so this row must never wrap
+		   (wrapping changes the header height and misaligns it with main's padding-top) */
 		flex-wrap: nowrap;
 		min-width: 0;
 	}
@@ -330,7 +330,7 @@
 		gap: 8px;
 		text-decoration: none;
 		color: inherit;
-		/* 縮小はツール側（検索欄）に寄せ、サイト名は常に全文表示する */
+		/* Shrinking goes to the tools (search field); the site name is always shown in full */
 		flex: none;
 	}
 	.brand-name {
@@ -348,7 +348,7 @@
 		white-space: nowrap;
 	}
 
-	/* 収録データの範囲。値はビルド時に確定しているため高さは固定＝CLSなし */
+	/* Range of the covered data. The values are fixed at build time, so the height is fixed = no CLS */
 	.coverage {
 		display: flex;
 		align-items: baseline;
