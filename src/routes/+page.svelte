@@ -151,7 +151,12 @@
 				<a class="cb-title" href="/c/{collectionSlug}" data-sveltekit-reload>
 					{activeCollection ? activeCollection.title : collectionSlug}
 				</a>
-				<button type="button" class="cb-clear" onclick={() => (collectionSlug = null)}>
+				<button
+					type="button"
+					class="cb-clear"
+					aria-label="特集の絞り込みを解除"
+					onclick={() => (collectionSlug = null)}
+				>
 					解除
 				</button>
 			</p>
@@ -172,7 +177,12 @@
 
 <main>
 	{#if timelineData.loadError}
-		<p class="error">データの読み込みに失敗しました: {timelineData.loadError}</p>
+		<!-- Say what to do next instead of echoing the raw exception (SHIG 11, 55) -->
+		<div class="error" role="alert">
+			<p>年表のデータを読み込めませんでした。</p>
+			<p>通信状況を確かめてから、もう一度読み込んでください。</p>
+			<button type="button" class="retry" onclick={() => location.reload()}>再読み込み</button>
+		</div>
 	{:else}
 		<Timeline
 			bind:this={timeline}
@@ -248,10 +258,14 @@
 
 	.nav-link {
 		flex: none;
+		display: inline-flex;
+		align-items: center;
+		/* 7mm touch target (SHIG 78) */
+		min-height: 32px;
 		font-size: 0.78rem;
 		color: var(--ink-muted);
 		text-decoration: none;
-		padding: 3px 2px;
+		padding: 0 4px;
 	}
 	.nav-link:hover {
 		color: var(--accent);
@@ -290,6 +304,7 @@
 	}
 	.cb-clear {
 		flex: none;
+		position: relative;
 		padding: 2px 9px;
 		font-family: inherit;
 		font-size: 0.68rem;
@@ -298,6 +313,12 @@
 		border: 1px solid var(--line);
 		border-radius: 999px;
 		cursor: pointer;
+	}
+	/* Widen the hotspot without changing the pill's look (SHIG 78, 93) */
+	.cb-clear::after {
+		content: '';
+		position: absolute;
+		inset: -6px -4px;
 	}
 	.cb-clear:hover {
 		color: var(--ink);
@@ -381,6 +402,21 @@
 		padding: 120px 20px;
 		text-align: center;
 		color: var(--ink-muted);
+	}
+	.error p {
+		margin: 0 0 6px;
+	}
+	.retry {
+		margin-top: 14px;
+		min-height: 36px;
+		padding: 6px 18px;
+		font-family: inherit;
+		font-size: 0.85rem;
+		color: var(--ink);
+		background: var(--bg-elevated);
+		border: 1px solid var(--line-strong);
+		border-radius: 999px;
+		cursor: pointer;
 	}
 
 	.site-footer {

@@ -59,7 +59,9 @@
 		{/each}
 	</div>
 	{#if anyActive}
-		<button type="button" class="clear" onclick={clearAll}>解除</button>
+		<!-- Sticky at the right edge so the way out stays visible even when the chips
+		     overflow on narrow screens; chips never shift when it appears (SHIG 60, 73) -->
+		<button type="button" class="clear" onclick={clearAll}>すべて表示</button>
 	{/if}
 </div>
 
@@ -92,6 +94,8 @@
 
 	.chip {
 		flex: none;
+		/* 7mm touch target (SHIG 78) */
+		min-height: 28px;
 		padding: 4px 12px;
 		font-size: 0.75rem;
 		font-family: inherit;
@@ -135,13 +139,17 @@
 
 	.clear {
 		flex: none;
-		padding: 4px 10px;
+		position: sticky;
+		right: 0;
+		min-height: 28px;
+		padding: 4px 10px 4px 14px;
 		font-size: 0.72rem;
 		font-family: inherit;
 		color: var(--accent);
-		background: transparent;
+		background: linear-gradient(to right, transparent, var(--bg) 10px);
 		border: none;
 		cursor: pointer;
 		text-decoration: underline;
+		white-space: nowrap;
 	}
 </style>
