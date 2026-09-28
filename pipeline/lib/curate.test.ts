@@ -17,7 +17,7 @@ function ev(id: string): NewsEvent {
 }
 
 describe('parseCuratedYaml', () => {
-	it('配列をパースする', () => {
+	it('parses an array', () => {
 		const entries = parseCuratedYaml('- id: a\n  title: 新タイトル\n- id: b\n  importance: 100\n');
 		expect(entries).toEqual([
 			{ id: 'a', title: '新タイトル' },
@@ -25,23 +25,23 @@ describe('parseCuratedYaml', () => {
 		]);
 	});
 
-	it('空ファイルやnullドキュメントは空配列', () => {
+	it('an empty file or null document yields an empty array', () => {
 		expect(parseCuratedYaml('')).toEqual([]);
 		expect(parseCuratedYaml('  \n')).toEqual([]);
 		expect(parseCuratedYaml('~\n')).toEqual([]);
 	});
 
-	it('配列でなければエラー', () => {
-		expect(() => parseCuratedYaml('id: a')).toThrow('配列');
+	it('errors when not an array', () => {
+		expect(() => parseCuratedYaml('id: a')).toThrow('must be an array');
 	});
 
-	it('idがなければエラー', () => {
+	it('errors without id', () => {
 		expect(() => parseCuratedYaml('- title: x')).toThrow('id');
 	});
 });
 
 describe('applyCurated', () => {
-	it('既存イベントを部分上書きする', () => {
+	it('partially overrides an existing event', () => {
 		const { events, updated, added, unmatched } = applyCurated(
 			[ev('a')],
 			[{ id: 'a', title: '新タイトル', importance: 99.9, svg: 'art-a' }],
@@ -56,13 +56,13 @@ describe('applyCurated', () => {
 		expect(e.summary).toBe('元要約。');
 	});
 
-	it('undefined のフィールドは上書きしない', () => {
+	it('does not override undefined fields', () => {
 		const { events } = applyCurated([ev('a')], [{ id: 'a', title: undefined, summary: '新要約' }]);
 		expect(events[0].title).toBe('元タイトル');
 		expect(events[0].summary).toBe('新要約');
 	});
 
-	it('必須項目が揃った新規エントリは追加する（デフォルト補完）', () => {
+	it('adds a new entry that has all required fields (fills defaults)', () => {
 		const { events, added } = applyCurated(
 			[],
 			[{ id: 'new1', date: '2000-01-01', title: 'T', summary: 'S' }],
@@ -78,7 +78,7 @@ describe('applyCurated', () => {
 		});
 	});
 
-	it('新規エントリの明示フィールドとimage/svgを尊重する', () => {
+	it('respects explicit fields and image/svg of a new entry', () => {
 		const image = { src: 'https://upload.wikimedia.org/x.jpg', width: 1, height: 1, credit: 'c' };
 		const { events } = applyCurated(
 			[],
@@ -108,13 +108,13 @@ describe('applyCurated', () => {
 		});
 	});
 
-	it('既存になく必須項目も足りないものは unmatched', () => {
+	it('reports unmatched for entries not existing and missing required fields', () => {
 		const { unmatched, events } = applyCurated([ev('a')], [{ id: 'ghost', title: 'X' }]);
 		expect(unmatched).toEqual(['ghost']);
 		expect(events).toHaveLength(1);
 	});
 
-	it('relatedIdsはNewsEventへ直接コピーされない（related組み立てはrelated.tsが担当するため）', () => {
+	it('does not copy relatedIds into NewsEvent (related.ts builds related)', () => {
 		const { events } = applyCurated(
 			[ev('a')],
 			[{ id: 'a', title: '新タイトル', relatedIds: ['b', 'c'] }],
@@ -123,7 +123,7 @@ describe('applyCurated', () => {
 		expect(events[0].title).toBe('新タイトル');
 	});
 
-	it('新規エントリのrelatedIdsもNewsEventへ直接コピーされない', () => {
+	it('does not copy relatedIds of a new entry into NewsEvent either', () => {
 		const { events } = applyCurated(
 			[],
 			[{ id: 'new1', date: '2000-01-01', title: 'T', summary: 'S', relatedIds: ['x'] }],

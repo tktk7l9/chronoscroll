@@ -46,9 +46,9 @@ for (const dir of CANDIDATES.filter((d) => existsSync(d))) {
 		if (replaced !== html) writeFileSync(p, replaced);
 	}
 }
-console.log(`externalize-inline: ${moved}件のインラインスクリプトを外部化`);
+console.log(`externalize-inline: externalized ${moved} inline scripts`);
 if (moved === 0) {
-	console.error('❌ インラインスクリプトが見つからなかった（SvelteKitの出力形式が変わった可能性）');
+	console.error('❌ No inline script found (the SvelteKit output format may have changed)');
 	process.exit(1);
 }
 
@@ -70,4 +70,4 @@ for (const dir of CANDIDATES.filter((d) => existsSync(d))) {
 		}
 	}
 }
-console.log(`__data.json削除: ${removed}件`);
+console.log(`Removed __data.json: ${removed}`);

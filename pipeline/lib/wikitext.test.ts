@@ -12,30 +12,30 @@ import {
 } from './wikitext.ts';
 
 describe('extractEventsSection', () => {
-	it('できごとセクションを次の見出しまで取り出す', () => {
+	it('extracts the events section up to the next heading', () => {
 		const wt = '導入\n== できごと ==\n本文A\n== 誕生 ==\n本文B';
 		expect(extractEventsSection(wt)).toBe('\n本文A\n');
 	});
 
-	it('「出来事」表記とスペースなし見出しにも対応する', () => {
+	it('handles the 出来事 spelling and headings without spaces', () => {
 		expect(extractEventsSection('==出来事==\nX\n== 死去 ==\nY')).toBe('\nX\n');
 	});
 
-	it('「出来事・事柄」のような変種見出しにも対応する（1995年ページ）', () => {
+	it('handles variant headings such as 出来事・事柄 (1995 page)', () => {
 		expect(extractEventsSection('== 出来事・事柄 ==\nX\n== 周年 ==\nY')).toBe('\nX\n');
 	});
 
-	it('次のレベル2見出しがなければ末尾まで', () => {
+	it('goes to the end without a next level-2 heading', () => {
 		expect(extractEventsSection('== できごと ==\nA\n=== 1月 ===\nB')).toBe('\nA\n=== 1月 ===\nB');
 	});
 
-	it('セクションがなければ null', () => {
+	it('null without the section', () => {
 		expect(extractEventsSection('== 誕生 ==\nX')).toBeNull();
 	});
 });
 
 describe('isDateLikeTarget', () => {
-	it('日付・年・元号・年代リンクを除外対象と判定する', () => {
+	it('excludes date, year, era and decade links', () => {
 		expect(isDateLikeTarget('1月2日')).toBe(true);
 		expect(isDateLikeTarget('11月22日 (旧暦)')).toBe(true);
 		expect(isDateLikeTarget('3月')).toBe(true);
@@ -45,30 +45,30 @@ describe('isDateLikeTarget', () => {
 		expect(isDateLikeTarget('1960年代')).toBe(true);
 	});
 
-	it('通常の記事リンクは除外しない', () => {
+	it('does not exclude regular article links', () => {
 		expect(isDateLikeTarget('東京オリンピック')).toBe(false);
 		expect(isDateLikeTarget('国際連合')).toBe(false);
 	});
 });
 
 describe('stripMarkup', () => {
-	it('コメント・refを除去する', () => {
+	it('removes comments and refs', () => {
 		expect(stripMarkup('A<!-- コメント -->B<ref name="x"/>C<ref>出典</ref>D')).toBe('ABCD');
 	});
 
-	it('仮リンクはラベルに置換する', () => {
+	it('replaces 仮リンク with its label', () => {
 		expect(stripMarkup('{{仮リンク|パスタ戦争|en|Pasta War}}が起きた')).toBe('パスタ戦争が起きた');
 	});
 
-	it('ネストしたテンプレートを除去する', () => {
+	it('removes nested templates', () => {
 		expect(stripMarkup('A{{main|{{lang|en|X}}}}B')).toBe('AB');
 	});
 
-	it('強調記法を除去する', () => {
+	it('removes emphasis markup', () => {
 		expect(stripMarkup("'''太字'''と''斜体''")).toBe('太字と斜体');
 	});
 
-	it('HTMLタグはタグのみ除去して中身を残す', () => {
+	it('removes only HTML tags and keeps their content', () => {
 		expect(stripMarkup('プルトニウム (<sup>238</sup>Pu) を合成')).toBe(
 			'プルトニウム (238Pu) を合成',
 		);
@@ -76,7 +76,7 @@ describe('stripMarkup', () => {
 });
 
 describe('replaceLinks', () => {
-	it('リンクをラベルに置換して収集する', () => {
+	it('replaces links with labels and collects them', () => {
 		const r = replaceLinks('[[中華人民共和国]]と[[フランス第五共和政|フランス]]が国交樹立。');
 		expect(r.text).toBe('中華人民共和国とフランスが国交樹立。');
 		expect(r.links).toEqual([
@@ -85,13 +85,13 @@ describe('replaceLinks', () => {
 		]);
 	});
 
-	it('日付リンクはテキストに残すが収集しない', () => {
+	it('keeps date links in text but does not collect them', () => {
 		const r = replaceLinks('[[1964年]]の[[東京オリンピック]]');
 		expect(r.text).toBe('1964年の東京オリンピック');
 		expect(r.links).toEqual([{ target: '東京オリンピック', label: '東京オリンピック' }]);
 	});
 
-	it('ファイル・カテゴリリンクは本文ごと除去する', () => {
+	it('removes file and category links entirely', () => {
 		const r = replaceLinks('[[ファイル:foo.jpg|thumb]]本文[[Category:何か]]');
 		expect(r.text).toBe('本文');
 		expect(r.links).toEqual([]);
@@ -99,7 +99,7 @@ describe('replaceLinks', () => {
 });
 
 describe('parseBulletLine', () => {
-	it('日付リンク付きの行を day precision で解析する', () => {
+	it('parses a line with a date link at day precision', () => {
 		const ev = parseBulletLine('[[1月27日]] - [[中華人民共和国]]と[[フランス]]が国交樹立。', 1964, 1);
 		expect(ev).toEqual({
 			year: 1964,
@@ -114,7 +114,7 @@ describe('parseBulletLine', () => {
 		});
 	});
 
-	it('旧暦注記（全角括弧内のリンク含む）をスキップする', () => {
+	it('skips old-calendar notes (including links in full-width parentheses)', () => {
 		const ev = parseBulletLine(
 			'[[1月2日]]（明治4年[[11月22日 (旧暦)|11月22日]]） - 府県廃合を完了（3府72県）。',
 			1872,
@@ -125,45 +125,45 @@ describe('parseBulletLine', () => {
 		expect(ev?.text).toBe('府県廃合を完了（3府72県）。');
 	});
 
-	it('日付リンク自体が旧暦なら日単位の精度を主張しない', () => {
+	it('does not claim day precision when the date link itself is old-calendar', () => {
 		const ev = parseBulletLine('[[1月2日 (旧暦)]] - 何かが起きた。', 1870, 1);
 		expect(ev).toMatchObject({ month: 1, day: 2, precision: 'month' });
 		expect(parseDateOnly('[[1月2日 (旧暦)]]')).toEqual({ month: 1, day: 2, precision: 'month' });
 	});
 
-	it('月のみリンクは month precision', () => {
+	it('a month-only link gives month precision', () => {
 		const ev = parseBulletLine('[[3月]] - 何かが起きた。', 1900, 1);
 		expect(ev?.month).toBe(3);
 		expect(ev?.day).toBeNull();
 		expect(ev?.precision).toBe('month');
 	});
 
-	it('日付リンクなし・月セクション内は month precision', () => {
+	it('no date link inside a month section gives month precision', () => {
 		const ev = parseBulletLine('[[国際連合]]で何かが決まった。', 1950, 6);
 		expect(ev?.month).toBe(6);
 		expect(ev?.precision).toBe('month');
 	});
 
-	it('日付リンクなし・セクション外は year precision', () => {
+	it('no date link outside a section gives year precision', () => {
 		const ev = parseBulletLine('この年の出来事。', 1900, null);
 		expect(ev?.month).toBeNull();
 		expect(ev?.precision).toBe('year');
 	});
 
-	it('空行やマークアップのみの行は null', () => {
+	it('null for empty or markup-only lines', () => {
 		expect(parseBulletLine('', 1900, null)).toBeNull();
 		expect(parseBulletLine('{{main|1964年の日本}}', 1964, null)).toBeNull();
 		expect(parseBulletLine('[[ファイル:foo.jpg|thumb]]', 1964, 1)).toBeNull();
 	});
 
-	it('不正な月日は null', () => {
+	it('null for an invalid month/day', () => {
 		expect(parseBulletLine('何か', 1900, 13)).toBeNull();
 		expect(parseBulletLine('何か', 1900, 0)).toBeNull();
 		expect(parseBulletLine('[[2月32日]] - 何か', 1900, null)).toBeNull();
 		expect(parseBulletLine('[[2月0日]] - 何か', 1900, null)).toBeNull();
 	});
 
-	it('forced date（ネスト箇条書きの親日付）を使う', () => {
+	it('uses the forced date (parent date of a nested list)', () => {
 		const ev = parseBulletLine('[[東海道新幹線]]開業。', 1964, 10, {
 			month: 10,
 			day: 1,
@@ -172,26 +172,26 @@ describe('parseBulletLine', () => {
 		expect(ev).toMatchObject({ month: 10, day: 1, precision: 'day', text: '東海道新幹線開業。' });
 	});
 
-	it('テンプレート除去後の空括弧を掃除する', () => {
+	it('cleans up empty parentheses after removing templates', () => {
 		const ev = parseBulletLine('[[10月10日]] - [[東京]]（{{JPN}}）で開会。', 1964, 10);
 		expect(ev?.text).toBe('東京で開会。');
 	});
 
-	it('リンクなしの日付表記も解釈する', () => {
+	it('parses dates written without links', () => {
 		const ev = parseBulletLine('4月15日 - そごう主要店舗が閉店。', 2008, 4);
 		expect(ev).toMatchObject({ month: 4, day: 15, precision: 'day', text: 'そごう主要店舗が閉店。' });
 	});
 
-	it('日付レンジの2つ目の日付は本文から除去する', () => {
+	it('removes the second date of a date range from the text', () => {
 		const ev = parseBulletLine('[[10月22日]] - [[10月24日]] - 首脳会議が開催。', 2024, 10);
 		expect(ev).toMatchObject({ day: 22, text: '首脳会議が開催。' });
 	});
 
-	it('季節プレフィックスは本文から除去する', () => {
+	it('removes a season prefix from the text', () => {
 		expect(parseBulletLine('夏 - 何かが流行した。', 1932, null)?.text).toBe('何かが流行した。');
 	});
 
-	it('【地域】タグを地域ヒントとして回収し本文から除く', () => {
+	it('takes a 【region】 tag as a region hint and removes it from the text', () => {
 		expect(parseBulletLine('[[8月8日]] - 【日本】閉会式が行われた。', 2021, 8)).toMatchObject({
 			text: '閉会式が行われた。',
 			regionHint: 'japan',
@@ -211,7 +211,7 @@ describe('parseBulletLine', () => {
 });
 
 describe('parseDateOnly', () => {
-	it('日付のみの行を検出する', () => {
+	it('detects date-only lines', () => {
 		expect(parseDateOnly('[[10月1日]]')).toEqual({ month: 10, day: 1, precision: 'day' });
 		expect(parseDateOnly('[[3月]] -')).toEqual({ month: 3, day: null, precision: 'month' });
 		expect(parseDateOnly('10月1日')).toEqual({ month: 10, day: 1, precision: 'day' });
@@ -219,7 +219,7 @@ describe('parseDateOnly', () => {
 		expect(parseDateOnly('10月1日:')).toEqual({ month: 10, day: 1, precision: 'day' });
 	});
 
-	it('本文がある行や不正な日付は null', () => {
+	it('null for lines with text or invalid dates', () => {
 		expect(parseDateOnly('[[10月1日]] - 何かが起きた。')).toBeNull();
 		expect(parseDateOnly('[[13月1日]]')).toBeNull();
 		expect(parseDateOnly('[[2月32日]]')).toBeNull();
@@ -253,7 +253,7 @@ describe('parseYearPage', () => {
 		'* [[1月1日]] - 誰かが生まれた。',
 	].join('\n');
 
-	it('月見出し・ネスト・コメント・他セクションを正しく扱う', () => {
+	it('handles month headings, nesting, comments and other sections', () => {
 		const events = parseYearPage(page, 1964);
 		expect(events.map((e) => e.text)).toEqual([
 			'中華人民共和国とフランスが国交樹立。',
@@ -268,7 +268,7 @@ describe('parseYearPage', () => {
 		expect(events[5].precision).toBe('year');
 	});
 
-	it('日付のみの行の後、通常の箇条書きが来たらpendingは解除される', () => {
+	it('clears pending when a regular bullet follows a date-only line', () => {
 		const p = [
 			'== できごと ==',
 			'=== 10月 ===',
@@ -281,7 +281,7 @@ describe('parseYearPage', () => {
 		expect(events[0].text).toBe('通常のできごと。');
 	});
 
-	it('コロン区切りの日付のみ親でもネスト行をその日のイベントとして取る', () => {
+	it('takes nested lines as that day events under a colon-separated date-only parent', () => {
 		const p = [
 			'== できごと ==',
 			'=== 1月 ===',
@@ -294,24 +294,24 @@ describe('parseYearPage', () => {
 		expect(events[0].text).toBe('エルサルバドル大地震発生。');
 	});
 
-	it('できごとセクションがないページは空配列', () => {
+	it('empty array for a page without an events section', () => {
 		expect(parseYearPage('== 誕生 ==\n* [[1月1日]] - 誰か', 1900)).toEqual([]);
 	});
 });
 
 describe('fnv1a', () => {
-	it('既知の値と一致する（安定ID）', () => {
+	it('matches a known value (stable ID)', () => {
 		expect(fnv1a('')).toBe('811c9dc5');
 		expect(fnv1a('a')).toBe('e40c292c');
 	});
 
-	it('異なる入力で異なるハッシュ', () => {
+	it('different input gives a different hash', () => {
 		expect(fnv1a('東京オリンピック')).not.toBe(fnv1a('大阪万博'));
 	});
 });
 
 describe('eventDateAndId', () => {
-	it('day precision はそのままの日付', () => {
+	it('day precision keeps the date as is', () => {
 		const { date, id } = eventDateAndId({
 			year: 1964,
 			month: 10,
@@ -324,7 +324,7 @@ describe('eventDateAndId', () => {
 		expect(id).toBe(`1964-10-10-${fnv1a('東京オリンピック開幕。')}`);
 	});
 
-	it('month/year precision は01埋め', () => {
+	it('month/year precision pads with 01', () => {
 		expect(
 			eventDateAndId({ year: 1900, month: null, day: null, precision: 'year', text: 'x', links: [] })
 				.date,
@@ -332,14 +332,14 @@ describe('eventDateAndId', () => {
 	});
 });
 
-describe('パースし損ねていた日付表記', () => {
-	it('「：」区切りの行から日付を取る（1953年の日本ページなど1ページ丸ごとこの表記）', () => {
+describe('date formats that used to be missed', () => {
+	it('takes the date from a line separated by a full-width colon (whole pages use it, e.g. 1953 Japan)', () => {
 		const ev = parseBulletLine('1月13日：[[エルサルバドル大地震]]発生。M7.8。', 2001, 1);
 		expect(ev).toMatchObject({ month: 1, day: 13, precision: 'day' });
 		expect(ev?.text).toBe('エルサルバドル大地震発生。M7.8。');
 	});
 
-	it('日付レンジは開始日に畳む（「～」「〜」「から」）', () => {
+	it('collapses a date range to its start (～, 〜, から)', () => {
 		expect(
 			parseBulletLine('[[8月25日]]～[[8月26日|26日]]: [[明治17年の台風]]による被害', 1884, 8),
 		).toMatchObject({ month: 8, day: 25, precision: 'day' });
@@ -351,19 +351,19 @@ describe('パースし損ねていた日付表記', () => {
 		).toMatchObject({ month: 4, day: 12, precision: 'day' });
 	});
 
-	it('レンジを畳んでも本文に2つ目の日付を残さない', () => {
+	it('leaves no second date in the text after collapsing a range', () => {
 		expect(parseBulletLine('[[3月6日]]〜[[3月15日]] - ドイツ軍が攻勢', 1945, 3)?.text).toBe(
 			'ドイツ軍が攻勢',
 		);
 	});
 
-	it('「日付不明 -」の行は本文からその印を落とす（月の精度は保つ）', () => {
+	it('drops the 日付不明 marker from the text (keeps month precision)', () => {
 		const ev = parseBulletLine('日付不明 - コンドーム自販機の登場。大阪市に設置。', 1969, 6);
 		expect(ev).toMatchObject({ month: 6, day: null, precision: 'month' });
 		expect(ev?.text).toBe('コンドーム自販機の登場。大阪市に設置。');
 	});
 
-	it('日付でない「：」は区切りとして誤認しない', () => {
+	it('does not mistake a non-date full-width colon for a separator', () => {
 		const ev = parseBulletLine('[[瀬戸内海]]サメ騒動：漁師がサメに襲われる', 1992, 3);
 		expect(ev?.text).toBe('瀬戸内海サメ騒動：漁師がサメに襲われる');
 		expect(ev?.day).toBe(null);

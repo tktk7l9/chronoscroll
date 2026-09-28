@@ -46,7 +46,7 @@ export async function apiPost(
 			if (!isRetryableError(e instanceof Error ? e.message : String(e))) throw e;
 			const delay = retryDelayMs(attempt, retryAfterSec);
 			if (delay === null) throw e;
-			console.warn(`  リトライ ${attempt + 1} (${delay}ms待機): ${e}`);
+			console.warn(`  retry ${attempt + 1} (waiting ${delay}ms): ${e}`);
 			await new Promise((r) => setTimeout(r, delay));
 		}
 	}
@@ -62,7 +62,7 @@ export async function fetchPageWikitext(page: string): Promise<string | null> {
 		page,
 		prop: 'wikitext',
 	}).catch((e) => {
-		console.warn(`  ${page}: 取得失敗 (${e})`);
+		console.warn(`  ${page}: fetch failed (${e})`);
 		return null;
 	})) as { parse?: { wikitext?: string } } | null;
 	return json?.parse?.wikitext ?? null;
@@ -187,12 +187,12 @@ export async function fetchPageviews(titles: readonly string[]): Promise<Map<str
 			} catch (e) {
 				const failed = String(e).match(/page "(.+?)" failed/)?.[1];
 				if (failed && batch.includes(failed)) {
-					console.warn(`  pageviews失敗タイトルを除外: ${failed}`);
+					console.warn(`  excluding titles whose pageviews failed: ${failed}`);
 					result.set(failed, 0);
 					batch = batch.filter((t) => t !== failed);
 					continue;
 				}
-				console.warn(`  pageviewsバッチをスキップ (${batch.length}件): ${e}`);
+				console.warn(`  skipping pageviews batch (${batch.length} titles): ${e}`);
 				break;
 			}
 		}

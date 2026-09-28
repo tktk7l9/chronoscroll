@@ -17,22 +17,22 @@ function ev(
 }
 
 describe('articleTitleFromUrl', () => {
-	it('URLエンコード・アンダースコアを復元する', () => {
+	it('decodes URL encoding and underscores', () => {
 		expect(articleTitleFromUrl(wikiUrl('東京オリンピック'))).toBe('東京オリンピック');
 		expect(articleTitleFromUrl(wikiUrl('A B'))).toBe('A B');
 	});
 
-	it('/wiki/ を含まないURLはnull', () => {
+	it('null for a URL without /wiki/', () => {
 		expect(articleTitleFromUrl('https://example.com/x')).toBeNull();
 	});
 
-	it('不正なパーセントエンコーディングはnull（例外を握りつぶす）', () => {
+	it('null for invalid percent-encoding (swallows the exception)', () => {
 		expect(articleTitleFromUrl('https://ja.wikipedia.org/wiki/%E3%81')).toBeNull();
 	});
 });
 
 describe('entityTitles', () => {
-	it('年ページの出典は除外する', () => {
+	it('excludes year-page sources', () => {
 		const titles = entityTitles({
 			sources: [
 				{ label: 'Wikipedia: 東京オリンピック', url: wikiUrl('東京オリンピック') },
@@ -42,7 +42,7 @@ describe('entityTitles', () => {
 		expect(titles).toEqual(['東京オリンピック']);
 	});
 
-	it('地名的な記事は除外する', () => {
+	it('excludes place-like articles', () => {
 		const titles = entityTitles({
 			sources: [
 				{ label: 'Wikipedia: アメリカ', url: wikiUrl('アメリカ') },
@@ -52,11 +52,11 @@ describe('entityTitles', () => {
 		expect(titles).toEqual(['ChatGPT']);
 	});
 
-	it('出典がなければ空配列', () => {
+	it('empty array without sources', () => {
 		expect(entityTitles({ sources: [] })).toEqual([]);
 	});
 
-	it('ラベルの表記揺れに左右されずURLから正規タイトルを復元する', () => {
+	it('recovers the canonical title from the URL regardless of label variants', () => {
 		const titles = entityTitles({
 			sources: [{ label: 'Wikipedia: 阪神・淡路大震災', url: wikiUrl('兵庫県南部地震') }],
 		});
@@ -65,7 +65,7 @@ describe('entityTitles', () => {
 });
 
 describe('computeRelated', () => {
-	it('同じ実体を出典に持つ2件を相互に関連付ける', () => {
+	it('links two events that cite the same entity to each other', () => {
 		const events = [
 			ev('a', '2016-03-09', 90, [{ label: 'Wikipedia: AlphaGo', url: wikiUrl('AlphaGo') }]),
 			ev('b', '2017-06-12', 80, [{ label: 'Wikipedia: AlphaGo', url: wikiUrl('AlphaGo') }]),
@@ -75,7 +75,7 @@ describe('computeRelated', () => {
 		expect(rel.get('b')).toEqual([{ id: 'a', date: '2016-03-09', title: 'a' }]);
 	});
 
-	it('実体を共有しなければMapにエントリを作らない', () => {
+	it('creates no Map entry when no entity is shared', () => {
 		const events = [
 			ev('a', '2000-01-01', 50, [{ label: 'Wikipedia: X', url: wikiUrl('X') }]),
 			ev('b', '2000-01-02', 50, [{ label: 'Wikipedia: Y', url: wikiUrl('Y') }]),
@@ -85,7 +85,7 @@ describe('computeRelated', () => {
 		expect(rel.has('b')).toBe(false);
 	});
 
-	it('地名だけを共有していても関連付けない（誤結合防止）', () => {
+	it('does not link events sharing only a place (prevents false links)', () => {
 		const events = [
 			ev('a', '2000-01-01', 50, [{ label: 'Wikipedia: 日本', url: wikiUrl('日本') }]),
 			ev('b', '2000-01-02', 50, [{ label: 'Wikipedia: 日本', url: wikiUrl('日本') }]),
@@ -93,7 +93,7 @@ describe('computeRelated', () => {
 		expect(computeRelated(events).size).toBe(0);
 	});
 
-	it('重要度降順・同点は日付昇順で上位maxRelated件に絞る', () => {
+	it('keeps the top maxRelated by importance desc, ties by date asc', () => {
 		const shared = { label: 'Wikipedia: X', url: wikiUrl('X') };
 		const events = [
 			ev('center', '2000-01-01', 50, [shared]),
@@ -111,7 +111,7 @@ describe('computeRelated', () => {
 		]);
 	});
 
-	it('重要度・日付とも同じ候補が複数あってもソートが安定して破綻しない', () => {
+	it('sorts stably when several candidates share importance and date', () => {
 		const shared = { label: 'Wikipedia: X', url: wikiUrl('X') };
 		const events = [
 			ev('a', '2000-01-01', 50, [shared]),
@@ -122,14 +122,14 @@ describe('computeRelated', () => {
 		expect(rel.get('a')?.map((r) => r.id).sort()).toEqual(['b', 'c']);
 	});
 
-	it('自分自身は候補に含まれない', () => {
+	it('does not include itself as a candidate', () => {
 		const shared = { label: 'Wikipedia: X', url: wikiUrl('X') };
 		const events = [ev('a', '2000-01-01', 50, [shared]), ev('b', '2000-01-02', 50, [shared])];
 		const rel = computeRelated(events);
 		expect(rel.get('a')?.some((r) => r.id === 'a')).toBe(false);
 	});
 
-	it('複数の実体を共有していても相手は重複しない', () => {
+	it('does not duplicate a partner sharing several entities', () => {
 		const shared1 = { label: 'Wikipedia: X', url: wikiUrl('X') };
 		const shared2 = { label: 'Wikipedia: Y', url: wikiUrl('Y') };
 		const events = [

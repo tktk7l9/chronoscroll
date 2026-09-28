@@ -20,34 +20,34 @@ function c(
 }
 
 describe('textBigrams', () => {
-	it('文字bigramの集合を作る', () => {
+	it('builds a set of character bigrams', () => {
 		expect(textBigrams('東京')).toEqual(new Set(['東京']));
 		expect(textBigrams('東京都')).toEqual(new Set(['東京', '京都']));
 	});
 
-	it('1文字以下は空集合', () => {
+	it('empty set for one character or less', () => {
 		expect(textBigrams('')).toEqual(new Set());
 		expect(textBigrams('あ')).toEqual(new Set());
 	});
 });
 
 describe('bigramJaccard', () => {
-	it('完全一致は1', () => {
+	it('1 for an exact match', () => {
 		const a = textBigrams('阪神・淡路大震災が発生');
 		expect(bigramJaccard(a, a)).toBe(1);
 	});
 
-	it('無関係な文は低い類似度', () => {
+	it('low similarity for unrelated sentences', () => {
 		const a = textBigrams('東京オリンピックが開幕した');
 		const b = textBigrams('ベルリンの壁が崩壊した');
 		expect(bigramJaccard(a, b)).toBeLessThan(0.3);
 	});
 
-	it('両方空集合なら1（境界ケース）', () => {
+	it('1 when both sets are empty (edge case)', () => {
 		expect(bigramJaccard(new Set(), new Set())).toBe(1);
 	});
 
-	it('実データ同等の言い換えは閾値を超える', () => {
+	it('a real-data-like paraphrase exceeds the threshold', () => {
 		const a = textBigrams('全国の新聞で夕刊が廃止');
 		const b = textBigrams('全国の新聞で夕刊が廃止。');
 		expect(bigramJaccard(a, b)).toBeGreaterThanOrEqual(SIMILARITY_THRESHOLD);
@@ -55,34 +55,34 @@ describe('bigramJaccard', () => {
 });
 
 describe('overlapCoefficient', () => {
-	it('小さい方が完全に大きい方に含まれれば1', () => {
+	it('1 when the smaller set is fully contained in the larger', () => {
 		const a = textBigrams('兵庫県南部地震');
 		const b = textBigrams('午前5時46分に兵庫県南部地震が発生した');
 		expect(overlapCoefficient(a, b)).toBe(1);
 	});
 
-	it('どちらかが空なら0', () => {
+	it('0 when either is empty', () => {
 		expect(overlapCoefficient(new Set(), textBigrams('あいう'))).toBe(0);
 	});
 });
 
 describe('linkOverlap', () => {
-	it('共通リンクの割合を小さい方基準で返す', () => {
+	it('returns the shared-link ratio based on the smaller side', () => {
 		expect(linkOverlap(['兵庫県南部地震', '阪神・淡路大震災'], ['明石海峡', '兵庫県南部地震', '阪神・淡路大震災'])).toBe(1);
 	});
 
-	it('共通リンクがなければ0', () => {
+	it('0 without shared links', () => {
 		expect(linkOverlap(['ガス事業法'], ['競馬法'])).toBe(0);
 	});
 
-	it('片方がリンクなしなら0', () => {
+	it('0 when one side has no links', () => {
 		expect(linkOverlap([], ['何か'])).toBe(0);
 	});
 });
 
 describe('duplicateIds', () => {
 	// Duplicate pairs confirmed in real data (different wordings that appeared on both 「YYYY年」 and 「YYYY年の日本」 pages)
-	it('同日+類似文面はスコアが高い方を残す（実データ再現: 長崎原爆投下）', () => {
+	it('same day + similar text keeps the higher score (real data: Nagasaki atomic bombing)', () => {
 		const drop = duplicateIds([
 			c('a', '1945-08-09', '午前11時02分、米軍が長崎市への原子爆弾投下。', ['長崎市', '原子爆弾'], 90),
 			c('b', '1945-08-09', '午前11時02分、米軍が長崎市へ原子爆弾投下。', ['長崎市', '原子爆弾'], 60),
@@ -90,7 +90,7 @@ describe('duplicateIds', () => {
 		expect(drop).toEqual(new Set(['b']));
 	});
 
-	it('先頭リンクが違っても本文が似ていれば重複と判定する（実データ再現: 硫黄島の戦い）', () => {
+	it('treats similar text as a duplicate even with a different first link (real data: Battle of Iwo Jima)', () => {
 		const drop = duplicateIds([
 			c(
 				'x',
@@ -111,7 +111,7 @@ describe('duplicateIds', () => {
 	});
 
 	// Case with high containment but Jaccard below the threshold: judged a duplicate if the link targets overlap
-	it('短い見出し文が長い説明文に包含される場合、リンクが重なれば重複と判定する（実データ再現: 阪神・淡路大震災）', () => {
+	it('treats a short headline contained in a long description as a duplicate when links overlap (real data: Great Hanshin earthquake)', () => {
 		const drop = duplicateIds([
 			c('short', '1995-01-17', '兵庫県南部地震（阪神・淡路大震災）', ['兵庫県南部地震', '阪神・淡路大震災'], 40),
 			c(
@@ -127,7 +127,7 @@ describe('duplicateIds', () => {
 
 	// This is the core of this design change: judging by containment alone would wrongly treat
 	// separate laws enacted on the same day as the same. If the link target entities differ, it is not a duplicate.
-	it('定型文が支配的な短文同士でも、リンク先の実体が異なれば重複としない（実データ再現: 同日成立の別法案）', () => {
+	it('does not merge boilerplate-dominated short texts whose linked entities differ (real data: separate bills passed the same day)', () => {
 		const drop = duplicateIds([
 			c(
 				'gas-law',
@@ -141,7 +141,7 @@ describe('duplicateIds', () => {
 		expect(drop.size).toBe(0);
 	});
 
-	it('スコア同点なら本文が長い方を残す', () => {
+	it('keeps the longer text on a score tie', () => {
 		const drop = duplicateIds([
 			c('short', '2000-01-01', '全国の新聞で夕刊が廃止', [], 50),
 			c('long', '2000-01-01', '全国の新聞で夕刊が廃止。', [], 50),
@@ -149,7 +149,7 @@ describe('duplicateIds', () => {
 		expect(drop).toEqual(new Set(['short']));
 	});
 
-	it('protected（curated参照）idはスコアに関わらず勝つ', () => {
+	it('a protected (curated) id wins regardless of score', () => {
 		const drop = duplicateIds(
 			[c('curated', '2000-01-01', '全国の新聞で夕刊が廃止', [], 10), c('auto', '2000-01-01', '全国の新聞で夕刊が廃止。', [], 99)],
 			new Set(['curated']),
@@ -157,7 +157,7 @@ describe('duplicateIds', () => {
 		expect(drop).toEqual(new Set(['auto']));
 	});
 
-	it('日付が違えば別イベント', () => {
+	it('different dates mean different events', () => {
 		const drop = duplicateIds([
 			c('a', '2000-01-01', '全国の新聞で夕刊が廃止'),
 			c('b', '2000-01-02', '全国の新聞で夕刊が廃止'),
@@ -165,7 +165,7 @@ describe('duplicateIds', () => {
 		expect(drop.size).toBe(0);
 	});
 
-	it('同日でも文面もリンクも無関係なら別イベントのまま', () => {
+	it('keeps events separate on the same day when text and links are unrelated', () => {
 		const drop = duplicateIds([
 			c('a', '1964-10-10', '東京オリンピックが開幕した', ['東京オリンピック']),
 			c('b', '1964-10-10', 'ベトナムで軍事クーデターが発生した', ['ベトナム']),
@@ -173,7 +173,7 @@ describe('duplicateIds', () => {
 		expect(drop.size).toBe(0);
 	});
 
-	it('推移的な3件クラスタは1件に集約される（A~B, B~Cだが A と C は直接非類似でも同クラスタ）', () => {
+	it('collapses a transitive 3-event cluster into one (A~B, B~C, same cluster even if A and C are not similar)', () => {
 		const drop = duplicateIds([
 			c('a', '2000-01-01', 'XXXXX新聞で夕刊が廃止された模様', [], 80),
 			c('b', '2000-01-01', 'XXXXX新聞で夕刊が廃止された', [], 60),
@@ -184,7 +184,7 @@ describe('duplicateIds', () => {
 		expect(remaining).toEqual(['a']);
 	});
 
-	it('カスタム閾値を指定できる（Jaccard経路のみに影響する）', () => {
+	it('accepts a custom threshold (affects only the Jaccard path)', () => {
 		const items = [
 			c('a', '2000-01-01', '全国の新聞で夕刊が廃止', [], 80),
 			c('b', '2000-01-01', '全国の新聞で夕刊が廃止。', [], 60),
@@ -196,7 +196,7 @@ describe('duplicateIds', () => {
 		expect(dropStrict.size).toBe(0);
 	});
 
-	it('本文が短すぎる場合はcontainment経路が働かない（境界: minLen<8）', () => {
+	it('the containment path does not apply to too short texts (boundary: minLen<8)', () => {
 		const drop = duplicateIds([
 			c('a', '2000-01-01', '中止', ['同一議案'], 50),
 			c('b', '2000-01-01', '中止が決定した', ['同一議案'], 50),

@@ -22,12 +22,12 @@ const scale: TimeScale = {
 };
 
 describe('dayOf / isoOf', () => {
-	it('往復変換できる', () => {
+	it('round-trips', () => {
 		expect(isoOf(dayOf('1964-10-10'))).toBe('1964-10-10');
 		expect(isoOf(dayOf('1868-01-01'))).toBe('1868-01-01');
 	});
 
-	it('日数の差が正しい', () => {
+	it('computes the day difference correctly', () => {
 		expect(dayOf('1970-01-02') - dayOf('1970-01-01')).toBe(1);
 		expect(dayOf('1970-01-01')).toBe(0);
 		expect(dayOf('1969-12-31')).toBe(-1);
@@ -35,7 +35,7 @@ describe('dayOf / isoOf', () => {
 });
 
 describe('clampPxPerDay', () => {
-	it('範囲内はそのまま、外はクランプ', () => {
+	it('keeps in-range values and clamps the rest', () => {
 		expect(clampPxPerDay(1)).toBe(1);
 		expect(clampPxPerDay(0)).toBe(MIN_PX_PER_DAY);
 		expect(clampPxPerDay(1e9)).toBe(MAX_PX_PER_DAY);
@@ -43,25 +43,25 @@ describe('clampPxPerDay', () => {
 });
 
 describe('dayToY / yToDay', () => {
-	it('最新日が padTop の位置、過去ほど下', () => {
+	it('the latest day sits at padTop and older days go lower', () => {
 		expect(dayToY(scale, scale.maxDay)).toBe(100);
 		expect(dayToY(scale, scale.maxDay - 10)).toBe(110);
 	});
 
-	it('往復変換できる', () => {
+	it('round-trips', () => {
 		const y = dayToY(scale, dayOf('1964-10-10'));
 		expect(yToDay(scale, y)).toBeCloseTo(dayOf('1964-10-10'));
 	});
 });
 
 describe('totalHeight', () => {
-	it('範囲×ズーム+パディング', () => {
+	it('range x zoom + padding', () => {
 		expect(totalHeight(scale)).toBe(100 + (scale.maxDay - scale.minDay) + 200);
 	});
 });
 
 describe('zoomAt', () => {
-	it('アンカー位置の日時が保たれる', () => {
+	it('keeps the date at the anchor position', () => {
 		const scrollTop = 5000;
 		const anchorY = 300;
 		const dayAtAnchor = yToDay(scale, scrollTop + anchorY);
@@ -70,7 +70,7 @@ describe('zoomAt', () => {
 		expect(yToDay(next, nextTop + anchorY)).toBeCloseTo(dayAtAnchor);
 	});
 
-	it('ズーム値はクランプされ、scrollTopは負にならない', () => {
+	it('clamps the zoom and never makes scrollTop negative', () => {
 		const { scale: next, scrollTop } = zoomAt(scale, 0, 0, 1e9);
 		expect(next.pxPerDay).toBe(MAX_PX_PER_DAY);
 		expect(scrollTop).toBeGreaterThanOrEqual(0);
@@ -78,7 +78,7 @@ describe('zoomAt', () => {
 });
 
 describe('visibleDayRange', () => {
-	it('fromDayが新しい側・toDayが古い側', () => {
+	it('fromDay is the newer side and toDay the older side', () => {
 		const { fromDay, toDay } = visibleDayRange(scale, 100, 500);
 		expect(fromDay).toBe(scale.maxDay);
 		expect(toDay).toBe(scale.maxDay - 500);

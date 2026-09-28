@@ -9,20 +9,20 @@ import {
 } from './url-state.ts';
 
 describe('normalizeDateParam', () => {
-	it('年のみは年央、年月は月央に展開する', () => {
+	it('expands year-only to mid-year and year-month to mid-month', () => {
 		expect(normalizeDateParam('1964')).toBe('1964-07-01');
 		expect(normalizeDateParam('1964-10')).toBe('1964-10-15');
 		expect(normalizeDateParam('1964-10-10')).toBe('1964-10-10');
 	});
 
-	it('不正な形式は null', () => {
+	it('returns null for an invalid format', () => {
 		expect(normalizeDateParam('abc')).toBeNull();
 		expect(normalizeDateParam('1964-10-10-10')).toBeNull();
 	});
 });
 
 describe('parseUrlState', () => {
-	it('全パラメータを読む', () => {
+	it('reads all parameters', () => {
 		const s = parseUrlState(
 			new URLSearchParams('t=1964-10&z=2.5&r=japan&c=politics&q=五輪&e=abc&k=anime'),
 		);
@@ -35,17 +35,17 @@ describe('parseUrlState', () => {
 		expect(s.collection).toBe('anime');
 	});
 
-	it('slugとして不正なkは無視する', () => {
+	it('ignores k when it is not a valid slug', () => {
 		expect(parseUrlState(new URLSearchParams('k=../secret')).collection).toBeNull();
 		expect(parseUrlState(new URLSearchParams('k=')).collection).toBeNull();
 		expect(parseUrlState(new URLSearchParams('k=Anime')).collection).toBeNull();
 	});
 
-	it('空のURLはデフォルト状態', () => {
+	it('an empty URL yields the default state', () => {
 		expect(parseUrlState(new URLSearchParams())).toEqual(DEFAULT_URL_STATE);
 	});
 
-	it('不正なzは無視、大きすぎるzはクランプ', () => {
+	it('ignores an invalid z and clamps a too large z', () => {
 		expect(parseUrlState(new URLSearchParams('z=abc')).pxPerDay).toBeNull();
 		expect(parseUrlState(new URLSearchParams('z=-5')).pxPerDay).toBeNull();
 		expect(parseUrlState(new URLSearchParams('z=99999')).pxPerDay).toBe(MAX_PX_PER_DAY);
@@ -53,11 +53,11 @@ describe('parseUrlState', () => {
 });
 
 describe('serializeUrlState', () => {
-	it('デフォルト値は省略する', () => {
+	it('omits default values', () => {
 		expect(serializeUrlState(DEFAULT_URL_STATE).toString()).toBe('');
 	});
 
-	it('往復できる', () => {
+	it('round-trips', () => {
 		const s = {
 			centerDate: '1964-10-15',
 			pxPerDay: 2.5,
@@ -74,7 +74,7 @@ describe('serializeUrlState', () => {
 		expect(roundTrip).toEqual(s);
 	});
 
-	it('zは4桁に丸める', () => {
+	it('rounds z to 4 digits', () => {
 		const params = serializeUrlState({
 			...DEFAULT_URL_STATE,
 			filter: EMPTY_FILTER,

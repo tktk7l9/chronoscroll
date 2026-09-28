@@ -4,4 +4,4 @@ import { renderHeadersFile } from './lib/headers.mjs';
 
 const security = JSON.parse(readFileSync('config/security-headers.json', 'utf8'));
 writeFileSync('static/_headers', renderHeadersFile(security));
-console.log('static/_headers を生成');
+console.log('Generated static/_headers');

@@ -17,7 +17,7 @@ import { isMassDelete, parseManifest, planSync, sha256 } from './lib/r2-plan.mjs
 // Preview builds on Workers Builds (anything but main) must not touch the production bucket.
 // WORKERS_CI and WORKERS_CI_BRANCH are injected by Workers Builds by default.
 if (process.env.WORKERS_CI && process.env.WORKERS_CI_BRANCH && process.env.WORKERS_CI_BRANCH !== 'main') {
-	console.log(`非 production ブランチ（${process.env.WORKERS_CI_BRANCH}）: R2 同期をスキップ`);
+	console.log(`Non-production branch (${process.env.WORKERS_CI_BRANCH}): skipping R2 sync`);
 	process.exit(0);
 }
 
@@ -30,7 +30,7 @@ const dryRun = process.argv.includes('--dry-run');
 
 for (const name of ['R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY']) {
 	if (!process.env[name]) {
-		console.error(`${name} が未設定（.env.r2 を node --env-file で読むか、環境変数で渡す）`);
+		console.error(`${name} is not set (load .env.r2 with node --env-file or pass it as an environment variable)`);
 		process.exit(1);
 	}
 }
@@ -63,7 +63,7 @@ console.log(
 		`put ${plan.put.length} / del ${plan.del.length} / skip ${plan.skip.length}${dryRun ? '（dry-run）' : ''}`,
 );
 if (isMassDelete(plan, Object.keys(local).length, Object.keys(remote).length) && !process.argv.includes('--allow-mass-delete')) {
-	console.error(`大量削除の疑い（local ${Object.keys(local).length} / del ${plan.del.length} / remote ${Object.keys(remote).length}）。意図した削除なら --allow-mass-delete を付けて再実行`);
+	console.error(`Suspected mass delete (local ${Object.keys(local).length} / del ${plan.del.length} / remote ${Object.keys(remote).length}). If the deletion is intended, rerun with --allow-mass-delete`);
 	process.exit(1);
 }
 if (dryRun) process.exit(0);
@@ -85,7 +85,7 @@ async function uploader() {
 			);
 		} catch (e) {
 			failed.add(key);
-			console.error(`PUT 失敗: ${key}: ${e.message}`);
+			console.error(`PUT failed: ${key}: ${e.message}`);
 		}
 		if (++done % 1000 === 0) console.log(`put ${done}/${plan.put.length}`);
 	}
@@ -102,7 +102,7 @@ for (let i = 0; i < plan.del.length; i += 1000) {
 	);
 	for (const { Key, Code, Message } of res.Errors ?? []) {
 		failedDel.add(Key);
-		console.error(`DELETE 失敗: ${Key}: ${Code} ${Message}`);
+		console.error(`DELETE failed: ${Key}: ${Code} ${Message}`);
 	}
 }
 
@@ -118,8 +118,8 @@ await s3.send(
 		ContentType: 'application/json',
 	}),
 );
-console.log(`manifest 更新（${Object.keys(manifest).length} 件）`);
+console.log(`Updated manifest (${Object.keys(manifest).length} entries)`);
 if (failed.size || failedDel.size) {
-	console.error(`PUT失敗 ${failed.size} 件・DELETE失敗 ${failedDel.size} 件。再実行で再送・再削除される`);
+	console.error(`${failed.size} PUT failures, ${failedDel.size} DELETE failures. Rerun to retry them`);
 	process.exit(1);
 }

@@ -28,7 +28,7 @@ function ev(id: string, date: string, importance = 50): NewsEvent {
 }
 
 describe('wikipediaUrl', () => {
-	it('タイトルをエンコードしスペースをアンダースコアに', () => {
+	it('encodes the title and turns spaces into underscores', () => {
 		expect(wikipediaUrl('東京オリンピック')).toBe(
 			`https://ja.wikipedia.org/wiki/${encodeURIComponent('東京オリンピック')}`,
 		);
@@ -37,11 +37,11 @@ describe('wikipediaUrl', () => {
 });
 
 describe('truncateTitle', () => {
-	it('句点を落とす', () => {
+	it('drops the trailing full stop', () => {
 		expect(truncateTitle('何かが起きた。')).toBe('何かが起きた');
 	});
 
-	it('長文は切り詰めて…を付ける', () => {
+	it('truncates long text and appends an ellipsis', () => {
 		const long = 'あ'.repeat(60);
 		const t = truncateTitle(long);
 		expect(t).toHaveLength(48);
@@ -59,7 +59,7 @@ describe('buildEvent', () => {
 		links: [{ target: '1964年東京オリンピック', label: '東京オリンピック' }],
 	};
 
-	it('出典は記事→年ページの順', () => {
+	it('lists sources as article then year page', () => {
 		const e = buildEvent({ raw, importance: 99.5, category: 'sports', region: 'japan' });
 		expect(e.id).toMatch(/^1964-10-10-[0-9a-f]{8}$/);
 		expect(e.title).toBe('東京オリンピック開幕');
@@ -74,7 +74,7 @@ describe('buildEvent', () => {
 		expect(e.image).toBeUndefined();
 	});
 
-	it('リンクなしは年ページのみ、画像があれば含める', () => {
+	it('only the year page without links, includes the image when present', () => {
 		const image = { src: 'https://upload.wikimedia.org/x.jpg', width: 640, height: 480, credit: 'c' };
 		const e = buildEvent({
 			raw: { ...raw, links: [] },
@@ -91,12 +91,12 @@ describe('buildEvent', () => {
 describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 	const events = [ev('b', '1964-10-10', 99), ev('a', '1964-10-10', 40), ev('c', '1872-10-14', 96)];
 
-	it('日付昇順・同日はid順', () => {
+	it('date ascending, same day by id', () => {
 		expect(sortEvents(events).map((e) => e.id)).toEqual(['c', 'a', 'b']);
 		expect(sortEvents([...events].reverse()).map((e) => e.id)).toEqual(['c', 'a', 'b']);
 	});
 
-	it('十年単位にチャンクする', () => {
+	it('chunks by decade', () => {
 		const chunks = buildChunks(events);
 		expect(chunks.map((c) => c.meta)).toEqual([
 			{ key: '1870s', fromYear: 1870, toYear: 1879, count: 1 },
@@ -105,7 +105,7 @@ describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 		expect(chunks[1].events.map((e) => e.id)).toEqual(['a', 'b']);
 	});
 
-	it('上限を超える十年は5年チャンクに分割する', () => {
+	it('splits a decade over the limit into 5-year chunks', () => {
 		const many = [
 			ev('x1', '2021-01-01'),
 			ev('x2', '2023-01-01'),
@@ -120,12 +120,12 @@ describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 		expect(chunks[1].meta).toMatchObject({ fromYear: 2025, toYear: 2029, count: 2 });
 	});
 
-	it('overviewSlice は閾値以上のみ', () => {
+	it('overviewSlice keeps only events at or above the threshold', () => {
 		expect(overviewSlice(events).map((e) => e.id)).toEqual(['c', 'b']);
 		expect(overviewSlice(events, 100)).toEqual([]);
 	});
 
-	it('searchDocs は [id, date, summary] の軽量配列（長文は切り詰め）', () => {
+	it('searchDocs is a light [id, date, summary] array (long text truncated)', () => {
 		expect(searchDocs(events)[0]).toEqual(['c', '1872-10-14', 's-c']);
 		const long = { ...ev('l', '2000-01-01'), summary: 'あ'.repeat(200) };
 		const [, , text] = searchDocs([long])[0];
@@ -134,14 +134,14 @@ describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 });
 
 describe('decadeKeyOf', () => {
-	it('年から十年キーを作る', () => {
+	it('builds a decade key from a year', () => {
 		expect(decadeKeyOf(1868)).toBe('1860s');
 		expect(decadeKeyOf(2026)).toBe('2020s');
 	});
 });
 
 describe('buildIndexMeta', () => {
-	it('範囲・件数・チャンク内訳を返す', () => {
+	it('returns range, count and chunk breakdown', () => {
 		const meta = buildIndexMeta(
 			[ev('a', '1964-10-10'), ev('b', '1872-10-14'), ev('c', '1964-11-01')],
 			'2026-07-10T00:00:00Z',
@@ -155,7 +155,7 @@ describe('buildIndexMeta', () => {
 		]);
 	});
 
-	it('空配列は空メタ', () => {
+	it('empty meta for an empty array', () => {
 		const meta = buildIndexMeta([], 'now');
 		expect(meta.total).toBe(0);
 		expect(meta.chunks).toEqual([]);

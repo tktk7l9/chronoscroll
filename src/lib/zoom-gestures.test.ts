@@ -10,13 +10,13 @@ function wheel(mods: { ctrlKey?: boolean; metaKey?: boolean } = {}) {
 }
 
 describe('takeCtrlWheel', () => {
-	it('修飾なしは触らない', () => {
+	it('leaves unmodified wheel alone', () => {
 		const e = wheel();
 		expect(takeCtrlWheel(e, false)).toBe(false);
 		expect(e.preventDefault).not.toHaveBeenCalled();
 	});
 
-	it('ctrl/⌘+ホイールは常に preventDefault する', () => {
+	it('always calls preventDefault for ctrl/cmd+wheel', () => {
 		const ctrl = wheel({ ctrlKey: true });
 		expect(takeCtrlWheel(ctrl, false)).toBe(true);
 		expect(ctrl.preventDefault).toHaveBeenCalledOnce();
@@ -26,7 +26,7 @@ describe('takeCtrlWheel', () => {
 		expect(meta.preventDefault).toHaveBeenCalledOnce();
 	});
 
-	it('ロック中も preventDefault し、年表ズームは掛けない', () => {
+	it('calls preventDefault while locked without zooming the timeline', () => {
 		const e = wheel({ ctrlKey: true });
 		expect(takeCtrlWheel(e, true)).toBe(false);
 		expect(e.preventDefault).toHaveBeenCalledOnce();
@@ -34,31 +34,31 @@ describe('takeCtrlWheel', () => {
 });
 
 describe('takePinchMove', () => {
-	it('1本指は触らない', () => {
+	it('leaves one finger alone', () => {
 		const preventDefault = vi.fn();
 		expect(takePinchMove(1, false, true, preventDefault)).toBe(false);
 		expect(preventDefault).not.toHaveBeenCalled();
 	});
 
-	it('未開始の2本指はブラウザに任せる', () => {
+	it('leaves a not-yet-started two-finger touch to the browser', () => {
 		const preventDefault = vi.fn();
 		expect(takePinchMove(2, false, false, preventDefault)).toBe(false);
 		expect(preventDefault).not.toHaveBeenCalled();
 	});
 
-	it('ピンチ中は preventDefault して年表ズームを掛ける', () => {
+	it('calls preventDefault and zooms the timeline during a pinch', () => {
 		const preventDefault = vi.fn();
 		expect(takePinchMove(2, false, true, preventDefault)).toBe(true);
 		expect(preventDefault).toHaveBeenCalledOnce();
 	});
 
-	it('ロック中はピンチ未開始でも preventDefault し、年表ズームは掛けない', () => {
+	it('calls preventDefault while locked even before a pinch starts, without zooming', () => {
 		const preventDefault = vi.fn();
 		expect(takePinchMove(2, true, false, preventDefault)).toBe(false);
 		expect(preventDefault).toHaveBeenCalledOnce();
 	});
 
-	it('ロック中にピンチが残っていても年表ズームは掛けない', () => {
+	it('does not zoom the timeline while locked even if a pinch remains', () => {
 		const preventDefault = vi.fn();
 		expect(takePinchMove(2, true, true, preventDefault)).toBe(false);
 		expect(preventDefault).toHaveBeenCalledOnce();

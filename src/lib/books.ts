@@ -11,10 +11,10 @@ export function resolveBookUrl(book: BookRef): string {
 	if (book.store === 'amazon') {
 		if (book.asin) return `https://www.amazon.co.jp/dp/${book.asin}?tag=${AMAZON_ASSOC_TAG}`;
 		if (book.url) return appendAmazonTag(book.url);
-		throw new Error(`amazon の書籍には asin か url が必要です: ${book.title}`);
+		throw new Error(`An amazon book needs asin or url: ${book.title}`);
 	}
 	if (book.url) return book.url;
-	throw new Error(`rakuten の書籍には url が必要です: ${book.title}`);
+	throw new Error(`A rakuten book needs url: ${book.title}`);
 }
 
 function appendAmazonTag(url: string): string {
