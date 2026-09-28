@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { bigramTokenize, buildSearchIndex, runQuery, type SearchDoc } from './search.ts';
+import {
+	bigramTokenize,
+	buildSearchIndex,
+	runQuery,
+	SEARCH_LIMIT,
+	searchStatusMessage,
+	type SearchDoc,
+} from './search.ts';
 
 describe('bigramTokenize', () => {
 	it('日本語はbigramに分解する', () => {
@@ -50,5 +57,36 @@ describe('buildSearchIndex / runQuery', () => {
 
 	it('limitで件数を制限する', () => {
 		expect(runQuery(mini, byId, 'オリンピック', 1)).toHaveLength(1);
+	});
+});
+
+// SHIG 55: status messages must tell the user what to do next, not just what failed
+describe('searchStatusMessage', () => {
+	it('returns nothing while idle', () => {
+		expect(searchStatusMessage('idle', '', 0)).toBeNull();
+	});
+
+	it('tells the user the index is still loading', () => {
+		expect(searchStatusMessage('loading', '東京', 0)).toBe('索引を準備中…');
+	});
+
+	it('suggests reloading when the index failed to load', () => {
+		expect(searchStatusMessage('error', '東京', 0)).toContain('再読み込み');
+	});
+
+	it('echoes the query and suggests other words when nothing matched', () => {
+		const msg = searchStatusMessage('ready', '  zzz  ', 0);
+		expect(msg).toContain('「zzz」');
+		expect(msg).toContain('別の言葉');
+	});
+
+	it('returns nothing when some hits fit under the limit', () => {
+		expect(searchStatusMessage('ready', '東京', 3)).toBeNull();
+	});
+
+	it('explains that only the top hits are shown when the limit is reached', () => {
+		const msg = searchStatusMessage('ready', '東京', SEARCH_LIMIT);
+		expect(msg).toContain(`上位${SEARCH_LIMIT}件`);
+		expect(msg).toContain('言葉を足す');
 	});
 });
