@@ -139,6 +139,9 @@ export class TimelineData {
 		const existing = this.#events.get(id);
 		if (existing) return existing;
 		const day = dayOf(date);
+		// A malformed ?e= deep link (the date is taken from the id prefix) yields NaN, which
+		// would throw inside chunkKeysInRange. There is no chunk to wait for, so give up at once
+		if (!Number.isFinite(day)) return undefined;
 		this.ensureRange(day, day);
 		// ensureRange is async. Wait for the relevant chunk to finish loading
 		for (let i = 0; i < 100 && !this.#events.has(id); i++) {
