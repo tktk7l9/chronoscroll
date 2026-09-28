@@ -297,8 +297,13 @@
 		};
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key !== 'Escape') return;
-			e.preventDefault();
 			jumpOpen = false;
+			// Only pull focus back when the key came from the panel (or nowhere). Escape in
+			// another widget, e.g. the search box, must not move focus into the timeline.
+			// Check the event target: the search box blurs itself before this runs.
+			const from = e.target as HTMLElement | null;
+			if (from && from !== document.body && !from.closest?.('.era-nav')) return;
+			e.preventDefault();
 			eraChip?.focus();
 		};
 		window.addEventListener('pointerdown', close);

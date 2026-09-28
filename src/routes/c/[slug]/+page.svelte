@@ -130,6 +130,13 @@
 	.brand-sub {
 		font-size: 0.7rem;
 		color: var(--ink-muted);
+		white-space: nowrap;
+	}
+	/* With the header nav on the right, the tagline wrapped into three lines at 320px */
+	@media (max-width: 400px) {
+		.brand-sub {
+			display: none;
+		}
 	}
 	main {
 		max-width: 660px;
