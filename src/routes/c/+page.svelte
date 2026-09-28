@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ArtIcon from '$lib/components/ArtIcon.svelte';
 	import BrandMark from '$lib/components/BrandMark.svelte';
+	import PageNav from '$lib/components/PageNav.svelte';
 	import { formatCount } from '$lib/coverage';
 	import { absoluteUrl } from '$lib/site';
 
@@ -34,6 +35,7 @@
 		<span class="brand-name">chronoscroll</span>
 		<span class="brand-sub">歴史ニュース年表</span>
 	</a>
+	<PageNav current="collections" />
 </header>
 
 <main>
@@ -74,6 +76,10 @@
 
 <style>
 	.page-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
 		padding: 14px 18px;
 		border-bottom: 1px solid var(--line);
 	}
