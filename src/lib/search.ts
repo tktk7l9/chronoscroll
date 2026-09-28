@@ -29,6 +29,9 @@ export interface SearchHit {
 	score: number;
 }
 
+/** Maximum number of hits returned to the dropdown. */
+export const SEARCH_LIMIT = 20;
+
 export function buildSearchIndex(docs: readonly SearchDoc[]): MiniSearch {
 	const mini = new MiniSearch({
 		fields: ['text'],
@@ -44,7 +47,7 @@ export function runQuery(
 	mini: MiniSearch,
 	docsById: ReadonlyMap<string, SearchDoc>,
 	query: string,
-	limit = 20,
+	limit = SEARCH_LIMIT,
 ): SearchHit[] {
 	const q = query.trim();
 	if (q === '') return [];
@@ -55,4 +58,28 @@ export function runQuery(
 			const doc = docsById.get(r.id as string)!;
 			return { id: doc[0], date: doc[1], text: doc[2], score: r.score };
 		});
+}
+
+export type SearchStatus = 'idle' | 'loading' | 'ready' | 'error';
+
+/**
+ * Hint line shown in the search dropdown (null = nothing to say).
+ * Each message says what the user can do next (SHIG 55).
+ */
+export function searchStatusMessage(
+	status: SearchStatus,
+	query: string,
+	hitCount: number,
+	limit = SEARCH_LIMIT,
+): string | null {
+	if (status === 'loading') return '索引を準備中…';
+	if (status === 'error') {
+		return '検索を準備できませんでした。ページを再読み込みしてからお試しください';
+	}
+	if (status !== 'ready') return null;
+	if (hitCount === 0) {
+		return `「${query.trim()}」に一致するできごとはありません。人名・地名・出来事名など別の言葉で試してください`;
+	}
+	if (hitCount >= limit) return `上位${limit}件を表示しています。言葉を足すと絞り込めます`;
+	return null;
 }

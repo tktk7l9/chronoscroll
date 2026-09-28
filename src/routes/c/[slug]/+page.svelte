@@ -2,6 +2,7 @@
 	import { timelineHref } from '$lib/collections';
 	import ArtIcon from '$lib/components/ArtIcon.svelte';
 	import BrandMark from '$lib/components/BrandMark.svelte';
+	import PageNav from '$lib/components/PageNav.svelte';
 	import SponsorSlot from '$lib/components/SponsorSlot.svelte';
 	import { formatCount, formatEventDate } from '$lib/coverage';
 	import { absoluteUrl } from '$lib/site';
@@ -38,7 +39,7 @@
 		<span class="brand-name">chronoscroll</span>
 		<span class="brand-sub">歴史ニュース年表</span>
 	</a>
-	<a class="up" href="/c">特集一覧</a>
+	<PageNav />
 </header>
 
 <main>
@@ -108,7 +109,7 @@
 <style>
 	.page-header {
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		justify-content: space-between;
 		gap: 12px;
 		padding: 14px 18px;
@@ -129,13 +130,14 @@
 	.brand-sub {
 		font-size: 0.7rem;
 		color: var(--ink-muted);
+		white-space: nowrap;
 	}
-	.up {
-		flex: none;
-		font-size: 0.78rem;
-		color: var(--accent);
+	/* With the header nav on the right, the tagline wrapped into three lines at 320px */
+	@media (max-width: 400px) {
+		.brand-sub {
+			display: none;
+		}
 	}
-
 	main {
 		max-width: 660px;
 		margin: 0 auto;

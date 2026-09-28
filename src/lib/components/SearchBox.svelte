@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SearchHit } from '../search.ts';
+	import { searchStatusMessage, type SearchHit, type SearchStatus } from '../search.ts';
 	import type { SearchRequest, SearchResponse } from '../workers/search.worker.ts';
 	import SearchWorker from '../workers/search.worker.ts?worker';
 
@@ -14,10 +14,15 @@
 	let worker: Worker | null = null;
 	let seq = 0;
 	let hits = $state<SearchHit[]>([]);
-	let status = $state<'idle' | 'loading' | 'ready' | 'error'>('idle');
+	let status = $state<SearchStatus>('idle');
 	let open = $state(false);
 	let activeIndex = $state(-1);
 	let inputEl = $state<HTMLInputElement>();
+
+	const listId = 'search-results';
+	const message = $derived(searchStatusMessage(status, query, hits.length));
+	const showHits = $derived(status !== 'error' && status !== 'loading' && hits.length > 0);
+	const expanded = $derived(open && query.trim() !== '' && (showHits || message !== null));
 
 	function ensureWorker(): Worker {
 		if (!worker) {
@@ -94,35 +99,43 @@
 		type="search"
 		placeholder="検索（/）"
 		aria-label="ニュースを検索"
+		role="combobox"
+		aria-autocomplete="list"
+		aria-expanded={expanded}
+		aria-controls={listId}
+		aria-activedescendant={expanded && showHits && activeIndex >= 0
+			? `${listId}-${activeIndex}`
+			: undefined}
 		onfocus={() => (open = true)}
 		onblur={() => setTimeout(() => (open = false), 150)}
 		onkeydown={onKeydown}
 	/>
-	{#if open && query.trim() !== ''}
-		<div class="results" role="listbox" aria-label="検索結果">
-			{#if status === 'loading'}
-				<p class="hint">索引を準備中…</p>
-			{:else if status === 'error'}
-				<p class="hint">検索でエラーが発生しました</p>
-			{:else if hits.length === 0 && status === 'ready'}
-				<p class="hint">見つかりませんでした</p>
-			{:else}
-				{#each hits as hit, i (hit.id)}
-					<button
-						type="button"
-						role="option"
-						aria-selected={i === activeIndex}
-						class="hit"
-						class:active={i === activeIndex}
-						onmousedown={(e) => {
-							e.preventDefault();
-							choose(hit);
-						}}
-					>
-						<span class="date">{hit.date.slice(0, 7).replace('-', '.')}</span>
-						<span class="text">{hit.text}</span>
-					</button>
-				{/each}
+	{#if expanded}
+		<div class="results">
+			{#if showHits}
+				<div id={listId} role="listbox" aria-label="検索結果">
+					{#each hits as hit, i (hit.id)}
+						<button
+							type="button"
+							id="{listId}-{i}"
+							role="option"
+							tabindex="-1"
+							aria-selected={i === activeIndex}
+							class="hit"
+							class:active={i === activeIndex}
+							onmousedown={(e) => {
+								e.preventDefault();
+								choose(hit);
+							}}
+						>
+							<span class="date">{hit.date.slice(0, 7).replace('-', '.')}</span>
+							<span class="text">{hit.text}</span>
+						</button>
+					{/each}
+				</div>
+			{/if}
+			{#if message}
+				<p class="hint" role="status">{message}</p>
 			{/if}
 		</div>
 	{/if}

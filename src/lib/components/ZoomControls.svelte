@@ -57,6 +57,9 @@
 		＋
 	</button>
 
+	<!-- Narrow screens: the slider is hidden (pinch zooms), so show the level as text -->
+	<span class="level-readout" aria-hidden="true">{level}</span>
+
 	<div class="slider">
 		<div class="labels" aria-hidden="true">
 			{#each ZOOM_STOPS as s (s.label)}
@@ -232,12 +235,27 @@
 		transition: color 0.12s ease;
 	}
 
+	.level-readout {
+		display: none;
+	}
+
+	/* On phones the full slider covered the card column. Keep only ± and the current
+	   level so the panel stays out of the way of the major task, reading (SHIG 20, 83, 25) */
 	@media (max-width: 759px) {
 		.slider {
-			height: 116px;
+			display: none;
 		}
 		.zoomctl {
-			padding: 8px;
+			align-items: center;
+			gap: 4px;
+			padding: 6px;
+		}
+		.level-readout {
+			display: block;
+			font-size: 0.66rem;
+			font-weight: 700;
+			color: var(--accent);
+			line-height: 1.4;
 		}
 	}
 </style>

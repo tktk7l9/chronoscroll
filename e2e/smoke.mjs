@@ -339,6 +339,27 @@ await page.waitForTimeout(900);
 const jumpedEra = await page.locator('.era-chip .era-year').textContent();
 assert('年代ジャンプ: 1900年代へ移動', jumpedEra === '1905', `era=${jumpedEra}`);
 
+// 8b. Escape closes the decade panel and returns focus to its button (SHIG 60)
+await page.locator('.era-chip').click();
+await page.locator('.jump-grid button').first().focus();
+await page.keyboard.press('Escape');
+await page.waitForTimeout(150);
+assert('年代ジャンプ: Escapeでパネルが閉じる', (await page.locator('.jump-panel').count()) === 0);
+assert(
+	'年代ジャンプ: Escape後はボタンにフォーカスが戻る',
+	await page.evaluate(() => document.activeElement?.classList.contains('era-chip')),
+);
+// Escape pressed in the search box closes the panel but must not steal focus
+await page.locator('.era-chip').click();
+await page.locator('input[type=search]').focus();
+await page.keyboard.press('Escape');
+await page.waitForTimeout(150);
+assert(
+	'年代ジャンプ: 検索欄のEscapeでフォーカスを奪わない',
+	(await page.locator('.jump-panel').count()) === 0 &&
+		!(await page.evaluate(() => document.activeElement?.classList.contains('era-chip'))),
+);
+
 // 9. イベント個別ページ: prerenderされたHTMLが直接表示できる
 const firstId = await page.evaluate(async () => {
 	const overview = await (await fetch('/data/overview.json')).json();
@@ -497,6 +518,30 @@ assert(
 	narrowOverflow.length === 0,
 	narrowOverflow.join(' '),
 );
+
+// 16. Static pages at 320px: the header (brand + 年表/特集 nav) stays on one row
+for (const path of ['/c', '/c/anime']) {
+	await page.goto(base + path, { waitUntil: 'networkidle' });
+	const hdr = await page.evaluate(() => {
+		const brand = document.querySelector('.page-header .brand').getBoundingClientRect();
+		const nav = document.querySelector('.page-header .page-nav').getBoundingClientRect();
+		const links = [...document.querySelectorAll('.page-header .page-nav a')].map(
+			(a) => a.getBoundingClientRect().height,
+		);
+		return {
+			oneRow: Math.abs(brand.top + brand.height / 2 - (nav.top + nav.height / 2)) < 8,
+			brandH: Math.round(brand.height),
+			fits: nav.right <= innerWidth,
+			minLink: Math.min(...links),
+		};
+	});
+	assert(
+		`狭幅320px: ${path} のヘッダーが1行に収まる`,
+		hdr.oneRow && hdr.brandH <= 32 && hdr.fits,
+		JSON.stringify(hdr),
+	);
+	assert(`狭幅320px: ${path} の導線リンクが7mm以上`, hdr.minLink >= 26, JSON.stringify(hdr));
+}
 
 await browser.close();
 
