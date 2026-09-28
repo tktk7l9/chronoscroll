@@ -288,14 +288,25 @@
 		}
 		jumpToDay(dayOf(`${Math.min(decade + 5, Number(isoOf(maxDay).slice(0, 4)))}-01-01`));
 	}
-	// パネル外クリックで閉じる
+	let eraChip = $state<HTMLButtonElement>();
+	// パネル外クリックで閉じる。Escape でも閉じてボタンへフォーカスを戻す（SHIG 60）
 	$effect(() => {
 		if (!jumpOpen) return;
 		const close = (e: PointerEvent) => {
 			if (!(e.target as HTMLElement).closest('.era-nav')) jumpOpen = false;
 		};
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key !== 'Escape') return;
+			e.preventDefault();
+			jumpOpen = false;
+			eraChip?.focus();
+		};
 		window.addEventListener('pointerdown', close);
-		return () => window.removeEventListener('pointerdown', close);
+		window.addEventListener('keydown', onKey);
+		return () => {
+			window.removeEventListener('pointerdown', close);
+			window.removeEventListener('keydown', onKey);
+		};
 	});
 
 	// キーボード操作: ↑↓=前後のイベントへ / +・-=ズーム
@@ -393,6 +404,7 @@
 {#if ready}
 	<div class="era-nav">
 		<button
+			bind:this={eraChip}
 			type="button"
 			class="era-chip"
 			aria-expanded={jumpOpen}
@@ -404,13 +416,13 @@
 			<span class="era-caret" aria-hidden="true">▾</span>
 		</button>
 		{#if jumpOpen}
-			<div class="jump-panel" role="menu" aria-label="年代を選択">
-				<button type="button" class="jump-latest" role="menuitem" onclick={() => jumpToDecade(null)}>
+			<div class="jump-panel" role="group" aria-label="年代を選択">
+				<button type="button" class="jump-latest" onclick={() => jumpToDecade(null)}>
 					最新へ
 				</button>
 				<div class="jump-grid">
 					{#each jumpDecades as d (d)}
-						<button type="button" role="menuitem" onclick={() => jumpToDecade(d)}>
+						<button type="button" onclick={() => jumpToDecade(d)}>
 							{d}<span class="jump-s">s</span>
 						</button>
 					{/each}
