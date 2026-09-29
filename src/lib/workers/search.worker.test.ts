@@ -47,6 +47,17 @@ describe('search worker', () => {
 		expect(calls).toHaveLength(1);
 	});
 
+	it('shares one index fetch between queries sent while it is still loading', async () => {
+		const { calls } = stubFetch({ '/data/search.json': docs });
+		const send = await loadWorker();
+		send({ seq: 1, query: '震災' });
+		send({ seq: 2, query: 'オリンピック' });
+		await settle(4);
+		expect(calls).toHaveLength(1);
+		const ready = posted.filter((m) => m.status === 'ready').map((m) => m.seq);
+		expect(ready.sort()).toEqual([1, 2]);
+	});
+
 	it('reports an error when the index cannot be fetched', async () => {
 		stubFetch({ '/data/search.json': 500 });
 		const send = await loadWorker();

@@ -87,6 +87,18 @@ describe('/c/[slug] loader', () => {
 		expect(() => load({ params: { slug: 'missing' } })).toThrow(expect.objectContaining({ status: 404 }));
 		expect(() => load({ params: { slug: '../etc' } })).toThrow(expect.objectContaining({ status: 404 }));
 	});
+
+	it('404s for a malformed slug even when the index lists it, without reading its path', async () => {
+		const bad = '../secret';
+		files.tree['static/data/collections.json'] = JSON.stringify({
+			collections: [makeCollection({ slug: bad, title: '不正' })],
+			byEvent: {},
+		});
+		files.tree[`static/data/collections/${bad}.json`] = JSON.stringify({ ...makeCollection({ slug: bad }), events: [] });
+		const mod = await import('./c/[slug]/+page.server.ts');
+		const load = mod.load as unknown as Loader;
+		expect(() => load({ params: { slug: bad } })).toThrow(expect.objectContaining({ status: 404 }));
+	});
 });
 
 describe('/c loader, sitemap and layout', () => {

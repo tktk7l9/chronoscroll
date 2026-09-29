@@ -46,7 +46,7 @@ describe('EventCard', () => {
 		expect(container.querySelector('use')).toHaveAttribute('href', '/art/sprite.svg#quake');
 	});
 
-	it('preloads the image on hover and on press without breaking selection', async () => {
+	it('preloads the image after a hover dwell, not on a brief pass, and at once on press', async () => {
 		const created: string[] = [];
 		const OrigImage = globalThis.Image;
 		globalThis.Image = class {
@@ -54,19 +54,44 @@ describe('EventCard', () => {
 				created.push(v);
 			}
 		} as unknown as typeof Image;
+		// The preloader is shared across cards and never fetches a URL twice, so use a fresh URL per step
+		const card = (name: string) => {
+			const onselect = vi.fn();
+			const ev = makeEvent({
+				id: name,
+				title: name,
+				image: { src: `https://upload.wikimedia.org/${name}.jpg`, width: 10, height: 10, credit: 'c' },
+			});
+			render(EventCard, { ...base, ev, onselect });
+			return { button: screen.getByRole('button', { name: new RegExp(name) }), url: ev.image!.src, onselect, ev };
+		};
 		try {
 			vi.useFakeTimers();
-			const ev = makeEvent({
-				image: { src: 'https://upload.wikimedia.org/x.jpg', width: 10, height: 10, credit: 'c' },
-			});
-			render(EventCard, { ...base, ev, onselect: vi.fn() });
-			const button = screen.getByRole('button');
-			await fireEvent.pointerEnter(button);
-			await fireEvent.pointerLeave(button);
-			await fireEvent.focus(button);
-			await fireEvent.pointerDown(button);
+
+			// A pointer that only passes over the card is cancelled before the dwell ends
+			const pass = card('pass');
+			await fireEvent.pointerEnter(pass.button);
+			await fireEvent.pointerLeave(pass.button);
 			vi.runAllTimers();
-			expect(created).toContain('https://upload.wikimedia.org/x.jpg');
+			expect(created).not.toContain(pass.url);
+
+			// Hover or keyboard focus that stays fetches after the dwell
+			const hover = card('hover');
+			await fireEvent.pointerEnter(hover.button);
+			expect(created).not.toContain(hover.url);
+			vi.runAllTimers();
+			expect(created).toContain(hover.url);
+			const focus = card('focus');
+			await fireEvent.focus(focus.button);
+			vi.runAllTimers();
+			expect(created).toContain(focus.url);
+
+			// Pressing fetches immediately and the click still opens the event
+			const press = card('press');
+			await fireEvent.pointerDown(press.button);
+			expect(created).toContain(press.url);
+			await fireEvent.click(press.button);
+			expect(press.onselect).toHaveBeenCalledWith(press.ev);
 		} finally {
 			vi.useRealTimers();
 			globalThis.Image = OrigImage;

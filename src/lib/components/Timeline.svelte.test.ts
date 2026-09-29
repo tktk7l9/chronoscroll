@@ -189,7 +189,8 @@ describe('Timeline', () => {
 		await user.click(within(panel).getByRole('button', { name: '1920s' }));
 		expect(screen.queryByRole('group', { name: '年代を選択' })).toBeNull();
 		expect(window.scrollY).toBeGreaterThan(0);
-		await waitFor(() => expect(chip).toHaveAccessibleName(/現在 192\d年/));
+		// The jump lands mid-decade, not on its first year
+		await waitFor(() => expect(chip).toHaveAccessibleName(/現在 192[3-7]年/));
 
 		await user.click(chip);
 		await user.click(screen.getByRole('button', { name: '最新へ' }));

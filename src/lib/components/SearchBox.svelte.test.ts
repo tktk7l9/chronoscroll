@@ -181,6 +181,10 @@ describe('SearchBox', () => {
 			expect(input).toHaveFocus();
 			// The shortcut key itself is not typed into the box
 			expect(input).toHaveValue('');
+
+			// Once inside an input, "/" is ordinary text (e.g. a date like 1945/8)
+			await user.keyboard('1945/8');
+			expect(input).toHaveValue('1945/8');
 		} finally {
 			other.remove();
 		}
