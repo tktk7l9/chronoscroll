@@ -47,10 +47,15 @@ It shows domestic and international news from 1829 to the present, with an impor
 - There is no svelte.config.js; the adapter etc. are consolidated in **the sveltekit() options in vite.config.ts**.
 - Transitions are WAAPI-based and compatible with the strict CSP (do not inject style tags).
 
-## Testing policy (lib 100%)
+## Testing policy (lib 100%, UI gated)
 - `src/lib/*.ts` (pure logic) and `pipeline/lib/**` (pure functions for parsing, scoring, etc.) are under a
   **100% coverage gate** (vitest.config.ts thresholds). It runs in CI.
-- UI components (`src/lib/components/`) and IO scripts (`pipeline/run/`) are excluded from the gate.
+- The UI layer (`src/lib/components/`, `src/lib/state/`, `src/lib/workers/`, `src/routes/`) has its own
+  gate (lines 98 / statements 97 / functions 97 / branches 83; reached level minus 2). Its tests run in the
+  `ui` Vitest project (jsdom + Testing Library): `*.svelte.test.ts` next to the component, plus
+  `src/lib/workers/*.test.ts` and `src/routes/**/*.test.ts`. Test behaviour through roles, visible text and
+  URL state, not internals. jsdom shims (dialog, matchMedia, scrollTo) live in `src/test/setup.ts`;
+  `$app/*` is stubbed in `src/test/stubs/`. IO scripts (`pipeline/run/`) stay outside the gate.
 - Isolate code that touches the network in `pipeline/run/`, and test the logic with fixtures.
 
 ## Security / publishing
