@@ -128,7 +128,7 @@ describe('SearchBox', () => {
 		const { user, input } = setup();
 		await user.type(input, '条約');
 		await answer({ status: 'error', message: 'boom' });
-		expect(await screen.findByRole('status')).toHaveTextContent('ページを再読み込みしてから');
+		expect(await screen.findByRole('status')).toHaveTextContent('もう一度入力すると再試行します');
 		expect(screen.queryByRole('listbox')).toBeNull();
 	});
 

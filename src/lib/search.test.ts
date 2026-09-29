@@ -70,8 +70,8 @@ describe('searchStatusMessage', () => {
 		expect(searchStatusMessage('loading', '東京', 0)).toBe('索引を準備中…');
 	});
 
-	it('suggests reloading when the index failed to load', () => {
-		expect(searchStatusMessage('error', '東京', 0)).toContain('再読み込み');
+	it('suggests typing again to retry when the index failed to load', () => {
+		expect(searchStatusMessage('error', '東京', 0)).toContain('もう一度入力すると再試行します');
 	});
 
 	it('echoes the query and suggests other words when nothing matched', () => {
