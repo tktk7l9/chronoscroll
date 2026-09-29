@@ -142,4 +142,26 @@ describe('search worker', () => {
 		expect(calls).toHaveLength(2);
 		expect(posted[3]).toMatchObject({ seq: 2, status: 'ready' });
 	});
+
+	it('caps the retry backoff at 8 seconds', async () => {
+		vi.useFakeTimers({ toFake: ['Date', 'setTimeout'] });
+		const { calls } = stubFetch({ '/data/search.json': 500 });
+		const send = await loadWorker();
+		// Six failures, each retried after the previous backoff has fully elapsed
+		for (let i = 1; i <= 6; i++) {
+			if (i > 1) await vi.advanceTimersByTimeAsync(60_000);
+			send({ seq: i, query: 'a' });
+			await settle(i * 2);
+		}
+		expect(calls).toHaveLength(6);
+		// Uncapped, the wait after the sixth failure would be 16s; capped it is 8s.
+		// (vi.waitFor also advances fake timers a little, hence the loose bounds)
+		send({ seq: 7, query: 'a' });
+		await settle(13);
+		await vi.advanceTimersByTimeAsync(7_000);
+		expect(calls).toHaveLength(6);
+		await vi.advanceTimersByTimeAsync(2_000);
+		await settle(14);
+		expect(calls).toHaveLength(7);
+	});
 });
