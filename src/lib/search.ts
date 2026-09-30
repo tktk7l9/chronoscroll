@@ -74,7 +74,7 @@ export function searchStatusMessage(
 ): string | null {
 	if (status === 'loading') return '索引を準備中…';
 	if (status === 'error') {
-		return '検索を準備できませんでした。ページを再読み込みしてからお試しください';
+		return '検索を準備できませんでした。通信状況を確かめて、もう一度入力すると再試行します';
 	}
 	if (status !== 'ready') return null;
 	if (hitCount === 0) {

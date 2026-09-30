@@ -1,6 +1,7 @@
 /**
  * Full-text search worker (IO layer, excluded from the coverage gate).
  * Fetches search.json on the first query and builds the MiniSearch index.
+ * A failed fetch is retried on a later query.
  */
 import type MiniSearch from 'minisearch';
 import { buildSearchIndex, runQuery, type SearchDoc, type SearchHit } from '../search.ts';
@@ -19,14 +20,34 @@ let mini: MiniSearch | null = null;
 let docsById: Map<string, SearchDoc> | null = null;
 let loading: Promise<void> | null = null;
 
+/** Retry backoff after a failed index load: 0.5s, 1s, 2s, ... capped at 8s */
+const RETRY_BASE_MS = 500;
+const RETRY_MAX_MS = 8000;
+let failures = 0;
+let retryAt = 0;
+
+async function loadIndex(): Promise<void> {
+	const wait = retryAt - Date.now();
+	if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
+	const res = await fetch('/data/search.json');
+	if (!res.ok) throw new Error(`search.json: HTTP ${res.status}`);
+	const docs = (await res.json()) as SearchDoc[];
+	docsById = new Map(docs.map((d) => [d[0], d]));
+	mini = buildSearchIndex(docs);
+	failures = 0;
+}
+
+/**
+ * Concurrent queries share one in-flight load. A failed load is forgotten so the
+ * next query retries (after a short backoff) instead of failing forever.
+ */
 async function ensureIndex(): Promise<void> {
-	loading ??= (async () => {
-		const res = await fetch('/data/search.json');
-		if (!res.ok) throw new Error(`search.json: HTTP ${res.status}`);
-		const docs = (await res.json()) as SearchDoc[];
-		docsById = new Map(docs.map((d) => [d[0], d]));
-		mini = buildSearchIndex(docs);
-	})();
+	loading ??= loadIndex().catch((err: unknown) => {
+		loading = null;
+		failures += 1;
+		retryAt = Date.now() + Math.min(RETRY_BASE_MS * 2 ** (failures - 1), RETRY_MAX_MS);
+		throw err;
+	});
 	await loading;
 }
 
