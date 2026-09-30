@@ -130,11 +130,15 @@
 	<link rel="preload" href="/data/overview.json" as="fetch" />
 </svelte:head>
 
+<!-- Skip past the header controls straight to the timeline (SHIG 20, 59) -->
+<a class="skip-link" href="#timeline">年表へ移動</a>
+
 <header class="site-header">
 	<div class="row">
 		<a class="brand" href="/">
 			<BrandMark size={21} />
-			<span class="brand-name">chronoscroll</span>
+			<!-- The site name is the page's only level-one heading (WCAG 1.3.1, SHIG 59) -->
+			<h1 class="brand-name">chronoscroll</h1>
 			<span class="brand-sub">歴史ニュース年表</span>
 		</a>
 		<div class="tools">
@@ -175,7 +179,7 @@
 	</p>
 </header>
 
-<main>
+<main id="timeline" tabindex="-1">
 	{#if timelineData.loadError}
 		<!-- Say what to do next instead of echoing the raw exception (SHIG 11, 55) -->
 		<div class="error" role="alert">
@@ -288,7 +292,8 @@
 		flex: none;
 		font-size: 0.65rem;
 		font-weight: 700;
-		color: var(--accent);
+		/* The plain accent reads 4.0:1 on the tinted banner; darken it a step to clear 4.5:1 (WCAG 1.4.3) */
+		color: color-mix(in srgb, var(--accent) 85%, var(--ink));
 		letter-spacing: 0.04em;
 	}
 	.cb-title {
@@ -334,6 +339,7 @@
 		flex: none;
 	}
 	.brand-name {
+		margin: 0;
 		font-family: var(--font-serif);
 		font-weight: 700;
 		font-size: 1.1rem;
@@ -396,6 +402,27 @@
 
 	main {
 		padding-top: 118px;
+	}
+	main:focus {
+		outline: none;
+	}
+
+	/* Hidden until focused, then shown above the fixed header */
+	.skip-link {
+		position: fixed;
+		top: 8px;
+		left: 8px;
+		z-index: 20;
+		padding: 8px 14px;
+		border-radius: 8px;
+		background: var(--bg-elevated);
+		color: var(--ink);
+		border: 1px solid var(--line-strong);
+		box-shadow: var(--shadow);
+		transform: translateY(-200%);
+	}
+	.skip-link:focus-visible {
+		transform: none;
 	}
 
 	.error {

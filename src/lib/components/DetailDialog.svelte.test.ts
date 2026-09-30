@@ -34,7 +34,10 @@ describe('DetailDialog', () => {
 		expect(dialog.open).toBe(true);
 		// Background scroll is locked while open
 		expect(document.documentElement).toHaveClass('modal-open');
-		expect(screen.getByRole('heading', { level: 2, name: '東京オリンピック開幕' })).toBeInTheDocument();
+		const title = screen.getByRole('heading', { level: 2, name: '東京オリンピック開幕' });
+		// The dialog is named by its title, and focus starts there so it is announced first
+		expect(dialog).toHaveAttribute('aria-labelledby', title.id);
+		expect(title).toHaveFocus();
 		expect(screen.getByText('1964年10月10日')).toBeInTheDocument();
 		expect(screen.getByText(/昭和39年/)).toBeInTheDocument();
 		expect(screen.getByText('スポーツ')).toBeInTheDocument();

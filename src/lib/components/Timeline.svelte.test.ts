@@ -188,6 +188,8 @@ describe('Timeline', () => {
 
 		await user.click(within(panel).getByRole('button', { name: '1920s' }));
 		expect(screen.queryByRole('group', { name: '年代を選択' })).toBeNull();
+		// The pressed button unmounts with the panel, so focus returns to the chip (SHIG 60)
+		expect(chip).toHaveFocus();
 		expect(window.scrollY).toBeGreaterThan(0);
 		// The jump lands mid-decade, not on its first year
 		await waitFor(() => expect(chip).toHaveAccessibleName(/現在 192[3-7]年/));

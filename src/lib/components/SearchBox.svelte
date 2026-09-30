@@ -112,8 +112,10 @@
 	/>
 	{#if expanded}
 		<div class="results">
-			{#if showHits}
-				<div id={listId} role="listbox" aria-label="検索結果">
+			<!-- The listbox exists whenever the popup is expanded (even while empty), so aria-controls
+			     always points at a real element. axe: aria-required-attr / aria-valid-attr-value -->
+			<div id={listId} role="listbox" aria-label="検索結果">
+				{#if showHits}
 					{#each hits as hit, i (hit.id)}
 						<button
 							type="button"
@@ -132,8 +134,8 @@
 							<span class="text">{hit.text}</span>
 						</button>
 					{/each}
-				</div>
-			{/if}
+				{/if}
+			</div>
 			{#if message}
 				<p class="hint" role="status">{message}</p>
 			{/if}

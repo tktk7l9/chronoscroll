@@ -29,6 +29,8 @@
 		if (ev && !dialog.open) {
 			closing = false;
 			dialog.showModal();
+			// Start on the title so a screen reader announces the event, not the first link
+			dialog.querySelector<HTMLElement>('h2')?.focus();
 		} else if (!ev && dialog.open) {
 			dialog.close();
 		}
@@ -66,6 +68,7 @@
 <dialog
 	bind:this={dialog}
 	class:closing
+	aria-labelledby="detail-title"
 	onclose={() => onclose()}
 	oncancel={(e) => {
 		e.preventDefault();
@@ -77,12 +80,16 @@
 >
 	{#if ev}
 		<article data-cat={ev.category}>
+			<!-- First in DOM so the tab order matches its top-right position (SHIG 60) -->
+			<button type="button" class="close" onclick={requestClose} aria-label="閉じる">
+				×
+			</button>
 			<header>
 				<p class="when">
 					<time datetime={ev.date}>{dateLabel}</time>
 					{#if wareki}<span class="wareki">{wareki}</span>{/if}
 				</p>
-				<h2>{ev.title}</h2>
+				<h2 id="detail-title" tabindex="-1">{ev.title}</h2>
 				<p class="chips">
 					<span class="chip cat">{CATEGORY_LABELS[ev.category]}</span>
 					<span class="chip">{REGION_LABELS[ev.region]}</span>
@@ -157,10 +164,6 @@
 
 			<BookLinks {books} headingLevel="h3" />
 			<SponsorSlot />
-
-			<button type="button" class="close" onclick={requestClose} aria-label="閉じる">
-				×
-			</button>
 		</article>
 	{/if}
 </dialog>
@@ -273,6 +276,9 @@
 		font-family: var(--font-serif);
 		font-size: 1.25rem;
 		line-height: 1.5;
+	}
+	h2:focus {
+		outline: none;
 	}
 
 	.chips {

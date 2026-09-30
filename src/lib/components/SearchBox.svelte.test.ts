@@ -76,7 +76,9 @@ describe('SearchBox', () => {
 
 		await answer({ status: 'loading' });
 		expect(await screen.findByRole('status')).toHaveTextContent('索引を準備中…');
-		expect(screen.queryByRole('listbox')).toBeNull();
+		// The listbox stays mounted (empty) while the popup is open so aria-controls resolves
+		expect(screen.getByRole('listbox', { name: '検索結果' })).toBeEmptyDOMElement();
+		expect(input).toHaveAttribute('aria-controls', 'search-results');
 
 		await answer({ status: 'ready', hits: [hit(1), hit(2)] });
 		const list = await screen.findByRole('listbox', { name: '検索結果' });
@@ -129,7 +131,7 @@ describe('SearchBox', () => {
 		await user.type(input, '条約');
 		await answer({ status: 'error', message: 'boom' });
 		expect(await screen.findByRole('status')).toHaveTextContent('もう一度入力すると再試行します');
-		expect(screen.queryByRole('listbox')).toBeNull();
+		expect(screen.queryAllByRole('option')).toHaveLength(0);
 	});
 
 	it('ignores stale responses from an earlier query', async () => {
