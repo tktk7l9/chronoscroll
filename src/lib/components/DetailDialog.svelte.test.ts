@@ -34,7 +34,10 @@ describe('DetailDialog', () => {
 		expect(dialog.open).toBe(true);
 		// Background scroll is locked while open
 		expect(document.documentElement).toHaveClass('modal-open');
-		expect(screen.getByRole('heading', { level: 2, name: '東京オリンピック開幕' })).toBeInTheDocument();
+		const title = screen.getByRole('heading', { level: 2, name: '東京オリンピック開幕' });
+		// The dialog is named by its title, and focus starts there so it is announced first
+		expect(dialog).toHaveAttribute('aria-labelledby', title.id);
+		expect(title).toHaveFocus();
 		expect(screen.getByText('1964年10月10日')).toBeInTheDocument();
 		expect(screen.getByText(/昭和39年/)).toBeInTheDocument();
 		expect(screen.getByText('スポーツ')).toBeInTheDocument();
@@ -65,7 +68,7 @@ describe('DetailDialog', () => {
 		const ev = makeEvent({
 			related: [{ id: 'rel-1', date: '1905-09-05', title: 'ポーツマス条約' }],
 		});
-		const { user, onselectrelated } = setup(ev, {
+		const { user, onselectrelated, rerender } = setup(ev, {
 			collections: [makeCollection({ slug: 'war-and-peace', title: '戦争と講和' })],
 			books: [{ title: '関連本', store: 'amazon', url: 'https://example.com/book' }],
 		});
@@ -74,6 +77,11 @@ describe('DetailDialog', () => {
 		await user.click(screen.getByRole('button', { name: /ポーツマス条約/ }));
 		expect(onselectrelated).toHaveBeenCalledWith('rel-1');
 		expect(screen.getByText('1905.09')).toBeInTheDocument();
+
+		// Switching to the related event swaps the body under the pressed link; focus moves to
+		// the new title instead of falling out of the still-open modal (SHIG 60)
+		await rerender({ ev: makeEvent({ id: 'rel-1', date: '1905-09-05', title: 'ポーツマス条約' }) });
+		expect(screen.getByRole('heading', { level: 2, name: 'ポーツマス条約' })).toHaveFocus();
 	});
 
 	it('closes after the exit animation when the close button is pressed', async () => {

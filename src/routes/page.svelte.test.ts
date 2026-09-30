@@ -91,6 +91,10 @@ describe('timeline page', () => {
 	it('shows the header, coverage, filters and the newest events', async () => {
 		open('/');
 		expect(screen.getByRole('link', { name: /chronoscroll/ })).toHaveAttribute('href', '/');
+		// The site name is the page's h1; the skip link lands on the timeline (SHIG 20, 59)
+		expect(screen.getByRole('heading', { level: 1, name: 'chronoscroll' })).toBeInTheDocument();
+		expect(screen.getByRole('link', { name: '年表へ移動' })).toHaveAttribute('href', '#timeline');
+		expect(screen.getByRole('main')).toHaveAttribute('id', 'timeline');
 		expect(screen.getByRole('link', { name: '特集' })).toHaveAttribute('href', '/c');
 		expect(screen.getByRole('combobox', { name: 'ニュースを検索' })).toBeInTheDocument();
 		expect(screen.getByRole('group', { name: '表示フィルタ' })).toBeInTheDocument();

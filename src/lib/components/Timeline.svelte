@@ -282,6 +282,8 @@
 	});
 	function jumpToDecade(decade: number | null): void {
 		jumpOpen = false;
+		// The panel unmounts with the focused button in it, so put focus back on the chip (SHIG 60)
+		eraChip?.focus({ preventScroll: true });
 		if (decade === null) {
 			window.scrollTo({ top: 0 });
 			return;
@@ -355,42 +357,9 @@
 
 <svelte:window bind:scrollY bind:innerHeight={vh} bind:innerWidth={vw} />
 
-<!-- style:height is not added during SSR (inline style attributes violate the strict CSP).
-     Before ready, a CSS min-height placeholder keeps the footer off screen to prevent CLS -->
-<div
-	class="timeline"
-	class:single={columns === 1}
-	class:is-ready={ready}
-	style:height={ready ? `${height}px` : undefined}
-	ondblclick={onDblClick}
-	role="presentation"
->
-	<div class="spine" aria-hidden="true"></div>
-
-	{#each ticks as t (t.year)}
-		<div class="tick" style:top="{t.y}px" aria-hidden="true">
-			<span class="tick-label">
-				<span class="tick-year">{t.year}</span>
-				{#if t.wareki}<span class="tick-wareki">{t.wareki}</span>{/if}
-			</span>
-		</div>
-	{/each}
-
-	{#each placed as item (item.id)}
-		<div class="dot" style:top="{item.dotY}px" data-cat={item.ev.category} aria-hidden="true"></div>
-		<div class="connector {item.side}" style:top="{item.dotY}px" aria-hidden="true"></div>
-		<EventCard
-			ev={item.ev}
-			top={item.top}
-			side={item.side}
-			single={columns === 1}
-			height={item.ev.svg ? CARD_H_BIG : CARD_H_NORMAL}
-			highlighted={highlightId === item.ev.id}
-			{onselect}
-		/>
-	{/each}
-</div>
-
+<!-- Navigation widgets come before the cards in DOM order so a keyboard user reaches
+     zoom and era jump without tabbing through every visible card. They are position:fixed,
+     so the visual layout is unchanged (SHIG 59) -->
 {#if ready && data.meta}
 	<Minimap
 		meta={data.meta}
@@ -436,6 +405,42 @@
 		{/if}
 	</div>
 {/if}
+
+<!-- style:height is not added during SSR (inline style attributes violate the strict CSP).
+     Before ready, a CSS min-height placeholder keeps the footer off screen to prevent CLS -->
+<div
+	class="timeline"
+	class:single={columns === 1}
+	class:is-ready={ready}
+	style:height={ready ? `${height}px` : undefined}
+	ondblclick={onDblClick}
+	role="presentation"
+>
+	<div class="spine" aria-hidden="true"></div>
+
+	{#each ticks as t (t.year)}
+		<div class="tick" style:top="{t.y}px" aria-hidden="true">
+			<span class="tick-label">
+				<span class="tick-year">{t.year}</span>
+				{#if t.wareki}<span class="tick-wareki">{t.wareki}</span>{/if}
+			</span>
+		</div>
+	{/each}
+
+	{#each placed as item (item.id)}
+		<div class="dot" style:top="{item.dotY}px" data-cat={item.ev.category} aria-hidden="true"></div>
+		<div class="connector {item.side}" style:top="{item.dotY}px" aria-hidden="true"></div>
+		<EventCard
+			ev={item.ev}
+			top={item.top}
+			side={item.side}
+			single={columns === 1}
+			height={item.ev.svg ? CARD_H_BIG : CARD_H_NORMAL}
+			highlighted={highlightId === item.ev.id}
+			{onselect}
+		/>
+	{/each}
+</div>
 
 <style>
 	.timeline {
@@ -604,7 +609,8 @@
 		font-family: inherit;
 		font-size: 0.8rem;
 		font-weight: 600;
-		color: var(--accent);
+		/* Same tint as the collection banner: the plain accent is 4.3:1 on it in light mode (WCAG 1.4.3) */
+		color: color-mix(in srgb, var(--accent) 85%, var(--ink));
 		background: color-mix(in srgb, var(--accent) 10%, transparent);
 		border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
 		border-radius: 8px;

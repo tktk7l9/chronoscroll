@@ -189,6 +189,12 @@
 		cursor: pointer;
 		touch-action: none;
 	}
+	/* Widen the pointer hit area to 28px without changing the look (SHIG 78, WCAG 2.5.8) */
+	.track::before {
+		content: '';
+		position: absolute;
+		inset: 0 -8px;
+	}
 	.fill {
 		position: absolute;
 		left: 0;

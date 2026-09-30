@@ -20,7 +20,7 @@
 	--cat-science: #2277a8;
 	--cat-sports: #a4570f;
 	--cat-disaster: #b3362b;
-	--cat-society: #6b7280;
+	--cat-society: #646b78; /* 4.9:1 on --bg (the #6b7280 gray was 4.4:1 as chip text) */
 	--cat-war: #7f1d1d;
 
 	--radius: 10px;
