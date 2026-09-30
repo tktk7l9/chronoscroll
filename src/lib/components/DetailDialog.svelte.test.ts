@@ -84,6 +84,32 @@ describe('DetailDialog', () => {
 		expect(screen.getByRole('heading', { level: 2, name: 'ポーツマス条約' })).toHaveFocus();
 	});
 
+	it('is named by its heading and starts reading from the title, not the image credit (SHIG 94, 41)', async () => {
+		const ev = makeEvent({
+			title: '東京オリンピック開幕',
+			image: { src: 'https://upload.wikimedia.org/a.jpg', width: 400, height: 300, credit: 'https://commons.wikimedia.org/wiki/File:a.jpg' },
+		});
+		const { dialog, rerender } = setup(ev);
+		expect(dialog).toHaveAccessibleName('東京オリンピック開幕');
+		expect(screen.getByRole('heading', { level: 2, name: '東京オリンピック開幕' })).toHaveFocus();
+		// Switching to another event (related link) reads from the top again
+		dialog.scrollTop = 120;
+		screen.getByRole('link', { name: '画像: Wikimedia Commons' }).focus();
+		await rerender({ ev: makeEvent({ id: 'b', title: '別のできごと' }) });
+		expect(dialog).toHaveAccessibleName('別のできごと');
+		expect(screen.getByRole('heading', { level: 2, name: '別のできごと' })).toHaveFocus();
+		expect(dialog.scrollTop).toBe(0);
+	});
+
+	it('offers a way back after a related event replaced the first one (SHIG 60, 81)', async () => {
+		const onback = vi.fn();
+		const { user, rerender } = setup(makeEvent(), { onback, canBack: false });
+		expect(screen.queryByRole('button', { name: /前のできごとに戻る/ })).toBeNull();
+		await rerender({ ev: makeEvent({ id: 'b' }), canBack: true });
+		await user.click(screen.getByRole('button', { name: /前のできごとに戻る/ }));
+		expect(onback).toHaveBeenCalledTimes(1);
+	});
+
 	it('closes after the exit animation when the close button is pressed', async () => {
 		const { dialog, user, onclose } = setup(makeEvent());
 		await user.click(screen.getByRole('button', { name: '閉じる' }));

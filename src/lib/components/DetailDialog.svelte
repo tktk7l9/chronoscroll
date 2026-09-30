@@ -11,14 +11,19 @@
 		ev = null,
 		books = [],
 		collections = [],
+		canBack = false,
 		onclose,
 		onselectrelated,
+		onback,
 	}: {
 		ev: NewsEvent | null;
 		books?: BookRef[];
 		collections?: CollectionMeta[];
+		/** A related link replaced an earlier event, so a way back exists (SHIG 60) */
+		canBack?: boolean;
 		onclose: () => void;
 		onselectrelated: (id: string) => void;
+		onback?: () => void;
 	} = $props();
 
 	let dialog = $state<HTMLDialogElement>();
@@ -31,9 +36,11 @@
 				closing = false;
 				dialog.showModal();
 			}
-			// Start on the title so a screen reader announces the event, not the first link.
-			// Also on every switch to a related event: the pressed link unmounts with the old
-			// body, which would otherwise drop focus to <body> inside the open modal (SHIG 60)
+			// Start on the title so a screen reader announces the event, not the first link
+			// (showModal() would focus the image credit). Also on every switch to a related event:
+			// the pressed link unmounts with the old body, which would otherwise drop focus to
+			// <body> inside the open modal, and the sheet is read from the top again (SHIG 60, 94, 41)
+			dialog.scrollTop = 0;
 			dialog.querySelector<HTMLElement>('h2')?.focus();
 		} else if (dialog.open) {
 			dialog.close();
@@ -89,6 +96,13 @@
 				×
 			</button>
 			<header>
+				{#if canBack}
+					<p class="back">
+						<button type="button" class="back-link" onclick={() => onback?.()}>
+							← 前のできごとに戻る
+						</button>
+					</p>
+				{/if}
 				<p class="when">
 					<time datetime={ev.date}>{dateLabel}</time>
 					{#if wareki}<span class="wareki">{wareki}</span>{/if}
@@ -253,6 +267,26 @@
 		position: relative;
 		padding: 28px 34px 24px;
 		--cat-color: var(--cat-society);
+	}
+
+	.back {
+		margin: -10px 0 10px;
+	}
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		/* 7mm touch target (SHIG 78) */
+		min-height: 32px;
+		padding: 0 6px 0 0;
+		border: none;
+		background: transparent;
+		color: var(--accent);
+		font-family: inherit;
+		font-size: 0.8rem;
+		cursor: pointer;
+	}
+	.back-link:hover {
+		text-decoration: underline;
 	}
 	article[data-cat='politics'] { --cat-color: var(--cat-politics); }
 	article[data-cat='economy'] { --cat-color: var(--cat-economy); }

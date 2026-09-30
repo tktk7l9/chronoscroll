@@ -114,8 +114,14 @@ describe('timeline page', () => {
 		await waitFor(() => expect(lastUrl().get('e')).toBe('1995-01-17-kobe'));
 
 		const dialog = document.querySelector('dialog')!;
+		expect(within(dialog).queryByRole('button', { name: /前のできごとに戻る/ })).toBeNull();
 		await user.click(within(dialog).getByRole('button', { name: /長野五輪開幕/ }));
 		expect(await screen.findByRole('heading', { level: 2, name: '長野五輪開幕' })).toBeInTheDocument();
+
+		// The way back to the event the reader came from (SHIG 60)
+		await user.click(within(dialog).getByRole('button', { name: /前のできごとに戻る/ }));
+		expect(await screen.findByRole('heading', { level: 2, name: '阪神・淡路大震災' })).toBeInTheDocument();
+		expect(within(dialog).queryByRole('button', { name: /前のできごとに戻る/ })).toBeNull();
 
 		await user.click(screen.getByRole('button', { name: '閉じる' }));
 		await waitFor(() => expect(screen.queryByRole('heading', { level: 2 })).toBeNull());
@@ -156,6 +162,8 @@ describe('timeline page', () => {
 		const user = open('/?k=theme');
 		const banner = await screen.findByRole('link', { name: 'テスト特集' });
 		expect(banner).toHaveAttribute('href', '/c/theme');
+		// How many events the narrowed view holds (SHIG 28, 25)
+		expect(banner.closest('.collection-banner')).toHaveTextContent('全3件');
 		expect(await screen.findByRole('button', { name: /阪神・淡路大震災/ })).toBeInTheDocument();
 		await waitFor(() => expect(screen.queryByRole('button', { name: /長野五輪開幕/ })).toBeNull());
 
