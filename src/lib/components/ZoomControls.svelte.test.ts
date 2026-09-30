@@ -15,6 +15,16 @@ describe('ZoomControls', () => {
 		expect(onzoomto).toHaveBeenLastCalledWith(1);
 	});
 
+	it('names the keyboard shortcuts on the buttons and keeps the level readable without the slider (SHIG 22, 94)', () => {
+		const { container } = render(ZoomControls, { pxPerDay: 3.1, onzoomto: vi.fn() });
+		expect(screen.getByRole('button', { name: 'ズームイン' })).toHaveAttribute('aria-keyshortcuts', '+');
+		expect(screen.getByRole('button', { name: 'ズームイン' })).toHaveAttribute('title', 'ズームイン（+ キー）');
+		expect(screen.getByRole('button', { name: 'ズームアウト' })).toHaveAttribute('aria-keyshortcuts', '-');
+		const readout = container.querySelector('.level-readout')!;
+		expect(readout).toHaveTextContent('年');
+		expect(readout).not.toHaveAttribute('aria-hidden');
+	});
+
 	it('disables the button at each end of the zoom range', () => {
 		const { unmount } = render(ZoomControls, { pxPerDay: MAX_PX_PER_DAY, onzoomto: vi.fn() });
 		expect(screen.getByRole('button', { name: 'ズームイン' })).toBeDisabled();

@@ -53,12 +53,15 @@
 		onclick={() => onzoomto(pxPerDay * 2)}
 		disabled={atMax}
 		aria-label="ズームイン"
+		aria-keyshortcuts="+"
+		title="ズームイン（+ キー）"
 	>
 		＋
 	</button>
 
-	<!-- Narrow screens: the slider is hidden (pinch zooms), so show the level as text -->
-	<span class="level-readout" aria-hidden="true">{level}</span>
+	<!-- Narrow screens: the slider is hidden (pinch zooms), so show the level as text.
+	     It is display:none on wide screens, so it never doubles the slider for screen readers (SHIG 94) -->
+	<span class="level-readout">{level}</span>
 
 	<div class="slider">
 		<div class="labels" aria-hidden="true">
@@ -106,6 +109,8 @@
 		onclick={() => onzoomto(pxPerDay / 2)}
 		disabled={atMin}
 		aria-label="ズームアウト"
+		aria-keyshortcuts="-"
+		title="ズームアウト（- キー）"
 	>
 		−
 	</button>
