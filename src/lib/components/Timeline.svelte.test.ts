@@ -249,6 +249,20 @@ describe('Timeline', () => {
 		expect(end).toHaveTextContent('1900年1月1日');
 	});
 
+	it('keeps the end label below the oldest card instead of behind it', async () => {
+		// The oldest event sits exactly on the first covered day, so its card spans the same y
+		const oldest = makeEvent({ id: 'e-1900', date: '1900-01-01', title: '最初のできごと', importance: 100 });
+		const { container } = await setup({ initialCenter: '1900-01-01', initialPxPerDay: 2 }, [...recent, oldest]);
+		const card = await waitFor(() => {
+			const el = container.querySelector<HTMLElement>('.card[data-id="e-1900"]');
+			expect(el).not.toBeNull();
+			return el!;
+		});
+		const end = container.querySelector<HTMLElement>('.timeline-end')!;
+		const cardBottom = parseFloat(card.style.top) + parseFloat(card.style.height);
+		expect(parseFloat(end.style.top)).toBeGreaterThanOrEqual(cardBottom);
+	});
+
 	it('does not steal focus when Escape comes from another widget', async () => {
 		const { user } = await setup();
 		const chip = screen.getByRole('button', { name: /年代へジャンプ/ });

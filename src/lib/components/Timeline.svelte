@@ -120,7 +120,11 @@
 			y: dayToY(scale, p.day),
 			height: p.ev.svg ? CARD_H_BIG : CARD_H_NORMAL,
 		}));
-		return layoutCards(items, columns).map((c, i) => ({ ...c, ev: capped[i].ev }));
+		return layoutCards(items, columns).map((c, i) => ({
+			...c,
+			ev: capped[i].ev,
+			height: items[i].height,
+		}));
 	});
 
 	function clampDay(day: number): number {
@@ -156,7 +160,8 @@
 		let month = 1;
 		for (;;) {
 			const day = dayOf(`${year}-${String(month).padStart(2, '0')}-01`);
-			if (day > newestDay) break;
+			// Negated so a NaN bound ends the loop instead of spinning forever
+			if (!(day <= newestDay)) break;
 			if (month !== 1) out.push({ key: `${year}-${month}`, month, y: dayToY(scale, day) });
 			month += step;
 			if (month > 12) {
@@ -165,6 +170,14 @@
 			}
 		}
 		return out;
+	});
+
+	// The "end of the data" label goes under the oldest card, never behind it: on one column the
+	// cards cover the spine side, and the oldest event sits exactly at minDay (SHIG 52, 59)
+	const endLabelY = $derived.by(() => {
+		let y = dayToY(scale, minDay) + 28;
+		for (const c of placed) y = Math.max(y, c.top + c.height + 16);
+		return y;
 	});
 
 	const centerLabel = $derived.by(() => {
@@ -466,7 +479,7 @@
 
 	{#if ready && data.meta}
 		<!-- The bottom of the spine is the start of the covered data, not a loading gap (SHIG 52, 59) -->
-		<p class="timeline-end" style:top="{dayToY(scale, minDay) + 28}px">
+		<p class="timeline-end" style:top="{endLabelY}px">
 			収録はここまで（{formatJpDate(data.meta.minDate)}）
 		</p>
 	{/if}
@@ -479,7 +492,7 @@
 			top={item.top}
 			side={item.side}
 			single={columns === 1}
-			height={item.ev.svg ? CARD_H_BIG : CARD_H_NORMAL}
+			height={item.height}
 			highlighted={highlightId === item.ev.id}
 			{onselect}
 		/>

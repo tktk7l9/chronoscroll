@@ -68,8 +68,8 @@ npm run data:build # データ再生成（Wikipedia取得・要ネットワー�
 - Lighthouse: **mobile 98/100/100/100・desktop 100/100/100/100**（本番URL実測 2026-07-30・mobile perfはmedian-of-3、LCP 2.3s・CLS 0・TBT 0ms）
   - 特集ページ（JSなしの静的HTML）は mobile **`/c` 99・`/c/anime` 100**（LCP 0.9〜1.1s・CLS 0）
 - Mozilla Observatory: **A+（score 120・10/10）**（2026-07-30再スキャン）
-- テスト: 486件 / `src/lib`・`pipeline/lib`・`worker`・`scripts/lib` 純関数層 カバレッジ100%・UI層（コンポーネント・ルート）行100%（CIゲート）
-- 実ブラウザスモーク: 62シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
+- テスト: 488件 / `src/lib`・`pipeline/lib`・`worker`・`scripts/lib` 純関数層 カバレッジ100%・UI層（コンポーネント・ルート）行100%（CIゲート）
+- 実ブラウザスモーク: 63シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
 - npm audit: 0件
 
 ## デプロイ（Cloudflare Workers）
