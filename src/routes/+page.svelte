@@ -98,8 +98,14 @@
 	function onselect(ev: NewsEvent): void {
 		selectedId = ev.id;
 	}
-	function onselectrelated(id: string): void {
-		if (selectedId !== null) detailHistory = [...detailHistory, selectedId];
+	async function onselectrelated(id: string): Promise<void> {
+		// Related events usually sit in another decade, i.e. in a chunk that is not loaded yet.
+		// Selecting the id first would render `selected` null, close the dialog and drop the
+		// selection before the chunk arrives, so load it while the current event stays open
+		const from = selectedId;
+		const target = await timelineData.loadById(id, id.slice(0, 10));
+		if (target === undefined || selectedId !== from) return;
+		if (from !== null) detailHistory = [...detailHistory, from];
 		selectedId = id;
 	}
 	function onback(): void {

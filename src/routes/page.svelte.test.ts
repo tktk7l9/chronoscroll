@@ -128,6 +128,23 @@ describe('timeline page', () => {
 		await waitFor(() => expect(lastUrl().has('e')).toBe(false));
 	});
 
+	it('follows a related link into a chunk that is not loaded yet and keeps the way back (SHIG 60)', async () => {
+		// Most related events live in another decade, i.e. in a chunk the timeline has not fetched
+		const withOldLink = makeEvent({
+			...kobe,
+			related: [{ id: '1920-03-03-old', date: '1920-03-03', title: '古いできごと' }],
+		});
+		const user = open('/', { '/data/overview.json': [nagano, withOldLink] });
+		await user.click(await screen.findByRole('button', { name: /阪神・淡路大震災/ }));
+		const dialog = document.querySelector('dialog')!;
+		await user.click(await within(dialog).findByRole('button', { name: /古いできごと/ }));
+		expect(await screen.findByRole('heading', { level: 2, name: '古いできごと' }, { timeout: 3000 })).toBeInTheDocument();
+		expect(dialog.open).toBe(true);
+		await waitFor(() => expect(lastUrl().get('e')).toBe('1920-03-03-old'));
+		await user.click(within(dialog).getByRole('button', { name: /前のできごとに戻る/ }));
+		expect(await screen.findByRole('heading', { level: 2, name: '阪神・淡路大震災' })).toBeInTheDocument();
+	});
+
 	it('restores a shared link to an event that is not loaded yet', async () => {
 		open('/?e=1920-03-03-old&t=1920-03-03&z=8');
 		expect(await screen.findByRole('heading', { level: 2, name: '古いできごと' }, { timeout: 3000 })).toBeInTheDocument();
