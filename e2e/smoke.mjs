@@ -285,6 +285,29 @@ assert('mobile: minimap hidden', !singles.minimapVisible);
 assert('mobile: the coverage line is shown', singles.coverageVisible);
 assert('mobile: the coverage line fits on one line', singles.coverageFits);
 
+// 7a. Mobile: every year label on screen is painted above the cards (it used to hide behind them)
+// Bring a year tick into the middle of the screen first (the current view may sit between two)
+await page.evaluate(() => {
+	const first = document.querySelector('.tick.year');
+	if (first) window.scrollTo({ top: parseFloat(first.style.top) - innerHeight / 2, behavior: 'instant' });
+});
+await page.waitForTimeout(600);
+const tickLabels = await page.evaluate(() => {
+	const out = [];
+	for (const label of document.querySelectorAll('.tick.year .tick-label')) {
+		const r = label.getBoundingClientRect();
+		if (r.top < 130 || r.bottom > innerHeight - 20) continue;
+		const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+		out.push({ text: label.textContent.trim(), onTop: label.contains(hit), left: Math.round(r.left) });
+	}
+	return out;
+});
+assert(
+	'mobile: year labels are visible above the cards and inside the viewport',
+	tickLabels.length > 0 && tickLabels.every((t) => t.onTop && t.left >= 0),
+	JSON.stringify(tickLabels),
+);
+
 // 7b. Narrow width (320px): every header element fits within the content box
 await page.setViewportSize({ width: 320, height: 640 });
 await page.waitForTimeout(500);

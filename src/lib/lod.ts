@@ -80,6 +80,21 @@ export function tickStepYears(pxPerDay: number): number {
 	return 50;
 }
 
+/** Average month length in days, for the month tick spacing */
+const DAYS_PER_MONTH = 365.25 / 12;
+
+/**
+ * Month tick step (months). 0 = no month ticks (year ticks only), 3 = quarters, 1 = every month.
+ * At month/day zoom a single year spans several screens, so without these the only
+ * orientation cue on screen is the date printed on each card (SHIG 59, 76, 12).
+ */
+export function tickStepMonths(pxPerDay: number): 0 | 1 | 3 {
+	const pxPerMonth = pxPerDay * DAYS_PER_MONTH;
+	if (pxPerMonth >= 180) return 1;
+	if (pxPerMonth >= 60) return 3;
+	return 0;
+}
+
 /**
  * Whether the detailed data of decade/5-year chunks actually contributes to the screen at this zoom.
  * overview.json shows nothing additional until importanceThreshold drops below OVERVIEW_MIN_IMPORTANCE,

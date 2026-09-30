@@ -3,7 +3,7 @@
 	import { eventsPerDayInRange } from '../chunks.ts';
 	import type { FilterState } from '../filters.ts';
 	import { isFiltering, matchesFilter } from '../filters.ts';
-	import { importanceThreshold, needsChunkData, tickStepYears } from '../lod.ts';
+	import { importanceThreshold, needsChunkData, tickStepMonths, tickStepYears } from '../lod.ts';
 	import { layoutCards } from '../layout.ts';
 	import {
 		clampPxPerDay,
@@ -18,6 +18,7 @@
 	} from '../timescale.ts';
 	import type { NewsEvent } from '../types.ts';
 	import { capDensity, queryVisible } from '../viewport.ts';
+	import { formatJpDate } from '../coverage.ts';
 	import { formatWareki } from '../wareki.ts';
 	import { takeCtrlWheel, takePinchMove } from '../zoom-gestures.ts';
 	import type { TimelineData } from '../state/data.svelte.ts';
@@ -138,6 +139,30 @@
 				y: dayToY(scale, dayOf(`${y}-01-01`)),
 				wareki: formatWareki(`${y}-01-01`),
 			});
+		}
+		return out;
+	});
+
+	// Month ticks between the year ticks at month/day zoom (SHIG 59, 76, 12). January is
+	// already the year tick, so it is skipped here
+	const monthTicks = $derived.by(() => {
+		if (!ready) return [];
+		const step = tickStepMonths(pxPerDay);
+		if (step === 0) return [];
+		const newestDay = clampDay(range.fromDay + bufferDays);
+		const oldestIso = isoOf(clampDay(range.toDay - bufferDays));
+		const out: { key: string; month: number; y: number }[] = [];
+		let year = Number(oldestIso.slice(0, 4));
+		let month = 1;
+		for (;;) {
+			const day = dayOf(`${year}-${String(month).padStart(2, '0')}-01`);
+			if (day > newestDay) break;
+			if (month !== 1) out.push({ key: `${year}-${month}`, month, y: dayToY(scale, day) });
+			month += step;
+			if (month > 12) {
+				month = 1;
+				year += 1;
+			}
 		}
 		return out;
 	});
@@ -280,6 +305,7 @@
 		for (let d = first; d >= last; d -= 10) out.push(d);
 		return out;
 	});
+	const currentDecade = $derived(Math.floor(Number(centerLabel.year) / 10) * 10);
 	function jumpToDecade(decade: number | null): void {
 		jumpOpen = false;
 		// The panel unmounts with the focused button in it, so put focus back on the chip (SHIG 60)
@@ -396,7 +422,13 @@
 				</button>
 				<div class="jump-grid">
 					{#each jumpDecades as d (d)}
-						<button type="button" onclick={() => jumpToDecade(d)}>
+						<!-- Mark where the reader is now (SHIG 25, 59); not by color alone (SHIG 96) -->
+						<button
+							type="button"
+							aria-current={d === currentDecade ? 'true' : undefined}
+							aria-label={d === currentDecade ? `${d}s（現在）` : undefined}
+							onclick={() => jumpToDecade(d)}
+						>
 							{d}<span class="jump-s">s</span>
 						</button>
 					{/each}
@@ -419,13 +451,25 @@
 	<div class="spine" aria-hidden="true"></div>
 
 	{#each ticks as t (t.year)}
-		<div class="tick" style:top="{t.y}px" aria-hidden="true">
+		<div class="tick year" style:top="{t.y}px" aria-hidden="true">
 			<span class="tick-label">
 				<span class="tick-year">{t.year}</span>
 				{#if t.wareki}<span class="tick-wareki">{t.wareki}</span>{/if}
 			</span>
 		</div>
 	{/each}
+	{#each monthTicks as m (m.key)}
+		<div class="tick month" style:top="{m.y}px" aria-hidden="true">
+			<span class="tick-label"><span class="tick-month">{m.month}月</span></span>
+		</div>
+	{/each}
+
+	{#if ready && data.meta}
+		<!-- The bottom of the spine is the start of the covered data, not a loading gap (SHIG 52, 59) -->
+		<p class="timeline-end" style:top="{dayToY(scale, minDay) + 28}px">
+			収録はここまで（{formatJpDate(data.meta.minDate)}）
+		</p>
+	{/if}
 
 	{#each placed as item (item.id)}
 		<div class="dot" style:top="{item.dotY}px" data-cat={item.ev.category} aria-hidden="true"></div>
@@ -492,7 +536,33 @@
 		font-size: 0.7rem;
 		color: var(--ink-muted);
 	}
-	.single .tick-label { left: 46px; }
+	.tick.month {
+		border-top-style: dotted;
+	}
+	.tick.month .tick-label {
+		padding: 1px 8px;
+		border-style: dashed;
+	}
+	.tick-month {
+		font-size: 0.72rem;
+		color: var(--ink-muted);
+		font-variant-numeric: tabular-nums;
+	}
+	/* Single column: cards start at 52px, so a label beside the spine was painted under them
+	   and only the dashed line remained. Center the year on the spine, above the cards,
+	   and leave the era name to the era chip (SHIG 59, 76, 37) */
+	.single .tick-label {
+		left: 26px;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		padding: 1px 5px;
+	}
+	.single .tick-wareki {
+		display: none;
+	}
+	.single .tick-year {
+		font-size: 0.85rem;
+	}
 
 	.dot {
 		position: absolute;
@@ -543,6 +613,24 @@
 		left: 31px;
 		right: auto;
 		width: 20px;
+	}
+
+	.timeline-end {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		margin: 0;
+		padding: 4px 14px;
+		font-size: 0.75rem;
+		color: var(--ink-muted);
+		background: var(--bg);
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		white-space: nowrap;
+	}
+	.single .timeline-end {
+		left: 26px;
+		transform: none;
 	}
 
 	.era-nav {
@@ -635,6 +723,13 @@
 	.jump-grid button:hover {
 		border-color: var(--accent);
 		color: var(--accent);
+	}
+	.jump-grid button[aria-current='true'] {
+		border-color: var(--accent);
+		background: color-mix(in srgb, var(--accent) 12%, transparent);
+		font-weight: 700;
+		text-decoration: underline;
+		text-underline-offset: 3px;
 	}
 	.jump-s {
 		font-size: 0.65rem;

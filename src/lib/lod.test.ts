@@ -5,6 +5,7 @@ import {
 	importanceThreshold,
 	needsChunkData,
 	tToZoom,
+	tickStepMonths,
 	tickStepYears,
 	zoomLevelLabel,
 	zoomToT,
@@ -102,6 +103,21 @@ describe('tickStepYears', () => {
 		expect(tickStepYears(0.06)).toBe(10);
 		expect(tickStepYears(0.15)).toBe(5);
 		expect(tickStepYears(1)).toBe(1);
+	});
+});
+
+describe('tickStepMonths', () => {
+	it('adds month ticks only once a year spans several screens (SHIG 59, 76)', () => {
+		// Year level and coarser: no month ticks (the year ticks are enough)
+		expect(tickStepMonths(0.04)).toBe(0);
+		expect(tickStepMonths(1)).toBe(0);
+		expect(tickStepMonths(1.9)).toBe(0);
+		// From about 60px per month: quarters
+		expect(tickStepMonths(2)).toBe(3);
+		expect(tickStepMonths(5)).toBe(3);
+		// From about 180px per month: every month
+		expect(tickStepMonths(6)).toBe(1);
+		expect(tickStepMonths(MAX_PX_PER_DAY)).toBe(1);
 	});
 });
 
