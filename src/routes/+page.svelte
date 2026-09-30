@@ -35,6 +35,8 @@
 	let timeline = $state<ReturnType<typeof Timeline>>();
 	let routerReady = $state(false);
 	let collectionSlug = $state<string | null>(initial.collection);
+	// Events left behind by following related links inside the dialog (the way back, SHIG 60)
+	let detailHistory = $state<string[]>([]);
 
 	const selected = $derived(selectedId !== null ? (timelineData.byId(selectedId) ?? null) : null);
 	const selectedBooks = $derived(selectedId !== null ? timelineData.booksById(selectedId) : []);
@@ -96,6 +98,26 @@
 	function onselect(ev: NewsEvent): void {
 		selectedId = ev.id;
 	}
+	async function onselectrelated(id: string): Promise<void> {
+		// Related events usually sit in another decade, i.e. in a chunk that is not loaded yet.
+		// Selecting the id first would render `selected` null, close the dialog and drop the
+		// selection before the chunk arrives, so load it while the current event stays open
+		const from = selectedId;
+		const target = await timelineData.loadById(id, id.slice(0, 10));
+		if (target === undefined || selectedId !== from) return;
+		if (from !== null) detailHistory = [...detailHistory, from];
+		selectedId = id;
+	}
+	function onback(): void {
+		const prev = detailHistory.at(-1);
+		if (prev === undefined) return;
+		detailHistory = detailHistory.slice(0, -1);
+		selectedId = prev;
+	}
+	function oncloseDetail(): void {
+		selectedId = null;
+		detailHistory = [];
+	}
 
 	let highlightTimer: ReturnType<typeof setTimeout> | undefined;
 	async function onJump(hit: SearchHit): Promise<void> {
@@ -155,6 +177,10 @@
 				<a class="cb-title" href="/c/{collectionSlug}" data-sveltekit-reload>
 					{activeCollection ? activeCollection.title : collectionSlug}
 				</a>
+				{#if activeCollection}
+					<!-- What the narrowed view holds; the header total stays the whole corpus (SHIG 28, 25) -->
+					<span class="cb-count">全{formatCount(activeCollection.count)}件</span>
+				{/if}
 				<button
 					type="button"
 					class="cb-clear"
@@ -208,8 +234,10 @@
 	ev={selected}
 	books={selectedBooks}
 	collections={selectedCollections}
-	onclose={() => (selectedId = null)}
-	onselectrelated={(id) => (selectedId = id)}
+	canBack={detailHistory.length > 0}
+	onclose={oncloseDetail}
+	{onselectrelated}
+	{onback}
 />
 
 <footer class="site-footer">
@@ -306,6 +334,12 @@
 	}
 	.cb-title:hover {
 		text-decoration: underline;
+	}
+	.cb-count {
+		flex: none;
+		font-size: 0.68rem;
+		color: var(--ink-muted);
+		font-variant-numeric: tabular-nums;
 	}
 	.cb-clear {
 		flex: none;
@@ -452,5 +486,11 @@
 		font-size: 0.75rem;
 		color: var(--ink-muted);
 		border-top: 1px solid var(--line);
+	}
+	/* On phones the fixed era chip and zoom buttons sit over the footer; leave room below the text (SHIG 85, 16) */
+	@media (max-width: 759px) {
+		.site-footer {
+			padding-bottom: 132px;
+		}
 	}
 </style>

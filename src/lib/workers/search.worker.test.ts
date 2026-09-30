@@ -59,6 +59,29 @@ describe('search worker', () => {
 		expect(ready.sort()).toEqual([1, 2]);
 	});
 
+	it('warms the index without replying, so the first query is answered at once (SHIG 14, 65)', async () => {
+		const { calls } = stubFetch({ '/data/search.json': docs });
+		const send = await loadWorker();
+		send({ warm: true });
+		await vi.waitFor(() => expect(calls).toHaveLength(1));
+		await new Promise((r) => setTimeout(r, 30));
+		expect(posted).toEqual([]);
+		send({ seq: 1, query: '震災' });
+		await settle(1);
+		// No "loading" message: the index was already there
+		expect(posted[0]).toMatchObject({ seq: 1, status: 'ready' });
+		expect(calls).toHaveLength(1);
+	});
+
+	it('a failed warm-up stays silent and the next query retries', async () => {
+		const { calls } = stubFetch({ '/data/search.json': 500 });
+		const send = await loadWorker();
+		send({ warm: true });
+		await vi.waitFor(() => expect(calls).toHaveLength(1));
+		await new Promise((r) => setTimeout(r, 30));
+		expect(posted).toEqual([]);
+	});
+
 	it('reports an error when the index cannot be fetched', async () => {
 		stubFetch({ '/data/search.json': 500 });
 		const send = await loadWorker();

@@ -31,11 +31,14 @@ function hit(n: number): SearchHit {
 /** A worker response without its sequence number (distributes over the union) */
 type Reply = SearchResponse extends infer R ? (R extends unknown ? Omit<R, 'seq'> : never) : never;
 
-/** Wait for the debounced request, then answer it */
+type QueryRequest = Extract<SearchRequest, { seq: number }>;
+const isQuery = (m: SearchRequest): m is QueryRequest => 'seq' in m;
+
+/** Wait for the debounced request (warm-up messages do not count), then answer it */
 async function answer(response: Reply, seqOffset = 0): Promise<void> {
-	await waitFor(() => expect(workers.instances[0]?.posted.length ?? 0).toBeGreaterThan(0));
+	await waitFor(() => expect(workers.instances[0]?.posted.filter(isQuery).length ?? 0).toBeGreaterThan(0));
 	const w = workers.instances[0];
-	const seq = w.posted.at(-1)!.seq + seqOffset;
+	const seq = w.posted.filter(isQuery).at(-1)!.seq + seqOffset;
 	w.onmessage!({ data: { seq, ...response } as SearchResponse } as MessageEvent<SearchResponse>);
 }
 
@@ -68,6 +71,28 @@ describe('SearchBox', () => {
 		expect(workers.instances).toHaveLength(0);
 	});
 
+	it('warms the index once on focus or hover so the first query does not wait (SHIG 14, 65)', async () => {
+		const { user, input } = setup();
+		await user.hover(input);
+		expect(workers.instances[0].posted).toEqual([{ warm: true }]);
+		await user.click(input);
+		await user.tab();
+		await user.click(input);
+		expect(workers.instances[0].posted).toEqual([{ warm: true }]);
+		expect(input).toHaveAttribute('aria-expanded', 'false');
+	});
+
+	it('does not prefetch the index when the browser asks for reduced data', async () => {
+		Object.defineProperty(navigator, 'connection', { value: { saveData: true }, configurable: true });
+		try {
+			const { user, input } = setup();
+			await user.click(input);
+			expect(workers.instances).toHaveLength(0);
+		} finally {
+			delete (navigator as { connection?: unknown }).connection;
+		}
+	});
+
 	it('debounces the query, shows loading, then lists hits and jumps on Enter', async () => {
 		const { user, input, onjump, query } = setup();
 		await user.click(input);
@@ -83,7 +108,7 @@ describe('SearchBox', () => {
 		await answer({ status: 'ready', hits: [hit(1), hit(2)] });
 		const list = await screen.findByRole('listbox', { name: '検索結果' });
 		expect(input).toHaveAttribute('aria-expanded', 'true');
-		expect(workers.instances[0].posted.at(-1)!.query).toBe('地震');
+		expect(workers.instances[0].posted.filter(isQuery).at(-1)!.query).toBe('地震');
 		const options = screen.getAllByRole('option');
 		expect(list).toContainElement(options[0]);
 		expect(options[0]).toHaveTextContent('1911.05');

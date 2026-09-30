@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubFetch, type Route } from '../test/fetch.ts';
 import { makeCollection, makeEvent, makeMeta } from '../test/fixtures.ts';
 import { TimelineData } from '$lib/state/data.svelte';
-import type { SearchResponse } from '$lib/workers/search.worker';
+import type { SearchRequest, SearchResponse } from '$lib/workers/search.worker';
 import Page from './+page.svelte';
 
 // A fresh store per test (the real module exports one shared instance)
@@ -25,17 +25,19 @@ vi.mock('$app/navigation', () => ({
 	replaceState: (url: string, state: unknown) => nav.replaceState(url, state),
 }));
 
-const worker = vi.hoisted(() => ({ onmessage: null as ((e: MessageEvent) => void) | null, posted: [] as { seq: number; query: string }[] }));
+const worker = vi.hoisted(() => ({ onmessage: null as ((e: MessageEvent) => void) | null, posted: [] as SearchRequest[] }));
 vi.mock('$lib/workers/search.worker.ts?worker', () => ({
 	default: class {
 		set onmessage(fn: (e: MessageEvent) => void) {
 			worker.onmessage = fn;
 		}
-		postMessage(m: { seq: number; query: string }) {
+		postMessage(m: SearchRequest) {
 			worker.posted.push(m);
 		}
 	},
 }));
+/** Query requests only (focusing the box also posts a warm-up request) */
+const queries = () => worker.posted.filter((m): m is Extract<SearchRequest, { seq: number }> => 'seq' in m);
 
 const nagano = makeEvent({ id: '1998-02-07-nagano', date: '1998-02-07', title: '長野五輪開幕', importance: 100 });
 const kobe = makeEvent({
@@ -112,12 +114,35 @@ describe('timeline page', () => {
 		await waitFor(() => expect(lastUrl().get('e')).toBe('1995-01-17-kobe'));
 
 		const dialog = document.querySelector('dialog')!;
+		expect(within(dialog).queryByRole('button', { name: /前のできごとに戻る/ })).toBeNull();
 		await user.click(within(dialog).getByRole('button', { name: /長野五輪開幕/ }));
 		expect(await screen.findByRole('heading', { level: 2, name: '長野五輪開幕' })).toBeInTheDocument();
+
+		// The way back to the event the reader came from (SHIG 60)
+		await user.click(within(dialog).getByRole('button', { name: /前のできごとに戻る/ }));
+		expect(await screen.findByRole('heading', { level: 2, name: '阪神・淡路大震災' })).toBeInTheDocument();
+		expect(within(dialog).queryByRole('button', { name: /前のできごとに戻る/ })).toBeNull();
 
 		await user.click(screen.getByRole('button', { name: '閉じる' }));
 		await waitFor(() => expect(screen.queryByRole('heading', { level: 2 })).toBeNull());
 		await waitFor(() => expect(lastUrl().has('e')).toBe(false));
+	});
+
+	it('follows a related link into a chunk that is not loaded yet and keeps the way back (SHIG 60)', async () => {
+		// Most related events live in another decade, i.e. in a chunk the timeline has not fetched
+		const withOldLink = makeEvent({
+			...kobe,
+			related: [{ id: '1920-03-03-old', date: '1920-03-03', title: '古いできごと' }],
+		});
+		const user = open('/', { '/data/overview.json': [nagano, withOldLink] });
+		await user.click(await screen.findByRole('button', { name: /阪神・淡路大震災/ }));
+		const dialog = document.querySelector('dialog')!;
+		await user.click(await within(dialog).findByRole('button', { name: /古いできごと/ }));
+		expect(await screen.findByRole('heading', { level: 2, name: '古いできごと' }, { timeout: 3000 })).toBeInTheDocument();
+		expect(dialog.open).toBe(true);
+		await waitFor(() => expect(lastUrl().get('e')).toBe('1920-03-03-old'));
+		await user.click(within(dialog).getByRole('button', { name: /前のできごとに戻る/ }));
+		expect(await screen.findByRole('heading', { level: 2, name: '阪神・淡路大震災' })).toBeInTheDocument();
 	});
 
 	it('restores a shared link to an event that is not loaded yet', async () => {
@@ -154,6 +179,8 @@ describe('timeline page', () => {
 		const user = open('/?k=theme');
 		const banner = await screen.findByRole('link', { name: 'テスト特集' });
 		expect(banner).toHaveAttribute('href', '/c/theme');
+		// How many events the narrowed view holds (SHIG 28, 25)
+		expect(banner.closest('.collection-banner')).toHaveTextContent('全3件');
 		expect(await screen.findByRole('button', { name: /阪神・淡路大震災/ })).toBeInTheDocument();
 		await waitFor(() => expect(screen.queryByRole('button', { name: /長野五輪開幕/ })).toBeNull());
 
@@ -181,8 +208,8 @@ describe('timeline page', () => {
 		const user = open('/');
 		await screen.findByRole('button', { name: /長野五輪開幕/ });
 		await user.type(screen.getByRole('combobox'), '古い');
-		await waitFor(() => expect(worker.posted.length).toBeGreaterThan(0));
-		const seq = worker.posted.at(-1)!.seq;
+		await waitFor(() => expect(queries().length).toBeGreaterThan(0));
+		const seq = queries().at(-1)!.seq;
 		worker.onmessage!({
 			data: {
 				seq,

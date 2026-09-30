@@ -213,6 +213,56 @@ describe('Timeline', () => {
 		expect(screen.queryByRole('group', { name: '年代を選択' })).toBeNull();
 	});
 
+	it('marks the decade currently in view inside the jump panel (SHIG 25, 59)', async () => {
+		const { user } = await setup({ initialCenter: '1950-06-01', initialPxPerDay: 2 });
+		const chip = screen.getByRole('button', { name: /年代へジャンプ/ });
+		await waitFor(() => expect(chip).toHaveAccessibleName(/現在 1950年/));
+		await user.click(chip);
+		const panel = screen.getByRole('group', { name: '年代を選択' });
+		expect(within(panel).getByRole('button', { name: /1950s/ })).toHaveAttribute('aria-current', 'true');
+		expect(within(panel).getByRole('button', { name: /1950s/ })).toHaveAccessibleName(/現在/);
+		expect(within(panel).getByRole('button', { name: '1960s' })).not.toHaveAttribute('aria-current');
+	});
+
+	it('shows month ticks at month zoom and only year ticks when zoomed out (SHIG 59, 76)', async () => {
+		const { container, user } = await setup({ initialCenter: '1950-06-15', initialPxPerDay: 10 });
+		await waitFor(() => expect(window.scrollY).toBeGreaterThan(0));
+		const monthLabels = () =>
+			[...container.querySelectorAll('.tick.month .tick-month')].map((el) => el.textContent!.trim());
+		await waitFor(() => expect(monthLabels()).toContain('6月'));
+		// January is the year tick, never duplicated as a month tick
+		expect(monthLabels()).not.toContain('1月');
+		// Quarter ticks at the next zoom-out step, then none at year zoom
+		await user.keyboard('-');
+		await waitFor(() => expect(monthLabels()).toContain('7月'));
+		expect(monthLabels()).not.toContain('6月');
+		await user.keyboard('-');
+		await user.keyboard('-');
+		await waitFor(() => expect(monthLabels()).toEqual([]));
+		expect(container.querySelector('.tick.year')).toBeInTheDocument();
+	});
+
+	it('says where the covered data ends at the bottom of the timeline (SHIG 52, 59)', async () => {
+		const { container } = await setup();
+		const end = container.querySelector('.timeline-end')!;
+		expect(end).toHaveTextContent('収録はここまで');
+		expect(end).toHaveTextContent('1900年1月1日');
+	});
+
+	it('keeps the end label below the oldest card instead of behind it', async () => {
+		// The oldest event sits exactly on the first covered day, so its card spans the same y
+		const oldest = makeEvent({ id: 'e-1900', date: '1900-01-01', title: '最初のできごと', importance: 100 });
+		const { container } = await setup({ initialCenter: '1900-01-01', initialPxPerDay: 2 }, [...recent, oldest]);
+		const card = await waitFor(() => {
+			const el = container.querySelector<HTMLElement>('.card[data-id="e-1900"]');
+			expect(el).not.toBeNull();
+			return el!;
+		});
+		const end = container.querySelector<HTMLElement>('.timeline-end')!;
+		const cardBottom = parseFloat(card.style.top) + parseFloat(card.style.height);
+		expect(parseFloat(end.style.top)).toBeGreaterThanOrEqual(cardBottom);
+	});
+
 	it('does not steal focus when Escape comes from another widget', async () => {
 		const { user } = await setup();
 		const chip = screen.getByRole('button', { name: /年代へジャンプ/ });

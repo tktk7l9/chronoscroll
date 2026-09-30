@@ -285,6 +285,50 @@ assert('mobile: minimap hidden', !singles.minimapVisible);
 assert('mobile: the coverage line is shown', singles.coverageVisible);
 assert('mobile: the coverage line fits on one line', singles.coverageFits);
 
+// 7a. Mobile: every year label on screen is painted above the cards (it used to hide behind them)
+// Bring a year tick into the middle of the screen first (the current view may sit between two)
+await page.evaluate(() => {
+	const first = document.querySelector('.tick.year');
+	if (first) window.scrollTo({ top: parseFloat(first.style.top) - innerHeight / 2, behavior: 'instant' });
+});
+await page.waitForTimeout(600);
+const tickLabels = await page.evaluate(() => {
+	const out = [];
+	for (const label of document.querySelectorAll('.tick.year .tick-label')) {
+		const r = label.getBoundingClientRect();
+		if (r.top < 130 || r.bottom > innerHeight - 20) continue;
+		const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+		out.push({ text: label.textContent.trim(), onTop: label.contains(hit), left: Math.round(r.left) });
+	}
+	return out;
+});
+assert(
+	'mobile: year labels are visible above the cards and inside the viewport',
+	tickLabels.length > 0 && tickLabels.every((t) => t.onTop && t.left >= 0),
+	JSON.stringify(tickLabels),
+);
+
+// 7a-2. Mobile: the "end of the data" label at the bottom is not hidden behind the oldest card
+// (the oldest event sits on the first covered day, so its card spans the same y)
+await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+await page.waitForTimeout(800);
+const endLabel = await page.evaluate(() => {
+	const el = document.querySelector('.timeline-end');
+	if (!el) return null;
+	const r = el.getBoundingClientRect();
+	const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+	const cards = [...document.querySelectorAll('.card')].map((c) => c.getBoundingClientRect());
+	const overlapsCard = cards.some((c) => r.top < c.bottom && r.bottom > c.top && r.left < c.right && r.right > c.left);
+	return { text: el.textContent.trim(), onTop: el.contains(hit), overlapsCard, fits: r.right <= innerWidth };
+});
+assert(
+	'mobile: the end-of-data label is fully visible below the oldest card',
+	endLabel !== null && endLabel.onTop && !endLabel.overlapsCard && endLabel.fits,
+	JSON.stringify(endLabel),
+);
+await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+await page.waitForTimeout(500);
+
 // 7b. Narrow width (320px): every header element fits within the content box
 await page.setViewportSize({ width: 320, height: 640 });
 await page.waitForTimeout(500);
