@@ -609,7 +609,8 @@
 		font-family: inherit;
 		font-size: 0.8rem;
 		font-weight: 600;
-		color: var(--accent);
+		/* Same tint as the collection banner: the plain accent is 4.3:1 on it in light mode (WCAG 1.4.3) */
+		color: color-mix(in srgb, var(--accent) 85%, var(--ink));
 		background: color-mix(in srgb, var(--accent) 10%, transparent);
 		border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
 		border-radius: 8px;

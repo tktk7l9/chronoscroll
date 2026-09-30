@@ -26,12 +26,16 @@
 
 	$effect(() => {
 		if (!dialog) return;
-		if (ev && !dialog.open) {
-			closing = false;
-			dialog.showModal();
-			// Start on the title so a screen reader announces the event, not the first link
+		if (ev) {
+			if (!dialog.open) {
+				closing = false;
+				dialog.showModal();
+			}
+			// Start on the title so a screen reader announces the event, not the first link.
+			// Also on every switch to a related event: the pressed link unmounts with the old
+			// body, which would otherwise drop focus to <body> inside the open modal (SHIG 60)
 			dialog.querySelector<HTMLElement>('h2')?.focus();
-		} else if (!ev && dialog.open) {
+		} else if (dialog.open) {
 			dialog.close();
 		}
 	});
