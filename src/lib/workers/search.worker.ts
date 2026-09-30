@@ -1,15 +1,15 @@
 /**
  * Full-text search worker (IO layer, excluded from the coverage gate).
- * Fetches search.json on the first query and builds the MiniSearch index.
- * A failed fetch is retried on a later query.
+ * Fetches search.json on the first query (or a warm-up request sent when the search box
+ * gains focus) and builds the MiniSearch index. A failed fetch is retried on a later query.
  */
 import type MiniSearch from 'minisearch';
 import { buildSearchIndex, runQuery, type SearchDoc, type SearchHit } from '../search.ts';
 
-export interface SearchRequest {
-	seq: number;
-	query: string;
-}
+export type SearchRequest =
+	| { seq: number; query: string }
+	/** Fetch and build the index ahead of the first keystroke; nothing is posted back */
+	| { warm: true };
 
 export type SearchResponse =
 	| { seq: number; status: 'ready'; hits: SearchHit[] }
@@ -52,6 +52,11 @@ async function ensureIndex(): Promise<void> {
 }
 
 self.onmessage = (e: MessageEvent<SearchRequest>) => {
+	if ('warm' in e.data) {
+		// Precomputation (SHIG 14): failures are reported by the query that follows
+		void ensureIndex().catch(() => {});
+		return;
+	}
 	const { seq, query } = e.data;
 	void (async () => {
 		try {

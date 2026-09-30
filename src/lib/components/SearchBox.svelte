@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { prefersReducedData, type ConnectionLike } from '../preload.ts';
 	import { searchStatusMessage, type SearchHit, type SearchStatus } from '../search.ts';
 	import type { SearchRequest, SearchResponse } from '../workers/search.worker.ts';
 	import SearchWorker from '../workers/search.worker.ts?worker';
@@ -57,6 +58,17 @@
 		return () => clearTimeout(t);
 	});
 
+	// The index (several MB) used to be fetched on the first keystroke, so the first search
+	// waited a couple of seconds. Start it when the reader shows intent (SHIG 14, 65, 61)
+	let warmed = false;
+	function warm(): void {
+		if (warmed) return;
+		const nav = navigator as Navigator & { connection?: ConnectionLike };
+		if (prefersReducedData(nav.connection)) return;
+		warmed = true;
+		ensureWorker().postMessage({ warm: true } satisfies SearchRequest);
+	}
+
 	function choose(hit: SearchHit): void {
 		open = false;
 		onjump(hit);
@@ -106,7 +118,11 @@
 		aria-activedescendant={expanded && showHits && activeIndex >= 0
 			? `${listId}-${activeIndex}`
 			: undefined}
-		onfocus={() => (open = true)}
+		onfocus={() => {
+			open = true;
+			warm();
+		}}
+		onpointerenter={warm}
 		onblur={() => setTimeout(() => (open = false), 150)}
 		onkeydown={onKeydown}
 	/>

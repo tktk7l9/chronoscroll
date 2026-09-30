@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubFetch, type Route } from '../test/fetch.ts';
 import { makeCollection, makeEvent, makeMeta } from '../test/fixtures.ts';
 import { TimelineData } from '$lib/state/data.svelte';
-import type { SearchResponse } from '$lib/workers/search.worker';
+import type { SearchRequest, SearchResponse } from '$lib/workers/search.worker';
 import Page from './+page.svelte';
 
 // A fresh store per test (the real module exports one shared instance)
@@ -25,17 +25,19 @@ vi.mock('$app/navigation', () => ({
 	replaceState: (url: string, state: unknown) => nav.replaceState(url, state),
 }));
 
-const worker = vi.hoisted(() => ({ onmessage: null as ((e: MessageEvent) => void) | null, posted: [] as { seq: number; query: string }[] }));
+const worker = vi.hoisted(() => ({ onmessage: null as ((e: MessageEvent) => void) | null, posted: [] as SearchRequest[] }));
 vi.mock('$lib/workers/search.worker.ts?worker', () => ({
 	default: class {
 		set onmessage(fn: (e: MessageEvent) => void) {
 			worker.onmessage = fn;
 		}
-		postMessage(m: { seq: number; query: string }) {
+		postMessage(m: SearchRequest) {
 			worker.posted.push(m);
 		}
 	},
 }));
+/** Query requests only (focusing the box also posts a warm-up request) */
+const queries = () => worker.posted.filter((m): m is Extract<SearchRequest, { seq: number }> => 'seq' in m);
 
 const nagano = makeEvent({ id: '1998-02-07-nagano', date: '1998-02-07', title: '長野五輪開幕', importance: 100 });
 const kobe = makeEvent({
@@ -181,8 +183,8 @@ describe('timeline page', () => {
 		const user = open('/');
 		await screen.findByRole('button', { name: /長野五輪開幕/ });
 		await user.type(screen.getByRole('combobox'), '古い');
-		await waitFor(() => expect(worker.posted.length).toBeGreaterThan(0));
-		const seq = worker.posted.at(-1)!.seq;
+		await waitFor(() => expect(queries().length).toBeGreaterThan(0));
+		const seq = queries().at(-1)!.seq;
 		worker.onmessage!({
 			data: {
 				seq,
