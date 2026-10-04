@@ -4,7 +4,7 @@ export function nextDelay(lastAt: number, now: number, minIntervalMs: number): n
 	return elapsed >= minIntervalMs ? 0 : minIntervalMs - elapsed;
 }
 
-const RETRY_MAX_ATTEMPTS = 6;
+export const RETRY_MAX_ATTEMPTS = 6;
 const RETRY_BASE_MS = 2000;
 const RETRY_CAP_MS = 60_000;
 const RETRY_AFTER_CAP_MS = 120_000;
