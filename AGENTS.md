@@ -57,6 +57,10 @@ It shows domestic and international news from 1829 to the present, with an impor
   URL state, not internals. jsdom shims (dialog, matchMedia, scrollTo) live in `src/test/setup.ts`;
   `$app/*` is stubbed in `src/test/stubs/`. IO scripts (`pipeline/run/`) stay outside the gate.
 - Isolate code that touches the network in `pipeline/run/`, and test the logic with fixtures.
+- `pipeline/run/api.ts` and `build.ts` are written with **Effect 4** (`effect`, devDependency only; nothing ships to the browser).
+  API failures are typed (`HttpError` / `ApiError` / `NetworkError`), retries are an Effect `Schedule` whose delays come from
+  `retryDelayMs` in `pipeline/lib/throttle.ts` (change the backoff there, not in the schedule), and waits go through `Clock`.
+  `pipeline/run/api.test.ts` checks the retry timing on `TestClock` with a stubbed `Fetch` reference, so no test waits in real time.
 
 ## Security / publishing
 - Strict CSP (config/security-headers.json). Only images are allowed from upload.wikimedia.org. Do not loosen it later.

@@ -15,6 +15,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { Effect } from 'effect';
 import { OVERVIEW_MIN_IMPORTANCE } from '../../src/lib/lod.ts';
 import type { EventImage, NewsEvent } from '../../src/lib/types.ts';
 import { buildBooksIndex, parseBooksYaml, unmatchedBookIds } from '../lib/books.ts';
@@ -48,6 +49,8 @@ import {
 	fetchPageWikitext,
 	fetchQids,
 	fetchSitelinkCounts,
+	type PageImage,
+	type WikiError,
 } from './api.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -102,148 +105,159 @@ function saveJsonCache(file: string, data: unknown): void {
  * Events are appended to the current year's page daily, so using the cache would mean anything after
  * the fetch date never shows up (the monthly refresh kept returning "no changes").
  */
-async function loadSeries(
+const loadSeries = (
 	args: Args,
 	suffix: string,
 	cacheDir: string,
 	today: string,
-): Promise<Map<number, string>> {
-	const texts = new Map<number, string>();
-	mkdirSync(join(CACHE, cacheDir), { recursive: true });
-	let refreshed = 0;
-	for (let y = args.from; y <= args.to; y++) {
-		const p = join(CACHE, cacheDir, `${y}.wikitext`);
-		const missing = join(CACHE, cacheDir, `${y}.missing`);
-		// --offline means no network at all, so follow the cache even for volatile years
-		const volatile = isVolatileYear(y, today) && !args.offline;
-		if (!volatile) {
-			if (existsSync(p)) {
-				texts.set(y, readFileSync(p, 'utf8'));
-				continue;
+): Effect.Effect<Map<number, string>> =>
+	Effect.gen(function* () {
+		const texts = new Map<number, string>();
+		mkdirSync(join(CACHE, cacheDir), { recursive: true });
+		let refreshed = 0;
+		for (let y = args.from; y <= args.to; y++) {
+			const p = join(CACHE, cacheDir, `${y}.wikitext`);
+			const missing = join(CACHE, cacheDir, `${y}.missing`);
+			// --offline means no network at all, so follow the cache even for volatile years
+			const volatile = isVolatileYear(y, today) && !args.offline;
+			if (!volatile) {
+				if (existsSync(p)) {
+					texts.set(y, readFileSync(p, 'utf8'));
+					continue;
+				}
+				if (existsSync(missing) || args.offline) continue;
 			}
-			if (existsSync(missing) || args.offline) continue;
+			process.stdout.write(`fetch ${y}${suffix} ...\r`);
+			const wt = yield* fetchPageWikitext(`${y}${suffix}`);
+			if (wt !== null) {
+				writeFileSync(p, wt);
+				texts.set(y, wt);
+				if (volatile) refreshed++;
+			} else if (existsSync(p)) {
+				// Both a network failure and a missing page return null, so keep the existing cache if there is one
+				// (do not drop the whole current year's events because of a transient failure)
+				console.warn(`  ${y}${suffix}: refetch failed, using the cache`);
+				texts.set(y, readFileSync(p, 'utf8'));
+			} else {
+				writeFileSync(missing, '');
+			}
 		}
-		process.stdout.write(`fetch ${y}${suffix} ...\r`);
-		const wt = await fetchPageWikitext(`${y}${suffix}`);
-		if (wt !== null) {
-			writeFileSync(p, wt);
-			texts.set(y, wt);
-			if (volatile) refreshed++;
-		} else if (existsSync(p)) {
-			// Both a network failure and a missing page return null, so keep the existing cache if there is one
-			// (do not drop the whole current year's events because of a transient failure)
-			console.warn(`  ${y}${suffix}: refetch failed, using the cache`);
-			texts.set(y, readFileSync(p, 'utf8'));
-		} else {
-			writeFileSync(missing, '');
-		}
-	}
-	console.log(`${suffix} pages: ${texts.size} (${refreshed} refetched as current/previous year)`);
-	return texts;
-}
+		console.log(`${suffix} pages: ${texts.size} (${refreshed} refetched as current/previous year)`);
+		return texts;
+	});
 
-async function resolveSitelinks(
-	targets: readonly string[],
-	offline: boolean,
-): Promise<Map<string, number>> {
-	const qidCache = loadJsonCache<Record<string, string | null>>('qids.json', {});
-	const slCache = loadJsonCache<Record<string, number>>('sitelinks.json', {});
-
-	const unknownTitles = targets.filter((t) => !(t in qidCache));
-	if (unknownTitles.length > 0 && !offline) {
-		console.log(`Resolving Qids: ${unknownTitles.length}`);
-		let done = 0;
-		for (let i = 0; i < unknownTitles.length; i += 500) {
-			const part = unknownTitles.slice(i, i + 500);
-			const got = await fetchQids(part);
-			for (const [t, q] of got) qidCache[t] = q;
-			done += part.length;
-			saveJsonCache('qids.json', qidCache);
-			process.stdout.write(`  ${done}/${unknownTitles.length}\r`);
-		}
-	}
-
-	const qids = [...new Set(Object.values(qidCache).filter((q): q is string => q !== null))];
-	const unknownQids = qids.filter((q) => !(q in slCache));
-	if (unknownQids.length > 0 && !offline) {
-		console.log(`Fetching sitelink counts: ${unknownQids.length}`);
-		let done = 0;
-		for (let i = 0; i < unknownQids.length; i += 500) {
-			const part = unknownQids.slice(i, i + 500);
-			const got = await fetchSitelinkCounts(part);
-			for (const [q, n] of got) slCache[q] = n;
-			done += part.length;
-			saveJsonCache('sitelinks.json', slCache);
-			process.stdout.write(`  ${done}/${unknownQids.length}\r`);
-		}
-	}
-
-	const counts = new Map<string, number>();
-	for (const t of targets) {
-		const q = qidCache[t];
-		counts.set(t, q != null ? (slCache[q] ?? 0) : 0);
-	}
-	return counts;
-}
-
-async function resolvePageviews(
-	targets: readonly string[],
-	offline: boolean,
-): Promise<Map<string, number>> {
-	const cache = loadJsonCache<Record<string, number>>('pageviews.json', {});
-	const unknown = targets.filter((t) => !(t in cache));
-	if (unknown.length > 0 && !offline) {
-		console.log(`Fetching page views: ${unknown.length}`);
+/**
+ * Fetch the keys missing from a JSON cache in parts of 500, saving the cache after each part
+ * so an interrupted run resumes where it stopped. Shared by every resolve* step.
+ */
+const fillCache = <V, F, E>(opts: {
+	label: string;
+	cache: Record<string, V>;
+	file: string;
+	keys: readonly string[];
+	offline: boolean;
+	fetch: (part: readonly string[]) => Effect.Effect<Map<string, F>, E>;
+	toCached: (fetched: F) => V;
+}): Effect.Effect<void, E> =>
+	Effect.gen(function* () {
+		const unknown = opts.keys.filter((k) => !(k in opts.cache));
+		if (unknown.length === 0 || opts.offline) return;
+		console.log(`${opts.label}: ${unknown.length}`);
 		let done = 0;
 		for (let i = 0; i < unknown.length; i += 500) {
 			const part = unknown.slice(i, i + 500);
-			const got = await fetchPageviews(part);
-			for (const [t, v] of got) cache[t] = Math.round(v * 10) / 10;
+			const got = yield* opts.fetch(part);
+			for (const [k, v] of got) opts.cache[k] = opts.toCached(v);
 			done += part.length;
-			saveJsonCache('pageviews.json', cache);
+			saveJsonCache(opts.file, opts.cache);
 			process.stdout.write(`  ${done}/${unknown.length}\r`);
 		}
-	}
-	return new Map(targets.map((t) => [t, cache[t] ?? 0]));
-}
+	});
 
-async function resolveImages(
+const resolveSitelinks = (
+	targets: readonly string[],
+	offline: boolean,
+): Effect.Effect<Map<string, number>, WikiError> =>
+	Effect.gen(function* () {
+		const qidCache = loadJsonCache<Record<string, string | null>>('qids.json', {});
+		const slCache = loadJsonCache<Record<string, number>>('sitelinks.json', {});
+		yield* fillCache({
+			label: 'Resolving Qids',
+			cache: qidCache,
+			file: 'qids.json',
+			keys: targets,
+			offline,
+			fetch: fetchQids,
+			toCached: (q) => q,
+		});
+		const qids = [...new Set(Object.values(qidCache).filter((q): q is string => q !== null))];
+		yield* fillCache({
+			label: 'Fetching sitelink counts',
+			cache: slCache,
+			file: 'sitelinks.json',
+			keys: qids,
+			offline,
+			fetch: fetchSitelinkCounts,
+			toCached: (n) => n,
+		});
+		const counts = new Map<string, number>();
+		for (const t of targets) {
+			const q = qidCache[t];
+			counts.set(t, q != null ? (slCache[q] ?? 0) : 0);
+		}
+		return counts;
+	});
+
+const resolvePageviews = (
+	targets: readonly string[],
+	offline: boolean,
+): Effect.Effect<Map<string, number>> =>
+	Effect.gen(function* () {
+		const cache = loadJsonCache<Record<string, number>>('pageviews.json', {});
+		yield* fillCache({
+			label: 'Fetching page views',
+			cache,
+			file: 'pageviews.json',
+			keys: targets,
+			offline,
+			fetch: fetchPageviews,
+			toCached: (v) => Math.round(v * 10) / 10,
+		});
+		return new Map(targets.map((t) => [t, cache[t] ?? 0]));
+	});
+
+const resolveImages = (
 	titles: readonly string[],
 	offline: boolean,
-): Promise<Map<string, EventImage | null>> {
-	const cache = loadJsonCache<
-		Record<string, { src: string; width: number; height: number; name: string } | null>
-	>('images.json', {});
-	const unknown = titles.filter((t) => !(t in cache));
-	if (unknown.length > 0 && !offline) {
-		console.log(`Fetching images: ${unknown.length}`);
-		let done = 0;
-		for (let i = 0; i < unknown.length; i += 500) {
-			const part = unknown.slice(i, i + 500);
-			const got = await fetchPageImages(part);
-			for (const [t, img] of got) cache[t] = img;
-			done += part.length;
-			saveJsonCache('images.json', cache);
-			process.stdout.write(`  ${done}/${unknown.length}\r`);
+): Effect.Effect<Map<string, EventImage | null>, WikiError> =>
+	Effect.gen(function* () {
+		const cache = loadJsonCache<Record<string, PageImage | null>>('images.json', {});
+		yield* fillCache({
+			label: 'Fetching images',
+			cache,
+			file: 'images.json',
+			keys: titles,
+			offline,
+			fetch: fetchPageImages,
+			toCached: (img) => img,
+		});
+		const result = new Map<string, EventImage | null>();
+		for (const t of titles) {
+			const img = cache[t];
+			result.set(
+				t,
+				img
+					? {
+							src: img.src,
+							width: img.width,
+							height: img.height,
+							credit: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(img.name.replace(/ /g, '_'))}`,
+						}
+					: null,
+			);
 		}
-	}
-	const result = new Map<string, EventImage | null>();
-	for (const t of titles) {
-		const img = cache[t];
-		result.set(
-			t,
-			img
-				? {
-						src: img.src,
-						width: img.width,
-						height: img.height,
-						credit: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(img.name.replace(/ /g, '_'))}`,
-					}
-				: null,
-		);
-	}
-	return result;
-}
+		return result;
+	});
 
 function loadCurated(): CuratedEntry[] {
 	if (!existsSync(CURATED_DIR)) return [];
@@ -267,13 +281,13 @@ function percent(n: number, total: number): string {
 	return `${((n / total) * 100).toFixed(1)}%`;
 }
 
-async function main(): Promise<void> {
+const main = Effect.gen(function* () {
 	const args = parseArgs();
 	const today = new Date().toISOString().slice(0, 10);
 
 	// 1-2. Fetch + parse (two series: "YYYY年" + "YYYY年の日本")
-	const texts = await loadSeries(args, '年', 'years', today);
-	const textsJp = await loadSeries(args, '年の日本', 'years-jp', today);
+	const texts = yield* loadSeries(args, '年', 'years', today);
+	const textsJp = yield* loadSeries(args, '年の日本', 'years-jp', today);
 	const raws: RawEvent[] = [];
 	for (const [year, wt] of texts) {
 		raws.push(...parseYearPage(wt, year));
@@ -290,8 +304,8 @@ async function main(): Promise<void> {
 
 	// 3. Scoring (max(sitelinks, pageviews-equivalent) × IDF decay × place-name decay)
 	const targets = [...new Set(rawEvents.flatMap((r) => r.links.map((l) => l.target)))];
-	const sitelinks = await resolveSitelinks(targets, args.offline);
-	const pageviews = await resolvePageviews(targets, args.offline);
+	const sitelinks = yield* resolveSitelinks(targets, args.offline);
+	const pageviews = yield* resolvePageviews(targets, args.offline);
 	const df = new Map<string, number>();
 	for (const r of rawEvents) {
 		for (const t of new Set(r.links.map((l) => l.target))) df.set(t, (df.get(t) ?? 0) + 1);
@@ -352,7 +366,7 @@ async function main(): Promise<void> {
 				.map((s) => s.raw.links[0].target),
 		),
 	];
-	const images = await resolveImages(imageTitles, args.offline);
+	const images = yield* resolveImages(imageTitles, args.offline);
 
 	// 5. Classification + 6. Assembly
 	const sidecar = existsSync(SIDECAR_PATH)
@@ -476,6 +490,6 @@ async function main(): Promise<void> {
 	console.log('\nTop 20 by importance:');
 	for (const e of [...events].sort((a, b) => b.importance - a.importance).slice(0, 20))
 		console.log(`  [${e.importance}] ${e.date} ${e.title} (${e.category}/${e.region})`);
-}
+});
 
-await main();
+await Effect.runPromise(main);
