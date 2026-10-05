@@ -31,7 +31,7 @@ export function isGeoLikeTarget(target: string): boolean {
 }
 
 /** Divisor that converts average daily page views to the sitelink-equivalent scale */
-export const PAGEVIEW_SCALE = 10;
+const PAGEVIEW_SCALE = 10;
 
 /**
  * Score contribution of a single link.

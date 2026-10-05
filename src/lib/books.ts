@@ -4,7 +4,7 @@ import type { BookRef } from './types.ts';
 export const AMAZON_ASSOC_TAG = 'PLACEHOLDER-22';
 
 /** Max number of book links shown per event */
-export const MAX_BOOKS_PER_EVENT = 4;
+const MAX_BOOKS_PER_EVENT = 4;
 
 /** Resolve the affiliate URL a BookRef actually navigates to */
 export function resolveBookUrl(book: BookRef): string {

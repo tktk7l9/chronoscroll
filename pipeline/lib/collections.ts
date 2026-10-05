@@ -19,7 +19,7 @@ export interface CollectionSource {
 }
 
 /** The slug used in URLs. Used for both /c/<slug> and ?k=<slug> */
-export const COLLECTION_SLUG_RE = /^[a-z0-9-]+$/;
+const COLLECTION_SLUG_RE = /^[a-z0-9-]+$/;
 
 function requireString(value: unknown, label: string): string {
 	if (typeof value !== 'string' || value === '') {

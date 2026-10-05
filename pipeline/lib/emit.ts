@@ -54,7 +54,7 @@ export function decadeKeyOf(year: number): string {
 }
 
 /** Max events per chunk. A decade exceeding it is split into first-half/second-half 5-year chunks */
-export const MAX_EVENTS_PER_CHUNK = 1200;
+const MAX_EVENTS_PER_CHUNK = 1200;
 
 /** Canonical sort by ascending date (same date by id) */
 export function sortEvents(events: readonly NewsEvent[]): NewsEvent[] {
