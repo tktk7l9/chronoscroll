@@ -120,8 +120,8 @@ export const apiPost = (
 	);
 };
 
-export const JA_WIKI_API = 'https://ja.wikipedia.org/w/api.php';
-export const WIKIDATA_API = 'https://www.wikidata.org/w/api.php';
+const JA_WIKI_API = 'https://ja.wikipedia.org/w/api.php';
+const WIKIDATA_API = 'https://www.wikidata.org/w/api.php';
 
 /** Fetch the wikitext of any page (null if it does not exist or the fetch failed) */
 export const fetchPageWikitext = (page: string): Effect.Effect<string | null> =>
@@ -132,7 +132,7 @@ export const fetchPageWikitext = (page: string): Effect.Effect<string | null> =>
 		),
 	);
 
-export function chunk<T>(arr: readonly T[], size: number): T[][] {
+function chunk<T>(arr: readonly T[], size: number): T[][] {
 	const out: T[][] = [];
 	for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
 	return out;
