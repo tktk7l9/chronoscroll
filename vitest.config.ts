@@ -74,8 +74,8 @@ export default defineConfig({
 			],
 			exclude: ["**/*.test.ts", "**/*.test.mjs", "worker/index.ts"],
 			reporter: ["text", "json-summary", "html"],
-			// 純ロジック層（src/lib 直下 + pipeline/lib + worker + scripts/lib）は 100% を維持する
-			// IOスクリプト(pipeline/run, scripts/*.mjs 直下)は対象外。UI層は下の閾値で別に守る
+			// Pure logic layer (top of src/lib + pipeline/lib + worker + scripts/lib) stays at 100%
+			// IO scripts (pipeline/run, top-level scripts/*.mjs) are excluded. The UI layer is guarded by the thresholds below
 			thresholds: {
 				"src/lib/*.ts": {
 					statements: 100,
