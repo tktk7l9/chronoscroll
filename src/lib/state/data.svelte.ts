@@ -58,18 +58,25 @@ export class TimelineData {
 				fetchJson<IndexMeta>('/data/index.json'),
 				fetchJson<OverviewLiteEvent[]>('/data/overview-lite.json').catch(() => null),
 			]);
-			const full = fetchJson<NewsEvent[]>('/data/overview.json');
 			if (lite !== null) {
 				this.#addPreviews(lite);
-				this.#overviewSettled = full.then(
-					(events) => this.#addEvents(events),
-					// Without the full overview, details fall back to loading the event's chunk
-					() => {},
-				);
+				// Everything else waits until the first screen is painted: a request that starts
+				// before LCP counts against it in Lighthouse's simulation even when it does not block it.
+				// #overviewSettled is set before meta so a deep link (?e=) already waits on it
+				const painted = afterPaint();
+				this.#overviewSettled = painted
+					.then(() => fetchJson<NewsEvent[]>('/data/overview.json'))
+					.then(
+						(events) => this.#addEvents(events),
+						// Without the full overview, details fall back to loading the event's chunk
+						() => {},
+					);
+				this.meta = meta;
+				await painted;
 			} else {
-				this.#addEvents(await full);
+				this.#addEvents(await fetchJson<NewsEvent[]>('/data/overview.json'));
+				this.meta = meta;
 			}
-			this.meta = meta;
 		} catch (e) {
 			this.loadError = String(e);
 		}
@@ -193,6 +200,21 @@ export class TimelineData {
 		}
 		this.version++;
 	}
+}
+
+/** Margin after the paint: presentation (when LCP is stamped) trails the frame by a few frames */
+const AFTER_PAINT_MS = 300;
+
+/**
+ * Resolves a little after the frame that draws the first cards. One rAF only reaches the start
+ * of that frame (its paint is still pending), so wait for the next one, then a short margin
+ */
+function afterPaint(): Promise<void> {
+	return new Promise((resolve) => {
+		const later = () => setTimeout(resolve, AFTER_PAINT_MS);
+		if (typeof requestAnimationFrame !== 'function') return later();
+		requestAnimationFrame(() => requestAnimationFrame(later));
+	});
 }
 
 async function fetchJson<T>(url: string): Promise<T> {

@@ -21,6 +21,21 @@ describe('EventCard', () => {
 		expect(screen.getByText('災害')).toBeInTheDocument();
 	});
 
+	it('keeps the still flag it was mounted with (first-screen cards never start fading later)', async () => {
+		const { container, rerender } = render(EventCard, {
+			...base,
+			ev: makeEvent(),
+			still: true,
+			onselect: vi.fn(),
+		});
+		expect(container.querySelector('.card')).toHaveClass('still');
+		await rerender({ still: false });
+		expect(container.querySelector('.card')).toHaveClass('still');
+
+		const later = render(EventCard, { ...base, ev: makeEvent({ id: 'later' }), onselect: vi.fn() });
+		expect(later.container.querySelector('.card')).not.toHaveClass('still');
+	});
+
 	it('opens the event when clicked or activated from the keyboard', async () => {
 		const user = userEvent.setup();
 		const onselect = vi.fn();
