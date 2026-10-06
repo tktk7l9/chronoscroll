@@ -41,6 +41,9 @@ describe('pageHeaders', () => {
 	it('full security headers + HTML + cache + ETag', () => {
 		const h = pageHeaders('"abc"', true);
 		for (const [k, v] of Object.entries(security)) expect(h.get(k)).toBe(v);
+		// Pinned by name so removing them from the JSON cannot pass unnoticed
+		expect(h.get('strict-transport-security')).toContain('max-age=');
+		expect(h.get('cross-origin-opener-policy')).toBe('same-origin');
 		expect(h.get('content-type')).toBe('text/html; charset=utf-8');
 		expect(h.get('cache-control')).toBe('public, max-age=3600, stale-while-revalidate=86400');
 		expect(h.get('etag')).toBe('"abc"');

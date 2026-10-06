@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isMassDelete, parseManifest, planSync, sha256 } from './r2-plan.mjs';
+import { isMassDelete, parseManifest, planSync, sha256, shouldSkipSync } from './r2-plan.mjs';
 
 describe('planSync', () => {
 	it('put for new/changed, del for removed, skip for unchanged (key order)', () => {
@@ -49,5 +49,22 @@ describe('parseManifest', () => {
 		expect(parseManifest('{not json')).toEqual({});
 		expect(parseManifest('[1,2]')).toEqual({});
 		expect(parseManifest('null')).toEqual({});
+	});
+});
+
+describe('shouldSkipSync', () => {
+	it('syncs from the main branch on Workers Builds', () => {
+		expect(shouldSkipSync({ WORKERS_CI: '1', WORKERS_CI_BRANCH: 'main' })).toBe(false);
+	});
+	it('skips preview branches on Workers Builds', () => {
+		expect(shouldSkipSync({ WORKERS_CI: '1', WORKERS_CI_BRANCH: 'feature/x' })).toBe(true);
+	});
+	it('fails closed when Workers Builds gives no branch name', () => {
+		expect(shouldSkipSync({ WORKERS_CI: '1' })).toBe(true);
+		expect(shouldSkipSync({ WORKERS_CI: '1', WORKERS_CI_BRANCH: '' })).toBe(true);
+	});
+	it('does not skip outside Workers Builds (local / GitHub Actions)', () => {
+		expect(shouldSkipSync({})).toBe(false);
+		expect(shouldSkipSync({ WORKERS_CI_BRANCH: 'feature/x' })).toBe(false);
 	});
 });
