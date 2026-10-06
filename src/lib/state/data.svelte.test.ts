@@ -140,6 +140,100 @@ describe('TimelineData', () => {
 		}
 	});
 
+	describe('card-only overview first', () => {
+		const lite = overview.map(({ id, date, precision, title, category, region, importance }) => ({
+			id,
+			date,
+			precision,
+			title,
+			category,
+			region,
+			importance,
+		}));
+
+		/** Holds overview.json until release() so the in-between state can be observed */
+		function heldOverview(ok = true) {
+			let release!: () => void;
+			const gate = new Promise<void>((r) => (release = r));
+			const route = async () => {
+				await gate;
+				return ok
+					? new Response(JSON.stringify(overview), { status: 200 })
+					: new Response('x', { status: 503 });
+			};
+			return { route, release: () => release() };
+		}
+
+		it('draws previews before the full overview and swaps them without duplicates', async () => {
+			const held = heldOverview();
+			const { calls } = stubFetch({
+				...baseRoutes(),
+				'/data/overview-lite.json': lite,
+				'/data/overview.json': held.route,
+			});
+			const data = new TimelineData();
+			await data.init();
+			expect(data.meta?.total).toBe(200);
+			expect(data.points.map((p) => p.ev.id)).toEqual(['ov-1']);
+			// A preview has no body, so the detail dialog must not get it
+			expect(data.byId('ov-1')).toBeUndefined();
+			expect(calls).toContain('/data/overview.json');
+
+			held.release();
+			await flush();
+			await flush();
+			expect(data.byId('ov-1')?.summary).toBe(overview[0].summary);
+			expect(data.points).toHaveLength(1);
+		});
+
+		it('loadById of a preview waits for the full overview instead of fetching a chunk', async () => {
+			const held = heldOverview();
+			const { calls } = stubFetch({
+				...baseRoutes(),
+				'/data/overview-lite.json': lite,
+				'/data/overview.json': held.route,
+			});
+			const data = new TimelineData();
+			await data.init();
+			const p = data.loadById('ov-1', '1950-01-01');
+			held.release();
+			expect((await p)?.summary).toBe(overview[0].summary);
+			expect(calls.some((u) => u.includes('/chunks/'))).toBe(false);
+		});
+
+		it('falls back to the chunk when the full overview fails', async () => {
+			const held = heldOverview(false);
+			const chunk1950 = [overview[0]];
+			stubFetch({
+				...baseRoutes(),
+				'/data/overview-lite.json': lite,
+				'/data/overview.json': held.route,
+				'/data/chunks/1950s.json': chunk1950,
+			});
+			const data = new TimelineData();
+			await data.init();
+			held.release();
+			expect(data.loadError).toBeNull();
+			expect((await data.loadById('ov-1', '1950-01-01'))?.summary).toBe(overview[0].summary);
+		});
+
+		it('keeps a full event over a later preview of the same id', async () => {
+			const held = heldOverview();
+			stubFetch({
+				...baseRoutes(),
+				'/data/overview-lite.json': lite,
+				'/data/overview.json': held.route,
+				'/data/collections/theme.json': { ...collectionDetail, events: overview },
+			});
+			const data = new TimelineData();
+			await data.loadCollection('theme');
+			await data.init();
+			expect(data.points).toHaveLength(1);
+			expect(data.points[0].ev.summary).toBe(overview[0].summary);
+			held.release();
+		});
+	});
+
 	it('loads a collection once, adds its events, and returns null on failure', async () => {
 		const { calls } = stubFetch({ ...baseRoutes(), '/data/collections/broken.json': 404 });
 		const data = new TimelineData();

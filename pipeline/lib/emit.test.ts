@@ -6,6 +6,7 @@ import {
 	buildEvent,
 	buildIndexMeta,
 	decadeKeyOf,
+	overviewLite,
 	overviewSlice,
 	searchDocs,
 	sortEvents,
@@ -123,6 +124,25 @@ describe('sortEvents / chunkByDecade / overviewSlice / searchDocs', () => {
 	it('overviewSlice keeps only events at or above the threshold', () => {
 		expect(overviewSlice(events).map((e) => e.id)).toEqual(['c', 'b']);
 		expect(overviewSlice(events, 100)).toEqual([]);
+	});
+
+	it('overviewLite keeps only the fields a card and the LOD read', () => {
+		const withSvg = { ...ev('s', '1964-10-10', 99), svg: 'torch' };
+		const lite = overviewLite([withSvg, events[0]]);
+		expect(lite[0]).toEqual({
+			id: 's',
+			date: '1964-10-10',
+			precision: 'day',
+			title: withSvg.title,
+			category: withSvg.category,
+			region: withSvg.region,
+			importance: 99,
+			svg: 'torch',
+		});
+		// No svg key at all when the event has none (keeps the JSON small)
+		expect('svg' in lite[1]).toBe(false);
+		expect(lite[1]).not.toHaveProperty('summary');
+		expect(lite[1]).not.toHaveProperty('sources');
 	});
 
 	it('searchDocs is a light [id, date, summary] array (long text truncated)', () => {

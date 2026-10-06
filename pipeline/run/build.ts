@@ -35,6 +35,7 @@ import {
 	buildChunks,
 	buildEvent,
 	buildIndexMeta,
+	overviewLite,
 	overviewSlice,
 	searchDocs,
 	sortEvents,
@@ -442,10 +443,9 @@ const main = Effect.gen(function* () {
 	mkdirSync(join(OUT, 'collections'), { recursive: true });
 	const meta = buildIndexMeta(events, new Date().toISOString());
 	writeFileSync(join(OUT, 'index.json'), JSON.stringify(meta));
-	writeFileSync(
-		join(OUT, 'overview.json'),
-		JSON.stringify(overviewSlice(events, OVERVIEW_MIN_IMPORTANCE)),
-	);
+	const overview = overviewSlice(events, OVERVIEW_MIN_IMPORTANCE);
+	writeFileSync(join(OUT, 'overview.json'), JSON.stringify(overview));
+	writeFileSync(join(OUT, 'overview-lite.json'), JSON.stringify(overviewLite(overview)));
 	for (const chunk of buildChunks(events)) {
 		writeFileSync(join(OUT, 'chunks', `${chunk.meta.key}.json`), JSON.stringify(chunk.events));
 	}

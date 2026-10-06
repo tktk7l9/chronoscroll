@@ -63,6 +63,17 @@ export interface NewsEvent {
 }
 
 /**
+ * Card-only slice of an overview event (static/data/overview-lite.json).
+ * The first screen needs only what a timeline card draws and what LOD/filters read, so the
+ * initial fetch is about a quarter of overview.json (LCP). The detail dialog still reads the
+ * full event, which arrives with overview.json right after.
+ */
+export type OverviewLiteEvent = Pick<
+	NewsEvent,
+	'id' | 'date' | 'precision' | 'title' | 'category' | 'region' | 'importance' | 'svg'
+>;
+
+/**
  * Metadata for a collection (a themed reading list that groups events).
  * Comes from content/collections/<slug>.yaml and is included in static/data/collections.json.
  */

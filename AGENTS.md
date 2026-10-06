@@ -12,6 +12,10 @@ It shows domestic and international news from 1829 to the present, with an impor
   the Workers Builds secrets. Host: https://chronoscroll.saitotakuya0719.workers.dev
 - Data is generated from the ja.wikipedia year pages by a **build-time pipeline** (`pipeline/`) and
   **committed** to `static/data/` as JSON chunks (deploys never hit Wikipedia).
+- **First paint uses `overview-lite.json`** (card-only fields of overview.json, about 1/4 the size; it is the
+  LCP critical path). `overview.json` is fetched right after it and swaps the previews for full events;
+  `byId`/`loadById` never return a preview (the detail dialog needs the body). Both are written by the pipeline
+  (`overviewLite` in `pipeline/lib/emit.ts`), so keep them in sync if you edit one by hand.
 - **The LOD threshold is driven by the local density of the visible range** (`eventsPerDayInRange` in `chunks.ts`). The actual density
   varies 12x by decade, from 0.14 to 1.67 events/day, so the all-time average would make the Meiji era sparse and the 2000s onward
   overcrowded. The density comes from the chunk counts in `index.json`, so no extra data is needed.
