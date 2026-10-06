@@ -19,8 +19,8 @@
     "deploy:check": "echo assets: $(find build -type f | wc -l) / pages: $(ls build-e | wc -l)"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1141.0",
-    "@cloudflare/workers-types": "^5.20260928.1",
+    "@aws-sdk/client-s3": "^3.1146.0",
+    "@cloudflare/workers-types": "^5.20261003.1",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.3",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
@@ -28,8 +28,8 @@
     "@testing-library/svelte": "^5.4.2",
     "@testing-library/user-event": "^14.6.7",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^26.6.3",
-    "@vitest/coverage-v8": "^5.0.1",
+    "@types/node": "^26.6.4",
+    "@vitest/coverage-v8": "^5.0.3",
     "effect": "^4.0.0",
     "js-yaml": "^5.4.2",
     "jsdom": "^30.1.1",
@@ -38,9 +38,9 @@
     "svelte-check": "^4.7.6",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "vite": "^8.3.1",
+    "vite": "^8.3.2",
     "vitest": "^5.0.0",
-    "wrangler": "^4.142.0"
+    "wrangler": "^4.147.0"
   },
   "dependencies": {
     "minisearch": "^7.2.0"
