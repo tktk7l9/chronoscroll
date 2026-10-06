@@ -33,3 +33,14 @@ export function parseManifest(text) {
 		return {};
 	}
 }
+
+/**
+ * Preview builds on Workers Builds (anything but main) must not touch the production bucket.
+ * WORKERS_CI and WORKERS_CI_BRANCH are injected by Workers Builds by default.
+ * Fail closed: inside Workers Builds, a missing branch is treated as non-production too.
+ * Outside Workers Builds (local, GitHub Actions) the sync is not skipped here.
+ * @param {Record<string, string | undefined>} env process.env
+ */
+export function shouldSkipSync(env) {
+	return Boolean(env.WORKERS_CI) && env.WORKERS_CI_BRANCH !== 'main';
+}

@@ -12,12 +12,10 @@ import {
 	PutObjectCommand,
 	S3Client,
 } from '@aws-sdk/client-s3';
-import { isMassDelete, parseManifest, planSync, sha256 } from './lib/r2-plan.mjs';
+import { isMassDelete, parseManifest, planSync, sha256, shouldSkipSync } from './lib/r2-plan.mjs';
 
-// Preview builds on Workers Builds (anything but main) must not touch the production bucket.
-// WORKERS_CI and WORKERS_CI_BRANCH are injected by Workers Builds by default.
-// Fail closed: inside Workers Builds, a missing branch is treated as non-production too.
-if (process.env.WORKERS_CI && process.env.WORKERS_CI_BRANCH !== 'main') {
+// Preview builds on Workers Builds must not touch the production bucket (see shouldSkipSync).
+if (shouldSkipSync(process.env)) {
 	console.log(`Non-production branch (${process.env.WORKERS_CI_BRANCH || 'unknown'}): skipping R2 sync`);
 	process.exit(0);
 }
