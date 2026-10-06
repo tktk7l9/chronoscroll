@@ -198,6 +198,14 @@
 		}
 	});
 
+	// Cards of the first screen are drawn without the fade-up (LCP); later ones fade in as before
+	let introDone = $state(false);
+	$effect(() => {
+		if (introDone || !ready || placed.length === 0) return;
+		const raf = requestAnimationFrame(() => (introDone = true));
+		return () => cancelAnimationFrame(raf);
+	});
+
 	// Lazy-load chunks for the visible range.
 	// The initial view can be drawn from overview alone, so delay slightly to avoid competing with LCP for bandwidth
 	let chunkLoadingEnabled = $state(false);
@@ -494,6 +502,7 @@
 			single={columns === 1}
 			height={item.height}
 			highlighted={highlightId === item.ev.id}
+			still={!introDone}
 			{onselect}
 		/>
 	{/each}

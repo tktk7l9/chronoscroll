@@ -14,6 +14,7 @@
 </script>
 
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import type { NewsEvent } from '../types.ts';
 	import { CATEGORY_LABELS } from '../types.ts';
 	import ArtIcon from './ArtIcon.svelte';
@@ -25,6 +26,7 @@
 		single,
 		height,
 		highlighted = false,
+		still = false,
 		onselect,
 	}: {
 		ev: NewsEvent;
@@ -33,8 +35,12 @@
 		single: boolean;
 		height: number;
 		highlighted?: boolean;
+		/** Skip the fade-up. Read once at mount: a card that later gets false must not start animating */
+		still?: boolean;
 		onselect: (ev: NewsEvent) => void;
 	} = $props();
+
+	const noIntro = untrack(() => still);
 
 	const dateLabel = $derived.by(() => {
 		const [y, m, d] = ev.date.split('-');
@@ -49,6 +55,7 @@
 	class:single
 	class:big={!!ev.svg}
 	class:highlighted
+	class:still={noIntro}
 	data-cat={ev.category}
 	data-id={ev.id}
 	style:top="{top}px"
@@ -84,6 +91,11 @@
 		--cat-color: var(--cat-society);
 		/* Light fade-up on appearance only (no exit = does not block unmounting by virtualization) */
 		animation: card-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	}
+	/* The first screen appears without the fade: a card at opacity 0 does not count as painted,
+	   so the fade pushed LCP back by its whole duration */
+	.card.still {
+		animation: none;
 	}
 	@keyframes card-in {
 		from {
