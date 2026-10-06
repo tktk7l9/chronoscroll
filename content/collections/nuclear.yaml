@@ -1,0 +1,55 @@
+# History of nuclear weapons and disarmament (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Sets the spread of nuclear weapons (the first test by each new nuclear power) beside the test bans,
+# arms-control treaties and the movement of the hibakusha.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Einstein's letter "sent" to Roosevelt on 2 Aug 1939 / the letter is dated 2 Aug and
+# reached Roosevelt on 11 Oct; Sato stating the three non-nuclear principles on 27 Jan 1968 / first stated
+# in the Diet on 11 Dec 1967).
+slug: nuclear
+title: 核兵器と軍縮の歴史
+lead: 1942年に始まったマンハッタン計画から、トリニティ実験、広島と長崎への原爆投下、第五福竜丸の被曝、キューバ危機、核拡散防止条約、そして日本被団協のノーベル平和賞まで。核兵器を持つ国が増えていく流れと、核実験の禁止や軍縮の条約、被爆者の運動を並べてたどる。
+description: マンハッタン計画から日本被団協のノーベル平和賞まで、核兵器の開発と拡散、核実験の禁止や軍縮条約、被爆者の運動を年代順にたどる特集。
+icon: art-hiroshima
+entries:
+  # --- The bomb ---
+  - id: 1942-08-13-c1324682 # Manhattan Project begins
+  - id: 1942-12-02-62682ab5 # First nuclear chain reaction, University of Chicago
+  - id: 1945-07-16-4fbb58aa # Trinity test
+  - id: 1945-08-01-02e05b66 # Atomic bombing of Hiroshima (6 Aug)
+  - id: 1945-08-09-7d44e41b # Atomic bombing of Nagasaki
+
+  # --- The hydrogen bomb and the Lucky Dragon ---
+  - id: 1949-08-29-fcb3e9cf # First Soviet nuclear test
+  - id: 1952-10-03-283af298 # First British nuclear test
+  - id: 1952-11-01-fc0760ab # First hydrogen bomb test, Enewetak
+  - id: 1954-03-01-f0b96c9f # Castle Bravo: fallout on the fishing boat Daigo Fukuryu Maru
+  - id: 1955-07-09-824c3c3f # Russell-Einstein Manifesto
+  - id: 1955-08-06-97d872a8 # First World Conference against A and H Bombs, Hiroshima
+  - id: 1956-08-10-e81e2366 # Nihon Hidankyo founded
+  - id: 1958-05-05-a125967e # Children's Peace Monument for Sasaki Sadako unveiled
+
+  # --- More nuclear powers, and the brink ---
+  - id: 1960-02-13-6d265c5b # First French nuclear test
+  - id: 1961-10-30-7b7956d7 # Tsar Bomba, the largest test ever
+  - id: 1962-10-22-f3d10d34 # Cuban Missile Crisis: Kennedy announces the blockade
+  - id: 1963-12-07-07186b01 # Shimoda case: Tokyo court rules the atomic bombings illegal
+  - id: 1964-10-16-972c06bd # First Chinese nuclear test
+
+  # --- Treaties and tests during the Cold War ---
+  - id: 1970-03-05-ebd6fde7 # Non-Proliferation Treaty enters into force
+  - id: 1972-05-26-2927bebd # SALT I signed in Moscow
+  - id: 1974-05-18-2b570977 # First Indian nuclear test
+  - id: 1983-09-26-8546a1fd # Stanislav Petrov judges a missile alert to be false
+  - id: 1987-12-08-5e6164f9 # INF Treaty signed
+  - id: 1991-07-31-72127425 # START I signed
+
+  # --- After the Cold War ---
+  - id: 1996-09-10-d0d3b4c7 # Comprehensive Nuclear-Test-Ban Treaty adopted
+  - id: 1996-12-05-26f3ea24 # Atomic Bomb Dome becomes a World Heritage Site
+  - id: 1998-05-28-f21258b7 # First Pakistani nuclear test
+  - id: 2006-10-09-d3fda850 # First North Korean nuclear test
+  - id: 2009-04-05-8204e847 # Obama's Prague speech on a world without nuclear weapons
+  - id: 2016-05-27-7b8791da # Obama, first sitting US president to visit Hiroshima
+  - id: 2017-09-20-16be9b34 # Treaty on the Prohibition of Nuclear Weapons opens for signature
+  - id: 2024-10-11-22d8018a # Nihon Hidankyo wins the Nobel Peace Prize

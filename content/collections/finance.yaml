@@ -1,0 +1,56 @@
+# History of money systems and financial crises (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Alternates the turning points of the monetary system (the yen, the Bank of Japan, the gold standard,
+# Bretton Woods, 360 yen to the dollar, floating rates, the euro) with the panics and crises around them,
+# in Japan and abroad.
+# Left out on purpose: entries whose dataset wording disagrees with the topic article
+# (the only Plaza Accord entry also says the yuan plunged, which the article does not support;
+# Silicon Valley Bank is called the largest failure after Lehman, the article: second-largest FDIC-insured bank).
+slug: finance
+title: 金融危機の歴史
+lead: 1871年の新貨条例で「円」が生まれてから、金本位制、昭和金融恐慌と世界恐慌、ブレトン・ウッズ協定と1ドル360円、ニクソン・ショックと変動相場制、1989年の日経平均株価の最高値と銀行・証券会社の破綻、リーマン・ショック、そして34年ぶりの最高値更新とマイナス金利の解除まで。市場を揺さぶった恐慌や金融危機を、通貨制度の転換点とあわせて、日本と世界の出来事でたどる。
+description: 新貨条例による円の誕生からマイナス金利の解除まで、恐慌と金融危機を通貨制度の転換点とあわせて、日本と世界の出来事で年代順にたどる特集。
+icon: art-great-depression
+entries:
+  # --- The yen, central banks and the gold standard ---
+  - id: 1869-09-24-9a00388b # Black Friday gold panic in the United States
+  - id: 1871-06-27-6268f0e6 # New Currency Act: the yen is adopted
+  - id: 1873-09-18-83d097ae # Panic of 1873
+  - id: 1882-10-10-0a3c7f54 # Bank of Japan opens
+  - id: 1896-05-26-b147ef7a # Charles Dow publishes the first Dow average
+  - id: 1897-10-01-5910e76b # Japan goes onto the gold standard
+  - id: 1913-12-23-572b187f # Federal Reserve Act: the Federal Reserve is set up
+
+  # --- Panics of the 1920s and the Great Depression ---
+  - id: 1927-03-14-206f12c5 # Finance minister's slip sets off the Showa financial crisis
+  - id: 1927-04-22-488662d6 # Three-week moratorium, banks close
+  - id: 1929-10-24-b6eff5a3 # Wall Street crash: Black Thursday
+  - id: 1930-01-11-e218c6fc # Japan returns to the gold standard
+  - id: 1931-12-13-70974cba # Gold exports banned again
+
+  # --- The postwar system ---
+  - id: 1944-07-22-0a17feff # Bretton Woods agreements
+  - id: 1946-02-17-631db258 # Bank deposits frozen as the new yen is introduced
+  - id: 1949-04-25-75c7fd7b # Single exchange rate of 360 yen to the dollar
+
+  # --- Floating rates and oil ---
+  - id: 1971-08-15-647e7f47 # Nixon shock: the dollar is no longer convertible into gold
+  - id: 1971-12-18-3dc25fe2 # Smithsonian Agreement
+  - id: 1973-02-14-4230c419 # The yen floats
+  - id: 1973-10-17-c0c14e5c # Oil shock
+
+  # --- The bubble and the banking crisis ---
+  - id: 1987-10-19-8b62a0ad # Black Monday
+  - id: 1989-12-29-fdef4d7e # Nikkei average peaks at 38,957
+  - id: 1997-07-02-ee64dd53 # Thailand floats the baht: the Asian financial crisis
+  - id: 1997-11-17-4d06d694 # Hokkaido Takushoku Bank fails
+  - id: 1997-11-24-a33232cc # Yamaichi Securities announces it will close
+  - id: 1998-10-23-4a64c390 # Long-Term Credit Bank of Japan fails
+  - id: 1999-01-01-3dd61886 # The euro is introduced
+
+  # --- Global financial crisis and after ---
+  - id: 2008-09-15-e06d57d8 # Lehman Brothers collapses
+  - id: 2010-05-02-c826a7cf # Eurozone and IMF agree a bailout for Greece
+  - id: 2010-09-10-33729ef7 # Japan's first deposit payoff (Incubator Bank of Japan)
+  - id: 2024-02-22-b74375f9 # Nikkei average passes its 1989 record
+  - id: 2024-03-19-80d023b3 # Bank of Japan ends negative interest rates

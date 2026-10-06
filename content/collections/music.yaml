@@ -1,0 +1,56 @@
+# History of music: recording, broadcasting and pop (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Follows how music reached listeners (phonograph, records, radio, TV, Walkman, CD, iPod, downloads,
+# a singing synthesizer) next to the pop milestones in Japan and abroad, with two concert-hall premieres.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Berliner's gramophone patent granted 27 Sep 1887 / issued 8 Nov 1887; Caruso's first
+# records 18 Mar 1902 / first sessions in April 1902; Nippon Polydor founded 9 May 1927 / 30 May 1927;
+# Misora Hibari's singer debut 1 May 1948 / no debut date, a Yokohama stage show in May 1948;
+# "Heartbreak Hotel" eight weeks at No. 1 / seven weeks on the Billboard Top 100; Sony's first transistor radio
+# on sale 7 Aug 1955 / developed in August, shipped in September; first Japan Record Award chosen
+# 15 Dec 1959 / that day only narrowed the field to six, ceremony on 27 Dec; the first CDs pressed at a Philips
+# plant in the Netherlands on 17 Aug 1982 / a PolyGram plant in Langenhagen, West Germany).
+slug: music
+title: 音楽の歴史
+lead: 1877年にエジソンが蓄音機で初めて声を録音してから、ジャズ初のレコード、ラジオ放送と紅白歌合戦、エルヴィスとビートルズ、ウォークマンとCD、iPodと初音ミク、そしてボブ・ディランのノーベル文学賞まで。録音と放送の技術の移り変わりと、それに乗って広がったポピュラー音楽の節目を、日本と世界の出来事でたどる。
+description: エジソンの蓄音機からボブ・ディランのノーベル文学賞まで、録音と放送の技術、ポピュラー音楽の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-turntable
+entries:
+  # --- Sound can be stored; concert halls and the first jazz record ---
+  - id: 1877-12-06-95b0c9c2 # Edison records a human voice on his phonograph (Japan's "Day of Sound")
+  - id: 1893-12-16-aa00143c # Dvorak's "New World" Symphony premieres at Carnegie Hall
+  - id: 1913-05-29-52dbb64f # The Rite of Spring premieres in Paris
+  - id: 1917-02-26-d3c75227 # Original Dixieland Jass Band: the first commercial jazz recording
+
+  # --- Radio, and the Kohaku song contest ---
+  - id: 1925-03-22-02aa949f # Tokyo Broadcasting Station (later NHK) starts radio broadcasts
+  - id: 1945-12-31-9ff5bdef # NHK radio airs "Kohaku Ongaku Shiai", forerunner of Kohaku Uta Gassen
+  - id: 1949-02-21-f87cce88 # Louis Armstrong, first jazz musician on the cover of Time
+  - id: 1951-01-03-faca5ffa # First NHK Kohaku Uta Gassen
+  - id: 1951-03-20-24e20b3e # Nippon Columbia releases Japan's first LP records
+  - id: 1953-12-31-3efbb1d8 # Fourth Kohaku: first on TV and radio, held on New Year's Eve from then on
+
+  # --- Rock and roll, the Beatles, charts ---
+  - id: 1956-09-09-918617cd # Elvis Presley on The Ed Sullivan Show (82.6% share)
+  - id: 1959-05-04-957592ff # First Grammy Awards
+  - id: 1962-03-19-296cbfdf # Bob Dylan's debut album
+  - id: 1962-10-05-d93fc56c # The Beatles' first record
+  - id: 1966-06-29-b23446ce # The Beatles arrive in Japan (Budokan concerts)
+  - id: 1968-01-04-f211f9a9 # Oricon charts begin
+  - id: 1969-08-15-033023ef # Woodstock
+  - id: 1970-04-10-e604e4b7 # The Beatles effectively break up
+
+  # --- Music you carry: Walkman and CD ---
+  - id: 1978-01-19-386f9d1c # TBS starts the chart show "The Best Ten"
+  - id: 1979-07-01-ed0aa39c # Sony launches the Walkman
+  - id: 1980-12-08-aa223c11 # John Lennon is shot dead
+  - id: 1982-10-01-1546a342 # Sony CDP-101, the first CD player, goes on sale
+  - id: 1989-07-06-54d56772 # Misora Hibari, first woman to receive the People's Honour Award
+  - id: 1997-07-26-8eb25b9f # First Fuji Rock Festival
+
+  # --- Digital music ---
+  - id: 2001-10-23-e22a7535 # Apple announces the iPod
+  - id: 2003-04-28-c90040a2 # iTunes Music Store opens in the US
+  - id: 2007-08-31-bfc649b6 # Hatsune Miku singing synthesizer goes on sale
+  - id: 2009-06-25-f687e0db # Michael Jackson dies
+  - id: 2016-10-13-8435e39c # Bob Dylan wins the Nobel Prize in Literature

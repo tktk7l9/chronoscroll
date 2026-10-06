@@ -1,0 +1,53 @@
+# History of aviation (collection)
+# References to existing auto-generated events only (nothing newly written).
+# From airships and the first powered flights through ocean crossings, the jet age and supersonic travel,
+# to Japan's airports, airlines and home-built airliners, including the major accidents.
+# Left out on purpose: entries whose dataset wording disagrees with the topic article
+# (the 15 Jul 1954 "Boeing 707 first flight" was the 367-80 prototype, the 707 itself first flew in 1957;
+# Earhart's 1932 solo Atlantic flight is given as 14 h 54 min, the article says 14 h 56 min).
+slug: aviation
+title: 航空の歴史
+lead: 1900年のツェッペリン飛行船、1903年のライト兄弟の初飛行から、リンドバーグの大西洋単独無着陸横断、世界初のジェット機、ジェット旅客機コメットとコンコルド、そして国産ジェット旅客機MRJの初飛行まで。羽田・成田・関西の空港の開港や国産旅客機YS-11、日本航空123便などの事故も含めて、空の旅が広がってきた歩みをたどる。
+description: ライト兄弟の初飛行から国産ジェット旅客機の初飛行と羽田空港の衝突事故まで、飛行機と空の旅の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-wright-flyer
+entries:
+  # --- Airships and the first aeroplanes ---
+  - id: 1900-07-02-7453c941 # First Zeppelin flight over Lake Constance
+  - id: 1903-12-17-8fe33c91 # Wright brothers' first powered flight
+  - id: 1909-07-25-ef685257 # Bleriot flies across the English Channel
+  - id: 1910-12-19-aa380279 # Tokugawa and Hino: the first powered flights in Japan
+
+  # --- Crossing oceans ---
+  - id: 1919-05-27-a31ddb7f # Curtiss NC-4 reaches Lisbon: first transatlantic flight
+  - id: 1927-05-21-b4e70bb6 # Lindbergh's solo nonstop Atlantic crossing
+  - id: 1928-06-18-26487449 # Amelia Earhart, first woman to fly across the Atlantic (as a passenger)
+  - id: 1928-10-20-ee0045cb # Japan Air Transport founded
+  - id: 1929-08-19-52417514 # The Graf Zeppelin visits Japan on its round-the-world flight
+  - id: 1931-08-25-47ab65e0 # Haneda airfield opens
+  - id: 1935-12-17-fa031f94 # Douglas DC-3 first flight
+  - id: 1937-05-06-3bf600b1 # Hindenburg disaster
+  - id: 1937-07-02-054a5a7a # Amelia Earhart disappears over the Pacific
+  - id: 1939-08-26-bf4f27e1 # The Mainichi "Nippon" leaves Haneda to fly around the world
+
+  # --- The jet age ---
+  - id: 1939-08-27-fc4a8088 # Heinkel He 178: the first jet flight
+  - id: 1947-10-14-b702209c # Bell X-1 breaks the sound barrier in level flight
+  - id: 1949-07-27-17c48d7a # de Havilland Comet, the first jet airliner, flies
+  - id: 1951-10-25-e6fccf78 # Japan Air Lines starts flying with the Martin 2-0-2 "Mokusei"
+  - id: 1952-05-02-fa7c1dc4 # First scheduled jet airliner service, London to Johannesburg
+  - id: 1965-04-01-512d9e54 # The YS-11, Japan's first home-built airliner, enters service
+
+  # --- Supersonic flights and big airports ---
+  - id: 1976-01-21-7f7dae59 # Concorde scheduled services begin
+  - id: 1978-05-20-c1d87161 # New Tokyo International Airport (Narita) opens
+  - id: 1985-08-12-1048ec6a # Japan Air Lines Flight 123 crashes
+  - id: 1994-09-04-4fa6fd43 # Kansai International Airport opens
+  - id: 1998-09-19-2a6cc439 # Skymark: first new domestic airline in 35 years
+
+  # --- 21st century ---
+  - id: 2000-07-25-cbc682cb # Concorde crash near Paris
+  - id: 2007-10-25-f845ddf5 # Airbus A380 enters commercial service
+  - id: 2010-01-19-f251c755 # Japan Airlines files for corporate reorganisation
+  - id: 2012-03-01-b38da581 # Peach, Japan's low-cost carrier, makes its first flight
+  - id: 2015-11-11-2e53b0bf # MRJ, Japan's first home-built jet airliner, flies
+  - id: 2024-01-02-29f880c4 # Haneda runway collision
