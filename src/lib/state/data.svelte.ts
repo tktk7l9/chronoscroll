@@ -1,6 +1,7 @@
 /**
  * Runtime store for event data (IO layer, excluded from the coverage gate).
- * Loads overview initially and lazy-loads decade chunks based on the visible range.
+ * Loads the card-only overview first (first paint), then the full overview, and lazy-loads
+ * decade chunks based on the visible range.
  */
 import { chunkKeysInRange } from '../chunks.ts';
 import { collectionDetailPath } from '../collections.ts';
@@ -12,6 +13,7 @@ import type {
 	CollectionsIndex,
 	IndexMeta,
 	NewsEvent,
+	OverviewLiteEvent,
 } from '../types.ts';
 import { toPoints, type EventPoint } from '../viewport.ts';
 
@@ -24,6 +26,13 @@ export class TimelineData {
 	collections = $state<CollectionMeta[]>([]);
 
 	#events = new Map<string, NewsEvent>();
+	/**
+	 * Card-only stand-ins from overview-lite.json, drawn until the full event arrives.
+	 * Kept apart from #events so byId/loadById never hand a body-less event to the detail dialog.
+	 */
+	#previews = new Map<string, NewsEvent>();
+	/** Settles once the full overview.json has been taken in (or has failed) */
+	#overviewSettled: Promise<void> | null = null;
 	#loaded = new Set<string>();
 	#pending = new Set<string>();
 	#books: Record<string, BookRef[]> = {};
@@ -32,7 +41,7 @@ export class TimelineData {
 
 	readonly points: EventPoint[] = $derived.by(() => {
 		void this.version;
-		return toPoints([...this.#events.values()]);
+		return toPoints([...this.#previews.values(), ...this.#events.values()]);
 	});
 
 	readonly eventsPerDay: number = $derived.by(() => {
@@ -42,11 +51,24 @@ export class TimelineData {
 
 	async init(): Promise<void> {
 		try {
-			const [meta, overview] = await Promise.all([
+			// The small card-only file paints the first screen; the full overview (about 4x larger)
+			// is fetched after it so the two do not split the bandwidth before LCP.
+			// If the lite file is missing, fall back to waiting for the full overview as before
+			const [meta, lite] = await Promise.all([
 				fetchJson<IndexMeta>('/data/index.json'),
-				fetchJson<NewsEvent[]>('/data/overview.json'),
+				fetchJson<OverviewLiteEvent[]>('/data/overview-lite.json').catch(() => null),
 			]);
-			this.#addEvents(overview);
+			const full = fetchJson<NewsEvent[]>('/data/overview.json');
+			if (lite !== null) {
+				this.#addPreviews(lite);
+				this.#overviewSettled = full.then(
+					(events) => this.#addEvents(events),
+					// Without the full overview, details fall back to loading the event's chunk
+					() => {},
+				);
+			} else {
+				this.#addEvents(await full);
+			}
 			this.meta = meta;
 		} catch (e) {
 			this.loadError = String(e);
@@ -138,6 +160,13 @@ export class TimelineData {
 	async loadById(id: string, date: string): Promise<NewsEvent | undefined> {
 		const existing = this.#events.get(id);
 		if (existing) return existing;
+		// An overview event that is only a preview yet: its body is on the way with overview.json,
+		// so wait for that instead of fetching a whole chunk
+		if (this.#previews.has(id) && this.#overviewSettled) {
+			await this.#overviewSettled;
+			const full = this.#events.get(id);
+			if (full) return full;
+		}
 		const day = dayOf(date);
 		// A malformed ?e= deep link (the date is taken from the id prefix) yields NaN, which
 		// would throw inside chunkKeysInRange. There is no chunk to wait for, so give up at once
@@ -151,7 +180,17 @@ export class TimelineData {
 	}
 
 	#addEvents(events: readonly NewsEvent[]): void {
-		for (const ev of events) this.#events.set(ev.id, ev);
+		for (const ev of events) {
+			this.#events.set(ev.id, ev);
+			this.#previews.delete(ev.id);
+		}
+		this.version++;
+	}
+
+	#addPreviews(events: readonly OverviewLiteEvent[]): void {
+		for (const ev of events) {
+			if (!this.#events.has(ev.id)) this.#previews.set(ev.id, { ...ev, summary: '', sources: [] });
+		}
 		this.version++;
 	}
 }

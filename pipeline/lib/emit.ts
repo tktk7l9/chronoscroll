@@ -4,6 +4,7 @@ import type {
 	EventImage,
 	IndexMeta,
 	NewsEvent,
+	OverviewLiteEvent,
 	Region,
 } from '../../src/lib/types.ts';
 import type { RawEvent } from './wikitext.ts';
@@ -109,6 +110,20 @@ export function buildChunks(
 /** For the initial load: only events at or above the importance threshold */
 export function overviewSlice(events: readonly NewsEvent[], minImportance = 95): NewsEvent[] {
 	return sortEvents(events.filter((e) => e.importance >= minImportance));
+}
+
+/** Card-only projection of the overview for the first paint (keeps the key order stable) */
+export function overviewLite(events: readonly NewsEvent[]): OverviewLiteEvent[] {
+	return events.map(({ id, date, precision, title, category, region, importance, svg }) => ({
+		id,
+		date,
+		precision,
+		title,
+		category,
+		region,
+		importance,
+		...(svg !== undefined ? { svg } : {}),
+	}));
 }
 
 /** Max characters of search text (keeps the index small; the key point comes at the start, so this is enough in practice) */

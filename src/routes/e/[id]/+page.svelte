@@ -57,7 +57,16 @@
 
 		{#if ev.image}
 			<figure>
-				<img src={ev.image.src} width={ev.image.width} height={ev.image.height} alt="" />
+				<!-- The photo is this page's LCP, so fetch it first. crossorigin="anonymous" sends the
+				     request without credentials, so Wikimedia's WMF-Uniq third-party cookie is never stored -->
+				<img
+					src={ev.image.src}
+					width={ev.image.width}
+					height={ev.image.height}
+					alt=""
+					crossorigin="anonymous"
+					fetchpriority="high"
+				/>
 				<figcaption>
 					<a href={ev.image.credit} target="_blank" rel="noopener noreferrer">
 						画像: Wikimedia Commons

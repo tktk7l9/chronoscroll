@@ -190,7 +190,16 @@ const PNG_1PX = Buffer.from(
 let imageHits = 0;
 await page.route('**upload.wikimedia.org**', async (route) => {
 	imageHits++;
-	await route.fulfill({ status: 200, contentType: 'image/png', body: PNG_1PX }).catch(() => {});
+	// Images are requested with crossorigin="anonymous" (no WMF-Uniq cookie), so answer with the
+	// CORS header upload.wikimedia.org really sends, or the browser rejects the stand-in
+	await route
+		.fulfill({
+			status: 200,
+			contentType: 'image/png',
+			headers: { 'access-control-allow-origin': '*' },
+			body: PNG_1PX,
+		})
+		.catch(() => {});
 });
 await page.goto(base + `/?t=${imageEvent.date}&z=8`, { waitUntil: 'networkidle' });
 const cardSel = `[data-id="${imageEvent.id}"] .hit`;

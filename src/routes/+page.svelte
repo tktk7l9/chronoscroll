@@ -151,7 +151,8 @@
 	     No crossorigin attribute (unless the credentials mode matches the same-origin fetch(),
 	     the preload goes unused, causing a double fetch + a held connection so networkidle never comes) -->
 	<link rel="preload" href="/data/index.json" as="fetch" />
-	<link rel="preload" href="/data/overview.json" as="fetch" />
+	<!-- Only the card-only overview is preloaded; the full overview.json follows once it arrives -->
+	<link rel="preload" href="/data/overview-lite.json" as="fetch" />
 </svelte:head>
 
 <!-- Skip past the header controls straight to the timeline (SHIG 20, 59) -->
