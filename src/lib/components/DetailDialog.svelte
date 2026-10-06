@@ -124,6 +124,7 @@
 						height={ev.image.height}
 						alt=""
 						decoding="async"
+						crossorigin="anonymous"
 					/>
 					<figcaption>
 						<a href={ev.image.credit} target="_blank" rel="noopener noreferrer">

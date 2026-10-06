@@ -3,7 +3,10 @@
 
 	// Shared across cards (never fetch the same image twice; at most one pending reservation)
 	const preloader = createImagePreloader((url) => {
-		new Image().src = url;
+		// Same CORS mode as the dialog's <img crossorigin="anonymous">, or the cache entry is not reused
+		const img = new Image();
+		img.crossOrigin = 'anonymous';
+		img.src = url;
 	}, {
 		skip: () =>
 			prefersReducedData((navigator as Navigator & { connection?: ConnectionLike }).connection),
