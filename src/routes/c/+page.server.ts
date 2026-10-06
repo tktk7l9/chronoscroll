@@ -3,7 +3,7 @@
  * Gives a path into history by theme and serves as a starting point for internal links to event pages.
  */
 import { readFileSync } from 'node:fs';
-import type { CollectionsIndex } from '$lib/types';
+import type { CollectionsIndex } from '#lib/types.js';
 import type { PageServerLoad } from './$types';
 
 export const prerender = true;

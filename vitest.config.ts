@@ -42,8 +42,8 @@ export default defineConfig({
 					// Load Svelte's client runtime (mount) instead of the server build
 					conditions: ["browser"],
 					alias: {
-						$lib: r("./src/lib"),
-						"$app/environment": r("./src/test/stubs/app-environment.ts"),
+						"#lib": r("./src/lib"),
+						"$app/env": r("./src/test/stubs/app-env.ts"),
 						"$app/navigation": r("./src/test/stubs/app-navigation.ts"),
 					},
 				},

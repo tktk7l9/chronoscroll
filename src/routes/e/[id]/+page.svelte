@@ -1,13 +1,13 @@
 <script lang="ts">
-	import ArtIcon from '$lib/components/ArtIcon.svelte';
-	import BookLinks from '$lib/components/BookLinks.svelte';
-	import BrandMark from '$lib/components/BrandMark.svelte';
-	import PageNav from '$lib/components/PageNav.svelte';
-	import SponsorSlot from '$lib/components/SponsorSlot.svelte';
-	import { formatEventDate } from '$lib/coverage';
-	import { absoluteUrl } from '$lib/site';
-	import { CATEGORY_LABELS, REGION_LABELS } from '$lib/types';
-	import { formatWareki } from '$lib/wareki';
+	import ArtIcon from '#lib/components/ArtIcon.svelte';
+	import BookLinks from '#lib/components/BookLinks.svelte';
+	import BrandMark from '#lib/components/BrandMark.svelte';
+	import PageNav from '#lib/components/PageNav.svelte';
+	import SponsorSlot from '#lib/components/SponsorSlot.svelte';
+	import { formatEventDate } from '#lib/coverage.js';
+	import { absoluteUrl } from '#lib/site.js';
+	import { CATEGORY_LABELS, REGION_LABELS } from '#lib/types.js';
+	import { formatWareki } from '#lib/wareki.js';
 
 	let { data } = $props();
 

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import ArtIcon from '$lib/components/ArtIcon.svelte';
-	import BrandMark from '$lib/components/BrandMark.svelte';
-	import PageNav from '$lib/components/PageNav.svelte';
-	import { formatCount } from '$lib/coverage';
-	import { absoluteUrl } from '$lib/site';
+	import ArtIcon from '#lib/components/ArtIcon.svelte';
+	import BrandMark from '#lib/components/BrandMark.svelte';
+	import PageNav from '#lib/components/PageNav.svelte';
+	import { formatCount } from '#lib/coverage.js';
+	import { absoluteUrl } from '#lib/site.js';
 
 	let { data } = $props();
 

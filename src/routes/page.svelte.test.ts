@@ -3,14 +3,14 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { stubFetch, type Route } from '../test/fetch.ts';
 import { makeCollection, makeEvent, makeMeta } from '../test/fixtures.ts';
-import { TimelineData } from '$lib/state/data.svelte';
-import type { SearchRequest, SearchResponse } from '$lib/workers/search.worker';
+import { TimelineData } from '#lib/state/data.svelte.js';
+import type { SearchRequest, SearchResponse } from '#lib/workers/search.worker.js';
 import Page from './+page.svelte';
 
 // A fresh store per test (the real module exports one shared instance)
 const store = vi.hoisted(() => ({ current: null as unknown }));
-vi.mock('$lib/state/data.svelte', async (importOriginal) => {
-	const actual = await importOriginal<typeof import('$lib/state/data.svelte')>();
+vi.mock('#lib/state/data.svelte.js', async (importOriginal) => {
+	const actual = await importOriginal<typeof import('#lib/state/data.svelte.js')>();
 	return {
 		...actual,
 		get timelineData() {
@@ -19,14 +19,14 @@ vi.mock('$lib/state/data.svelte', async (importOriginal) => {
 	};
 });
 
-const nav = vi.hoisted(() => ({ replaceState: vi.fn() }));
+const nav = vi.hoisted(() => ({ goto: vi.fn() }));
 vi.mock('$app/navigation', () => ({
-	afterNavigate: (fn: () => void) => queueMicrotask(fn),
-	replaceState: (url: string, state: unknown) => nav.replaceState(url, state),
+	afterNavigate: (fn: (n: { shallow: boolean }) => void) => queueMicrotask(() => fn({ shallow: false })),
+	goto: (url: string, opts: unknown) => nav.goto(url, opts),
 }));
 
 const worker = vi.hoisted(() => ({ onmessage: null as ((e: MessageEvent) => void) | null, posted: [] as SearchRequest[] }));
-vi.mock('$lib/workers/search.worker.ts?worker', () => ({
+vi.mock('#lib/workers/search.worker.ts?worker', () => ({
 	default: class {
 		set onmessage(fn: (e: MessageEvent) => void) {
 			worker.onmessage = fn;
@@ -75,12 +75,12 @@ function open(url: string, extra?: Record<string, Route>) {
 
 /** The query string of the most recent URL sync */
 function lastUrl(): URLSearchParams {
-	const url = nav.replaceState.mock.lastCall?.[0] as string | undefined;
+	const url = nav.goto.mock.lastCall?.[0] as string | undefined;
 	return new URLSearchParams(url?.startsWith('?') ? url.slice(1) : '');
 }
 
 beforeEach(() => {
-	nav.replaceState.mockClear();
+	nav.goto.mockClear();
 	worker.posted.length = 0;
 	worker.onmessage = null;
 });
