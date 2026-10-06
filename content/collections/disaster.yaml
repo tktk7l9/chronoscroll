@@ -1,0 +1,56 @@
+# Disasters and disaster preparedness in Japan (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The disasters are interleaved with the systems built to reduce their toll
+# (weather maps, AMeDAS, Earthquake Early Warning, emergency warnings, alert levels, relief law).
+# Left out on purpose: entries whose wording goes beyond the topic article
+# (the 1947 Typhoon Kathleen entry says it made landfall; the article has it passing the tip of Boso).
+slug: disaster
+title: 日本の災害と防災の歴史
+lead: 1883年に日本で初めて作られた天気図から、関東大震災、伊勢湾台風、阪神・淡路大震災、東日本大震災、そして能登半島地震まで。地震・津波・台風・噴火の記録に、緊急地震速報や特別警報のように被害を減らすために生まれた仕組みを重ねてたどる。
+description: 日本初の天気図から能登半島地震まで、日本を襲った地震・津波・台風・噴火と、被害を減らすために整えられてきた防災の仕組みを年代順にたどる特集。
+icon: art-kanto-earthquake
+entries:
+  # --- Meiji: modern observation and the first recorded catastrophes ---
+  - id: 1883-02-16-18743166 # First weather map drawn in Japan (Tokyo Meteorological Observatory)
+  - id: 1888-07-15-2f3494b8 # Mount Bandai erupts and collapses
+  - id: 1891-10-28-0e82ba55 # Nobi earthquake
+  - id: 1896-06-15-dc161158 # Meiji Sanriku tsunami
+
+  # --- Taisho to early Showa ---
+  - id: 1914-01-12-9505538e # Taisho eruption of Sakurajima
+  - id: 1923-09-01-3eedb04e # Great Kanto earthquake (origin of Disaster Prevention Day)
+  - id: 1933-03-03-6bdf037f # Showa Sanriku earthquake
+  - id: 1934-09-21-5556ed5c # Muroto typhoon
+
+  # --- War and postwar: great earthquakes and typhoons in quick succession ---
+  - id: 1944-12-07-2fda8408 # Tonankai earthquake
+  - id: 1946-12-21-96ed61f4 # Showa Nankai earthquake
+  - id: 1947-10-18-9a2101ef # Disaster Relief Act promulgated
+  - id: 1948-06-28-81ae904f # Fukui earthquake
+  - id: 1959-09-26-2437d00b # Isewan typhoon
+  - id: 1960-05-22-8019a129 # Chile earthquake; the tsunami crosses the Pacific to Japan
+  - id: 1964-06-16-3e21fac9 # Niigata earthquake
+
+  # --- Observation networks and the earthquake under a city ---
+  - id: 1974-11-01-3e5df111 # AMeDAS starts operating
+  - id: 1983-05-26-5756d426 # Nihonkai-Chubu earthquake
+  - id: 1991-06-03-129f7330 # Unzen pyroclastic flow
+  - id: 1993-07-12-bbf892b3 # Hokkaido Nansei-oki earthquake (Okushiri tsunami)
+  - id: 1995-01-17-2fd6404c # Great Hanshin-Awaji earthquake
+
+  # --- Warnings that reach people ---
+  - id: 2000-09-02-66eec65b # Miyakejima: whole-island evacuation
+  - id: 2004-10-23-a760b029 # Chuetsu earthquake
+  - id: 2007-10-01-c57969ea # Earthquake Early Warning starts
+  - id: 2011-03-11-8f5c114a # Great East Japan earthquake
+  - id: 2012-08-29-7e3b0dd2 # Damage estimate for a Nankai Trough megaquake
+  - id: 2013-08-30-b86ed15c # Emergency warnings (tokubetsu keiho) start
+  - id: 2014-09-27-61bdcb84 # Mount Ontake eruption
+
+  # --- Recent disasters and the five-level alert scale ---
+  - id: 2016-04-16-4b934435 # Kumamoto earthquake (main shock)
+  - id: 2018-06-28-5c2a30d0 # July 2018 floods in western Japan
+  - id: 2018-09-06-99d8643b # Hokkaido Eastern Iburi earthquake and island-wide blackout
+  - id: 2019-05-29-411df5e5 # Five-level alert scale starts
+  - id: 2019-10-12-bdc8d98a # Typhoon Hagibis
+  - id: 2024-01-01-bd9f39a2 # Noto Peninsula earthquake

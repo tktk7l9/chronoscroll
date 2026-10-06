@@ -1,0 +1,54 @@
+# History of medicine and infectious disease (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Pairs the science (bacteriology, vaccines, antibiotics, regenerative medicine) with outbreaks and
+# Japan's health-policy milestones.
+# Left out on purpose: entries whose dataset date disagrees with the topic article
+# (SARS was designated a "new infectious disease" on 3 Apr 2003, not 4 Apr).
+slug: medicine
+title: 医学と感染症の歴史
+lead: コレラが猛威を振るった明治の日本と、コッホの結核菌、パスツールの狂犬病ワクチン、北里柴三郎のペスト菌から、ペニシリン、天然痘の根絶、iPS細胞、そして新型コロナのパンデミックまで。病原体を突き止め、ワクチンと薬で立ち向かってきた医学の歩みを、国民健康保険や臓器移植法など日本の医療制度の転換点とともにたどる。
+description: コッホの結核菌発見から新型コロナの5類移行まで、感染症との闘いと医学の転換点を、日本の研究者と医療制度の歩みとともに年代順にたどる特集。
+icon: art-penicillin
+entries:
+  # --- 19th century: cholera and the age of bacteriology ---
+  - id: 1879-07-14-ffc32b90 # Cholera quarantine rules (origin of Japan's Quarantine Day)
+  - id: 1880-11-06-1d3d8ca1 # Laveran finds the malaria parasite
+  - id: 1882-03-24-59bc0271 # Koch identifies the tuberculosis bacterium
+  - id: 1885-07-06-e1c8f2ad # Pasteur's rabies vaccine, first human use
+  - id: 1892-11-30-143337c3 # Institute for Infectious Diseases (Kitasato Shibasaburo)
+  - id: 1894-08-25-ef689b14 # Kitasato reports the plague bacillus
+  - id: 1895-11-08-36119113 # Roentgen discovers X-rays
+  - id: 1899-01-01-750ea2b4 # Plague reaches Japan
+
+  # --- Early 20th century: hormones, vitamins, antibiotics ---
+  - id: 1900-01-01-5c29bd5b # Takamine Jokichi crystallises adrenaline
+  - id: 1910-12-13-ffc83815 # Suzuki Umetaro reports the first vitamin
+  - id: 1918-01-01-cca912f8 # Spanish flu pandemic
+  - id: 1922-01-11-15148265 # Insulin given to a patient for the first time
+  - id: 1928-09-28-71194675 # Fleming discovers penicillin
+
+  # --- Postwar: global health and the molecules of life ---
+  - id: 1948-04-07-6ef165bd # WHO founded
+  - id: 1953-01-01-7cbe1f39 # DNA double helix
+  - id: 1958-12-27-aabd6280 # National Health Insurance Act promulgated
+  - id: 1967-12-03-cd1074d4 # First human heart transplant
+  - id: 1978-07-25-ee9e1a60 # First baby born through IVF
+  - id: 1980-05-08-396a0055 # WHO declares smallpox eradicated
+  - id: 1981-07-03-4d061426 # New York Times report on the illness later named AIDS
+
+  # --- Late 20th century: Japan's turning points ---
+  - id: 1987-10-12-dbd44749 # Tonegawa Susumu, Nobel Prize in Physiology or Medicine
+  - id: 1996-02-16-77c63c6b # Health minister apologises over HIV-tainted blood products
+  - id: 1999-02-28-c7833055 # First brain-death organ transplant under the Organ Transplant Act
+  - id: 2000-10-29-de0a6d0d # Western Pacific certified polio-free
+
+  # --- 21st century: stem cells and pandemics ---
+  - id: 2007-11-21-f97b3f2d # Human iPS cells
+  - id: 2009-06-11-3ad8be24 # WHO declares the H1N1 influenza pandemic
+  - id: 2012-10-08-8626ac28 # Yamanaka Shinya, Nobel Prize
+  - id: 2014-08-08-e42ff74b # Ebola: WHO public health emergency
+  - id: 2015-10-05-407cd333 # Omura Satoshi, Nobel Prize
+  - id: 2020-01-07-00ec241d # Novel coronavirus identified in Wuhan
+  - id: 2020-03-11-3fe40b2e # WHO declares the COVID-19 pandemic
+  - id: 2021-02-17-0ed41d06 # First COVID-19 vaccinations in Japan
+  - id: 2023-05-08-0eeb3eec # COVID-19 moved to Class 5 in Japan
