@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
-	import { afterNavigate, replaceState } from '$app/navigation';
-	import BrandMark from '$lib/components/BrandMark.svelte';
-	import DetailDialog from '$lib/components/DetailDialog.svelte';
-	import FilterBar from '$lib/components/FilterBar.svelte';
-	import SearchBox from '$lib/components/SearchBox.svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import Timeline from '$lib/components/Timeline.svelte';
-	import { formatCount, formatJpDate } from '$lib/coverage';
-	import { withCollection } from '$lib/filters';
-	import { absoluteUrl } from '$lib/site';
-	import type { SearchHit } from '$lib/search';
-	import { timelineData } from '$lib/state/data.svelte';
-	import type { NewsEvent } from '$lib/types';
-	import { DEFAULT_URL_STATE, parseUrlState, serializeUrlState } from '$lib/url-state';
+	import { browser } from '$app/env';
+	import { afterNavigate, goto } from '$app/navigation';
+	import BrandMark from '#lib/components/BrandMark.svelte';
+	import DetailDialog from '#lib/components/DetailDialog.svelte';
+	import FilterBar from '#lib/components/FilterBar.svelte';
+	import SearchBox from '#lib/components/SearchBox.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+	import Timeline from '#lib/components/Timeline.svelte';
+	import { formatCount, formatJpDate } from '#lib/coverage.js';
+	import { withCollection } from '#lib/filters.js';
+	import { absoluteUrl } from '#lib/site.js';
+	import type { SearchHit } from '#lib/search.js';
+	import { timelineData } from '#lib/state/data.svelte.js';
+	import type { NewsEvent } from '#lib/types.js';
+	import { DEFAULT_URL_STATE, parseUrlState, serializeUrlState } from '#lib/url-state.js';
 	// The count and period are fixed at build time (not waiting on a runtime fetch
 	// avoids pop-in/CLS and puts the real numbers into the prerendered HTML and OGP/description)
 	import { maxDate, minDate, total } from '../../static/data/index.json';
@@ -53,8 +53,10 @@
 		void timelineData.init();
 	});
 
-	// replaceState cannot be called before the router initializes, so enable it after the first navigation completes
-	afterNavigate(() => {
+	// goto cannot be called before the router initializes, so enable it after the first navigation completes
+	// (the shallow URL updates below also fire afterNavigate in SvelteKit 3; ignore those)
+	afterNavigate(({ shallow }) => {
+		if (shallow) return;
 		routerReady = true;
 	});
 
@@ -92,7 +94,7 @@
 			collection: collectionSlug,
 		});
 		const qs = params.toString();
-		replaceState(qs !== '' ? `?${qs}` : location.pathname, {});
+		void goto(qs !== '' ? `?${qs}` : location.pathname, { shallow: true, replace: true });
 	});
 
 	function onselect(ev: NewsEvent): void {

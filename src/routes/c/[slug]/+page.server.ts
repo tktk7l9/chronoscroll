@@ -4,8 +4,8 @@
  */
 import { readFileSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
-import { isCollectionSlug } from '$lib/collections';
-import type { CollectionDetail, CollectionsIndex } from '$lib/types';
+import { isCollectionSlug } from '#lib/collections.js';
+import type { CollectionDetail, CollectionsIndex } from '#lib/types.js';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
 export const prerender = true;

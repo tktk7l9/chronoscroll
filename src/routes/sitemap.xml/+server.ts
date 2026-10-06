@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
-import type { CollectionsIndex, NewsEvent } from '$lib/types';
-import { SITE_ORIGIN as BASE } from '$lib/site';
+import type { CollectionsIndex, NewsEvent } from '#lib/types.js';
+import { SITE_ORIGIN as BASE } from '#lib/site.js';
 
 export const prerender = true;
 

@@ -4,7 +4,7 @@
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { error } from '@sveltejs/kit';
-import type { BookRef, CollectionMeta, CollectionsIndex, NewsEvent } from '$lib/types';
+import type { BookRef, CollectionMeta, CollectionsIndex, NewsEvent } from '#lib/types.js';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
 export const prerender = true;
