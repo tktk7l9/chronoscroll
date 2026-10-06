@@ -1,0 +1,60 @@
+# Constitutions, the Diet and elections in Japan (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Follows who may vote and who governs: the push for an elected assembly, the Meiji Constitution and the
+# Imperial Diet, universal male suffrage, the wartime one-party Diet, the postwar Constitution, the 1955 system
+# and its end, and later changes to how elections work.
+# Women's suffrage (1945) and the first postwar general election (1946) are in womens-rights, so not repeated.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: the Kokkai Kisei Domei "renamed from" the Aikokusha on 17 Mar 1880 / founded that day as
+# a separate body; the first universal-suffrage bill submitted 12 Feb 1902 / the article gives both 12 and 15 Feb;
+# the 1976 general election held 9 Dec / held 5 Dec, the term ended 9 Dec).
+slug: constitution
+title: 憲法と選挙の歴史
+lead: 1874年の民選議院設立建白書から、大日本帝国憲法の発布と第1回衆議院議員総選挙、普通選挙法、翼賛選挙、日本国憲法の公布と施行、55年体制の始まりと崩壊、そして18歳選挙権まで。誰が選び、誰が国を動かすのかという仕組みの移り変わりを、憲法と議会、選挙の節目でたどる。
+description: 民選議院設立建白書から18歳選挙権まで、日本の憲法と議会、選挙の仕組みがどう形づくられてきたかを年代順にたどる特集。
+icon: art-meiji-constitution
+entries:
+  # --- Calls for an elected assembly ---
+  - id: 1874-01-17-31a58ae0 # Itagaki and others petition for an elected assembly
+  - id: 1881-10-12-8dcf87e2 # Imperial rescript promising a national assembly in 1890
+
+  # --- The Meiji Constitution and the Imperial Diet ---
+  - id: 1889-02-11-c4d09e8e # Meiji Constitution promulgated
+  - id: 1890-07-01-90dcaad3 # First general election
+  - id: 1890-11-29-04226122 # First Imperial Diet opens
+  - id: 1892-02-15-ad528124 # Second general election, marred by government interference
+  - id: 1898-06-30-c8711377 # Okuma-Itagaki cabinet
+
+  # --- Taisho democracy and universal male suffrage ---
+  - id: 1913-02-05-2912fa51 # Ozaki Yukio's speech impeaching the government (constitutional movement)
+  - id: 1918-09-29-1e9a6b2b # Hara Takashi forms the first full party cabinet
+  - id: 1920-02-11-b03d1c92 # Mass march in Tokyo for universal suffrage
+  - id: 1925-05-05-d214d0aa # General Election Law: the vote for men aged 25 and over
+  - id: 1928-02-20-42eaebc8 # First general election under universal male suffrage
+
+  # --- The constitution under strain and the wartime Diet ---
+  - id: 1935-02-18-b47df66c # Minobe's emperor-organ theory attacked in the House of Peers
+  - id: 1940-10-12-62be1ea9 # Imperial Rule Assistance Association launched
+  - id: 1942-04-30-33e1521a # The "Yokusan" general election
+
+  # --- Writing the postwar Constitution ---
+  - id: 1945-10-11-9313b535 # GHQ orders the five reforms and revision of the constitution
+  - id: 1946-02-13-4d5a5e66 # GHQ rejects the Matsumoto draft and hands over its own
+  - id: 1946-03-06-a3df8d28 # Government publishes the outline of the new constitution
+  - id: 1946-11-03-2065018b # Constitution of Japan promulgated
+  - id: 1947-04-05-9ca169f9 # First unified local elections
+  - id: 1947-04-20-1b1ebbce # First House of Councillors election
+  - id: 1947-05-03-e887a525 # Constitution of Japan takes effect
+
+  # --- The 1955 system ---
+  - id: 1955-11-15-65d67312 # Conservative merger: the Liberal Democratic Party is born
+  - id: 1980-06-22-06f633ed # First double election for both houses
+  - id: 1983-06-26-621e0618 # Proportional representation in the upper-house national constituency
+  - id: 1993-08-09-3a884fd3 # Hosokawa coalition takes office; the 1955 system ends
+
+  # --- New rules for elections ---
+  - id: 1996-10-20-63bd3ce6 # First general election with single-seat districts plus PR
+  - id: 2007-05-14-d01704c3 # Referendum law for constitutional amendments enacted
+  - id: 2009-09-16-e134a0a3 # Hatoyama cabinet: power changes hands after an election
+  - id: 2013-04-19-0e190770 # Online campaigning allowed
+  - id: 2015-06-17-9707b20c # Voting age lowered to 18
