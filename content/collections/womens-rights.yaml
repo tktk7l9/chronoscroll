@@ -1,0 +1,45 @@
+# History of women's suffrage and rights (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Follows the vote, then public office, then rights at work, in marriage and over one's own body,
+# setting Japan beside other countries.
+# Left out on purpose: entries whose dataset date disagrees with the topic article
+# (the 1908 New York march, Bandaranaike's 1960 premiership, Doi Takako becoming JSP chair in 1986,
+# the 1999 Basic Act for a Gender-Equal Society listed as "passed" on its promulgation date).
+slug: womens-rights
+title: 女性の権利の歴史
+lead: 1893年にニュージーランドで成立した世界初の女性参政権から、『青鞜』と新婦人協会、39人の女性議員が誕生した1946年の総選挙、男女雇用機会均等法、そして日本初の女性首相まで。投票し、議席に就き、働き、自分の体について決める権利をめぐる各国の歩みを、日本の動きと並べてたどる。
+description: ニュージーランドの女性参政権から日本初の女性首相の誕生まで、女性が参政権と法的な権利を求めてきた歩みを年代順にたどる特集。
+icon: art-human-rights
+entries:
+  # --- Winning the vote abroad, finding a voice in Japan ---
+  - id: 1893-09-19-7d45a111 # New Zealand: first women's suffrage
+  - id: 1900-09-14-0b109be0 # Tsuda Umeko opens Joshi Eigaku Juku
+  - id: 1906-01-01-7a08b492 # Finland gives women the vote
+  - id: 1911-09-01-eb46119e # Seito founded (Hiratsuka Raicho)
+  - id: 1916-11-07-4af916ff # Jeannette Rankin, first woman elected to the US House
+  - id: 1918-02-06-730e7500 # UK: the vote for women over 30
+  - id: 1920-03-28-afa9bdb2 # New Women's Association (Hiratsuka, Ichikawa Fusae)
+  - id: 1920-08-26-1fdd1732 # US 19th Amendment
+  - id: 1923-03-08-9bbb1a30 # Japan's first International Women's Day meeting
+  - id: 1928-07-02-8c6140a0 # UK: equal franchise
+
+  # --- Postwar Japan: the vote and the first women in office ---
+  - id: 1945-12-17-2741f217 # Women's suffrage in Japan
+  - id: 1946-04-10-46e37387 # 39 women elected to the House of Representatives
+  - id: 1960-07-19-a68b5177 # Nakayama Masa, first woman cabinet minister
+
+  # --- Law, work and the body ---
+  - id: 1973-01-22-33355e82 # Roe v. Wade
+  - id: 1979-05-04-0682377a # Thatcher, first woman prime minister of a developed country
+  - id: 1985-05-17-7151a2dd # Equal Employment Opportunity Act passed
+  - id: 1988-12-02-7feeeaa7 # Benazir Bhutto becomes prime minister of Pakistan
+  - id: 1993-08-06-a0fcd10c # Doi Takako, first woman Speaker of the House of Representatives
+  - id: 2001-04-13-d0240ce7 # Domestic Violence Prevention Act promulgated
+  - id: 2004-07-30-a625af93 # Ogi Chikage, first woman President of the House of Councillors
+
+  # --- 21st century ---
+  - id: 2012-10-09-5ef3e099 # Malala Yousafzai shot by the Taliban
+  - id: 2015-12-16-081c4226 # Supreme Court rulings on the remarriage ban and married surnames
+  - id: 2022-06-24-97b0d02e # US Supreme Court overturns Roe v. Wade
+  - id: 2024-10-01-b06fd76d # Claudia Sheinbaum, Mexico's first woman president
+  - id: 2025-10-21-7e9d48c1 # Takaichi Sanae, Japan's first woman prime minister

@@ -1,0 +1,53 @@
+# History of pollution and environmental issues (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Follows Japan's pollution cases (Ashio, then the four big pollution diseases: Minamata,
+# Niigata Minamata, Yokkaichi asthma, itai-itai) into national law and on to the
+# international treaties on ozone, mercury and climate.
+# Left out on purpose: entries whose dataset date disagrees with the topic article
+# (The Limits to Growth came out on 2 Mar 1972, not 1 Mar).
+slug: environment
+title: 公害と環境の歴史
+lead: 世界初の国立公園と足尾鉱毒事件から、水俣病をはじめとする四大公害、環境庁の発足、地球サミットと京都議定書、そしてパリ協定と脱炭素の宣言まで。地域の公害との闘いが、国境を越える気候変動対策へと広がっていく流れをたどる。
+description: 足尾鉱毒事件と水俣病からパリ協定まで、日本の公害と、国境を越える環境問題への取り組みを年代順にたどる特集。
+icon: art-minamata
+entries:
+  # --- Before pollution had a name: national parks and the Ashio copper mine ---
+  - id: 1872-03-01-b9ed9184 # Yellowstone, the world's first national park
+  - id: 1891-12-18-747f3fc1 # Tanaka Shozo raises the Ashio mine pollution in the Diet
+  - id: 1892-05-28-dd314763 # Sierra Club founded
+  - id: 1900-02-13-ae484461 # Kawamata incident (Ashio petitioners clash with police)
+  - id: 1901-12-10-c40236b9 # Tanaka Shozo's direct appeal to the Emperor
+  - id: 1934-03-16-20a902ea # Japan's first national parks
+
+  # --- High growth and the four big pollution diseases ---
+  - id: 1953-01-01-db411b75 # Minamata: the cats die first
+  - id: 1956-05-01-1c6894be # Minamata disease officially confirmed
+  - id: 1959-07-22-df9ce93d # Kumamoto University names organic mercury as the cause
+  - id: 1967-08-03-526ce386 # Basic Law for Environmental Pollution Control promulgated
+  - id: 1967-09-01-bac3b41f # Yokkaichi asthma lawsuit filed
+  - id: 1968-05-08-99aff554 # Itai-itai disease recognised as a pollution disease
+  - id: 1970-11-24-82f5f365 # The "Pollution Diet" convenes
+  - id: 1971-07-01-50d81bcf # Environment Agency founded
+  - id: 1971-09-29-150a1e84 # Niigata Minamata disease: the plaintiffs win
+
+  # --- From the courtroom to Stockholm ---
+  - id: 1972-06-05-bcb49dc9 # UN Conference on the Human Environment, Stockholm
+  - id: 1972-11-16-5c43c69d # World Heritage Convention adopted
+  - id: 1973-03-20-488a071b # Minamata disease lawsuit: Chisso's waste water ruled the cause
+
+  # --- Ozone, the Earth Summit and Kyoto ---
+  - id: 1989-03-02-a02e0607 # EC agrees to end CFC production
+  - id: 1992-06-03-695bb09c # Earth Summit, Rio de Janeiro
+  - id: 1997-12-11-15df2495 # Kyoto Protocol adopted
+  - id: 1999-07-16-2ee5b352 # Dioxins law enacted
+  - id: 2003-10-10-94b4f777 # Kin, the last Japan-born crested ibis, dies
+  - id: 2005-02-16-e8c9f6d1 # Kyoto Protocol enters into force
+
+  # --- Climate and the Minamata Convention ---
+  - id: 2007-02-02-28243dd8 # IPCC projects warming of 1.1-6.4 C by 2100
+  - id: 2012-04-22-99b1b1c2 # First chicks hatched by released crested ibises
+  - id: 2013-10-10-4cd4de61 # Minamata Convention on Mercury adopted
+  - id: 2015-12-12-efd6c271 # Paris Agreement adopted
+  - id: 2017-06-01-70dcca9b # US announces withdrawal from the Paris Agreement
+  - id: 2020-10-26-6fcebd3b # Japan pledges net-zero emissions by 2050
+  - id: 2021-10-05-e70d93e9 # Manabe Syukuro, Nobel Prize for climate modelling

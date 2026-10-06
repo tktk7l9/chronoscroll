@@ -1,0 +1,51 @@
+# History of the Olympic and Paralympic Games (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Not every Games is listed: the picks are turning points and Japan's path
+# (first entry, the forfeited 1940 Games, Tokyo 1964 and 2020).
+# Left out on purpose: entries whose dataset date disagrees with the topic article
+# (Coubertin's Sorbonne speech was on 25 Nov 1892, not 23 Nov).
+slug: olympics
+title: オリンピック・パラリンピックの歴史
+lead: 1894年の国際オリンピック委員会の設立から、日本が初参加したストックホルム大会、返上された1940年の東京大会、アジア初の1964年東京大会、1年延期された東京2020大会、そして100年ぶりのパリ大会まで。冬季大会とパラリンピック、ボイコットやテロに揺れた大会も含めて、近代五輪の130年をたどる。
+description: 国際オリンピック委員会の設立から2024年のパリ大会まで、オリンピックとパラリンピックの転換点を、日本の参加の歩みとともに年代順にたどる特集。
+icon: art-tokyo-olympics-1964
+entries:
+  # --- Reviving the Games ---
+  - id: 1894-06-23-52d56eb7 # IOC founded
+  - id: 1896-04-06-cc5e40eb # First modern Olympics, Athens
+  - id: 1908-07-24-31d88866 # London marathon: Dorando Pietri helped over the line and disqualified
+  - id: 1912-05-05-981f6122 # Stockholm: Japan's first Olympics
+  - id: 1912-07-14-902cf5ad # Kanakuri Shiso collapses mid-marathon and is listed as missing
+  - id: 1924-01-25-f986fa19 # First Winter Olympics, Chamonix
+
+  # --- Between the wars: the Tokyo Games that never happened ---
+  - id: 1936-07-31-2570ad0d # Tokyo chosen for 1940
+  - id: 1936-08-11-a6fc2bec # Berlin: the "Maehata ganbare" broadcast
+  - id: 1938-07-15-a630742f # Japan gives up the 1940 Games
+
+  # --- Postwar return and Tokyo 1964 ---
+  - id: 1948-07-29-56ac84b7 # London 1948 without Japan
+  - id: 1952-07-19-12a2da52 # Helsinki: Japan back after 16 years
+  - id: 1956-01-31-65e9696b # Igaya Chiharu wins Japan's first Winter Olympic medal
+  - id: 1959-05-26-ef796760 # Tokyo chosen for 1964
+  - id: 1964-10-10-e99097eb # Tokyo 1964 opens, the first Games in Asia
+  - id: 1964-11-08-4c9e2910 # Tokyo 1964 Paralympics
+  - id: 1967-03-21-43e10bb3 # Kanakuri finishes his 1912 marathon after 54 years
+
+  # --- Games shaken by politics ---
+  - id: 1972-02-03-48e40ef7 # Sapporo Winter Olympics
+  - id: 1972-09-05-4ef6fb5a # Munich massacre
+  - id: 1980-05-24-39b5a41a # JOC votes to stay away from Moscow
+  - id: 1984-08-05-4b2125c5 # First women's Olympic marathon, Los Angeles
+  - id: 1991-07-09-0d934fea # South Africa readmitted
+  - id: 1992-02-08-a75f8aad # Albertville: last Winter Games held in a Summer Games year
+
+  # --- Nagano to Tokyo 2020 and Paris ---
+  - id: 1998-02-07-fe3f0448 # Nagano Winter Olympics
+  - id: 1998-03-05-42d90f15 # Nagano Paralympics
+  - id: 2000-09-24-79c0dbec # Takahashi Naoko wins the marathon in Sydney
+  - id: 2013-09-07-e4766bce # Tokyo chosen for 2020
+  - id: 2020-03-24-fdde3f7f # Tokyo 2020 postponed by a year
+  - id: 2021-07-23-fa647dbd # Tokyo 2020 opens
+  - id: 2021-08-24-d3401743 # Tokyo 2020 Paralympics
+  - id: 2024-07-26-700cc076 # Paris 2024, a century after Paris 1924
