@@ -6,7 +6,7 @@
 import { MAX_PX_PER_DAY, MIN_PX_PER_DAY } from './timescale.ts';
 
 /** Vertical px to reserve per displayed event (smaller shows more densely) */
-export const MIN_PX_PER_EVENT = 110;
+const MIN_PX_PER_EVENT = 110;
 
 /**
  * Minimum importance included in overview.json.

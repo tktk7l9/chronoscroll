@@ -16,8 +16,9 @@ import { isMassDelete, parseManifest, planSync, sha256 } from './lib/r2-plan.mjs
 
 // Preview builds on Workers Builds (anything but main) must not touch the production bucket.
 // WORKERS_CI and WORKERS_CI_BRANCH are injected by Workers Builds by default.
-if (process.env.WORKERS_CI && process.env.WORKERS_CI_BRANCH && process.env.WORKERS_CI_BRANCH !== 'main') {
-	console.log(`Non-production branch (${process.env.WORKERS_CI_BRANCH}): skipping R2 sync`);
+// Fail closed: inside Workers Builds, a missing branch is treated as non-production too.
+if (process.env.WORKERS_CI && process.env.WORKERS_CI_BRANCH !== 'main') {
+	console.log(`Non-production branch (${process.env.WORKERS_CI_BRANCH || 'unknown'}): skipping R2 sync`);
 	process.exit(0);
 }
 

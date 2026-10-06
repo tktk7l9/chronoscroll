@@ -85,7 +85,7 @@ const SEP = '[-–—−‐：:]';
  * Without this the date is not parsed and falls back to the start of the month (precision=month).
  * The second date may also be a link with the month omitted, such as 「[[8月26日|26日]]」.
  */
-export function collapseDateRange(text: string): string {
+function collapseDateRange(text: string): string {
 	return text.replace(
 		/^((?:\[\[)?\d{1,2}月\d{1,2}日(?:\]\])?)\s*(?:[〜～~]|から)\s*(?:\[\[)?(?:\d{1,2}月)?\d{1,2}日(?:\|[^\]|]*)?(?:\]\])?/,
 		'$1',
