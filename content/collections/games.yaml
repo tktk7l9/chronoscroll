@@ -1,0 +1,68 @@
+# History of video games (collection)
+# References to existing auto-generated events only (nothing newly written).
+# From the companies' beginnings (Nintendo as a card maker, Sega's predecessor) through the first home and arcade
+# games, the Famicom era and its rivals (PC Engine, Mega Drive), the handhelds (Game & Watch to the 3DS), the
+# PlayStation and Xbox generations, Pokémon, Tamagotchi and Minecraft, to smartphones (Pokémon GO), the Switch and
+# a Nintendo theme park area. The used-game ruling of Japan's Supreme Court is included.
+# Deep Blue and AlphaGo are in the AI collection and the Pokémon anime in the anime collection.
+# The 1977 Color TV-Game 15 entry has year precision and is shown with its year only (the article gives 1 Jul 1977).
+# Duplicates: the Game Boy (21 Apr 1989) and Pokémon Red and Green (27 Feb 1996) each appear twice; for the Game Boy
+# the entry with the overseas dates is used, for Pokémon the plain one (the other's "best-selling RPG in the world" is
+# not in the article). Super Mario Bros. appears on 13 Sep 1985 and 21 Sep 1985; the article gives 13 Sep.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Tetris "date unknown" May 1985 / created in 1984; Doom released "in North America" on
+# 10 Dec 1993 / released that day as MS-DOS shareware, not as a regional release; the PlayStation 2, 4 Mar 2000,
+# appears twice, once with "about 980,000 sold in three days" / 600,000 in three days plus 380,000 online orders for
+# two weeks ahead, and once with a leftover year-page cross-reference (後節「#ゲーム」も参照); the PlayStation 2 named
+# a Future Technology Heritage on 3 Sep 2024 / the list article gives the 2024 round but no date).
+slug: games
+title: ゲームの歴史
+lead: 1889年の任天堂骨牌の創業とセガの前身の設立から、日本初の家庭用テレビゲーム機「テレビテニス」、ゲーム&ウオッチとパックマン、ファミコンと『スーパーマリオブラザーズ』『ドラゴンクエスト』、ゲームボーイ、プレイステーション、そしてNintendo Switchまで。中古ゲームソフトの売買をめぐる最高裁判決やセガの家庭用ハードからの撤退、Minecraft、Pokémon GO、スーパー・ニンテンドー・ワールドの開業も含めて、ゲーム機とゲームソフトの移り変わりをたどる。
+description: 任天堂骨牌の創業とセガの前身から、ファミコンとゲームボーイ、プレイステーション、Wii、Nintendo Switchまで、ゲーム機とゲームソフトの転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-deep-blue
+entries:
+  # --- Before the video game ---
+  - id: 1889-09-23-ffc1a2e1 # Yamauchi Fusajiro founds Nintendo Koppai (later Nintendo)
+  - id: 1960-06-03-dd6793d1 # Nihon Goraku Bussan, Sega's predecessor, founded
+
+  # --- The first home and arcade games ---
+  - id: 1975-09-12-c88df077 # Epoch's TV Tennis, Japan's first home video game console
+  - id: 1977-01-01-6d1b16ea # Nintendo's first video game, Color TV-Game 15 (year)
+  - id: 1980-04-28-80211654 # Game & Watch, Nintendo's first handheld
+  - id: 1980-05-22-9012963c # Pac-Man's location test
+
+  # --- The Famicom era ---
+  - id: 1983-07-15-e152da10 # The Famicom goes on sale (and Sega's SG-1000 the same day)
+  - id: 1985-09-13-8dc9a16d # Super Mario Bros.
+  - id: 1985-10-18-f90cb47a # The NES launches in North America
+  - id: 1986-05-27-46ce9fe4 # Dragon Quest
+  - id: 1987-10-30-baec4139 # NEC's PC Engine
+  - id: 1987-12-18-43595ac3 # Final Fantasy
+  - id: 1988-02-10-9e6b9396 # Dragon Quest III: long queues on a weekday
+  - id: 1988-10-29-c03e13dc # Sega's Mega Drive
+  - id: 1989-04-21-a4559793 # The Game Boy
+  - id: 1990-11-21-f8a13085 # The Super Famicom
+
+  # --- New consoles, Pokémon, Tamagotchi ---
+  - id: 1994-11-22-20733a3d # The Sega Saturn
+  - id: 1994-12-03-ecb4a3e2 # Sony's PlayStation
+  - id: 1996-02-27-9b329657 # Pokémon Red and Green
+  - id: 1996-11-23-e0647a7e # Bandai's Tamagotchi
+  - id: 1998-11-27-42fbda81 # The Dreamcast
+  - id: 2001-01-31-489d5a0c # Sega leaves the home console business
+
+  # --- New players, a court ruling, new controls ---
+  - id: 2002-02-22-78605cd9 # Microsoft's Xbox goes on sale in Japan
+  - id: 2002-04-25-10e2a1ff # Supreme Court: selling used games does not break copyright law
+  - id: 2004-12-02-682f005e # The Nintendo DS in Japan
+  - id: 2006-11-11-6d6b31a4 # The PlayStation 3, first in Japan
+  - id: 2006-12-02-bb7985ad # The Wii in Japan
+  - id: 2009-05-17-e5719ac8 # Minecraft's first public version
+  - id: 2011-02-26-ef5a7002 # The Nintendo 3DS
+
+  # --- Smartphones, the Switch, a theme park ---
+  - id: 2016-07-06-edcd5c8e # Pokémon GO starts
+  - id: 2017-03-03-a94e6c93 # The Nintendo Switch launches worldwide
+  - id: 2020-11-12-120d8337 # The PlayStation 5, sold out on pre-orders
+  - id: 2021-03-18-dec0022b # Super Nintendo World opens at Universal Studios Japan
+  - id: 2022-02-03-33f59410 # The Switch passes 100 million units
