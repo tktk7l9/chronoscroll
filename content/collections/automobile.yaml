@@ -1,0 +1,57 @@
+# History of the motor car and the road (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Cars (Benz, Ford and the Model T, Japan's carmakers, the Corolla, the hybrid Prius, self-driving cars), roads
+# (Japan's expressways and bridges, America's interstates) and the rules for drivers (beginner marks, seat belts,
+# cognitive tests for older drivers), with the falling number of road deaths.
+# Railways and aviation have their own collections.
+# Duplicates: for the Tomei Expressway the first opening of 25 Apr 1968 is used (see below).
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Daimler "obtains the patent" for his motorcycle on 29 Aug 1885 / he applied that day, the patent
+# was granted in Aug 1886; Toyota Motor founded 27 Aug 1937 / 28 Aug 1937; Japan's first automatic traffic light at
+# Hibiya 1 Nov 1930 / 23 Mar 1930; Japan's first bus service in Kyoto on 20 Sep 1903 / a Hiroshima service from
+# Jan 1903 is considered the first; the Tomei Expressway "fully opened 21 Dec 1971" / fully open on 26 May 1969;
+# the 2022 road-death figure credited to the Tokyo police (警視庁) instead of the National Police Agency (警察庁)).
+slug: automobile
+title: 自動車と道路の歴史
+lead: 1886年のベンツのガソリン自動車の特許、フォードの最初の自動車とモデルTから、日産の前身と本田技研工業の設立、首都高速道路と名神・東名高速道路の開通、カローラとプリウス、マツダのル・マン優勝、そしてレベル3・レベル4の自動運転まで。初心者マークの制定やシートベルトの着用義務化、高齢運転者の認知機能検査、交通事故死者数の減少も含めて、車と道と交通のルールの移り変わりをたどる。
+description: ベンツの特許とフォード・モデルTから、高速道路網の整備、ハイブリッド車、自動運転まで、自動車と道路の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-early-car
+entries:
+  # --- The first cars and the Model T ---
+  - id: 1886-01-29-cbcc817a # Benz patents the first petrol car
+  - id: 1896-06-04-a77a42ad # Henry Ford's first car, the Quadricycle
+  - id: 1908-10-01-ff8f3987 # Ford Model T goes on sale
+  - id: 1914-01-05-a74fe120 # Ford's eight-hour day and five-dollar wage
+  - id: 1927-05-26-7d8de265 # Model T production ends
+
+  # --- Japan's carmakers ---
+  - id: 1933-12-26-775d5e7d # Jidosha Seizo (later Nissan) founded
+  - id: 1948-09-24-71d4e7ab # Honda Motor founded
+
+  # --- Building the expressways ---
+  - id: 1956-04-16-aea562ff # Japan Highway Public Corporation founded
+  - id: 1956-06-29-e4abde60 # US Federal-Aid Highway Act (the interstates)
+  - id: 1962-12-20-2c36a027 # First section of the Shuto Expressway opens in Tokyo
+  - id: 1963-07-16-b9083989 # Meishin Expressway: Japan's first expressway section opens
+  - id: 1965-07-01-8c9c1732 # Meishin Expressway fully open
+  - id: 1966-10-20-86e328e8 # Toyota unveils the Corolla
+  - id: 1968-04-25-5f9fadae # Tomei Expressway: first sections open, linked to the Meishin
+
+  # --- Clean air, safety and racing ---
+  - id: 1970-09-22-3f18c0f4 # US Senate passes the Muskie Act on car exhaust
+  - id: 1972-02-17-6b60d63f # VW Beetle overtakes the Model T's production record
+  - id: 1972-10-01-620380d0 # Beginner driver's mark introduced
+  - id: 1979-07-11-3ac87e96 # Nihonzaka Tunnel crash and fire on the Tomei
+  - id: 1985-09-01-7eecdef4 # Front seat belts made compulsory on expressways
+  - id: 1991-06-23-0b3a4fbe # Mazda 787B, first Japanese car to win Le Mans
+
+  # --- Hybrids, sea crossings, fewer road deaths ---
+  - id: 1997-12-10-61a8a980 # Toyota Prius, the first mass-produced hybrid
+  - id: 1997-12-18-0dc2d1b2 # Tokyo Bay Aqua-Line opens
+  - id: 1998-04-05-3b687bc6 # Akashi Kaikyo Bridge opens
+  - id: 2007-01-02-90b8bc1b # Road deaths in 2006 at their lowest in 51 years
+  - id: 2009-06-01-81d9feea # Cognitive tests for drivers aged 75 and over
+
+  # --- Self-driving cars ---
+  - id: 2020-11-11-b68db063 # Honda's Level 3 self-driving car approved, a world first
+  - id: 2023-04-01-5aa24dbc # Level 4 self-driving allowed on public roads

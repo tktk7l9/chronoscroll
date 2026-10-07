@@ -1,0 +1,61 @@
+# History of telecommunications and broadcasting (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Wires (telegraph, telephone, undersea cable), the air (wireless, radio, television, satellites) and the pocket
+# (car phones, the shoulder phone, i-mode, smartphones, LTE, 5G), from Japan's first telegraph line to the end of 3G.
+# The first radio broadcast in Japan (1925) and the Kohaku song contest are in the music collection, ARPANET and the
+# web services of the 2000s in the AI collection, and are not repeated.
+# Duplicates: of the two 11 Jul 2008 iPhone 3G entries the SoftBank one is used (the other writes "iphone").
+# Left out on purpose: entries whose dataset date disagrees with the topic article
+# (dataset vs article: Matsushiro Matsunosuke's wireless experiment off Tsukiji, Dec 1897 / 1898).
+slug: telecom
+title: 通信と放送の歴史
+lead: 1870年の東京・横浜間の電信開通、ベルの電話、マルコーニの大西洋横断無線通信から、ラジオとテレビの放送開始、東京タワー、日米間の初の衛星中継、自動車電話とショルダーフォン、そして世界初のWebサイト、iモード、iPhone、5Gまで。日本放送協会の設立から地上デジタル放送への完全移行までの放送の歩みも含めて、声と映像と情報を遠くへ届ける技術の移り変わりをたどる。
+description: 電信と電話、ラジオとテレビの放送開始から、衛星中継、携帯電話、インターネット、スマートフォン、5Gまで、通信と放送の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-tv-broadcast
+entries:
+  # --- Telegraph and telephone ---
+  - id: 1870-01-26-f4b6bcdc # Telegraph line opens between Tokyo and Yokohama
+  - id: 1876-03-10-397763b3 # Bell's first telephone call
+  - id: 1890-12-16-3d491bb9 # Telephone exchange service starts in Tokyo and Yokohama
+  - id: 1901-12-12-b598e612 # Marconi sends a wireless signal across the Atlantic
+  - id: 1906-11-03-660de42a # SOS adopted as the international distress signal
+
+  # --- Radio and the first television ---
+  - id: 1922-11-14-a14e61e7 # The British Broadcasting Company starts radio broadcasts
+  - id: 1926-01-26-b93167b6 # Baird demonstrates television in public
+  - id: 1926-08-06-94287973 # Nippon Hoso Kyokai (NHK) founded
+  - id: 1926-12-25-5968394b # Takayanagi Kenjiro's electronic television receiver
+  - id: 1951-09-01-bcf7f68e # Japan's first commercial radio stations go on air
+
+  # --- The television age ---
+  - id: 1953-02-01-84936241 # NHK starts regular television broadcasts
+  - id: 1953-08-28-17a3c720 # Nippon Television, the first commercial TV station, goes on air
+  - id: 1958-12-23-334d8850 # Tokyo Tower, the broadcasting tower, is completed
+  - id: 1960-09-10-cc52e76b # Colour television broadcasts start in Japan
+  - id: 1962-03-01-9b398060 # Television licences in Japan pass 10 million
+
+  # --- Satellites and cables ---
+  - id: 1963-11-23-e308c5e8 # First Japan-US satellite relay carries news of Kennedy's assassination
+  - id: 1964-06-19-eeee0936 # Trans-Pacific cable: Ikeda and Johnson talk by phone
+  - id: 1967-06-25-685a16eb # "Our World", the first global satellite broadcast
+
+  # --- Phones leave the house ---
+  - id: 1979-12-03-91c0426b # Car phone service starts in Tokyo's 23 wards
+  - id: 1982-12-23-d642fc58 # Card payphones and telephone cards
+  - id: 1984-05-12-f7d50059 # NHK starts satellite broadcasting
+  - id: 1985-04-01-e866c28a # Nippon Telegraph and Telephone Public Corporation becomes NTT
+  - id: 1985-09-02-10b4956d # NTT's "shoulder phone"
+
+  # --- The internet and the mobile web ---
+  - id: 1991-08-06-eaa5612d # The first website goes online
+  - id: 1996-04-01-1a3b1009 # Yahoo! JAPAN opens
+  - id: 1999-02-22-33b21b72 # i-mode starts
+  - id: 2003-12-01-003d59c9 # Digital terrestrial television starts in Tokyo, Osaka and Nagoya
+  - id: 2007-01-09-e68c1122 # Apple announces the iPhone
+  - id: 2008-07-11-acb791a1 # SoftBank starts selling the iPhone 3G in Japan
+
+  # --- Faster networks, the end of analogue and of 3G ---
+  - id: 2010-12-24-f20b6ae3 # NTT Docomo starts LTE ("Xi")
+  - id: 2011-07-24-889d59a2 # Analogue terrestrial television ends
+  - id: 2020-03-25-d3e1c1df # 5G service starts in Japan
+  - id: 2026-03-31-5bd13da9 # NTT Docomo ends FOMA (3G) and i-mode
