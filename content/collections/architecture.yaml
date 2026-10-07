@@ -1,0 +1,71 @@
+# History of architecture and the city (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Landmarks of iron and stone (Cologne Cathedral, the Brooklyn Bridge, the Eiffel Tower, Tower Bridge), the buildings
+# of modern Tokyo (the Rokumeikan, the Imperial Hotel, Tokyo Station, the National Diet Building), housing and the
+# city (the Japan Housing Corporation, the Shinjuku subcentre, redevelopment on the old city hall site and in
+# Roppongi), the race for height (the Kasumigaseki Building to the Burj Khalifa and Tokyo Skytree), building rules,
+# and the fire and reopening of Notre-Dame with the Sagrada Família's main tower.
+# Railway lines and stations as transport are in the railway collection; Tokyo Station is here as a building.
+# Duplicates: Tokyo Skytree's completion on 29 Feb 2012 appears twice; the entry with its height ranking is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Brooklyn Bridge construction begins 3 Jan 1870 / no start date in the article; the Ginza
+# brick town finished in part 9 May 1873 and its road 2 Feb 1874 / 1873 only; Cologne Cathedral's consecration "with
+# Wilhelm I" on 15 Oct 1880 / the article puts the completion ceremony with Wilhelm I on 14 Aug 1880 (that entry is
+# used); the Sagrada Família begun 19 Mar 1882 "to be completed in 2026" / the date is right, but the article now
+# expects completion around 2035; the Rokumeikan "completed" 7 Jul 1883 / the opening celebration of 28 Nov 1883 is
+# used; the Chrysler Building opens 28 May 1930 / 27 May 1930; the Empire State Building completed 1 May 1931 /
+# completed 11 Apr 1931; Tokyo Tower completed 14 Oct 1958 / the antenna went up that day, completed 23 Dec 1958; the
+# first residents of Tama New Town 26 Mar 1971 / 1971 only; the World Trade Center opens 4 Apr 1973 "(now One World
+# Trade Center)" / the original towers were destroyed in 2001 and One WTC is a new building; the new Tokyo city hall
+# opens 1 Apr 1991 / opening ceremony in Mar 1991, work from April (no day); the Petronas Towers completed Jun 1996
+# as "the world's tallest" / built 1992-1998, world's tallest from 1998; the structural-calculation forgery of
+# 17 Nov 2005 / the date is right, but the counts (21 forgeries, 12 buildings at risk "from intensity 5") are not in
+# the article, which gives collapse risk at 震度5強; Abeno Harukas, 7 Mar 2014, has the right date but its summary
+# keeps a year-page cross-reference (「日本の超高層建築物」も参照); the Nakagin Capsule Tower demolition begins
+# 12 Apr 2022 / 21 Apr 2022; Azabudai Hills Mori JP Tower "330 m" / about 325 m).
+slug: architecture
+title: 建築と都市の歴史
+lead: 1880年のケルン大聖堂の完成、ブルックリン橋、エッフェル塔、鹿鳴館と帝国ホテル、東京駅と国会議事堂から、霞が関ビルディングと新宿副都心の超高層ビル、横浜ランドマークタワー、東京スカイツリーとブルジュ・ハリファまで。日本住宅公団の設立や旧東京都庁跡地の東京国際フォーラム、改正建築基準法、ノートルダム大聖堂の火災と再開、サグラダ・ファミリアの「イエスの塔」も含めて、建物と街の姿の移り変わりをたどる。
+description: エッフェル塔と東京駅から、日本初の超高層ビル、新宿副都心、東京スカイツリーと世界一の超高層ビルまで、建築と都市の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-eiffel-tower
+entries:
+  # --- Iron and stone landmarks ---
+  - id: 1880-08-14-aaf2fe3c # Cologne Cathedral completed, 600 years after it was begun
+  - id: 1883-05-24-ad68e0bd # The Brooklyn Bridge opens
+  - id: 1883-11-28-eae76f09 # The Rokumeikan opens in Tokyo
+  - id: 1884-12-06-0900f8e5 # The Washington Monument gets its aluminium capstone
+  - id: 1886-10-28-02e364b0 # The Statue of Liberty completed
+  - id: 1889-03-31-c70f6fd5 # The Eiffel Tower completed
+  - id: 1890-11-07-e30826c3 # The Imperial Hotel opens
+  - id: 1891-03-08-29c39fae # Nikolai-do (Holy Resurrection Cathedral) consecrated
+  - id: 1894-06-30-a2d114b4 # Tower Bridge opens
+
+  # --- Buildings for a capital ---
+  - id: 1913-08-28-bd073197 # The Peace Palace in The Hague inaugurated
+  - id: 1914-12-20-9f731e79 # Tokyo Station opens
+  - id: 1925-07-06-6742dd39 # Yasuda Auditorium of Tokyo Imperial University completed
+  - id: 1936-11-07-fa541743 # The National Diet Building completed
+
+  # --- Housing and the first skyscrapers ---
+  - id: 1955-07-25-d2e72b53 # The Japan Housing Corporation founded
+  - id: 1957-02-22-ccdb19c6 # Tokyo's city hall in Marunouchi completed
+  - id: 1968-04-12-5ac9a067 # The Kasumigaseki Building, Japan's first skyscraper
+  - id: 1971-06-05-c7b3d7f8 # Keio Plaza Hotel, the first skyscraper of the Shinjuku subcentre
+  - id: 1978-04-06-732b4e66 # Sunshine 60 opens in Ikebukuro
+  - id: 1988-03-17-afb0f138 # Tokyo Dome completed
+
+  # --- Redevelopment, rules and the race for height ---
+  - id: 1993-07-16-0ebac636 # Yokohama Landmark Tower, Japan's tallest building
+  - id: 1997-01-10-ac2892d4 # Tokyo International Forum on the old city hall site
+  - id: 2003-04-25-8a79eec0 # Roppongi Hills opens
+  - id: 2007-06-20-8189d95a # The revised Building Standards Act takes effect
+  - id: 2008-08-28-7e45ad91 # Shanghai World Financial Center completed
+  - id: 2010-01-04-cae32c63 # Burj Khalifa, the world's tallest building, opens
+  - id: 2012-02-29-02f08d7b # Tokyo Skytree completed
+  - id: 2012-10-01-a2ff9ff8 # Tokyo Station's Marunouchi building restored
+  - id: 2014-11-03-3b96ad2e # One World Trade Center completed on the Ground Zero site
+
+  # --- Notre-Dame and the Sagrada Família ---
+  - id: 2019-04-15-6cfb61e1 # Fire at Notre-Dame de Paris
+  - id: 2024-12-08-454195a7 # Notre-Dame reopens after restoration
+  - id: 2026-06-10-c8dada94 # Sagrada Família's Tower of Jesus completed, 100 years after Gaudí's death

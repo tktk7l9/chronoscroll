@@ -1,0 +1,70 @@
+# History of literature and publishing (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Works and writers (Meiji to Showa novels, Proust and Joyce, the Nobel prizes for Kawabata and Oe), the ways books
+# reached readers (Iwanami Bunko and Shinsho, the Kojien dictionary, the weekly boys' manga magazines, Tezuka's
+# Shin Takarajima) and the rules and bodies around writing (the Berne Convention, PEN International and the Japan PEN
+# Club, the death of Kobayashi Takiji in police custody).
+# Bob Dylan's Nobel prize is in the music collection and the women's magazine Seito in the women's rights collection.
+# Year-precision entries (Hakai, Botchan/Kusamakura, Rashomon, Takasebune) are shown with their year only.
+# Duplicates: Dazai Osamu's death on 13 Jun 1948 appears twice; the entry naming Yamazaki Tomie and the
+# Tamagawa Aqueduct is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: the first Oxford English Dictionary "volume 1 (A to Ant)" on 1 Feb 1884 / an unbound first
+# fascicle; Waseda Bungaku founded Oct 1891 / the articles give 1891 only; Bungakukai founded 31 Jan 1893 / Jan 1893
+# only; Yosano Akiko's poem in Myojo on 1 Sep 1904 / Sep 1904 only; Wagahai wa Neko de Aru begins in Hototogisu on
+# 1 Jan 1905 / the January 1905 issue, no day; Shirakaba founded 1 Apr 1910 / Apr 1910 only; Kaizosha's one-yen
+# complete works on 3 Dec 1926 / launched in Nov 1926, first volume in Dec 1926; the OED "finished in the last week"
+# of Apr 1928 / 1928 only; Ishikawa Tatsuzo's Ikiteiru Heitai banned on 18 Feb 1938 with the author and editors
+# arrested / banned on the day of issue (no date given) and the three indicted later; Anne Frank begins her diary "in
+# the hiding place" on 14 Jun 1942 / the diary runs from 12 Jun 1942 and the family went into hiding on 6 Jul 1942;
+# the obscenity case over Lady Chatterley's Lover, 8 Jul 1950, carries a stray closing bracket; Shukan Shincho "the
+# first weekly from a publisher" on 6 Feb 1956 / ja:週刊誌 gives Diamond's Shukan Diamond (Mar 1955) as the first;
+# Bungei Shunju's Tanaka Kakuei report "on sale this day" 10 Oct 1974 / on sale 9 Oct 1974; the Satanic Verses fatwa
+# of 14 Feb 1989, whose second sentence has the Iranian government offer 3 million dollars on the 24th / an Iranian
+# foundation offered the bounty on 15 Feb; the Akutagawa and Naoki prizes announced on 17 Jan 2006 and 16 Jul 2015 /
+# the winners match, but the announcement dates are not in the articles).
+slug: literature
+title: 文学と出版の歴史
+lead: 1885年の『ハックルベリー・フィンの冒険』、樋口一葉の「たけくらべ」と夏目漱石の『坊っちゃん』『こゝろ』、芥川龍之介の『羅生門』から、プルーストとジョイス、宮沢賢治の『春と修羅』、岩波文庫と岩波新書の創刊、そして川端康成と大江健三郎のノーベル文学賞まで。ベルヌ条約やペンクラブの結成、小林多喜二の死、手塚治虫の「新宝島」と週刊少年マガジン・サンデー、少年ジャンプの創刊、広辞苑の初版も含めて、書き手と本と読者をめぐる移り変わりをたどる。
+description: 樋口一葉と夏目漱石、芥川龍之介から、文庫と新書の創刊、少年誌の創刊、川端康成と大江健三郎のノーベル文学賞まで、文学と出版の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-anne-diary
+entries:
+  # --- Novels of the 1880s, copyright, Meiji letters ---
+  - id: 1885-02-18-2b3684e9 # Adventures of Huckleberry Finn published
+  - id: 1886-01-05-5cf2f698 # Strange Case of Dr Jekyll and Mr Hyde published
+  - id: 1886-09-09-412eaa96 # The Berne Convention on copyright is drawn up
+  - id: 1895-01-01-c4d62a04 # Higuchi Ichiyo's Takekurabe begins in Bungakukai (month)
+  - id: 1906-01-01-5d6a3017 # Shimazaki Toson, Hakai (year)
+  - id: 1906-01-01-9e34ce2e # Natsume Soseki, Botchan and Kusamakura (year)
+
+  # --- Soseki, Akutagawa, Ogai; Proust and Joyce ---
+  - id: 1913-11-14-6fe69c2f # Proust's Swann's Way, self-published
+  - id: 1914-04-20-d35a1700 # Soseki's Kokoro begins as a newspaper serial
+  - id: 1915-01-01-dd238a5b # Akutagawa Ryunosuke, Rashomon (year)
+  - id: 1916-01-01-5807db78 # Mori Ogai, Takasebune (year)
+  - id: 1921-10-01-8052ea7c # PEN International founded in London (month)
+  - id: 1922-02-02-a43c95ab # Joyce's Ulysses
+  - id: 1924-04-20-f43872d3 # Miyazawa Kenji's Haru to Shura
+
+  # --- Paperbacks, a writers' club, a writer killed in custody ---
+  - id: 1927-07-10-d3831ce4 # Iwanami Bunko launched
+  - id: 1927-07-24-34a2a393 # Akutagawa's suicide
+  - id: 1933-02-20-7c6e8f2a # Kobayashi Takiji arrested and killed by the special police
+  - id: 1935-11-26-7d4c3023 # The Japan PEN Club founded, Shimazaki Toson its first president
+  - id: 1938-11-20-e82fed37 # Iwanami Shinsho launched
+
+  # --- After the war: manga, a dictionary, weekly magazines ---
+  - id: 1947-01-30-b8fda31a # Tezuka Osamu's Shin Takarajima
+  - id: 1948-06-13-741a1b94 # Dazai Osamu drowns himself in the Tamagawa Aqueduct
+  - id: 1955-05-25-f3c0989d # First edition of the Kojien
+  - id: 1959-03-17-93e4766c # Weekly Shonen Magazine and Shonen Sunday launched the same day
+  - id: 1962-06-21-c1b0fdc9 # Shiba Ryotaro's Ryoma ga Yuku begins in the Sankei evening paper
+  - id: 1968-07-11-ccb70360 # Shonen Jump launched (twice a month at first)
+
+  # --- Nobel prizes, two suicides, Shiba's death ---
+  - id: 1968-10-17-6f9c2de0 # Kawabata Yasunari, the first Japanese Nobel laureate in literature
+  - id: 1970-10-08-ac997e1b # Solzhenitsyn's Nobel prize announced
+  - id: 1970-11-25-38c94fef # Mishima Yukio's suicide at Ichigaya
+  - id: 1972-04-16-acca1ec5 # Kawabata's suicide in Zushi
+  - id: 1994-10-13-3d057c70 # Oe Kenzaburo's Nobel prize; he declines the Order of Culture
+  - id: 1996-02-12-c0d85bdc # Shiba Ryotaro dies

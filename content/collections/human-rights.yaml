@@ -1,0 +1,63 @@
+# History of human rights and civil rights (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The end of slavery, non-violent resistance and the Nazi race laws, the Universal Declaration of Human Rights, the
+# US civil rights movement, apartheid in South Africa and its end, and in Japan the leprosy law, the Ainu culture law
+# and the Supreme Court rulings on the nationality law and the Eugenic Protection Law, with the recognition of
+# same-sex couples (WHO, the Irish referendum, the Japanese marriage suits).
+# Women's suffrage and equal-opportunity law are in the womens-rights collection and are not repeated.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: slavery abolished in Puerto Rico on 23 Mar 1873 / 22 Mar 1873; Spain abolishes slavery in Cuba
+# on 6 Oct 1886 / 7 Oct 1886; the NAACP "founded" on 12 Feb 1909 / that day the call for a conference was decided;
+# Japan's racial equality proposal voted down on 15 Apr 1919 / at the commission's last meeting on 11 Apr; the
+# Suiheisha declaration of 3 Mar 1922 as "Japan's first declaration of human rights" / the article calls it the
+# second and notes that "first" is not accurate; the March on Washington, 28 Aug 1963, with the "I Have a Dream"
+# speech "in front of the Washington Monument" / it was given on the steps of the Lincoln Memorial; Malcolm X's
+# assassination, 21 Feb 1965, has the right date but a garbled summary (マルコム・X暗殺事件される); Mandela "released
+# from a Cape Town prison" on 11 Feb 1990 / the date is right, but he left Victor Verster Prison near Paarl; Mandela
+# and de Klerk's Nobel Peace Prize dated 17 Oct 1993 / no such date in the articles (awarded in Oslo on
+# 10 Dec 1993); the government drops its appeal in the leprosy suit on 23 May 2001 / Koizumi met the plaintiffs that day
+# and the statement came on 25 May; the disability rights convention in force on 3 May 2008 "now ratified by 185
+# countries" / 192 as of Feb 2025; the US Supreme Court on 26 Jun 2013 "upholding" the appeals court on California's
+# ban / the Prop 8 appeal was dismissed for lack of standing and the appeals court ruling vacated; Jesse Jackson dies
+# on 16 Feb 2026 / 17 Feb 2026).
+slug: human-rights
+title: 人権と公民権の歴史
+lead: 1872年のマリア・ルス号事件の判決とブラジルの奴隷制廃止から、ガンディーの塩の行進、世界人権宣言、ローザ・パークスのバス・ボイコットと1964年公民権法、ネルソン・マンデラの投獄と南アフリカ初の黒人大統領就任まで。らい予防法の廃止やアイヌ新法、国籍法と旧優生保護法の違憲判決、同性婚をめぐる国民投票と判決も含めて、差別をなくし権利を広げてきた歩みをたどる。
+description: 奴隷制の廃止と世界人権宣言から、アメリカの公民権運動、南アフリカのアパルトヘイト撤廃、日本の差別と人権をめぐる判決まで、人権と公民権の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-broken-chains
+entries:
+  # --- The end of slavery ---
+  - id: 1872-08-30-0c8715bf # Maria Luz incident: the Kanagawa court frees the Chinese labourers
+  - id: 1888-05-13-f2ed057b # Brazil abolishes slavery (the Golden Law)
+
+  # --- Non-violence and persecution ---
+  - id: 1930-03-12-1a8f22f9 # Gandhi's Salt March begins
+  - id: 1935-09-15-ef312dd4 # The Nuremberg Laws strip German Jews of their civil rights
+
+  # --- The Universal Declaration, the US civil rights movement, apartheid on trial ---
+  - id: 1948-07-26-b1080a69 # Truman's executive order against racial discrimination in the armed forces
+  - id: 1948-12-10-67c619b3 # The UN adopts the Universal Declaration of Human Rights
+  - id: 1955-12-01-7ac50c14 # Rosa Parks and the Montgomery bus boycott
+  - id: 1957-09-04-52f09def # Little Rock: the National Guard blocks nine Black students
+  - id: 1960-02-01-bde6c0b8 # The Greensboro sit-in
+  - id: 1962-08-05-68d9a312 # Nelson Mandela arrested
+  - id: 1962-11-06-afb9aa81 # The UN General Assembly condemns apartheid
+  - id: 1964-06-12-410108e0 # Mandela and seven others sentenced to life, sent to Robben Island
+  - id: 1964-07-02-69b7d9b3 # Johnson signs the Civil Rights Act of 1964
+  - id: 1968-04-04-ed055f9c # Martin Luther King Jr. assassinated
+
+  # --- The 1990s: the end of apartheid; leprosy and the Ainu in Japan ---
+  - id: 1990-05-17-ae35151b # WHO removes homosexuality from its list of diseases
+  - id: 1991-06-17-a6f660bc # The Population Registration Act repealed: apartheid ended in law
+  - id: 1994-04-27-62850741 # The first election without racial restrictions
+  - id: 1994-05-10-3e3b6610 # Mandela becomes South Africa's first Black president
+  - id: 1996-04-01-76f8d3cb # The Leprosy Prevention Act abolished
+  - id: 1997-05-14-6eb62f47 # The Ainu Culture Act promulgated
+
+  # --- 21st century: nationality, a Black president, eugenics, same-sex couples ---
+  - id: 2008-06-04-4df11071 # Supreme Court: the nationality law's marriage requirement is unconstitutional
+  - id: 2009-01-20-a94c0b67 # Barack Obama, the first Black US president
+  - id: 2015-05-23-bf199873 # Ireland approves same-sex marriage by referendum
+  - id: 2021-03-17-59f0b948 # Sapporo District Court: no same-sex marriage violates Article 14
+  - id: 2024-07-03-b664cd5f # Supreme Court: the Eugenic Protection Law was unconstitutional
+  - id: 2025-03-07-86bbcc9c # Nagoya High Court: the marriage rules are unconstitutional (fourth high court)
