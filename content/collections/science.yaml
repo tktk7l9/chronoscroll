@@ -1,0 +1,61 @@
+# Great discoveries in science (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Physics, chemistry, astronomy and the life sciences: from helium in the solar spectrum, the periodic table and
+# radium through quantum theory and relativity to exoplanets, the human genome, the Higgs boson, gravitational waves
+# and the first image of a black hole, with the Japanese laureates of the Nobel Prizes in physics and chemistry.
+# Medical discoveries (X-rays, penicillin, the DNA double helix, iPS cells) stay in the medicine collection,
+# Manabe's climate model in the environment collection and the 2024 AI physics prize in the AI collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or that the articles
+# cannot confirm (dataset vs article: Ramsay isolates helium 26 May 1895 / 26 Mar 1895; Tomonaga's Nobel Prize
+# "decided" 2 Oct 1965 / the article gives only autumn 1965; the Schrodinger equation "established" 3 Sep 1926 /
+# the articles give only 1926 for his series of papers).
+slug: science
+title: 科学の大発見の歴史
+lead: 1869年のメンデレーエフの周期表、キュリー夫妻のラジウム、プランクの量子仮説とアインシュタインの相対性理論から、冥王星の発見、超新星1987Aのニュートリノ、初めての太陽系外惑星、クローン羊ドリー、ヒトゲノムの解読、ヒッグス粒子、重力波、ブラックホールの撮影まで。湯川秀樹から北川進までの日本の研究者のノーベル物理学賞・化学賞と、113番元素の命名権の獲得も含めて、物理・化学・生命科学の大発見をたどる。
+description: メンデレーエフの周期表からヒッグス粒子、重力波、ブラックホールの撮影まで、物理・化学・生命科学の大発見と日本の研究者のノーベル賞を年代順にたどる特集。
+icon: art-radium-discovery
+entries:
+  # --- Elements, rays and the prize for them (19th century) ---
+  - id: 1868-08-18-35a0ba94 # Janssen sees an unknown element's line in the solar spectrum (helium)
+  - id: 1869-01-01-c64ede2e # Mendeleev's periodic table
+  - id: 1869-01-01-a0ba2723 # Miescher finds nucleic acid ("nuclein") in the cell nucleus
+  - id: 1895-11-27-c6ac92b9 # Alfred Nobel signs the will that creates the Nobel Prizes
+  - id: 1898-12-26-db659829 # The Curies announce radium
+
+  # --- Quanta, relativity and the atom ---
+  - id: 1900-01-01-21ecd77d # Villard discovers gamma rays
+  - id: 1900-12-14-029a7775 # Planck's quantum hypothesis
+  - id: 1905-06-30-18f5d965 # Einstein's special relativity
+  - id: 1907-01-01-7867d3b9 # Rutherford: alpha particles are helium nuclei
+  - id: 1908-07-10-906c2a93 # Kamerlingh Onnes liquefies helium
+  - id: 1911-01-01-25a0eb04 # Kamerlingh Onnes discovers superconductivity
+  - id: 1916-01-01-8a004a8b # Einstein's general relativity
+  - id: 1925-07-01-8a62a70e # Heisenberg's matrix mechanics
+
+  # --- A new planet, the cell's chemistry, a new element, Japan's first Nobel ---
+  - id: 1930-02-18-a5b1740c # Tombaugh discovers Pluto
+  - id: 1937-01-01-fa94c5ad # The citric acid (Krebs) cycle
+  - id: 1941-02-23-921abebb # Seaborg's team makes plutonium
+  - id: 1949-11-03-0c3b0421 # Yukawa Hideki, Japan's first Nobel Prize (meson theory)
+
+  # --- From tunnelling to the human genome ---
+  - id: 1973-10-23-6cc927fe # Esaki Leona, Nobel Prize in Physics
+  - id: 1981-10-19-ef0d6d47 # Fukui Kenichi, Nobel Prize in Chemistry
+  - id: 1987-02-23-c45d4790 # Supernova 1987A and the first supernova neutrinos
+  - id: 1991-01-01-70db2a29 # Iijima Sumio discovers carbon nanotubes
+  - id: 1995-10-06-01cadbdc # First planet found around a Sun-like star (51 Pegasi)
+  - id: 1997-02-22-cba87525 # Dolly, the first cloned sheep, is announced
+  - id: 2000-10-10-ba9e42c0 # Shirakawa Hideki, Nobel Prize in Chemistry
+  - id: 2002-10-08-c78c8de7 # Koshiba Masatoshi (physics) and Tanaka Koichi (chemistry)
+  - id: 2003-04-14-3a1c30f3 # Human Genome Project completes the sequence
+
+  # --- 21st century ---
+  - id: 2008-10-07-fc1ad334 # Kobayashi, Masukawa and Nambu, Nobel Prize in Physics
+  - id: 2008-10-08-76d46ece # Shimomura Osamu, Nobel Prize in Chemistry (GFP)
+  - id: 2012-07-04-7e857f84 # CERN finds a particle that looks like the Higgs boson
+  - id: 2014-10-07-563509f6 # Akasaki, Amano and Nakamura, Nobel Prize in Physics
+  - id: 2015-10-06-abb86738 # Kajita Takaaki, Nobel Prize in Physics
+  - id: 2015-12-31-be0ebc3c # Element 113 credited to RIKEN, with naming rights
+  - id: 2016-02-11-962487c0 # LIGO and Virgo announce gravitational waves
+  - id: 2019-04-10-443a559a # Event Horizon Telescope: first image of a black hole
+  - id: 2025-10-08-779c2dc0 # Kitagawa Susumu, Nobel Prize in Chemistry

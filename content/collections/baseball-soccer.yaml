@@ -1,0 +1,63 @@
+# History of baseball and football (soccer) (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Japan's two big team sports outside the Olympics: the school tournament, Koshien and the professional league,
+# Nagashima and Oh, the Japanese players in the major leagues and the World Baseball Classic; FIFA and the World Cup,
+# the J.League, the road to Japan's first World Cup, the 2002 World Cup and the women's world title.
+# Olympic tournaments are left out (the olympics collection covers the Games).
+# Duplicates: of the two Koshien entries the 1 Aug 1924 one is used (the article gives the opening as 1 Aug 1924);
+# of the two 2011 Women's World Cup entries the tournament entry dated 26 Jun is used (see below).
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Murakami Masanori "promoted to the majors" 31 Aug 1964 / the article puts his call-up and
+# major-league debut on 1 Sep 1964; Ichiro sets the record of 262 hits on 1 Oct 2004 / that day he broke Sisler's
+# record with his 258th hit, 262 was his season total; the Women's World Cup final dated 18 Jul 2011 and Japan's win
+# over Spain dated 2 Dec 2022 / played on 17 Jul and 1 Dec, the dataset gives the Japanese date without saying so;
+# Japan's win over Germany, 23 Nov 2022, has the right date but its summary carries the typo 選出時代 for 選手時代,
+# copied from the year page).
+slug: baseball-soccer
+title: 野球とサッカー史
+lead: 1915年の第1回全国中等学校優勝野球大会と甲子園球場の竣工、ベーブ・ルースらの来日と職業野球の発足、天覧試合と王貞治の756号、野茂英雄とイチローの大リーグでの活躍、そして2023年のワールド・ベースボール・クラシック優勝まで。国際サッカー連盟の創立と第1回ワールドカップ、Jリーグの開幕、ジョホールバルの歓喜でのワールドカップ初出場、日韓共催のワールドカップ、サッカー日本女子代表の女子ワールドカップ優勝も含めて、二つの球技の歩みを日本と世界の出来事でたどる。
+description: 第1回全国中等学校優勝野球大会と職業野球の発足からWBC優勝まで、国際サッカー連盟の創立とワールドカップからJリーグ、日韓共催のワールドカップまで、野球とサッカーの節目を年代順にたどる特集。
+icon: art-world-cup
+entries:
+  # --- Beginnings: the school tournament, FIFA, Koshien, the first World Cup ---
+  - id: 1904-05-21-445c1a88 # FIFA founded
+  - id: 1915-08-18-c830632d # First national middle-school baseball tournament (today's summer Koshien)
+  - id: 1921-09-10-037ca434 # Japan Football Association founded
+  - id: 1921-11-26-9270bf16 # First national football championship (today's Emperor's Cup)
+  - id: 1924-08-01-e7cb1d6a # Koshien Stadium completed
+  - id: 1930-07-13-2b3cd372 # First FIFA World Cup, Uruguay
+
+  # --- Professional baseball is born ---
+  - id: 1934-11-02-2db7338b # Babe Ruth and a major-league all-star team tour Japan
+  - id: 1934-12-26-86bf133a # Dai Nippon Tokyo Yakyu Club (today's Yomiuri Giants) founded
+  - id: 1936-02-05-5b024663 # Japan's professional baseball league founded
+  - id: 1948-08-17-90158335 # First professional night game, Yokohama
+  - id: 1950-11-28-77155eb5 # First Japan Series: Mainichi beat Shochiku
+
+  # --- Nagashima and Oh ---
+  - id: 1958-04-05-e1120d7b # Nagashima's debut: four strikeouts in four at-bats
+  - id: 1959-06-25-37ed4659 # The Emperor watches Giants v Tigers; Nagashima's walk-off home run
+  - id: 1965-06-06-d7d39d55 # Japan Soccer League kicks off
+  - id: 1973-11-01-326073c8 # The Giants' ninth straight title (V9)
+  - id: 1974-10-14-01b98dda # Nagashima retires: "the Giants are forever immortal"
+  - id: 1977-09-03-40f5a924 # Oh Sadaharu's world-record 756th home run
+  - id: 1977-10-01-69b10bb8 # Pele's farewell match
+  - id: 1986-06-29-9bcf8170 # Argentina win the World Cup in Mexico
+
+  # --- The J.League and the road to the World Cup; Japanese players in the majors ---
+  - id: 1993-05-15-15266837 # The J.League kicks off
+  - id: 1993-10-28-1d46e701 # Late goal against Iraq: Japan miss the 1994 World Cup
+  - id: 1994-09-20-742113b2 # Ichiro, first to reach 200 hits in a Japanese season
+  - id: 1995-11-09-b0d331c6 # Nomo Hideo, first Japanese NL Rookie of the Year
+  - id: 1996-05-31-09ef6db9 # Japan and Korea chosen to co-host the 2002 World Cup
+  - id: 1997-11-16-87b79f45 # Johor Bahru: Japan beat Iran to reach their first World Cup
+  - id: 1998-06-14-5faf4718 # Japan's first World Cup match
+  - id: 2001-04-02-d1a229fb # Ichiro's major-league debut
+
+  # --- 21st century ---
+  - id: 2002-05-31-9843da6a # The 2002 World Cup in Japan and Korea
+  - id: 2004-11-02-97d88f9d # Rakuten Eagles, the first new team in 50 years
+  - id: 2006-03-03-85a29a4b # The first World Baseball Classic opens
+  - id: 2011-06-26-21958a11 # Japan win the Women's World Cup in Germany
+  - id: 2022-10-03-39ba3fcf # Murakami Munetaka's 56th home run and Triple Crown
+  - id: 2023-03-21-2405c248 # Japan win the World Baseball Classic

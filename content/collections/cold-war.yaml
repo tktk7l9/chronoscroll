@@ -1,0 +1,72 @@
+# History of the Cold War (collection)
+# References to existing auto-generated events only (nothing newly written).
+# From the "Iron Curtain" speech, the Marshall Plan and NATO through Korea, Hungary, Prague and the Berlin Wall
+# to perestroika, the Malta summit and the end of the Soviet Union, with Japan's own steps
+# (the police reserve, the Japan-Soviet declaration, the 1960 security treaty).
+# The Cuban Missile Crisis, the test-ban and arms-control treaties belong to the nuclear collection and are not repeated.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article
+# (dataset vs article: Reagan's "evil empire" phrase said in the State of the Union, 8 Mar 1983 / in a speech to the
+# National Association of Evangelicals in Orlando; the Velvet Revolution "brings down the communist government" on
+# 24 Nov 1989 / the revolution began on 17 Nov and on the 24th the party leadership resigned, Havel became president on
+# 29 Dec; Solidarity takes over 99% of the seats in both houses in the first round of 4 Jun 1989 / that result came
+# after the second round, so the 18 Jun entry is used; the San Francisco Peace Treaty and Security Treaty "in force six
+# months later" / in force on 28 Apr 1952; the San Francisco peace conference "until 4 Sep" 1951 / held 4-8 Sep;
+# West Germany "officially founded" 7 Sep 1949 / 23 May 1949; the 3 Jun 1961 Vienna summit entry starts with a stray
+# "4日 -").
+slug: cold-war
+title: 冷戦の歴史
+lead: 1946年のチャーチルの「鉄のカーテン」演説から、マーシャル・プランとNATOの発足、ベルリン封鎖と朝鮮戦争、ハンガリー動乱やプラハの春、ベルリンの壁の建設と崩壊、マルタ会談での冷戦終結の宣言、そして1991年のソビエト連邦の崩壊まで。警察予備隊の創設要求や日ソ共同宣言、新安保条約の調印といった日本の動きも含めて、冷戦の始まりから終わりまでをたどる。
+description: チャーチルの「鉄のカーテン」演説からベルリンの壁の崩壊、ソビエト連邦の崩壊まで、冷戦の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-berlin-wall
+entries:
+  # --- The Iron Curtain comes down ---
+  - id: 1946-03-05-029193ef # Churchill's "Iron Curtain" speech
+  - id: 1947-03-12-6ccc42e6 # Truman Doctrine: aid for Greece and Turkey
+  - id: 1947-06-05-3934db33 # Marshall announces the European Recovery Program
+  - id: 1948-06-24-1730ad51 # The Soviet Union blockades West Berlin
+  - id: 1949-04-04-bd730c1e # North Atlantic Treaty signed: NATO is born
+  - id: 1949-10-07-0ef08698 # East Germany founded: Germany is split in two
+
+  # --- War in Korea; Japan's place in the West ---
+  - id: 1950-06-25-ad3a75fa # The Korean War breaks out
+  - id: 1950-07-08-40f68495 # MacArthur asks Japan to set up a police reserve at once
+  - id: 1953-07-27-061c6db9 # Korean War armistice
+  - id: 1955-05-14-6c616a2f # Warsaw Pact founded
+  - id: 1956-02-25-de02fe8b # Khrushchev denounces Stalin
+  - id: 1956-10-19-a8d4609c # Japan-Soviet Joint Declaration restores relations
+  - id: 1956-10-23-40de433e # Hungarian uprising
+  - id: 1960-01-19-c2010c01 # New Japan-US Security Treaty signed
+
+  # --- Crises around 1960 ---
+  - id: 1960-05-01-7f15d284 # U-2 incident
+  - id: 1961-04-15-3b6d6e44 # Bay of Pigs invasion
+  - id: 1961-08-13-301eef4a # East Germany seals the Berlin border: the Wall goes up
+
+  # --- Prague, the Sino-Soviet split, detente, Vietnam ---
+  - id: 1968-01-05-a54b6104 # Dubcek takes office: the Prague Spring begins
+  - id: 1968-08-20-7c4eade7 # Warsaw Pact troops invade Czechoslovakia
+  - id: 1969-03-02-04cd43bf # Sino-Soviet border clash on Zhenbao (Damansky) Island
+  - id: 1970-03-19-3a9102d3 # Brandt and Stoph meet in Erfurt: first German-German summit
+  - id: 1972-02-21-f294d921 # Nixon visits China
+  - id: 1975-04-30-7286e8f0 # Fall of Saigon ends the Vietnam War
+  - id: 1979-12-24-92dbfeaf # Soviet invasion of Afghanistan
+
+  # --- Solidarity, Gorbachev and the summits ---
+  - id: 1980-08-14-9bdd3b55 # Gdansk shipyard strike led by Walesa (road to Solidarity)
+  - id: 1985-03-11-4abb72cf # Gorbachev becomes General Secretary
+  - id: 1985-11-19-239a0303 # Reagan and Gorbachev first meet in Geneva
+  - id: 1986-10-11-5e2f9cab # Reykjavik summit
+  - id: 1988-01-01-e34cd0a0 # Perestroika gets under way
+
+  # --- 1989: the revolutions in Eastern Europe ---
+  - id: 1989-06-18-4436f829 # Second round confirms Solidarity's landslide in Poland
+  - id: 1989-08-19-cc5b8e20 # Pan-European Picnic: East Germans cross into Austria
+  - id: 1989-11-10-50619ea3 # The Berlin Wall falls (9 Nov)
+  - id: 1989-12-03-dc1bf184 # Malta summit declares the Cold War over
+  - id: 1989-12-22-8517c26b # Ceausescu regime falls in Romania
+
+  # --- Germany reunited, the Soviet Union dissolved ---
+  - id: 1990-10-03-d3d1409f # German reunification
+  - id: 1991-07-01-5bd5ae87 # Warsaw Pact dissolved
+  - id: 1991-08-19-7b887f94 # August coup in Moscow fails
+  - id: 1991-12-25-97cf6e8d # The Soviet Union comes to an end
