@@ -1,0 +1,48 @@
+# History of photography and cameras (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Film and the camera (Eastman's roll film and Kodak, Nikon and Fujifilm founded, Japan's first colour film, the
+# disposable camera, the first LCD digital camera, the peak of film shipments), photographers and photojournalism
+# (Draper's Orion Nebula, Capa, Nagai Kenji, Friday and the attack on its newsroom, the faked coral photo, the
+# Mapplethorpe ruling), a planetary portrait by Voyager 1 and the photo booth.
+# Le Prince's first film is in the cinema collection; Earthrise and the far side of the Moon are in the space
+# collection and the black hole image in the science collection.
+# Year-precision entries (Print Club, the film shipment record) are shown with their year only.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the first photographs of a meteor 27 Nov 1885, of an aurora 5 Jan 1892
+# and Japan's oldest surviving star plate 5 Mar 1899 / not in the articles; Pluto first photographed 19 Mar 1915 / not
+# in the article; Konica's photo school 17 Mar 1923, Asahi Camera Apr 1926, Land's polarizer 1929 and the Tokyo-Osaka
+# photo telegraph 21 Aug 1930 / not dated in the articles; "Konica (then Konishiroku Photo Industry)" founded
+# 22 Dec 1936 / the company founded that day was Konishiroku Honten; the Olympus, Canon, Sony and Konica products of
+# 1954-1989 / the articles give the year only; the Nikon F on 1 Jun 1959 / Jun 1959; Focus founded 30 Oct 1981 /
+# 23 Oct 1981; the Minolta α-7000 20 Feb 1985 / 1985 only; the Canon EOS 650 on 2 Mar 1987 / 1 Mar 1987; Konishiroku
+# renamed Konica 1 Oct 1987 / 21 Oct 1987; Nippon Kogaku renamed Nikon 1 Apr 1988 / 1988 only; the Imperial Household
+# Agency's Instagram account 1 Apr 2024 / "from April" only; the Emperor's photo with MacArthur published 29 Sep 1945
+# / not dated in the articles).
+slug: photo
+title: 写真とカメラの歴史
+lead: 1880年のオリオン大星雲の撮影、イーストマンのロールフィルムの特許とコダックの商標登録から、日本光学工業（現在のニコン）と富士写真フイルムの設立、国産初のカラーフィルム、写真家ロバート・キャパの死、写真週刊誌「フライデー」の創刊、レンズ付きフィルム「写ルンです」、液晶デジタルカメラ「QV-10」、プリクラの登場、写真フィルム出荷量のピークまで。フライデー襲撃事件や朝日新聞の珊瑚写真の自作自演、ボイジャー1号が撮った太陽系の写真、メイプルソープ写真集をめぐる最高裁判決も含めて、写真とカメラの歩みをたどる。
+description: イーストマンのロールフィルムとコダックから、ニコンと富士写真フイルムの設立、「写ルンです」、デジタルカメラ「QV-10」、写真フィルム出荷量のピークまで、写真とカメラの節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-voyager
+entries:
+  # --- Roll film and the first cameras ---
+  - id: 1880-09-30-331ef46f # Henry Draper photographs the Orion Nebula
+  - id: 1884-10-14-9a6302d3 # Eastman's roll film patents
+  - id: 1888-09-04-da2e6ea1 # Eastman's roll-film camera patent and the Kodak trademark
+  - id: 1917-07-25-cb005011 # Nippon Kogaku (now Nikon) founded
+  - id: 1934-01-20-b2ac1bbc # Fuji Photo Film founded
+  - id: 1940-11-03-99f06154 # Konishiroku announces Japan's first colour film
+  - id: 1954-05-25-1d298d1b # Robert Capa killed by a mine in Indochina
+
+  # --- Photo weeklies, the disposable camera, a faked photo ---
+  - id: 1984-11-09-f4cbd62c # Friday launched; the FF war with Focus
+  - id: 1986-07-01-c8a6444d # Utsurundesu, the first single-use camera
+  - id: 1986-12-09-cfebc3d0 # Beat Takeshi and his troupe attack the Friday newsroom
+  - id: 1989-04-20-0ef2b042 # The Asahi Shimbun's coral photo, later found to be staged
+  - id: 1990-02-14-1e9e6b3e # Voyager 1 photographs the solar system
+
+  # --- Digital cameras and the end of the film boom ---
+  - id: 1995-01-01-afa070c7 # Print Club photo booths appear (year)
+  - id: 1995-03-10-a125c0cf # Casio's QV-10, an LCD digital camera
+  - id: 1997-01-01-7d2f174f # Film shipments peak (year)
+  - id: 2007-09-27-c1ddea6b # Nagai Kenji shot dead while filming in Myanmar
+  - id: 2008-02-19-9643a63c # The Supreme Court clears the Mapplethorpe photo book

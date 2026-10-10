@@ -1,0 +1,72 @@
+# History of education and schools (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The Meiji school system (the Ministry of Education, the Gakusei of 1872, the first elementary school and
+# kindergarten, the University of Tokyo, the Education Order, the Imperial University Order, the school orders of
+# 1886, the Imperial Rescript on Education, six years of compulsory schooling, the first women at an imperial
+# university, the University Order and the first private universities), the war (the student mobilisation rally,
+# Tsushima Maru), the postwar reform (UNESCO, the Fundamental Law of Education, the 6-3-3 system, the teachers'
+# union, the rescript annulled, the new universities and junior colleges), the textbook suits and the campus
+# struggle, Tsukuba, and the national examinations from the 1979 joint first-stage test to the 2021 common test.
+# Helen Keller's first lesson and Sesame Street are the two entries from outside Japan's school system.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: compulsory education in Britain 29 Nov 1870, Japan's first doctorates
+# 7 May 1888, national textbooks 13 Apr 1903, Yasui Kono's doctorate 20 Apr 1927, the blacked-out textbooks
+# 20 Sep 1945, Nanbara's remark on women 5 Feb 1946, school lunches resumed 20 Jan 1947 and rice lunches Apr 1976,
+# the new high schools 1 Apr 1948, the nationwide achievement test 26 Oct 1961, the Provisional Council on
+# Education 21 Aug 1984, the 1990 curriculum on the flag and anthem 1 Apr 1990, the high-school tuition law
+# 27 Nov 2013, the Gakusei 150th-anniversary ceremony 5 Sep 2022 and the digital textbook law 10 Jun 2026 / the
+# articles give the year or the month only or do not mention it; Montessori's first Casa dei Bambini 6 Jan 1907 /
+# Jan 1907; the Board of Education Law passed 5 Jul 1948 / promulgated 15 Jul 1948; the full five-day week and
+# "yutori" from 1 Apr 2002 / the article has the first Saturday off on 6 Apr 2002).
+slug: education
+title: 教育と学校の歴史
+lead: 1871年の文部省の設置と1872年の学制発布、日本初の小学校と幼稚園、東京大学の設立から、教育令と帝国大学令、教育勅語、義務教育の6年化、帝国大学初の女子学生、大学令による私立大学の認可、学徒出陣の壮行会、教育基本法と学校教育法による六三三制、新制大学の発足、家永教科書裁判、東大安田講堂事件、共通一次試験とセンター試験、学校週5日制、改正教育基本法、全国学力調査、大学入学共通テストまで。アン・サリヴァンによるヘレン・ケラーの教育の開始、ユネスコ憲章の採択、『セサミストリート』の放送開始も含めて、学校と教育制度の移り変わりをたどる。
+description: 学制の発布と日本初の小学校から、教育勅語、六三三制と新制大学、共通一次試験とセンター試験、大学入学共通テストまで、教育と学校制度の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-kenpou
+entries:
+  # --- The Meiji school system ---
+  - id: 1871-09-02-00fc84ed # The Ministry of Education set up at Yushima Seido
+  - id: 1872-09-04-40c5a572 # The Gakusei, Japan's first school system law
+  - id: 1873-01-15-89b9827d # Japan's first elementary school under the Gakusei
+  - id: 1874-03-13-55382a41 # The Women's Normal School (later Ochanomizu University) ordered
+  - id: 1876-11-16-73c63a65 # Japan's first kindergarten
+  - id: 1877-04-12-a753aed0 # The University of Tokyo founded
+  - id: 1879-09-29-8e5294ff # The Education Order replaces the Gakusei
+  - id: 1886-03-02-4a16a05f # The Imperial University Order
+  - id: 1886-04-10-d20489dc # The Elementary, Middle and Normal School Orders
+  - id: 1887-03-03-0cae5053 # Anne Sullivan begins teaching Helen Keller
+  - id: 1890-10-30-20313c01 # The Imperial Rescript on Education
+  - id: 1899-02-08-f35651cb # The Girls' High School Order
+  - id: 1900-08-20-2de9fc12 # Four years of compulsory elementary school
+  - id: 1907-03-21-ffb36df0 # Compulsory schooling extended to six years
+  - id: 1913-08-21-6a9020d2 # Tohoku Imperial University admits the first women
+  - id: 1918-12-06-89132fd9 # The University Order
+  - id: 1920-02-05-5d5054a8 # Keio and Waseda, the first private universities under the order
+
+  # --- War ---
+  - id: 1943-10-21-4fffbfc8 # The student mobilisation rally at the Meiji Jingu stadium
+  - id: 1944-08-22-314c6b67 # The evacuation ship Tsushima Maru sunk
+
+  # --- The postwar reform ---
+  - id: 1945-11-16-4c7e51f1 # The UNESCO constitution adopted
+  - id: 1947-03-31-bf5b0d70 # The Fundamental Law of Education in force
+  - id: 1947-04-01-7ac3c644 # The School Education Law: the 6-3-3 system
+  - id: 1947-06-08-1e34d494 # The Japan Teachers' Union founded
+  - id: 1948-06-19-4eed8240 # The Diet annuls the Imperial Rescript on Education
+  - id: 1949-05-31-503b09ba # The new national universities
+  - id: 1950-04-01-926eafd3 # The junior college system
+
+  # --- Textbooks, campus struggle, Tsukuba ---
+  - id: 1965-06-12-040c3066 # Ienaga Saburo sues over textbook screening
+  - id: 1969-01-18-4967b7e2 # The Yasuda Auditorium siege; Tokyo's entrance exam cancelled
+  - id: 1969-11-10-d2961ff0 # Sesame Street goes on the air
+  - id: 1973-10-01-c9f133b9 # The University of Tsukuba opens
+
+  # --- The national examinations and the reforms since the 1990s ---
+  - id: 1979-01-13-94db8bb4 # The first joint first-stage achievement test
+  - id: 1990-01-13-85488028 # The first National Center Test
+  - id: 1992-09-12-2a0c7ada # The school five-day week starts, one Saturday a month
+  - id: 2006-12-15-d9cebd69 # The revised Fundamental Law of Education enacted
+  - id: 2007-04-24-83e7d209 # The nationwide achievement survey, back after 43 years
+  - id: 2018-04-01-1559240a # Moral education becomes a school subject
+  - id: 2021-01-16-40fc51eb # The first Common Test for University Admissions

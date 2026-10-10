@@ -1,0 +1,79 @@
+# History of ships and shipping (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Lighthouses and canals (Kannonzaki, Suez, Panama, the St. Lawrence Seaway), shipping lines and ferries (NYK, the
+# Kanpu and Seikan ferries, Sakurajima, Hankyu Ferry), emigrant ships, the great wrecks (Titanic, Toya Maru, Shiun
+# Maru, Estonia, Costa Concordia, Sewol, the Shiretoko tour boat), the oil spills and the collisions (Yuyo Maru No. 10,
+# Nakhodka), the Suez nationalisation and the 2021 blockage, the solo and family voyages under sail (Horie Ken'ichi,
+# the Nagae family), the nuclear ship Mutsu, the discovery of the Titanic wreck, the world's largest cruise ship and
+# the first Arctic container voyage from China to Europe.
+# The Challenger expedition and the Titan submersible are in the exploration collection and the SOS adoption of 1906 in
+# the telecom collection; Tsushima Maru is in the education collection (school evacuation); naval warfare is not here.
+# Duplicates: the Toya Maru disaster appears twice on 26 Sep 1954 and the launch of Mutsu twice on 12 Jun 1969; the
+# detailed entry of each is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the Postal Steamship Company founded 3 Dec 1872, Britain's Suez shares
+# bought 24 Nov 1875, the Tokyo-Uraga-Tateyama steamers 24 Apr 1879, de Lesseps breaking ground at Panama 24 Feb 1881,
+# the US canal concession 18 Nov 1901, the Kirishima Maru sinking 9 Mar 1927, Mitsubishi Heavy Industries 11 Feb 1931,
+# the tanker Nissho Maru launched 10 Jul 1962, the Juliana spill 29 Nov 1971, the Diamond Princess deaths 20 Feb 2020
+# and the Panama Canal Authority's transit cap 4 Sep 2026 / not dated in the articles; Kawasaki Dockyard founded
+# 15 Oct 1896 / ja:川崎重工業 gives 9 Oct and ja:川崎造船所 15 Oct; the Sakura Maru emigrants landing at Ancon 3 Apr
+# 1899 / the article has Callao; the Wakato ferry capsized 1 Apr 1930 / 2 Apr 1930; the Kongo Maru in service 6 Nov
+# 1936 / 16 Nov 1936; Mitsui Senpaku founded 26 Dec 1942 / 28 Dec 1942; the Ehime Maru sunk 9 Feb 2001 / the article
+# dates it 10 Feb 2001 in Japan time; the Wakashio leak reported 6 Aug 2020 / not dated in the article).
+# Not used to keep the list within 40: the US taking over the Panama works 4 May 1904, the Lusitania 7 May 1915,
+# the IHI merger Dec 1960, the naming of Asuka II 26 Feb 2006 and the Sanchi collision 6 Jan 2018.
+slug: ship
+title: 船と海運の歴史
+lead: 1869年の観音埼燈台の初点灯とスエズ運河の開通、帆船カティーサークの進水から、日本郵船の創立、関釜連絡船と青函連絡船の運航開始、ブラジル移民を乗せた笠戸丸、タイタニック号の沈没、パナマ運河の開通、洞爺丸事故と紫雲丸事故、スエズ運河の国有化、堀江謙一の太平洋単独無寄港横断、日本初の長距離フェリーと原子力船「むつ」、青函連絡船の運航終了、セウォル号の沈没、スエズ運河の封鎖事故、世界最大の客船の出航まで。海上保安庁の設置やタイタニック号の残骸の発見、パナマ運河の返還も含めて、船と港と航路の歩みをたどる。
+description: 観音埼燈台とスエズ運河の開通から、青函連絡船、タイタニック号の沈没、洞爺丸事故、堀江謙一の太平洋横断、スエズ運河の封鎖事故まで、船と海運の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-suez-canal
+entries:
+  # --- Lighthouses, the Suez Canal and the last of the clippers ---
+  - id: 1869-02-11-850a4e09 # Kannonzaki, Japan's first Western-style lighthouse, lit
+  - id: 1869-11-17-9a56a6bc # The Suez Canal opens
+  - id: 1869-11-22-604b69b7 # The clipper Cutty Sark launched at Dumbarton
+  - id: 1876-07-20-4d0705cf # The Meiji Emperor returns to Yokohama on the Meiji Maru (Marine Day)
+  - id: 1885-09-29-62de6ae0 # Nippon Yusen (NYK) founded
+  - id: 1890-09-16-43d455f9 # The Ottoman frigate Ertugrul wrecked off Kushimoto
+
+  # --- Ferries, emigrant ships, SOS and the Titanic ---
+  - id: 1905-09-11-ff8037cd # The Kanpu ferry between Shimonoseki and Busan
+  - id: 1908-03-07-b68dc63c # The Seikan ferry between Aomori and Hakodate
+  - id: 1908-04-28-1c8e1891 # The Kasato Maru leaves Kobe with the first emigrants to Brazil
+  - id: 1909-08-11-b023124f # The first SOS, sent by the Arapahoe off Cape Hatteras
+  - id: 1912-04-14-7c89b5cd # The Titanic sinks
+  - id: 1914-04-01-4d3399c1 # The Ashizuri lighthouse lit
+  - id: 1914-08-15-d0b177bc # The Panama Canal opens
+  - id: 1934-11-19-d47e440e # The Sakurajima ferry
+  - id: 1941-05-20-cb541a45 # The Port of Tokyo opened to foreign trade
+
+  # --- The postwar ferries and their disasters ---
+  - id: 1947-11-21-e235e3d1 # The Toya Maru enters service
+  - id: 1948-05-01-e5328a02 # The Japan Coast Guard set up
+  - id: 1954-09-26-efcaee95 # The Toya Maru disaster: 1,155 dead and missing
+  - id: 1955-05-11-81003a4c # The Shiun Maru disaster
+  - id: 1956-07-26-04cf955d # Nasser nationalises the Suez Canal
+  - id: 1959-04-25-b5293eb6 # The St. Lawrence Seaway opens to shipping
+  - id: 1962-08-12-89c9dd16 # Horie Ken'ichi's solo non-stop Pacific crossing
+  - id: 1968-08-10-0007dc4f # Hankyu Ferry, Japan's first long-distance ferry
+  - id: 1969-06-12-2ce7e50e # Mutsu, Japan's first nuclear-powered ship, launched
+  - id: 1974-11-09-590f0c95 # The Yuyo Maru No. 10 collision and fire in Tokyo Bay
+  - id: 1979-10-01-15a2e313 # The Panama Canal Zone returned to Panama
+
+  # --- The wreck of the Titanic found; the end of the rail ferries ---
+  - id: 1985-09-01-7426616d # The Titanic wreck found by the US-French team
+  - id: 1986-04-13-11203d60 # The Nagae family's four-year-nine-month world voyage ends at Gamagori
+  - id: 1988-03-13-f8fdc458 # The Seikan ferry's last day
+  - id: 1990-03-31-6bc7a104 # The Uko ferry ends
+  - id: 1994-09-28-6e2f6587 # The Estonia sinks in the Baltic
+  - id: 1997-01-02-b5edf9a2 # The Nakhodka oil spill
+  - id: 1999-12-31-56dad5c1 # The Panama Canal handed over to Panama
+
+  # --- The 21st century: cruise ships, Sewol, Suez again ---
+  - id: 2012-01-13-99afc890 # The Costa Concordia runs aground
+  - id: 2014-04-16-79309eae # The Sewol sinks
+  - id: 2016-06-26-f60db55a # The expanded Panama Canal opens
+  - id: 2021-03-23-a3e295c3 # The Ever Given blocks the Suez Canal
+  - id: 2022-04-23-21793a57 # The Shiretoko tour boat sinks
+  - id: 2024-01-27-9dff0e9b # Icon of the Seas, the world's largest cruise ship, sails
+  - id: 2025-10-13-c7d0f07b # A Chinese container ship reaches Felixstowe by the Arctic route
