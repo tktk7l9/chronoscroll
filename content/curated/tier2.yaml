@@ -188,9 +188,11 @@
   title: 映画「オズの魔法使」プレミア上映
   svg: art-wizard-of-oz
 
+# The diary began at home: the album was a present for her 13th birthday on 12 June 1942 and the family went into
+# hiding on 6 July 1942 (ja:アンネ・フランク, ja:アンネの日記)
 - id: 1942-06-14-9bfd91a6
   title: アンネ、日記を書き始める
-  summary: ナチス占領下のアムステルダムの隠れ家で、13歳のアンネ・フランクが日記を書き始めた。「アンネの日記」は戦後、ホロコーストの記憶を伝える世界的な証言となった。
+  summary: ナチス占領下のアムステルダムで、13歳の誕生日に贈られた日記帳にアンネ・フランクが日記を書き始めた。一家は7月6日から隠れ家での生活に入り、日記は1944年8月1日まで続いた。「アンネの日記」は戦後、ホロコーストの記憶を伝える世界的な証言となった。
   category: culture
   svg: art-anne-diary
 
@@ -267,6 +269,12 @@
 - id: 1961-04-03-dd9e61be
   title: NHK朝の連続テレビ小説が始まる
 
+# Summary from the 1962 year page, whose stripped {{要検証範囲|世界初}} template left the typo 堀江謙一がの; the topic
+# article says 日本人初 (ja:堀江謙一). The auto title carried the same typo, so a title is set too.
+- id: 1962-08-12-89c9dd16
+  title: 堀江謙一、小型ヨットで太平洋単独無寄港横断に成功
+  summary: 堀江謙一が日本人初の小型ヨット単独無寄港太平洋横断航海に成功。「マーメイド号」（全長5.83m）で、5月12日、兵庫県西宮を出航、サンフランシスコに到着。
+
 - id: 1963-04-07-9cd840f5
   title: NHK大河ドラマが始まる
 
@@ -276,6 +284,12 @@
   importance: 99.9
   category: politics
   svg: art-jfk
+
+# Summary from the 1965 year page, whose stripped {{仮リンク|マルコム・X暗殺事件|...|label=暗殺}} template left the garbled
+# マルコム・X暗殺事件される; the second sentence follows ja:マルコム・X (Washington Heights rally, sawn-off shotgun and pistols).
+- id: 1965-02-21-9e325bdf
+  title: 米、黒人運動指導者マルコム・Xが暗殺される
+  summary: 米、黒人運動指導者マルコム・Xが暗殺される。ニューヨーク・マンハッタンのワシントンハイツ地区で開かれた集会でスピーチを始めた直後、聴衆の中から現れた男たちに散弾銃と短銃で撃たれた。
 
 - id: 1965-10-06-56365544
   title: 日本初のカラーテレビアニメ「ジャングル大帝」
@@ -304,6 +318,12 @@
   summary: 西ドイツ・ハノーファー近郊のランゲンハーゲンにあるポリグラムの工場で、世界で初めて音楽CDの生産が始まった。音楽はレコードからデジタルの時代へと動き出した。
   category: science
   svg: art-compact-disc
+
+# The 1985 year page calls the discoverers a 合同捜査チーム (a criminal-investigation team); ja:タイタニック (客船) has Ballard's
+# research team (調査団) of Woods Hole and IFREMER finding the wreck at a depth of 3,650 m.
+- id: 1985-09-01-7426616d
+  title: 米仏の合同調査団、大西洋の海底でタイタニック号の残骸を発見
+  summary: ロバート・バラード率いるアメリカとフランスの合同調査団が、大西洋の水深約3650メートルの海底に沈んでいたタイタニック号の残骸を発見した。1912年の沈没から73年ぶりに船の所在が確かめられた。
 
 # --- 1989-2026 ---
 - id: 1989-12-03-dc1bf184

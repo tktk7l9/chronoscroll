@@ -11,8 +11,7 @@
 # Japan's racial equality proposal voted down on 15 Apr 1919 / at the commission's last meeting on 11 Apr; the
 # Suiheisha declaration of 3 Mar 1922 as "Japan's first declaration of human rights" / the article calls it the
 # second and notes that "first" is not accurate; the March on Washington, 28 Aug 1963, with the "I Have a Dream"
-# speech "in front of the Washington Monument" / it was given on the steps of the Lincoln Memorial; Malcolm X's
-# assassination, 21 Feb 1965, has the right date but a garbled summary (マルコム・X暗殺事件される); Mandela "released
+# speech "in front of the Washington Monument" / it was given on the steps of the Lincoln Memorial; Mandela "released
 # from a Cape Town prison" on 11 Feb 1990 / the date is right, but he left Victor Verster Prison near Paarl; Mandela
 # and de Klerk's Nobel Peace Prize dated 17 Oct 1993 / no such date in the articles (awarded in Oslo on
 # 10 Dec 1993); the government drops its appeal in the leprosy suit on 23 May 2001 / Koizumi met the plaintiffs that day
@@ -20,6 +19,8 @@
 # countries" / 192 as of Feb 2025; the US Supreme Court on 26 Jun 2013 "upholding" the appeals court on California's
 # ban / the Prop 8 appeal was dismissed for lack of standing and the appeals court ruling vacated; Jesse Jackson dies
 # on 16 Feb 2026 / 17 Feb 2026).
+# Malcolm X's assassination (21 Feb 1965) was left out at first because its summary was garbled by a stripped 仮リンク
+# template (マルコム・X暗殺事件される); it is included since the summary was corrected in content/curated/tier2.yaml.
 slug: human-rights
 title: 人権と公民権の歴史
 lead: 1872年のマリア・ルス号事件の判決とブラジルの奴隷制廃止から、ガンディーの塩の行進、世界人権宣言、ローザ・パークスのバス・ボイコットと1964年公民権法、ネルソン・マンデラの投獄と南アフリカ初の黒人大統領就任まで。らい予防法の廃止やアイヌ新法、国籍法と旧優生保護法の違憲判決、同性婚をめぐる国民投票と判決も含めて、差別をなくし権利を広げてきた歩みをたどる。
@@ -44,6 +45,7 @@ entries:
   - id: 1962-11-06-afb9aa81 # The UN General Assembly condemns apartheid
   - id: 1964-06-12-410108e0 # Mandela and seven others sentenced to life, sent to Robben Island
   - id: 1964-07-02-69b7d9b3 # Johnson signs the Civil Rights Act of 1964
+  - id: 1965-02-21-9e325bdf # Malcolm X assassinated at a rally in Manhattan
   - id: 1968-04-04-ed055f9c # Martin Luther King Jr. assassinated
 
   # --- The 1990s: the end of apartheid; leprosy and the Ainu in Japan ---

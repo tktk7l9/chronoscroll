@@ -1,0 +1,68 @@
+# History of art and museums (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The first museums (the Met, the Natural History Museum in London, the Imperial Museum in Tokyo), the painters and the
+# stolen masterpiece (the first impressionist exhibition, van Gogh, the Mona Lisa, the Armory Show), the cave and tomb
+# paintings found in the 20th century (Lascaux, Takamatsuzuka), Japan's museums and cultural administration (the Tokyo
+# Prefectural Art Museum, the Order of Culture, the Horyuji murals, the Agency for Cultural Affairs, the Kyushu National
+# Museum, the National Art Center), the auction records (Sunflowers, Portrait of Dr. Gachet, Salvator Mundi) and the
+# museums of the 2020s (Osaka Nakanoshima, Tottori, the Grand Egyptian Museum) with the 2025 Louvre robbery.
+# Architecture (Eiffel Tower, Notre-Dame) is in the architecture collection; the Berne Convention and the Nobel prizes
+# for literature are in the literature collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the American Museum of Natural History founded 8 Apr 1869 / its
+# charter was signed 6 Apr 1869; the Tokyo School of Fine Arts named 4 Oct 1887 / 5 Oct 1887 in ja:図画取調掛, and its
+# move to Ueno on 11 Dec 1888 and 1 Feb 1889 / opened Feb 1889, no day; its first graduation on 10 Jul 1893, the
+# Kyoto Imperial Museum opened 1 May 1897, the Japan Art Institute founded 15 Oct 1898, Picasso's first Paris show on
+# 24 Jun 1901, the Ohara Museum opened 5 Nov 1930 and the Imperial Museum's new building opened 10 Nov 1938 / the
+# articles give the month or the year only; Les Demoiselles d'Avignon finished Mar 1907 / 1907 only; Mitsukoshi's art
+# department 1 Sep 1907 / not in the article; the Osaka City Museum of Art opened 11 Sep 1936 / 1 May 1936; the
+# Shosoin treasures shown from 5 Nov 1940 / 6 Nov 1940; the Imperial Academy of Arts renamed with the library and the
+# academy on 4 Dec 1947 / the academy was renamed on 2 Dec 1947; the Hakone Open-Air Museum opened 1 Aug 1969 /
+# 6 Sep 1969; the Mona Lisa shown in Tokyo from 20 Apr 1974 and Yamanashi buying Millet's Sower on 28 Apr 1977 /
+# April only; the National Museum of Western Art listed as World Heritage, Jul 2016, keeps a year-page residue
+# (17日 -); the Met "announcing" mandatory admission on 1 Mar 2018 / the article has the charge in force from
+# Mar 2018; the ICOM Kyoto conference 1 Sep 2019, the museum law amendment 8 Apr 2022, the Tokyo National Museum's
+# 150th-anniversary show 18 Oct 2022, Klimt's Portrait of Elisabeth Lederer sold 18 Nov 2025 and Vermeer's Girl with a
+# Pearl Earring shown in Osaka from 21 Aug 2026 / the articles give the year or the month only; Banksy's statue in
+# London 30 Apr 2026 / not in the article; the Lucas Museum's press preview 2 Sep 2026 / the article has the public
+# opening on 22 Sep 2026 only).
+slug: art
+title: 美術と美術館の歴史
+lead: 1870年のメトロポリタン美術館の創立と1874年の第1回印象派展から、ゴッホが自らの耳を切った事件、「モナ・リザ」の盗難と発見、現在の東京都美術館の開館、ラスコー洞窟壁画と高松塚古墳壁画の発見、グッゲンハイム美術館の開館、ゴッホの「ひまわり」と「医師ガシェの肖像」の落札、「サルバトール・ムンディ」の史上最高落札額、国立新美術館と大阪中之島美術館、大エジプト博物館の開館まで。帝国博物館と文化庁の発足、第1回文化勲章、法隆寺金堂壁画の焼失、ルーヴル美術館の強盗事件も含めて、作品と美術館をめぐる出来事をたどる。
+description: メトロポリタン美術館の創立と第1回印象派展から、「モナ・リザ」の盗難、ゴッホの「ひまわり」の落札、国立新美術館や大エジプト博物館の開館まで、美術と美術館の転換点を日本と世界の出来事で年代順にたどる特集。
+icon: art-monalisa
+entries:
+  # --- The first museums and the impressionists ---
+  - id: 1870-04-13-2e1e6e2f # The Metropolitan Museum of Art founded in New York
+  - id: 1872-02-20-5934e7a1 # The Met opens to the public
+  - id: 1874-04-15-a66641c1 # The first impressionist exhibition opens in Paris
+  - id: 1881-04-18-33273e73 # The Natural History Museum opens in London
+  - id: 1888-12-23-edf575f2 # Van Gogh cuts off part of his left ear
+  - id: 1889-05-16-abd8706f # The Imperial Museum (later the Imperial Household Museum) named
+  - id: 1890-07-27-807d6e0b # Van Gogh shoots himself; he dies on 29 July
+
+  # --- A stolen masterpiece and modern art in New York ---
+  - id: 1911-08-21-0cf7eabf # The Mona Lisa stolen from the Louvre
+  - id: 1913-02-17-da641e6c # The Armory Show opens in New York
+  - id: 1913-12-12-abce9d2d # The Mona Lisa recovered
+  - id: 1926-05-01-3980f3c9 # The present Tokyo Metropolitan Art Museum opens
+  - id: 1937-04-28-387f2fcc # The first Order of Culture ceremony
+  - id: 1940-09-12-abb4c3fe # The Lascaux cave paintings found
+  - id: 1949-01-26-954b8169 # The Horyuji Kondo murals lost to fire
+
+  # --- Museums and cultural administration after the war ---
+  - id: 1959-10-21-093affb8 # The Solomon R. Guggenheim Museum opens in New York
+  - id: 1968-06-15-a5bb8cae # The Agency for Cultural Affairs established
+  - id: 1972-03-21-88743619 # The Takamatsuzuka tomb murals found
+  - id: 1987-03-30-5600546f # Yasuda Fire buys van Gogh's Sunflowers for 5.3 billion yen
+  - id: 1990-05-15-dce9aaa3 # Portrait of Dr. Gachet sold for a record 82.5 million dollars
+
+  # --- New museums and auction records ---
+  - id: 2005-10-15-c5c31bbb # The Kyushu National Museum opens in Dazaifu
+  - id: 2007-01-21-191aacc4 # The National Art Center, Tokyo opens
+  - id: 2013-07-20-38e34d9e # The Setouchi Triennale 2013 summer session opens
+  - id: 2017-11-15-e5ce7d88 # Salvator Mundi sold for a record 450 million dollars
+  - id: 2022-02-02-b8bf6063 # The Nakanoshima Museum of Art, Osaka opens
+  - id: 2025-03-30-79b9668b # The Tottori Prefectural Museum of Art opens
+  - id: 2025-10-19-6985d331 # Jewels stolen from the Louvre
+  - id: 2025-11-01-1b74809e # The Grand Egyptian Museum opens

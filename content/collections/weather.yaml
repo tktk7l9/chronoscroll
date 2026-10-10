@@ -1,0 +1,69 @@
+# History of weather observation and forecasting (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The weather services (the US Weather Bureau, the Tokyo Meteorological Observatory and its successors up to the Japan
+# Meteorological Agency, the WMO), the first weather maps and forecasts, the records (Asahikawa -41.0°C, the 11.82 m
+# of snow on Mount Ibuki, the record highs from Yamagata to Kumagaya and Hamamatsu), the observation posts (Mount
+# Tsukuba, Mount Fuji), the Himawari satellites, the forecaster licence, and the forecast products of the 2020s
+# (the heatstroke alert, the end of the "177" telephone forecast, the word 酷暑日, the reorganised warnings).
+# Entries that belong to the disaster collection are not repeated: the first weather map of 16 Feb 1883, AMeDAS
+# (1974), the emergency earthquake warning, the special warnings and the five-level alert; the Vostok record low is in
+# the exploration collection. Storms and floods as disasters are left to that collection.
+# The two 酷暑日 entries of 17 Apr 2026 are duplicates; the one that says the agency announced its decision is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Cloncurry's 53°C on 16 Jan 1889 / not in the article; the Tohoku crop
+# failure of 1913 / not dated in the article; Basra's 53.8°C, Jul 1921, keeps a year-page residue (7月15日・17日 -);
+# the radio forecast resumed on 22 Aug 1945 / 17 Aug 1945 in ja:天気予報; the Mount Fuji radar completed 1 Oct 1964 /
+# the article gives 1964 only, and its observation started 10 Mar 1965 / the article has only a commemorative stamp on
+# that day; Tokyo rain forecasts from 1 Jun 1980, the 2003 French heatwave toll on 29 Aug 2003, Baghdad's snow on
+# 11 Jan 2008, Tokyo's latest first snow on 16 Mar 2007, the Kanto rainy season ending 29 Jun 2018, the new climate
+# normals of 19 May 2021, Tokyo's nine straight 猛暑日 on 3 Jul 2022, the hottest summer of 3 Sep 2024 and the
+# weather law amendment of 5 Dec 2025 / not dated in the articles; the half-day linear rainband information from
+# 27 May 2024 / 28 May 2024 in the article).
+slug: weather
+title: 気象と天気予報史
+lead: 1870年のアメリカの気象局の設立と1875年の東京気象台の設置、天気図の発行開始と日本初の天気予報、旭川の氷点下41.0度と伊吹山の積雪11メートル82センチ、富士山頂の気象観測所から、気象庁の発足、気象衛星「ひまわり」の打ち上げ、初の気象予報士試験、熊谷と浜松の41.1度、「酷暑日」の決定と防災気象情報の再編まで。世界気象機関の発足や1888年の大ブリザード、天気予報の電話サービス「177」の終了も含めて、空を観測し予報してきた歩みをたどる。
+description: 東京気象台の設置と日本初の天気予報から、気象庁の発足、気象衛星「ひまわり」、国内最高気温の更新、「酷暑日」の決定まで、気象観測と予報の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-sputnik
+entries:
+  # --- The first weather services, maps and forecasts ---
+  - id: 1870-02-09-c744ae03 # The US Weather Bureau established
+  - id: 1875-06-01-725eb68f # The Tokyo Meteorological Observatory set up
+  - id: 1883-02-08-680b2005 # 46 cm of snow in Tokyo, the city's record
+  - id: 1883-03-01-98808fdd # The observatory starts issuing printed weather maps
+  - id: 1884-06-01-1302f083 # Japan's first weather forecast
+  - id: 1887-01-01-76adc9fd # The Central Meteorological Observatory
+  - id: 1888-03-11-6d395a2b # The Great Blizzard of 1888 on the US east coast
+  - id: 1890-08-04-365900ec # The Central Meteorological Observatory becomes an independent body
+
+  # --- Mountain stations and the records ---
+  - id: 1902-01-01-fb4dfe8a # Japan's first mountain weather station on Mount Tsukuba
+  - id: 1902-01-25-f7ea1d41 # -41.0°C at Asahikawa, Japan's record low
+  - id: 1923-08-06-a860e3da # 42.5°C at Naruto, the unofficial record high
+  - id: 1927-02-14-91660ccf # 11.82 m of snow on Mount Ibuki
+  - id: 1932-07-01-c56d4411 # A weather station on the summit of Mount Fuji
+  - id: 1933-07-25-dcce8431 # 40.8°C at Yamagata, the record for 74 years
+
+  # --- The WMO, the agency and the satellites ---
+  - id: 1950-03-23-799828a1 # The World Meteorological Organization founded
+  - id: 1956-07-01-d500244d # The Japan Meteorological Agency
+  - id: 1977-02-17-04274c24 # Sleet on Kumejima, the southernmost snow in Japan
+  - id: 1977-07-14-d46c34eb # Himawari, Japan's first geostationary weather satellite
+  - id: 1977-09-09-ca2d4324 # Typhoon Babe sets Japan's record low pressure on Okinoerabu
+  - id: 1981-08-11-ab8a9615 # Himawari 2 launched from Tanegashima
+  - id: 1984-08-03-2f947130 # Himawari 3
+  - id: 1994-08-28-ce8815ec # The first weather forecaster examination
+  - id: 2005-02-26-cea511bd # Himawari 6 launched on an H-IIA
+
+  # --- New record highs ---
+  - id: 2007-08-16-270d7070 # 40.9°C at Tajimi and Kumagaya
+  - id: 2013-08-12-bf7ca6d2 # 41.0°C at Shimanto
+  - id: 2013-10-01-5c8c6a77 # The marine observatories abolished
+  - id: 2018-07-23-17e16b92 # 41.1°C at Kumagaya
+  - id: 2020-08-17-73a1e2aa # 41.1°C at Hamamatsu ties the record
+  - id: 2022-06-25-71f6371c # 40.2°C at Isesaki, the first 40°C in June
+
+  # --- Alerts, words and warnings of the 2020s ---
+  - id: 2024-04-24-1bac2964 # The heatstroke special alert
+  - id: 2025-03-31-25127ca5 # The "177" telephone forecast ends
+  - id: 2026-04-17-746d7d93 # 酷暑日: a name for days of 40°C or more
+  - id: 2026-05-28-54958ce8 # The warnings reorganised with alert levels

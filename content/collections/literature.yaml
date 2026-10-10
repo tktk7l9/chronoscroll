@@ -15,14 +15,16 @@
 # 1 Jan 1905 / the January 1905 issue, no day; Shirakaba founded 1 Apr 1910 / Apr 1910 only; Kaizosha's one-yen
 # complete works on 3 Dec 1926 / launched in Nov 1926, first volume in Dec 1926; the OED "finished in the last week"
 # of Apr 1928 / 1928 only; Ishikawa Tatsuzo's Ikiteiru Heitai banned on 18 Feb 1938 with the author and editors
-# arrested / banned on the day of issue (no date given) and the three indicted later; Anne Frank begins her diary "in
-# the hiding place" on 14 Jun 1942 / the diary runs from 12 Jun 1942 and the family went into hiding on 6 Jul 1942;
-# the obscenity case over Lady Chatterley's Lover, 8 Jul 1950, carries a stray closing bracket; Shukan Shincho "the
+# arrested / banned on the day of issue (no date given) and the three indicted later; the obscenity case over Lady
+# Chatterley's Lover, 8 Jul 1950, carries a stray closing bracket; Shukan Shincho "the
 # first weekly from a publisher" on 6 Feb 1956 / ja:週刊誌 gives Diamond's Shukan Diamond (Mar 1955) as the first;
 # Bungei Shunju's Tanaka Kakuei report "on sale this day" 10 Oct 1974 / on sale 9 Oct 1974; the Satanic Verses fatwa
 # of 14 Feb 1989, whose second sentence has the Iranian government offer 3 million dollars on the 24th / an Iranian
 # foundation offered the bounty on 15 Feb; the Akutagawa and Naoki prizes announced on 17 Jan 2006 and 16 Jul 2015 /
 # the winners match, but the announcement dates are not in the articles).
+# Anne Frank's diary (14 Jun 1942) was left out at first because its curated summary placed the start of the diary in
+# the hiding place; it is included since the summary was corrected in content/curated/tier2.yaml (the album was a
+# birthday present of 12 Jun 1942, the family went into hiding on 6 Jul 1942).
 slug: literature
 title: 文学と出版の歴史
 lead: 1885年の『ハックルベリー・フィンの冒険』、樋口一葉の「たけくらべ」と夏目漱石の『坊っちゃん』『こゝろ』、芥川龍之介の『羅生門』から、プルーストとジョイス、宮沢賢治の『春と修羅』、岩波文庫と岩波新書の創刊、そして川端康成と大江健三郎のノーベル文学賞まで。ベルヌ条約やペンクラブの結成、小林多喜二の死、手塚治虫の「新宝島」と週刊少年マガジン・サンデー、少年ジャンプの創刊、広辞苑の初版も含めて、書き手と本と読者をめぐる移り変わりをたどる。
@@ -52,6 +54,7 @@ entries:
   - id: 1933-02-20-7c6e8f2a # Kobayashi Takiji arrested and killed by the special police
   - id: 1935-11-26-7d4c3023 # The Japan PEN Club founded, Shimazaki Toson its first president
   - id: 1938-11-20-e82fed37 # Iwanami Shinsho launched
+  - id: 1942-06-14-9bfd91a6 # Anne Frank begins her diary
 
   # --- After the war: manga, a dictionary, weekly magazines ---
   - id: 1947-01-30-b8fda31a # Tezuka Osamu's Shin Takarajima
