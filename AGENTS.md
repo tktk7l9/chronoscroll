@@ -24,6 +24,15 @@ It shows domestic and international news from 1829 to the present, with an impor
   **is never shown at any zoom or scroll position** (thinning dense stretches is capDensity's job).
 - `content/curated/*.yaml` overrides top-tier events by id (rewritten summaries, SVG assignment, importance adjustments).
   Never edit the auto-generated data directly. Always make manual fixes in the curated layer.
+  `fixes.yaml` holds corrections of parser residue and wrong year-page lines, each verified against the topic article.
+  **A `date:` override keeps the id** (id = date + hash of the original text), so the old date stays in the id and the
+  `/e/` URL, and the correction **must stay within the same year** (`crossYearDateOverrides`: `loadById` loads the chunk
+  of a `?e=<id>` deep link from the id prefix). A cross-year fix or a parser change that alters the text needs a
+  redirect mechanism first (new id = new page, old page orphaned; collections and curated entries reference the id).
+- **Markup residue** (an unclosed `<ref>{{Cite …}}` tail, 「9–13日 - 」 date fragments, 「…も参照」, a `{{仮リンク|…|label=…}}`
+  rendered with its first argument such as 「暗殺事件される」) is detected by `pipeline/lib/residue.ts` and reported, not
+  failed, by `build.ts` (⚠️ lines at the end of the stats) and `pipeline/content.test.ts`, so a new case on Wikipedia
+  never blocks the monthly refresh. Hand-written text in `content/` must be clean (hard fail). Fix cases via `fixes.yaml`.
 - `content/affiliate/books.yaml` holds affiliate book links (id → BookRef[]). They are never
   merged into `NewsEvent`; they are served through a separate path as `static/data/books.json` (to keep the CC BY-SA-derived data clean).
 - `content/collections/<slug>.yaml` is a **collection (特集)** (a themed reading list). One file per collection, with metadata +

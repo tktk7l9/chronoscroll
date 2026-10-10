@@ -3,6 +3,7 @@ import {
 	eventDateAndId,
 	extractEventsSection,
 	fnv1a,
+	hasDroppedInterlinkLabel,
 	isDateLikeTarget,
 	parseBulletLine,
 	parseDateOnly,
@@ -367,5 +368,29 @@ describe('date formats that used to be missed', () => {
 		const ev = parseBulletLine('[[瀬戸内海]]サメ騒動：漁師がサメに襲われる', 1992, 3);
 		expect(ev?.text).toBe('瀬戸内海サメ騒動：漁師がサメに襲われる');
 		expect(ev?.day).toBe(null);
+	});
+
+	it('flags a 仮リンク whose label is dropped, without changing the text', () => {
+		const ev = parseBulletLine(
+			'[[2月21日]] - 米、[[マルコム・X]]が{{仮リンク|マルコム・X暗殺事件|en|Assassination of Malcolm X|label=暗殺}}される。',
+			1965,
+			2,
+		);
+		// The rendered text (and so the id) stays as before; only the flag is added for the build report
+		expect(ev?.text).toBe('米、マルコム・Xがマルコム・X暗殺事件される。');
+		expect(ev?.lostLabel).toBe(true);
+	});
+
+	it('does not flag a 仮リンク without a label (the first argument is the display text)', () => {
+		const ev = parseBulletLine('{{仮リンク|パスタ戦争|en|Pasta War}}が起きた', 1985, 1);
+		expect(ev?.text).toBe('パスタ戦争が起きた');
+		expect(ev).not.toHaveProperty('lostLabel');
+	});
+
+	it('does not flag a label that equals the first argument (2022年 アルバニア大統領選挙)', () => {
+		const line = '{{仮リンク|2022年アルバニア大統領選挙|en|2022 Albanian presidential election|label=2022年アルバニア大統領選挙}}4回目投票';
+		expect(hasDroppedInterlinkLabel(line)).toBe(false);
+		expect(hasDroppedInterlinkLabel(`${line}と{{仮リンク|X|en|X|label=Y}}`)).toBe(true);
+		expect(parseBulletLine(line, 2022, 6)).not.toHaveProperty('lostLabel');
 	});
 });

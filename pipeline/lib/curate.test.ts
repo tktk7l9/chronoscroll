@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { NewsEvent } from '../../src/lib/types.ts';
-import { applyCurated, parseCuratedYaml } from './curate.ts';
+import { applyCurated, crossYearDateOverrides, parseCuratedYaml } from './curate.ts';
 
 function ev(id: string): NewsEvent {
 	return {
@@ -54,6 +54,16 @@ describe('applyCurated', () => {
 		expect(e.importance).toBe(99.9);
 		expect(e.svg).toBe('art-a');
 		expect(e.summary).toBe('元要約。');
+	});
+
+	it('overrides the date and precision of an existing event while keeping its id', () => {
+		// A wrong day on the year page is corrected like this (top50: Hiroshima 1945-08-01-… → 1945-08-06)
+		const { events, updated } = applyCurated(
+			[ev('1964-10-10-abc')],
+			[{ id: '1964-10-10-abc', date: '1964-10-12', precision: 'day' }],
+		);
+		expect(updated).toEqual(['1964-10-10-abc']);
+		expect(events[0]).toMatchObject({ id: '1964-10-10-abc', date: '1964-10-12', precision: 'day', title: '元タイトル' });
 	});
 
 	it('does not override undefined fields', () => {
@@ -129,5 +139,22 @@ describe('applyCurated', () => {
 			[{ id: 'new1', date: '2000-01-01', title: 'T', summary: 'S', relatedIds: ['x'] }],
 		);
 		expect(events[0]).not.toHaveProperty('relatedIds');
+	});
+});
+
+describe('crossYearDateOverrides', () => {
+	it('lists entries whose date leaves the year of the id prefix', () => {
+		expect(
+			crossYearDateOverrides([
+				{ id: '1936-09-11-11dc7ebf', date: '1936-05-01' },
+				{ id: '1945-08-01-02e05b66', date: '1946-08-06' },
+				{ id: '1950-10-01-ai-turing-test', date: '1951-10-01' },
+				{ id: '1989-11-10-50619ea3', title: 'no date here' },
+			]),
+		).toEqual(['1945-08-01-02e05b66', '1950-10-01-ai-turing-test']);
+	});
+
+	it('skips ids without a year prefix', () => {
+		expect(crossYearDateOverrides([{ id: 'custom', date: '2000-01-01' }])).toEqual([]);
 	});
 });
