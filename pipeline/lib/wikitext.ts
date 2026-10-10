@@ -19,6 +19,21 @@ export interface RawEvent {
 	links: WikiLink[];
 	/** Region hint taken from a leading tag such as 「【日本】」 in the body */
 	regionHint?: 'japan' | 'world' | 'both';
+	/**
+	 * The line had a {{仮リンク|記事名|…|label=表示名}} whose label was dropped (stripMarkup renders the first
+	 * argument, e.g. 「マルコム・X暗殺事件される」). Only flagged for the build report: honouring the label would change
+	 * the text and therefore the id, so the text is corrected in content/curated/ instead.
+	 */
+	lostLabel?: true;
+}
+
+/** Whether the line has a {{仮リンク|記事名|…|label=表示名}} whose 表示名 differs from 記事名 (the template never nests braces) */
+export function hasDroppedInterlinkLabel(line: string): boolean {
+	for (const m of line.matchAll(/\{\{仮リンク\|([^{}|]*)((?:\|[^{}|]*)*)\}\}/g)) {
+		const label = m[2].match(/\|\s*label\s*=\s*([^|]*)/);
+		if (label && label[1].trim() !== m[1].trim()) return true;
+	}
+	return false;
 }
 
 /** Extract only the contents of the "== できごと ==" section (variants such as 「出来事・事柄」 are allowed) */
@@ -187,7 +202,16 @@ export function parseBulletLine(
 	if (month !== null && (month < 1 || month > 12)) return null;
 	if (day !== null && (day < 1 || day > 31)) return null;
 
-	return { year, month, day, precision, text: clean, links, ...(regionHint ? { regionHint } : {}) };
+	return {
+		year,
+		month,
+		day,
+		precision,
+		text: clean,
+		links,
+		...(regionHint ? { regionHint } : {}),
+		...(hasDroppedInterlinkLabel(content) ? { lostLabel: true as const } : {}),
+	};
 }
 
 /** Get RawEvent[] from the whole wikitext of a year page */

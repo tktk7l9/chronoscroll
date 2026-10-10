@@ -30,7 +30,12 @@ import {
 	unmatchedCollectionIds,
 	type CollectionSource,
 } from '../lib/collections.ts';
-import { applyCurated, parseCuratedYaml, type CuratedEntry } from '../lib/curate.ts';
+import {
+	applyCurated,
+	crossYearDateOverrides,
+	parseCuratedYaml,
+	type CuratedEntry,
+} from '../lib/curate.ts';
 import {
 	buildChunks,
 	buildEvent,
@@ -41,6 +46,7 @@ import {
 	sortEvents,
 } from '../lib/emit.ts';
 import { computeRelated, MAX_RELATED } from '../lib/related.ts';
+import { formatResidueReport, residueSummary } from '../lib/residue.ts';
 import { linkScore, percentileByDecade, rawScore } from '../lib/score.ts';
 import { eventDateAndId, parseYearPage, type RawEvent } from '../lib/wikitext.ts';
 import { duplicateIds } from '../lib/dedupe.ts';
@@ -395,6 +401,12 @@ const main = Effect.gen(function* () {
 	if (curateResult.unmatched.length > 0) {
 		console.warn(`⚠️ curated ids with no match: ${curateResult.unmatched.join(', ')}`);
 	}
+	const crossYear = crossYearDateOverrides(curatedEntries);
+	if (crossYear.length > 0) {
+		console.warn(
+			`⚠️ curated date override leaves the year of the id (deep links load the chunk from the id prefix): ${crossYear.join(', ')}`,
+		);
+	}
 
 	// 7. Compute related events (link events whose sources point to the same Wikipedia entity).
 	// curated relatedIds (manual) take precedence; the automatically computed ones fill the rest.
@@ -490,6 +502,18 @@ const main = Effect.gen(function* () {
 	console.log('\nTop 20 by importance:');
 	for (const e of [...events].sort((a, b) => b.importance - a.importance).slice(0, 20))
 		console.log(`  [${e.importance}] ${e.date} ${e.title} (${e.category}/${e.region})`);
+
+	// Markup residue left by the parser (fixed through content/curated/, never by editing the data).
+	// Reported, not failed: a new case on Wikipedia must not block the monthly refresh.
+	const residue = residueSummary(events);
+	if (residue.flagged > 0) console.warn(`\n${formatResidueReport(residue, events.length)}`);
+	const curatedSummaryIds = new Set(curatedEntries.filter((e) => e.summary !== undefined).map((e) => e.id));
+	const lostLabel = deduped.filter((s) => s.raw.lostLabel && !curatedSummaryIds.has(s.id)).map((s) => s.id);
+	if (lostLabel.length > 0) {
+		console.warn(
+			`⚠️ 仮リンク label dropped (first argument shown) and no curated summary yet: ${lostLabel.length}: ${lostLabel.join(', ')}`,
+		);
+	}
 });
 
 await Effect.runPromise(main);

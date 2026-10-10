@@ -26,6 +26,19 @@ export function parseCuratedYaml(yamlText: string): CuratedEntry[] {
 	return data as CuratedEntry[];
 }
 
+/**
+ * Ids whose `date` lies in a different year than the id prefix (ids are 「YYYY-MM-DD-…」).
+ * A date override keeps the id, so a correction must stay within the year: the client loads the chunk of a
+ * deep link (?e=<id>) from the id prefix (loadById in src/lib/state), while buildChunks places the event by its
+ * date, so a cross-year override would put the event where that deep link never looks. Ids without a year
+ * prefix cannot be checked and are skipped.
+ */
+export function crossYearDateOverrides(entries: readonly CuratedEntry[]): string[] {
+	return entries
+		.filter((e) => e.date !== undefined && /^\d{4}-/.test(e.id) && e.date.slice(0, 4) !== e.id.slice(0, 4))
+		.map((e) => e.id);
+}
+
 export interface CurateResult {
 	events: NewsEvent[];
 	updated: string[];
