@@ -33,6 +33,11 @@ It shows domestic and international news from 1829 to the present, with an impor
   rendered with its first argument such as 「暗殺事件される」) is detected by `pipeline/lib/residue.ts` and reported, not
   failed, by `build.ts` (⚠️ lines at the end of the stats) and `pipeline/content.test.ts`, so a new case on Wikipedia
   never blocks the monthly refresh. Hand-written text in `content/` must be clean (hard fail). Fix cases via `fixes.yaml`.
+  The committed data must also stay at or below `RESIDUE_CEILING` in `content.test.ts` (count per class; 3 cases left
+  after the 2026-10 pass). The data-refresh job only annotates an excess, then CI fails until the new cases are fixed:
+  lower the ceiling together with fixes, never raise it. A multi-line `<ref>`/`{{efn}}` case is best fixed with the
+  text the parser gives for the whole logical line (the line plus its continuation lines), which restores words that
+  follow `</ref>`; a range such as 「[[2月8日]] - [[2月15日|15日]] - 本文」 keeps the start date, as the parser does.
 - `content/affiliate/books.yaml` holds affiliate book links (id → BookRef[]). They are never
   merged into `NewsEvent`; they are served through a separate path as `static/data/books.json` (to keep the CC BY-SA-derived data clean).
 - `content/collections/<slug>.yaml` is a **collection (特集)** (a themed reading list). One file per collection, with metadata +

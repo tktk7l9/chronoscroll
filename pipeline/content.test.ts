@@ -15,9 +15,18 @@ import { describe, expect, it } from 'vitest';
 import type { NewsEvent } from '../src/lib/types.ts';
 import { parseCollectionYaml } from './lib/collections.ts';
 import { crossYearDateOverrides, parseCuratedYaml, type CuratedEntry } from './lib/curate.ts';
-import { findResidue, formatResidueReport, residueSummary } from './lib/residue.ts';
+import { findResidue, formatResidueReport, residueOverCeiling, residueSummary } from './lib/residue.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
+
+/**
+ * Most events allowed per residue class in the committed data (a class not listed allows none). It only goes down:
+ * lower an entry in the same commit as the fixes; when new cases appear, fix them in content/curated/fixes.yaml
+ * instead of raising it. Left on purpose (2026-10): leading_date 1938-01-01-1a7d4cff and 1944-02-01-74b78a28 (the
+ * year page links one day and shows another, and no source settles it), see_also 2021-03-01-99bcdb98 (a bare
+ * 「…も参照」 line without event text; the earthquake is 2021-03-20-975b7871).
+ */
+const RESIDUE_CEILING: Readonly<Record<string, number>> = { leading_date: 2, see_also: 1 };
 
 function yamlFiles(dir: string): string[] {
 	return readdirSync(join(ROOT, dir))
@@ -110,5 +119,17 @@ describe('generated data (static/data/chunks)', () => {
 			process.stderr.write(`${report}\n`);
 		}
 		expect(summary.byPattern.size).toBeGreaterThanOrEqual(0);
+	});
+
+	it('keeps residue per class at or below the committed ceiling', () => {
+		const over = residueOverCeiling(residueSummary([...events.values()]), RESIDUE_CEILING);
+		const text = over.map((x) => `${x.name} ${x.count} > ${x.ceiling}`).join(', ');
+		// The monthly data-refresh job runs the tests before it opens its PR and must not be blocked by a new case on
+		// Wikipedia: it only annotates the run, and CI on main fails until the cases are fixed in fixes.yaml
+		if (over.length > 0 && process.env.GITHUB_WORKFLOW === 'data-refresh') {
+			process.stderr.write(`::warning title=markup residue above the ceiling::${text}\n`);
+			return;
+		}
+		expect(over, `residue above the ceiling (${text}); fix the cases in content/curated/fixes.yaml`).toEqual([]);
 	});
 });

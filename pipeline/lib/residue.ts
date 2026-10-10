@@ -120,6 +120,26 @@ export function residueSummary(events: readonly Pick<NewsEvent, 'id' | 'title' |
 	return { flagged, byPattern };
 }
 
+export interface CeilingExcess {
+	name: string;
+	count: number;
+	ceiling: number;
+}
+
+/**
+ * Residue classes whose event count is above the allowed ceiling (a class missing from `ceiling` allows none).
+ * pipeline/content.test.ts keeps the committed data at or below its per-class ceiling, so fixed cases cannot come back
+ * and new ones cannot pile up unnoticed.
+ */
+export function residueOverCeiling(
+	summary: ResidueSummary,
+	ceiling: Readonly<Record<string, number>>,
+): CeilingExcess[] {
+	return [...summary.byPattern]
+		.map(([name, ids]) => ({ name, count: ids.length, ceiling: ceiling[name] ?? 0 }))
+		.filter((x) => x.count > x.ceiling);
+}
+
 /** Multi-line report for the build log: counts per pattern (descending) with the first few ids */
 export function formatResidueReport(summary: ResidueSummary, total: number, sampleSize = 8): string {
 	const lines = [`⚠️ markup residue in generated text: ${summary.flagged} of ${total} events (fix via content/curated/)`];

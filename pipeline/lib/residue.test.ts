@@ -4,6 +4,7 @@ import {
 	eventResidue,
 	findResidue,
 	formatResidueReport,
+	residueOverCeiling,
 	residueSummary,
 	unbalancedBrackets,
 } from './residue.ts';
@@ -110,6 +111,14 @@ describe('residueSummary / formatResidueReport', () => {
 				'  leading_date: 2 — date fragment left in front of the body (unparsed date form such as 「9–13日 - 」): c, … (+1)',
 			].join('\n'),
 		);
+	});
+
+	it('lists the classes above their ceiling; a class without a ceiling allows none', () => {
+		const s = residueSummary(events);
+		expect(residueOverCeiling(s, { braces: 2, leading_date: 2 })).toEqual([]);
+		expect(residueOverCeiling(s, { braces: 1, leading_date: 3 })).toEqual([{ name: 'braces', count: 2, ceiling: 1 }]);
+		expect(residueOverCeiling(s, { braces: 2 })).toEqual([{ name: 'leading_date', count: 2, ceiling: 0 }]);
+		expect(residueOverCeiling(residueSummary([]), {})).toEqual([]);
 	});
 
 	it('describes the unbalanced pseudo pattern and lists all ids when they fit', () => {
