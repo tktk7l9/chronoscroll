@@ -1,0 +1,59 @@
+# History of shogi, go and chess (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The associations (Hoensha for go, FIDE, the Tokyo Shogi Federation), the Jinya incident, Habu Yoshiharu (junior-high
+# professional, seven crowns, eternal seven crowns, losing the last title, leaving A class), Satomi Kana's five women's
+# titles, Deep Blue against Kasparov and AlphaGo against Lee Sedol, the software-cheating affair and the Eiou-sen
+# becoming a title, Kato Hifumi's retirement and farewell, the People's Honour Award for Habu and Iyama Yuta, and Fujii
+# Sota from his professional qualification to all eight titles and the Prime Minister's award.
+# Deep Blue's win and AlphaGo are also in the AI collection.
+# The Hoensha entry has month precision and is shown with its month only.
+# Duplicates: Habu's seven crowns appears twice on 14 Feb 1996; the entry naming the Osho match against Tanigawa is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Steinitz the first official world chess champion 26 Mar 1886 / 1886
+# only; Masuda beating Oyama with a lance handicap 20 Jan 1956 / the article dates the game 19 Jan 1956; Masuda's three
+# crowns 24 Jul 1957, the NHK Cup go on television 7 Oct 1962 and Habu's record 81st title 5 Jul 2012 / not dated in
+# the articles; Hayashiba Naoko the youngest women's Meijin 19 Feb 1983 / Jan-Feb 1983 only; Xie Jun women's world
+# chess champion 29 Oct 1991 / 1991 only; Satomi Kana's four crowns "at 22" on 23 May 2012 / at 20 years 2 months).
+slug: board-games
+title: 将棋・囲碁・チェスの歴史
+lead: 1879年の囲碁団体「方円社」の設立、1924年の国際チェス連盟と東京将棋連盟の設立から、陣屋事件、羽生善治の中学生棋士デビューと七冠独占、ディープ・ブルー対ガルリ・カスパロフ、囲碁AI「AlphaGo」とイ・セドル九段の対局、藤井聡太の最年少でのプロ入りと八冠達成まで。将棋ソフトをめぐる疑惑の責任を取った谷川浩司会長の辞任、羽生善治と井山裕太の国民栄誉賞、加藤一二三の引退も含めて、盤上の勝負の歩みをたどる。
+description: 方円社と国際チェス連盟、東京将棋連盟の設立から、羽生善治の七冠独占、ディープ・ブルーとAlphaGo、藤井聡太の八冠達成まで、将棋・囲碁・チェスの節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-alphago
+entries:
+  # --- Associations and the Jinya incident ---
+  - id: 1879-04-01-9d54e071 # Hoensha, a go association, founded (month)
+  - id: 1924-07-20-18dd0d9e # FIDE founded in Paris
+  - id: 1924-09-08-dd49f58f # The Tokyo Shogi Federation, forerunner of the Japan Shogi Association
+  - id: 1952-02-18-32f0fe81 # The Jinya incident: Masuda refuses to play Kimura
+
+  # --- Habu Yoshiharu and the machines ---
+  - id: 1985-12-18-5692fbed # Habu becomes the third junior-high-school professional
+  - id: 1996-02-10-fd06caac # Deep Blue plays Kasparov for the first time
+  - id: 1996-02-14-5b7304d3 # Habu takes the Osho title from Tanigawa and holds all seven titles
+  - id: 1997-05-11-d05df6c0 # Deep Blue beats Kasparov
+  - id: 2009-03-11-f4ecfe21 # Nakahara Makoto announces his retirement
+  - id: 2013-05-01-1788e0e1 # Satomi Kana, the first holder of five women's titles
+  - id: 2016-03-09-ai-alphago # AlphaGo beats Lee Sedol
+
+  # --- Fujii Sota's rise ---
+  - id: 2016-09-01-1cf3f123 # Fujii Sota qualifies as a professional at 14
+  - id: 2017-01-01-250e74ae # Tanigawa resigns over the software-cheating affair
+  - id: 2017-05-01-0f9c3ff0 # The Eiou-sen becomes a title match
+  - id: 2017-06-01-da55d1ac # Kato Hifumi retires
+  - id: 2017-12-01-39bf880e # Habu, the first eternal seven-crown holder
+  - id: 2018-02-01-4f7dbb10 # Fujii promoted to 5-dan
+  - id: 2018-02-13-e7253249 # People's Honour Award for Habu and Iyama Yuta
+  - id: 2018-02-17-6a5acad1 # Fujii wins the Asahi Cup and becomes 6-dan
+  - id: 2018-05-18-bcf33678 # Fujii, the youngest 7-dan
+  - id: 2018-12-21-b676d87a # Habu loses the Ryuo title, without a title after 27 years
+
+  # --- Eight crowns ---
+  - id: 2020-08-20-dd62d0be # Fujii takes the Oi title: two crowns
+  - id: 2021-11-13-eee50a68 # Fujii, the youngest holder of four titles
+  - id: 2022-02-04-50f36dd2 # Habu drops out of A class
+  - id: 2022-02-12-3da28057 # Fujii takes the Osho title: five crowns
+  - id: 2023-03-19-18707bf2 # Fujii takes the Kio title: six crowns
+  - id: 2023-06-01-002c9f5e # Fujii becomes Meijin: seven crowns
+  - id: 2023-10-11-ae06dadf # Fujii holds all eight titles
+  - id: 2023-11-13-b73aa23c # Prime Minister's award for Fujii
+  - id: 2026-06-06-e9229244 # Farewell for Kato Hifumi; honorary 10-dan
