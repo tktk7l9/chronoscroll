@@ -3,19 +3,20 @@
 # The first Kentucky Derby and the first Tokyo Yushun (Japanese Derby); the Meguro, Fuchu and Nakayama racecourses, the
 # Tokyo Keiba Club, an off-track betting office and the Japan Racing Association; the Triple Crown winners (St Lite,
 # Shinzan, Mr. C.B., Symboli Rudolf, Narita Brian, Deep Impact, Orfevre, Contrail) and the fillies' Triple Crowns
-# (Mejiro Ramonu, Still in Love, Gentildonna, Almond Eye); Haiseiko, Oguri Cap, Silence Suzuka, the jockeys Fukunaga
-# Yoichi and Shibata Masato; night racing at Oi, the 2007 equine influenza, Japanese horses abroad (the Japan Cup, the
+# (Mejiro Ramonu, Still in Love, Gentildonna, Almond Eye); Haiseiko, Oguri Cap, Silence Suzuka, Haru Urara, the
+# jockeys Fukunaga Yoichi and Shibata Masato; night racing at Oi, the 2007 equine influenza, Japanese horses abroad (the Japan Cup, the
 # Arc, the Dubai World Cup) and the Emperor at the Tenno Sho.
 # Dates of the Triple Crown races, the Japan Cup and the Arima Kinen are checked against the race result tables of the
 # race articles (菊花賞, 秋華賞, エリザベス女王杯, ジャパンカップ, 第35回有馬記念) where the horse article gives none.
-# The Meguro racecourse entry has month precision and is shown with its month only.
+# The Meguro racecourse entry has month precision and the Haru Urara boom (2003, 「2003年夏」 in the article) year
+# precision; they are shown with their month and year only.
 # Duplicates: the Triple Crowns of Mr. C.B. (13 Nov 1983), Symboli Rudolf (11 Nov 1984), Narita Brian (6 Nov 1994)
 # and Deep Impact (23 Oct 2005) each appear twice; one entry of each is used.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
 # articles cannot confirm (dataset vs article: the Shinobazu Pond racecourse 23 Jun 1884, the Kyoto racecourse fire
 # 3 Apr 1933 and adult students allowed to buy betting tickets 1 Jan 2005 / not dated in the articles; Speed Symboli
 # "10th of 24" in the 1969 Arc / the race record gives 11th; Haiseiko's last race in the Arima Kinen 15 Dec 1974 /
-# 16 Dec 1974; the Haru Urara boom (2003, year) / the entry keeps a leftover 「夏頃 - 」 prefix).
+# 16 Dec 1974).
 slug: horse-racing
 title: 競馬の歴史
 lead: 1875年の第1回ケンタッキーダービーから、目黒競馬場の開設と第1回東京優駿、府中競馬場の開場と中山競馬場の再開、日本中央競馬会の発足、セントライト・シンザン・シンボリルドルフ・ディープインパクトらクラシック三冠馬の誕生、ハイセイコーのデビューとオグリキャップのラストラン、ディープインパクトの凱旋門賞出走、ドバイワールドカップでの日本馬の優勝、天皇賞（秋）の天覧競馬まで。日本初のナイター競走や馬インフルエンザによる開催中止、牝馬三冠も含めて、競馬の歩みをたどる。
@@ -48,6 +49,7 @@ entries:
   - id: 1998-11-01-fcdc8bf3 # Silence Suzuka breaks down in the Tenno Sho
 
   # --- Deep Impact and the world stage ---
+  - id: 2003-01-01-9b3dbb12 # The Haru Urara boom (year)
   - id: 2003-10-19-e7f5085a # Still in Love completes the fillies' Triple Crown
   - id: 2005-10-23-7df07ce6 # Deep Impact, unbeaten Triple Crown
   - id: 2006-10-01-ee3206ee # Deep Impact third in the Arc, later disqualified
