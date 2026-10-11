@@ -1,0 +1,79 @@
+# Wars and peace in the Middle East (collection)
+# References to existing auto-generated events only (nothing newly written; one typo of the year-page line is fixed in
+# content/curated/fixes.yaml, see 2023-10-07-96de1607).
+# The UN partition plan and Israel's independence; the first, second and fourth Arab-Israeli wars, the PLO, Nasser's
+# death; Sadat's visit to Israel, Camp David and the peace treaty, Sadat's assassination; the Iran-Iraq War, the strike
+# on Iraq's reactor, the invasion of Lebanon, the first intifada; the invasion and liberation of Kuwait and Japan's
+# minesweepers; Rabin's assassination, Wye River, the failed Camp David talks of 2000, the second intifada, the Iraq
+# War, Arafat's death, the Gaza disengagement and the Hamas election win; the Jasmine Revolution, Mubarak's
+# resignation, the fall of Tripoli, the ISIL caliphate, the Hamas attack of 7 Oct 2023, the fall of Assad and the
+# Israeli strikes on Iran in 2025.
+# Where the ja articles give no day, the date is checked against en articles: Sadat's visit (19-21 Nov 1977), the 1982
+# Lebanon War (6 Jun 1982), the Wye River Memorandum (23 Oct 1998), the 2000 Camp David Summit (11-25 Jul 2000) and the
+# Gaza disengagement (settlers' evacuation completed 22 Aug 2005). The minesweeper dispatch (1991) and Rabin's
+# assassination (1995) are year entries and are shown with their year only.
+# The Arab League's declaration of war (14 May 1948) is left out next to the invasion of the next day.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the Balfour Declaration "promised a Jewish state" / the article stresses
+# the text said "national home", not a state; the first truce 1 Jun 1948 / not dated in the article; the Six-Day War
+# "fighting ended on 11 June" / fighting 5-10 June (Syria's ceasefire on 10 June); the Jordan-PLO ceasefire 25 Sep
+# 1970 / not dated; the oil shock 17 Oct 1973 / the price rise was decided on 16 Oct (OPEC Gulf states), the
+# production cut on 17 Oct (OAPEC); the Iranian Revolution 1 Feb 1979 / the entry says only 「イラン革命」, the article
+# dates Khomeini's return to 1 Feb and the fall of the government to 11 Feb; the Turkish Airlines rescue 19 Mar 1985 /
+# 「空襲警報が鳴り響く中」「自国民より優先して」 are not in the article; the Palestinian declaration of independence
+# 15 Nov 1988 / 「チュニジアのチュニスで」 is not in the articles; the Oslo Accords 13 Aug 1993 / signed 20 Aug 1993;
+# Israel's ground invasion of Lebanon 22 Jul 2006 / not dated (the war ran 12 Jul - 8 Sep); the killing of Soleimani
+# 3 Jan 2020 / the article has the drone strike and Trump's tweet, not a Pentagon statement; the Gaza ceasefire
+# 19 Jan 2025 / 「予定から3時間遅れた現地時間11時15分から」 is not in the article).
+slug: middle-east
+title: 中東の戦争と和平
+lead: 1947年の国連総会でのパレスチナ分割決議とイスラエルの独立宣言から、第一次・第二次・第四次中東戦争、パレスチナ解放機構の設立、サダト大統領のイスラエル訪問とキャンプ・デービッド合意、イラン・イラク戦争、イラクのクウェート侵攻と湾岸戦争、ワイ・リバー合意と第二次インティファーダ、イラク戦争、ジャスミン革命とムバーラク大統領の辞任、ISILの国家樹立宣言、ハマースのイスラエル攻撃、アサド政権の崩壊まで。ペルシャ湾への日本の掃海艇派遣も含めて、中東の戦争と和平の歩みをたどる。
+description: パレスチナ分割決議とイスラエルの独立宣言から、中東戦争、キャンプ・デービッド合意、湾岸戦争、インティファーダ、ジャスミン革命、ハマースのイスラエル攻撃まで、中東の戦争と和平を年代順にたどる特集。
+icon: art-israel-founding
+entries:
+  # --- Partition and the first wars (1947-1964) ---
+  - id: 1947-11-29-074e5991 # The UN General Assembly adopts the partition plan
+  - id: 1948-05-14-e6669ec0 # Ben-Gurion declares Israel's independence
+  - id: 1948-05-15-fc20dfe4 # Arab armies invade: the first Arab-Israeli war
+  - id: 1956-10-29-820e5037 # Israel invades Egypt: the Suez War
+  - id: 1964-05-28-2abb3781 # The PLO is founded
+
+  # --- From Nasser to Camp David (1970-1981) ---
+  - id: 1970-09-28-0f773a83 # Nasser dies, Sadat succeeds him
+  - id: 1973-10-06-69a48144 # The Yom Kippur War
+  - id: 1976-07-03-ec3f52ba # The Entebbe raid
+  - id: 1977-11-19-2e6b9771 # Sadat visits Israel
+  - id: 1978-09-17-b732600e # The Camp David Accords
+  - id: 1979-03-26-01030d65 # The Egypt-Israel peace treaty
+  - id: 1980-09-22-6e09304e # The Iran-Iraq War begins
+  - id: 1981-06-07-b2bd98da # Israel bombs Iraq's reactor
+  - id: 1981-10-06-b525ef5f # Sadat is assassinated, Mubarak succeeds him
+
+  # --- Lebanon, the intifada and the Gulf (1982-1991) ---
+  - id: 1982-06-06-a98cd34d # Israel invades Lebanon
+  - id: 1987-12-08-ed93ecc9 # The first intifada
+  - id: 1988-08-20-32b340e9 # The Iran-Iraq ceasefire
+  - id: 1990-08-02-5ce46c00 # Iraq invades Kuwait
+  - id: 1991-01-01-fb4789be # Japan sends minesweepers to the Gulf (year)
+  - id: 1991-01-17-6b8abc93 # The Gulf War air campaign begins
+  - id: 1991-02-27-c9359a06 # Kuwait is liberated
+
+  # --- The Oslo years and their collapse (1995-2008) ---
+  - id: 1995-01-01-16a2a20f # Rabin is assassinated (year)
+  - id: 1998-10-23-d98d6727 # The Wye River Memorandum
+  - id: 2000-07-25-6706055b # The Camp David talks break down over Jerusalem
+  - id: 2000-09-28-68262c4e # Sharon on the Temple Mount sets off the second intifada
+  - id: 2003-03-19-ef546daf # The Iraq War begins
+  - id: 2004-11-11-23e2b1a6 # Arafat dies
+  - id: 2005-08-22-2be6c3c2 # The last settlers leave Gaza
+  - id: 2006-01-25-bac5448a # Hamas wins the Palestinian legislative election
+  - id: 2008-12-27-bd2d6a36 # Israel's air strikes on Gaza begin the 2008-09 war
+
+  # --- The Arab Spring to the present (2011-2025) ---
+  - id: 2011-01-14-b38d3202 # The Jasmine Revolution in Tunisia
+  - id: 2011-02-11-a41ca55f # Mubarak resigns
+  - id: 2011-08-23-50ff97a9 # Tripoli falls and the Gaddafi regime collapses
+  - id: 2014-06-29-a7bd0dce # ISIL declares a caliphate
+  - id: 2023-10-07-96de1607 # Hamas attacks Israel
+  - id: 2024-12-08-9fa89556 # The Assad regime falls
+  - id: 2025-06-13-ef7a4fbd # Israel strikes Iran's nuclear sites and commanders

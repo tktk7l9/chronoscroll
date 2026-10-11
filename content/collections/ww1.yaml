@@ -1,0 +1,76 @@
+# World War I (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The Sarajevo assassination and the chain of declarations of war in July-August 1914 (Austria-Hungary on Serbia,
+# Russia's general mobilisation, Germany on Russia and France, the invasion of Belgium, Britain, Japan); the Marne, the
+# Dardanelles, Verdun, Jutland, the Brusilov offensive and the Somme; unrestricted submarine warfare, the US entry,
+# Cambrai, the Fourteen Points and Brest-Litovsk; the 1918 offensives, the Kiel mutiny, the armistices and the peace
+# (the Paris Peace Conference, the South Seas mandate, Scapa Flow, Versailles, the League of Nations). Japan's part:
+# the declaration of war, the Twenty-One Demands, the special service squadrons, the German prisoners' Ninth at Bando
+# and the Siberian intervention.
+# The Second Battle of the Marne has no ja article; its start (15 Jul 1918) is checked against en "Second Battle of
+# the Marne".
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Tannenberg (Aug 1914, month) / "the eastern front stalled afterwards"
+# is not in the articles; Japan's landing in Shandong 2 Sep 1914 / advance party 1 Sep, 18th Division 11 Sep; the
+# Ottoman entry 11 Nov 1914 / "November 1914" only; the Christmas truce "begins" 25 Dec / 24-25 Dec; Zeppelin raids on
+# Britain 19 Jan 1915 and the war zone around Britain 4 Feb 1915 / not dated (February 1915 only); the Second Ypres
+# gas attack "15,000 poisoned, about 5,000 dead" / French losses 27,500+ (18,000 on 22 Apr); the Lusitania "139
+# Americans died" / 128 of the 139 Americans aboard died; the Gallipoli evacuation "begins" 8 Jan 1916 / from 7 Dec
+# 1915, the last troops left 9 Jan 1916; Aqaba 6 Jul 1917 "led by Faisal and Lawrence" / led by Auda abu Tayi, Sherif
+# Nasir and Lawrence (en; ja gives July 1917 only); the Kaiser "abdicates and goes into exile" 10 Nov 1918 / reign
+# ended 9 Nov, formal abdication 28 Nov; the racial equality proposal rejected 15 Apr 1919 / vote on 11 Apr (15 Apr is
+# the date of the report telegram); the Shandong decision 29 Apr 1919 / not dated in the articles; the Balfour
+# Declaration "promised a Jewish state" / the article stresses the text said "national home", not a state).
+# Versailles coming into force (10 Jan 1920) is left out as it shares the day of the League of Nations entry.
+slug: ww1
+title: 第一次世界大戦
+lead: 1914年6月のサラエボ事件から、オーストリア＝ハンガリーのセルビアへの宣戦、ドイツのベルギー侵入とイギリスの参戦、日本の対独宣戦、マルヌ会戦、ヴェルダンの戦いとソンムの戦い、ユトランド沖海戦、無制限潜水艦作戦とアメリカの参戦、ブレスト＝リトフスク条約、キール軍港の水兵の反乱、休戦協定まで。対華21ヶ条要求や日本海軍の特務艦隊、板東の捕虜による日本初の第九の演奏、パリ講和会議とヴェルサイユ条約、国際連盟の成立も含めて、人類初の世界大戦の4年余りをたどる。
+description: サラエボ事件からマルヌ会戦、ヴェルダンとソンムの戦い、アメリカの参戦、休戦協定、ヴェルサイユ条約と国際連盟の成立まで、第一次世界大戦の4年余りを日本と世界の出来事で年代順にたどる特集。
+icon: art-ww1
+entries:
+  # --- Outbreak (1914) ---
+  - id: 1914-06-28-29015c24 # The Sarajevo assassination
+  - id: 1914-07-28-717607be # Austria-Hungary declares war on Serbia
+  - id: 1914-07-30-978f7de6 # Russia orders general mobilisation
+  - id: 1914-08-01-219294df # Germany declares war on Russia
+  - id: 1914-08-03-54bfa531 # Germany declares war on France
+  - id: 1914-08-04-2059a6c3 # Germany invades neutral Belgium
+  - id: 1914-08-04-b8dc205a # Britain declares war on Germany
+  - id: 1914-08-23-c91ca5b9 # Japan declares war on Germany
+  - id: 1914-09-06-9b9ecc2e # The Marne: the western front settles into trenches
+
+  # --- Trench war and the sea (1915-1916) ---
+  - id: 1915-01-18-64491789 # Japan presents the Twenty-One Demands
+  - id: 1915-03-18-9d7edcb9 # The Allied attempt on the Dardanelles fails
+  - id: 1915-05-09-65118953 # Yuan Shikai accepts the demands
+  - id: 1915-05-23-b64f52e1 # Italy enters on the Allied side
+  - id: 1916-02-21-49870f23 # Verdun
+  - id: 1916-05-16-df9be725 # The Sykes-Picot agreement
+  - id: 1916-05-31-db047746 # Jutland
+  - id: 1916-06-04-d6a4bc9a # The Brusilov offensive
+  - id: 1916-07-01-11385fd8 # The Somme
+
+  # --- 1917: submarines, America, Russia leaves ---
+  - id: 1917-02-01-281079e6 # Germany declares unrestricted submarine warfare
+  - id: 1917-02-07-4d386ef7 # Japan forms the special service squadrons for Europe
+  - id: 1917-04-06-0237d290 # The United States declares war on Germany
+  - id: 1917-11-20-2e543387 # Cambrai
+  - id: 1918-01-08-dbd55e73 # Wilson's Fourteen Points
+  - id: 1918-03-03-7fdb3028 # The Treaty of Brest-Litovsk
+
+  # --- 1918: the last offensives and the armistice ---
+  - id: 1918-03-21-352247f0 # The German spring offensive and the Paris gun
+  - id: 1918-06-01-8acb6890 # German prisoners at Bando give Japan's first Ninth
+  - id: 1918-07-15-d0486d29 # The Second Battle of the Marne begins
+  - id: 1918-08-02-752ce0a3 # Japan declares the Siberian intervention
+  - id: 1918-11-03-1f97ee31 # The Kiel mutiny starts the German revolution
+  - id: 1918-11-03-e7f2e427 # Austria-Hungary signs the Villa Giusti armistice
+  - id: 1918-11-09-40ae6610 # Germany is proclaimed a republic
+  - id: 1918-11-11-7c1b62dd # The armistice ends the war
+
+  # --- The peace ---
+  - id: 1919-01-18-1bd16a99 # The Paris Peace Conference opens
+  - id: 1919-05-07-02169041 # Japan receives the mandate over the German islands north of the equator
+  - id: 1919-06-21-a808e541 # The German fleet scuttles itself at Scapa Flow
+  - id: 1919-06-28-1a244656 # The Treaty of Versailles
+  - id: 1920-01-10-6ade3e76 # The League of Nations is founded

@@ -1,0 +1,67 @@
+# History of combat sports (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Sumo's institutions (the Kokugikan of 1909, the Sumo Association, radio broadcasts, the Shunjuen strike) and
+# Futabayama's streak; Rikidozan's debut, his match with Kimura Masahiko and his death; the first World Judo
+# Championships; Japan's world boxing champions (Shirai Yoshio, Fighting Harada, Ohba
+# Masao, Guts Ishimatsu, Yakushiji vs Tatsuyoshi) and Tyson's defeat in Tokyo; New Japan and All Japan Pro Wrestling,
+# the Rumble in the Jungle and Inoki vs Ali; Yamashita Yasuhiro and Chiyonofuji (People's Honour Awards, retirements),
+# the Wakanohana-Takanohana playoff, PRIDE.1, Inoki's retirement match, the cancelled tournament of March 2011 and
+# Yoshida Saori's retirement.
+# Duplicates: the Rikidozan-Kimura match (22 Dec 1954) and Inoki's retirement (4 Apr 1998) each appear twice; one
+# entry of each is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm. Sumo articles mostly date bouts by tournament day, not by calendar date, so these are not
+# dated in the articles: Kashiwado and Taiho promoted together (2 Oct 1961), Taiho's loss to Toda (10 Mar 1969), his
+# 32nd title (24 Jan 1971) and retirement (14 May 1971), Takamiyama's promotion to juryo (4 Mar 1967) and first title
+# (16 Jul 1972), Chiyonofuji's 965th (22 Sep 1989) and 1000th wins (17 Mar 1990), Akebono's promotion (27 Jan 1993),
+# Takanohana's last title (27 May 2001), Asashoryu's promotion (29 Jan 2003) and seventh straight title (26 Nov 2005)
+# and Hakuho's 33rd title (23 Jan 2015). Also (dataset vs article): the Kodokan founded 5 May 1882 and the dojo at
+# Eishoji 5 Jun 1882 / May 1882 only; the first title fight under the Queensberry rules 7 Sep 1892 「初のボクシング
+# 公式試合」 / the first world title fight under those rules; the first All-Japan Judo Championships 15 Nov 1930 /
+# the 1930-41 event was the 全日本柔道選士権大会 and is not dated; the first international pro wrestling event
+# 19 Feb 1954 「3月9日まで」 / not in the articles; Baba's NWA title 2 Dec 1974 「アジア人初」 / the article says the
+# first Japanese; Yamashita's first national title 29 Apr 1977 / not dated; the present Kokugikan 「完成」 9 Jan 1985 /
+# completed 30 Nov 1984, the opening ceremony was on 9 Jan; Ohba's death 25 Jan 1973 「新宿区新小川町付近」 / the
+# article names the Ohmagari curve of the Metropolitan Expressway only; Yoshida's People's Honour Award decided
+# 23 Oct 2012 / not dated; her 13th straight world title 29 Sep 2012 / September 2012 only).
+slug: combat-sports
+title: 格闘技の歴史
+lead: 1909年の両国国技館の落成から、大日本相撲協会の設立と大相撲のラジオ実況放送、双葉山の連勝ストップ、力道山のデビューと木村政彦戦、第1回世界柔道選手権大会、白井義男・ファイティング原田・大場政夫・ガッツ石松の世界戦、新日本プロレスと全日本プロレスの旗揚げ、キンシャサの奇跡とアントニオ猪木対モハメド・アリ、山下泰裕と千代の富士の国民栄誉賞、東京ドームでのマイク・タイソンの敗戦、若乃花・貴乃花の兄弟による優勝決定戦、PRIDE.1まで。八百長問題による春場所の中止や吉田沙保里の引退も含めて、相撲・柔道・ボクシング・プロレス・総合格闘技・レスリングの歩みをたどる。
+description: 両国国技館の落成と力道山、白井義男から、キンシャサの奇跡、猪木対アリ、千代の富士、東京ドームでのタイソンの敗戦、PRIDE.1まで、相撲・柔道・ボクシング・プロレスなど格闘技の節目を年代順にたどる特集。
+icon: art-rumble-jungle
+entries:
+  # --- Sumo's institutions, Rikidozan and judo (1909-1956) ---
+  - id: 1909-06-02-498f7777 # The Ryogoku Kokugikan opens
+  - id: 1925-12-28-646471f9 # The Dai-Nippon Sumo Association is founded
+  - id: 1928-01-12-ee44ee52 # Live radio broadcasts of sumo begin
+  - id: 1932-01-06-28953d84 # The Shunjuen incident
+  - id: 1939-01-15-c566ab90 # Futabayama's 69-bout streak ends
+  - id: 1951-10-28-9c8bc440 # Rikidozan's pro wrestling debut
+  - id: 1952-05-19-576426bf # Shirai Yoshio, Japan's first world boxing champion
+  - id: 1954-12-22-a55383e6 # Rikidozan beats Kimura Masahiko
+  - id: 1956-05-03-e5b106b4 # The first World Judo Championships in Tokyo
+
+  # --- World titles and the pro wrestling boom (1962-1976) ---
+  - id: 1962-10-10-7f61ff87 # Fighting Harada wins the flyweight title
+  - id: 1963-12-08-0f6e7e42 # Rikidozan is stabbed
+  - id: 1972-03-06-4281d984 # New Japan Pro-Wrestling's first show
+  - id: 1972-10-22-3682f99c # All Japan Pro Wrestling's first show
+  - id: 1973-01-02-d54249f6 # Ohba Masao's fifth defence
+  - id: 1974-04-11-fc48ea52 # Guts Ishimatsu takes the WBC lightweight title
+  - id: 1974-10-30-06867c25 # The Rumble in the Jungle
+  - id: 1976-06-26-bea23946 # Inoki vs Ali
+
+  # --- Yamashita, Chiyonofuji, Tyson (1984-1995) ---
+  - id: 1984-10-09-011c8dc0 # People's Honour Award for Yamashita Yasuhiro
+  - id: 1985-06-17-226137a0 # Yamashita retires
+  - id: 1989-09-29-66c9f990 # People's Honour Award for Chiyonofuji
+  - id: 1990-02-11-75bff791 # Tyson loses to Douglas in the Tokyo Dome
+  - id: 1991-05-14-9273a442 # Chiyonofuji retires
+  - id: 1994-12-04-c5af2a0a # Yakushiji vs Tatsuyoshi, the first all-Japanese unification bout
+  - id: 1995-11-26-03ee4c92 # The Wakanohana-Takanohana playoff
+
+  # --- Mixed martial arts and after (1997-2019) ---
+  - id: 1997-10-11-9a0b059f # PRIDE.1 at the Tokyo Dome
+  - id: 1998-04-04-bd1b4ab3 # Inoki's retirement match
+  - id: 2011-02-06-8b939ba1 # The March tournament is cancelled over match fixing
+  - id: 2019-01-08-40ef4234 # Yoshida Saori retires

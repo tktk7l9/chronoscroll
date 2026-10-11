@@ -1,0 +1,65 @@
+# History of nuclear power (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The first chain reaction at Chicago, the Japan-US nuclear agreement and the Euratom treaty; the Kyshtym, Windscale
+# and Fermi 1 accidents; the nuclear ship Mutsu and Fukushima Daiichi unit 1; Three Mile Island, Chernobyl, the Monju
+# sodium leak and the Tokai reprocessing fire; TEPCO's inspection cover-up, the Mihama steam accident and the Shika
+# criticality revealed in 2007; the Fukushima Daiichi accident (loss of cooling, the unit 1 hydrogen explosion, INES
+# level 7), the Hamaoka shutdown request, the first restart at Ohi, the Nuclear Regulation Authority, the Fukui court
+# injunction, the first restart under the new rules at Sendai, Germany's last reactors and Onagawa's return to
+# commercial operation.
+# Germany's shutdown (15 Apr 2023) is checked against en "Nuclear power in Germany" (ja gives April 2023 only).
+# Overlaps: the Chicago chain reaction is also in the nuclear weapons collection and the launch of Mutsu in ships.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date or
+# details the articles cannot confirm (dataset vs article: Obninsk "starts operating" 27 Jun 1954 / operation from
+# 1 Jun, commissioned 25 Jun, grid connection 26 Jun; uranium at Ningyo-toge (Dec 1955, month) / the outcrop was found
+# 12 Nov 1955; JRR-1 criticality 27 Aug 1957 / 「午前5時23分」「原子の火」 are not in the articles; the Tsuruga leak
+# 18 Apr 1981 / 「累計101人の被曝」 is not in the article; the JCO accident 30 Sep 1999 「日本初の臨界事故」 / the
+# article says the first deaths from accident exposure in Japan (and Shika had a criticality in Jun 1999); Genkai's
+# plu-thermal approval 26 Mar 2006 / March 2006 only; all reactors stopped 5 May 2012 「23:00」「50基」 / 23:03, no
+# count; Fukushima Daiichi units 1-4 retired 19 Apr 2012 and units 5-6 18 Dec 2013 / the reactor counts (54 to 50,
+# 48) are not in the articles; Monju's decommissioning plan 28 Mar 2018 / not dated; the treated water decision
+# 13 Apr 2021 / the IAEA quote is not in the article; the start of the ALPS discharge 24 Aug 2023 / 「北朝鮮」 is not
+# in the article; the fuel debris trial 10 Sep 2024 / not dated; Onagawa's restart 29 Oct 2024 「BWRとして震災後初」
+# / not in the article; Shimane's restart 7 Dec 2024 / commercial operation from 10 Jan is not in the article; the
+# drone strike on Chernobyl 14 Feb 2025 「コンクリート製のシェルター」 / it hit the New Safe Confinement (en); Taiwan's
+# last reactor 17 May 2025 / 「1970年代に最初の原発が商用運転を開始して以来」 is not in the article; the Hamaoka
+# review halted 7 Jan 2026 / 「白紙化する方針」 is not in the article; Kashiwazaki-Kariwa unit 6 restarts 15 Feb 2026 /
+# restarted 9 Feb 2026; the operating-period rule change 13 Feb 2023 / not dated).
+slug: nuclear-power
+title: 原子力発電の歴史
+lead: 1942年のシカゴ大学でのウラン核分裂連鎖反応の成功から、日米原子力協定と欧州原子力共同体設立条約、原子力船「むつ」の進水、東京電力福島原子力発電所の運転開始、ウィンズケール・スリーマイル島・チェルノブイリの原子力事故、もんじゅのナトリウム漏洩事故、福島第一原子力発電所事故とレベル7の評価、原子力規制委員会の発足と新規制基準での初の再稼働、ドイツの全原発停止まで。ウラル核惨事や東京電力の自主点検の不正、運転差し止め判決も含めて、原子力発電の歩みをたどる。
+description: シカゴ大学の核分裂連鎖反応の成功から、スリーマイル島・チェルノブイリ・福島第一の原子力事故、原子力規制委員会の発足と再稼働、ドイツの全原発停止まで、原子力発電の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-chernobyl
+entries:
+  # --- The first reactors (1942-1971) ---
+  - id: 1942-12-02-62682ab5 # The first chain reaction at the University of Chicago
+  - id: 1955-11-14-975ba06c # The Japan-US nuclear agreement
+  - id: 1957-03-25-0a08118c # The Treaties of Rome, including Euratom
+  - id: 1957-09-29-eb5c9499 # The Kyshtym disaster, kept secret
+  - id: 1957-10-10-1ab13c35 # The Windscale fire
+  - id: 1966-10-05-453baed7 # Fermi 1, the first core meltdown
+  - id: 1969-06-12-2ce7e50e # Japan's nuclear ship Mutsu is launched
+  - id: 1971-03-26-5825a520 # Fukushima Daiichi unit 1 starts operation
+
+  # --- Accidents and cover-ups (1974-2007) ---
+  - id: 1974-09-01-700a3562 # Radiation leaks from Mutsu
+  - id: 1979-03-28-d00fce4b # Three Mile Island
+  - id: 1986-04-26-e47c5ef2 # Chernobyl
+  - id: 1995-12-08-7f5f64b6 # The Monju sodium leak
+  - id: 1997-03-11-91716ee3 # Fire and explosion at the Tokai reprocessing plant
+  - id: 2002-08-29-4d866fed # TEPCO's unreported inspection findings come out
+  - id: 2004-08-09-1bd918b0 # The Mihama steam accident
+  - id: 2005-10-01-6ce355c4 # The Japan Atomic Energy Agency is formed
+  - id: 2007-03-15-5834b922 # Shika's 1999 criticality comes to light
+
+  # --- Fukushima and after (2011-2024) ---
+  - id: 2011-03-11-63d4bbb7 # Fukushima Daiichi loses cooling
+  - id: 2011-03-12-18539432 # Hydrogen explosion at unit 1
+  - id: 2011-04-12-ee80b7b6 # Rated INES level 7
+  - id: 2011-05-06-264d139e # The prime minister asks Hamaoka to stop
+  - id: 2012-07-05-dbd16e0d # Ohi unit 3 restarts after two months with no reactor running
+  - id: 2012-09-19-0a511dae # The Nuclear Regulation Authority is set up
+  - id: 2014-05-21-0ecb2203 # The Fukui District Court bars Ohi units 3 and 4
+  - id: 2015-08-11-f2487ef0 # Sendai unit 1, the first restart under the new rules
+  - id: 2023-04-15-ea347300 # Germany shuts down its last reactors
+  - id: 2024-12-26-d200627d # Onagawa resumes commercial operation
