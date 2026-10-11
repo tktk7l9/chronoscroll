@@ -1,0 +1,61 @@
+# COVID-19 (collection)
+# References to existing auto-generated events only (nothing newly written). The identification of the virus in
+# Wuhan, the first case in Japan, the charter flights from Wuhan, the school closures, the WHO pandemic statement,
+# the postponement of the Tokyo Olympics and the deaths of Shimura Ken and Okae Kumiko; the first state of emergency
+# and its end, Go To Travel and its suspension and Sputnik V; the second and third states of emergency, the first
+# vaccinations in Japan and the torch relay; Omicron, the priority measures of January 2022, Xocova and China's
+# easing; the end of the WHO emergency and the move to Class 5.
+# Checked against en: Sputnik V as the first registered vaccine (11 Aug 2020, "Sputnik V COVID-19 vaccine").
+# Overlaps: the identification of the virus, the pandemic statement, the first vaccinations and the move to Class 5
+# are also in the medicine collection; the postponement of the Olympics is also in the Olympics collection.
+# The first case in Japan appears twice and the entry of 15 Jan 2020 (the date in the main ja article) is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the Wuhan announcement 31 Dec 2019 "by the city's CDC" / by the Wuhan
+# Municipal Health Commission; the PHEIC 31 Jan 2020 / declared 30 Jan; the designated infectious disease 1 Feb 2020
+# "forced hospitalisation" / not in the articles; the first death in Japan 13 Feb 2020 "a Kanagawa woman in her 80s"
+# / not in the articles; the first deaths from the Diamond Princess 20 Feb 2020 "the news went round the world" /
+# not in the article; the amended special measures law 13 Mar 2020 "passed with the CDP and the DPFP" / the parties
+# are not in the articles; the reopening of Wuhan 8 Apr 2020, Go To Travel without Sapporo and Osaka 24 Nov 2020,
+# the 50% second-dose mark 13 Sep 2021 and the border reopening 11 Oct 2022 / not dated in the articles; the
+# 100,000-yen payment 20 Apr 2020 "subcontracted to Dentsu" / that story belongs to the business continuity subsidy;
+# remdesivir 7 May 2020 "approved in two months instead of a year" / not in the article; 50 million cases 9 Nov 2020
+# / 8 Nov, and the line has lost its country names; the Olympics without spectators 9 Jul 2021 / decided on 8 Jul;
+# the end of the priority measures (two entries, 21 and 22 Mar 2022) / the articles give only the last day of the
+# period; the border measures of 7 Sep 2022 / only the third-dose rule is in the articles; masks left to individuals
+# 13 Mar 2023 / the situations where masks stay recommended are not in the articles).
+slug: covid19
+title: 新型コロナウイルス
+lead: 2020年1月の武漢市での新型コロナウイルスの特定と日本での初確認から、武漢からのチャーター便による帰国、全国の小中高校の一斉臨時休校、WHOのパンデミック宣言、東京オリンピック・パラリンピックの延期、志村けんと岡江久美子の死去、初の緊急事態宣言とその解除、Go To トラベルの開始と一斉停止、2度目と3度目の緊急事態宣言、国内初のワクチン接種、オミクロン株の市中感染、ゾコーバの緊急承認、WHOの緊急事態宣言終了と5類への移行まで。スプートニクVの承認や中国の対策の大幅緩和も含めて、新型コロナウイルス感染症の流行の3年余りをたどる。
+description: 武漢での新型コロナウイルスの特定と日本での初確認から、一斉臨時休校、パンデミック宣言、東京五輪の延期、緊急事態宣言、ワクチン接種の開始、オミクロン株、5類への移行まで、新型コロナウイルスの流行を年代順にたどる特集。
+icon: art-covid19
+entries:
+  # --- The outbreak (January-March 2020) ---
+  - id: 2020-01-07-00ec241d # The novel coronavirus identified in Wuhan
+  - id: 2020-01-15-b91513e6 # The first case in Japan
+  - id: 2020-01-29-a69b2789 # Charter flights bring the Japanese home from Wuhan
+  - id: 2020-02-27-4c3eba9d # Schools across Japan asked to close
+  - id: 2020-03-11-3fe40b2e # WHO declares the pandemic
+  - id: 2020-03-24-fdde3f7f # The Tokyo Olympics postponed
+  - id: 2020-03-29-4f49bf9e # Shimura Ken dies
+
+  # --- The first state of emergency and Go To (April-December 2020) ---
+  - id: 2020-04-07-84ea1c9e # The first state of emergency
+  - id: 2020-04-23-97c6b347 # Okae Kumiko dies
+  - id: 2020-05-25-a874dea7 # The state of emergency ends
+  - id: 2020-07-22-fbd0624a # Go To Travel begins
+  - id: 2020-08-11-65d9eec8 # Russia approves Sputnik V
+  - id: 2020-12-14-df668e05 # Go To Travel suspended nationwide
+
+  # --- Vaccines and more emergencies (2021) ---
+  - id: 2021-01-07-60e939d5 # The second state of emergency
+  - id: 2021-02-17-0ed41d06 # The first vaccinations in Japan
+  - id: 2021-03-25-34490d3b # The Olympic torch relay starts at J-Village
+  - id: 2021-04-25-e15db766 # The third state of emergency
+  - id: 2021-12-22-6442608e # Omicron spreads in the community in Osaka
+
+  # --- Omicron to Class 5 (2022-2023) ---
+  - id: 2022-01-09-8687d80b # Priority measures for Okinawa, Yamaguchi and Hiroshima
+  - id: 2022-11-22-214696f5 # Xocova approved
+  - id: 2022-12-07-34e1bc24 # China eases its measures
+  - id: 2023-05-05-1438424e # WHO ends the emergency
+  - id: 2023-05-08-0eeb3eec # COVID-19 moved to Class 5 in Japan
