@@ -1,0 +1,60 @@
+# History of the calendar, eras and time (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Era names (the rescript of one era per reign, Taisho, Showa, the Era Name Act, Heisei, Reiwa), the switch from the
+# Tenpo lunisolar calendar to the Gregorian calendar in 1872-1873, standard time (the 1886 ordinance, Japan Standard
+# Time from 1888, Central and Western Standard Time, one standard time again in 1937, Samoa crossing the date line),
+# summer time in 1948, leap seconds (2009, 2012, 2015) and the holidays (the 1873 holiday decree, the National Holidays
+# Act and its changes: National Foundation Day, substitute holidays, the national day of rest, Marine Day, the Happy
+# Monday system, Showa Day and Greenery Day, Mountain Day).
+# Heisei: the curated top-tier entry for 7 Jan 1989 is used (its wording is corrected in content/curated/top50.yaml:
+# Akihito acceded on 7 Jan and the era changed on the 8th, per the article 平成); the long year-page entry of the same
+# day and the 8 Jan entry are not.
+# Duplicates: the Reiwa announcement (1 Apr 2019) and its start (1 May 2019) each appear twice; the detailed
+# announcement entry and the curated top-tier start entry are used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: New Zealand adopting standard time 2 Nov 1868, the US Standard Time Act
+# 19 Mar 1918, the first full cycle of the Gregorian calendar 14 Oct 1982, Marine Day enacted 8 Mar 1995 and the leap
+# second of 31 Dec 2005 / not dated in the articles).
+slug: calendar
+title: 暦と時刻の歴史
+lead: 1868年の一世一元の詔と、1872年の改暦の布告で旧暦（天保暦）からグレゴリオ暦に切り替わり明治5年12月が2日で終わった明治の改暦から、日本標準時の制定、大正・昭和への改元、夏時刻法によるサマータイム、国民の祝日に関する法律、建国記念の日、振替休日、元号法、平成への改元、ハッピーマンデー制度、閏秒の挿入、山の日、そして令和の発表と改元まで。サモアが日付変更線をまたいで1日を飛ばした出来事も含めて、暦と時刻と祝日の歩みをたどる。
+description: 一世一元の詔と明治の改暦から、日本標準時、夏時刻、国民の祝日に関する法律、元号法、閏秒、令和への改元まで、暦と時刻と祝日の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-reiwa
+entries:
+  # --- One era per reign, the solar calendar and standard time ---
+  - id: 1868-10-23-f7b10d78 # Rescript of one era per reign: Keio 4 becomes Meiji 1
+  - id: 1872-12-09-aceb9fbd # The calendar reform decree (Gregorian calendar)
+  - id: 1872-12-31-54707edc # Meiji 5 ends on 2 December; 3-30 December never happen
+  - id: 1873-01-01-061d560c # Meiji 6 begins on the Gregorian 1 January
+  - id: 1873-10-14-75e313b3 # The holiday decree of 1873
+  - id: 1886-07-13-7d4806ae # Imperial ordinance on the prime meridian and standard time
+  - id: 1888-01-01-6b38b21a # Japan Standard Time takes effect
+  - id: 1895-12-28-7c49df61 # Central and Western Standard Time
+  - id: 1912-07-30-3602d388 # Meiji becomes Taisho
+  - id: 1926-12-25-36e7c45d # Taisho becomes Showa
+  - id: 1937-09-25-15031ccb # Western Standard Time abolished: one standard time again
+
+  # --- Summer time, the holiday law, the era law ---
+  - id: 1948-04-28-0bf0e641 # The Summer Time Act
+  - id: 1948-05-02-368a6d31 # Japan's first summer time
+  - id: 1948-07-20-9519f6c3 # The National Holidays Act
+  - id: 1966-06-25-7d373375 # National Foundation Day, Respect for the Aged Day and Sports Day added
+  - id: 1966-12-09-4f3789c3 # Cabinet order fixes National Foundation Day on 11 February
+  - id: 1967-02-11-a0e3083d # The first National Foundation Day
+  - id: 1973-04-12-f41461ac # Substitute holidays introduced
+  - id: 1979-06-12-b72b9f4b # The Era Name Act
+  - id: 1986-05-04-5adb11bf # 4 May becomes a national day of rest
+  - id: 1989-01-07-df6d1213 # Showa ends; Heisei from the next day
+
+  # --- New holidays, leap seconds and Reiwa ---
+  - id: 1996-07-20-a1a74ea6 # Marine Day first observed
+  - id: 2000-01-10-48a55196 # Coming of Age Day on the second Monday (Happy Monday system)
+  - id: 2007-04-29-107ae30c # Showa Day
+  - id: 2007-05-04-394a4c53 # Greenery Day moves to 4 May
+  - id: 2009-01-01-edb65a3f # The 24th leap second
+  - id: 2011-12-29-6ef6b40c # Samoa skips 30 December by crossing the date line
+  - id: 2012-07-01-e28aade6 # Leap second
+  - id: 2015-07-01-7434e93b # Leap second
+  - id: 2016-08-01-aabbf2fd # Mountain Day, 11 August
+  - id: 2019-04-01-0f6b97f6 # Reiwa announced
+  - id: 2019-05-01-617b427c # Reiwa begins

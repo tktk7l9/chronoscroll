@@ -1,0 +1,76 @@
+# History of world's fairs and exhibitions (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The world's fairs from Vienna 1873 (Japan's first official participation) and Philadelphia 1876 through Paris 1889
+# (the Eiffel Tower), St. Louis, Chicago 1933, Paris 1937, New York 1939 (the Westinghouse time capsule), Brussels,
+# Seattle, Montreal, Seville, Hannover, Zaragoza, Shanghai, Milan, Astana and Dubai; Japan's own exhibitions (the five
+# National Industrial Exhibitions, the Japan-British Exhibition, the Tokyo Taisho and Peace Commemorative exhibitions)
+# and expos (Osaka 1970 and its time capsule, Okinawa, Tsukuba and its Post Capsule letters, the Garden and Greenery
+# Expo, Aichi 2005, Osaka-Kansai 2025); Japan joining the Convention on International Exhibitions, the Kitchen Debate
+# at the American National Exhibition in Moscow and the cancelled World City Expo Tokyo.
+# The Eiffel Tower is also in the architecture collection; the Crystal Palace of 1851 is in the houseplant collection.
+# The Okinawa expo entry is dated on its opening ceremony (19 Jul 1975), as the article gives it.
+# Duplicates: the Aichi expo opening (25 Mar 2005) and the Osaka-Kansai expo opening (13 Apr 2025) each appear twice,
+# and the Post Capsule delivery (1 Jan 2001) twice; for each the entry the articles confirm in full is used.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Paris 1900 open 15 Apr - 15 Nov / 14 Apr - 12 Nov; Chicago 1893 "until
+# 30 Oct" / 1 May - 3 Oct, and its Ferris wheel 21 Jun 1893 / not dated; the St. Louis hamburger (year) / not in the
+# article; the Japanese pavilion's prize at Paris 1937 on 22 Oct / not dated; the Mustang at the New York fair on
+# 17 Apr 1964 / the fair article opens it on 22 Apr; Osaka chosen for 1970 on 13 Sep 1965 / 14 Sep 1965; the Osaka
+# theme fixed 25 Oct 1965 / not dated; the 2005 expo "venue decided as Seto" 12 Jun 1997 / the article reports Japan
+# and Aichi winning the vote; Milan chosen for 2015 on 1 Apr 2008 / 31 Mar 2008; Osaka chosen for 2025 on 24 Nov 2018
+# "to open 3 May" / the planned dates are not in the article; the 2025 groundbreaking 13 Apr 2023 / not dated; the
+# Aichi expo closing with "about 22.05 million visitors" / the figure is not in the article; the 2025 opening entry with
+# "165 participants" and "the opening ceremony on the 12th" / not in the article; the Paris Metro opening during the
+# 1900 fair 19 Jul 1900 / not dated in the article). Regional fairs (Himeji 1966, Hokkaido 1968 and the like) are not used.
+slug: expo
+title: 万博と博覧会の歴史
+lead: 1873年のウィーン万国博覧会（日本が初めて公式参加）とフィラデルフィア万国博覧会、上野公園で始まった内国勧業博覧会から、エッフェル塔が完成したパリ万国博覧会、日本初のエスカレーターが登場した東京大正博覧会、ニューヨーク万国博覧会のタイムカプセル、「人類の進歩と調和」をテーマにアジア初の万国博覧会として開かれた大阪万博、沖縄国際海洋博覧会と国際科学技術博覧会（つくば'85）、国際花と緑の博覧会、愛・地球博、上海国際博覧会、そして2025年の大阪・関西万博まで。台所論争の舞台となったモスクワのアメリカ博覧会や、青島幸男東京都知事による世界都市博覧会の中止も含めて、万博と博覧会の歩みをたどる。
+description: ウィーン万国博覧会と内国勧業博覧会から、エッフェル塔のパリ万国博覧会、大阪万博、つくば'85、愛・地球博、2025年の大阪・関西万博まで、万博と博覧会の節目を日本と世界の出来事で年代順にたどる特集。
+icon: art-expo70
+entries:
+  # --- The first world's fairs and Japan's industrial exhibitions ---
+  - id: 1873-05-01-5955b43e # Vienna World's Fair opens; Japan's first official participation
+  - id: 1876-05-10-d3856ddf # Philadelphia Centennial Exposition opens
+  - id: 1877-08-21-da4806c4 # First National Industrial Exhibition in Ueno
+  - id: 1881-03-01-4eb8cbdc # Second National Industrial Exhibition in Ueno
+  - id: 1889-03-31-c70f6fd5 # The Eiffel Tower completed for the Paris Exposition
+  - id: 1889-05-06-194d23b2 # Paris Exposition Universelle opens
+  - id: 1890-04-01-f07a9cfd # Third National Industrial Exhibition in Ueno
+  - id: 1895-04-01-4713f601 # Fourth National Industrial Exhibition (Okazaki Park, Kyoto)
+  - id: 1903-03-01-104ffbde # Fifth National Industrial Exhibition at Tennoji, Osaka
+  - id: 1904-04-30-ecabece2 # Louisiana Purchase Exposition, St. Louis
+
+  # --- From London to New York: exhibitions between the wars ---
+  - id: 1910-05-14-f613f158 # Japan-British Exhibition in London
+  - id: 1914-03-20-e293c153 # Tokyo Taisho Exhibition, Japan's first escalator
+  - id: 1922-03-10-a109d3c2 # Peace Commemorative Tokyo Exhibition in Ueno
+  - id: 1933-05-27-a43dff44 # A Century of Progress, Chicago
+  - id: 1937-05-25-12c55249 # Paris Exposition 1937 opens
+  - id: 1939-09-23-13493ae6 # Westinghouse time capsule buried at the New York World's Fair
+
+  # --- Postwar expos and Osaka 1970 ---
+  - id: 1958-04-17-e7f2660c # Expo 58, Brussels
+  - id: 1959-07-24-792b446d # The Kitchen Debate at the American National Exhibition in Moscow
+  - id: 1962-04-21-b932c3da # Century 21 Exposition, Seattle
+  - id: 1965-02-08-180555a4 # Japan joins the Convention on International Exhibitions
+  - id: 1967-04-28-d1d47350 # Expo 67, Montreal
+  - id: 1970-03-14-656fea20 # Expo '70 opens in the Senri hills
+  - id: 1970-09-13-2385c72a # Expo '70 closes
+  - id: 1971-01-20-aa68aef7 # Time Capsule EXPO'70 buried at Osaka Castle
+  - id: 1975-07-19-eaa05d7a # Okinawa International Ocean Exposition (opening ceremony)
+  - id: 1985-03-17-9a706987 # International Exposition, Tsukuba '85
+  - id: 1990-04-01-997a49ca # International Garden and Greenery Exposition, Osaka
+
+  # --- From Seville to Osaka-Kansai ---
+  - id: 1992-04-20-44f4331f # Expo '92 Seville
+  - id: 1995-05-31-ad8bcc73 # Governor Aoshima cancels the World City Expo Tokyo
+  - id: 2000-06-01-ae588f6e # Expo 2000 Hannover
+  - id: 2001-01-01-b1e4904f # The Tsukuba expo's Post Capsule letters delivered
+  - id: 2005-03-25-d72a4b12 # Expo 2005 Aichi opens
+  - id: 2008-06-14-fb986df5 # Expo 2008 Zaragoza
+  - id: 2010-05-01-0db6c414 # Expo 2010 Shanghai opens
+  - id: 2015-05-01-4e8df493 # Expo Milano 2015
+  - id: 2017-06-10-a4afd1d5 # Expo 2017 Astana
+  - id: 2021-10-01-6488b32c # Expo 2020 Dubai opens a year late
+  - id: 2025-04-13-e3c90bc4 # Expo 2025 Osaka, Kansai opens
+  - id: 2025-10-13-20d289c9 # Expo 2025 closes
