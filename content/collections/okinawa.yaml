@@ -1,0 +1,66 @@
+# History of Okinawa (collection)
+# References to existing auto-generated events only (nothing newly written). The killing of Ryukyuan castaways in
+# Taiwan (1871) and the Ryukyu disposition that made Okinawa a prefecture, the death of the last king Sho Tai; the
+# Battle of Okinawa (from the Kerama landing and the main island landing to Ushijima's suicide); American rule (the
+# University of the Ryukyus, the Government of the Ryukyu Islands, Shuri High School at Koshien, Sato's visit, the
+# Koza riot), the reversion agreement and the reversion of 1972; the Ocean Expo, the switch to left-hand traffic
+# ("730"); the 1995 rape case and the protest rally, the agreement to return Futenma, the Okinawa summit and the
+# 2,000-yen note, the Churaumi aquarium, the Yui Rail, the helicopter crash at Okinawa International University,
+# Hatoyama's visit, the approval of the Henoko landfill, the elections of Onaga and Tamaki, the Shuri Castle fire and
+# the start of its rebuilding.
+# The 1871 entry is a year entry and Shuri High School's appearance at Koshien (Aug 1958) a month entry; they are
+# shown with their year and month only.
+# Overlaps: the start of the Battle of Okinawa is also in the World War II collection, the Ryukyu disposition in the
+# Meiji Restoration collection and the Ocean Expo in the expositions collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: conscription extended to Okinawa 1 Jan 1898 / January 1898 only; the
+# Emperor's message on Okinawa 20 Sep 1947 / no article states it; the Miyamori school jet crash "100 injured" / 210
+# injured; Yara elected chief executive 10 Nov 1968 / the articles give 1 Dec (election) and 15 Nov (took office); the
+# Sato-Nixon joint statement 21 Nov 1969 / November 1969 only; the Okinawa rail found 13 Nov 1981 / caught in Jun-Jul
+# 1981, the announcement is not dated; Shuri Castle restored 3 Nov 1992 / 1992 only; the Emperor's first visit 23 Apr
+# 1993 / 1993 only; the 50th anniversary ceremony of the reversion 15 May 2022 / not in the article).
+slug: okinawa
+title: 沖縄の歴史
+lead: 1871年の琉球島民殺害事件と1879年の琉球処分による沖縄県の設置から、沖縄戦と牛島満の自決、琉球大学の開学と琉球政府の発足、首里高校の甲子園出場、コザ市での暴動、沖縄返還協定と1972年の本土復帰、沖縄国際海洋博覧会、730と呼ばれた交通ルールの変更、米兵による少女暴行事件と県民総決起大会、普天間飛行場の返還合意、沖縄サミットと守礼門の二千円札、ゆいレールの開業、辺野古の埋め立て承認、首里城の焼失と再建の起工式まで。沖縄の近現代をたどる。
+description: 琉球処分と沖縄県の設置から、沖縄戦、アメリカ統治と本土復帰、普天間飛行場などの基地問題、沖縄サミット、首里城の焼失と再建まで、沖縄の近現代を年代順にたどる特集。
+icon: art-okinawa-return
+entries:
+  # --- From the Ryukyu kingdom to Okinawa prefecture (1871-1901) ---
+  - id: 1871-01-01-b402e268 # Ryukyuan castaways killed in Taiwan (year)
+  - id: 1879-03-27-c4dda708 # Matsuda announces the abolition of the domain at Shuri Castle
+  - id: 1879-04-04-b227005c # The Ryukyu domain becomes Okinawa prefecture
+  - id: 1901-08-19-cb20d789 # Sho Tai, the last king, dies
+
+  # --- The Battle of Okinawa (1945) ---
+  - id: 1945-03-26-1cc6b7e5 # US troops land in the Kerama Islands
+  - id: 1945-04-01-4cffc6d1 # US troops land on the main island
+  - id: 1945-06-23-a122fdd5 # Ushijima's suicide ends organized resistance
+
+  # --- American rule and reversion (1950-1972) ---
+  - id: 1950-05-22-a2018121 # The University of the Ryukyus opens
+  - id: 1952-04-01-4b5feafc # The Government of the Ryukyu Islands is set up
+  - id: 1958-08-01-40a30577 # Shuri High School at Koshien (month)
+  - id: 1965-08-19-83464664 # Sato, the first postwar prime minister to visit
+  - id: 1970-12-20-f152e81e # The Koza riot
+  - id: 1971-06-17-4b4b082f # The reversion agreement is signed
+  - id: 1972-05-15-b5649356 # Okinawa returns to Japan
+
+  # --- After reversion (1975-2004) ---
+  - id: 1975-07-19-eaa05d7a # The Okinawa Ocean Expo opens
+  - id: 1978-07-30-83bb6d16 # "730": traffic switches to the left
+  - id: 1995-09-04-363ba32e # The rape of a schoolgirl by US servicemen
+  - id: 1995-10-21-9b7ada9f # The prefecture-wide protest rally
+  - id: 1996-04-12-2366bbc0 # Japan and the US agree to return Futenma
+  - id: 2000-07-19-67ce23a4 # The 2,000-yen note with the Shureimon gate
+  - id: 2000-07-21-863bfcc4 # The Kyushu-Okinawa summit
+  - id: 2002-11-01-73a32488 # The Churaumi aquarium opens
+  - id: 2003-08-10-e67339cd # The Yui Rail monorail opens
+  - id: 2004-08-13-7da6625b # A US helicopter crashes into Okinawa International University
+
+  # --- Futenma, Henoko and Shuri Castle (2010-2022) ---
+  - id: 2010-05-04-83e5c4b2 # Hatoyama gives up moving Futenma out of the prefecture
+  - id: 2013-12-27-d0d66e27 # The governor approves the Henoko landfill
+  - id: 2014-11-16-5af87f96 # Onaga is elected governor
+  - id: 2018-09-30-8a6c556c # Tamaki is elected governor
+  - id: 2019-10-31-96233528 # Shuri Castle burns
+  - id: 2022-11-03-7dd989d1 # The rebuilding of the main hall begins
