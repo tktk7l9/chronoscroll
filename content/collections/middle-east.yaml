@@ -1,42 +1,44 @@
 # Wars and peace in the Middle East (collection)
-# References to existing auto-generated events only (nothing newly written; one typo of the year-page line is fixed in
-# content/curated/fixes.yaml, see 2023-10-07-96de1607).
-# The UN partition plan and Israel's independence; the first, second and fourth Arab-Israeli wars, the PLO, Nasser's
-# death; Sadat's visit to Israel, Camp David and the peace treaty, Sadat's assassination; the Iran-Iraq War, the strike
-# on Iraq's reactor, the invasion of Lebanon, the first intifada; the invasion and liberation of Kuwait and Japan's
-# minesweepers; Rabin's assassination, Wye River, the failed Camp David talks of 2000, the second intifada, the Iraq
-# War, Arafat's death, the Gaza disengagement and the Hamas election win; the Jasmine Revolution, Mubarak's
-# resignation, the fall of Tripoli, the ISIL caliphate, the Hamas attack of 7 Oct 2023, the fall of Assad and the
-# Israeli strikes on Iran in 2025.
+# References to existing auto-generated events only (nothing newly written; wrong or misspelt year-page lines are
+# corrected in content/curated/fixes.yaml: the Balfour Declaration ("national home", not a state), the end of the
+# Six-Day War (10 June), the date of the Oslo Accords (signed 20 Aug 1993; the entry keeps its id 1993-08-13-b6837b4c)
+# and a typo in 2023-10-07-96de1607).
+# The Balfour Declaration, the UN partition plan and Israel's independence; the four Arab-Israeli wars, the PLO,
+# Nasser's death; Sadat's visit to Israel, Camp David and the peace treaty, Sadat's assassination; the Iran-Iraq War,
+# the strike on Iraq's reactor, the invasion of Lebanon, the first intifada; the invasion and liberation of Kuwait and
+# Japan's minesweepers; the Oslo Accords, Rabin's assassination, Wye River, the failed Camp David talks of 2000, the
+# second intifada, the Iraq War, Arafat's death, the Gaza disengagement and the Hamas election win; the Jasmine
+# Revolution, Mubarak's resignation, the fall of Tripoli, the ISIL caliphate, the Hamas attack of 7 Oct 2023, the fall
+# of Assad and the Israeli strikes on Iran in 2025.
 # Where the ja articles give no day, the date is checked against en articles: Sadat's visit (19-21 Nov 1977), the 1982
-# Lebanon War (6 Jun 1982), the Wye River Memorandum (23 Oct 1998), the 2000 Camp David Summit (11-25 Jul 2000) and the
-# Gaza disengagement (settlers' evacuation completed 22 Aug 2005). The minesweeper dispatch (1991) and Rabin's
+# Lebanon War (6 Jun 1982), the Wye River Memorandum (23 Oct 1998), the 2000 Camp David Summit (11-25 Jul 2000) and
+# the Gaza disengagement (settlers' evacuation completed 22 Aug 2005). The minesweeper dispatch (1991) and Rabin's
 # assassination (1995) are year entries and are shown with their year only.
 # The Arab League's declaration of war (14 May 1948) is left out next to the invasion of the next day.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
-# articles cannot confirm (dataset vs article: the Balfour Declaration "promised a Jewish state" / the article stresses
-# the text said "national home", not a state; the first truce 1 Jun 1948 / not dated in the article; the Six-Day War
-# "fighting ended on 11 June" / fighting 5-10 June (Syria's ceasefire on 10 June); the Jordan-PLO ceasefire 25 Sep
-# 1970 / not dated; the oil shock 17 Oct 1973 / the price rise was decided on 16 Oct (OPEC Gulf states), the
-# production cut on 17 Oct (OAPEC); the Iranian Revolution 1 Feb 1979 / the entry says only 「イラン革命」, the article
-# dates Khomeini's return to 1 Feb and the fall of the government to 11 Feb; the Turkish Airlines rescue 19 Mar 1985 /
-# 「空襲警報が鳴り響く中」「自国民より優先して」 are not in the article; the Palestinian declaration of independence
-# 15 Nov 1988 / 「チュニジアのチュニスで」 is not in the articles; the Oslo Accords 13 Aug 1993 / signed 20 Aug 1993;
-# Israel's ground invasion of Lebanon 22 Jul 2006 / not dated (the war ran 12 Jul - 8 Sep); the killing of Soleimani
-# 3 Jan 2020 / the article has the drone strike and Trump's tweet, not a Pentagon statement; the Gaza ceasefire
-# 19 Jan 2025 / 「予定から3時間遅れた現地時間11時15分から」 is not in the article).
+# articles cannot confirm (dataset vs article: the first truce 1 Jun 1948 / not dated in the article; the Jordan-PLO
+# ceasefire 25 Sep 1970 / not dated; the oil shock 17 Oct 1973 / the price rise was decided on 16 Oct (OPEC Gulf
+# states), the production cut on 17 Oct (OAPEC); the Iranian Revolution 1 Feb 1979 / the entry says only 「イラン革命」, the
+# article dates Khomeini's return to 1 Feb and the fall of the government to 11 Feb; the Turkish Airlines rescue 19
+# Mar 1985 / 「空襲警報が鳴り響く中」「自国民より優先して」 are not in the article; the Palestinian declaration of independence 15 Nov 1988 /
+# 「チュニジアのチュニスで」 is not in the articles; Israel's ground invasion of Lebanon 22 Jul 2006 / not dated (the war ran 12
+# Jul - 8 Sep); the killing of Soleimani 3 Jan 2020 / the article has the drone strike and Trump's tweet, not a
+# Pentagon statement; the Gaza ceasefire 19 Jan 2025 / 「予定から3時間遅れた現地時間11時15分から」 is not in the article).
+# The icon is the oil drop of the oil shock rather than a symbol of one side of the conflicts.
 slug: middle-east
 title: 中東の戦争と和平
-lead: 1947年の国連総会でのパレスチナ分割決議とイスラエルの独立宣言から、第一次・第二次・第四次中東戦争、パレスチナ解放機構の設立、サダト大統領のイスラエル訪問とキャンプ・デービッド合意、イラン・イラク戦争、イラクのクウェート侵攻と湾岸戦争、ワイ・リバー合意と第二次インティファーダ、イラク戦争、ジャスミン革命とムバーラク大統領の辞任、ISILの国家樹立宣言、ハマースのイスラエル攻撃、アサド政権の崩壊まで。ペルシャ湾への日本の掃海艇派遣も含めて、中東の戦争と和平の歩みをたどる。
-description: パレスチナ分割決議とイスラエルの独立宣言から、中東戦争、キャンプ・デービッド合意、湾岸戦争、インティファーダ、ジャスミン革命、ハマースのイスラエル攻撃まで、中東の戦争と和平を年代順にたどる特集。
-icon: art-israel-founding
+lead: 1917年のバルフォア宣言、1947年の国連総会でのパレスチナ分割決議とイスラエルの独立宣言から、第一次から第四次までの中東戦争、パレスチナ解放機構の設立、サダト大統領のイスラエル訪問とキャンプ・デービッド合意、イラン・イラク戦争、イラクのクウェート侵攻と湾岸戦争、オスロ合意とワイ・リバー合意、第二次インティファーダ、イラク戦争、ジャスミン革命とムバーラク大統領の辞任、ISILの国家樹立宣言、ハマースのイスラエル攻撃、アサド政権の崩壊まで。ペルシャ湾への日本の掃海艇派遣も含めて、中東の戦争と和平の歩みをたどる。
+description: バルフォア宣言とイスラエルの独立宣言から、4度の中東戦争、キャンプ・デービッド合意、湾岸戦争、オスロ合意、インティファーダ、ジャスミン革命、ハマースのイスラエル攻撃まで、中東の戦争と和平を年代順にたどる特集。
+icon: art-oil-shock
 entries:
-  # --- Partition and the first wars (1947-1964) ---
+  # --- From the Balfour Declaration to the first wars (1917-1967) ---
+  - id: 1917-11-02-0e8b7f4d # The Balfour Declaration
   - id: 1947-11-29-074e5991 # The UN General Assembly adopts the partition plan
   - id: 1948-05-14-e6669ec0 # Ben-Gurion declares Israel's independence
   - id: 1948-05-15-fc20dfe4 # Arab armies invade: the first Arab-Israeli war
   - id: 1956-10-29-820e5037 # Israel invades Egypt: the Suez War
   - id: 1964-05-28-2abb3781 # The PLO is founded
+  - id: 1967-06-05-9f435b54 # The Six-Day War
 
   # --- From Nasser to Camp David (1970-1981) ---
   - id: 1970-09-28-0f773a83 # Nasser dies, Sadat succeeds him
@@ -58,7 +60,8 @@ entries:
   - id: 1991-01-17-6b8abc93 # The Gulf War air campaign begins
   - id: 1991-02-27-c9359a06 # Kuwait is liberated
 
-  # --- The Oslo years and their collapse (1995-2008) ---
+  # --- The Oslo years and their collapse (1993-2008) ---
+  - id: 1993-08-13-b6837b4c # The Oslo Accords (signed 20 Aug 1993)
   - id: 1995-01-01-16a2a20f # Rabin is assassinated (year)
   - id: 1998-10-23-d98d6727 # The Wye River Memorandum
   - id: 2000-07-25-6706055b # The Camp David talks break down over Jerusalem
