@@ -34,6 +34,7 @@ import {
 	applyCurated,
 	crossYearDateOverrides,
 	parseCuratedYaml,
+	suppressedIds,
 	type CuratedEntry,
 } from '../lib/curate.ts';
 import {
@@ -346,7 +347,9 @@ const main = Effect.gen(function* () {
 	// all work for collections as-is (collections come last, so for the same id the collection wins)
 	const collectionSources = loadCollections();
 	const curatedEntries = [...loadCurated(), ...collectionCuratedEntries(collectionSources)];
-	const protectedIds = new Set(curatedEntries.map((e) => e.id));
+	// A suppressed id is dropped after curation, so it must not win a near-duplicate pair either
+	const suppressed = suppressedIds(curatedEntries);
+	const protectedIds = new Set(curatedEntries.map((e) => e.id).filter((id) => !suppressed.has(id)));
 	const dropIds = duplicateIds(
 		unique.map((s) => ({
 			id: s.id,
@@ -479,7 +482,10 @@ const main = Effect.gen(function* () {
 	console.log(`Total: ${events.length} (range ${meta.minDate} to ${meta.maxDate})`);
 	console.log(`overview(>=${OVERVIEW_MIN_IMPORTANCE}): ${overviewSlice(events, OVERVIEW_MIN_IMPORTANCE).length}`);
 	console.log(`With image: ${events.filter((e) => e.image).length}`);
-	console.log(`curated: updated ${curateResult.updated.length} / added ${curateResult.added.length}`);
+	console.log(
+		`curated: updated ${curateResult.updated.length} / added ${curateResult.added.length} / suppressed ${curateResult.suppressed.length}` +
+			(curateResult.suppressed.length > 0 ? ` (${curateResult.suppressed.join(', ')})` : ''),
+	);
 	console.log(`With related events: ${relatedCount} (manual relations set on ${manualRelatedIds.size} events)`);
 	console.log(`Collections: ${collectionDetails.length}`);
 	for (const d of collectionDetails) {

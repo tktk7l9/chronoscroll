@@ -5,8 +5,9 @@
  *   override must stay in the year of the id (hard fail: this is our own text, see pipeline/lib/residue.ts and
  *   crossYearDateOverrides).
  * - static/data/chunks: the committed data must carry the curated title/summary/date (catches a forgotten
- *   regeneration). Residue in the generated text is only reported, so a new case on Wikipedia never blocks the
- *   monthly data refresh (data-refresh.yml runs the tests before it opens the PR); build.ts prints the same report.
+ *   regeneration), and a suppressed event must be gone from every output. Residue in the generated text is only
+ *   reported, so a new case on Wikipedia never blocks the monthly data refresh (data-refresh.yml runs the tests
+ *   before it opens the PR); build.ts prints the same report.
  */
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -14,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import type { NewsEvent } from '../src/lib/types.ts';
 import { parseCollectionYaml } from './lib/collections.ts';
-import { crossYearDateOverrides, parseCuratedYaml, type CuratedEntry } from './lib/curate.ts';
+import { crossYearDateOverrides, parseCuratedYaml, suppressedIds, type CuratedEntry } from './lib/curate.ts';
 import { findResidue, formatResidueReport, residueOverCeiling, residueSummary } from './lib/residue.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -23,10 +24,9 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url));
  * Most events allowed per residue class in the committed data (a class not listed allows none). It only goes down:
  * lower an entry in the same commit as the fixes; when new cases appear, fix them in content/curated/fixes.yaml
  * instead of raising it. Left on purpose (2026-10): leading_date 1938-01-01-1a7d4cff and 1944-02-01-74b78a28 (the
- * year page links one day and shows another, and no source settles it), see_also 2021-03-01-99bcdb98 (a bare
- * 「…も参照」 line without event text; the earthquake is 2021-03-20-975b7871).
+ * year page links one day and shows another, and no source settles it).
  */
-const RESIDUE_CEILING: Readonly<Record<string, number>> = { leading_date: 2, see_also: 1 };
+const RESIDUE_CEILING: Readonly<Record<string, number>> = { leading_date: 2 };
 
 function yamlFiles(dir: string): string[] {
 	return readdirSync(join(ROOT, dir))
@@ -45,6 +45,10 @@ function loadEntries(): { file: string; entry: CuratedEntry }[] {
 		for (const entry of parseCollectionYaml(readFileSync(file, 'utf8')).entries) out.push({ file, entry });
 	}
 	return out;
+}
+
+function readJson<T>(path: string): T {
+	return JSON.parse(readFileSync(join(ROOT, path), 'utf8')) as T;
 }
 
 function loadEvents(): Map<string, NewsEvent> {
@@ -76,6 +80,20 @@ describe('hand-written content (content/curated, content/collections)', () => {
 	it('keeps every date override within the year of the id', () => {
 		expect(crossYearDateOverrides(entries.map((x) => x.entry))).toEqual([]);
 	});
+
+	it('gives a suppressed id no other entry, relatedIds pointer or book link', () => {
+		const suppressed = suppressedIds(entries.map((x) => x.entry));
+		const problems: string[] = [];
+		for (const { file, entry } of entries) {
+			if (suppressed.has(entry.id) && entry.suppress === undefined) problems.push(`${file}: ${entry.id} is suppressed`);
+			for (const id of entry.relatedIds ?? []) {
+				if (suppressed.has(id)) problems.push(`${file}: ${entry.id} relatedIds ${id} is suppressed`);
+			}
+		}
+		const books = readFileSync(join(ROOT, 'content/affiliate/books.yaml'), 'utf8');
+		for (const id of suppressed) if (books.includes(id)) problems.push(`content/affiliate/books.yaml: ${id} is suppressed`);
+		expect(problems).toEqual([]);
+	});
 });
 
 describe('generated data (static/data/chunks)', () => {
@@ -90,6 +108,8 @@ describe('generated data (static/data/chunks)', () => {
 		const mismatches: string[] = [];
 		const unmatched: string[] = [];
 		for (const [id, entry] of effective) {
+			// Dropped on purpose; the next test checks that it is really gone
+			if (entry.suppress !== undefined) continue;
 			const ev = events.get(id);
 			if (!ev) {
 				unmatched.push(id);
@@ -104,6 +124,26 @@ describe('generated data (static/data/chunks)', () => {
 		// Ids that no longer exist after a refresh are reported by build.ts (⚠️ curated ids with no match)
 		if (unmatched.length > 0) console.warn(`curated ids not in the data: ${unmatched.join(', ')}`);
 		expect(mismatches).toEqual([]);
+	});
+
+	it('drops every suppressed event from all outputs', () => {
+		const suppressed = suppressedIds(loadEntries().map((x) => x.entry));
+		const found: string[] = [];
+		const check = (where: string, ids: Iterable<string>) => {
+			for (const id of ids) if (suppressed.has(id)) found.push(`${where}: ${id}`);
+		};
+		check('chunks', events.keys());
+		for (const ev of events.values()) check(`related of ${ev.id}`, (ev.related ?? []).map((r) => r.id));
+		check('overview.json', readJson<NewsEvent[]>('static/data/overview.json').map((e) => e.id));
+		check('overview-lite.json', readJson<{ id: string }[]>('static/data/overview-lite.json').map((e) => e.id));
+		check('search.json', readJson<[string, string, string][]>('static/data/search.json').map(([id]) => id));
+		check('books.json', Object.keys(readJson<Record<string, unknown>>('static/data/books.json')));
+		const index = readJson<{ byEvent: Record<string, string[]> }>('static/data/collections.json');
+		check('collections.json', Object.keys(index.byEvent));
+		for (const f of readdirSync(join(ROOT, 'static/data/collections'))) {
+			check(f, readJson<{ events: NewsEvent[] }>(`static/data/collections/${f}`).events.map((e) => e.id));
+		}
+		expect(found).toEqual([]);
 	});
 
 	it('reports markup residue without failing (fix via content/curated/)', () => {

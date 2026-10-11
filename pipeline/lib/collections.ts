@@ -49,9 +49,13 @@ export function parseCollectionYaml(yamlText: string): CollectionSource {
 	if (!Array.isArray(raw.entries) || raw.entries.length === 0) {
 		throw new Error(`Collection (${slug}) entries is empty`);
 	}
-	for (const entry of raw.entries as { id?: unknown }[]) {
+	for (const entry of raw.entries as { id?: unknown; suppress?: unknown }[]) {
 		if (typeof entry?.id !== 'string' || entry.id === '') {
 			throw new Error(`Collection (${slug}) entry has no id: ${JSON.stringify(entry)}`);
+		}
+		// A collection lists events to read; dropping a junk event is done in content/curated/suppress.yaml
+		if (entry.suppress !== undefined) {
+			throw new Error(`Collection (${slug}) entry ${entry.id}: suppress belongs in content/curated, not in a collection`);
 		}
 	}
 	return {

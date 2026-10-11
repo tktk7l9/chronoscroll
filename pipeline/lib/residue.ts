@@ -45,6 +45,13 @@ export const RESIDUE_PATTERNS: readonly ResiduePattern[] = [
 		description: 'date fragment left in front of the body (unparsed date form such as 「9–13日 - 」)',
 		re: new RegExp(`^.{0,12}?\\d{1,2}[日月]\\s*${SEP}`),
 	},
+	{
+		name: 'leading_season',
+		description: 'season or period word left in front of the body (「夏頃 - 」; the parser only drops 「夏 - 」 and the like)',
+		re: new RegExp(
+			`^(?:春|夏|秋|冬|初夏|晩夏|初秋|晩秋|初冬|早春|晩春|年初|年央|年末|上半期|下半期|上旬|中旬|下旬|初旬)[^\\s、。]{0,2}\\s*(?:${SEP}|[:：])`,
+		),
+	},
 	{ name: 'see_also', description: 'year-page cross reference (「…も参照」)', re: /も参照|を参照/ },
 	{
 		name: 'edge_separator',

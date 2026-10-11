@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { NewsEvent } from '../../src/lib/types.ts';
-import { applyCurated, crossYearDateOverrides, parseCuratedYaml } from './curate.ts';
+import { applyCurated, crossYearDateOverrides, parseCuratedYaml, suppressedIds } from './curate.ts';
 
 function ev(id: string): NewsEvent {
 	return {
@@ -37,6 +37,25 @@ describe('parseCuratedYaml', () => {
 
 	it('errors without id', () => {
 		expect(() => parseCuratedYaml('- title: x')).toThrow('id');
+	});
+
+	it('accepts a suppress entry that gives a reason and nothing else', () => {
+		expect(parseCuratedYaml('- id: a\n  suppress: a list line from inside a <ref>\n')).toEqual([
+			{ id: 'a', suppress: 'a list line from inside a <ref>' },
+		]);
+	});
+
+	it('errors when suppress has no reason', () => {
+		expect(() => parseCuratedYaml('- id: a\n  suppress: ""\n')).toThrow('suppress needs a reason');
+		expect(() => parseCuratedYaml('- id: a\n  suppress: "  "\n')).toThrow('suppress needs a reason');
+		expect(() => parseCuratedYaml('- id: a\n  suppress: true\n')).toThrow('suppress needs a reason');
+		expect(() => parseCuratedYaml('- id: a\n  suppress:\n')).toThrow('suppress needs a reason');
+	});
+
+	it('errors when a suppressed entry also sets other fields', () => {
+		expect(() => parseCuratedYaml('- id: a\n  suppress: junk\n  title: x\n  importance: 1\n')).toThrow(
+			'a suppressed entry cannot set title, importance',
+		);
 	});
 });
 
@@ -139,6 +158,68 @@ describe('applyCurated', () => {
 			[{ id: 'new1', date: '2000-01-01', title: 'T', summary: 'S', relatedIds: ['x'] }],
 		);
 		expect(events[0]).not.toHaveProperty('relatedIds');
+	});
+
+	it('removes a suppressed event and reports it', () => {
+		const result = applyCurated([ev('a'), ev('b'), ev('c')], [{ id: 'b', suppress: 'not an event' }]);
+		expect(result.events.map((e) => e.id)).toEqual(['a', 'c']);
+		expect(result.suppressed).toEqual(['b']);
+		expect(result.updated).toEqual([]);
+		expect(result.unmatched).toEqual([]);
+	});
+
+	it('a suppress entry wins over other entries for the same id, before or after it', () => {
+		const result = applyCurated(
+			[ev('a'), ev('b')],
+			[
+				{ id: 'a', title: '先の上書き' },
+				{ id: 'b', title: '先の上書き' },
+				{ id: 'a', suppress: 'junk' },
+				{ id: 'b', summary: '後の上書き' },
+				{ id: 'b', suppress: 'junk' },
+			],
+		);
+		expect(result.events).toEqual([]);
+		expect(result.suppressed).toEqual(['a', 'b']);
+		expect(result.updated).toEqual([]);
+	});
+
+	it('never adds a complete new entry whose id is suppressed', () => {
+		const result = applyCurated(
+			[],
+			[
+				{ id: 'new1', date: '2000-01-01', title: 'T', summary: 'S' },
+				{ id: 'new1', suppress: 'junk' },
+			],
+		);
+		expect(result.events).toEqual([]);
+		expect(result.added).toEqual([]);
+		expect(result.unmatched).toEqual(['new1']);
+	});
+
+	it('reports a suppress entry whose event no longer exists as unmatched', () => {
+		const result = applyCurated([ev('a')], [{ id: 'gone', suppress: 'junk' }]);
+		expect(result.events.map((e) => e.id)).toEqual(['a']);
+		expect(result.suppressed).toEqual([]);
+		expect(result.unmatched).toEqual(['gone']);
+	});
+
+	it('never writes the suppress reason into an event', () => {
+		const { events } = applyCurated([ev('a'), ev('b')], [{ id: 'b', suppress: 'junk' }]);
+		expect(events[0]).not.toHaveProperty('suppress');
+	});
+});
+
+describe('suppressedIds', () => {
+	it('collects the ids of suppress entries only', () => {
+		expect([
+			...suppressedIds([
+				{ id: 'a', title: 'x' },
+				{ id: 'b', suppress: 'junk' },
+				{ id: 'c', suppress: 'junk' },
+			]),
+		]).toEqual(['b', 'c']);
+		expect(suppressedIds([]).size).toBe(0);
 	});
 });
 
