@@ -1,0 +1,18 @@
+# Generated events that are not events at all, dropped from every output (see `suppress` in pipeline/lib/curate.ts).
+# Each entry quotes the year-page line it comes from and says why it is not an event; it may carry nothing but `id`
+# and `suppress`. Wrong or broken text of a real event is corrected in fixes.yaml instead.
+# A dropped event also loses its /e/<id> page: the next deploy's R2 sync deletes the object (the del list of planSync in
+# scripts/lib/r2-plan.mjs; a few deletions stay far below the isMassDelete valve of 10% of the bucket) and the Worker
+# answers 404. The lines below were checked on the current year pages (2026-10-11); they are still there, so the next
+# data refresh generates the same ids and these entries keep dropping them.
+
+- id: 1998-09-01-34e313b6
+  suppress: >-
+    A bullet inside the <ref> of the 9月4日 entry on 1998年の日本 (「* 裁判官：田中聖浩（裁判長）・奥山雅哉・吉岡恵</ref>
+    （戦後7人目の女性死刑囚）。」, the judges of a 2015 ruling cited by that ref); the line-by-line parser reads it as an
+    event of its own. The 9月4日 event (1998-09-04-09552749) keeps 「戦後7人目の女性死刑囚」.
+
+- id: 2021-03-01-99bcdb98
+  suppress: >-
+    The bare cross-reference line 「* [[宮城県沖地震 (2021年3月)]]も参照」 under 3月 on 2021年, with no event text; the
+    earthquake itself is 2021-03-20-975b7871.

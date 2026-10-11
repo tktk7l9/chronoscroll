@@ -2476,3 +2476,13 @@
 - id: 2024-12-11-50a4633e
   title: "国連総会は、イスラエルに対して、（1）国連パレスチナ難民救済事業機関（UNRWA）の活動をイス…"
   summary: "国連総会は、イスラエルに対して、（1）国連パレスチナ難民救済事業機関（UNRWA）の活動をイスラエルが禁止した措置を撤回するよう求める決議、（2）ガザでただちに停戦し、ガザであらゆる人道支援活動が行えるよう求める決議、以上2つを圧倒的多数で採択した。"
+
+# --- Season words left in front of the text (「夏季 - 」「夏頃 - 」; the parser drops only 「夏 - 」 and the like) ---
+# Dropped the same way; the rest is the year-page text. Checked against the topic articles (2026-10-11).
+- id: 1969-07-01-8eac9529   # 急性出血性結膜炎: originated in Ghana, the 1969 summer pandemic, also called アポロ病
+  title: "ガーナを起点として急性出血性結膜炎（アポロ病）が世界的に大流行する"
+  summary: "ガーナを起点として急性出血性結膜炎（アポロ病）が世界的に大流行する。"
+
+- id: 2003-01-01-9b3dbb12   # ハルウララ: 「2003年夏、ハルウララは連敗を続けていたことが話題となり、全国的な人気・知名度を獲得した」
+  title: "1勝もあげられずに負け続ける競走馬・ハルウララが注目され、ハルウララブームが始まる"
+  summary: "1勝もあげられずに負け続ける競走馬・ハルウララが注目され、ハルウララブームが始まる。"

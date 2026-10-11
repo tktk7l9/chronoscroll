@@ -33,6 +33,9 @@ describe('findResidue', () => {
 		['leading_date', '17日 - 国立西洋美術館が世界遺産に登録'],
 		['leading_date', '8月 - アメリカ軍による空爆が激化。'],
 		['leading_date', '1月2日-広島市の宇品港で転覆事故が発生。'],
+		['leading_season', '夏頃 - 1勝もあげられずに負け続ける競走馬が注目される。'],
+		['leading_season', '夏季 - 結膜炎が世界的に大流行する。'],
+		['leading_season', '年末：株価が急落。'],
 		['see_also', '明治改暦も参照'],
 		['see_also', '詳しくはニホンオオカミを参照。'],
 		['edge_separator', '- 日韓首脳会談。歴史認識合意せず。'],
@@ -44,6 +47,12 @@ describe('findResidue', () => {
 		['empty_quote', '作品『』が出版された。'],
 	])('flags %s in %s', (name, text) => {
 		expect(findResidue(text)).toContain(name);
+	});
+
+	it('does not flag a season word that is part of the sentence', () => {
+		expect(findResidue('夏の甲子園で初優勝。')).toEqual([]);
+		expect(findResidue('春闘で賃上げ率が過去最高に。')).toEqual([]);
+		expect(findResidue('冬季オリンピックが開幕（ - 28日）。')).toEqual([]);
 	});
 
 	it('does not flag dates inside the body or the usual range notation', () => {

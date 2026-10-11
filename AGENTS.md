@@ -25,16 +25,23 @@ It shows domestic and international news from 1829 to the present, with an impor
 - `content/curated/*.yaml` overrides top-tier events by id (rewritten summaries, SVG assignment, importance adjustments).
   Never edit the auto-generated data directly. Always make manual fixes in the curated layer.
   `fixes.yaml` holds corrections of parser residue and wrong year-page lines, each verified against the topic article.
+  `suppress.yaml` drops generated lines that are not events at all (a list line from inside a `<ref>`, a bare
+  「…も参照」 line): an entry is `id` + a non-empty `suppress:` reason and nothing else (parse error otherwise, and a
+  collection entry cannot suppress). `applyCurated` removes the event whatever other entries say, so it leaves the
+  chunks, search, overview, related links, collections and the sitemap; `content.test.ts` checks that and that no
+  other entry, `relatedIds` or book link points at it. Its `/e/<id>` page goes away on the next deploy: the R2 sync
+  deletes keys that left the build (the `del` list of `planSync`; a few ids stay far below the `isMassDelete` valve)
+  and the Worker answers 404. Wrong text of a real event belongs in `fixes.yaml`, not here.
   **A `date:` override keeps the id** (id = date + hash of the original text), so the old date stays in the id and the
   `/e/` URL, and the correction **must stay within the same year** (`crossYearDateOverrides`: `loadById` loads the chunk
   of a `?e=<id>` deep link from the id prefix). A cross-year fix or a parser change that alters the text needs a
   redirect mechanism first (new id = new page, old page orphaned; collections and curated entries reference the id).
-- **Markup residue** (an unclosed `<ref>{{Cite …}}` tail, 「9–13日 - 」 date fragments, 「…も参照」, a `{{仮リンク|…|label=…}}`
-  rendered with its first argument such as 「暗殺事件される」) is detected by `pipeline/lib/residue.ts` and reported, not
+- **Markup residue** (an unclosed `<ref>{{Cite …}}` tail, 「9–13日 - 」 date fragments, 「夏頃 - 」 season prefixes,
+  「…も参照」, a `{{仮リンク|…|label=…}}` rendered with its first argument such as 「暗殺事件される」) is detected by `pipeline/lib/residue.ts` and reported, not
   failed, by `build.ts` (⚠️ lines at the end of the stats) and `pipeline/content.test.ts`, so a new case on Wikipedia
   never blocks the monthly refresh. Hand-written text in `content/` must be clean (hard fail). Fix cases via `fixes.yaml`.
-  The committed data must also stay at or below `RESIDUE_CEILING` in `content.test.ts` (count per class; 3 cases left
-  after the 2026-10 pass). The data-refresh job only annotates an excess, then CI fails until the new cases are fixed:
+  The committed data must also stay at or below `RESIDUE_CEILING` in `content.test.ts` (count per class; 2 cases left
+  after the 2026-10 passes). The data-refresh job only annotates an excess, then CI fails until the new cases are fixed:
   lower the ceiling together with fixes, never raise it. A multi-line `<ref>`/`{{efn}}` case is best fixed with the
   text the parser gives for the whole logical line (the line plus its continuation lines), which restores words that
   follow `</ref>`; a range such as 「[[2月8日]] - [[2月15日|15日]] - 本文」 keeps the start date, as the parser does.
