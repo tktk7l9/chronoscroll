@@ -1,0 +1,73 @@
+# US presidents (collection)
+# References to existing auto-generated events only (nothing newly written). The elections that brought new
+# presidents from Grant (1868) to Wilson (1912), Hoover, Franklin Roosevelt, Truman (1948), Eisenhower, Nixon
+# (1968), Carter, Reagan, George H. W. Bush, Clinton, the Bush-Gore election, Obama, Trump (2016 and 2024) and
+# Biden, and Franklin Roosevelt's third term; the shootings of Garfield, McKinley and Kennedy and the successions of
+# Theodore Roosevelt, Coolidge and Truman; the first televised debate, the Clinton impeachment trial, Trump's first
+# impeachment, the attack on the Capitol and the shooting at Butler.
+# Re-elections other than Franklin Roosevelt's third term (1872, 1900, 1916, 1936, 1944, 1972, 1984, 1996, 2004 and
+# 2012) are not repeated. Inaugurations are included only for Franklin Roosevelt (with the New Deal), Kennedy, Obama
+# (the first Black president) and Trump's return in 2025; the others are left out next to the elections. Trump's
+# first win is represented by the count of the electoral votes in Congress (6 Jan 2017).
+# Checked against en: the first televised debate (26 Sep 1960, "1960 United States presidential debates"), the start
+# of the Clinton trial (7 Jan 1999, "Impeachment of Bill Clinton") and "the third president to be impeached" (18 Dec
+# 2019, "First impeachment of Donald Trump").
+# Overlaps: Obama's inauguration is also in the human rights collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Kennedy's win 8 Nov 1960 "in the electors' vote" / 8 Nov was the
+# general vote; Johnson "re-elected" 3 Nov 1964 / he had succeeded Kennedy and the 1964 election was his first;
+# Nixon resigns and Ford takes over 8 Aug 1974 / Nixon announced it on the evening of 8 Aug and resigned on 9 Aug;
+# Trump's win "becomes certain" 9 Nov 2016 / the article dates the count and the result 8 Nov).
+slug: us-presidents
+title: アメリカ大統領
+lead: 1868年のユリシーズ・グラントの勝利から、紛糾の末にラザフォード・ヘイズが勝った1876年の選挙、ガーフィールドとマッキンリーの銃撃、フランクリン・ルーズベルトの当選とニューディール政策の始動、3選、トルーマンの昇格、ケネディとニクソンの史上初のテレビ討論、ケネディ大統領の暗殺、クリントン大統領の弾劾裁判、ブッシュとゴアの大接戦、黒人として初めてのオバマ大統領の就任、トランプ大統領の弾劾訴追と議会襲撃、2024年のトランプの銃撃と当選、2025年の就任式まで。選挙で新しい大統領が選ばれた日と、暗殺や死去による交代を中心に、アメリカ大統領の150年余りをたどる。
+description: グラントの勝利から、マッキンリーとケネディの暗殺、フランクリン・ルーズベルトの3選、史上初のテレビ討論、オバマ大統領の就任、議会襲撃、2025年の就任式まで、アメリカ大統領の選挙と交代を年代順にたどる特集。
+icon: art-jfk
+entries:
+  # --- Grant to McKinley (1868-1901) ---
+  - id: 1868-11-03-f0af6ff7 # Grant wins
+  - id: 1876-11-07-dabc5202 # Hayes wins a disputed election
+  - id: 1880-11-02-9be595f2 # Garfield wins
+  - id: 1881-07-02-650ccbd5 # Garfield shot
+  - id: 1884-11-04-fa07d23e # Cleveland wins narrowly
+  - id: 1888-11-06-2d1a8bc4 # Benjamin Harrison wins
+  - id: 1892-11-08-abc2656d # Cleveland returns
+  - id: 1896-11-03-3cbc14c5 # McKinley wins
+  - id: 1901-09-06-9dcc1a97 # McKinley shot
+  - id: 1901-09-14-77446c43 # Theodore Roosevelt succeeds McKinley
+
+  # --- Theodore Roosevelt to Franklin Roosevelt (1904-1945) ---
+  - id: 1904-11-08-0b675496 # Theodore Roosevelt wins
+  - id: 1908-11-03-eb6079fa # Taft wins
+  - id: 1912-11-05-f377bab6 # Wilson wins
+  - id: 1923-08-03-9bca7e97 # Coolidge succeeds Harding
+  - id: 1928-11-06-7cdd764e # Hoover wins by a landslide
+  - id: 1932-11-08-f50a26a1 # Franklin Roosevelt defeats Hoover
+  - id: 1933-03-04-216654ea # Franklin Roosevelt takes office; the New Deal begins
+  - id: 1940-11-05-5f5fc8d8 # A third term for Franklin Roosevelt
+  - id: 1945-04-12-12cbe91e # Franklin Roosevelt dies; Truman succeeds
+
+  # --- Truman to Clinton (1948-1999) ---
+  - id: 1948-11-02-5288dbb5 # Truman wins
+  - id: 1952-11-04-1c49e498 # Eisenhower wins
+  - id: 1960-09-26-79c1c6f7 # The first televised debate: Kennedy and Nixon
+  - id: 1961-01-20-99a6b248 # Kennedy takes office
+  - id: 1963-11-22-b85a2ca9 # Kennedy assassinated in Dallas
+  - id: 1968-11-05-4389da7d # Nixon wins
+  - id: 1976-11-02-c070890f # Carter defeats Ford
+  - id: 1980-11-04-22565c85 # Reagan defeats Carter
+  - id: 1988-11-08-c81acc23 # George H. W. Bush wins
+  - id: 1992-11-03-cdc7bc36 # Clinton wins
+  - id: 1999-01-07-c888d08d # The Senate trial of Clinton begins
+
+  # --- Bush to Trump (2000-2025) ---
+  - id: 2000-11-07-34ef324c # Bush and Gore: a dead heat
+  - id: 2008-11-04-961eb7e4 # Obama wins
+  - id: 2009-01-20-a94c0b67 # Obama, the first Black president, takes office
+  - id: 2017-01-06-dcfc0658 # Congress counts the electoral votes: Trump elected
+  - id: 2019-12-18-72ff8417 # The House impeaches Trump
+  - id: 2020-12-14-755a2eea # The electors confirm Biden's win
+  - id: 2021-01-06-b1a61b54 # Trump supporters storm the Capitol
+  - id: 2024-07-13-14dd7537 # Trump shot at a rally in Butler
+  - id: 2024-11-05-d0479cd2 # Trump defeats Harris
+  - id: 2025-01-20-b59a6b3f # Trump and Vance take office
