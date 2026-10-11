@@ -8,8 +8,9 @@
 # 2,000-yen note, the Churaumi aquarium, the Yui Rail, the helicopter crash at Okinawa International University,
 # Hatoyama's visit, the approval of the Henoko landfill, the elections of Onaga and Tamaki, the Shuri Castle fire and
 # the start of its rebuilding.
-# The 1871 entry is a year entry and Shuri High School's appearance at Koshien (Aug 1958) a month entry; they are
-# shown with their year and month only.
+# Shuri High School's appearance at Koshien (Aug 1958) is a month entry and is shown with its month only. The killing of
+# the castaways appears twice (a year entry 1871-01-01-b402e268 and the dated entry, whose date prefix is corrected in
+# content/curated/fixes.yaml); the dated one is used.
 # Overlaps: the start of the Battle of Okinawa is also in the World War II collection, the Ryukyu disposition in the
 # Meiji Restoration collection and the Ocean Expo in the expositions collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
@@ -26,7 +27,7 @@ description: 琉球処分と沖縄県の設置から、沖縄戦、アメリカ�
 icon: art-okinawa-return
 entries:
   # --- From the Ryukyu kingdom to Okinawa prefecture (1871-1901) ---
-  - id: 1871-01-01-b402e268 # Ryukyuan castaways killed in Taiwan (year)
+  - id: 1871-12-01-03541f8f # Ryukyuan castaways killed in Taiwan (19 Dec 1871)
   - id: 1879-03-27-c4dda708 # Matsuda announces the abolition of the domain at Shuri Castle
   - id: 1879-04-04-b227005c # The Ryukyu domain becomes Okinawa prefecture
   - id: 1901-08-19-cb20d789 # Sho Tai, the last king, dies
