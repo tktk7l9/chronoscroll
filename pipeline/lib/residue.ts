@@ -42,8 +42,9 @@ export const RESIDUE_PATTERNS: readonly ResiduePattern[] = [
 	},
 	{
 		name: 'leading_date',
-		description: 'date fragment left in front of the body (unparsed date form such as 「9–13日 - 」)',
-		re: new RegExp(`^.{0,12}?\\d{1,2}[日月]\\s*${SEP}`),
+		description: 'date fragment left in front of the body (unparsed date form such as 「9–13日 - 」 or 「4月18日（現地時間） - 」)',
+		// The date may carry one parenthesised note, half- or full-width: 「12月19日(明治4年11月8日) - 」
+		re: new RegExp(`^.{0,12}?\\d{1,2}[日月](?:\\s*[（(][^（()）]{0,24}[）)])?\\s*${SEP}`),
 	},
 	{
 		name: 'leading_season',

@@ -2510,3 +2510,23 @@
 - id: 1999-09-30-47ca4af4   # 東海村JCO臨界事故: 「日本国内で初めて、事故被曝による死亡者を出した」 (not the first criticality: Shika had one in Jun 1999, revealed in 2007)
   title: "茨城県東海村JCO臨界事故。2人が死亡し、日本国内で初めて事故被曝による死亡者を出した"
   summary: "茨城県東海村JCO臨界事故。2人が死亡し、日本国内で初めて事故被曝による死亡者を出した。"
+
+# --- Date fragments with a parenthesised note left in front of the text (「12月19日(明治4年11月8日) - 」,
+# 「4月18日（現地時間） - 」), caught once leading_date allowed one parenthesised part after the date (2026-10-11).
+# Handled like the date fragments above: a month-precision event gets the day its line starts with, a range keeps its
+# start date and the end goes into the text.
+- id: 1871-12-01-03541f8f   # 宮古島島民遭難事件: 明治4年11月8日（西暦1871年12月19日）, 54 killed; the line gave the Gregorian date first
+  date: "1871-12-19"
+  precision: day
+  title: "台湾に漂着した琉球島民54人が現地人に殺害される宮古島島民遭難事件が起こる"
+  summary: "台湾に漂着した琉球島民54人が現地人に殺害される宮古島島民遭難事件が起こる。"
+
+- id: 2009-05-01-e8a3445f   # 2009年の日本: 「（4月29日（水・昭和の日）-）5月2日（土）-6日（水） - 1回目の大型連休。ゴールデンウィーク。」 (the optional start on 29 Apr is dropped)
+  date: "2009-05-02"
+  precision: day
+  title: "1回目の大型連休（6日まで）。ゴールデンウィーク"
+  summary: "1回目の大型連休（6日まで）。ゴールデンウィーク。"
+
+- id: 2018-04-17-163ede9d   # 2018年の日本: 「4月17日 - 4月18日（現地時間） - アメリカ・フロリダ州で…日米首脳会談を開催」
+  title: "アメリカ・フロリダ州で安倍晋三内閣総理大臣がドナルド・トランプ大統領と日米首脳会談を開催（現地…"
+  summary: "アメリカ・フロリダ州で安倍晋三内閣総理大臣がドナルド・トランプ大統領と日米首脳会談を開催（現地時間18日まで）。"

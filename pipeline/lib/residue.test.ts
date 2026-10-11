@@ -33,6 +33,9 @@ describe('findResidue', () => {
 		['leading_date', '17日 - 国立西洋美術館が世界遺産に登録'],
 		['leading_date', '8月 - アメリカ軍による空爆が激化。'],
 		['leading_date', '1月2日-広島市の宇品港で転覆事故が発生。'],
+		['leading_date', '12月19日(明治4年11月8日) - 台湾に漂着した琉球島民が殺害される。'],
+		['leading_date', '4月18日（現地時間） - フロリダ州で日米首脳会談を開催。'],
+		['leading_date', '（4月29日（水・昭和の日）-）5月2日（土）-6日（水） - 大型連休。'],
 		['leading_season', '夏頃 - 1勝もあげられずに負け続ける競走馬が注目される。'],
 		['leading_season', '夏季 - 結膜炎が世界的に大流行する。'],
 		['leading_season', '年末：株価が急落。'],
@@ -59,6 +62,7 @@ describe('findResidue', () => {
 		expect(findResidue('昭和最後の日となり、昭和64年は、昭和元年（12月25日 - 31日）と並び7日間のみとなった。')).toEqual([]);
 		expect(findResidue('国体夏季大会が開幕（ - 24日、秋季大会は10月26日 - 31日）。')).toEqual([]);
 		expect(findResidue('東京都港区の環状第2号線地下トンネル区間の地上部に虎ノ門ヒルズが竣工。')).toEqual([]);
+		expect(findResidue('東京で国際会議が開幕し、各国の代表が集まった（5月31日（金） - 6月2日）。')).toEqual([]);
 	});
 
 	it('reports unbalanced brackets unless balance checking is off', () => {
@@ -117,7 +121,7 @@ describe('residueSummary / formatResidueReport', () => {
 			[
 				'⚠️ markup residue in generated text: 3 of 4 events (fix via content/curated/)',
 				'  braces: 2 — unclosed template, usually a <ref>{{Cite …}} that spans lines: b, … (+1)',
-				'  leading_date: 2 — date fragment left in front of the body (unparsed date form such as 「9–13日 - 」): c, … (+1)',
+				'  leading_date: 2 — date fragment left in front of the body (unparsed date form such as 「9–13日 - 」 or 「4月18日（現地時間） - 」): c, … (+1)',
 			].join('\n'),
 		);
 	});
