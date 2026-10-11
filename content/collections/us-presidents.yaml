@@ -1,10 +1,10 @@
 # US presidents (collection)
-# References to existing auto-generated events only (nothing newly written). The elections that brought new
-# presidents from Grant (1868) to Wilson (1912), Hoover, Franklin Roosevelt, Truman (1948), Eisenhower, Nixon
-# (1968), Carter, Reagan, George H. W. Bush, Clinton, the Bush-Gore election, Obama, Trump (2016 and 2024) and
-# Biden, and Franklin Roosevelt's third term; the shootings of Garfield, McKinley and Kennedy and the successions of
-# Theodore Roosevelt, Coolidge and Truman; the first televised debate, the Clinton impeachment trial, Trump's first
-# impeachment, the attack on the Capitol and the shooting at Butler.
+# References to existing auto-generated events only (nothing newly written). The elections won by Grant (1868) to
+# Wilson (1912), Hoover, Franklin Roosevelt (and his third term), Truman (1948), Eisenhower, Nixon (1968), Carter,
+# Reagan, George H. W. Bush, Clinton, Obama, Trump (2016 and 2024) and Biden, and the Bush-Gore election; the
+# shootings of Garfield, McKinley and Kennedy and the successions of Theodore Roosevelt, Coolidge and Truman; the
+# first televised debate, the Clinton impeachment trial, Trump's first impeachment, the attack on the Capitol and
+# the shooting at Butler.
 # Re-elections other than Franklin Roosevelt's third term (1872, 1900, 1916, 1936, 1944, 1972, 1984, 1996, 2004 and
 # 2012) are not repeated. Inaugurations are included only for Franklin Roosevelt (with the New Deal), Kennedy, Obama
 # (the first Black president) and Trump's return in 2025; the others are left out next to the elections. Trump's
@@ -20,7 +20,7 @@
 # Trump's win "becomes certain" 9 Nov 2016 / the article dates the count and the result 8 Nov).
 slug: us-presidents
 title: アメリカ大統領
-lead: 1868年のユリシーズ・グラントの勝利から、紛糾の末にラザフォード・ヘイズが勝った1876年の選挙、ガーフィールドとマッキンリーの銃撃、フランクリン・ルーズベルトの当選とニューディール政策の始動、3選、トルーマンの昇格、ケネディとニクソンの史上初のテレビ討論、ケネディ大統領の暗殺、クリントン大統領の弾劾裁判、ブッシュとゴアの大接戦、黒人として初めてのオバマ大統領の就任、トランプ大統領の弾劾訴追と議会襲撃、2024年のトランプの銃撃と当選、2025年の就任式まで。選挙で新しい大統領が選ばれた日と、暗殺や死去による交代を中心に、アメリカ大統領の150年余りをたどる。
+lead: 1868年のユリシーズ・グラントの勝利から、紛糾の末にラザフォード・ヘイズが勝った1876年の選挙、ガーフィールドとマッキンリーの銃撃、フランクリン・ルーズベルトの当選とニューディール政策の始動、3選、トルーマンの昇格、ケネディとニクソンの史上初のテレビ討論、ケネディ大統領の暗殺、クリントン大統領の弾劾裁判、ブッシュとゴアの大接戦、黒人として初めてのオバマ大統領の就任、トランプ大統領の弾劾訴追と議会襲撃、2024年のトランプの銃撃と当選、2025年の就任式まで。大統領選挙と、暗殺や死去による交代を中心に、アメリカ大統領の150年余りをたどる。
 description: グラントの勝利から、マッキンリーとケネディの暗殺、フランクリン・ルーズベルトの3選、史上初のテレビ討論、オバマ大統領の就任、議会襲撃、2025年の就任式まで、アメリカ大統領の選挙と交代を年代順にたどる特集。
 icon: art-jfk
 entries:
