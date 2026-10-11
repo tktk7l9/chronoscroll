@@ -110,6 +110,13 @@ describe('parseCollectionYaml', () => {
 		expect(() => parseCollectionYaml(`${head}entries:\n  - date: "2000-01-01"`)).toThrow('id');
 		expect(() => parseCollectionYaml(`${head}entries:\n  - id: ""`)).toThrow('id');
 	});
+
+	it('errors when an entry tries to suppress an event (that belongs in content/curated)', () => {
+		const head = 'slug: a\ntitle: T\nlead: L\ndescription: D\n';
+		expect(() => parseCollectionYaml(`${head}entries:\n  - id: x\n    suppress: junk`)).toThrow(
+			'suppress belongs in content/curated',
+		);
+	});
 });
 
 describe('collectionCuratedEntries', () => {
