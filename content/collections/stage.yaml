@@ -1,20 +1,22 @@
 # History of the stage arts (collection)
 # References to existing auto-generated events only (nothing newly written). The premieres of Die Meistersinger, Das
-# Rheingold and the whole Ring at Bayreuth, Aida, Die Fledermaus, Carmen, Peer Gynt, Swan Lake, The Tales of
-# Hoffmann, The Mikado, Otello and The Nutcracker; La bohème, Tosca, The Cherry Orchard, Madama Butterfly, Peter Pan
-# and The Blue Bird; The Rite of Spring, the first Takarazuka performance and revue, Boléro and Porgy and Bess;
-# Oklahoma!, My Fair Lady, Hair, The Rose of Versailles at Takarazuka, Annie and Shiki's Phantom of the Opera.
+# Rheingold and the whole Ring at Bayreuth, Aida, Die Fledermaus, Carmen, Peer Gynt, Swan Lake, A Doll's House, The
+# Tales of Hoffmann, The Mikado, Otello and The Nutcracker; La bohème, Tosca, The Cherry Orchard, Madama Butterfly,
+# Peter Pan and The Blue Bird; The Rite of Spring, the first Takarazuka performance, Parade, the first Takarazuka
+# revue, Boléro and Porgy and Bess; Oklahoma!, My Fair Lady, Hair, The Rose of Versailles at Takarazuka, Annie and
+# Shiki's Phantom of the Opera.
 # Checked against en: La bohème (1 Feb 1896, "La bohème"), Hair on Broadway (29 Apr 1968, "Hair (musical)") and
 # Annie (21 Apr 1977 and 2,377 performances, "Annie (musical)").
+# A Doll's House (21 Dec 1879) and Parade (18 May 1917) are included with the date corrected in fixes.yaml
+# (2026-10-13).
 # Overlaps: The Rite of Spring is also in the music collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
-# articles cannot confirm (dataset vs article: A Doll's House 21 Jan 1879 / premiered on 21 Dec 1879; Parade 17 May
-# 1917 / premiered on 18 May; the Fujiwara Opera's Tannhäuser 12 Jul 1947 / July 1947 only; Hōrōki 20 Oct 1961 /
-# 1961 only; Shiki's Cats 11 Nov 1983 "Japan's first long-run musical" / the article calls its tent theatre Japan's
-# first temporary theatre for musicals).
+# articles cannot confirm (dataset vs article: the Fujiwara Opera's Tannhäuser 12 Jul 1947 / July 1947 only; Hōrōki
+# 20 Oct 1961 / 1961 only; Shiki's Cats 11 Nov 1983 "Japan's first long-run musical" / the article calls its tent
+# theatre Japan's first temporary theatre for musicals).
 slug: stage
 title: 舞台芸術の歴史
-lead: 1868年のワーグナー『ニュルンベルクのマイスタージンガー』の初演から、『ラインの黄金』、『アイーダ』、『こうもり』、『カルメン』、『ペール・ギュント』、『ニーベルングの指環』の全曲初演、『白鳥の湖』、『ホフマン物語』、『ミカド』、『オテロ』、『くるみ割り人形』、『ラ・ボエーム』、『トスカ』、『桜の園』、『蝶々夫人』、『ピーター・パン』、『青い鳥』、『春の祭典』、宝塚少女歌劇の第1回公演とレビュー『モン・パリ』、『ボレロ』、『ポーギーとベス』、ブロードウェイの『オクラホマ!』『マイ・フェア・レディ』『ヘアー』、宝塚の『ベルサイユのばら』、『アニー』、劇団四季の『オペラ座の怪人』まで。オペラ、バレエ、演劇、ミュージカルの初演をたどる。
+lead: 1868年のワーグナー『ニュルンベルクのマイスタージンガー』の初演から、『ラインの黄金』、『アイーダ』、『こうもり』、『カルメン』、『ペール・ギュント』、『ニーベルングの指環』の全曲初演、『白鳥の湖』、『人形の家』、『ホフマン物語』、『ミカド』、『オテロ』、『くるみ割り人形』、『ラ・ボエーム』、『トスカ』、『桜の園』、『蝶々夫人』、『ピーター・パン』、『青い鳥』、『春の祭典』、宝塚少女歌劇の第1回公演、バレエ『パラード』、宝塚のレビュー『モン・パリ』、『ボレロ』、『ポーギーとベス』、ブロードウェイの『オクラホマ!』『マイ・フェア・レディ』『ヘアー』、宝塚の『ベルサイユのばら』、『アニー』、劇団四季の『オペラ座の怪人』まで。オペラ、バレエ、演劇、ミュージカルの初演をたどる。
 description: ワーグナーの楽劇と『カルメン』『白鳥の湖』から、プッチーニのオペラ、『春の祭典』、宝塚歌劇、ブロードウェイのミュージカルまで、舞台芸術の初演を年代順にたどる特集。
 icon: art-rite-of-spring
 entries:
@@ -27,6 +29,7 @@ entries:
   - id: 1876-02-24-eca667d2 # Peer Gynt
   - id: 1876-08-13-55a7b3ce # The Ring at the first Bayreuth Festival
   - id: 1877-03-04-5943f0cd # Swan Lake
+  - id: 1879-01-21-a2a1d4d2 # A Doll's House (21 Dec)
   - id: 1881-02-10-381897a2 # The Tales of Hoffmann
   - id: 1885-03-14-56e6caf8 # The Mikado
   - id: 1887-02-05-4aedbbaa # Otello
@@ -41,8 +44,9 @@ entries:
   - id: 1908-09-30-aff262fb # The Blue Bird
   - id: 1913-05-29-52dbb64f # The Rite of Spring
 
-  # --- Takarazuka, Boléro and Porgy (1914-1935) ---
+  # --- Takarazuka, Parade, Boléro and Porgy (1914-1935) ---
   - id: 1914-04-01-22d627f4 # Takarazuka's first performance
+  - id: 1917-05-17-9749b1eb # Parade (18 May)
   - id: 1927-09-01-44a4c8ff # Mon Paris, Takarazuka's first revue
   - id: 1928-11-22-aff33462 # Boléro
   - id: 1935-09-30-780f8240 # Porgy and Bess

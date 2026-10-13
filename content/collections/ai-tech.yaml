@@ -88,10 +88,12 @@ entries:
       - { label: "Wikipedia: Facebook", url: "https://ja.wikipedia.org/wiki/Facebook" }
     relatedIds: ["2006-07-15-ai-twitter", "2021-10-28-ai-meta"]
 
+  # YouTube: 「www.youtube.comのドメインは2005年2月14日に有効化された」, 「2005年2月15日、PayPalの従業員であった…3人によって設立」,
+  # 「2006年11月に…Googleが買収」 (it said the company was founded on the 14th; 2026-10-13)
   - id: 2005-02-14-ai-youtube
     date: "2005-02-14"
-    title: YouTube設立
-    summary: PayPal出身の3人が動画共有サイトYouTubeを設立した。「誰もが放送局になれる」時代が始まり、翌年Googleが買収。映像文化とメディアの構造を根本から変えた。
+    title: YouTubeのドメインが有効化
+    summary: 動画共有サイトYouTubeのドメインが有効化された。PayPal出身の3人による会社の設立は翌15日で、翌2006年にはGoogleが買収した。
     category: culture
     region: world
     importance: 95

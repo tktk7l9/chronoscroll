@@ -342,9 +342,12 @@
   category: sports
   svg: art-race-horse
 
+# World Wide Web: 「1991年8月6日、彼は World Wide Web プロジェクトに関する簡単な要約をalt.hypertextニュースグループに投稿した」;
+# en "Tim Berners-Lee": the first website was published on 20 December 1990, and on 6 August 1991 he "first posted, on
+# Usenet, a public invitation for collaboration with the WorldWideWeb project" (it said the first website went up that day)
 - id: 1991-08-06-eaa5612d
-  title: 世界初のWebサイトが公開される
-  summary: CERNのティム・バーナーズ＝リーが、World Wide Webの仕組みを説明する世界初のWebサイトを公開した。インターネットが研究者の道具から人類のインフラへ変わる出発点となった。
+  title: World Wide Webを外部に公開
+  summary: CERNのティム・バーナーズ＝リーが、World Wide Webプロジェクトの要約をニュースグループに投稿し、外部の人々に参加を呼びかけた。最初のWebサイトは前年12月20日に公開されていた。
   category: science
   svg: art-www
 
