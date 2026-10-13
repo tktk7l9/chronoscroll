@@ -5,11 +5,13 @@
 # The first radio broadcast in Japan (1925) and the Kohaku song contest are in the music collection, ARPANET and the
 # web services of the 2000s in the AI collection, and are not repeated.
 # Duplicates: of the two 11 Jul 2008 iPhone 3G entries the SoftBank one is used (the other writes "iphone").
+# The opening of the World Wide Web (6 Aug 1991) is included with the wording corrected in content/curated/tier2.yaml:
+# the first website went up on 20 Dec 1990, and 6 Aug 1991 was the public Usenet post (2026-10-13).
 # Left out on purpose: entries whose dataset date disagrees with the topic article
 # (dataset vs article: Matsushiro Matsunosuke's wireless experiment off Tsukiji, Dec 1897 / 1898).
 slug: telecom
 title: 通信と放送の歴史
-lead: 1870年の東京・横浜間の電信開通、ベルの電話、マルコーニの大西洋横断無線通信から、ラジオとテレビの放送開始、東京タワー、日米間の初の衛星中継、自動車電話とショルダーフォン、そして世界初のWebサイト、iモード、iPhone、5Gまで。日本放送協会の設立から地上デジタル放送への完全移行までの放送の歩みも含めて、声と映像と情報を遠くへ届ける技術の移り変わりをたどる。
+lead: 1870年の東京・横浜間の電信開通、ベルの電話、マルコーニの大西洋横断無線通信から、ラジオとテレビの放送開始、東京タワー、日米間の初の衛星中継、自動車電話とショルダーフォン、そしてWorld Wide Webの公開、iモード、iPhone、5Gまで。日本放送協会の設立から地上デジタル放送への完全移行までの放送の歩みも含めて、声と映像と情報を遠くへ届ける技術の移り変わりをたどる。
 description: 電信と電話、ラジオとテレビの放送開始から、衛星中継、携帯電話、インターネット、スマートフォン、5Gまで、通信と放送の転換点を日本と世界の出来事で年代順にたどる特集。
 icon: art-tv-broadcast
 entries:
@@ -47,7 +49,7 @@ entries:
   - id: 1985-09-02-10b4956d # NTT's "shoulder phone"
 
   # --- The internet and the mobile web ---
-  - id: 1991-08-06-eaa5612d # The first website goes online
+  - id: 1991-08-06-eaa5612d # The World Wide Web is opened to outsiders
   - id: 1996-04-01-1a3b1009 # Yahoo! JAPAN opens
   - id: 1999-02-22-33b21b72 # i-mode starts
   - id: 2003-12-01-003d59c9 # Digital terrestrial television starts in Tokyo, Osaka and Nagoya

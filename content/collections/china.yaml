@@ -2,25 +2,27 @@
 # References to existing auto-generated events only (nothing newly written). The Boxer war, Puyi's accession, the
 # Wuchang uprising, the Republic of China and Puyi's abdication; Yuan Shikai's empire, the May Fourth Movement and
 # Sun Yat-sen's death; the Xi'an incident, the Marco Polo Bridge incident and the Chongqing talks; the 228 incident
-# in Taiwan and the founding of the People's Republic; Liu Shaoqi as head of state, the Zhenbao Island clash, the
-# first satellite and the seat at the UN; Nixon in Beijing, normalisation with Japan, the Tiananmen incident of
-# 1976, the peace treaty with Japan and Deng Xiaoping in the United States; the Hong Kong declaration, Tiananmen
-# 1989, Taiwan's first direct presidential election and the Hong Kong handover; the Beijing Olympics and the Silk
-# Road Economic Belt.
-# Overlaps: the Marco Polo Bridge incident is also in the Manchurian Incident and Second World War collections; the
-# Zhenbao Island clash and Nixon's visit in the Cold War collection.
+# in Taiwan and the founding of the People's Republic; Liu Shaoqi as head of state, the first nuclear test, the
+# Zhenbao Island clash, the first satellite and the seat at the UN; Nixon in Beijing, the Lin Biao incident,
+# normalisation with Japan, the Tiananmen incident of 1976, the arrest of the Gang of Four, the peace treaty with
+# Japan and Deng Xiaoping in the United States; the Hong Kong declaration, Tiananmen 1989, Taiwan's first direct
+# presidential election and the Hong Kong handover; the Beijing Olympics and the Silk Road Economic Belt.
+# The first nuclear test (16 Oct 1964) is included with the wording corrected in fixes.yaml, and the Lin Biao
+# incident (13 Sep 1971) and the arrest of the Gang of Four (6 Oct 1976) with the date and wording corrected
+# (2026-10-13).
+# Overlaps: the first nuclear test is also in the nuclear weapons collection; the Marco Polo Bridge incident is also
+# in the Manchurian Incident and Second World War collections; the Zhenbao Island clash and Nixon's visit in the
+# Cold War collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date or
 # details the articles cannot confirm (dataset vs article: the Nanjing government 18 Apr 1927, the Long March 15 Oct
-# 1934 and the civil war 12 Jul 1946 / not dated in the articles; the first nuclear test 16 Oct 1964 「タクラマカン砂漠で」 /
-# at Lop Nur; the Cultural Revolution "begins" 10 Nov 1965 / Yao Wenyuan's article that day, which the article calls
-# its trigger in the literary world; Lin Biao 8 Sep 1971 "the failed coup and the crash" / the incident ran from 8
-# to 13 Sep and he died on the 13th; Mao's death 9 Sep 1976 "condolences from the Soviet Union and Eastern Europe
-# refused" / not in the article; the Gang of Four arrested 12 Oct 1976 "Hua Guofeng becomes premier" / arrested on 6
-# Oct, Hua made party chairman on 7 Oct; the Sichuan earthquake 12 May 2008 "Xinhua reports about 40,000 dead" / not
-# in the article; the Xi-Ma meeting 7 Nov 2015 / no topic article found).
+# 1934 and the civil war 12 Jul 1946 / not dated in the articles; the Cultural Revolution "begins" 10 Nov 1965 / Yao
+# Wenyuan's article that day, which the article calls its trigger in the literary world; Mao's death 9 Sep 1976
+# "condolences from the Soviet Union and Eastern Europe refused" / not in the article; the Sichuan earthquake 12 May
+# 2008 "Xinhua reports about 40,000 dead" / not in the article; the Xi-Ma meeting 7 Nov 2015 / no topic article
+# found).
 slug: china
 title: 中国の近現代
-lead: 1900年の義和団の乱での清の宣戦布告から、溥儀の即位、武昌新軍の蜂起、中華民国の成立と清の滅亡、袁世凱の帝政、五・四運動、孫文の死去、西安事件、盧溝橋事件、蔣介石と毛沢東の重慶交渉、台湾の二・二八事件、中華人民共和国の成立、劉少奇の国家主席選出、珍宝島事件、東方紅1号の打ち上げ、中華人民共和国の国連加盟、ニクソン大統領の訪中、日中国交正常化、四五天安門事件、日中平和友好条約、鄧小平の訪米、香港返還の合意、天安門事件、台湾初の総統直接選挙、香港返還、北京オリンピック、シルクロード経済帯構想の発表まで。清朝末期から現代までの中国と台湾の110年余りをたどる。
+lead: 1900年の義和団の乱での清の宣戦布告から、溥儀の即位、武昌新軍の蜂起、中華民国の成立と清の滅亡、袁世凱の帝政、五・四運動、孫文の死去、西安事件、盧溝橋事件、蔣介石と毛沢東の重慶交渉、台湾の二・二八事件、中華人民共和国の成立、劉少奇の国家主席選出、初の原爆実験、珍宝島事件、東方紅1号の打ち上げ、中華人民共和国の国連加盟、ニクソン大統領の訪中、林彪事件、日中国交正常化、四五天安門事件、四人組の逮捕、日中平和友好条約、鄧小平の訪米、香港返還の合意、天安門事件、台湾初の総統直接選挙、香港返還、北京オリンピック、シルクロード経済帯構想の発表まで。清朝末期から現代までの中国と台湾の110年余りをたどる。
 description: 義和団の乱と辛亥革命から、中華人民共和国の成立、日中国交正常化、天安門事件、香港返還、北京オリンピックまで、中国の近現代を年代順にたどる特集。
 icon: art-esperanto
 entries:
@@ -43,12 +45,15 @@ entries:
 
   # --- Mao's China (1959-1976) ---
   - id: 1959-04-27-3afe0682 # Liu Shaoqi becomes head of state
+  - id: 1964-10-16-972c06bd # The first nuclear test
   - id: 1969-03-02-04cd43bf # The Zhenbao Island clash
   - id: 1970-04-24-a85dedb7 # Dong Fang Hong 1
+  - id: 1971-09-08-3df88d04 # The Lin Biao incident (13 Sep)
   - id: 1971-10-25-a6cf549e # The People's Republic takes China's UN seat
   - id: 1972-02-21-f294d921 # Nixon in Beijing
   - id: 1972-09-29-2466724c # Relations with Japan normalised
   - id: 1976-04-05-6785ee75 # The Tiananmen incident of 1976
+  - id: 1976-10-12-dfe18f9a # The Gang of Four arrested (6 Oct)
 
   # --- Reform, Tiananmen and Hong Kong (1978-2013) ---
   - id: 1978-08-12-f01b26b4 # The peace treaty with Japan
