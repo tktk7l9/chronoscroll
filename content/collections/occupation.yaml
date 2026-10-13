@@ -1,24 +1,24 @@
 # Occupied Japan (collection)
 # References to existing auto-generated events only (nothing newly written). The Emperor's visit to MacArthur and
 # the GHQ; the civil liberties directive, the five reforms, the break-up of the zaibatsu, the land reform, the
-# Shinto directive, women's suffrage and the purge; the Tokyo tribunal from its charter to the executions; the
-# deposit freeze and the election of 1946; the constitution and the called-off general strike; the Dodge line and
-# the Shimoyama, Mitaka and Matsukawa incidents; the National Police Reserve, MacArthur's dismissal, the peace
-# treaty and the end of the occupation.
-# The civil liberties directive (SCAPIN-93, 4 Oct 1945) is checked against the ja article on SCAPIN.
+# Shinto directive, women's suffrage and the purge; the Tokyo tribunal from its charter through the verdict to the
+# executions; the deposit freeze and the election of 1946; the constitution and the called-off general strike; the
+# Dodge line and the Shimoyama, Mitaka and Matsukawa incidents; the National Police Reserve, MacArthur's dismissal,
+# the peace treaty and the end of the occupation.
+# The civil liberties directive (SCAPIN-93, 4 Oct 1945) is checked against the ja article on SCAPIN. The verdict of
+# the Tokyo tribunal (12 Nov 1948) is included with the wording corrected in fixes.yaml (2026-10-13).
 # Overlaps: the five reforms and the constitution are also in the constitution collection, women's suffrage and the
 # election of 1946 in the women's rights collection, the deposit freeze in the finance collection and MacArthur's
 # demand for a police reserve in the Cold War collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
 # articles cannot confirm (dataset vs article: MacArthur lands at Atsugi 30 Aug 1945 "and sets up the US Army
 # headquarters in the Yokohama Customs building" / not in the articles; the Emperor's rescript of 1 Jan 1946 "the
-# first rescript with voiced marks and punctuation" / not in the articles; the verdict of the Tokyo tribunal 12 Nov
-# 1948 "3 dismissed" / two defendants died during the trial and one was found unfit to stand trial; the single rate
-# of 360 yen 25 Apr 1949 / not dated in the articles; the Shoup report "submitted" 26 Aug 1949 / the report is dated
-# 27 Aug (Shoup left Japan on the 26th)).
+# first rescript with voiced marks and punctuation" / not in the articles; the single rate of 360 yen 25 Apr 1949 /
+# not dated in the articles; the Shoup report "submitted" 26 Aug 1949 / the report is dated 27 Aug (Shoup left Japan
+# on the 26th)).
 slug: occupation
 title: 占領下の日本
-lead: 1945年9月の昭和天皇とマッカーサーの会見と連合国軍最高司令官総司令部（GHQ）の設置から、五大改革の指令、財閥解体・農地改革・神道指令・公職追放、女性参政権と婦人議員39名が当選した総選挙、極東国際軍事裁判の開廷とA級戦犯7人の処刑、日本国憲法の公布、二・一ゼネストの中止、ドッジ・ライン、下山・三鷹・松川事件、警察予備隊の発足、マッカーサーの解任、平和条約の締結と発効による主権回復まで。預金封鎖も含めて、占領下の日本の7年近くをたどる。
+lead: 1945年9月の昭和天皇とマッカーサーの会見と連合国軍最高司令官総司令部（GHQ）の設置から、五大改革の指令、財閥解体・農地改革・神道指令・公職追放、女性参政権と婦人議員39名が当選した総選挙、極東国際軍事裁判の開廷・判決とA級戦犯7人の処刑、日本国憲法の公布、二・一ゼネストの中止、ドッジ・ライン、下山・三鷹・松川事件、警察予備隊の発足、マッカーサーの解任、平和条約の締結と発効による主権回復まで。預金封鎖も含めて、占領下の日本の7年近くをたどる。
 description: 昭和天皇とマッカーサーの会見とGHQの設置から、財閥解体・農地改革、女性参政権、東京裁判、日本国憲法の公布、ドッジ・ライン、警察予備隊、平和条約の発効と主権回復まで、占領下の日本を年代順にたどる特集。
 icon: art-shusen
 entries:
@@ -40,6 +40,7 @@ entries:
   - id: 1946-05-03-2e3dab54 # The Tokyo tribunal opens
   - id: 1946-11-03-2065018b # The constitution is promulgated
   - id: 1947-01-31-32c27d0b # MacArthur calls off the general strike
+  - id: 1948-11-12-03ff59dc # The Tokyo tribunal's verdict
   - id: 1948-12-23-a5303cc7 # Seven class-A war criminals hanged
 
   # --- The Dodge line and the railway incidents (1949) ---

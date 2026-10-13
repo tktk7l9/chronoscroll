@@ -32,6 +32,8 @@
 		font-family: "Hiragino Mincho ProN", serif;
 		font-size: 78px; line-height: 1.28; letter-spacing: 0.01em;
 	}
+	/* Long titles: a slightly smaller single line, or two balanced lines broken at phrase boundaries (see fitTitle) */
+	h1.balanced { text-wrap: balance; word-break: auto-phrase; }
 	p.lead {
 		font-size: 27px; margin-top: 26px; color: #443f37; line-height: 1.72;
 		display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
@@ -68,12 +70,48 @@
 		<span class="url" id="url"></span>
 	</div>
 <script>
+// Keep the title readable when it does not fit on one line at the default 78px:
+// shrink it down to 54px on a single line first; if it still overflows, use two balanced lines at the largest size
+// that fits them. Titles that already fit keep the default styles (no inline styles are left behind).
+function fitTitle() {
+	const h1 = document.getElementById('title');
+	const row = document.querySelector('.body');
+	const avail = row.clientWidth - document.querySelector('.icon').offsetWidth - parseFloat(getComputedStyle(row).columnGap);
+	const MAX = 78;
+	const MIN_ONE_LINE = 54;
+	const MIN_TWO_LINES = 48;
+	h1.style.whiteSpace = 'nowrap';
+	let size = MAX;
+	while (h1.scrollWidth > avail && size > MIN_ONE_LINE) {
+		size -= 1;
+		h1.style.fontSize = size + 'px';
+	}
+	if (h1.scrollWidth <= avail) {
+		h1.style.whiteSpace = '';
+		if (size === MAX) h1.style.fontSize = '';
+		document.body.dataset.fit = size === MAX ? 'none' : 'shrink';
+		return;
+	}
+	h1.style.whiteSpace = '';
+	h1.classList.add('balanced');
+	size = MAX;
+	h1.style.fontSize = size + 'px';
+	const lines = () => Math.round(h1.offsetHeight / parseFloat(getComputedStyle(h1).lineHeight));
+	while (lines() > 2 && size > MIN_TWO_LINES) {
+		size -= 1;
+		h1.style.fontSize = size + 'px';
+	}
+	if (size === MAX) h1.style.fontSize = '';
+	document.body.dataset.fit = 'balance';
+}
+
 (async () => {
 	const slug = new URLSearchParams(location.search).get('slug');
 	const { collections } = await (await fetch('/data/collections.json')).json();
 	const c = collections.find((x) => x.slug === slug);
 	if (!c) { document.getElementById('title').textContent = 'not found: ' + slug; return; }
 	document.getElementById('title').textContent = c.title;
+	fitTitle();
 	document.getElementById('lead').textContent = c.lead;
 	document.getElementById('count').textContent = '全' + c.count + '件';
 	document.getElementById('span').textContent = c.fromDate.slice(0, 4) + '年 〜 ' + c.toDate.slice(0, 4) + '年';
