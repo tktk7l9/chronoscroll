@@ -1,0 +1,59 @@
+# The Soviet Union (collection)
+# References to existing auto-generated events only (nothing newly written). Bloody Sunday and the October
+# Manifesto; the abdication of Nicholas II, the April Theses and the October Revolution; the attempt on Lenin,
+# Stalin made general secretary and the founding of the Soviet Union; the Kirov murder, the Stalin constitution, the
+# purge of Tukhachevsky and the trial of Bukharin; the first Soviet atomic test and Stalin's death; Khrushchev's
+# secret speech, Sputnik, Khrushchev as premier and Gagarin; Afghanistan, Chernenko's death and Gorbachev;
+# Chernobyl, Gorbachev in Japan, the August coup, the Belovezha Accords and the end of the Soviet Union.
+# Checked against en: the April Theses (17 Apr 1917, "April Theses"), Sputnik's radio beeps and the shock in the
+# West ("Sputnik 1", "Sputnik crisis") and Chernobyl as the most destructive nuclear disaster ("Chernobyl
+# disaster"). Dates before 1918 are the Gregorian dates the articles give next to the Julian ones.
+# Overlaps: the first atomic test is also in the nuclear weapons collection; the secret speech, Afghanistan,
+# Gorbachev's election, the August coup and the end of the Soviet Union in the Cold War collection; Sputnik and
+# Gagarin in the space collection; Chernobyl in the nuclear power collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the February Revolution "breaks out" 12 Mar 1917 / the article dates
+# it 8-12 Mar; the execution of the Romanovs 17 Jul 1918 "Nicholas and five family members" / the article names his
+# wife and five children; Trotsky expelled 31 Jan 1929 / the article has the year only; Brezhnev's death 10 Nov 1982
+# "Andropov succeeds" and Andropov's death 9 Feb 1984 "Chernenko is chosen" / they took office on 12 Nov 1982 and 13
+# Feb 1984; Gorbachev made president 15 Mar 1990 "Lithuania's declaration declared void" and the rehabilitation
+# decree of 13 Aug 1990 / not in the article).
+slug: soviet-union
+title: ソビエト連邦の興亡
+lead: 1905年の血の日曜日事件と十月宣言から、ニコライ2世の退位、レーニンの四月テーゼ、十月革命、レーニンの銃撃、スターリンの書記長選出、ソビエト社会主義共和国連邦の成立、キーロフ暗殺事件、スターリン憲法、トゥハチェフスキーの粛清とモスクワ裁判、初の核実験、スターリンの死、フルシチョフによるスターリン批判、スプートニク1号とガガーリンの宇宙飛行、アフガニスタン侵攻、ゴルバチョフの書記長就任、チェルノブイリ原子力発電所の事故、8月クーデター、独立国家共同体の創立宣言、ソビエト連邦の崩壊まで。革命から崩壊までのソ連の歩みをたどる。
+description: 血の日曜日事件と十月革命から、ソビエト連邦の成立、スターリンの大粛清、スプートニク1号、ゴルバチョフの登場、チェルノブイリ、8月クーデター、ソビエト連邦の崩壊まで、ソ連の興亡を年代順にたどる特集。
+icon: art-soviet-dissolution
+entries:
+  # --- Revolution (1905-1918) ---
+  - id: 1905-01-22-0abf9376 # Bloody Sunday in St Petersburg
+  - id: 1905-10-30-6272857d # The October Manifesto
+  - id: 1917-03-15-691a3f28 # Nicholas II abdicates
+  - id: 1917-04-17-1b140b05 # Lenin's April Theses
+  - id: 1917-11-07-40b4bf55 # The October Revolution
+  - id: 1918-08-30-4eb00b05 # Lenin shot
+
+  # --- Stalin (1922-1953) ---
+  - id: 1922-04-03-7fa3d675 # Stalin becomes general secretary
+  - id: 1922-12-30-5783c0df # The Soviet Union is founded
+  - id: 1934-12-01-8fa89511 # Kirov murdered
+  - id: 1936-12-05-c2e7e027 # The Stalin constitution
+  - id: 1937-06-11-d6d1f4ba # Tukhachevsky purged
+  - id: 1938-03-02-fce47169 # The trial of Bukharin and twenty others
+  - id: 1949-08-29-fcb3e9cf # The first Soviet atomic test
+  - id: 1953-03-05-408432b0 # Stalin dies
+
+  # --- Khrushchev to Chernenko (1956-1985) ---
+  - id: 1956-02-25-de02fe8b # Khrushchev denounces Stalin
+  - id: 1957-10-04-e3fdcc7a # Sputnik 1
+  - id: 1958-03-27-0f1ff23f # Khrushchev becomes premier
+  - id: 1961-04-12-c4e35c8a # Gagarin orbits the Earth
+  - id: 1979-12-24-92dbfeaf # The invasion of Afghanistan
+  - id: 1985-03-10-6930e0d1 # Chernenko dies
+
+  # --- Gorbachev and the end (1985-1991) ---
+  - id: 1985-03-11-4abb72cf # Gorbachev becomes general secretary
+  - id: 1986-04-26-e47c5ef2 # Chernobyl
+  - id: 1991-04-16-6e19e090 # Gorbachev visits Japan
+  - id: 1991-08-19-7b887f94 # The August coup
+  - id: 1991-12-08-38045dbd # The Belovezha Accords found the CIS
+  - id: 1991-12-25-97cf6e8d # The Soviet Union comes to an end

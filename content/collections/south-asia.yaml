@@ -1,0 +1,55 @@
+# India and South Asia (collection)
+# References to existing auto-generated events only (nothing newly written). Queen Victoria as Empress of India, the
+# partition of Bengal and the Muslim League; the Congress's declaration of independence, the Salt March and Bose's
+# Free India government; independence and partition, Gandhi's assassination, the constitution and the first Asian
+# Games; the Bengali language movement, Bangladesh's declaration of independence and the third India-Pakistan war;
+# India's nuclear tests of 1974 and 1998 and Pakistan's of 1998; the assassinations of Indira Gandhi, Rajiv Gandhi
+# and Benazir Bhutto, Bhutto's first premiership, the Bhopal disaster and the Mumbai attacks.
+# Checked against en: the partition of Bengal (16 Oct 1905, "Partition of Bengal (1905)"), the Muslim League (30 Dec
+# 1906, "All-India Muslim League") and the declaration of independence (26 Jan 1930, "Purna Swaraj").
+# Overlaps: the Salt March is also in the human rights collection, the nuclear tests of 1974 and of Pakistan in the
+# nuclear weapons collection, Bhutto's premiership in the women's rights collection and the Mumbai attacks in the
+# terrorism collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the Calcutta session of 28 Dec 1906 / not dated in the articles; the
+# Rowlatt Act 21 Mar 1919 "enacted in Britain" / passed in Delhi by the Imperial Legislative Council; Gandhi's
+# satyagraha of 6 Apr 1919 / not dated in the articles; Amritsar 13 Apr 1919 "hundreds of casualties" / more than
+# 1,500 in the article; Nehru's death 27 May 1964 "Nanda becomes the second prime minister" / Nanda was acting prime
+# minister; the second India-Pakistan war 1 Sep 1965 / the article dates the war from August; Manmohan Singh's
+# cabinet 13 May 2004 / he took office on 22 May; the banknote ban 9 Nov 2016 and the UN population announcement 19
+# Apr 2023 / not dated in the articles).
+slug: south-asia
+title: インドと南アジア
+lead: 1877年のヴィクトリア女王のインド女帝即位から、ベンガル分割令、インド・ムスリム連盟の創立、インド国民会議の独立宣言、ガンディーの塩の行進、自由インド仮政府、インドとパキスタンの分離独立、ガンディーの暗殺、インド憲法の施行、第1回アジア競技大会、ベンガル語の公用語化を求める運動、バングラデシュの建国宣言と第三次印パ戦争、インドとパキスタンの核実験、インディラ・ガンディーとラジーヴ・ガンディーの暗殺、ボパール化学工場事故、ベーナズィール・ブットーの首相就任と暗殺、ムンバイ同時多発テロまで。インド・パキスタン・バングラデシュの130年余りをたどる。
+description: ヴィクトリア女王のインド女帝即位から、ガンディーの塩の行進、インドとパキスタンの分離独立、バングラデシュの建国、印パの核実験、ムンバイ同時多発テロまで、インドと南アジアの歩みを年代順にたどる特集。
+icon: art-salt-march
+entries:
+  # --- British India and the independence movement (1877-1943) ---
+  - id: 1877-01-01-d869db55 # Queen Victoria becomes Empress of India
+  - id: 1905-10-16-374c9643 # The partition of Bengal
+  - id: 1906-12-30-7e6eec63 # The All-India Muslim League is founded
+  - id: 1930-01-26-4ff72ded # The Indian National Congress declares independence
+  - id: 1930-03-12-1a8f22f9 # Gandhi's Salt March
+  - id: 1943-10-21-e779ad29 # Bose proclaims the Provisional Government of Free India
+
+  # --- Independence and partition (1947-1952) ---
+  - id: 1947-08-15-4df141a2 # India and Pakistan become independent
+  - id: 1948-01-30-4bf066e5 # Gandhi assassinated
+  - id: 1950-01-26-a44d2f68 # India's constitution comes into force
+  - id: 1951-03-04-78dc2a27 # The first Asian Games in New Delhi
+  - id: 1952-02-21-50e8494f # The Bengali language movement
+
+  # --- Bangladesh and the bomb (1971-1991) ---
+  - id: 1971-03-26-073bcbd9 # Bangladesh declares independence
+  - id: 1971-12-03-0f9294a0 # The third India-Pakistan war
+  - id: 1974-05-18-2b570977 # India's first nuclear test
+  - id: 1984-10-31-0be4699d # Indira Gandhi assassinated
+  - id: 1984-12-03-998318c6 # The Bhopal disaster
+  - id: 1988-12-02-7feeeaa7 # Benazir Bhutto becomes prime minister
+  - id: 1991-05-21-cca16a2c # Rajiv Gandhi assassinated
+
+  # --- Nuclear tests to the Mumbai attacks (1998-2008) ---
+  - id: 1998-05-11-68f22ceb # India's nuclear tests of 1998
+  - id: 1998-05-28-f21258b7 # Pakistan's first nuclear tests
+  - id: 2007-12-27-29962902 # Benazir Bhutto assassinated
+  - id: 2008-11-26-d138bb50 # The Mumbai attacks
