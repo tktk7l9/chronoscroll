@@ -276,9 +276,11 @@
   category: economy
   region: both
 
+# The spread follows en "Chernobyl disaster": "dispersed by wind over Ukraine, Belarus, Russia, and much of Europe"
+# (it said 「ヨーロッパ全域」, 2026-10-13)
 - id: 1986-04-26-e47c5ef2
   title: チェルノブイリ原発事故
-  summary: ソ連（現ウクライナ）のチェルノブイリ原子力発電所4号炉が試験運転中に爆発した。史上最悪の原子力事故となり、放射性物質はヨーロッパ全域へ拡散した。
+  summary: ソ連（現ウクライナ）のチェルノブイリ原子力発電所4号炉が試験運転中に爆発した。史上最悪の原子力事故となり、放射性物質はヨーロッパの広い範囲へ拡散した。
   importance: 100
   svg: art-chernobyl
   category: disaster
