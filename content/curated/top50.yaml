@@ -58,9 +58,13 @@
   category: war
   region: both
 
+# en "Lumière brothers": "Their first commercial public screening on 28 December 1895 ... has traditionally been regarded
+# as the birth of cinema", while the Eidoloscope (20 May 1895, Broadway) and the Skladanowskys (1 November 1895, Berlin)
+# had shown films to a paying public before; シネマトグラフ: 「最初の商業上映が行われ、一般的にはこの日が「映画の誕生」と
+# 見なされている」 (it said 「世界初の有料映画上映」 and called film 「20世紀最大の娯楽と芸術」, 2026-10-13)
 - id: 1895-12-28-eab508c7
-  title: リュミエール兄弟が世界初の映画興行
-  summary: パリのグラン・カフェで、リュミエール兄弟がシネマトグラフによる世界初の有料映画上映を行った。「映画」という20世紀最大の娯楽と芸術の歴史が、ここから始まった。
+  title: リュミエール兄弟がシネマトグラフの商業上映
+  summary: パリのグラン・カフェで、リュミエール兄弟がシネマトグラフの最初の商業上映を行った。一般に、この日が「映画の誕生」と見なされている。
   importance: 100
   svg: art-cinema-birth
   category: culture
@@ -130,9 +134,12 @@
   category: disaster
   region: japan
 
+# チャールズ・リンドバーグ: 「パリのル・ブルジェ空港に着陸、大西洋単独無着陸飛行に初めて成功した。この時、リンドバーグは
+# 25歳であった。飛行距離は5,810kmで飛行時間は33時間半」; the Atlantic had already been flown nonstop by Alcock and Brown
+# in 1919 (same article), so the closing line 「大西洋を「飛んで渡れる海」に変えた」 was dropped (2026-10-13)
 - id: 1927-05-21-b4e70bb6
   title: リンドバーグが大西洋単独無着陸横断
-  summary: スピリット・オブ・セントルイス号でニューヨークからパリまで約5,800kmを33時間半で飛行。世界初の大西洋単独無着陸横断は、大西洋を「飛んで渡れる海」に変えた。
+  summary: チャールズ・リンドバーグがスピリット・オブ・セントルイス号でニューヨークからパリまで約5,800kmを33時間半で飛び、大西洋の単独無着陸横断に初めて成功した。パリのル・ブルジェ空港に降り立ったとき、リンドバーグは25歳だった。
   importance: 100
   svg: art-lindbergh
   category: science

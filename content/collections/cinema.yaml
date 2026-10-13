@@ -1,42 +1,55 @@
-# 映画の歴史（特集）
-# 全て既存の自動生成イベントへの参照（新規執筆なし）。
-# 「カンヌ」「映画」はG20・宝石強盗・俳優の訃報など主題違いのヒットが多いため、
-# 作品史・表現史のマイルストーンに絞っている。
+# History of cinema (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The keywords カンヌ and 映画 also find G20 summits, jewel robberies and actors' obituaries, so the entries are limited
+# to milestones of films and filmmaking.
+# Audited against the topic articles (2026-10-13): 23 entries checked, 8 corrected (7 in fixes.yaml, 1 in
+# top50.yaml), none dropped. Corrected: Roundhay Garden Scene, now 「現存する最古の映画とされる」 rather than the first film (en
+# "Roundhay Garden Scene"); the Lumière screening, their first commercial one rather than the first paid one (en
+# "Lumière brothers": the Eidoloscope and the Skladanowskys had shown films to paying audiences earlier in 1895);
+# The Birth of a Nation, the first non-serial American 12-reel film, not the first American feature (en "Feature
+# film"); the Academy, founded on 11 May (ja and en; 4 May was the filing of the articles of incorporation);
+# Kagemusha's Palme d'Or, shared with All That Jazz (the line called it グランプリ); Kurosawa's honorary Academy Award
+# (the line said 特別名誉賞); Okuribito, the first Japanese winner since 宮本武蔵 at the 28th Academy Awards in 1956 (the
+# line said 1955 and 54 years); Kurosawa Kiyoshi's Silver Lion, the first for a Japanese director since Kitano in
+# 2003 (the line had Mizoguchi winning in 1952, a year 銀獅子賞 does not list for him).
+# Dates checked against the festivals: Mifune's Best Actor award on 3 Sep 1961 and Kagemusha's Palme d'Or on 23 May
+# 1980 fall on the closing days of the 22nd Venice (20 Aug - 3 Sep) and 33rd Cannes (9-23 May) festivals. The lead
+# and description now speak of the oldest surviving film instead of the first filming.
 slug: cinema
 title: 映画の歴史
-lead: 1888年の最初の撮影から、リュミエール兄弟の興行、トリック映画、総天然色、ゴジラ、そして日本映画が世界の賞を取るまで。
-description: 世界初の映画撮影からアカデミー賞・カンヌ・ヴェネツィアでの日本映画の受賞まで、映画という表現の百三十年を年代順にたどる特集。
+lead: 1888年に撮影された現存最古の映画から、リュミエール兄弟の興行、トリック映画、総天然色、ゴジラ、そして日本映画が世界の賞を取るまで。
+description: 現存最古の映画からアカデミー賞・カンヌ・ヴェネツィアでの日本映画の受賞まで、映画という表現の百三十年あまりを年代順にたどる特集。
 icon: art-cinema-birth
 entries:
-  # --- 発明と最初の物語 ---
-  - id: 1888-10-14-99100333 # ル・プランスが世界初の映画を撮影
-  - id: 1895-12-28-eab508c7 # リュミエール兄弟が世界初の映画興行
-  - id: 1902-09-01-c04cf330 # 『月世界旅行』公開（世界初のSF映画）
-  - id: 1915-02-08-3aa3be7a # 『國民の創生』公開（アメリカ映画最初の長編）
-  - id: 1927-05-04-ee5ecc81 # 米国映画芸術科学アカデミー創立
+  # --- Invention and the first stories ---
+  - id: 1888-10-14-99100333 # Le Prince films Roundhay Garden Scene, the oldest surviving film
+  - id: 1895-12-28-eab508c7 # The Lumiere brothers' first commercial screening
+  - id: 1902-09-01-c04cf330 # A Trip to the Moon, often called the first science-fiction film
+  - id: 1915-02-08-3aa3be7a # The Birth of a Nation, the first non-serial American 12-reel film
+  - id: 1927-05-04-ee5ecc81 # The Academy of Motion Picture Arts and Sciences is founded (dated 11 May in fixes.yaml)
 
-  # --- ハリウッド黄金期 ---
-  - id: 1939-08-15-6206248f # 映画「オズの魔法使」プレミア上映
-  - id: 1939-12-15-e00ea240 # 『風と共に去りぬ』封切り
-  - id: 1940-02-29-166cde3f # ハティ・マクダニエル、黒人初のアカデミー賞受賞
+  # --- Hollywood's golden age ---
+  - id: 1939-08-15-6206248f # The Wizard of Oz premieres in Hollywood
+  - id: 1939-12-15-e00ea240 # Gone with the Wind opens
+  - id: 1940-02-29-166cde3f # Hattie McDaniel, the first Black Academy Award winner
 
-  # --- 戦後日本と世界の観客 ---
-  - id: 1951-03-21-e94b81fb # 日本初の総天然色映画『カルメン故郷に帰る』
-  - id: 1954-11-03-6f3ec63d # 東宝映画「ゴジラ」公開
-  - id: 1960-03-30-7361ebcb # 「ベン・ハー」日本公開、日本映画史上初の天覧上映
-  - id: 1961-09-03-3f5e82d7 # 三船敏郎、ヴェネツィアで最優秀男優賞
+  # --- Postwar Japan and audiences worldwide ---
+  - id: 1951-03-21-e94b81fb # Carmen Comes Home, Japan's first colour feature
+  - id: 1954-11-03-6f3ec63d # Godzilla opens
+  - id: 1960-03-30-7361ebcb # Ben-Hur's charity screening, the first film screening attended by the Emperor
+  - id: 1961-09-03-3f5e82d7 # Toshiro Mifune wins Best Actor at Venice
 
-  # --- ブロックバスターの時代 ---
-  - id: 1973-07-20-8d2830ce # ブルース・リー死去
-  - id: 1980-05-23-22b6158c # 「影武者」がカンヌでグランプリ
-  - id: 1982-12-04-32f81367 # 『E.T.』日本公開
-  - id: 1985-07-03-3998ec48 # 『バック・トゥ・ザ・フューチャー』劇場公開
-  - id: 1990-03-26-bf82bee5 # 黒澤明、米アカデミー賞特別名誉賞
+  # --- The blockbuster era ---
+  - id: 1973-07-20-8d2830ce # Bruce Lee dies
+  - id: 1980-05-23-22b6158c # Kagemusha shares the Palme d'Or
+  - id: 1982-12-04-32f81367 # E.T. opens in Japan
+  - id: 1985-07-03-3998ec48 # Back to the Future opens
+  - id: 1990-03-26-bf82bee5 # Kurosawa receives an honorary Academy Award
 
-  # --- 日本映画が世界の賞を取る ---
-  - id: 1997-05-18-80ed8dfa # 『うなぎ』がカンヌでパルムドール
-  - id: 1997-07-12-f7a4c709 # 「もののけ姫」劇場公開
-  - id: 1998-10-01-5a6a40de # 黒澤明に国民栄誉賞
-  - id: 2009-02-22-666e228b # 『おくりびと』がアカデミー賞外国語映画賞
-  - id: 2020-09-12-cc3679fc # 黒沢清『スパイの妻』がヴェネツィアで銀獅子賞
-  - id: 2022-02-08-55a04afb # 『ドライブ・マイ・カー』がアカデミー作品賞にノミネート
+  # --- Japanese films win the world's prizes ---
+  - id: 1997-05-18-80ed8dfa # The Eel wins the Palme d'Or
+  - id: 1997-07-12-f7a4c709 # Princess Mononoke opens
+  - id: 1998-10-01-5a6a40de # Kurosawa receives the People's Honour Award
+  - id: 2009-02-22-666e228b # Departures wins the Academy Award for Best Foreign Language Film
+  - id: 2020-09-12-cc3679fc # Kurosawa Kiyoshi wins the Silver Lion for Wife of a Spy
+  - id: 2022-02-08-55a04afb # Drive My Car is nominated for Best Picture
