@@ -1,0 +1,62 @@
+# History of astronomy (collection)
+# References to existing auto-generated events only (nothing newly written). Helium in the solar spectrum, the moons
+# of Mars, the Great Comet of 1882 and Holmes's comet; Tunguska, the eclipse of 1919 and Hubble's galaxies; Pluto,
+# the Kasamatsu and Sikhote-Alin meteorites, Miranda and Nereid; Ikeya-Seki, the Arecibo message, the rings of
+# Uranus and the Wow! signal; SN 1987A, the Hubble Space Telescope, Shoemaker-Levy 9 and 51 Pegasi b; Pluto
+# reclassified, the annular eclipse of 2012, Chelyabinsk and comet ISON; gravitational waves, the American eclipse
+# of 2017, the first image of a black hole and the James Webb Space Telescope.
+# Checked against en: the Arecibo message (16 Nov 1974, "Arecibo message"), the announcement of gravitational waves
+# by LIGO and Virgo (11 Feb 2016, "First observation of gravitational waves") and the eight telescopes behind the
+# black hole image ("Event Horizon Telescope").
+# Overlaps: helium, the discovery of Pluto, SN 1987A, 51 Pegasi b, gravitational waves and the black hole image are
+# also in the science collection; the Hubble and James Webb telescopes in the space collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date or
+# details the articles cannot confirm (dataset vs article: the eclipse of 19 Aug 1887 「白河日食」「東京でも99％」 / not in the
+# article; Halley's comet 19 May 1910 「欧米では18日」 / the articles give 19 May only; Honda's comet 14 Nov 1947 /
+# discovered 13 Nov; Palomar completed 3 Jun 1948 / 1948 only; the eclipse of 21 Jul 1963 "from Daisetsuzan through
+# Kamchatka to the Bering Sea" / the article has Hokkaido, the Kurils, Alaska, Canada and Maine; the eclipse of 22
+# Jul 2009 "the Tokara Islands, where the totality was to be the longest on an inhabited island" / not in the
+# article; TRAPPIST-1 22 Feb 2017 「39光年」 / about 40.5 light years; comet Borisov 28 Dec 2019 / not dated in the
+# article).
+slug: astronomy
+title: 天文学の歴史
+lead: 1868年の日食観測で見つかったヘリウムの輝線から、火星の衛星ダイモスとフォボスの発見、1882年の大彗星、ホームズ彗星、ツングースカ大爆発、1919年の日食、ハッブルによる系外銀河の発見、冥王星の発見、笠松隕石とシホテアリニ隕石、天王星の衛星ミランダと海王星の衛星ネレイド、池谷・関彗星、アレシボ・メッセージ、天王星の環、Wow! シグナル、超新星SN 1987A、ハッブル宇宙望遠鏡の打ち上げ、シューメーカー・レヴィ第9彗星の木星衝突、初の太陽系外惑星、冥王星の準惑星への分類、2012年の金環日食、チェリャビンスク州の隕石落下、アイソン彗星、重力波の直接検出、2017年のアメリカの皆既日食、ブラックホールの撮影、ジェイムズ・ウェッブ宇宙望遠鏡の打ち上げまで。日食や彗星、隕石から宇宙望遠鏡まで、天文学の150年余りをたどる。
+description: ヘリウムの輝線と火星の衛星の発見から、冥王星の発見、シューメーカー・レヴィ第9彗星、初の太陽系外惑星、重力波、ブラックホールの撮影まで、天文学の発見と天体現象を年代順にたどる特集。
+icon: art-comet-jupiter
+entries:
+  # --- Helium, the moons of Mars and great comets (1868-1892) ---
+  - id: 1868-08-18-35a0ba94 # Janssen sees the helium line during an eclipse
+  - id: 1877-08-12-a2db2f74 # Deimos discovered
+  - id: 1877-08-18-89f6b930 # Phobos discovered
+  - id: 1882-09-17-f79e9b88 # The Great Comet of 1882 at perihelion
+  - id: 1892-11-06-ee5b4241 # Holmes's comet discovered
+
+  # --- Tunguska to Nereid (1908-1949) ---
+  - id: 1908-06-30-7d3d8da0 # The Tunguska event
+  - id: 1919-05-29-2c823b83 # The eclipse that bent starlight
+  - id: 1924-12-30-9f7e381b # Hubble announces galaxies beyond our own
+  - id: 1930-02-18-a5b1740c # Tombaugh discovers Pluto
+  - id: 1938-03-31-a7e91e6c # The Kasamatsu meteorite
+  - id: 1947-02-12-ec803ab0 # The Sikhote-Alin meteorite
+  - id: 1948-02-16-e66d2f42 # Miranda discovered
+  - id: 1949-05-01-e36183ed # Nereid discovered
+
+  # --- Comets, signals and a supernova (1965-1995) ---
+  - id: 1965-09-18-269580f0 # Comet Ikeya-Seki
+  - id: 1974-11-16-6536dbfa # The Arecibo message
+  - id: 1977-03-10-21943fe5 # The rings of Uranus
+  - id: 1977-08-15-78576d6a # The Wow! signal
+  - id: 1987-02-23-c45d4790 # Supernova 1987A
+  - id: 1990-04-24-61b5ae07 # The Hubble Space Telescope is launched
+  - id: 1994-07-16-96c824c2 # Shoemaker-Levy 9 hits Jupiter
+  - id: 1995-10-06-01cadbdc # 51 Pegasi b
+
+  # --- Pluto reclassified to the James Webb Space Telescope (2006-2021) ---
+  - id: 2006-08-24-c6f50b38 # Pluto becomes a dwarf planet
+  - id: 2012-05-20-765d44bf # The annular eclipse of 2012
+  - id: 2013-02-15-9cbbffca # The Chelyabinsk meteor
+  - id: 2013-11-28-97e551ad # Comet ISON at perihelion
+  - id: 2016-02-11-962487c0 # Gravitational waves detected
+  - id: 2017-08-21-e2d61a18 # The total eclipse across the United States
+  - id: 2019-04-10-443a559a # The first image of a black hole
+  - id: 2021-12-25-304d1f83 # The James Webb Space Telescope is launched
