@@ -1,0 +1,59 @@
+# Germany (collection)
+# References to existing auto-generated events only (nothing newly written). The proclamation of the German Empire,
+# the Year of the Three Emperors and Bismarck's dismissal; the Weimar constitution, the Beer Hall Putsch and Mein
+# Kampf; Hitler's chancellorship, the Night of the Long Knives, the Nuremberg Laws, the Anschluss and the invasion
+# of Poland; Hitler's suicide and the Nuremberg trials; the Berlin blockade, the western zones merged and the
+# founding of East Germany; the uprising of 1953, the Berlin Wall, the Erfurt summit, both Germanys joining the UN
+# and Brandt's resignation; Honecker's fall, the fall of the Wall, the free election in the East, the unification
+# treaty and reunification; Schröder and Merkel.
+# Checked against en: the Year of the Three Emperors (1888, "Year of the Three Emperors").
+# Overlaps: the Nuremberg Laws are also in the human rights collection; the invasion of Poland and Hitler's suicide
+# in the Second World War collection; the Berlin blockade, the founding of East Germany, the Berlin Wall, the Erfurt
+# summit, the fall of the Wall and reunification in the Cold War collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Wilhelm II "abdicates and flees to the Netherlands" 10 Nov 1918 / his
+# reign ended on 9 Nov and he signed the abdication on 28 Nov, the flight is not dated; the Enabling Act passed 24
+# Mar 1933 / passed on 23 Mar; Kristallnacht 9 Nov 1938 "the persecution of the Jews begins" / the article describes
+# an anti-Jewish riot, and the persecution had begun earlier (the Nuremberg Laws of 1935); West Germany 5 May 1955
+# "full sovereignty restored" / the article has German sovereignty restricted until 1991).
+slug: germany
+title: ドイツの近現代
+lead: 1871年のドイツ帝国の成立から、三皇帝年、ビスマルクの解任、ヴァイマル憲法、ミュンヘン一揆、『我が闘争』、ヒトラーの首相就任、長いナイフの夜、ニュルンベルク法、オーストリア併合、ポーランド侵攻、ヒトラーの自殺、ニュルンベルク裁判、ベルリン封鎖、西側3占領地域の統合と東ドイツの成立、東ベルリンの6月17日事件、ベルリンの壁、初の東西ドイツ首脳会談、東西ドイツの国連加盟、ブラントの辞任、ホーネッカーの失脚、ベルリンの壁崩壊、東ドイツ初の自由選挙、ドイツ再統一条約とドイツ再統一、シュレーダー政権の発足、メルケルの首相就任まで。帝国から分断、再統一に至るドイツの130年余りをたどる。
+description: ドイツ帝国の成立から、ヴァイマル憲法、ヒトラーの首相就任とナチス・ドイツ、東西分裂とベルリンの壁、壁の崩壊とドイツ再統一、メルケルの首相就任まで、ドイツの近現代を年代順にたどる特集。
+icon: art-cold-war-end
+entries:
+  # --- The Empire (1871-1890) ---
+  - id: 1871-01-18-b1346c03 # The German Empire is proclaimed at Versailles
+  - id: 1888-06-15-9355c9e0 # The Year of the Three Emperors
+  - id: 1890-03-20-2c124546 # Wilhelm II dismisses Bismarck
+
+  # --- Weimar and the Nazi era (1919-1945) ---
+  - id: 1919-08-11-7fa72c74 # The Weimar constitution
+  - id: 1923-11-08-b22b53e2 # The Beer Hall Putsch
+  - id: 1925-07-18-e814e3ef # Mein Kampf, volume 1
+  - id: 1933-01-30-d1b60306 # Hitler becomes chancellor
+  - id: 1934-06-30-df79806c # The Night of the Long Knives
+  - id: 1935-09-15-ef312dd4 # The Nuremberg Laws
+  - id: 1938-03-13-713c6a72 # The Anschluss
+  - id: 1939-09-01-7583d835 # The invasion of Poland
+  - id: 1945-04-30-ccc41518 # Hitler's suicide
+  - id: 1945-11-20-57b46a56 # The Nuremberg trials open
+
+  # --- Division (1948-1974) ---
+  - id: 1948-06-24-1730ad51 # The Berlin blockade
+  - id: 1949-05-23-76d6f678 # The western zones are merged
+  - id: 1949-10-07-0ef08698 # East Germany is founded
+  - id: 1953-06-17-f239e056 # The uprising of 17 June
+  - id: 1961-08-13-301eef4a # The Berlin Wall
+  - id: 1970-03-19-3a9102d3 # Brandt and Stoph meet in Erfurt
+  - id: 1973-09-18-fd95b3f6 # Both Germanys join the UN
+  - id: 1974-05-06-da302960 # Brandt resigns over the Guillaume affair
+
+  # --- Reunification and after (1989-2005) ---
+  - id: 1989-10-17-e75121df # Honecker is ousted
+  - id: 1989-11-10-50619ea3 # The fall of the Berlin Wall
+  - id: 1990-03-18-87f04f6c # East Germany's first free election
+  - id: 1990-08-31-e14866c6 # The unification treaty is signed
+  - id: 1990-10-03-d3d1409f # German reunification
+  - id: 1998-10-27-7647266b # Schröder's government
+  - id: 2005-11-22-03901459 # Merkel becomes chancellor
