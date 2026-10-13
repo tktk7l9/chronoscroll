@@ -22,6 +22,10 @@
 # the article says the youngest in the world, and the list article gives 12 Apr; the deepest fish recognised by
 # Guinness on 4 Apr 2023 / no such date in the articles).
 # Not used: Tokai University's K2 ascent of 1 Aug 2006 (the article gives the date but not "five of the six members").
+# Audited against the topic articles (2026-10-13): 34 entries checked, 2 corrected in fixes.yaml, none dropped.
+# Corrected: the first ascent of the Eiger north face, made by Heckmair, Vorg, Harrer and Kasparek, not Harrer alone
+# (アイガー); Takada Mitsumasa's Grandes Jorasses climb, without 「日本人で初めて」, which no article gives (1967年のスポーツ:
+# 「アルプス三大北壁制覇」). Shirase's departure (29 Nov 1910) is dated by 白瀬矗, Machu Picchu (24 Jul 1911) by マチュ・ピチュ.
 slug: exploration
 title: 探検と冒険の歴史
 lead: 1872年のチャレンジャー号の探検航海、白瀬矗の南極探険とアムンセン、スコットの南極点到達から、コンティキ号の航海、エベレスト初登頂と日本登山隊のマナスル初登頂、原子力潜水艦ノーチラスの北極点海中通過まで。タロとジロの生存確認や日本人初の南極点到達、田部井淳子と植村直己、三浦雄一郎の挑戦も含めて、極地と高山と海に挑んだ人々の足跡をたどる。

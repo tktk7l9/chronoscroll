@@ -2,7 +2,7 @@
 # References to existing auto-generated events only (nothing newly written).
 # Cars (Benz, Ford and the Model T, Japan's carmakers, the Corolla, the hybrid Prius, self-driving cars), roads
 # (Japan's expressways and bridges, America's interstates) and the rules for drivers (beginner marks, seat belts,
-# cognitive tests for older drivers), with the falling number of road deaths.
+# cognitive tests for older drivers).
 # Railways and aviation have their own collections.
 # Duplicates: for the Tomei Expressway the first opening of 25 Apr 1968 is used (see below).
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article
@@ -11,9 +11,15 @@
 # Hibiya 1 Nov 1930 / 23 Mar 1930; Japan's first bus service in Kyoto on 20 Sep 1903 / a Hiroshima service from
 # Jan 1903 is considered the first; the Tomei Expressway "fully opened 21 Dec 1971" / fully open on 26 May 1969;
 # the 2022 road-death figure credited to the Tokyo police (警視庁) instead of the National Police Agency (警察庁)).
+# Audited against the topic articles (2026-10-13): 27 entries checked, none corrected, 3 dropped because no article
+# gives the day: 1970-09-22-3f18c0f4 the US Senate passing the Muskie Act (マスキー法 and en give 1970 only),
+# 2007-01-02-90b8bc1b the National Police Agency's count of 2006 road deaths (no article), 2020-11-11-b68db063
+# Honda's Level 3 approval (no article gives the day). The lead and the scope line no longer speak of Level 3 or the
+# falling number of road deaths. The Model T's launch (1 Oct 1908), Ford's five-dollar day (5 Jan 1914), the
+# Federal-Aid Highway Act (29 Jun 1956) and the Prius (10 Dec 1997) are dated by the en articles.
 slug: automobile
 title: 自動車と道路の歴史
-lead: 1886年のベンツのガソリン自動車の特許、フォードの最初の自動車とモデルTから、日産の前身と本田技研工業の設立、首都高速道路と名神・東名高速道路の開通、カローラとプリウス、マツダのル・マン優勝、そしてレベル3・レベル4の自動運転まで。初心者マークの制定やシートベルトの着用義務化、高齢運転者の認知機能検査、交通事故死者数の減少も含めて、車と道と交通のルールの移り変わりをたどる。
+lead: 1886年のベンツのガソリン自動車の特許、フォードの最初の自動車とモデルTから、日産の前身と本田技研工業の設立、首都高速道路と名神・東名高速道路の開通、カローラとプリウス、マツダのル・マン優勝、そしてレベル4の自動運転まで。初心者マークの制定やシートベルトの着用義務化、高齢運転者の認知機能検査も含めて、車と道と交通のルールの移り変わりをたどる。
 description: ベンツの特許とフォード・モデルTから、高速道路網の整備、ハイブリッド車、自動運転まで、自動車と道路の転換点を日本と世界の出来事で年代順にたどる特集。
 icon: art-early-car
 entries:
@@ -38,20 +44,17 @@ entries:
   - id: 1968-04-25-5f9fadae # Tomei Expressway: first sections open, linked to the Meishin
 
   # --- Clean air, safety and racing ---
-  - id: 1970-09-22-3f18c0f4 # US Senate passes the Muskie Act on car exhaust
   - id: 1972-02-17-6b60d63f # VW Beetle overtakes the Model T's production record
   - id: 1972-10-01-620380d0 # Beginner driver's mark introduced
   - id: 1979-07-11-3ac87e96 # Nihonzaka Tunnel crash and fire on the Tomei
   - id: 1985-09-01-7eecdef4 # Front seat belts made compulsory on expressways
   - id: 1991-06-23-0b3a4fbe # Mazda 787B, first Japanese car to win Le Mans
 
-  # --- Hybrids, sea crossings, fewer road deaths ---
+  # --- Hybrids, sea crossings and self-driving cars ---
   - id: 1997-12-10-61a8a980 # Toyota Prius, the first mass-produced hybrid
   - id: 1997-12-18-0dc2d1b2 # Tokyo Bay Aqua-Line opens
   - id: 1998-04-05-3b687bc6 # Akashi Kaikyo Bridge opens
-  - id: 2007-01-02-90b8bc1b # Road deaths in 2006 at their lowest in 51 years
   - id: 2009-06-01-81d9feea # Cognitive tests for drivers aged 75 and over
 
   # --- Self-driving cars ---
-  - id: 2020-11-11-b68db063 # Honda's Level 3 self-driving car approved, a world first
   - id: 2023-04-01-5aa24dbc # Level 4 self-driving allowed on public roads

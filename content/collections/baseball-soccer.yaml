@@ -13,9 +13,15 @@
 # over Spain dated 2 Dec 2022 / played on 17 Jul and 1 Dec, the dataset gives the Japanese date without saying so;
 # Japan's win over Germany, 23 Nov 2022, has the right date but its summary carries the typo 選出時代 for 選手時代,
 # copied from the year page).
+# Audited against the topic articles (2026-10-13): 33 entries checked, 4 corrected in fixes.yaml, 1 dropped.
+# Corrected: the 1959 Emperor's game, without 「日本プロ野球史上唯一の天覧試合」 (天覧試合 does not say so); Rakuten's admission, without
+# the hotel venue and unanimous vote the article does not give; the 2011 Women's World Cup entry, which put Japan's
+# title on the opening day (the final was on 17 Jul); Murakami's 56th home run, without 「18年ぶり8人目（通算12度目）」.
+# Dropped because no article gives the day: 1995-11-09-b0d331c6 Nomo Hideo named NL Rookie of the Year (野茂英雄,
+# 最優秀新人選手賞 (MLB) and en give 1995 only). The lead now names Ichiro alone for the major leagues.
 slug: baseball-soccer
 title: 野球とサッカー史
-lead: 1915年の第1回全国中等学校優勝野球大会と甲子園球場の竣工、ベーブ・ルースらの来日と職業野球の発足、天覧試合と王貞治の756号、野茂英雄とイチローの大リーグでの活躍、そして2023年のワールド・ベースボール・クラシック優勝まで。国際サッカー連盟の創立と第1回ワールドカップ、Jリーグの開幕、ジョホールバルの歓喜でのワールドカップ初出場、日韓共催のワールドカップ、サッカー日本女子代表の女子ワールドカップ優勝も含めて、二つの球技の歩みを日本と世界の出来事でたどる。
+lead: 1915年の第1回全国中等学校優勝野球大会と甲子園球場の竣工、ベーブ・ルースらの来日と職業野球の発足、天覧試合と王貞治の756号、イチローの大リーグでの活躍、そして2023年のワールド・ベースボール・クラシック優勝まで。国際サッカー連盟の創立と第1回ワールドカップ、Jリーグの開幕、ジョホールバルの歓喜でのワールドカップ初出場、日韓共催のワールドカップ、サッカー日本女子代表の女子ワールドカップ優勝も含めて、二つの球技の歩みを日本と世界の出来事でたどる。
 description: 第1回全国中等学校優勝野球大会と職業野球の発足からWBC優勝まで、国際サッカー連盟の創立とワールドカップからJリーグ、日韓共催のワールドカップまで、野球とサッカーの節目を年代順にたどる特集。
 icon: art-world-cup
 entries:
@@ -48,7 +54,6 @@ entries:
   - id: 1993-05-15-15266837 # The J.League kicks off
   - id: 1993-10-28-1d46e701 # Late goal against Iraq: Japan miss the 1994 World Cup
   - id: 1994-09-20-742113b2 # Ichiro, first to reach 200 hits in a Japanese season
-  - id: 1995-11-09-b0d331c6 # Nomo Hideo, first Japanese NL Rookie of the Year
   - id: 1996-05-31-09ef6db9 # Japan and Korea chosen to co-host the 2002 World Cup
   - id: 1997-11-16-87b79f45 # Johor Bahru: Japan beat Iran to reach their first World Cup
   - id: 1998-06-14-5faf4718 # Japan's first World Cup match
