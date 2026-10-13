@@ -6,6 +6,11 @@
 # Left out on purpose: entries whose dataset wording disagrees with the topic article
 # (the only Plaza Accord entry also says the yuan plunged, which the article does not support;
 # Silicon Valley Bank is called the largest failure after Lehman, the article: second-largest FDIC-insured bank).
+# Audited against the topic articles (2026-10-13): 31 entries checked, 2 corrected in fixes.yaml, none dropped.
+# Corrected: Bretton Woods, where the IMF and the World Bank were agreed on, not yet established (ブレトン・ウッズ協定:
+# 「設立を決定し」); the 1973 move to floating rates, without the opening rate of 277 yen that no article gives. The single
+# rate of 360 yen (25 Apr 1949) is dated by en "Japanese yen", the full float (14 Feb 1973) by ニクソン・ショック, and the
+# 1927 moratorium (from 22 Apr, three weeks) by 昭和金融恐慌.
 slug: finance
 title: 金融危機の歴史
 lead: 1871年の新貨条例で「円」が生まれてから、金本位制、昭和金融恐慌と世界恐慌、ブレトン・ウッズ協定と1ドル360円、ニクソン・ショックと変動相場制、1989年の日経平均株価の最高値と銀行・証券会社の破綻、リーマン・ショック、そして34年ぶりの最高値更新とマイナス金利の解除まで。市場を揺さぶった恐慌や金融危機を、通貨制度の転換点とあわせて、日本と世界の出来事でたどる。
