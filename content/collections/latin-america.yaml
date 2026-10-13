@@ -1,32 +1,33 @@
 # Latin America and the Caribbean (collection)
 # References to existing auto-generated events only (nothing newly written). Cuba's first war of independence, Díaz
 # in Mexico and the end of slavery in Brazil; the Maine in Havana, Cuban and Panamanian independence, the Mexican
-# Revolution, Machu Picchu and the Panama Canal; Trotsky in Mexico and the oil nationalisation; Castro's landing,
-# the Chilean earthquake of 1960, Jamaican independence and the missile crisis; Allende and the Chilean coup; the
-# Falklands, Grenada, the fall of Stroessner and the invasion of Panama; Fujimori, the Earth Summit, Escobar and the
-# return of the canal; the earthquakes in Haiti and Chile, Rousseff, Chávez's death and Pope Francis; Obama in Cuba,
-# Santos's Nobel Peace Prize and the attack in Brasília.
+# Revolution, Machu Picchu and the Panama Canal; Trotsky in Mexico and the oil nationalisation; Castro's landing and
+# the Cuban Revolution, the Chilean earthquake of 1960, Jamaican independence, the missile crisis and the Brazilian
+# coup; Allende, the Managua earthquake and the Chilean coup; the Falklands, Grenada, the Mexico City earthquake,
+# the fall of Stroessner and the invasion of Panama; Fujimori, the Earth Summit, Escobar, the end of the Lima
+# hostage crisis and the return of the canal; the earthquakes in Haiti and Chile, Rousseff, Chávez's death and Pope
+# Francis; Obama in Cuba, Santos's Nobel Peace Prize and the attack in Brasília.
 # Checked against en: Trotsky's arrival in Mexico (9 Jan 1937, "Leon Trotsky"), Kennedy's blockade (22 Oct 1962,
 # "Cuban Missile Crisis") and the attack in Brasília (8 Jan 2023, "8 January Brasília attacks"). Coolidge as the
 # sitting president who visited Cuba in 1928 follows 「バラク・オバマ」 (a visit in 1928) and 「カルビン・クーリッジ」 (in office
 # 1923-1929).
+# The Cuban Revolution (1 Jan 1959), the Mexico City earthquake (19 Sep 1985) and the end of the Lima hostage crisis
+# (22 Apr 1997) are included with the wording corrected in fixes.yaml, and the Brazilian coup (31 Mar 1964) and the
+# Managua earthquake (23 Dec 1972) with the date and wording corrected (2026-10-13).
 # Overlaps: the end of slavery in Brazil is also in the human rights collection, Machu Picchu in the exploration and
 # archaeology collections, the Panama Canal's opening and return in the ships collection, the Chilean earthquake of
 # 1960 in the disaster collection, the missile crisis in the nuclear weapons collection, the Earth Summit in the
 # environment collection and Pope Francis in the papacy collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date or
-# details the articles cannot confirm (dataset vs article: the Cuban Revolution 1 Jan 1959 "Batista flees to the
-# United States" / he fled to the Dominican Republic; the Brazilian coup 30 Mar 1964 / 31 Mar - 1 Apr (en); the
-# Managua earthquake 22 Dec 1972 / 23 Dec (en); the Argentine coup 24 Mar 1976 "bloodless" / not in the articles;
-# the Mexico City earthquake 19 Sep 1985 "M8.1, more than 9,000 dead" / Mw 8.0, no toll in the article; the Lima
-# hostage crisis 22 Apr 1997 "all hostages freed" / 71 of the 72 hostages rescued, one died; Pinochet's arrest 16
-# Oct 1998 / October 1998 only; the US-Cuba announcement 17 Dec 2014 "at the same time" / not in the articles; the
-# Rio Olympics 5 Aug 2016 "a record 206 nations" / the record is not in the articles; Moïse's assassination 7 Jul
-# 2021 "4 shot dead and 2 detained" / the 4 killed were announced, the arrests came on 8 Jul).
+# details the articles cannot confirm (dataset vs article: the Argentine coup 24 Mar 1976 "bloodless" / not in the
+# articles; Pinochet's arrest 16 Oct 1998 / October 1998 only; the US-Cuba announcement 17 Dec 2014 "at the same
+# time" / not in the articles; the Rio Olympics 5 Aug 2016 "a record 206 nations" / the record is not in the
+# articles; Moïse's assassination 7 Jul 2021 "4 shot dead and 2 detained" / the 4 killed were announced, the arrests
+# came on 8 Jul).
 slug: latin-america
 title: 中南米とカリブ海
-lead: 1868年の第一次キューバ独立戦争から、メキシコのディアス大統領の就任、ブラジルの奴隷制廃止、ハバナ湾での戦艦メインの爆発、キューバとパナマの独立、メキシコ革命、マチュ・ピチュ遺跡の発見、パナマ運河の開通、トロツキーのメキシコ到着、メキシコの石油国有化、カストロらのキューバ上陸、チリ地震、ジャマイカの独立、キューバ危機、アジェンデのチリ大統領就任とチリ・クーデター、フォークランド紛争、グレナダ侵攻、ストロエスネル大統領の失脚、パナマ侵攻、フジモリのペルー大統領就任、地球サミット、パブロ・エスコバルの射殺、パナマ運河の返還、ハイチ地震と2010年のチリ地震、ルセフ大統領の就任、チャベス大統領の死去、教皇フランシスコの選出、オバマ大統領のキューバ訪問、サントス大統領のノーベル平和賞、ブラジリアの国民議会などへの襲撃まで。メキシコからカリブ海、南米までの150年余りをたどる。
-description: 第一次キューバ独立戦争から、メキシコ革命、パナマ運河、カストロらのキューバ上陸とキューバ危機、チリ・クーデター、フォークランド紛争、パナマ運河の返還、オバマ大統領のキューバ訪問まで、中南米とカリブ海の歩みを年代順にたどる特集。
+lead: 1868年の第一次キューバ独立戦争から、メキシコのディアス大統領の就任、ブラジルの奴隷制廃止、ハバナ湾での戦艦メインの爆発、キューバとパナマの独立、メキシコ革命、マチュ・ピチュ遺跡の発見、パナマ運河の開通、トロツキーのメキシコ到着、メキシコの石油国有化、カストロらのキューバ上陸とキューバ革命、チリ地震、ジャマイカの独立、キューバ危機、ブラジルの軍事クーデター、アジェンデのチリ大統領就任、マナグア付近の地震、チリ・クーデター、フォークランド紛争、グレナダ侵攻、メキシコ地震、ストロエスネル大統領の失脚、パナマ侵攻、フジモリのペルー大統領就任、地球サミット、パブロ・エスコバルの射殺、在ペルー日本大使公邸占拠事件の終結、パナマ運河の返還、ハイチ地震と2010年のチリ地震、ルセフ大統領の就任、チャベス大統領の死去、教皇フランシスコの選出、オバマ大統領のキューバ訪問、サントス大統領のノーベル平和賞、ブラジリアの国民議会などへの襲撃まで。メキシコからカリブ海、南米までの150年余りをたどる。
+description: 第一次キューバ独立戦争から、メキシコ革命、パナマ運河、キューバ革命とキューバ危機、チリ・クーデター、フォークランド紛争、パナマ運河の返還、オバマ大統領のキューバ訪問まで、中南米とカリブ海の歩みを年代順にたどる特集。
 icon: art-machu-picchu
 entries:
   # --- Independence, revolution and the canal (1868-1914) ---
@@ -44,20 +45,25 @@ entries:
   - id: 1937-01-09-4b3291c8 # Trotsky arrives in Mexico
   - id: 1938-03-18-8072b559 # Mexico nationalises its oil
   - id: 1956-12-02-8a3171f4 # Castro lands in Cuba
+  - id: 1959-01-01-8fe4e5ad # The Cuban Revolution
   - id: 1960-05-22-8019a129 # The great Chilean earthquake
   - id: 1962-08-06-96ccb32b # Jamaica becomes independent
   - id: 1962-10-22-f3d10d34 # The Cuban missile crisis: Kennedy announces the blockade
+  - id: 1964-03-30-81ba9a9e # The Brazilian coup (31 Mar)
   - id: 1970-11-03-0e0d6dc9 # Allende becomes president of Chile
+  - id: 1972-12-22-081ca2e8 # The Managua earthquake (23 Dec)
   - id: 1973-09-11-ed911446 # The Chilean coup
 
   # --- Wars, invasions and the end of dictators (1982-1999) ---
   - id: 1982-04-02-9fc70fe0 # The Falklands War begins
   - id: 1983-10-25-877e22a5 # The invasion of Grenada
+  - id: 1985-09-19-84acc050 # The Mexico City earthquake
   - id: 1989-02-03-8cae5d5b # Stroessner overthrown in Paraguay
   - id: 1989-12-20-6ce5bef1 # The invasion of Panama
   - id: 1990-07-28-fb8ab07c # Fujimori becomes president of Peru
   - id: 1992-06-03-695bb09c # The Earth Summit in Rio
   - id: 1993-12-02-7c710fb9 # Pablo Escobar killed
+  - id: 1997-04-22-fe16b51c # The Lima hostage crisis ends
   - id: 1999-12-31-56dad5c1 # The Panama Canal is handed over
 
   # --- The 21st century (2010-2023) ---
