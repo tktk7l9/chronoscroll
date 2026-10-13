@@ -2530,3 +2530,63 @@
 - id: 2018-04-17-163ede9d   # 2018年の日本: 「4月17日 - 4月18日（現地時間） - アメリカ・フロリダ州で…日米首脳会談を開催」
   title: "アメリカ・フロリダ州で安倍晋三内閣総理大臣がドナルド・トランプ大統領と日米首脳会談を開催（現地…"
   summary: "アメリカ・フロリダ州で安倍晋三内閣総理大臣がドナルド・トランプ大統領と日米首脳会談を開催（現地時間18日まで）。"
+
+# --- Wrong facts found while checking the collections of #70 against the topic articles (2026-10-13): wrong dates
+# moved within the same year, wrong or unsupported wording replaced by what the articles say, and country names the
+# parser dropped from a year-page line restored ---
+- id: 1894-09-15-49211b67   # 広島大本営: 「9月13日に大本営が宮中からこの地に移転し、2日後の15日には…明治天皇が移った」; 明治天皇: 「9月15日夕刻に広島に到着した天皇はただちに大本営が設置された広島城内の第5師団司令部へ向かった」
+  title: "日清戦争: 明治天皇が広島に到着し、大本営が置かれた広島城内の第5師団司令部に入る（広島大本営）"
+  summary: "日清戦争: 明治天皇が広島に到着し、大本営が置かれた広島城内の第5師団司令部に入る（広島大本営）"
+
+- id: 1895-05-04-d1048e4c   # 三国干渉: 「5月4日の閣議で全遼東半島の放棄を決め、翌5月5日、独仏露の駐日公使に通告した」「5月10日、日本は遼東半島を清に還付」
+  title: "露独仏の三国干渉を受け、日本政府が閣議で遼東半島の全面放棄を決める"
+  summary: "露独仏の三国干渉を受け、日本政府が閣議で遼東半島の全面放棄を決める。"
+
+- id: 1960-11-08-ffc7b9db   # 1960年アメリカ合衆国大統領選挙: election 8 Nov (the general vote, not the electors' vote); 「ニクソンが最終的に敗北宣言し、ケネディが勝利を宣言したのは翌11月9日水曜日の午後だった」
+  title: "アメリカ合衆国大統領選挙の一般投票。民主党のジョン・F・ケネディが共和党のリチャード・ニクソン…"
+  summary: "アメリカ合衆国大統領選挙の一般投票。民主党のジョン・F・ケネディが共和党のリチャード・ニクソンとの接戦を制し、翌9日午後にニクソンが敗北を宣言した。"
+
+- id: 1964-11-03-ea83f038   # リンドン・ジョンソン: 「ゴールドウォーターを大差で破り、歴史的な大勝を果たした」 (his first election as president; he had succeeded Kennedy in 1963)
+  title: "アメリカ合衆国大統領選挙で、民主党のリンドン・ジョンソン大統領が、共和党のバリー・ゴールドウォ…"
+  summary: "アメリカ合衆国大統領選挙で、民主党のリンドン・ジョンソン大統領が、共和党のバリー・ゴールドウォーター候補を大差で破り当選する。"
+
+- id: 1974-08-08-99ca412b   # ウォーターゲート事件: 「8月8日夜…テレビ演説で、ニクソンは翌8月9日正午に辞任することを発表した」「1974年8月9日の午前に…副大統領のジェラルド・R・フォードが昇格して大統領宣誓を行い」
+  date: "1974-08-09"
+  title: "ウォーターゲート事件でニクソン米大統領が辞任。フォード副大統領が大統領に昇格"
+  summary: "ウォーターゲート事件でニクソン米大統領が辞任。フォード副大統領が大統領に昇格。"
+
+- id: 1870-09-20-ffd70f67   # イタリア王国: 「教皇領を占領し（ローマ占領）」 (en "Capture of Rome": 20 Sep 1870); Trentino and Trieste stayed Austrian, so 「イタリアの領土が現在とほぼ同様に」 is dropped
+  title: "イタリア王国軍がローマに進軍し教皇国家滅亡（ローマ占領）"
+  summary: "イタリア王国軍がローマに進軍し教皇国家滅亡（ローマ占領）"
+
+- id: 1937-03-14-06675271   # ミット・ブレネンダー・ゾルゲ: the title was misspelt 「ミット・ブレメンデル・ゾルゲ」 (en: "1937 papal encyclical condemning fascism and antisemitism in Germany")
+  title: "ローマ教皇ピウス11世、ナチスによる教会弾圧とユダヤ人差別を批判する回勅「ミット・ブレネンダー…"
+  summary: "ローマ教皇ピウス11世、ナチスによる教会弾圧とユダヤ人差別を批判する回勅「ミット・ブレネンダー・ゾルゲ」を発表"
+
+- id: 1982-05-28-202d5fca   # ヨハネ・パウロ2世: 「歴代ローマ教皇史上初めてイギリスを訪問…448年にわたり断絶状態にあった英国国教会とローマ・カトリックの和解の挨拶をした」
+  title: "ローマ教皇ヨハネ・パウロ2世が歴代教皇で初めてイギリスを訪問し、448年にわたって断絶していた…"
+  summary: "ローマ教皇ヨハネ・パウロ2世が歴代教皇で初めてイギリスを訪問し、448年にわたって断絶していたイングランド国教会との和解の挨拶をした。"
+
+- id: 2016-02-12-da90b5ff   # フランシスコ (ローマ教皇): met Kirill in Havana; en "Joint Declaration of Pope Francis and Patriarch Kirill": "the first time leaders of the Catholic Church and the Moscow Patriarchate had met"
+  title: "ローマ教皇フランシスコとロシア正教会のモスクワ総主教キリル1世がキューバのハバナで会談した。ロ…"
+  summary: "ローマ教皇フランシスコとロシア正教会のモスクワ総主教キリル1世がキューバのハバナで会談した。ローマ教皇とモスクワ総主教の会談は史上初めて。"
+
+- id: 2024-10-07-e8047a01   # 菊地功: 「2024年10月6日、教皇フランシスコは正午のお告げの祈りの際…枢機卿に親任することを発表した」; 枢機卿: Kikuchi is the seventh Japanese cardinal in the list
+  date: "2024-10-06"
+
+- id: 2019-12-31-dcbe35f2   # en "Timeline of the COVID-19 pandemic in 2019" (31 December): the Wuhan Municipal Health Commission released the briefing, 27 cases; 新型コロナウイルス感染症の世界的流行 (2019年-): 「12月31日、新型肺炎の発生について中国側は初めてWHO中国事務所へ報告した」
+  title: "湖北省武漢市の衛生健康委員会が、市内での肺炎の集団発生を公表した（患者27人）。同日、中国はW…"
+  summary: "湖北省武漢市の衛生健康委員会が、市内での肺炎の集団発生を公表した（患者27人）。同日、中国はWHO中国事務所に初めて報告した。"
+
+- id: 2020-04-20-722bcda8   # 特別定額給付金: decided by the cabinet on 20 Apr; the 769億円/電通 subcontracting story belongs to 持続化給付金 (the business subsidy), not to this payment
+  title: "国民1人あたりに10万円の特別定額給付金支給を含む新型コロナウイルス感染症緊急経済対策が閣議決定"
+  summary: "国民1人あたりに10万円の特別定額給付金支給を含む新型コロナウイルス感染症緊急経済対策が閣議決定。"
+
+- id: 2020-11-09-f01aba28   # 2020年: the line has {{USA}}, {{IND}} and {{BRA}}, which the parser dropped (the date stays: the line gives Japanese time, the articles date the 50 million mark 8 Nov)
+  title: "（日本時間）新型コロナウイルスの全世界の感染者数が5000万人を超える。国別には、アメリカ合衆…"
+  summary: "（日本時間）新型コロナウイルスの全世界の感染者数が5000万人を超える。国別には、アメリカ合衆国が約990万人で世界最多。次いでインド約851万人、ブラジル約565万人と続く。また、欧州の感染者数も約1200万人にまで拡大しており、中南米を再び上回っている。"
+
+- id: 2021-07-09-dbe9f98b   # 新型コロナウイルス感染拡大による東京オリンピック・パラリンピックへの影響: 「2021年7月8日、1都3県の会場では無観客と5者会議で決定した」; the cap of 10,000 was set on 21 Jun (only Tokyo, not the three neighbouring prefectures, was put under the state of emergency)
+  date: "2021-07-08"
+  title: "東京オリンピックについて、5者協議で1都3県（東京・埼玉・千葉・神奈川）の会場を無観客とするこ…"
+  summary: "東京オリンピックについて、5者協議で1都3県（東京・埼玉・千葉・神奈川）の会場を無観客とすることが決まった。観客の上限は6月に1万人と決めていた。"

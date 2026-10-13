@@ -1,38 +1,38 @@
 # The popes (collection)
 # References to existing auto-generated events only (nothing newly written). The First Vatican Council, papal
-# infallibility and the suspension of the council; the elections of Leo XIII, Pius X, Pius XI, Pius XII and John
-# XXIII and Leo XIII's Aeterni Patris; the Lateran Treaty and the Reichskonkordat; John Paul II's visit to Japan,
-# the attempt on his life, the acknowledgement of the Galileo trial's error, relations with Israel and his death;
-# Benedict XVI's election, resignation, death and funeral; the conclaves of 2013 and 2025, Francis's election, his
-# visits to Myanmar and Japan and his death; Leo XIV's election, his first journey abroad (Turkey) and his
-# encyclical on artificial intelligence.
+# infallibility, the capture of Rome and the suspension of the council; the elections of Leo XIII, Pius X, Pius XI,
+# Pius XII and John XXIII and Leo XIII's Aeterni Patris; the Lateran Treaty, the Reichskonkordat and Mit brennender
+# Sorge; John Paul II's visit to Japan, the attempt on his life, his visit to Britain, the acknowledgement of the
+# Galileo trial's error, relations with Israel and his death; Benedict XVI's election, resignation, death and
+# funeral; the conclaves of 2013 and 2025, Francis's election, his meeting with Patriarch Kirill, his visits to
+# Myanmar and Japan, Kikuchi's nomination as a cardinal and Francis's death; Leo XIV's election, his first journey
+# abroad (Turkey) and his encyclical on artificial intelligence.
 # Checked against en: Pastor aeternus (18 Jul 1870), the suspension of the council (20 Oct 1870, "First Vatican
 # Council"), Aeterni Patris (4 Aug 1879), the signatories of the Reichskonkordat, Galileo (31 Oct 1992, "Galileo
 # Galilei"), relations with Israel (15 Jun 1994, "Holy See–Israel relations"), Myanmar (27 Nov 2017, "List of
 # pastoral trips made by Pope Francis"), Turkey (27-30 Nov 2025, "2025 visit by Pope Leo XIV to Turkey and Lebanon")
 # and Magnifica humanitas (25 May 2026). The two-thirds majority of 2025 is the rule given in the ja article on the
-# conclave.
+# conclave. The capture of Rome (20 Sep 1870), Mit brennender Sorge (14 Mar 1937; en describes it as condemning
+# fascism and antisemitism in Germany), John Paul II in Britain (28 May 1982), Francis and Kirill (12 Feb 2016) and
+# Kikuchi's nomination (moved to 6 Oct 2024; the seventh Japanese cardinal in the ja list) are included with the
+# wording or date corrected in fixes.yaml (2026-10-13).
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
-# articles cannot confirm (dataset vs article: the capture of Rome 20 Sep 1870 "Italy reaches roughly its present
-# territory" / not in the articles; Mit brennender Sorge 14 Mar 1937 "condemns discrimination against Jews" / the
-# articles describe a condemnation of the deification of race, people and state; the recognition of Franco 27 Aug
-# 1937, relations with Japan 23 Mar 1942 and the Galileo statement of 9 May 1983 / not dated in the articles; John
-# Paul II in Britain 28 May 1982 "after 450 years" / 448 years; Francis and Kirill 12 Feb 2016 "the first meeting in
-# about 1,000 years" / the first meeting ever between a pope and a patriarch of Moscow; the messages at Nagasaki and
-# Hiroshima 24 Nov 2019 / the quoted sentence is not in the article; Kishida's audience 4 May 2022, Leo XIV and
-# Kirill's envoy 26 Jul 2025 and Leo XIV's warning of 14 Apr 2026 / not in the articles; Kikuchi made a cardinal 7
-# Oct 2024 / announced 6 Oct; the funeral of Francis 26 Apr 2025 / Iwaya's attendance is not in the articles; Leo
-# XIV's inauguration Mass 18 May 2025 / the place and the participants of the Zelensky-Vance meeting are not in the
-# articles).
+# articles cannot confirm (dataset vs article: the recognition of Franco 27 Aug 1937, relations with Japan 23 Mar
+# 1942 and the Galileo statement of 9 May 1983 / not dated in the articles; the messages at Nagasaki and Hiroshima
+# 24 Nov 2019 / the quoted sentence is not in the article; Kishida's audience 4 May 2022, Leo XIV and Kirill's envoy
+# 26 Jul 2025 and Leo XIV's warning of 14 Apr 2026 / not in the articles; the funeral of Francis 26 Apr 2025 /
+# Iwaya's attendance is not in the articles; Leo XIV's inauguration Mass 18 May 2025 / the place and the
+# participants of the Zelensky-Vance meeting are not in the articles).
 slug: papacy
 title: ローマ教皇
-lead: 1869年の第1バチカン公会議と教皇不可謬説の宣言から、レオ13世、ピウス10世、ピウス11世、ピウス12世、ヨハネ23世の選出、ラテラノ条約とライヒスコンコルダート、ヨハネ・パウロ2世の来日と暗殺未遂事件、ガリレオ裁判の誤りの承認、イスラエルとの国交樹立、ベネディクト16世の選出と辞任、フランシスコの選出と38年ぶりの来日、2025年のコンクラーベとレオ14世の選出まで。レオ14世のトルコ訪問と人工知能をテーマにした回勅も含めて、ローマ教皇とバチカンの150年余りをたどる。
+lead: 1869年の第1バチカン公会議と教皇不可謬説の宣言、ローマ占領による教皇国家の滅亡から、レオ13世、ピウス10世、ピウス11世、ピウス12世、ヨハネ23世の選出、ラテラノ条約とライヒスコンコルダート、回勅「ミット・ブレネンダー・ゾルゲ」、ヨハネ・パウロ2世の来日と暗殺未遂事件、歴代教皇で初めてのイギリス訪問、ガリレオ裁判の誤りの承認、イスラエルとの国交樹立、ベネディクト16世の選出と辞任、フランシスコの選出、モスクワ総主教キリル1世との史上初の会談と38年ぶりの来日、2025年のコンクラーベとレオ14世の選出まで。レオ14世のトルコ訪問と人工知能をテーマにした回勅も含めて、ローマ教皇とバチカンの150年余りをたどる。
 description: 第1バチカン公会議から、ラテラノ条約、ヨハネ・パウロ2世の来日、ガリレオの名誉回復、ベネディクト16世の辞任、フランシスコの選出と来日、レオ14世の選出まで、ローマ教皇の歩みを年代順にたどる特集。
 icon: art-conclave
 entries:
   # --- The First Vatican Council to Pius XI (1869-1922) ---
   - id: 1869-12-08-b9874db7 # The First Vatican Council opens
   - id: 1870-07-18-db88fb69 # Pastor aeternus: papal infallibility
+  - id: 1870-09-20-ffd70f67 # Italy takes Rome; the Papal States end
   - id: 1870-10-20-f17ed103 # The council is suspended indefinitely
   - id: 1878-02-20-a403b62d # Leo XIII elected
   - id: 1879-08-04-fc8e0d3a # Aeterni Patris
@@ -42,12 +42,14 @@ entries:
   # --- Treaties and Pius XII (1929-1958) ---
   - id: 1929-02-11-7e1aa1d3 # The Lateran Treaty
   - id: 1933-07-20-fb3b8be7 # The Reichskonkordat
+  - id: 1937-03-14-06675271 # Mit brennender Sorge
   - id: 1939-03-02-1dbb02cb # Pius XII elected
   - id: 1958-10-28-785f1d48 # John XXIII elected
 
   # --- John Paul II (1981-2005) ---
   - id: 1981-02-23-0ee8997a # John Paul II visits Japan
   - id: 1981-05-13-6e39652e # John Paul II shot in St Peter's Square
+  - id: 1982-05-28-202d5fca # John Paul II, the first pope to visit Britain
   - id: 1992-10-31-bc1b2332 # The Church admits the Galileo trial was wrong
   - id: 1994-06-15-800504dd # Diplomatic relations with Israel
   - id: 2005-04-02-df555017 # John Paul II dies
@@ -58,10 +60,12 @@ entries:
   - id: 2013-02-28-42a2dbbd # The resignation takes effect
   - id: 2013-03-12-1b2697bc # The conclave of 2013 begins
   - id: 2013-03-13-a95fd407 # Francis elected
+  - id: 2016-02-12-da90b5ff # Francis meets Patriarch Kirill in Havana
   - id: 2017-11-27-13693e75 # Francis visits Myanmar
   - id: 2019-11-23-3bec3797 # Francis visits Japan, 38 years after John Paul II
   - id: 2022-12-31-1a9e006c # Benedict XVI dies
   - id: 2023-01-05-854880f1 # The funeral of Benedict XVI
+  - id: 2024-10-07-e8047a01 # Kikuchi Isao to be made a cardinal
 
   # --- Francis's death to Leo XIV (2025-2026) ---
   - id: 2025-04-21-0ba3cc26 # Francis dies

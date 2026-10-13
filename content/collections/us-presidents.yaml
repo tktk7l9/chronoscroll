@@ -1,27 +1,27 @@
 # US presidents (collection)
 # References to existing auto-generated events only (nothing newly written). The elections won by Grant (1868) to
-# Wilson (1912), Hoover, Franklin Roosevelt (and his third term), Truman (1948), Eisenhower, Nixon (1968), Carter,
-# Reagan, George H. W. Bush, Clinton, Obama, Trump (2016 and 2024) and Biden, and the Bush-Gore election; the
-# shootings of Garfield, McKinley and Kennedy and the successions of Theodore Roosevelt, Coolidge and Truman; the
-# first televised debate, the Clinton impeachment trial, Trump's first impeachment, the attack on the Capitol and
-# the shooting at Butler.
+# Wilson (1912), Hoover, Franklin Roosevelt (and his third term), Truman (1948), Eisenhower, Kennedy, Johnson
+# (1964), Nixon (1968), Carter, Reagan, George H. W. Bush, Clinton, Obama, Trump (2016 and 2024) and Biden, and the
+# Bush-Gore election; the shootings of Garfield, McKinley and Kennedy and the successions of Theodore Roosevelt,
+# Coolidge and Truman; Nixon's resignation; the first televised debate, the Clinton impeachment trial, Trump's first
+# impeachment, the attack on the Capitol and the shooting at Butler.
 # Re-elections other than Franklin Roosevelt's third term (1872, 1900, 1916, 1936, 1944, 1972, 1984, 1996, 2004 and
 # 2012) are not repeated. Inaugurations are included only for Franklin Roosevelt (with the New Deal), Kennedy, Obama
 # (the first Black president) and Trump's return in 2025; the others are left out next to the elections. Trump's
-# first win is represented by the count of the electoral votes in Congress (6 Jan 2017).
+# first win is represented by the count of the electoral votes in Congress (6 Jan 2017). Kennedy's election (8 Nov
+# 1960), Johnson's (3 Nov 1964) and Nixon's resignation (moved to 9 Aug 1974) are included with the wording or date
+# corrected in fixes.yaml (2026-10-13).
 # Checked against en: the first televised debate (26 Sep 1960, "1960 United States presidential debates"), the start
 # of the Clinton trial (7 Jan 1999, "Impeachment of Bill Clinton") and "the third president to be impeached" (18 Dec
 # 2019, "First impeachment of Donald Trump").
 # Overlaps: Obama's inauguration is also in the human rights collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
-# articles cannot confirm (dataset vs article: Kennedy's win 8 Nov 1960 "in the electors' vote" / 8 Nov was the
-# general vote; Johnson "re-elected" 3 Nov 1964 / he had succeeded Kennedy and the 1964 election was his first;
-# Nixon resigns and Ford takes over 8 Aug 1974 / Nixon announced it on the evening of 8 Aug and resigned on 9 Aug;
-# Trump's win "becomes certain" 9 Nov 2016 / the article dates the count and the result 8 Nov).
+# articles cannot confirm (dataset vs article: Trump's win "becomes certain" 9 Nov 2016 / the article dates the
+# count and the result 8 Nov).
 slug: us-presidents
 title: アメリカ大統領
-lead: 1868年のユリシーズ・グラントの勝利から、紛糾の末にラザフォード・ヘイズが勝った1876年の選挙、ガーフィールドとマッキンリーの銃撃、フランクリン・ルーズベルトの当選とニューディール政策の始動、3選、トルーマンの昇格、ケネディとニクソンの史上初のテレビ討論、ケネディ大統領の暗殺、クリントン大統領の弾劾裁判、ブッシュとゴアの大接戦、黒人として初めてのオバマ大統領の就任、トランプ大統領の弾劾訴追と議会襲撃、2024年のトランプの銃撃と当選、2025年の就任式まで。大統領選挙と、暗殺や死去による交代を中心に、アメリカ大統領の150年余りをたどる。
-description: グラントの勝利から、マッキンリーとケネディの暗殺、フランクリン・ルーズベルトの3選、史上初のテレビ討論、オバマ大統領の就任、議会襲撃、2025年の就任式まで、アメリカ大統領の選挙と交代を年代順にたどる特集。
+lead: 1868年のユリシーズ・グラントの勝利から、紛糾の末にラザフォード・ヘイズが勝った1876年の選挙、ガーフィールドとマッキンリーの銃撃、フランクリン・ルーズベルトの当選とニューディール政策の始動、3選、トルーマンの昇格、ケネディとニクソンの史上初のテレビ討論、ケネディ大統領の暗殺、ウォーターゲート事件によるニクソン大統領の辞任、クリントン大統領の弾劾裁判、ブッシュとゴアの大接戦、黒人として初めてのオバマ大統領の就任、トランプ大統領の弾劾訴追と議会襲撃、2024年のトランプの銃撃と当選、2025年の就任式まで。大統領選挙と、暗殺や死去による交代を中心に、アメリカ大統領の150年余りをたどる。
+description: グラントの勝利から、マッキンリーとケネディの暗殺、フランクリン・ルーズベルトの3選、史上初のテレビ討論、ニクソンの辞任、オバマ大統領の就任、議会襲撃、2025年の就任式まで、アメリカ大統領の選挙と交代を年代順にたどる特集。
 icon: art-jfk
 entries:
   # --- Grant to McKinley (1868-1901) ---
@@ -51,9 +51,12 @@ entries:
   - id: 1948-11-02-5288dbb5 # Truman wins
   - id: 1952-11-04-1c49e498 # Eisenhower wins
   - id: 1960-09-26-79c1c6f7 # The first televised debate: Kennedy and Nixon
+  - id: 1960-11-08-ffc7b9db # Kennedy defeats Nixon
   - id: 1961-01-20-99a6b248 # Kennedy takes office
   - id: 1963-11-22-b85a2ca9 # Kennedy assassinated in Dallas
+  - id: 1964-11-03-ea83f038 # Johnson defeats Goldwater
   - id: 1968-11-05-4389da7d # Nixon wins
+  - id: 1974-08-08-99ca412b # Nixon resigns over Watergate; Ford succeeds
   - id: 1976-11-02-c070890f # Carter defeats Ford
   - id: 1980-11-04-22565c85 # Reagan defeats Carter
   - id: 1988-11-08-c81acc23 # George H. W. Bush wins
