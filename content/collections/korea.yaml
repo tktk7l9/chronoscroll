@@ -1,36 +1,34 @@
 # The Korean Peninsula (collection)
-# References to existing auto-generated events only (nothing newly written). The Ganghwa Island incident and the Imo
-# and Gapsin incidents; the Hague envoys, the killing of Ito Hirobumi, the annexation treaty and the March First
-# Movement; the founding of South and North Korea and the Korean War from the invasion, the fall of Seoul and
-# Incheon to the armistice; the April Revolution, the May 16 coup, the Mun Se-gwang incident, Park Chung-hee's
+# References to existing auto-generated events only (nothing newly written). The Ganghwa Island incident, the
+# Japan-Korea treaty of 1876 and the Imo and Gapsin incidents; the Hague envoys, the killing of Ito Hirobumi, the
+# annexation treaty and the March First Movement; the founding of South and North Korea and the Korean War from the
+# invasion, the fall of Seoul, Incheon and the Chinese attack to the armistice; the April Revolution, the May 16
+# coup, the 1965 treaty with Japan, North Korea's constitution of 1972, the Mun Se-gwang incident, Park Chung-hee's
 # assassination and the December 12 coup; Gwangju, Korean Air 007 and 858, the June 29 declaration and the Seoul
-# Olympics; both Koreas joining the UN, the death of Kim Il-sung, Kim Dae-jung's inauguration, Koizumi in Pyongyang,
-# the first nuclear test, the second inter-Korean summit, the Cheonan and the death of Kim Jong-il; Park Geun-hye's
-# inauguration and impeachment, the Sewol, the Panmunjom declaration and the Singapore summit; the martial law of
-# 2024 and Yoon Suk-yeol's impeachment.
+# Olympics; both Koreas joining the UN, the death of Kim Il-sung, Kim Dae-jung's inauguration, the first
+# inter-Korean summit, Koizumi in Pyongyang, the first nuclear test, the second inter-Korean summit, the Cheonan,
+# the shelling of Yeonpyeong and the death of Kim Jong-il; Park Geun-hye's inauguration and impeachment, the Sewol,
+# the Panmunjom declaration and the Singapore summit; the martial law of 2024 and Yoon Suk-yeol's impeachment.
 # Checked against en: the opening of the Second Hague Peace Conference (15 Jun 1907, "Hague Conventions of 1899 and
 # 1907") and the Baltic states joining the UN on the same day as the two Koreas (17 Sep 1991, "Member states of the
 # United Nations").
-# Overlaps: the Ganghwa Island incident is also in the Meiji Restoration collection, the outbreak of the Korean War
-# and the armistice in the Cold War collection, the nuclear test in the nuclear weapons collection and the Sewol in
-# the ships collection.
-# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date or
-# details the articles cannot confirm (dataset vs article: the Japan-Korea treaty of 1876 signed 27 Feb / signed 26
-# Feb; the Donghak uprising 29 Mar 1894 / not dated in the article; the Chinese People's Volunteers "enter the war"
-# 25 Oct 1950 / they entered on 19 Oct and attacked on 25 Oct; the treaty of 22 Jun 1965 "relations normalised" /
-# relations were normalised when the ratifications were exchanged on 18 Dec 1965; North Korea's constitution 25 Dec
-# 1972 / adopted 27 Dec, Kim Il-sung made president 28 Dec; the first inter-Korean summit 13 Jun 2000 "55 years
-# after the division" / the article dates the division from 1948; the shelling of Yeonpyeong 23 Nov 2010 "2 soldiers
-# killed and 4 seriously injured, 2 civilians killed and 4 injured, more than 60 houses burnt" / 2 marines and 2
-# civilians killed, 16 marines injured and 3 civilians lightly injured, no house count).
+# The treaty of 1876 (26 Feb) and North Korea's constitution (27 Dec 1972) are included with the date corrected in
+# fixes.yaml, and the Chinese attack of 25 Oct 1950, the treaty of 1965, the summit of 2000 and the shelling of
+# Yeonpyeong with the wording corrected (2026-10-13).
+# Overlaps: the Ganghwa Island incident and the treaty of 1876 are also in the Meiji Restoration collection, the
+# outbreak of the Korean War and the armistice in the Cold War collection, the nuclear test in the nuclear weapons
+# collection and the Sewol in the ships collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the Donghak uprising 29 Mar 1894 / not dated in the article).
 slug: korea
 title: 朝鮮半島の近現代
-lead: 1875年の江華島事件から、壬午事変と甲申政変、ハーグ密使事件、伊藤博文の暗殺、日韓併合条約の調印、三・一独立運動、大韓民国と朝鮮民主主義人民共和国の成立、朝鮮戦争の勃発とソウル陥落・仁川上陸作戦・休戦、四月革命と5・16軍事クーデター、文世光事件、朴正煕大統領の暗殺と粛軍クーデター、光州事件、大韓航空機撃墜事件と大韓航空機爆破事件、民主化宣言、ソウルオリンピック、南北の国連同時加盟、金日成の死去、金大中の大統領就任、日朝首脳会談、北朝鮮の核実験、第2回南北首脳会談、哨戒艦「天安」の沈没、金正日の死去、朴槿恵の大統領就任と弾劾訴追、セウォル号沈没事故、板門店宣言と米朝首脳会談、尹錫悦大統領の非常戒厳令と弾劾まで。朝鮮半島の150年をたどる。
+lead: 1875年の江華島事件と翌年の日朝修好条規から、壬午事変と甲申政変、ハーグ密使事件、伊藤博文の暗殺、日韓併合条約の調印、三・一独立運動、大韓民国と朝鮮民主主義人民共和国の成立、朝鮮戦争の勃発とソウル陥落・仁川上陸作戦・中国人民志願軍の攻撃・休戦、四月革命と5・16軍事クーデター、日韓基本条約、北朝鮮の社会主義憲法、文世光事件、朴正煕大統領の暗殺と粛軍クーデター、光州事件、大韓航空機撃墜事件と大韓航空機爆破事件、民主化宣言、ソウルオリンピック、南北の国連同時加盟、金日成の死去、金大中の大統領就任と初の南北首脳会談、日朝首脳会談、北朝鮮の核実験、第2回南北首脳会談、哨戒艦「天安」の沈没と延坪島砲撃事件、金正日の死去、朴槿恵の大統領就任と弾劾訴追、セウォル号沈没事故、板門店宣言と米朝首脳会談、尹錫悦大統領の非常戒厳令と弾劾まで。朝鮮半島の150年をたどる。
 description: 江華島事件と日韓併合条約から、三・一独立運動、朝鮮戦争、光州事件、民主化宣言、南北首脳会談と米朝首脳会談、2024年の非常戒厳令まで、朝鮮半島の近現代を年代順にたどる特集。
 icon: art-sino-japanese-war
 entries:
   # --- Late Joseon and annexation (1875-1919) ---
   - id: 1875-09-20-b6a2b35e # The Ganghwa Island incident
+  - id: 1876-02-27-fffc01f5 # The Japan-Korea Treaty of Amity (26 Feb)
   - id: 1882-07-23-0bf6358e # The Imo incident
   - id: 1884-12-04-410bee10 # The Gapsin coup
   - id: 1907-06-15-57c53297 # The Hague Peace Conference and the Korean envoys
@@ -44,11 +42,14 @@ entries:
   - id: 1950-06-25-ad3a75fa # The Korean War begins
   - id: 1950-06-28-dae34586 # Seoul falls
   - id: 1950-09-15-f65b5ebd # The Incheon landing
+  - id: 1950-10-25-966aa384 # The Chinese People's Volunteers attack
   - id: 1953-07-27-061c6db9 # The armistice
 
   # --- Revolution, coups and democratisation (1960-1988) ---
   - id: 1960-04-19-bf31d14c # The April Revolution
   - id: 1961-05-16-f0d763c6 # The May 16 coup
+  - id: 1965-06-22-868ce950 # The treaty with Japan
+  - id: 1972-12-25-257eb29b # North Korea's socialist constitution (27 Dec)
   - id: 1974-08-15-7bd6aa6f # The Mun Se-gwang incident
   - id: 1979-10-26-e4d81202 # Park Chung-hee assassinated
   - id: 1979-12-12-0515c607 # The December 12 coup
@@ -62,10 +63,12 @@ entries:
   - id: 1991-09-17-df3e2c69 # Both Koreas join the UN
   - id: 1994-07-08-c6b6ca29 # Kim Il-sung dies
   - id: 1998-02-25-347fa464 # Kim Dae-jung becomes president
+  - id: 2000-06-13-c275858d # The first inter-Korean summit
   - id: 2002-09-17-7fbce5e3 # Koizumi in Pyongyang; Kim Jong-il admits the abductions
   - id: 2006-10-09-d3fda850 # North Korea's first nuclear test
   - id: 2007-10-02-9d5676bd # The second inter-Korean summit
   - id: 2010-03-26-202dd6df # The Cheonan sinks
+  - id: 2010-11-23-8197d87b # The shelling of Yeonpyeong
   - id: 2011-12-17-a33e861f # Kim Jong-il dies
 
   # --- Summits and impeachments (2013-2024) ---

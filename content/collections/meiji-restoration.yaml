@@ -4,11 +4,12 @@
 # decree; Edo Castle renamed Tokyo Castle and the move of the capital; the return of the domains, the abolition of the
 # domains and the Iwakura Mission; schools, conscription, the land tax reform and the emancipation of geisha and
 # prostitutes; the petition for an elected assembly; the Saga, Shinpuren, Akizuki and Hagi rebellions and the end of
-# the Satsuma Rebellion at Shiroyama; the Taiwan expedition, the exchange of Sakhalin for the Kurils and the Ganghwa
-# incident; the end of samurai stipends and sword wearing; Okubo's assassination, the Ryukyu disposition, the edict on
-# a national assembly, the cabinet system and the Meiji Constitution.
+# the Satsuma Rebellion at Shiroyama; the Taiwan expedition, the exchange of Sakhalin for the Kurils, the Ganghwa
+# incident and the Japan-Korea treaty; the end of samurai stipends and sword wearing; Okubo's assassination, the
+# Ryukyu disposition, the edict on a national assembly, the cabinet system and the Meiji Constitution.
 # Dates before 1873 are the Gregorian dates the articles give next to the lunar ones. The cabinet system is checked
 # against the article on the first Ito cabinet (22 Dec 1885).
+# The Japan-Korea Treaty of Amity (26 Feb 1876) is included with the date corrected in fixes.yaml (2026-10-13).
 # Overlaps: the era name decree is also in the calendar collection, the school system in education, the petition for
 # an elected assembly, the edict on a national assembly and the constitution in the constitution collection, and the
 # Ryukyu disposition in the Okinawa collection.
@@ -16,12 +17,12 @@
 # articles cannot confirm (dataset vs article: Toba-Fushimi 27 Jan 1868 "Prince Yoshiaki made 軍事総裁" / the article has
 # him appointed 征討大将軍; the new government's notice to the foreign envoys 8 Feb 1868 / not dated in the article (it has
 # a report to the envoys on 7 Mar); the surrender of Edo Castle 3 May 1868 "Enomoto takes 8 ships to Tateyama" / 7
-# ships; the political crisis of 1873 (25 Oct) / not dated; the Japan-Korea Treaty of Amity 27 Feb 1876 / signed 26
-# Feb; the Satsuma Rebellion "(to 24 Sep)" dated 15 Feb 1877 / the article dates the war 29 Jan - 24 Sep (15 Feb is
-# Saigo's departure); Tabaruzaka "(to 20 Mar)" dated 4 Mar 1877 / the article dates the battle 3-20 Mar).
+# ships; the political crisis of 1873 (25 Oct) / not dated; the Satsuma Rebellion "(to 24 Sep)" dated 15 Feb 1877 /
+# the article dates the war 29 Jan - 24 Sep (15 Feb is Saigo's departure); Tabaruzaka "(to 20 Mar)" dated 4 Mar 1877 /
+# the article dates the battle 3-20 Mar).
 slug: meiji-restoration
 title: 明治維新
-lead: 1868年の王政復古の大号令から、西郷隆盛と勝海舟の会談、五箇条の誓文、戊辰戦争の上野戦争と会津戦争、一世一元の詔、東京奠都と箱館戦争の終結、版籍奉還と廃藩置県、岩倉使節団、学制・徴兵令・地租改正、民選議院設立建白書、佐賀の乱・神風連の乱・秋月の乱・萩の乱と西南戦争、大久保利通の暗殺、琉球処分、国会開設の詔、内閣制度の創設、大日本帝国憲法の発布まで。台湾出兵や樺太・千島交換条約、廃刀令も含めて、明治維新の20年余りをたどる。
+lead: 1868年の王政復古の大号令から、西郷隆盛と勝海舟の会談、五箇条の誓文、戊辰戦争の上野戦争と会津戦争、一世一元の詔、東京奠都と箱館戦争の終結、版籍奉還と廃藩置県、岩倉使節団、学制・徴兵令・地租改正、民選議院設立建白書、佐賀の乱・神風連の乱・秋月の乱・萩の乱と西南戦争、大久保利通の暗殺、琉球処分、国会開設の詔、内閣制度の創設、大日本帝国憲法の発布まで。台湾出兵や樺太・千島交換条約、日朝修好条規、廃刀令も含めて、明治維新の20年余りをたどる。
 description: 王政復古の大号令から、戊辰戦争、版籍奉還と廃藩置県、佐賀の乱から西南戦争までの反乱、大日本帝国憲法の発布まで、明治維新を年代順にたどる特集。
 icon: art-meiji-ishin
 entries:
@@ -48,6 +49,7 @@ entries:
   - id: 1874-05-06-a2f1e1ca # The Taiwan expedition
   - id: 1875-05-07-6ce006c3 # Sakhalin is exchanged for the Kurils
   - id: 1875-09-20-b6a2b35e # The Ganghwa incident
+  - id: 1876-02-27-fffc01f5 # The Japan-Korea Treaty of Amity (26 Feb)
   - id: 1876-03-28-e7e98f45 # Sword wearing is banned
   - id: 1876-08-05-9bce9200 # Samurai stipends are commuted into bonds
 
