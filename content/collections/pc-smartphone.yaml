@@ -1,0 +1,45 @@
+# Personal computers and smartphones (collection)
+# References to existing auto-generated events only (nothing newly written). The founding of Microsoft and Apple,
+# NEC's PC-8001, the IBM PC, the Macintosh and Windows 1.0; Linux, Windows 95 in Japan, Apple's purchase of NeXT and
+# the iMac; i-mode, the iPhone from its announcement to its launch in the US and Japan, Android 1.0 and Windows 7;
+# the end of Windows XP, Windows 10 and Windows 11.
+# Checked against en: the first public release of Linux (5 Oct 1991, "Linux kernel").
+# Overlaps: i-mode and the announcement of the iPhone are also in the telecommunications and broadcasting
+# collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the PC-9801 13 Oct 1982 / October 1982 only; Mac OS X 10.0 24 Mar
+# 2001 "10.1 on 25 Sep" / the 10.1 date is not in the articles; Windows XP 25 Oct 2001 "retail on 16 Nov" / neither
+# date is in the ja article; Steve Jobs's death 5 Oct 2011 "respiratory arrest, surrounded by his family at home" /
+# the article has pancreatic cancer and Palo Alto only).
+slug: pc-smartphone
+title: パソコンとスマートフォン
+lead: 1975年のマイクロソフト設立と1976年のアップルコンピュータ設立から、NECのPC-8001、IBM PC、Macintosh、Windows 1.0、Linuxの公開、Windows 95日本語版の発売、AppleによるNeXTの買収、iMac、iモードの開始、初代iPhoneの発表と発売、iPhone 3Gの日本発売、Android 1.0、Windows 7、Windows XPのサポート終了、Windows 10とWindows 11の提供開始まで。パソコンとスマートフォンが暮らしに入ってきた50年近くをたどる。
+description: マイクロソフトとアップルの設立から、PC-8001、IBM PC、Macintosh、Windows 95、iモード、iPhone、Android、Windows 11まで、パソコンとスマートフォンの歩みを年代順にたどる特集。
+icon: art-windows95
+entries:
+  # --- The first personal computers (1975-1985) ---
+  - id: 1975-04-04-812c7cdb # Microsoft is founded
+  - id: 1976-04-01-a323f617 # Apple Computer is founded
+  - id: 1979-05-09-4ef0b9ac # NEC announces the PC-8001
+  - id: 1981-08-12-05acdfdc # The IBM PC
+  - id: 1984-01-24-89a903e5 # The Macintosh goes on sale
+  - id: 1985-11-20-0614b641 # Windows 1.0
+
+  # --- Linux, Windows 95 and the iMac (1991-1999) ---
+  - id: 1991-10-05-13cc8fcc # Torvalds releases Linux
+  - id: 1995-11-23-8a73b54f # Windows 95 goes on sale in Japan
+  - id: 1996-12-20-e7f4fbd4 # Apple buys NeXT; Jobs returns
+  - id: 1998-08-15-62c43fbb # The iMac
+  - id: 1999-02-22-33b21b72 # NTT Docomo starts i-mode
+
+  # --- Smartphones (2007-2009) ---
+  - id: 2007-01-09-e68c1122 # Jobs unveils the iPhone
+  - id: 2007-06-29-da7cf588 # The iPhone goes on sale in the US
+  - id: 2008-07-11-9ddf6c11 # The iPhone 3G goes on sale in Japan
+  - id: 2008-09-23-ddb5ad06 # Android 1.0
+  - id: 2009-10-22-cfe5bf09 # Windows 7
+
+  # --- Windows XP to Windows 11 (2014-2021) ---
+  - id: 2014-04-09-bb691f65 # Support for Windows XP ends
+  - id: 2015-07-29-4d419e7d # Windows 10
+  - id: 2021-10-05-35a43b90 # Windows 11

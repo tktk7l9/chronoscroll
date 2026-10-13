@@ -1,0 +1,45 @@
+# Terrorism (collection)
+# References to existing auto-generated events only (nothing newly written). The Lod airport massacre, the Munich
+# Olympics, the Rangoon bombing, Air India 182 and Pan Am 103; the Matsumoto sarin attack, Oklahoma City, the
+# embassy bombings in Kenya and Tanzania and the USS Cole; 11 September, Bali, Beslan and London; the Mumbai
+# attacks, the killing of bin Laden and the attacks in Norway; Boston, Paris, Brussels, Dhaka and Manchester.
+# Overlaps: the Munich Olympics are also in the Olympics collection and the Mumbai attacks in the India and South
+# Asia collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the Tokyo subway sarin attack 20 Mar 1995 "5,510 injured" / about
+# 6,300 (estimate) in the article; Charlie Hebdo 7 Jan 2015 "4 seriously injured" / 11 injured; the ISIL hostage
+# videos 20 Jan 2015 / the quoted statement of 1 Feb and "November 2005" are not in the article).
+slug: terrorism
+title: テロ事件
+lead: 1972年のテルアビブ空港乱射事件とミュンヘンオリンピック事件から、ラングーン事件、エア・インディア182便とパンアメリカン航空103便の爆破、松本サリン事件、オクラホマシティ連邦政府ビル爆破事件、ケニアとタンザニアのアメリカ大使館爆破、米艦コール襲撃、アメリカ同時多発テロ、バリ島の爆弾テロ、ベスラン学校占拠事件、ロンドン同時爆破、ムンバイ同時多発テロ、ビンラディンの殺害、ノルウェー連続テロ、ボストンマラソン爆弾テロ、パリ同時多発テロ、ブリュッセルとダッカの事件、マンチェスター・アリーナの爆破まで。1972年から2017年まで、世界各地で起きたテロ事件をたどる。
+description: テルアビブ空港乱射事件とミュンヘンオリンピック事件から、松本サリン事件、アメリカ同時多発テロ、ロンドン同時爆破、ムンバイ同時多発テロ、パリ同時多発テロまで、世界のテロ事件を年代順にたどる特集。
+icon: art-september11
+entries:
+  # --- Hijacks, bombs and airliners (1972-1988) ---
+  - id: 1972-05-30-85b0186c # The Lod airport massacre
+  - id: 1972-09-05-4ef6fb5a # The Munich Olympics massacre
+  - id: 1983-10-09-bee88590 # The Rangoon bombing
+  - id: 1985-06-23-9c9f380a # Air India 182 is bombed
+  - id: 1988-12-21-c31ca504 # Pan Am 103 is bombed over Lockerbie
+
+  # --- Sarin, Oklahoma City and al-Qaeda (1994-2000) ---
+  - id: 1994-06-27-1f4063bd # The Matsumoto sarin attack
+  - id: 1995-04-19-1e5da7cd # The Oklahoma City bombing
+  - id: 1998-08-07-71e69c7f # The US embassy bombings in Kenya and Tanzania
+  - id: 2000-10-12-a79277fd # The attack on the USS Cole
+
+  # --- 11 September and after (2001-2011) ---
+  - id: 2001-09-11-038f51ad # The 11 September attacks
+  - id: 2002-10-12-6bc8f95f # The Bali bombings
+  - id: 2004-09-01-f7aaa079 # The Beslan school siege
+  - id: 2005-07-07-64408135 # The London bombings
+  - id: 2008-11-26-d138bb50 # The Mumbai attacks
+  - id: 2011-05-02-1e0a34eb # Bin Laden killed
+  - id: 2011-07-22-36be9086 # The attacks in Norway
+
+  # --- Boston to Manchester (2013-2017) ---
+  - id: 2013-04-15-59686514 # The Boston Marathon bombing
+  - id: 2015-11-13-797efbd2 # The Paris attacks
+  - id: 2016-03-22-d1ae4de5 # The Brussels bombings
+  - id: 2016-07-01-82b70ea8 # The attack on a café in Dhaka
+  - id: 2017-05-22-ef16592a # The Manchester Arena bombing
