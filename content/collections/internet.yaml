@@ -1,0 +1,54 @@
+# History of the Internet (collection)
+# References to existing auto-generated events only (nothing newly written). ARPANET's first message and the switch
+# to TCP/IP; Amazon, Google, i-mode, 2channel and Wikipedia in English and Japanese; the iTunes Music Store,
+# Facebook, Twitter and Bitcoin; the Winny ruling, WikiLeaks and the left-pad incident; Trump banned from Twitter,
+# Bitcoin as legal tender in El Salvador, Facebook renamed Meta, the end of Internet Explorer and Musk's purchase of
+# Twitter.
+# Checked against en: the switch to TCP/IP (1 Jan 1983, "ARPANET"), Facebook's launch (4 Feb 2004, "Facebook"),
+# Twitter's public launch (15 Jul 2006, "Twitter") and the left-pad incident (22 Mar 2016, "Npm left-pad incident").
+# Overlaps: ARPANET's first message, Twitter, Bitcoin and Meta are also in the AI and computing collection; i-mode
+# in the PC and smartphone and the telecommunications collections; the iTunes Music Store in the music collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date or
+# details the articles cannot confirm (dataset vs article: ARPANET's first message 29 Oct 1969 "from UCLA to
+# Stanford University" / to the Stanford Research Institute (the AI and computing entry for that day is used
+# instead); the first domain name symbolics.com 15 Mar 1985 / the first .com domain (en); the first website 6 Aug
+# 1991 / the first website went up on 20 Dec 1990, and 6 Aug 1991 is the public Usenet post (en); Cadabra founded 5
+# Jul 1994 / the ja article has 5 Jul 1993; YouTube "founded" 14 Feb 2005 / the domain was activated on 14 Feb and
+# the company founded on 15 Feb; the PC-VAN virus 13 Sep 1988, the ITU's two billion users 26 Jan 2011 and the AWS
+# outage 20 Oct 2025 / not dated in the articles; the Mt. Gox halt 25 Feb 2014 / the article has trading halted on
+# the 24th and the announcement on the 25th; Snowden's asylum 1 Aug 2013 / Obama's remark of the 6th and the
+# cancelled summit are not in the article; Assange freed 26 Jun 2024 "after 14 years" / the article has some 12
+# years).
+slug: internet
+title: インターネットの歴史
+lead: 1969年のARPANETによる最初のメッセージ送信から、ARPANETのIPへの切り替え、Amazon.comのサービス開始、Googleの設立、iモードの開始、2ちゃんねるの開設、英語版と日本語版のウィキペディアの開設、iTunes Music Storeの開始、Facebookの開設、Twitterの一般公開、ビットコインの最初のブロック、Winny開発者の逆転無罪判決、ウィキリークスによる外交電文の暴露、npm left-pad削除事件、トランプ大統領のTwitterアカウントの永久停止、エルサルバドルのビットコイン導入、FacebookのMetaへの社名変更、Internet Explorerのサポート終了、イーロン・マスクによるTwitter買収まで。インターネットの50年余りをたどる。
+description: ARPANETの最初の通信から、Google、iモード、ウィキペディア、Facebook、Twitter、ビットコイン、イーロン・マスクによるTwitter買収まで、インターネットの歩みを年代順にたどる特集。
+icon: art-www
+entries:
+  # --- ARPANET (1969-1983) ---
+  - id: 1969-10-29-ai-arpanet # ARPANET's first message
+  - id: 1983-01-01-fad4510f # ARPANET switches to TCP/IP
+
+  # --- The web goes mainstream (1995-2004) ---
+  - id: 1995-07-16-be637751 # Amazon.com opens
+  - id: 1998-09-04-b3c1a684 # Google is founded
+  - id: 1999-02-22-33b21b72 # i-mode starts
+  - id: 1999-05-30-257b3abb # 2channel opens
+  - id: 2001-01-15-9ae30e95 # Wikipedia starts in English
+  - id: 2001-05-20-7f6128d8 # The Japanese Wikipedia starts
+  - id: 2003-04-28-c90040a2 # The iTunes Music Store opens
+  - id: 2004-02-04-fcf81bb5 # Facebook is launched
+
+  # --- Social media and cryptocurrency (2006-2016) ---
+  - id: 2006-07-15-ai-twitter # Twitter opens to the public
+  - id: 2009-01-03-ai-bitcoin # Bitcoin's genesis block
+  - id: 2009-10-08-0e3782a7 # The Winny developer is acquitted on appeal
+  - id: 2010-11-28-1d006f59 # WikiLeaks publishes US diplomatic cables
+  - id: 2016-03-22-cbf89189 # The left-pad incident
+
+  # --- Platforms and power (2021-2022) ---
+  - id: 2021-01-08-a76bb183 # Twitter bans Trump
+  - id: 2021-09-07-9aa25a18 # El Salvador adopts Bitcoin
+  - id: 2021-10-28-ai-meta # Facebook becomes Meta
+  - id: 2022-06-15-5c7a9b5e # Internet Explorer is retired
+  - id: 2022-10-27-00c7df3e # Musk buys Twitter
