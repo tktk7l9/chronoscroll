@@ -94,9 +94,10 @@
   category: war
   region: both
 
+# en "Annus mirabilis papers": the paper "was received on 30 June and published 26 September" (it said 「発表」 on 30 June, 2026-10-13)
 - id: 1905-06-30-18f5d965
   title: アインシュタインが特殊相対性理論を発表
-  summary: 26歳の特許局員アインシュタインが論文「運動物体の電気力学について」を発表。時間と空間は絶対ではないという洞察は物理学の常識を覆し、「奇跡の年」の代表的成果となった。
+  summary: 26歳の特許局員アインシュタインの論文「運動物体の電気力学について」が学術誌に受理された（掲載は9月26日）。時間と空間は絶対ではないという洞察は物理学の常識を覆し、「奇跡の年」の代表的成果となった。
   importance: 100
   svg: art-relativity
   category: science
@@ -213,9 +214,11 @@
   category: politics
   region: japan
 
+# 866 contracts from 新しい動画 3つのはなし; the street televisions were set up by NTV for its August launch (街頭テレビ),
+# so the sentence about crowds watching wrestling on them was dropped (2026-10-13)
 - id: 1953-02-01-84936241
   title: NHKがテレビ本放送を開始
-  summary: 東京・内幸町の東京放送会館から、日本初のテレビ本放送が始まった。当初の受信契約はわずか866件。街頭テレビにプロレス中継を見る人垣ができ、テレビの時代が幕を開けた。
+  summary: 東京・内幸町の東京放送会館から、日本初のテレビ本放送が始まった。当初の受信契約はわずか866件だった。
   importance: 100
   svg: art-tv-broadcast
   category: culture
@@ -229,9 +232,11 @@
   category: science
   region: world
 
+# 東京タワー: 竣工 1958年12月23日, 「当時の自立式鉄塔としては世界最高」, 「東京のシンボルで、観光名所となっている」; the main TV
+# transmitters moved to Tokyo Skytree, so 「テレビ放送の総合電波塔として首都の空に立ち続ける」 was dropped (2026-10-13)
 - id: 1958-12-23-334d8850
   title: 東京タワーが完成
-  summary: 高さ333m、当時世界一の自立式鉄塔として東京タワーが完成した。戦後復興を遂げた東京の新しいシンボルとなり、テレビ放送の総合電波塔として首都の空に立ち続ける。
+  summary: 高さ333m、当時世界一の自立式鉄塔として東京タワーが完成した。テレビとラジオの電波塔として建てられ、東京のシンボルとなった。
   importance: 100
   svg: art-tokyo-tower
   category: culture

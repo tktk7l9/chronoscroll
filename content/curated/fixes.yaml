@@ -2899,3 +2899,41 @@
 - id: 2017-09-20-16be9b34   # 核兵器禁止条約: date_signed 2017年9月20日 (New York); en "Treaty on the Prohibition of Nuclear Weapons": "opened for signature on 20 September 2017" (the line had 「51カ国が署名」, a count neither article gives)
   title: "核兵器禁止条約の署名式典が国連本部で行われ、署名の受け付けが始まった"
   summary: "核兵器禁止条約の署名式典が国連本部で行われ、署名の受け付けが始まった。"
+
+# --- Audit of the older collections, group 4 (finance, cold-war, science, telecom): wrong or unsupported facts
+# found by checking every entry against its topic articles (2026-10-13) ---
+- id: 1944-07-22-0a17feff   # ブレトン・ウッズ協定: talks from 「1944年7月1日から7月22日にかけて」, 「国際通貨基金（IMF）、国際復興開発銀行（IBRD）の設立を決定し」 (the line said the IMF and the World Bank were established that day)
+  title: "米ニューハンプシャー州で開かれていた連合国金融通貨会議でブレトン・ウッズ協定が締結され、国際通…"
+  summary: "米ニューハンプシャー州で開かれていた連合国金融通貨会議でブレトン・ウッズ協定が締結され、国際通貨基金と世界銀行（国際復興開発銀行）の設立が決まった。"
+
+- id: 1953-08-28-17a3c720   # 日本テレビ放送網: 「8月28日…午前11時20分…民放初のテレビ局…として本放送を開始」, 「日本で初めてとなるテレビCM（精工舎提供）を放送」 (the line spoke of 「日本で初めての放送事故」, which the article does not mention)
+  title: "日本初の民間放送によるテレビ局、日本テレビ放送網がテレビジョン本放送を開始。日本で初めてのテレ…"
+  summary: "日本初の民間放送によるテレビ局、日本テレビ放送網がテレビジョン本放送を開始。日本で初めてのテレビCM（精工舎提供）も放送された。"
+
+- id: 1964-06-19-eeee0936   # en "Transpac (cable system)": "TRANSPAC-1 (TPC-1) was laid by AT&T's cable ship C.S. Long Lines and opened on June 19, 1964. It connected Hawaii, Midway Atoll, Wake Island, Guam, and Japan" (the line added a first call between Ikeda and Johnson, which no article gives)
+  title: "日本とハワイをグアムなど経由で結ぶ太平洋横断海底ケーブルTPC-1が開通した"
+  summary: "日本とハワイをグアムなど経由で結ぶ太平洋横断海底ケーブルTPC-1が開通した。"
+
+- id: 1967-06-25-685a16eb   # en "Our World (1967 TV program)": "the first live multinational multi-satellite television production", "broadcast on Sunday 25 June 1967 (Monday 26 June in Australia and Japan) in twenty-four countries", the Beatles "performing their song All You Need Is Love for the first time" (the line called it the first satellite-relayed programme, when satellite relays had run since 1962)
+  title: "複数の衛星で各国を生中継で結んだ初のテレビ番組『OUR WORLD 〜われらの世界〜』が24か…"
+  summary: "複数の衛星で各国を生中継で結んだ初のテレビ番組『OUR WORLD 〜われらの世界〜』が24か国で放送され、ビートルズが「愛こそはすべて」を生演奏した。"
+
+- id: 1973-02-14-4230c419   # ニクソン・ショック: 「12月20日 - 新為替レート（1ドル＝308円）が実施」, 「1973年2月14日 - 円は変動相場制へ完全に移行」 (the line added 「スタートは、1ドル=277円」, a rate no article gives)
+  title: "日本円が1ドル=308円の固定相場制から変動相場制に完全移行した"
+  summary: "日本円が1ドル=308円の固定相場制から変動相場制に完全移行した。"
+
+- id: 1995-10-06-01cadbdc   # en "51 Pegasi b": discovered 6 October 1995, "the first exoplanet to be discovered orbiting a main-sequence star" (the line called it the first exoplanet, while planets around a pulsar had been found in 1992)
+  title: "ペガスス座51番星に惑星が発見された。主系列星を公転する太陽系外惑星としては初めての発見である"
+  summary: "ペガスス座51番星に惑星が発見された。主系列星を公転する太陽系外惑星としては初めての発見である。"
+
+- id: 1996-04-01-1a3b1009   # Yahoo! JAPAN: 「Yahoo! JAPANが創業時の1996年4月1日から提供していたディレクトリ型（カテゴリー検索型）の検索エンジン」 (the line called it 「国内初の商用検索サイト」 and added Daiwa's online share dealing, neither of which any article gives)
+  title: "検索サイト「Yahoo! JAPAN」がサービスを開始した"
+  summary: "検索サイト「Yahoo! JAPAN」がサービスを開始した。"
+
+- id: 1997-02-22-cba87525   # ドリー (羊): 「世界初の哺乳類の体細胞クローンである雌羊」, 「ドリーの誕生は1997年2月22日に発表された」 (the line called Dolly the first cloned sheep, when sheep had been cloned from embryo cells before)
+  title: "世界初の哺乳類の体細胞クローンである羊ドリーの誕生が発表された"
+  summary: "世界初の哺乳類の体細胞クローンである羊ドリーの誕生が発表された。"
+
+- id: 2019-04-10-443a559a   # イベントホライズンテレスコープ: 「EHTが世界で初めて撮影に成功したブラックホールシャドウ」, results released 「2019年4月10日13時（UTC）から」; en: "eight telescopes located at six geographical sites" (the line ended with 「ノーベル賞級の成果と言われている」, which neither article says)
+  title: "日米欧などの国際共同研究グループ（イベントホライズンテレスコープ）が、巨大ブラックホールの撮影…"
+  summary: "日米欧などの国際共同研究グループ（イベントホライズンテレスコープ）が、巨大ブラックホールの撮影に初めて成功したと発表。チリやメキシコ、米国、スペイン、南極にある8つの電波望遠鏡を連動させ、極めて解像度の高い巨大望遠鏡に見立てて観測した。"

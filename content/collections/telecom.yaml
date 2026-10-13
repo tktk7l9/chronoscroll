@@ -1,7 +1,7 @@
 # History of telecommunications and broadcasting (collection)
 # References to existing auto-generated events only (nothing newly written).
 # Wires (telegraph, telephone, undersea cable), the air (wireless, radio, television, satellites) and the pocket
-# (car phones, the shoulder phone, i-mode, smartphones, LTE, 5G), from Japan's first telegraph line to the end of 3G.
+# (car phones, i-mode, smartphones, LTE, 5G), from Japan's first telegraph line to the end of 3G.
 # The first radio broadcast in Japan (1925) and the Kohaku song contest are in the music collection, ARPANET and the
 # web services of the 2000s in the AI collection, and are not repeated.
 # Duplicates: of the two 11 Jul 2008 iPhone 3G entries the SoftBank one is used (the other writes "iphone").
@@ -9,9 +9,19 @@
 # the first website went up on 20 Dec 1990, and 6 Aug 1991 was the public Usenet post (2026-10-13).
 # Left out on purpose: entries whose dataset date disagrees with the topic article
 # (dataset vs article: Matsushiro Matsunosuke's wireless experiment off Tsukiji, Dec 1897 / 1898).
+# Audited against the topic articles (2026-10-13): 33 entries checked, 6 corrected (4 in fixes.yaml, 2 in
+# top50.yaml), 1 dropped. Corrected: NHK's first TV broadcast (top50), without the street-television crowds that
+# belonged to NTV (街頭テレビ); NTV's first day, its first TV commercial rather than 「日本で初めての放送事故」; Tokyo Tower (top50),
+# no longer said to stand as the capital's TV broadcasting tower; the TPC-1 cable, without the Ikeda-Johnson call
+# that no article gives; Our World, the first live multi-satellite programme rather than the first satellite-relayed
+# one; Yahoo! JAPAN, without 「国内初の商用検索サイト」 and Daiwa's online dealing.
+# Dropped: 1985-09-02-10b4956d NTT's shoulder phone (dataset vs article: 2 Sep 1985 / NTT大容量方式 gives September 1985,
+# 日本無線 gives 18 Sep for its 100 model). The lead and the line above no longer name the shoulder phone. The 1962
+# ten-million TV licences are dated by 1962年のテレビ (日本), the 1890 telephone exchange by 電話番号案内 and 日本の公衆電話, the 1870
+# telegraph by 電報.
 slug: telecom
 title: 通信と放送の歴史
-lead: 1870年の東京・横浜間の電信開通、ベルの電話、マルコーニの大西洋横断無線通信から、ラジオとテレビの放送開始、東京タワー、日米間の初の衛星中継、自動車電話とショルダーフォン、そしてWorld Wide Webの公開、iモード、iPhone、5Gまで。日本放送協会の設立から地上デジタル放送への完全移行までの放送の歩みも含めて、声と映像と情報を遠くへ届ける技術の移り変わりをたどる。
+lead: 1870年の東京・横浜間の電信開通、ベルの電話、マルコーニの大西洋横断無線通信から、ラジオとテレビの放送開始、東京タワー、日米間の初の衛星中継、自動車電話、そしてWorld Wide Webの公開、iモード、iPhone、5Gまで。日本放送協会の設立から地上デジタル放送への完全移行までの放送の歩みも含めて、声と映像と情報を遠くへ届ける技術の移り変わりをたどる。
 description: 電信と電話、ラジオとテレビの放送開始から、衛星中継、携帯電話、インターネット、スマートフォン、5Gまで、通信と放送の転換点を日本と世界の出来事で年代順にたどる特集。
 icon: art-tv-broadcast
 entries:
@@ -46,7 +56,6 @@ entries:
   - id: 1982-12-23-d642fc58 # Card payphones and telephone cards
   - id: 1984-05-12-f7d50059 # NHK starts satellite broadcasting
   - id: 1985-04-01-e866c28a # Nippon Telegraph and Telephone Public Corporation becomes NTT
-  - id: 1985-09-02-10b4956d # NTT's "shoulder phone"
 
   # --- The internet and the mobile web ---
   - id: 1991-08-06-eaa5612d # The World Wide Web is opened to outsiders

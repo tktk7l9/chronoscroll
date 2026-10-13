@@ -9,9 +9,19 @@
 # cannot confirm (dataset vs article: Ramsay isolates helium 26 May 1895 / 26 Mar 1895; Tomonaga's Nobel Prize
 # "decided" 2 Oct 1965 / the article gives only autumn 1965; the Schrodinger equation "established" 3 Sep 1926 /
 # the articles give only 1926 for his series of papers).
+# Audited against the topic articles (2026-10-13): 35 entries checked, 4 corrected (3 in fixes.yaml, 1 in
+# top50.yaml), 1 dropped. Corrected: Einstein's relativity paper (top50), received on 30 June and published on 26
+# September (en "Annus mirabilis papers"), not 「発表」 on 30 June; 51 Pegasi b, the first exoplanet found around a
+# main-sequence star, not the first exoplanet (en "51 Pegasi b"); Dolly, the first mammal cloned from an adult cell,
+# not the first cloned sheep (ドリー (羊)); the Event Horizon Telescope image, without the unsourced 「ノーベル賞級の成果と言われている」.
+# Dropped because no article gives the day: 1981-10-19-ef0d6d47 Fukui Kenichi's Nobel Prize in Chemistry (福井謙一 and
+# en give 1981 only). The other Nobel Prize days are dated by the laureates' articles or the press releases and news
+# they cite (Esaki 23 Oct 1973, Shirakawa 10 Oct 2000, Koshiba 8 Oct 2002 in 佐藤勝彦 (物理学者), Kobayashi, Masukawa and
+# Nambu 7 Oct 2008, Shimomura 8 Oct 2008, Akasaki, Amano and Nakamura 7 Oct 2014, Kajita 6 Oct 2015, Kitagawa 8 Oct
+# 2025). The lead now calls 51 Pegasi b the first exoplanet around a sun-like star.
 slug: science
 title: 科学の大発見の歴史
-lead: 1869年のメンデレーエフの周期表、キュリー夫妻のラジウム、プランクの量子仮説とアインシュタインの相対性理論から、冥王星の発見、超新星1987Aのニュートリノ、初めての太陽系外惑星、クローン羊ドリー、ヒトゲノムの解読、ヒッグス粒子、重力波、ブラックホールの撮影まで。湯川秀樹から北川進までの日本の研究者のノーベル物理学賞・化学賞と、113番元素の命名権の獲得も含めて、物理・化学・生命科学の大発見をたどる。
+lead: 1869年のメンデレーエフの周期表、キュリー夫妻のラジウム、プランクの量子仮説とアインシュタインの相対性理論から、冥王星の発見、超新星1987Aのニュートリノ、主系列星を回る初めての太陽系外惑星、クローン羊ドリー、ヒトゲノムの解読、ヒッグス粒子、重力波、ブラックホールの撮影まで。湯川秀樹から北川進までの日本の研究者のノーベル物理学賞・化学賞と、113番元素の命名権の獲得も含めて、物理・化学・生命科学の大発見をたどる。
 description: メンデレーエフの周期表からヒッグス粒子、重力波、ブラックホールの撮影まで、物理・化学・生命科学の大発見と日本の研究者のノーベル賞を年代順にたどる特集。
 icon: art-radium-discovery
 entries:
@@ -40,7 +50,6 @@ entries:
 
   # --- From tunnelling to the human genome ---
   - id: 1973-10-23-6cc927fe # Esaki Leona, Nobel Prize in Physics
-  - id: 1981-10-19-ef0d6d47 # Fukui Kenichi, Nobel Prize in Chemistry
   - id: 1987-02-23-c45d4790 # Supernova 1987A and the first supernova neutrinos
   - id: 1991-01-01-70db2a29 # Iijima Sumio discovers carbon nanotubes
   - id: 1995-10-06-01cadbdc # First planet found around a Sun-like star (51 Pegasi)
