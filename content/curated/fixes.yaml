@@ -2590,3 +2590,12 @@
   date: "2021-07-08"
   title: "東京オリンピックについて、5者協議で1都3県（東京・埼玉・千葉・神奈川）の会場を無観客とするこ…"
   summary: "東京オリンピックについて、5者協議で1都3県（東京・埼玉・千葉・神奈川）の会場を無観客とすることが決まった。観客の上限は6月に1万人と決めていた。"
+
+# --- Wrong facts found while building the collections of #73, checked against the topic articles (2026-10-13) ---
+- id: 1948-11-12-03ff59dc   # 極東国際軍事裁判: 「判決前に病死した2人と病気のため訴追免除された大川周明1人を除く全員が有罪となり、うち7人が絞首刑、16人が終身刑、2人が有期禁固刑となった」 (the line had 「免訴3名」)
+  title: "東京裁判の判決が下る。判決前に病死した2人と病気で訴追を免除された1人を除く被告25人が有罪と…"
+  summary: "東京裁判の判決が下る。判決前に病死した2人と病気で訴追を免除された1人を除く被告25人が有罪となり、死刑7人、終身禁固16人、有期禁固2人。"
+
+- id: 2022-04-14-79cca9a2   # en "Russian cruiser Moskva": "the largest warship to be sunk in combat since the General Belgrano in the 1982 Falklands War, and the largest Russian warship to be sunk since World War II" (the line had 「第二次世界大戦以来最大」 for any warship)
+  title: "ロシアのウクライナ侵攻関連: ロシア黒海艦隊旗艦のミサイル巡洋艦モスクワが損傷を受け曳航中に沈…"
+  summary: "ロシアのウクライナ侵攻関連: ロシア黒海艦隊旗艦のミサイル巡洋艦モスクワが損傷を受け曳航中に沈没。ウクライナ側は損傷はネプチューン対艦ミサイルによるものだとしており、事実であれば戦闘で沈んだ軍艦としては1982年のフォークランド紛争以来最大で、ロシアの軍艦としては第二次世界大戦以来最大。一方、ロシア側は同艦の損傷は弾薬の爆発事故によるものだと述べた。"
