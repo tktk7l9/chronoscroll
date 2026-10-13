@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="color-scheme" content="light dark" />
 		%sveltekit.head%
-		<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "cf62303813104660bbb08da280e9673d"}'></script><!-- Cloudflare Web Analytics (the token is not secret) gitleaks:allow -->
+		<script type="module" src="/cf-beacon.js"></script><!-- Cloudflare Web Analytics: static/cf-beacon.js appends the beacon at runtime -->
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<!-- Inline style attributes are forbidden by the strict CSP (style-src 'self'), so use .app-shell in app.css -->
