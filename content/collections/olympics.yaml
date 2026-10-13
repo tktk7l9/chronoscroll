@@ -4,6 +4,14 @@
 # (first entry, the forfeited 1940 Games, Tokyo 1964 and 2020).
 # Left out on purpose: entries whose dataset date disagrees with the topic article
 # (Coubertin's Sorbonne speech was on 25 Nov 1892, not 23 Nov).
+# Audited against the topic articles (2026-10-13): 30 entries checked, 4 corrected (3 in fixes.yaml, 1 in
+# top50.yaml), none dropped. Corrected: Stockholm 1912, which ran to 22 July, not 27 July; Helsinki 1952, whose
+# 「陸上・水泳は不振」 neither article says (Japan won three silver medals in swimming); Kanakuri's 1967 finish, recorded by
+# Guinness World Records (the line was ungrammatical); Tokyo 2020 (top50), whose firsts were the postponement and
+# the odd-year Games, not the empty stands. South Africa's readmission keeps 9 Jul 1991: en "Apartheid-era South
+# Africa and the Olympics" gives 1991 and cites reports of 9 and 10 July 1991 on the readmission; the 1912 marathon
+# (14 July), Igaya's slalom silver (31 Jan 1956) and the first women's marathon (5 Aug 1984) are dated by the en
+# event articles.
 slug: olympics
 title: オリンピック・パラリンピックの歴史
 lead: 1894年の国際オリンピック委員会の設立から、日本が初参加したストックホルム大会、返上された1940年の東京大会、アジア初の1964年東京大会、1年延期された東京2020大会、そして100年ぶりのパリ大会まで。冬季大会とパラリンピック、ボイコットやテロに揺れた大会も含めて、近代五輪の130年をたどる。
