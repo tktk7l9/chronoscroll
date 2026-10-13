@@ -1,25 +1,26 @@
 # The Sino-Japanese and Russo-Japanese Wars (collection)
 # References to existing auto-generated events only (nothing newly written). The naval battle off Pungdo, Seonghwan,
-# the declarations of war, Pyongyang, the Battle of the Yellow Sea, Port Arthur and the Treaty of Shimonoseki;
-# Russia's lease of Port Arthur and Dalian and the Anglo-Japanese Alliance; the attack on Port Arthur, the
-# declarations of war, the blockade operations at Port Arthur and the death of Hirose, the Battle off Ulsan, the
-# first general assault on Port Arthur, the Dogger Bank incident, Hill 203 and the fall of Port Arthur; Tsushima,
-# the invasion of Sakhalin, the peace conference, the Treaty of Portsmouth and the Hibiya riot.
+# the declarations of war, Pyongyang, the Emperor at the headquarters in Hiroshima, the Battle of the Yellow Sea,
+# Port Arthur, the Treaty of Shimonoseki and the Triple Intervention; Russia's lease of Port Arthur and Dalian and
+# the Anglo-Japanese Alliance; the attack on Port Arthur, the declarations of war, the blockade operations at Port
+# Arthur and the death of Hirose, the Battle off Ulsan, the first general assault on Port Arthur, the Dogger Bank
+# incident, Hill 203 and the fall of Port Arthur; Tsushima, the invasion of Sakhalin, the peace conference, the
+# Treaty of Portsmouth and the Hibiya riot.
 # The mutual declarations of war of 1 Aug 1894 are checked against en "First Sino-Japanese War" (the ja article
 # names Japan's declaration only). The ja article on the Battle of Chemulpo dates the battle 9 Feb 1904 and
 # describes the first exchange of fire there on 8 Feb, the day of the attack on Port Arthur. The fall of Port Arthur
-# is dated by the surrender offer of 1 Jan 1905 (the capitulation was signed the next day).
+# is dated by the surrender offer of 1 Jan 1905 (the capitulation was signed the next day). The Emperor's arrival at
+# the headquarters in Hiroshima (15 Sep 1894) and the Triple Intervention (4 May 1895) are included with the wording
+# corrected in fixes.yaml (2026-10-13).
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
 # articles cannot confirm (dataset vs article: the Donghak uprising 29 Mar 1894 / the article dates it from 10 Jan
-# 1894; the Imperial Headquarters "moves" to Hiroshima 15 Sep 1894 / it moved on 13 Sep and the Emperor arrived on
-# the 15th; the Yalu crossing 25 Oct 1894 / the article dates the operation 24-25 Oct; the surrender of the Beiyang
-# Fleet at Weihaiwei 17 Feb 1895 / the articles date the battle 20 Jan - 12 Feb and the surrender 12 Feb; the Triple
-# Intervention "Liaodong returned" 4 May 1895 / the cabinet decided to give it up on 4 May and it was returned on 10
-# May; the imperial conference of 4 Feb 1904 "the war drew the world's attention" / not in the articles; Mukden "(to
-# 10 Mar)" dated 1 Mar 1905 / the article dates the battle 21 Feb - 10 Mar).
+# 1894; the Yalu crossing 25 Oct 1894 / the article dates the operation 24-25 Oct; the surrender of the Beiyang
+# Fleet at Weihaiwei 17 Feb 1895 / the articles date the battle 20 Jan - 12 Feb and the surrender 12 Feb; the
+# imperial conference of 4 Feb 1904 "the war drew the world's attention" / not in the articles; Mukden "(to 10 Mar)"
+# dated 1 Mar 1905 / the article dates the battle 21 Feb - 10 Mar).
 slug: sino-russo-wars
 title: 日清・日露戦争
-lead: 1894年の豊島沖海戦と成歓の戦い、日本と清の宣戦布告から、平壌の戦い、黄海海戦、旅順口の戦い、下関条約の調印、ロシアによる関東州の租借と日英同盟を経て、1904年の旅順口攻撃と日露の宣戦布告、旅順港閉塞作戦、蔚山沖海戦、旅順総攻撃と203高地の占領、旅順開城、日本海海戦、樺太の戦い、ポーツマス条約の締結と日比谷焼打事件まで。ドッガーバンク事件や広瀬武夫中佐の戦死も含めて、日清・日露の二つの戦争をたどる。
+lead: 1894年の豊島沖海戦と成歓の戦い、日本と清の宣戦布告から、平壌の戦い、黄海海戦、旅順口の戦い、下関条約の調印と三国干渉による遼東半島の放棄、ロシアによる関東州の租借と日英同盟を経て、1904年の旅順口攻撃と日露の宣戦布告、旅順港閉塞作戦、蔚山沖海戦、旅順総攻撃と203高地の占領、旅順開城、日本海海戦、樺太の戦い、ポーツマス条約の締結と日比谷焼打事件まで。ドッガーバンク事件や広瀬武夫中佐の戦死も含めて、日清・日露の二つの戦争をたどる。
 description: 豊島沖海戦と下関条約から、日英同盟、旅順口攻撃、203高地の占領と旅順開城、日本海海戦、ポーツマス条約と日比谷焼打事件まで、日清戦争と日露戦争を年代順にたどる特集。
 icon: art-russo-japanese-war
 entries:
@@ -27,10 +28,12 @@ entries:
   - id: 1894-07-25-98b56267 # The naval battle off Pungdo
   - id: 1894-07-28-8409af43 # Seonghwan
   - id: 1894-08-01-c83f0c49 # Japan and Qing declare war
+  - id: 1894-09-15-49211b67 # The Emperor arrives at the headquarters in Hiroshima
   - id: 1894-09-15-50fda395 # Pyongyang
   - id: 1894-09-17-c0ec77a8 # The Battle of the Yellow Sea
   - id: 1894-11-21-62f47f3c # Port Arthur
   - id: 1895-04-17-2d57e86d # The Treaty of Shimonoseki
+  - id: 1895-05-04-d1048e4c # The Triple Intervention: Japan gives up the Liaodong Peninsula
 
   # --- Between the wars (1898-1902) ---
   - id: 1898-03-27-aa2de7fb # Russia leases Port Arthur and Dalian
