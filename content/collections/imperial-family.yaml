@@ -1,0 +1,68 @@
+# The imperial family (collection)
+# References to existing auto-generated events only (nothing newly written). Crown Prince Yoshihito's investiture
+# and wedding and the death of Emperor Meiji; Hirohito's regency, wedding, accession and enthronement; the departure
+# of the eleven collateral houses; Akihito's investiture, engagement and wedding and the birth of Naruhito; Prince
+# Hitachi's wedding, the pachinko-ball attack on Hirohito and his visit to the United States; the end of Showa and
+# the state funeral; Prince Akishino's wedding, Akihito's enthronement and his visit to China; Naruhito's
+# investiture and wedding; the births of Princess Aiko and Prince Hisahito and Princess Sayako's wedding; Akihito's
+# video message, the date of the abdication, the abdication and the start of Reiwa; Naruhito's enthronement,
+# Akishino's investiture as heir, Princess Mako's wedding, Aiko coming of age and Hisahito's coming-of-age ceremony.
+# Overlaps: the death of Taisho, the end of Showa and the start of Reiwa are also in the calendar collection (the
+# same entries).
+# Hisahito "the first boy in 41 years" (6 Sep 2006): the article has 40 years and 9 months; kept as the rounded
+# figure.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Meiji's silver wedding 9 Mar 1894 "silver weddings spread in Japan" /
+# not in the article; Taisho's funeral 7 Feb 1927 "137,669 amnestied" / the numbers are not in the article;
+# Akihito's birth 23 Dec 1933 "the siren sounded twice" / not in the articles; Akihito at the coronation of
+# Elizabeth II 2 Jun 1953 "talks with President Eisenhower" / not in the articles; Hirohito's European tour 27 Sep
+# 1971 "seven countries including Switzerland" / the articles name six; the long entry on the death of Showa 7 Jan
+# 1989 "TV stations cancelled their programmes until the 9th" / not in the articles, the shorter entry of the same
+# day is used; Akihito in Palau 8 Apr 2015 / not dated in the article).
+slug: imperial-family
+title: 皇室
+lead: 1889年の嘉仁親王の立太子礼から、明治天皇の崩御、裕仁親王の摂政就任と即位の礼、11宮家51人の皇籍離脱、明仁親王と正田美智子の婚約とミッチー・ブーム、昭和天皇の初の訪米、昭和の終わりと大喪の礼、天皇明仁の即位礼正殿の儀と初の中国訪問、皇太子徳仁親王と小和田雅子の結婚、愛子内親王と悠仁親王の誕生、天皇の退位と令和の始まり、天皇徳仁の即位礼正殿の儀、立皇嗣の礼、眞子内親王の結婚、悠仁親王の成年式まで。明治から令和まで、天皇と皇族の誕生・結婚・即位・崩御をたどる。
+description: 嘉仁親王の立太子礼から、明治・大正・昭和の天皇の崩御と即位、皇太子明仁親王の結婚、平成の即位と天皇の退位、令和の始まり、悠仁親王の成年式まで、皇室の歩みを年代順にたどる特集。
+icon: art-heisei
+entries:
+  # --- Meiji and Taisho (1889-1926) ---
+  - id: 1889-11-03-4d947c37 # Yoshihito invested as crown prince
+  - id: 1900-05-10-bcee701d # Yoshihito marries Kujo Sadako
+  - id: 1912-07-30-49bfb38f # Emperor Meiji dies; Taisho succeeds
+  - id: 1921-11-25-093dcc83 # Crown Prince Hirohito becomes regent
+  - id: 1924-01-26-a257e19c # Hirohito marries Princess Nagako
+  - id: 1926-12-25-36e7c45d # Emperor Taisho dies; Showa begins
+
+  # --- Showa (1928-1975) ---
+  - id: 1928-11-10-c112c745 # Hirohito's enthronement
+  - id: 1947-10-14-5d282fc0 # Fifty-one members of eleven houses leave the imperial family
+  - id: 1952-11-10-30e8b757 # Akihito invested as crown prince
+  - id: 1958-11-27-5c99dc84 # Akihito's engagement to Shoda Michiko
+  - id: 1959-04-10-83a3dbe3 # Akihito marries Michiko
+  - id: 1960-02-23-6c9fcc2b # Naruhito is born
+  - id: 1964-09-30-3fdc1500 # Prince Hitachi marries
+  - id: 1969-01-02-5412bdbc # Pachinko balls fired at Hirohito
+  - id: 1975-09-30-74c932d8 # Hirohito visits the United States
+
+  # --- Heisei (1989-2017) ---
+  - id: 1989-01-07-df6d1213 # Showa ends; Heisei begins
+  - id: 1989-02-24-d5c1cae7 # The state funeral of Hirohito
+  - id: 1990-06-29-dee42dd4 # Prince Akishino marries
+  - id: 1990-11-12-06110e5e # Akihito's enthronement
+  - id: 1991-02-23-aaf2aa3f # Naruhito invested as crown prince
+  - id: 1992-10-23-c0536afc # Akihito visits China
+  - id: 1993-06-09-ee924075 # Naruhito marries Owada Masako
+  - id: 2001-12-01-de196df2 # Princess Aiko is born
+  - id: 2005-11-15-d21d3196 # Princess Sayako marries and leaves the family
+  - id: 2006-09-06-19c9ef85 # Prince Hisahito is born
+  - id: 2016-08-08-1a0889c7 # Akihito's video message
+  - id: 2017-12-01-d725dd8b # The abdication date is set
+
+  # --- Reiwa (2019-2025) ---
+  - id: 2019-04-30-78867d27 # Akihito abdicates
+  - id: 2019-05-01-617b427c # Naruhito succeeds; Reiwa begins
+  - id: 2019-10-22-164ec8a6 # Naruhito's enthronement
+  - id: 2020-11-08-db31486d # Akishino invested as heir
+  - id: 2021-10-26-2c53e4d7 # Princess Mako marries and leaves the family
+  - id: 2021-12-01-18a29499 # Princess Aiko comes of age
+  - id: 2025-09-06-011c5452 # Hisahito's coming-of-age ceremony
