@@ -25,6 +25,10 @@
 # Anne Frank's diary (14 Jun 1942) was left out at first because its curated summary placed the start of the diary in
 # the hiding place; it is included since the summary was corrected in content/curated/tier2.yaml (the album was a
 # birthday present of 12 Jun 1942, the family went into hiding on 6 Jul 1942).
+# Audited against the topic articles (2026-10-13): 31 entries checked, 1 corrected in tier2.yaml, none dropped.
+# Corrected: Anne Frank's diary, now dated 12 Jun 1942 (アンネの日記: 「1942年6月12日から1944年8月1日まで記録されている」); the dataset had
+# 14 Jun. Jekyll and Hyde (5 Jan 1886) is dated by en, Solzhenitsyn's and Oe's Nobel prizes (8 Oct 1970, 13 Oct
+# 1994) by the en prize articles.
 slug: literature
 title: 文学と出版の歴史
 lead: 1885年の『ハックルベリー・フィンの冒険』、樋口一葉の「たけくらべ」と夏目漱石の『坊っちゃん』『こゝろ』、芥川龍之介の『羅生門』から、プルーストとジョイス、宮沢賢治の『春と修羅』、岩波文庫と岩波新書の創刊、そして川端康成と大江健三郎のノーベル文学賞まで。ベルヌ条約やペンクラブの結成、小林多喜二の死、手塚治虫の「新宝島」と週刊少年マガジン・サンデー、少年ジャンプの創刊、広辞苑の初版も含めて、書き手と本と読者をめぐる移り変わりをたどる。

@@ -191,8 +191,10 @@
   svg: art-wizard-of-oz
 
 # The diary began at home: the album was a present for her 13th birthday on 12 June 1942 and the family went into
-# hiding on 6 July 1942 (ja:アンネ・フランク, ja:アンネの日記)
+# hiding on 6 July 1942 (ja:アンネ・フランク, ja:アンネの日記); アンネの日記 has the entries run from 12 June 1942, so the
+# date moves from the dataset's 14 June (2026-10-13)
 - id: 1942-06-14-9bfd91a6
+  date: "1942-06-12"
   title: アンネ、日記を書き始める
   summary: ナチス占領下のアムステルダムで、13歳の誕生日に贈られた日記帳にアンネ・フランクが日記を書き始めた。一家は7月6日から隠れ家での生活に入り、日記は1944年8月1日まで続いた。「アンネの日記」は戦後、ホロコーストの記憶を伝える世界的な証言となった。
   category: culture
