@@ -1,54 +1,63 @@
-# 宇宙開発の歴史（特集）
-# 全て既存の自動生成イベントへの参照（新規執筆なし）。
-# 「ロケット花火」「スペースワールド開園」「スプートニクV（ワクチン）」など
-# キーワードは合うが主題が違うものは意図的に外している。
+# History of space exploration (collection)
+# References to existing auto-generated events only (nothing newly written).
+# Left out on purpose: keyword matches on other subjects (a firework rocket, the opening of the Space World theme
+# park, the Sputnik V vaccine).
+# Audited against the topic articles (2026-10-13): 33 entries checked, 6 corrected in fixes.yaml, none dropped.
+# Corrected: Leonov's rank 中佐, which neither ボスホート2号 nor アレクセイ・レオーノフ gives; Apollo 17's note 「2025年現在最後の有人月面探査」, now
+# the article's 「史上6度目にして最後の有人月面着陸」; Hayabusa's sample return, the first from a body other than the Moon (the line
+# said the first after landing on any body, while Luna 16 had brought back lunar samples in 1970); the comet
+# landing, made by Rosetta's lander Philae; Cassini's last signal, now given in UTC, and the reason for the plunge
+# (microbes riding on the probe, not on the moons); SN10, which landed and then exploded eight minutes later.
+# Dates kept on purpose: Luna 2 on 14 Sep (en "Luna 2" has the impact on 13 September 21:02 GMT, "14th of September
+# according to Moscow's time zone"; ja also gives 14日), SN10 on 3 Mar (the local date in en "List of Starship
+# vehicles"; ja gives 4 Mar, Japan time).
 slug: space
 title: 宇宙開発の歴史
 lead: 1926年の液体燃料ロケットから、スプートニク、ガガーリン、アポロ11号、ボイジャーの太陽圏脱出、そして小惑星からの試料回収と民間宇宙船まで。
 description: ゴダードの液体燃料ロケットからはやぶさ2・スターシップまで、人類が地球の外へ出ていった道のりを年代順にたどる特集。
 icon: art-apollo11
 entries:
-  # --- 前史 ---
-  - id: 1926-03-16-c76c2369 # ゴダードが最初の液体燃料ロケットを発射
+  # --- Before the space age ---
+  - id: 1926-03-16-c76c2369 # Goddard launches the first liquid-fuelled rocket
 
-  # --- 宇宙時代の幕開けと有人飛行競争 ---
-  - id: 1957-10-04-e3fdcc7a # スプートニク1号——宇宙時代の幕開け
-  - id: 1958-01-31-ae3e7097 # エクスプローラー1号（米初の人工衛星）
-  - id: 1959-09-14-fa1e653c # ルナ2号、初めて月面に到達した人工物
-  - id: 1959-10-07-b4f7cf81 # ルナ3号が月の裏側を撮影
-  - id: 1961-04-12-c4e35c8a # ガガーリン、人類初の有人宇宙飛行
-  - id: 1962-02-20-2a4ca373 # ジョン・グレン、米初の地球周回
-  - id: 1965-03-18-45ce106f # レオーノフ、人類初の宇宙遊泳
-  - id: 1966-02-03-76823a93 # ルナ9号、初の月面軟着陸
-  - id: 1967-04-24-fa6a32e9 # ソユーズ1号、史上初の宇宙飛行中の死亡事故
+  # --- The space age opens: the race for crewed flight ---
+  - id: 1957-10-04-e3fdcc7a # Sputnik 1, the first artificial satellite
+  - id: 1958-01-31-ae3e7097 # Explorer 1, the first US satellite
+  - id: 1959-09-14-fa1e653c # Luna 2, the first man-made object to reach the Moon
+  - id: 1959-10-07-b4f7cf81 # Luna 3 photographs the far side of the Moon
+  - id: 1961-04-12-c4e35c8a # Gagarin, the first human in space
+  - id: 1962-02-20-2a4ca373 # John Glenn, the first American to orbit the Earth
+  - id: 1965-03-18-45ce106f # Leonov, the first spacewalk
+  - id: 1966-02-03-76823a93 # Luna 9, the first soft landing on the Moon
+  - id: 1967-04-24-fa6a32e9 # Soyuz 1, the first death in a spaceflight
 
-  # --- 月へ ---
-  - id: 1968-12-24-cde4384e # アポロ8号、月の地平線から昇る地球
-  - id: 1969-07-20-87c1bf64 # アポロ11号が月面着陸
-  - id: 1970-02-11-f609c6df # 「おおすみ」、日本初の国産人工衛星
-  - id: 1970-12-15-38e452dc # ベネラ7号、他の惑星への初着陸（金星）
-  - id: 1971-04-19-520989fb # サリュート1号、世界初の宇宙ステーション
-  - id: 1972-03-02-2f33482d # パイオニア10号打ち上げ
-  - id: 1972-12-07-58f2df9d # アポロ17号——アポロ計画の終了
+  # --- To the Moon ---
+  - id: 1968-12-24-cde4384e # Apollo 8 orbits the Moon and photographs Earthrise
+  - id: 1969-07-20-87c1bf64 # Apollo 11 lands on the Moon
+  - id: 1970-02-11-f609c6df # Ohsumi, Japan's first satellite
+  - id: 1970-12-15-38e452dc # Venera 7, the first landing on another planet (Venus)
+  - id: 1971-04-19-520989fb # Salyut 1, the first space station
+  - id: 1972-03-02-2f33482d # Pioneer 10 launched
+  - id: 1972-12-07-58f2df9d # Apollo 17, the last crewed Moon landing
 
-  # --- 深宇宙とシャトルの時代 ---
-  - id: 1975-07-17-f4bacc9a # アポロ・ソユーズ、史上初の国際ドッキング
-  - id: 1977-08-20-d9806e7d # ボイジャー2号打ち上げ
-  - id: 1977-09-05-eb48526d # ボイジャー1号打ち上げ
-  - id: 1986-01-28-4170bb05 # チャレンジャー号爆発事故
-  - id: 1990-04-24-61b5ae07 # ハッブル宇宙望遠鏡打ち上げ
-  - id: 1992-09-12-5cb87055 # 毛利衛、日本人初のスペースシャトル搭乗
-  - id: 2003-02-01-6395cb08 # コロンビア号空中分解事故
+  # --- Deep space and the Shuttle era ---
+  - id: 1975-07-17-f4bacc9a # Apollo-Soyuz, the first international docking
+  - id: 1977-08-20-d9806e7d # Voyager 2 launched
+  - id: 1977-09-05-eb48526d # Voyager 1 launched
+  - id: 1986-01-28-4170bb05 # Challenger disaster
+  - id: 1990-04-24-61b5ae07 # Hubble Space Telescope launched
+  - id: 1992-09-12-5cb87055 # Mamoru Mohri flies on the Shuttle Endeavour
+  - id: 2003-02-01-6395cb08 # Columbia disaster
 
-  # --- 探査機の時代 ---
-  - id: 2010-06-13-a803cb5d # 「はやぶさ」帰還、世界初のサンプルリターン
-  - id: 2012-08-25-323181e6 # ボイジャー1号、人工物として初めて太陽圏を出る
-  - id: 2014-11-12-81de691b # ロゼッタ、世界初の彗星着陸
-  - id: 2015-07-14-3ae55e1c # ニュー・ホライズンズが冥王星に到達
-  - id: 2017-09-15-0fe4658e # カッシーニ、土星の大気圏へ突入して消滅
-  - id: 2019-02-22-698dff41 # 「はやぶさ2」がリュウグウに着陸
-  - id: 2020-12-06-697dc6eb # 「はやぶさ2」の回収カプセルが地球へ帰還
+  # --- The age of probes ---
+  - id: 2010-06-13-a803cb5d # Hayabusa returns: the first sample return from a body other than the Moon
+  - id: 2012-08-25-323181e6 # Voyager 1 leaves the heliosphere
+  - id: 2014-11-12-81de691b # Rosetta's lander Philae lands on a comet
+  - id: 2015-07-14-3ae55e1c # New Horizons flies past Pluto
+  - id: 2017-09-15-0fe4658e # Cassini plunges into Saturn
+  - id: 2019-02-22-698dff41 # Hayabusa2 touches down on Ryugu
+  - id: 2020-12-06-697dc6eb # Hayabusa2's sample capsule returns to Earth
 
-  # --- 民間と次世代望遠鏡 ---
-  - id: 2021-03-03-4f3c1b5e # スペースXのスターシップが高高度飛行に成功
-  - id: 2021-12-25-304d1f83 # ジェイムズ・ウェッブ宇宙望遠鏡打ち上げ
+  # --- Private rockets and the next telescope ---
+  - id: 2021-03-03-4f3c1b5e # SpaceX Starship SN10 lands, then explodes
+  - id: 2021-12-25-304d1f83 # James Webb Space Telescope launched

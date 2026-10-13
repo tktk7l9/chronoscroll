@@ -2723,3 +2723,87 @@
   date: "1976-10-06"
   title: "中国共産党の指導部が、文化大革命後期の指導部で四人組を形成した江青・張春橋・王洪文・姚文元を隔…"
   summary: "中国共産党の指導部が、文化大革命後期の指導部で四人組を形成した江青・張春橋・王洪文・姚文元を隔離審査（逮捕）する。翌7日、華国鋒が党中央委員会主席に就任。"
+
+# --- Audit of the older collections, group 1 (space, railway, cinema, aviation): wrong facts and dates found by
+# checking every entry against its topic articles (2026-10-13); dates moved within the same year ---
+- id: 1882-10-02-5ee966b7   # 東京馬車鉄道: 「1882年（明治15年）10月1日には、日本橋 - 上野 - 浅草 - 日本橋間の環状線も短時間で竣工させた」, chronology 「10月25日 : 浅草橋が落成。全線開通。循環運転開始。」 (the line had the loop opening on 2 Oct)
+  date: "1882-10-25"
+  title: "東京馬車鉄道の浅草橋が落成して全線が開通し、日本橋・上野・浅草を回る循環運転が始まった"
+  summary: "東京馬車鉄道の浅草橋が落成して全線が開通し、日本橋・上野・浅草を回る循環運転が始まった。"
+
+- id: 1888-10-14-99100333   # ルイ・ル・プランス: 「「ラウンドヘイの庭の場面」であり、世界初の映画と言われている」; en "Roundhay Garden Scene": "It is believed to be the oldest surviving film", with earlier films "often considered the first film" (the line called it the first film outright)
+  title: "ルイ・ル・プランスが『ラウンドヘイの庭の場面』を撮影した。現存する最古の映画とされる"
+  summary: "ルイ・ル・プランスが『ラウンドヘイの庭の場面』を撮影した。現存する最古の映画とされる。"
+
+- id: 1915-02-08-3aa3be7a   # 國民の創生: 公開 「1915年2月8日(ロス)」, 「1,500ショット、上映時間165分・12巻」; en "The Birth of a Nation": "the first non-serial American 12-reel film ever made"; en "Feature film": "It is often incorrectly cited that The Birth of a Nation (1915) was the first American feature film", the first ones being of 1912 (the line called it the first American feature)
+  title: "D・W・グリフィス監督の『國民の創生』がロサンゼルスで公開された。上映時間165分・12巻の大…"
+  summary: "D・W・グリフィス監督の『國民の創生』がロサンゼルスで公開された。上映時間165分・12巻の大作で、連続物を除くアメリカ映画で初めて12巻に及んだ。"
+
+- id: 1927-05-04-ee5ecc81   # 映画芸術科学アカデミー: 「1927年5月11日、映画芸術科学アカデミーは非営利組織として36人の会員により創立された」; en: formation 11 May 1927, the Articles of Incorporation were filed on 4 May (the line put the founding on 4 May)
+  date: "1927-05-11"
+  title: "米国の映画芸術科学アカデミーが、36人の会員による非営利組織として創立された"
+  summary: "米国の映画芸術科学アカデミーが、36人の会員による非営利組織として創立された。"
+
+- id: 1928-06-18-26487449   # アメリア・イアハート: 「1928年6月17日、3人が乗ったフレンド・シップ号…は、ニューファンドランド島…のトレパシー湾を出発し、およそ21時間後にウェールズのバリー・ポートに到着した」; en "Amelia Earhart": "In 1928, Earhart was the first female passenger to cross the Atlantic by airplane", "Bill (Wilmer Stultz) did all the flying" (the line had her make the crossing as if she flew it, and spelled her name エアハート)
+  title: "アメリア・イアハートが、飛行機で大西洋を渡った初の女性となった。同乗者として乗ったフレンドシッ…"
+  summary: "アメリア・イアハートが、飛行機で大西洋を渡った初の女性となった。同乗者として乗ったフレンドシップ号が、ニューファンドランドからウェールズに到着した。"
+
+- id: 1929-08-19-52417514   # ツェッペリン伯号: 「霞ヶ浦航空隊基地に来港したLZ 127（1929年8月19日）」, 「8月23日、グラーフ・ツェッペリン伯号は初の太平洋横断飛行に霞ヶ浦から出発した」 (the line used the non-word 向発)
+  title: "世界一周中の飛行船ツェッペリン伯号が霞ヶ浦に到着した（23日にアメリカへ向けて出発）"
+  summary: "世界一周中の飛行船ツェッペリン伯号が霞ヶ浦に到着した（23日にアメリカへ向けて出発）。"
+
+- id: 1943-10-17-de734f7a   # 泰緬鉄道: 「当初5年はかかるといわれた建設が1943年10月に完成した」; en "Burma Railway": on 17 October 1943 "The two sections of the line met at kilometre 263", "A holiday was declared for 25 October, which was chosen as the ceremonial opening of the line" (the line put the opening ceremony on 21 Oct)
+  title: "泰緬鉄道の線路がビルマ側とタイ側からつながり、全線が接続した（開通式は10月25日）"
+  summary: "泰緬鉄道の線路がビルマ側とタイ側からつながり、全線が接続した（開通式は10月25日）。"
+
+- id: 1951-10-25-e6fccf78   # もく星号 (マーチン 2-0-2): 「実際の定期路線運航はノースウエスト航空が操縦士つきで担当」, 「「ど星」号は1番機として1951年（昭和26年）10月25日に東京 - 大阪間の定期航空路線に就航した」; en "Japan Airlines": "On 25 October, Japan's first post-war domestic airline service was inaugurated, using a Martin 2-0-2 aircraft, named Mokusei, and crew leased from Northwest Orient Airlines subsidiary TALOA" (the line named もく星号 and a Tokyo-Osaka-Fukuoka route; the two articles name different aircraft and neither gives Fukuoka)
+  title: "戦後初の国内民間定期便として、日本航空が東京 - 大阪間の運航を始めた。機体のマーチン2-0-…"
+  summary: "戦後初の国内民間定期便として、日本航空が東京 - 大阪間の運航を始めた。機体のマーチン2-0-2型機と乗員はノースウエスト航空から借りていた。"
+
+- id: 1965-03-18-45ce106f   # アレクセイ・レオーノフ, ボスホート2号: neither gives his rank in March 1965 (ja names only ベリャーエフ大佐; en gives his final rank, Major general) (the line called him 中佐)
+  title: "ソ連の宇宙飛行士アレクセイ・レオーノフが、人類初の宇宙遊泳を行う"
+  summary: "ソ連の宇宙飛行士アレクセイ・レオーノフが、人類初の宇宙遊泳を行う。"
+
+- id: 1965-04-01-512d9e54   # YS-11: 「第二次世界大戦後に初めて日本のメーカーが開発し」, 「運輸省の量産一号機の翌々日の4月1日に、東京（羽田） - 徳島 - 高知線で定期航空路線の運用を開始した」 (日本国内航空) (the line called it the first home-built airliner, without 戦後)
+  title: "戦後初めて日本のメーカーが開発した旅客機YS-11が就航した。日本国内航空が東京 - 徳島 -…"
+  summary: "戦後初めて日本のメーカーが開発した旅客機YS-11が就航した。日本国内航空が東京 - 徳島 - 高知線で定期運航を始めた。"
+
+- id: 1972-12-07-58f2df9d   # アポロ17号: 「アメリカ合衆国のアポロ計画における最後の飛行である。現在、史上6度目にして最後の有人月面着陸を行った」, landing_date 1972年12月19日 (the line ended 「（2025年現在最後の有人月面探査）」)
+  title: "アポロ計画最後の飛行となるアポロ17号が打ち上げられた。史上6度目の有人月面着陸を行い、12月…"
+  summary: "アポロ計画最後の飛行となるアポロ17号が打ち上げられた。史上6度目の有人月面着陸を行い、12月19日に地球へ帰還した。現在まで最後の有人月面着陸である。"
+
+- id: 1980-05-23-22b6158c   # 影武者 (映画): 「第33回カンヌ国際映画祭でパルム・ドールを受賞（『オール・ザット・ジャズ』と同賞）」; en "1980 Cannes Film Festival": 9-23 May 1980, "The Palme d'Or, the festival's top prize, was jointly awarded" (the line called the prize グランプリ, today the name of the second prize)
+  title: "黒澤明監督の『影武者』が、カンヌ国際映画祭で最高賞のパルム・ドールを受賞した。『オール・ザット…"
+  summary: "黒澤明監督の『影武者』が、カンヌ国際映画祭で最高賞のパルム・ドールを受賞した。『オール・ザット・ジャズ』との同時受賞だった。"
+
+- id: 1990-03-26-bf82bee5   # 黒澤明: 「1990年にアカデミー名誉賞を受賞した」 (the line called it 特別名誉賞)
+  title: "黒澤明、米アカデミー賞の名誉賞を受賞"
+  summary: "黒澤明、米アカデミー賞の名誉賞を受賞。"
+
+- id: 1998-09-19-2a6cc439   # スカイマーク: 「1998年9月19日に東京/羽田 - 福岡線を開設。日本国内における定期航空運送事業の新規参入は、1963年の長崎航空…以来、35年ぶり」; AIRDO: 「1998年12月20日より、札幌/新千歳 - 東京/羽田間で運航開始」 (the line wrote 運行 for 運航)
+  title: "スカイマークエアラインズが羽田・福岡間で運航開始。12月のAIRDOによる羽田・新千歳間の運航…"
+  summary: "スカイマークエアラインズが羽田・福岡間で運航開始。12月のAIRDOによる羽田・新千歳間の運航開始も含め、日本国内定期航空事業への新規参入は35年ぶりとなった。"
+
+- id: 2009-02-22-666e228b   # おくりびと: 「同賞の前身である名誉賞時代にすでに3本の日本映画が受賞」; 宮本武蔵 (1954年の映画): 「第28回アカデミー賞では名誉外国語映画賞…を受賞した」; 第28回アカデミー賞: date 1956年3月21日 (the line had 宮本武蔵 win in 1955 and counted 54 years)
+  title: "第81回アカデミー賞で、映画『おくりびと』が外国語映画賞を受賞した。日本映画の受賞は、名誉賞と…"
+  summary: "第81回アカデミー賞で、映画『おくりびと』が外国語映画賞を受賞した。日本映画の受賞は、名誉賞として贈られていた時代の第28回（1956年）の『宮本武蔵』以来で、独立した賞になってからは初めて。短編アニメ賞も『つみきのいえ』が受賞し、日本作品のダブル受賞となった。"
+
+- id: 2010-06-13-a803cb5d   # はやぶさ (探査機): カプセルは「翌14日16時8分に回収された。はやぶさ本体は大気中で燃えて失われた」, 「11月16日にカプセル内より回収された岩石質微粒子の大半がイトカワのものであると判断」; 世界初記録 「月以外の天体の固体表面からのサンプルリターン」, while 「無人探査機によるものでは翌1970年の旧ソ連の月探査機ルナ16号が初」 (the line called it the first sample return after landing on any body)
+  title: "小惑星探査機「はやぶさ」が地球に帰還し、本体は大気圏で燃え尽きた。翌日オーストラリアで回収され…"
+  summary: "小惑星探査機「はやぶさ」が地球に帰還し、本体は大気圏で燃え尽きた。翌日オーストラリアで回収されたカプセルからは、のちに小惑星イトカワの微粒子が見つかり、月以外の天体に着陸してのサンプルリターンは世界初となった。"
+
+- id: 2014-11-12-81de691b   # ロゼッタ (探査機): 「2014年11月12日：彗星への着陸機フィラエの投下および着陸」; en "Philae (spacecraft)": "Philae achieved the first-ever "soft" (nondestructive) landing on a comet nucleus" (the line had Rosetta itself land)
+  title: "探査機ロゼッタから切り離された着陸機フィラエが、チュリュモフ・ゲラシメンコ彗星に着陸した。彗星…"
+  summary: "探査機ロゼッタから切り離された着陸機フィラエが、チュリュモフ・ゲラシメンコ彗星に着陸した。彗星の核への軟着陸は世界初だった。"
+
+- id: 2017-09-15-0fe4658e   # カッシーニ (探査機): 「9月15日：日本時間19時32分、カッシーニ本体が土星大気圏へ突入、運用終了。この方法は、本体に付着している可能性のある微生物を衛星などに持ち込まないための処置であった」; en "Cassini–Huygens": last_contact 11:55:39 UTC, "to prevent any risk of contaminating Saturn's moons, which might have offered habitable environments to stowaway terrestrial microbes" (the line gave 午前11時55分 with no time zone and spoke of microbes 「衛星に付着した」)
+  title: "土星探査機カッシーニが土星の大気圏に突入し、協定世界時11時55分を最後に通信が途絶えた。生命…"
+  summary: "土星探査機カッシーニが土星の大気圏に突入し、協定世界時11時55分を最後に通信が途絶えた。生命を育む環境があるかもしれないエンケラドゥスなどの衛星に、探査機に付着した地球の微生物を持ち込まないための措置だった。"
+
+- id: 2020-09-12-cc3679fc   # スパイの妻: 「第77回ヴェネツィア国際映画祭に出品され、コンペティション部門銀獅子賞（最優秀監督賞）を受賞した。日本人の受賞は『座頭市』での北野武以来17年振り」; 銀獅子賞 lists 溝口健二 in 1953 and 1954 and 黒澤明 in 1954, none in 1952 (the line had 「1952年の溝口健二、2003年の北野武に次ぐ日本人3人目」)
+  title: "第77回ヴェネツィア国際映画祭で、『スパイの妻』の黒沢清が銀獅子賞（監督賞）を受賞した。日本人…"
+  summary: "第77回ヴェネツィア国際映画祭で、『スパイの妻』の黒沢清が銀獅子賞（監督賞）を受賞した。日本人の受賞は2003年の『座頭市』の北野武以来17年ぶり。"
+
+- id: 2021-03-03-4f3c1b5e   # スターシップ (宇宙船): 「2021年3月4日のSN10では高高度飛行試験からの着陸にも成功した（…着陸時の速度が速く、衝撃が強かったためメタン漏れが発生し、着陸後8分で爆発した）」 (4 Mar is Japan time); en "List of Starship vehicles": SN10 flew on March 3, 2021, "Eight minutes later the prototype exploded" (the line said only that a high-altitude flight succeeded, which SN8 and SN9 had already flown)
+  title: "スペースXの宇宙船スターシップの試験機SN10が高高度飛行試験で着陸に成功した。ただし着陸の衝…"
+  summary: "スペースXの宇宙船スターシップの試験機SN10が高高度飛行試験で着陸に成功した。ただし着陸の衝撃が強く、約8分後に爆発した。"

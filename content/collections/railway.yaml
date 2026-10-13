@@ -1,43 +1,50 @@
-# 鉄道の歴史（特集）
-# 全て既存の自動生成イベントへの参照（新規執筆なし）。
-# 「鉄道」キーワードは事故記事が非常に多いため、開業・開通・全通などの
-# マイルストーンに絞って選んでいる（事故史は別テーマとして立てるべき）。
+# History of railways (collection)
+# References to existing auto-generated events only (nothing newly written).
+# The keyword 鉄道 mostly finds accidents, so the entries are limited to openings and other milestones (accidents
+# would make a collection of their own).
+# Audited against the topic articles (2026-10-13): 26 entries checked, 2 corrected in fixes.yaml, 1 dropped.
+# Corrected: the 東京馬車鉄道 loop, moved from 2 Oct to 25 Oct 1882 (the article's chronology has 「10月25日 :
+# 浅草橋が落成。全線開通。循環運転開始。」 and its prose has the loop 竣工 on 1 Oct, neither 2 Oct); the Burma Railway, whose opening
+# ceremony was on 25 October (en "Burma Railway"), not 21 October.
+# Dropped: 1902-01-30-e6dd11fd 「シベリア鉄道ウラジオストク-ハバロフスク間が開通」 (dataset vs article: 30 Jan 1902 / シベリア鉄道:
+# 「ウスリー線がまず1897年に完成した」), which cannot move across years. The lead no longer names the Siberian railway, and it no
+# longer speaks of the invention of the subway, which none of the entries is (the earliest here, Budapest, opened in
+# 1896).
 slug: railway
 title: 鉄道の歴史
-lead: 1872年の新橋–横浜から、大陸横断鉄道とシベリア鉄道、地下鉄の発明、東海道新幹線、TGV、そして世界最長トンネルまで。
+lead: 1871年のアルプスの鉄道トンネルと1872年の新橋–横浜から、大陸横断鉄道、各地の地下鉄、東海道新幹線、TGV、そして世界最長の鉄道トンネルまで。
 description: 日本初の鉄道開業から新幹線・TGV・ゴッタルドベーストンネルまで、鉄道が世界と日本をどう変えたかを年代順にたどる特集。
 icon: art-first-railway
 entries:
-  # --- 19世紀：山を貫き、大陸を横断する ---
-  - id: 1871-09-17-7c604041 # フレジュス鉄道トンネル開通（アルプス越え）
-  - id: 1872-10-14-098bca3d # 新橋–横浜間に日本初の鉄道が開業
-  - id: 1882-10-02-5ee966b7 # 東京馬車鉄道の環状線開通
-  - id: 1886-06-28-c42b4520 # カナダ太平洋鉄道開業、初の大陸横断列車
-  - id: 1896-05-02-978748de # ブダペスト地下鉄初の区間が開通
+  # --- The 19th century: through mountains and across a continent ---
+  - id: 1871-09-17-7c604041 # Fréjus Rail Tunnel opens through the Alps
+  - id: 1872-10-14-098bca3d # Japan's first railway opens, Shimbashi to Yokohama
+  - id: 1882-10-02-5ee966b7 # Tokyo Horse Tramway: the loop opens (dated 25 Oct in fixes.yaml)
+  - id: 1886-06-28-c42b4520 # Canadian Pacific: the first transcontinental train leaves Montreal
+  - id: 1896-05-02-978748de # Budapest Metro: the first section opens
 
-  # --- 20世紀前半：地下鉄と長大路線 ---
-  - id: 1900-07-19-ac53fb0d # パリ万博会期中にパリの地下鉄が開通
-  - id: 1902-01-30-e6dd11fd # シベリア鉄道ウラジオストク-ハバロフスク間が開通
-  - id: 1904-10-27-da3ff045 # ニューヨーク市地下鉄開業
-  - id: 1927-12-30-d5fe38c4 # 上野・浅草間に日本最初の地下鉄
-  - id: 1935-05-15-4362cc2a # モスクワ地下鉄開通
-  - id: 1943-10-17-de734f7a # 泰緬鉄道が全線接続
-  - id: 1948-01-01-2826bfd5 # 英国で鉄道を国有化
+  # --- The early 20th century: subways and long lines ---
+  - id: 1900-07-19-ac53fb0d # Paris Metro opens during the World's Fair
+  - id: 1904-10-27-da3ff045 # New York City Subway opens
+  - id: 1927-12-30-d5fe38c4 # Japan's first subway, Ueno to Asakusa
+  - id: 1935-05-15-4362cc2a # Moscow Metro opens
+  - id: 1943-10-17-de734f7a # Burma Railway: the two sections meet
+  - id: 1948-01-01-2826bfd5 # Britain nationalises its railways
 
-  # --- 高度成長と高速鉄道 ---
-  - id: 1954-04-05-9b4e6d5c # 初の集団就職列車（青森・上野間）
-  - id: 1964-10-01-eaaaeaf5 # 東海道新幹線が開業
-  - id: 1972-10-14-30b9d194 # 日本の鉄道開業100年
-  - id: 1979-08-01-61f0a2ec # 「SLやまぐち号」運行開始（蒸気機関車の復活）
-  - id: 1981-09-27-18bbdeb7 # パリ〜リヨン間でTGV運行開始
-  - id: 1982-06-23-c217bc68 # 東北新幹線が開業
+  # --- Postwar growth and high-speed rail ---
+  - id: 1954-04-05-9b4e6d5c # The first group-employment train, Aomori to Ueno
+  - id: 1964-10-01-eaaaeaf5 # Tokaido Shinkansen opens
+  - id: 1972-10-14-30b9d194 # Japan's railways turn 100
+  - id: 1979-08-01-61f0a2ec # SL Yamaguchi: steam returns to regular runs
+  - id: 1981-09-27-18bbdeb7 # TGV service begins between Paris and Lyon
+  - id: 1982-06-23-c217bc68 # Tohoku Shinkansen opens
 
-  # --- 海を越え、国境を越える ---
-  - id: 1988-03-13-3561fb65 # 青函トンネル開通、海峡線が開業
-  - id: 1992-07-01-5530f381 # 山形新幹線開業
-  - id: 1997-10-01-4748a114 # 北陸新幹線 高崎–長野間が開業
-  - id: 2005-08-24-bda1e9c9 # つくばエクスプレス開通
-  - id: 2007-07-01-60ddb369 # 東海道・山陽新幹線のN700系運行開始
-  - id: 2007-11-14-a9bc1663 # ロンドンとユーロトンネルを結ぶ高速鉄道CTRL開業
-  - id: 2016-06-01-2104154e # ゴッタルドベーストンネル開通（世界最長）
-  - id: 2023-10-02-e50e54ac # ジャカルタ〜バンドン高速鉄道が開通
+  # --- Under the sea and across borders ---
+  - id: 1988-03-13-3561fb65 # Seikan Tunnel and the Kaikyo Line open
+  - id: 1992-07-01-5530f381 # Yamagata Shinkansen opens
+  - id: 1997-10-01-4748a114 # Hokuriku Shinkansen opens, Takasaki to Nagano
+  - id: 2005-08-24-bda1e9c9 # Tsukuba Express opens
+  - id: 2007-07-01-60ddb369 # N700 series enters service on the Tokaido and Sanyo Shinkansen
+  - id: 2007-11-14-a9bc1663 # CTRL opens between London and the Channel Tunnel
+  - id: 2016-06-01-2104154e # Gotthard Base Tunnel opens, the world's longest railway tunnel
+  - id: 2023-10-02-e50e54ac # Jakarta-Bandung high-speed railway opens
