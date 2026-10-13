@@ -1,0 +1,47 @@
+# The Russo-Ukrainian War (collection)
+# References to existing auto-generated events only (nothing newly written). The annexation of Crimea, Poroshenko's
+# inauguration and the shooting down of MH17; the full-scale invasion, the first talks, the UN General Assembly
+# resolution and Zelensky's speech to the Japanese Diet; the annexation of four regions and the missile that fell in
+# Poland; Soledar, Biden in Ukraine, the ICC warrant for Putin, Kishida in Ukraine and Zelensky at the G7 in
+# Hiroshima; the Kakhovka dam, the Wagner mutiny and Prigozhin's death.
+# Checked against en: "the largest and deadliest war in Europe since World War II" (24 Feb 2022, "Russian invasion
+# of Ukraine") and the missile in Poland (15 Nov 2022, "2022 missile explosion in Poland").
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the agreement of 21 Feb 2014 "77 dead" and the events of the
+# following days / not in the article; Putin recognises the separatist republics 21 Feb 2022 "and the US imposes
+# sanctions with Germany and France" / not in the articles; SWIFT 26 Feb 2022 / not dated in the articles; Bucha 1
+# Apr 2022 "AFP finds 20 bodies and a grave of about 280" / the reporters entered after the liberation was announced
+# on 2 Apr and the 280 is not in the article; Japan's condemnation 4 Apr 2022 / not in the article; the cruiser
+# Moskva 14 Apr 2022 "the largest warship sunk since World War II" / the largest since the General Belgrano in 1982;
+# the strike on Sevastopol 13 Sep 2023 "the first submarine lost in combat since World War II" / not in the
+# articles; the Kursk incursion 11 Aug 2024 and ATACMS 19 Nov 2024 / not dated in the articles; Trump and Zelensky
+# in the Oval Office 28 Feb 2025 / the line's account of the meeting is not in the articles; Operation Spiderweb 1
+# Jun 2025 "over 40 bombers destroyed" / 41 aircraft hit by Ukraine's count).
+slug: russia-ukraine
+title: ロシア・ウクライナ戦争
+lead: 2014年のロシアによるクリミアの併合、ポロシェンコ大統領の就任、マレーシア航空17便撃墜事件から、2022年のロシア軍によるウクライナ各地への攻撃、国連緊急特別総会での非難決議、ゼレンスキー大統領の日本の国会でのオンライン演説、4州の併合条約への署名、ポーランドへのミサイル着弾、ソレダルの戦い、バイデン大統領のウクライナ訪問、国際刑事裁判所によるプーチン大統領への逮捕状、岸田首相のウクライナ訪問と広島でのG7へのゼレンスキー大統領の来日、カホフカダムの決壊、ワグネル・グループの武装蜂起とプリゴジンの死まで。日本との関わりも含めて、ロシア・ウクライナ戦争の10年近くをたどる。
+description: クリミアの併合とマレーシア航空17便撃墜事件から、ロシアのウクライナ侵攻、4州の併合、ゼレンスキー大統領の来日、カホフカダムの決壊、ワグネル・グループの武装蜂起まで、ロシア・ウクライナ戦争を年代順にたどる特集。
+icon: art-ukraine-invasion
+entries:
+  # --- Crimea and MH17 (2014) ---
+  - id: 2014-03-18-c958f5b2 # Russia annexes Crimea
+  - id: 2014-06-07-473b64a3 # Poroshenko takes office
+  - id: 2014-07-17-d84a4342 # MH17 shot down over eastern Ukraine
+
+  # --- The full-scale invasion (2022) ---
+  - id: 2022-02-24-5161292b # Russia invades Ukraine
+  - id: 2022-02-27-2680b7fa # Ukraine agrees to talks on the Belarusian border
+  - id: 2022-03-02-8dff911a # The UN General Assembly condemns Russia
+  - id: 2022-03-23-0ef82377 # Zelensky addresses the Japanese Diet online
+  - id: 2022-09-30-6700d58e # Putin signs the annexation of four regions
+  - id: 2022-11-15-d8ec32dc # A missile kills two in Poland
+
+  # --- Soledar to Prigozhin (2023) ---
+  - id: 2023-01-16-864f5031 # Soledar falls
+  - id: 2023-02-20-821928ae # Biden visits Ukraine
+  - id: 2023-03-17-3ae77676 # The ICC issues a warrant for Putin
+  - id: 2023-03-21-08c23933 # Kishida visits Ukraine
+  - id: 2023-05-19-46ce2a6e # The G7 in Hiroshima; Zelensky comes to Japan
+  - id: 2023-06-06-7c1216d1 # The Kakhovka dam is destroyed
+  - id: 2023-06-24-f4354a2e # The Wagner mutiny
+  - id: 2023-08-23-8a205734 # Prigozhin killed in a plane crash

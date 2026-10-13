@@ -1,0 +1,61 @@
+# The Manchurian Incident and the February 26 Incident (collection)
+# References to existing auto-generated events only (nothing newly written). Kataoka's slip and the financial crisis
+# of 1927, the Shandong expedition, the Jinan incident and the killing of Zhang Zuolin; the fall of the Tanaka
+# cabinet, the London naval conference and the shooting of Hamaguchi; the Liutiao Lake incident, the Korea Army
+# crossing the border on its own authority, the October incident and the Inukai cabinet; the Shanghai incident and
+# its truce, the League of Blood killings, Manchukuo and the May 15 incident; the Lytton report, Rehe, the League of
+# Nations vote and Japan's withdrawal, the Tanggu truce and Puyi made emperor; the attack on the emperor-organ
+# theory and the statement on the national polity, the killing of Nagata, Japan's exit from the London conference,
+# the February 26 incident, the Anti-Comintern Pact and the Marco Polo Bridge incident.
+# The fifteen years of war that followed the Liutiao Lake incident are checked against the ja article on the Fifteen
+# Years' War.
+# Overlaps: Kataoka's slip is also in the finance collection, the attack on the emperor-organ theory in the
+# constitution collection and the Marco Polo Bridge incident in the World War II collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: the punishments over Zhang Zuolin's killing "and then" the Emperor's
+# rebuke 1 Jul 1929 / the rebuke came before the punishments were announced; the London Naval Treaty "signed by the
+# US, Britain and Japan" 22 Apr 1930 / not in the article; the March incident "discovered" 20 Mar 1931 / the coup
+# was planned for that day and abandoned).
+slug: manchurian-incident
+title: 満州事変と二・二六事件
+lead: 1927年の片岡直温蔵相の失言による昭和金融恐慌から、山東出兵と済南事件、張作霖爆殺事件、濱口首相の狙撃、柳条湖事件と満州事変、十月事件、第一次上海事変、血盟団事件、満洲国の建国宣言、五・一五事件、リットン報告書、国際連盟での撤退勧告の可決と連盟脱退、塘沽協定、天皇機関説への糾弾と国体明徴声明、相沢事件、ロンドン海軍軍縮会議からの脱退、二・二六事件、日独防共協定、1937年の盧溝橋事件まで。昭和の初めの10年に、日本が日中戦争へ向かった歩みをたどる。
+description: 柳条湖事件と満州事変から、満洲国の建国、五・一五事件、国際連盟脱退、二・二六事件、盧溝橋事件まで、昭和の初めの10年を年代順にたどる特集。
+icon: art-manchurian-incident
+entries:
+  # --- The financial crisis to the London conference (1927-1930) ---
+  - id: 1927-03-14-206f12c5 # Kataoka's slip sets off the financial crisis
+  - id: 1927-05-28-d6eb65d3 # The first Shandong expedition
+  - id: 1928-05-03-c4e0bfca # The Jinan incident
+  - id: 1928-06-04-be0da07b # Zhang Zuolin killed
+  - id: 1929-07-02-d3db1b54 # The Tanaka cabinet falls; Hamaguchi takes over
+  - id: 1930-01-21-ac82e057 # The London naval conference opens
+  - id: 1930-11-14-35bb3baa # Prime Minister Hamaguchi shot at Tokyo Station
+
+  # --- The Manchurian Incident (1931) ---
+  - id: 1931-09-18-17940576 # The Liutiao Lake incident
+  - id: 1931-09-21-5644c331 # The Korea Army crosses into Manchuria on its own authority
+  - id: 1931-10-17-efc4b71e # The October incident
+  - id: 1931-12-13-de91c637 # The Inukai cabinet
+
+  # --- Manchukuo and the League of Nations (1932-1934) ---
+  - id: 1932-01-28-730d63fb # The first Shanghai incident
+  - id: 1932-02-09-8bed94e4 # Inoue Junnosuke killed by the League of Blood
+  - id: 1932-03-01-b8392318 # Manchukuo proclaimed
+  - id: 1932-03-05-80c18355 # Dan Takuma killed by the League of Blood
+  - id: 1932-05-05-eb70ea88 # The Shanghai truce
+  - id: 1932-05-15-b0f67f7b # The May 15 incident: Inukai killed
+  - id: 1932-10-02-0ff226b4 # The Lytton report published
+  - id: 1933-02-23-bd43d774 # The army invades Rehe
+  - id: 1933-02-24-456d1402 # The League votes 42 to 1
+  - id: 1933-03-27-e3487b7d # Japan leaves the League of Nations
+  - id: 1933-05-31-8b91e4b0 # The Tanggu truce
+  - id: 1934-03-01-1a210763 # Puyi made emperor of Manchukuo
+
+  # --- Toward war with China (1935-1937) ---
+  - id: 1935-02-18-b47df66c # Kikuchi attacks the emperor-organ theory
+  - id: 1935-08-03-ed3e1498 # The statement on the national polity
+  - id: 1935-08-12-6f17ca94 # Nagata Tetsuzan killed (the Aizawa incident)
+  - id: 1936-01-15-820f05f0 # Japan leaves the London naval conference
+  - id: 1936-02-26-0a83bd9b # The February 26 incident
+  - id: 1936-11-25-534b4c8f # The Anti-Comintern Pact
+  - id: 1937-07-07-13edb170 # The Marco Polo Bridge incident
