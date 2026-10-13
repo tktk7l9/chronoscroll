@@ -7,6 +7,11 @@
 # (dataset vs article: Einstein's letter "sent" to Roosevelt on 2 Aug 1939 / the letter is dated 2 Aug and
 # reached Roosevelt on 11 Oct; Sato stating the three non-nuclear principles on 27 Jan 1968 / first stated
 # in the Diet on 11 Dec 1967).
+# Audited against the topic articles (2026-10-13): 32 entries checked, 2 corrected (1 in fixes.yaml, 1 in
+# top50.yaml), none dropped. Corrected: the Hiroshima toll (top50), now the article's 90,000 to 166,000 dead within
+# two to four months instead of 「その年のうちに約14万人」; the ban treaty's opening for signature, without the count 「51カ国」
+# that neither article gives. The Manhattan District (13 Aug 1942), SALT I (26 May 1972) and France's first test (13
+# Feb 1960) are dated by the en articles; the Hidankyo Peace Prize (11 Oct 2024) by the cited Nobel press release.
 slug: nuclear
 title: 核兵器と軍縮の歴史
 lead: 1942年に始まったマンハッタン計画から、トリニティ実験、広島と長崎への原爆投下、第五福竜丸の被曝、キューバ危機、核拡散防止条約、そして日本被団協のノーベル平和賞まで。核兵器を持つ国が増えていく流れと、核実験の禁止や軍縮の条約、被爆者の運動を並べてたどる。

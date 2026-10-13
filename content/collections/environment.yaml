@@ -1,31 +1,36 @@
 # History of pollution and environmental issues (collection)
 # References to existing auto-generated events only (nothing newly written).
-# Follows Japan's pollution cases (Ashio, then the four big pollution diseases: Minamata,
-# Niigata Minamata, Yokkaichi asthma, itai-itai) into national law and on to the
-# international treaties on ozone, mercury and climate.
+# Follows Japan's pollution cases (Ashio, then Minamata, Niigata Minamata and Yokkaichi asthma) into
+# national law and on to the international treaties on ozone, mercury and climate.
 # Left out on purpose: entries whose dataset date disagrees with the topic article
 # (The Limits to Growth came out on 2 Mar 1972, not 1 Mar).
+# Audited against the topic articles (2026-10-13): 31 entries checked, 2 corrected in fixes.yaml, 2 dropped.
+# Corrected: the 2007 IPCC report, whose 「約2億人が難民」 the working group I report does not contain (the 1.1-6.4 °C range
+# stays); the Minamata Convention, adopted with 92 signatories (the line had 140 countries, 1,000 delegates and a
+# unanimous vote, which the article gives only for the naming vote in Geneva).
+# Dropped because no article gives the day: 1891-12-18-747f3fc1 Tanaka Shozo's question in the Diet (田中正造 gives 1891
+# and cites the minutes of 25 and 26 Dec; en gives 1891), 1968-05-08-99aff554 itai-itai disease recognised as a
+# pollution disease (イタイイタイ病: 「1968年（昭和43年）5月」; en: 1968). The lead no longer speaks of all four big pollution
+# diseases. The EC's CFC ban (2 Mar 1989) is dated by en "Chlorofluorocarbon".
 slug: environment
 title: 公害と環境の歴史
-lead: 世界初の国立公園と足尾鉱毒事件から、水俣病をはじめとする四大公害、環境庁の発足、地球サミットと京都議定書、そしてパリ協定と脱炭素の宣言まで。地域の公害との闘いが、国境を越える気候変動対策へと広がっていく流れをたどる。
+lead: 世界初の国立公園と足尾鉱毒事件から、水俣病などの公害とその裁判、環境庁の発足、地球サミットと京都議定書、そしてパリ協定と脱炭素の宣言まで。地域の公害との闘いが、国境を越える気候変動対策へと広がっていく流れをたどる。
 description: 足尾鉱毒事件と水俣病からパリ協定まで、日本の公害と、国境を越える環境問題への取り組みを年代順にたどる特集。
 icon: art-minamata
 entries:
   # --- Before pollution had a name: national parks and the Ashio copper mine ---
   - id: 1872-03-01-b9ed9184 # Yellowstone, the world's first national park
-  - id: 1891-12-18-747f3fc1 # Tanaka Shozo raises the Ashio mine pollution in the Diet
   - id: 1892-05-28-dd314763 # Sierra Club founded
   - id: 1900-02-13-ae484461 # Kawamata incident (Ashio petitioners clash with police)
   - id: 1901-12-10-c40236b9 # Tanaka Shozo's direct appeal to the Emperor
   - id: 1934-03-16-20a902ea # Japan's first national parks
 
-  # --- High growth and the four big pollution diseases ---
+  # --- High growth and the pollution diseases ---
   - id: 1953-01-01-db411b75 # Minamata: the cats die first
   - id: 1956-05-01-1c6894be # Minamata disease officially confirmed
   - id: 1959-07-22-df9ce93d # Kumamoto University names organic mercury as the cause
   - id: 1967-08-03-526ce386 # Basic Law for Environmental Pollution Control promulgated
   - id: 1967-09-01-bac3b41f # Yokkaichi asthma lawsuit filed
-  - id: 1968-05-08-99aff554 # Itai-itai disease recognised as a pollution disease
   - id: 1970-11-24-82f5f365 # The "Pollution Diet" convenes
   - id: 1971-07-01-50d81bcf # Environment Agency founded
   - id: 1971-09-29-150a1e84 # Niigata Minamata disease: the plaintiffs win

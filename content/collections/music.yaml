@@ -10,6 +10,12 @@
 # on sale 7 Aug 1955 / developed in August, shipped in September; first Japan Record Award chosen
 # 15 Dec 1959 / that day only narrowed the field to six, ceremony on 27 Dec; the first CDs pressed at a Philips
 # plant in the Netherlands on 17 Aug 1982 / a PolyGram plant in Langenhagen, West Germany).
+# Audited against the topic articles (2026-10-13): 29 entries checked, 2 corrected in fixes.yaml, 1 dropped.
+# Corrected: the iTunes Music Store's launch, without the price 「1曲一律1ドル」 that no article gives; Michael Jackson's
+# death, without the unsupported 「6種類の薬物」 and with the 2011 manslaughter verdict. Dropped because no article gives
+# the day: 1951-03-20-24e20b3e Nippon Columbia's first LP records (日本コロムビア: 1951 only). Misora Hibari's People's
+# Honour Award keeps 6 Jul 1989 from the award table in 国民栄誉賞 (美空ひばり itself gives 2 Jul); Edison's first recording
+# keeps 6 Dec 1877, the day 蓄音機 gives for 音の日 in memory of it.
 slug: music
 title: 音楽の歴史
 lead: 1877年にエジソンが蓄音機で初めて声を録音してから、ジャズ初のレコード、ラジオ放送と紅白歌合戦、エルヴィスとビートルズ、ウォークマンとCD、iPodと初音ミク、そしてボブ・ディランのノーベル文学賞まで。録音と放送の技術の移り変わりと、それに乗って広がったポピュラー音楽の節目を、日本と世界の出来事でたどる。
@@ -27,7 +33,6 @@ entries:
   - id: 1945-12-31-9ff5bdef # NHK radio airs "Kohaku Ongaku Shiai", forerunner of Kohaku Uta Gassen
   - id: 1949-02-21-f87cce88 # Louis Armstrong, first jazz musician on the cover of Time
   - id: 1951-01-03-faca5ffa # First NHK Kohaku Uta Gassen
-  - id: 1951-03-20-24e20b3e # Nippon Columbia releases Japan's first LP records
   - id: 1953-12-31-3efbb1d8 # Fourth Kohaku: first on TV and radio, held on New Year's Eve from then on
 
   # --- Rock and roll, the Beatles, charts ---
