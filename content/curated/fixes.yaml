@@ -2963,3 +2963,9 @@
 - id: 2022-10-03-39ba3fcf   # 村上宗隆: 「日本人およびアジア人打者のシーズン最多本塁打記録となる56本塁打…（バレンティンに次ぐNPB史上2位）、NPB史上最年少の22歳で三冠王を達成」, cited 「５６号達成…」 (スポーツ報知, 2022年10月3日) and 「村上宗隆、最終戦で王貞治超え56…」 (the line added 「18年ぶり8人目（通算12度目）」, which no article gives)
   title: "東京ヤクルトスワローズの村上宗隆がシーズン最終戦で本塁打を放ち、日本人選手のシーズン最多となる…"
   summary: "東京ヤクルトスワローズの村上宗隆がシーズン最終戦で本塁打を放ち、日本人選手のシーズン最多となる56本塁打を記録した。三冠王も確定し、22歳での達成はプロ野球史上最年少。"
+
+# --- Audit of the older collections, group 6 (architecture, human-rights, games, art): a claim that is no longer
+# true, found by checking every entry against its topic articles (2026-10-13) ---
+- id: 2012-02-29-02f08d7b   # 東京スカイツリー: 高さ634 m, 「人工の建造物としてはブルジュ・ハリファ…の828メートル、ムルデカ118…の679メートルに次ぐ世界第3位」 (the line still called it second to the Burj Khalifa, true only until Merdeka 118 was finished)
+  title: "高さ634mの東京スカイツリーが竣工した。自立式鉄塔としては世界一で、人工建造物ではブルジュ・…"
+  summary: "高さ634mの東京スカイツリーが竣工した。自立式鉄塔としては世界一で、人工建造物ではブルジュ・ハリファ（828m）に次ぐ高さだった（のちにムルデカ118が完成し、現在は世界第3位）。"

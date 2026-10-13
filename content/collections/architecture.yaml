@@ -23,6 +23,11 @@
 # the article, which gives collapse risk at 震度5強; Abeno Harukas, 7 Mar 2014, has the right date but its summary
 # keeps a year-page cross-reference (「日本の超高層建築物」も参照); the Nakagin Capsule Tower demolition begins
 # 12 Apr 2022 / 21 Apr 2022; Azabudai Hills Mori JP Tower "330 m" / about 325 m).
+# Audited against the topic articles (2026-10-13): 31 entries checked, 1 corrected in fixes.yaml, none dropped.
+# Corrected: Tokyo Skytree, which the line still called the second-tallest structure; since Merdeka 118 it is third
+# (東京スカイツリー). The opening dates of the Yasuda Auditorium, the old Tokyo city hall, the Kasumigaseki Building, the
+# Keio Plaza Hotel, Sunshine 60, Tokyo Dome, the Landmark Tower, the Tokyo International Forum, the Shanghai World
+# Financial Center and the Burj Khalifa match their articles.
 slug: architecture
 title: 建築と都市の歴史
 lead: 1880年のケルン大聖堂の完成、ブルックリン橋、エッフェル塔、鹿鳴館と帝国ホテル、東京駅と国会議事堂から、霞が関ビルディングと新宿副都心の超高層ビル、横浜ランドマークタワー、東京スカイツリーとブルジュ・ハリファまで。日本住宅公団の設立や旧東京都庁跡地の東京国際フォーラム、改正建築基準法、ノートルダム大聖堂の火災と再開、サグラダ・ファミリアの「イエスの塔」も含めて、建物と街の姿の移り変わりをたどる。
