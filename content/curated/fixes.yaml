@@ -2877,3 +2877,25 @@
 - id: 2024-01-01-bd9f39a2   # 能登半島地震 (2024年): Mj7.6, 震度7 in 輪島市 and 志賀町, 大津波警報 at 16:22, 「2026年6月30日14時現在、死者743人（うち災害関連死515人）」 (the line gave the early count 「死者408人、行方不明者3人、負傷者1341人」 and a list of first-day details)
   title: "石川県能登地方を震源とするM7.6の地震が発生し、輪島市と志賀町で最大震度7を観測した。能登に…"
   summary: "石川県能登地方を震源とするM7.6の地震が発生し、輪島市と志賀町で最大震度7を観測した。能登には大津波警報が出され、輪島市では大規模な火災も起きた。死者は災害関連死を含めて743人に上る（2026年6月時点）。"
+
+# --- Audit of the older collections, group 3 (environment, music, constitution, nuclear): wrong or unsupported facts
+# found by checking every entry against its topic articles (2026-10-13) ---
+- id: 2003-04-28-c90040a2   # iTunes Store: opened 2003年4月28日, 「開始当初は約20万ファイル」 (the line gave the price as 「1曲一律1ドル」, which neither ja nor en "iTunes Store" states for the launch)
+  title: "アメリカ合衆国でiTunes Music Storeが開始される。開始当初は約20万曲を用意した"
+  summary: "アメリカ合衆国でiTunes Music Storeが開始される。開始当初は約20万曲を用意した。"
+
+- id: 2007-02-02-28243dd8   # IPCC第4次評価報告書: 「2007年2月に第一作業部会（WG I）による報告書…が発行された」, 「今世紀末の平均気温の上昇幅の予測結果は…1.1〜6.4℃」; en "IPCC Fourth Assessment Report" cites the UNEP press release of 2 February 2007 (the line added 「約2億人が難民となる」, which the working group I report does not say)
+  title: "気候変動に関する政府間パネル（IPCC）が第4次評価報告書の第1作業部会報告書を公表し、今世紀…"
+  summary: "気候変動に関する政府間パネル（IPCC）が第4次評価報告書の第1作業部会報告書を公表し、今世紀末の世界の平均気温は20世紀末に比べて1.1〜6.4℃上がると予測した。"
+
+- id: 2009-06-25-f687e0db   # マイケル・ジャクソンの死: 「6月25日、マイケルが自宅にて心停止・呼吸停止状態に陥り」, 「カリフォルニア時間14時26分に死亡が確認された」, ロサンゼルス市警察は 「プロポフォールの不適切な使用が死因である疑いは強く」, 「2011年11月にマーレーは過失致死罪で禁錮4年の有罪判決」 (the line had 「プロポフォール等6種類の薬物」, which the article does not count)
+  title: "アメリカ合衆国の歌手マイケル・ジャクソンが自宅で心停止・呼吸停止状態に陥り、搬送先の病院で死亡…"
+  summary: "アメリカ合衆国の歌手マイケル・ジャクソンが自宅で心停止・呼吸停止状態に陥り、搬送先の病院で死亡した。麻酔薬プロポフォールの投与が問題となり、専属医師は2011年に過失致死罪で有罪判決を受けた。"
+
+- id: 2013-10-10-4cd4de61   # 水銀に関する水俣条約: 「水銀および水銀を使用した製品の製造と輸出入を規制する国際条約」, 「熊本県で2013年10月7日-8日の準備会合を経て、2013年10月10日に採択され、92ヶ国（含むEU）が条約への署名をおこなった」 (the line had 「約140か国・地域の代表ら約1000人」 and 「全会一致」, which the article gives only for the naming vote in Geneva)
+  title: "熊本県で開かれた会議で、水銀と水銀を使った製品の製造や輸出入を規制する「水銀に関する水俣条約」…"
+  summary: "熊本県で開かれた会議で、水銀と水銀を使った製品の製造や輸出入を規制する「水銀に関する水俣条約」が採択され、92か国（EUを含む）が署名した。"
+
+- id: 2017-09-20-16be9b34   # 核兵器禁止条約: date_signed 2017年9月20日 (New York); en "Treaty on the Prohibition of Nuclear Weapons": "opened for signature on 20 September 2017" (the line had 「51カ国が署名」, a count neither article gives)
+  title: "核兵器禁止条約の署名式典が国連本部で行われ、署名の受け付けが始まった"
+  summary: "核兵器禁止条約の署名式典が国連本部で行われ、署名の受け付けが始まった。"
