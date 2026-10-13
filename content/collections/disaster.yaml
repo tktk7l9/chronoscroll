@@ -4,6 +4,16 @@
 # (weather maps, AMeDAS, Earthquake Early Warning, emergency warnings, alert levels, relief law).
 # Left out on purpose: entries whose wording goes beyond the topic article
 # (the 1947 Typhoon Kathleen entry says it made landfall; the article has it passing the tip of Boso).
+# Audited against the topic articles (2026-10-13): 33 entries checked, 6 corrected in fixes.yaml, none dropped.
+# Corrected: Bandai 1888, whose 「千年ぶり」 the article does not support (it lists an eruption around 1787) and whose
+# dead were taken by a debris avalanche (岩屑なだれ), not 泥流; the 1944 Tonankai earthquake, centred off Kumano-nada
+# rather than 「東海道沖」, with 18,008 houses destroyed (the line had 36,520, close to the article's half-destroyed
+# count) and without the unsupported claim that it hastened Japan's defeat; the Fukui earthquake's epicentre near
+# Maruoka (not 「九頭竜川下流域」) and its 3,769 dead and missing; the Isewan typhoon's 5,098 dead and missing (the line had
+# 5,041 dead and 570,000 houses, figures the article does not give); Typhoon Hagibis, cut down to what the article
+# supports (landfall before 19:00, heavy-rain emergency warnings in 13 prefectures, the Chikuma levee breach); the
+# Noto earthquake's toll, now 743 dead including 515 disaster-related deaths as of June 2026 (the line had the early
+# count of 408).
 slug: disaster
 title: 日本の災害と防災の歴史
 lead: 1883年に日本で初めて作られた天気図から、関東大震災、伊勢湾台風、阪神・淡路大震災、東日本大震災、そして能登半島地震まで。地震・津波・台風・噴火の記録に、緊急地震速報や特別警報のように被害を減らすために生まれた仕組みを重ねてたどる。

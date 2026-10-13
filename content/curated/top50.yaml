@@ -391,9 +391,11 @@
   category: disaster
   region: world
 
+# 2020年東京オリンピック: 「開催の延期は近代オリンピック史上初めてのことであり、奇数年の開催も夏冬通じて史上初」,
+# 「大多数の会場で無観客開催」 (it called the empty stands 「五輪史上初」, which the article does not say, 2026-10-13)
 - id: 2021-07-23-fa647dbd
   title: 東京2020オリンピック開幕
-  summary: 新型コロナの影響で1年延期された東京オリンピックが開幕した。ほとんどの会場が無観客という五輪史上初の異例の大会は、それでも世界のアスリートの舞台であり続けた。
+  summary: 新型コロナの影響で1年延期された東京オリンピックが開幕した。延期も奇数年の開催も近代オリンピック史上初めてで、大多数の会場は無観客で行われた。
   importance: 100
   svg: art-tokyo2020
   category: sports
