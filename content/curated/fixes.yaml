@@ -2969,3 +2969,13 @@
 - id: 2012-02-29-02f08d7b   # 東京スカイツリー: 高さ634 m, 「人工の建造物としてはブルジュ・ハリファ…の828メートル、ムルデカ118…の679メートルに次ぐ世界第3位」 (the line still called it second to the Burj Khalifa, true only until Merdeka 118 was finished)
   title: "高さ634mの東京スカイツリーが竣工した。自立式鉄塔としては世界一で、人工建造物ではブルジュ・…"
   summary: "高さ634mの東京スカイツリーが竣工した。自立式鉄塔としては世界一で、人工建造物ではブルジュ・ハリファ（828m）に次ぐ高さだった（のちにムルデカ118が完成し、現在は世界第3位）。"
+
+# --- Audit of the older collections, group 7 (weather, photo, ship, education): wrong or unsupported facts found
+# by checking every entry against its topic articles (2026-10-13) ---
+- id: 1909-08-11-b023124f   # en "SOS": RMS Slavonia, wrecked on 10 June 1909, "is the earliest-reported ship to have transmitted the SOS distress call", followed by "the steamer SS Arapahoe on 11 August 1909 while off the North Carolina coast" (the line called the Arapahoe's call the world's first SOS)
+  title: "クライド・ラインのアラパホ号がハッテラス岬沖で遭難信号「SOS」を発信し、救助された。同年6月…"
+  summary: "クライド・ラインのアラパホ号がハッテラス岬沖で遭難信号「SOS」を発信し、救助された。同年6月のスラボニア号に続く、SOSの発信が記録された最初期の例とされる。"
+
+- id: 2016-06-26-f60db55a   # en "Panama Canal expansion project": "The expanded canal began commercial operation on 26 June 2016", ships "about one and a half times larger than the previous Panamax size", the project "doubled the capacity of the Panama Canal" (the line gave a 2.6-fold rise for container ships, which no article gives)
+  title: "拡張されたパナマ運河が営業運航を始めた。通れる船は従来のパナマックス級のおよそ1.5倍の大きさ…"
+  summary: "拡張されたパナマ運河が営業運航を始めた。通れる船は従来のパナマックス級のおよそ1.5倍の大きさとなり、運河の輸送能力は2倍になった。"

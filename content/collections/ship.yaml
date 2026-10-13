@@ -22,6 +22,11 @@
 # dates it 10 Feb 2001 in Japan time; the Wakashio leak reported 6 Aug 2020 / not dated in the article).
 # Not used to keep the list within 40: the US taking over the Panama works 4 May 1904, the Lusitania 7 May 1915,
 # the IHI merger Dec 1960, the naming of Asuka II 26 Feb 2006 and the Sanchi collision 6 Jan 2018.
+# Audited against the topic articles (2026-10-13): 40 entries checked, 2 corrected in fixes.yaml, none dropped.
+# Corrected: the Arapahoe's SOS, an early one after the Slavonia's of June 1909, not the world's first (en "SOS");
+# the expanded Panama Canal, which doubled the canal's capacity, without the 2.6-fold figure no article gives (en
+# "Panama Canal expansion project"). The Titanic wreck keeps the depth of 3,650 m from ja:タイタニック (客船) (en "Wreck of
+# the Titanic" gives about 12,500 ft).
 slug: ship
 title: 船と海運の歴史
 lead: 1869年の観音埼燈台の初点灯とスエズ運河の開通、帆船カティーサークの進水から、日本郵船の創立、関釜連絡船と青函連絡船の運航開始、ブラジル移民を乗せた笠戸丸、タイタニック号の沈没、パナマ運河の開通、洞爺丸事故と紫雲丸事故、スエズ運河の国有化、堀江謙一の太平洋単独無寄港横断、日本初の長距離フェリーと原子力船「むつ」、青函連絡船の運航終了、セウォル号の沈没、スエズ運河の封鎖事故、世界最大の客船の出航まで。海上保安庁の設置やタイタニック号の残骸の発見、パナマ運河の返還も含めて、船と港と航路の歩みをたどる。
@@ -40,7 +45,7 @@ entries:
   - id: 1905-09-11-ff8037cd # The Kanpu ferry between Shimonoseki and Busan
   - id: 1908-03-07-b68dc63c # The Seikan ferry between Aomori and Hakodate
   - id: 1908-04-28-1c8e1891 # The Kasato Maru leaves Kobe with the first emigrants to Brazil
-  - id: 1909-08-11-b023124f # The first SOS, sent by the Arapahoe off Cape Hatteras
+  - id: 1909-08-11-b023124f # An early SOS, sent by the Arapahoe off Cape Hatteras
   - id: 1912-04-14-7c89b5cd # The Titanic sinks
   - id: 1914-04-01-4d3399c1 # The Ashizuri lighthouse lit
   - id: 1914-08-15-d0b177bc # The Panama Canal opens
