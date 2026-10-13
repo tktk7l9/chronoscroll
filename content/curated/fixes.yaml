@@ -2979,3 +2979,32 @@
 - id: 2016-06-26-f60db55a   # en "Panama Canal expansion project": "The expanded canal began commercial operation on 26 June 2016", ships "about one and a half times larger than the previous Panamax size", the project "doubled the capacity of the Panama Canal" (the line gave a 2.6-fold rise for container ships, which no article gives)
   title: "拡張されたパナマ運河が営業運航を始めた。通れる船は従来のパナマックス級のおよそ1.5倍の大きさ…"
   summary: "拡張されたパナマ運河が営業運航を始めた。通れる船は従来のパナマックス級のおよそ1.5倍の大きさとなり、運河の輸送能力は2倍になった。"
+
+# --- Audit of the older collections, group 8 (anime; breaking, houseplant and ai-tech are fixed in their own
+# files): wrong or unsupported facts found by checking every entry against its topic articles (2026-10-13) ---
+- id: 1917-06-30-becc6d38   # 塙凹内名刀之巻: 「2007年（平成19年）に玩具版が発見され、現存する作者と制作年が判明している日本最古のアニメーション作品として知られる」 (the line called it the oldest surviving Japanese animation outright)
+  title: "短編アニメーション映画『塙凹内名刀之巻』（なまくら刀）が公開された。2007年に玩具用のフィル…"
+  summary: "短編アニメーション映画『塙凹内名刀之巻』（なまくら刀）が公開された。2007年に玩具用のフィルムが見つかり、作者と制作年がわかる現存最古の日本のアニメーションとして知られる。"
+
+- id: 1943-03-25-c6bbd339   # 桃太郎の海鷲: 「1943年3月25日に公開されたアニメ映画。日本初の長編アニメ映画といわれることがある」, its footnote naming 桃太郎 海の神兵 as the first in another book (the line stated it as fact)
+  title: "国策アニメ映画として藝術映画社が製作した『桃太郎の海鷲』が公開された。日本初の長編アニメ映画と…"
+  summary: "国策アニメ映画として藝術映画社が製作した『桃太郎の海鷲』が公開された。日本初の長編アニメ映画といわれることがある。"
+
+- id: 1965-10-06-56365544   # ジャングル大帝: 「10月6日、カラーテレビアニメシリーズとして虫プロダクション制作でフジテレビ系で放送開始」; en "Kimba the White Lion": "the first Japanese color animated television series"; テレビアニメ: 『もぐらのアバンチュール』 (1958) was 「日本最古のテレビ放送されたカラーアニメ（≠テレビシリーズ）」 (the line called it the first colour TV anime)
+  title: "手塚治虫原作のテレビアニメ『ジャングル大帝』が、虫プロダクションの制作でフジテレビ系で放送を始…"
+  summary: "手塚治虫原作のテレビアニメ『ジャングル大帝』が、虫プロダクションの制作でフジテレビ系で放送を始めた。日本初のカラーのテレビアニメシリーズとされる。"
+
+- id: 1969-10-05-76be6ef7   # ハクション大魔王: 放送開始 1969年10月5日, 放送終了 1970年9月27日; サザエさん (テレビアニメ): 「1969年10月5日からフジテレビ系列で放送されている」, 「世界で最も長く放映されているテレビアニメ番組としてギネス世界記録を保持」 (the line ended 「（2025年現在も放送中）」)
+  title: "タツノコプロ制作のテレビアニメ『ハクション大魔王』がフジテレビ系列で放送を始めた（1970年9…"
+  summary: "タツノコプロ制作のテレビアニメ『ハクション大魔王』がフジテレビ系列で放送を始めた（1970年9月まで）。同じ日に同じ系列で『サザエさん』も始まり、世界で最も長く放映されているテレビアニメとしてギネス世界記録に認定されている。"
+
+- id: 1984-03-11-8ff86ed7   # 風の谷のナウシカ (映画): 「1984年3月11日に公開されたトップクラフト制作の日本のアニメーション映画」, note 「厳密に言えばスタジオジブリ作品でないが…スタジオジブリ作品として取り扱われることが非常に多い」 (the line called it a Studio Ghibli film)
+  title: "宮崎駿監督のアニメ映画『風の谷のナウシカ』が公開された。制作はトップクラフトで、厳密にはスタジ…"
+  summary: "宮崎駿監督のアニメ映画『風の谷のナウシカ』が公開された。制作はトップクラフトで、厳密にはスタジオジブリの作品ではないが、ジブリ作品として扱われることが多い。"
+
+- id: 2003-03-24-0e433607   # 千と千尋の神隠し: 「2003年3月23日、第75回アカデミー賞長編アニメ映画賞を受賞」; 第75回アカデミー賞: 「2003年3月23日に発表・授賞式が行われた」 (the line had 24 March, the date in Japan)
+  date: "2003-03-23"
+
+- id: 2019-07-18-f685736d   # 京都アニメーション放火殺人事件: 「従業員36人が死亡、33人が重軽傷を負った」, 「明治時代以降の大量殺人事件において最多の犠牲者数とされている」, cited 「京都放火 死者34人に…府警 確保41歳 氏名公表」 (読売新聞, 2019-07-20) (the line gave an early count and quoted the National Police Agency on 「放火事件としては平成期以降最多の死者数」, which no article gives)
+  title: "京都市伏見区の京都アニメーション第1スタジオに男が侵入してガソリンをまき、火を放った。従業員3…"
+  summary: "京都市伏見区の京都アニメーション第1スタジオに男が侵入してガソリンをまき、火を放った。従業員36人が死亡、33人が重軽傷を負い、明治以降の日本の大量殺人事件で最多の犠牲者数とされる。京都府警は41歳の男の身柄を確保した。"

@@ -1,80 +1,92 @@
-# ブレイクダンスの歴史（特集）
-# 既存の自動生成データにブレイクダンス関連は1件も無いため、全て新規イベント。
-# 出典URLは ja/en Wikipedia の実在記事のみ（2026-07 時点で存在を確認済み）。
-# importance は 40〜60 に抑え、概観ズームで本編を汚さないようにする。
+# History of breakdancing (collection)
+# The auto-generated data has no breakdancing events, so every entry is written here, with ja/en Wikipedia articles
+# as sources. Importance is kept at 40-60 so that the entries do not crowd the overview zoom.
+# Audited against the topic articles (2026-10-13): 18 entries checked, 15 corrected here, 1 dropped. Each line now
+# says only what its sources say, and the article that gives the date was added where the listed ones did not.
+# Corrected: Kool Herc's party of 11 Aug 1973, held in the apartment building at 1520 Sedgwick Avenue and credited
+# with starting hip hop (en "DJ Kool Herc", "1520 Sedgwick Avenue"; the line called it a block party and dated the
+# invention of the breakbeat to that night); the Rock Steady Crew, formed by Jimmy Dee and Jimmy Lee and made famous
+# by Flashdance (en "Breakdancing"); "Rapper's Delight", the first commercially successful rap record, number 36 in
+# the US (not the first nationwide hip-hop hit, and the spread of breaking it was said to prepare is in no article);
+# the 1981 Lincoln Center battle and its press coverage (en "Breakdancing"); Style Wars, a PBS documentary centred
+# on graffiti (not a record of the "four elements"); Wild Style, released in Japan in Oct 1983 and followed by the
+# Rock Steady Crew's visit (ja ブレイクダンス); Beat Street's influence abroad, as in Germany (en "Beat Street"; the line
+# said it decided the worldwide boom); the 1984 Los Angeles closing ceremony, where Lionel Richie sang with
+# breakdancers (en "1984 Summer Olympics closing ceremony"; the line called it the first Olympic stage for street
+# dance); Japan's 1984 boom, now Kazami Shingo's 「涙のtake a chance」 (the line put youths dancing on the Harajuku
+# hokoten, which ja ブレイクダンス doubts); Battle of the Year, without Hanover and the claim of the first framework; the
+# UK B-Boy Championships, founded by DJ Hooch in London (en "Hip-hop dance"); Red Bull BC One, without the claim
+# that it laid the ground for the Olympics; the 2012 school dance requirement, without 「現代的なリズムのダンス」; the 2018 Youth
+# Olympics, the first dancesport at any Olympics; the IOC decision of 7 Dec 2020 (en "Breaking at the 2024 Summer
+# Olympics", sources dated that day).
+# Dropped: 1975-01-01-bd-uprock 「トップロックとアップロックが型として固まる」 (no article gives a year; en "Uprock" has rocking evolve in
+# the late 1960s and calls its origins debated). Because the entries are defined here, a dropped entry leaves the
+# timeline too. The lead and description no longer speak of a block party.
 slug: breaking
 title: ブレイクダンスの歴史
-lead: 1973年ブロンクスのブロックパーティーで生まれたダンスが、映画とメディアで世界へ広がり、半世紀後にオリンピックの正式競技になるまで。
-description: DJクール・ハークのブロックパーティーからパリ五輪の金メダルまで、ブレイクダンス（ブレイキン）の50年を年代順にたどる特集。
+lead: 1973年にブロンクスのパーティーで生まれたダンスが、映画とメディアで世界へ広がり、半世紀後にオリンピックの正式競技になるまで。
+description: DJクール・ハークのパーティーからパリ五輪の金メダルまで、ブレイクダンス（ブレイキン）の50年を年代順にたどる特集。
 icon: art-collection-breaking
 entries:
-  # --- 誕生：ブロンクスのブロックパーティー ---
+  # --- Birth: parties in the Bronx ---
   - id: 1973-08-11-bd-kool-herc
     date: "1973-08-11"
     precision: day
-    title: DJクール・ハークがブレイクビーツを発明
-    summary: ニューヨーク・ブロンクスのセジウィック・アベニュー1520番地で開かれたブロックパーティーで、DJクール・ハークが2台のターンテーブルを使い曲の間奏（ブレイク）だけを繋ぎ続ける手法を披露した。この延長されたブレイクで踊る者がB-BOY／B-GIRLと呼ばれ、ブレイクダンスとヒップホップ文化が生まれた。
+    title: "ヒップホップの始まりとされるクール・ハークのパーティー"
+    summary: "DJクール・ハークが、ニューヨーク・ブロンクスのセジウィック・アベニュー1520番地のアパートで妹と開いたパーティーでDJを務めた。ヒップホップの始まりとされる催しで、同じレコード2枚で曲の間奏（ブレイク）を引き延ばす彼のDJもこの年に生まれたとされる。ブレイクで踊る若者を、彼はBボーイ・Bガールと呼んだ。"
     category: culture
     region: world
     importance: 58
     svg: art-turntable
     sources:
       - { label: "Wikipedia: クール・ハーク", url: "https://ja.wikipedia.org/wiki/クール・ハーク" }
-      - { label: "Wikipedia: ヒップホップ", url: "https://ja.wikipedia.org/wiki/ヒップホップ" }
+      - { label: "Wikipedia (英語): DJ Kool Herc", url: "https://en.wikipedia.org/wiki/DJ_Kool_Herc" }
+      - { label: "Wikipedia (英語): 1520 Sedgwick Avenue", url: "https://en.wikipedia.org/wiki/1520_Sedgwick_Avenue" }
     relatedIds: ["1977-01-01-bd-rock-steady", "1983-04-15-bd-flashdance", "2024-08-09-bd-paris-gold"]
-
-  - id: 1975-01-01-bd-uprock
-    date: "1975-01-01"
-    precision: year
-    title: トップロックとアップロックが型として固まる
-    summary: ブロンクスとブルックリンのダンサーたちの間で、立ったまま踏むステップ（トップロック）と、相手に挑む所作を様式化したアップロックが定着した。この頃ブレイクダンスは、床に降りる動き（フットワーク・フリーズ）と組み合わさり、即興のバトル形式として輪郭を持ちはじめる。
-    category: culture
-    region: world
-    importance: 42
-    sources:
-      - { label: "Wikipedia: ブレイクダンス", url: "https://ja.wikipedia.org/wiki/ブレイクダンス" }
 
   - id: 1977-01-01-bd-rock-steady
     date: "1977-01-01"
     precision: year
     title: ロック・ステディ・クルー結成
-    summary: ブロンクスでロック・ステディ・クルーが結成された。のちにクレイジー・レッグスらを擁して国際的に知られる存在となり、ブレイクダンスを「クルー同士のバトル」という形式で世界に伝える中心的な担い手になった。
+    summary: "Bボーイのジミー・ディーとジミー・リーが、ブロンクスでロック・ステディ・クルーを結成した。のちにクレイジー・レッグスがマンハッタンの支部を作り、映画『フラッシュダンス』への出演で世界的に知られるようになった。"
     category: culture
     region: world
     importance: 52
     sources:
       - { label: "Wikipedia (英語): Rock Steady Crew", url: "https://en.wikipedia.org/wiki/Rock_Steady_Crew" }
+      - { label: "Wikipedia (英語): Breakdancing", url: "https://en.wikipedia.org/wiki/Breakdancing" }
       - { label: "Wikipedia: ブレイクダンス", url: "https://ja.wikipedia.org/wiki/ブレイクダンス" }
 
   - id: 1979-09-16-bd-rappers-delight
     date: "1979-09-16"
     precision: month
-    title: シュガーヒル・ギャング「Rapper's Delight」でヒップホップが商業化
-    summary: シュガーヒル・ギャングのシングル「Rapper's Delight」が発売され、ブロンクスのパーティー文化だったヒップホップが初めて全米規模のヒットとなった。レコードとして流通しはじめたことで、ブレイクダンスもニューヨークの外へ伝わる下地ができた。
+    title: "シュガーヒル・ギャング「ラッパーズ・ディライト」発売"
+    summary: "シュガーヒル・ギャングのシングル「ラッパーズ・ディライト」が発売された。商業的に初めて成功したラップとされ、全米チャートで最高36位、カナダでは1位になった。"
     category: culture
     region: world
     importance: 50
     sources:
       - { label: "Wikipedia: シュガーヒル・ギャング", url: "https://ja.wikipedia.org/wiki/シュガーヒル・ギャング" }
-      - { label: "Wikipedia: ヒップホップ・ミュージック", url: "https://ja.wikipedia.org/wiki/ヒップホップ・ミュージック" }
+      - { label: "Wikipedia (英語): Rapper's Delight", url: "https://en.wikipedia.org/wiki/Rapper's_Delight" }
 
-  # --- 1980年代：メディアが世界へ運ぶ ---
+  # --- The 1980s: films and media carry it worldwide ---
   - id: 1981-01-01-bd-lincoln-center
     date: "1981-01-01"
     precision: year
     title: リンカーン・センターでのバトルがメディアの注目を集める
-    summary: ロック・ステディ・クルーとダイナミック・ロッカーズのバトルがニューヨークのリンカーン・センターで行われ、報道を通じて路上のダンスが「見せる競技」として広く知られるきっかけになった。ストリートの実践が主流メディアに接続された象徴的な出来事である。
+    summary: "ロック・ステディ・クルーとダイナミック・ロッカーズのバトルがニューヨークのリンカーン・センターで行われ、ABCニュースやニューヨーク・タイムズなど大手メディアの注目を集めた。"
     category: culture
     region: world
     importance: 48
     sources:
+      - { label: "Wikipedia (英語): Breakdancing", url: "https://en.wikipedia.org/wiki/Breakdancing" }
       - { label: "Wikipedia (英語): Rock Steady Crew", url: "https://en.wikipedia.org/wiki/Rock_Steady_Crew" }
 
   - id: 1983-01-01-bd-style-wars
     date: "1983-01-01"
     precision: year
-    title: ドキュメンタリー『Style Wars』がヒップホップ文化を記録
-    summary: トニー・シルヴァー監督のドキュメンタリー『Style Wars』が公開され、グラフィティ・DJ・MC・ブレイクダンスという初期ヒップホップの四要素を映像として記録した。文化の内側からの証言として、以後のブレイクダンス史の一次資料になっている。
+    title: "ドキュメンタリー『スタイル・ウォーズ』放送"
+    summary: "トニー・シルヴァー監督がヘンリー・チャルファントと作ったドキュメンタリー『スタイル・ウォーズ』が、アメリカの公共放送PBSで放送された。初期のヒップホップ文化をグラフィティを中心に描き、Bボーイングとラップも記録した。"
     category: culture
     region: world
     importance: 46
@@ -100,76 +112,83 @@ entries:
     date: "1983-10-01"
     precision: year
     title: 『ワイルド・スタイル』公開
-    summary: チャーリー・エーハン監督の『ワイルド・スタイル』が公開された。実在のグラフィティライターやダンサーが本人役で出演した劇映画で、日本を含む各国で上映され、現地のヒップホップシーンの出発点となった作品として語られることが多い。
+    summary: "チャーリー・エーハーン監督のヒップホップ映画『ワイルド・スタイル』が公開された。ヒップホップの先駆者たちが本人役で出演した作品で、日本でも10月に公開され、11月に来日したロック・ステディ・クルーが日本にブレイクダンスを紹介した。アメリカのヒップホップ文化が日本に紹介されたのはこの映画が最初とされる。"
     category: culture
     region: world
     importance: 47
     sources:
       - { label: "Wikipedia: ワイルド・スタイル", url: "https://ja.wikipedia.org/wiki/ワイルド・スタイル" }
+      - { label: "Wikipedia: ブレイクダンス", url: "https://ja.wikipedia.org/wiki/ブレイクダンス" }
+      - { label: "Wikipedia (英語): Wild Style", url: "https://en.wikipedia.org/wiki/Wild_Style" }
 
   - id: 1984-06-08-bd-beat-street
     date: "1984-06-08"
     precision: month
     title: 『ビート・ストリート』公開
-    summary: ブロンクスのヒップホップ文化を描いた映画『ビート・ストリート』が公開された。『フラッシュダンス』『ワイルド・スタイル』と並び、1980年代半ばのブレイクダンス世界的流行を決定づけた作品として知られる。
+    summary: "ブロンクスでブレイクダンスやDJ、グラフィティに打ち込む若者たちを描いた映画『ビート・ストリート』がアメリカで公開された。影響は国外にも及び、ドイツでは『ワイルド・スタイル』とともにヒップホップを国内に紹介した映画とされる。"
     category: culture
     region: world
     importance: 45
     sources:
       - { label: "Wikipedia: ビート・ストリート", url: "https://ja.wikipedia.org/wiki/ビート・ストリート" }
+      - { label: "Wikipedia (英語): Beat Street", url: "https://en.wikipedia.org/wiki/Beat_Street" }
 
   - id: 1984-08-12-bd-la-olympics
     date: "1984-08-12"
     precision: day
     title: ロサンゼルス五輪の閉会式でブレイクダンスが披露される
-    summary: ロサンゼルスオリンピックの閉会式でブレイクダンサーによるパフォーマンスが行われ、世界中に中継された。ストリートのダンスがオリンピックの舞台に立った最初の場面であり、40年後の正式競技化を遠く予告する出来事だった。
+    summary: "ロサンゼルスオリンピックの閉会式で、ライオネル・リッチーがブレイクダンサーを伴ってヒット曲「オール・ナイト・ロング」を歌った。"
     category: sports
     region: world
     importance: 54
     sources:
+      - { label: "Wikipedia (英語): 1984 Summer Olympics closing ceremony", url: "https://en.wikipedia.org/wiki/1984_Summer_Olympics_closing_ceremony" }
       - { label: "Wikipedia: 1984年ロサンゼルスオリンピック", url: "https://ja.wikipedia.org/wiki/1984年ロサンゼルスオリンピック" }
-      - { label: "Wikipedia: ブレイクダンス", url: "https://ja.wikipedia.org/wiki/ブレイクダンス" }
     relatedIds: ["2020-12-07-bd-ioc-paris", "2024-08-09-bd-paris-gold"]
 
   - id: 1984-01-01-bd-japan-boom
     date: "1984-01-01"
     precision: year
-    title: 日本でブレイクダンスの最初のブーム
-    summary: 映画『フラッシュダンス』『ワイルド・スタイル』の公開を受け、東京・原宿の歩行者天国などでブレイクダンスを踊る若者が現れた。日本のストリートダンス文化の出発点であり、のちの世代のダンサーを生む土壌となった。
+    title: "日本でブレイクダンスがブームに"
+    summary: "風見慎吾がブレイクダンスの振り付けを全編に取り入れた「涙のtake a chance」を発売し、ブレイクダンスの動きがテレビを通じて一般にも知られるようになった。前年の11月には、映画『ワイルド・スタイル』の公開に合わせてロック・ステディ・クルーが来日していた。"
     category: culture
     region: japan
     importance: 44
     sources:
       - { label: "Wikipedia: ブレイクダンス", url: "https://ja.wikipedia.org/wiki/ブレイクダンス" }
+      - { label: "Wikipedia: 涙のtake a chance", url: "https://ja.wikipedia.org/wiki/涙のtake_a_chance" }
 
-  # --- 1990年代：競技としての制度化 ---
+  # --- From the 1990s: international competitions ---
   - id: 1990-01-01-bd-boty
     date: "1990-01-01"
     precision: year
     title: バトル・オブ・ザ・イヤー開始
-    summary: ドイツ・ハノーバーで国際的なブレイクダンスの大会「バトル・オブ・ザ・イヤー」が始まった。クルー同士がショーケースとバトルで競う形式が定着し、ブレイクダンスが世界規模の競技シーンを持つ最初の枠組みとなった。
+    summary: "ブレイクダンスの国際大会「バトル・オブ・ザ・イヤー」が始まった。以後毎年開かれ、Bボーイングの世界最高峰の大会とされる。"
     category: sports
     region: world
     importance: 50
     sources:
       - { label: "Wikipedia: バトル・オブ・ザ・イヤー", url: "https://ja.wikipedia.org/wiki/バトル・オブ・ザ・イヤー" }
+      - { label: "Wikipedia (英語): Battle of the Year", url: "https://en.wikipedia.org/wiki/Battle_of_the_Year" }
 
   - id: 1996-01-01-bd-uk-champs
     date: "1996-01-01"
     precision: year
     title: UK B-Boy Championships 開始
-    summary: ロンドンで UK B-Boy Championships が始まった。ソロとクルーの両部門を備えた大会として世界の強豪が集まり、バトル・オブ・ザ・イヤーと並ぶ主要国際大会に育った。
+    summary: "DJフーチがロンドンでUK B-Boy Championshipsを創設した。Bボーイのクルーとソロなどの世界王者を決める大会で、バトル・オブ・ザ・イヤーなどと並ぶブレイクダンスの主要な世界大会とされる。"
     category: sports
     region: world
     importance: 43
     sources:
+      - { label: "Wikipedia (英語): Hip-hop dance", url: "https://en.wikipedia.org/wiki/Hip-hop_dance" }
+      - { label: "Wikipedia: UK B-Boy Championships", url: "https://ja.wikipedia.org/wiki/UK_B-Boy_Championships" }
       - { label: "Wikipedia (英語): UK B-Boy Championships", url: "https://en.wikipedia.org/wiki/UK_B-Boy_Championships" }
 
   - id: 2004-01-01-bd-bc-one
     date: "2004-01-01"
     precision: year
     title: Red Bull BC One 第1回開催
-    summary: スイスのビール／ビエンヌで、1対1のソロバトルに絞った国際大会 Red Bull BC One の第1回が開催された。個人競技としてのブレイキンを世界に印象づけ、以後の五輪種目化に向けた競技形式の土台になった。
+    summary: "スイスのビール（ビエンヌ）で、飲料会社レッドブルが主催する1対1のブレイクダンスの国際大会「Red Bull BC One」の第1回が開かれた。16人が勝ち抜き戦で争う大会で、以後毎年開かれている。"
     category: sports
     region: world
     importance: 51
@@ -180,36 +199,39 @@ entries:
     date: "2012-04-01"
     precision: month
     title: 日本の中学校でダンスが必修化
-    summary: 学習指導要領の改訂により、中学校保健体育で「現代的なリズムのダンス」を含むダンスが必修となった。ヒップホップ系のダンスが学校教育に入ったことで、日本の競技人口の裾野が大きく広がった。
+    summary: "学習指導要領の改訂により、中学校の体育で男女ともに武道とダンスが必修になった。SNSの普及とともに、ブレイクダンスに若い世代が加わるきっかけになったとされる。"
     category: society
     region: japan
     importance: 46
     sources:
       - { label: "Wikipedia: 学習指導要領", url: "https://ja.wikipedia.org/wiki/学習指導要領" }
+      - { label: "Wikipedia: ブレイクダンス", url: "https://ja.wikipedia.org/wiki/ブレイクダンス" }
       - { label: "Wikipedia: ダンス", url: "https://ja.wikipedia.org/wiki/ダンス" }
 
-  # --- オリンピックへ ---
+  # --- To the Olympics ---
   - id: 2018-10-06-bd-youth-olympics
     date: "2018-10-06"
     precision: month
     title: ユースオリンピックでブレイキンが正式競技に
-    summary: ブエノスアイレスで開かれた夏季ユースオリンピックで、ブレイキンが正式競技として実施された。国際オリンピック委員会が若年層の関心を取り込む種目として評価し、パリ2024での採用へ直結する試金石となった。
+    summary: "ブエノスアイレスで開かれた夏季ユースオリンピックで、ブレイキンが男子・女子・男女混合の3種目で正式競技として行われた。オリンピックでダンススポーツが行われたのはこれが初めてだった。"
     category: sports
     region: world
     importance: 53
     sources:
-      - { label: "Wikipedia: ユースオリンピック", url: "https://ja.wikipedia.org/wiki/ユースオリンピック" }
+      - { label: "Wikipedia: 2018年ブエノスアイレスユースオリンピック", url: "https://ja.wikipedia.org/wiki/2018年ブエノスアイレスユースオリンピック" }
       - { label: "Wikipedia: ブレイキン", url: "https://ja.wikipedia.org/wiki/ブレイキン" }
+      - { label: "Wikipedia (英語): Breaking at the 2018 Summer Youth Olympics", url: "https://en.wikipedia.org/wiki/Breaking_at_the_2018_Summer_Youth_Olympics" }
 
   - id: 2020-12-07-bd-ioc-paris
     date: "2020-12-07"
     precision: day
     title: IOCがパリ五輪でのブレイキン実施を承認
-    summary: 国際オリンピック委員会が理事会で、2024年パリオリンピックの追加種目としてブレイキンを承認した。1973年にブロンクスの路上で生まれたダンスが、およそ半世紀を経てオリンピック競技になることが決まった。
+    summary: "国際オリンピック委員会（IOC）が、2024年パリオリンピックの実施競技にブレイキンを加えることを正式に承認した。1973年にブロンクスで生まれたダンスが、およそ半世紀を経てオリンピック競技になることが決まった。"
     category: sports
     region: world
     importance: 57
     sources:
+      - { label: "Wikipedia (英語): Breaking at the 2024 Summer Olympics", url: "https://en.wikipedia.org/wiki/Breaking_at_the_2024_Summer_Olympics" }
       - { label: "Wikipedia: ブレイキン", url: "https://ja.wikipedia.org/wiki/ブレイキン" }
       - { label: "Wikipedia: 2024年パリオリンピック", url: "https://ja.wikipedia.org/wiki/2024年パリオリンピック" }
     relatedIds: ["1973-08-11-bd-kool-herc", "2024-08-09-bd-paris-gold"]

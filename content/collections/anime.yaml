@@ -1,45 +1,56 @@
-# アニメの歴史（特集）
-# 全て既存の自動生成イベントへの参照。id は本文のハッシュなので、
-# 月次のWikipedia再生成で文面が変わると外れる（build時に⚠️で検出される）。
+# History of anime (collection)
+# References to existing auto-generated events only (nothing newly written). The ids are hashes of the text, so a
+# monthly Wikipedia re-generation that changes the wording breaks them (the build flags it with a warning).
+# Audited against the topic articles (2026-10-13): 25 entries checked, 7 corrected in fixes.yaml, 1 dropped.
+# Corrected: 塙凹内名刀之巻 (Namakura-gatana), the oldest surviving Japanese animation whose maker and year are known, not
+# simply the oldest; 桃太郎の海鷲, which 「日本初の長編アニメ映画といわれることがある」 (the line stated it as fact); Jungle Emperor, the first
+# Japanese colour TV anime series (en "Kimba the White Lion"; テレビアニメ has the colour もぐらのアバンチュール on TV in 1958);
+# Sazae-san, whose 「2025年現在も放送中」 is now its Guinness record as the longest-running animated TV programme; Nausicaä,
+# made by Topcraft and only treated as a Ghibli film; Spirited Away's Academy Award, moved from 24 to 23 Mar 2003
+# (千と千尋の神隠し and 第75回アカデミー賞; 24 Mar is the date in Japan); the Kyoto Animation arson, now 36 dead and 33 injured and
+# the largest toll of any mass murder in Japan since Meiji, without the early count and the police quote that no
+# article gives.
+# Dropped: 1952-04-01-8ec1a77a 「この日発売の「少年」（光文社）にて、手塚治虫のSF漫画『鉄腕アトム』が連載開始」 (dataset vs article: 1 Apr 1952 / 鉄腕アトム
+# gives the April 1952 issue, not the day it went on sale). The lead now calls Namakura-gatana one of the oldest
+# surviving Japanese anime.
 slug: anime
 title: アニメの歴史
-lead: 現存最古の国産アニメ「なまくら刀」から、テレビアニメの発明、世界名作劇場、ガンダム、ジブリ、そして興行収入記録を塗り替えた劇場版まで。
+lead: 現存する最古級の国産アニメ「なまくら刀」から、テレビアニメの発明、世界名作劇場、ガンダム、ジブリ、そして興行収入記録を塗り替えた劇場版まで。
 description: 1917年の「なまくら刀」から『劇場版「鬼滅の刃」無限列車編』まで、日本のアニメーション100年の転換点を年代順にたどる特集。
 icon: art-collection-anime
 entries:
-  # --- 黎明期 ---
-  - id: 1917-06-30-becc6d38 # 「なまくら刀」公開（現存する日本最古のアニメ）
-  - id: 1928-11-18-c272666e # 『蒸気船ウィリー』公開（ミッキーマウス公式初登場）
-  - id: 1943-03-25-c6bbd339 # 日本初の国産長編アニメ映画「桃太郎の海鷲」
+  # --- The early years ---
+  - id: 1917-06-30-becc6d38 # Namakura-gatana, the oldest surviving Japanese anime whose maker and year are known
+  - id: 1928-11-18-c272666e # Steamboat Willie, Mickey Mouse's official debut
+  - id: 1943-03-25-c6bbd339 # Momotaro's Sea Eagles, said to be Japan's first feature-length anime
 
-  # --- テレビアニメの発明 ---
-  - id: 1952-04-01-8ec1a77a # 手塚治虫『鉄腕アトム』連載開始
-  - id: 1963-01-01-5ad5b5d5 # 国産連続30分テレビアニメ第1号『鉄腕アトム』放映開始
-  - id: 1965-10-06-56365544 # 日本初のカラーテレビアニメ『ジャングル大帝』
-  - id: 1968-03-30-caab6342 # 『巨人の星』放送開始（スポ根ブーム）
-  - id: 1969-10-05-76be6ef7 # 『サザエさん』『ハクション大魔王』放送開始
+  # --- The first TV anime series ---
+  - id: 1963-01-01-5ad5b5d5 # Astro Boy, Japan's first 30-minute TV anime series
+  - id: 1965-10-06-56365544 # Jungle Emperor, Japan's first colour TV anime series
+  - id: 1968-03-30-caab6342 # Star of the Giants (the sports-drama boom)
+  - id: 1969-10-05-76be6ef7 # Hakushon Daimao and Sazae-san begin
 
-  # --- 1970年代：名作劇場とSFアニメ ---
-  - id: 1974-01-06-41c923b2 # 『アルプスの少女ハイジ』放映開始
-  - id: 1974-10-06-dad7ad21 # 『宇宙戦艦ヤマト』第1作放映開始
-  - id: 1975-01-05-57dbb74d # 『フランダースの犬』放送開始（世界名作劇場スタート）
-  - id: 1979-04-02-3cdb1deb # 『ドラえもん』（第2作第1期）放送開始
-  - id: 1979-04-07-a6ab5dff # 『機動戦士ガンダム』放送開始
+  # --- The 1970s: World Masterpiece Theater and science fiction ---
+  - id: 1974-01-06-41c923b2 # Heidi, Girl of the Alps
+  - id: 1974-10-06-dad7ad21 # Space Battleship Yamato
+  - id: 1975-01-05-57dbb74d # A Dog of Flanders, the first World Masterpiece Theater
+  - id: 1979-04-02-3cdb1deb # Doraemon (the 1979 series)
+  - id: 1979-04-07-a6ab5dff # Mobile Suit Gundam
 
-  # --- 1980年代：スタジオジブリと作家性 ---
-  - id: 1984-03-11-8ff86ed7 # 「風の谷のナウシカ」公開
-  - id: 1988-04-16-a6d3b599 # 『となりのトトロ』『火垂るの墓』同時公開
-  - id: 1989-02-09-6a5f7c4d # 手塚治虫が死去
+  # --- The 1980s: Studio Ghibli and auteurs ---
+  - id: 1984-03-11-8ff86ed7 # Nausicaä of the Valley of the Wind
+  - id: 1988-04-16-a6d3b599 # My Neighbor Totoro and Grave of the Fireflies
+  - id: 1989-02-09-6a5f7c4d # Death of Tezuka Osamu
 
-  # --- 1990年代：国民的アニメと世界市場へ ---
-  - id: 1990-01-07-66ab3f7f # 『ちびまる子ちゃん』放送開始
-  - id: 1992-03-07-30b35dd6 # 『美少女戦士セーラームーン』放送開始
-  - id: 1995-10-04-c8467cf5 # 『新世紀エヴァンゲリオン』放送開始
-  - id: 1997-04-01-c68e7175 # 『ポケットモンスター』放送開始
-  - id: 1999-10-20-8dbb51d5 # 『ONE PIECE』放送開始
+  # --- The 1990s: national favourites and the world market ---
+  - id: 1990-01-07-66ab3f7f # Chibi Maruko-chan
+  - id: 1992-03-07-30b35dd6 # Sailor Moon
+  - id: 1995-10-04-c8467cf5 # Neon Genesis Evangelion
+  - id: 1997-04-01-c68e7175 # Pokémon
+  - id: 1999-10-20-8dbb51d5 # One Piece
 
-  # --- 2000年代以降 ---
-  - id: 2001-07-20-452b7a8f # 「千と千尋の神隠し」公開
-  - id: 2003-03-24-0e433607 # 「千と千尋の神隠し」がアカデミー賞長編アニメ映画賞を受賞
-  - id: 2019-07-18-f685736d # 京都アニメーション第1スタジオ放火事件
-  - id: 2020-12-28-77edcc02 # 『劇場版「鬼滅の刃」無限列車編』が歴代興行収入1位
+  # --- From the 2000s ---
+  - id: 2001-07-20-452b7a8f # Spirited Away
+  - id: 2003-03-24-0e433607 # Spirited Away wins the Academy Award for Best Animated Feature
+  - id: 2019-07-18-f685736d # Kyoto Animation arson attack
+  - id: 2020-12-28-77edcc02 # Demon Slayer: Mugen Train becomes Japan's top-grossing film

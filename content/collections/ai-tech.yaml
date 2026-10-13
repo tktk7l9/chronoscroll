@@ -1,13 +1,37 @@
-# AI・コンピューティングの歴史（特集）
-# Wikipedia年ページに載らない重要マイルストーンを補完する。
-# ほぼ全て新規追加（date+title+summaryが揃うとapplyCuratedが新規イベントとして生成する）
+# History of AI and computing (collection)
+# Fills in milestones that the Wikipedia year pages do not carry. Every entry except Deep Blue (1997-05-11-d05df6c0,
+# an auto-generated event whose title and summary are set here) is written here: an entry with date, title and
+# summary becomes a new event through applyCurated.
+# Audited against the topic articles (2026-10-13): 41 entries checked, 28 corrected here, none dropped. Sources that
+# pointed to ja articles that do not exist were replaced (ダートマス会議 (人工知能), AlphaGo対李世乭, 人工知能の規制 twice, Sora (人工知能)),
+# and the article that gives the date was added where the listed ones did not (Turing's paper in October 1950,
+# Google, Facebook, Twitter, DALL-E 2, Midjourney, Stable Diffusion).
+# Dates as the articles give them: the Dartmouth workshop in July-August 1956 (ja ダートマス会議; the line had June),
+# AlexNet's win at ILSVRC 2012 on 30 Sep 2012 (ja AlexNet; the line had October), the Hiroshima AI Process launched
+# in the leaders' communiqué of 20 May 2023 (ja 広島AIプロセス); GAN (June 2014), BERT (October 2018) and the pause letter
+# (March 2023) now carry only the month the articles give.
+# Facts corrected: ELIZA's model was a Rogerian therapist and some users read feelings into it (the ELIZA effect);
+# Deep Blue won the 1997 match with two wins, one loss and three draws, the first match a world champion lost to a
+# computer under tournament rules; Google's line keeps its mission statement instead of the claim that it set the
+# shape of the internet; Facebook had 800 million users in 2011 (not "nearly half the world"); Watson beat two
+# former champions, not the strongest of all time; AlphaGo's match began on 9 March and ended 4-1 on the 15th; the
+# Transformer led to BERT and GPT (not to all large language models); AlphaFold 2 scored GDT above 90 on about
+# two-thirds of the CASP14 targets (the line said it solved the problem); Lemoine was put on leave, not suspended;
+# GPT-4's bar exam result without the quoted reception; LLaMA's weights leaked on 2 Mar 2023; the pause letter has
+# more than 30,000 signatures (the line said 1,000); the Tokyo office Altman was said to announce in April 2023 is
+# in no article (ja ChatGPT has the meeting with Kishida); o1's maths result was on AIME, not the Olympiad; the 2024
+# Nobel chemistry prize is now "the same year", not "the next day"; DeepSeek wiped 589 billion dollars off Nvidia
+# (ja DeepSeek; the line had about 600 billion); the Paris summit, where the US and UK refused to sign the
+# declaration (en "AI Action Summit").
+# Dates kept on purpose: Midjourney's open beta on 12 Jul 2022 (en "Midjourney"; ja gives 13 Jul for the
+# announcement). The lead no longer names personal computers, which no entry covers.
 slug: ai-tech
 title: AI・コンピューティングの歴史
-lead: 「機械は考えることができるか」という1950年の問いから、ダートマス会議、パーソナルコンピュータ、ディープラーニング、そして生成AIまで。
+lead: 「機械は考えることができるか」という1950年の問いから、ダートマス会議、インターネット、ディープラーニング、そして生成AIまで。
 description: チューリングの問いからChatGPTの登場まで、人工知能とコンピューティングを形づくった転換点を年代順にたどる特集。
 icon: art-turing
 entries:
-  # --- AI前史〜古典 ---
+  # --- Beginnings ---
   - id: 1950-10-01-ai-turing-test
     date: "1950-10-01"
     precision: month
@@ -19,10 +43,11 @@ entries:
     svg: art-turing
     sources:
       - { label: "Wikipedia: チューリング・テスト", url: "https://ja.wikipedia.org/wiki/チューリング・テスト" }
+      - { label: "Wikipedia (英語): Computing Machinery and Intelligence", url: "https://en.wikipedia.org/wiki/Computing_Machinery_and_Intelligence" }
     relatedIds: ["1956-06-18-ai-dartmouth", "1966-01-01-ai-eliza", "2022-11-30-ai-chatgpt"]
 
   - id: 1956-06-18-ai-dartmouth
-    date: "1956-06-18"
+    date: "1956-07-01"
     precision: month
     title: ダートマス会議——「人工知能」の誕生
     summary: 米ダートマス大学で、マッカーシー、ミンスキー、シャノンらが集う夏季研究会が開かれた。提案書で初めて「人工知能（Artificial Intelligence）」という言葉が使われ、AIが学問分野として産声を上げた。
@@ -31,19 +56,21 @@ entries:
     importance: 99.2
     svg: art-ai-birth
     sources:
-      - { label: "Wikipedia: ダートマス会議", url: "https://ja.wikipedia.org/wiki/ダートマス会議_(人工知能)" }
+      - { label: "Wikipedia: ダートマス会議", url: "https://ja.wikipedia.org/wiki/ダートマス会議" }
+      - { label: "Wikipedia (英語): Dartmouth workshop", url: "https://en.wikipedia.org/wiki/Dartmouth_workshop" }
     relatedIds: ["1950-10-01-ai-turing-test", "1966-01-01-ai-eliza", "2012-10-01-ai-alexnet"]
 
   - id: 1966-01-01-ai-eliza
     date: "1966-01-01"
     precision: year
     title: 対話プログラムELIZA誕生
-    summary: MITのワイゼンバウムが、精神科医を模して人と対話するプログラムELIZAを発表した。単純な言い換えにもかかわらず人々が心を開いたことは、後のチャットボット時代を先取りする発見だった。
+    summary: "MITのジョセフ・ワイゼンバウムが、来談者中心療法のセラピストを模して人と対話するプログラム「ELIZA」を発表した。単純な仕組みにもかかわらず、彼の秘書を含む一部の利用者はプログラムに人間のような感情を感じ取り、この現象はのちに「ELIZA効果」と呼ばれた。"
     category: science
     region: world
     importance: 92
     sources:
       - { label: "Wikipedia: ELIZA", url: "https://ja.wikipedia.org/wiki/ELIZA" }
+      - { label: "Wikipedia (英語): ELIZA", url: "https://en.wikipedia.org/wiki/ELIZA" }
     relatedIds: ["1950-10-01-ai-turing-test", "2022-06-11-ai-lamda", "2022-11-30-ai-chatgpt"]
 
   - id: 1969-10-29-ai-arpanet
@@ -57,10 +84,10 @@ entries:
       - { label: "Wikipedia: ARPANET", url: "https://ja.wikipedia.org/wiki/ARPANET" }
     relatedIds: ["1998-09-04-ai-google", "1991-08-06-eaa5612d", "1991-10-05-13cc8fcc"]
 
-  # --- 1990s〜2000s ---
+  # --- The 1990s and 2000s ---
   - id: 1997-05-11-d05df6c0
     title: ディープ・ブルー、チェス世界王者を破る
-    summary: IBMのチェス専用コンピューター「ディープ・ブルー」が、世界チャンピオンのガルリ・カスパロフに勝ち越した。機械が知的ゲームの頂点で人間を上回った歴史的瞬間として世界に衝撃を与えた。
+    summary: "IBMのチェス専用コンピューター「ディープ・ブルー」が、世界チャンピオンのガルリ・カスパロフとの6番勝負を2勝1敗3引き分けで制した。公式ルールの番勝負で世界王者がコンピューターに敗れたのは初めてだった。"
     importance: 99
     category: science
     svg: art-deep-blue
@@ -69,23 +96,25 @@ entries:
   - id: 1998-09-04-ai-google
     date: "1998-09-04"
     title: Google設立
-    summary: スタンフォード大学の大学院生ラリー・ペイジとセルゲイ・ブリンが、検索エンジンの会社Googleを設立した。「世界中の情報を整理する」という使命は、その後のインターネットの姿を決定づけた。
+    summary: "スタンフォード大学の博士課程にいたラリー・ペイジとセルゲイ・ブリンが、検索エンジンの会社Googleを設立した。「世界中の情報を整理し、世界中の人々がアクセスできて使えるようにすること」を使命に掲げる。"
     category: economy
     region: world
     importance: 97.5
     sources:
       - { label: "Wikipedia: Google", url: "https://ja.wikipedia.org/wiki/Google" }
+      - { label: "Wikipedia (英語): Google", url: "https://en.wikipedia.org/wiki/Google" }
     relatedIds: ["1969-10-29-ai-arpanet", "2005-02-14-ai-youtube", "2023-12-06-ai-gemini"]
 
   - id: 2004-02-04-ai-facebook
     date: "2004-02-04"
     title: Facebook誕生
-    summary: ハーバード大学の学生マーク・ザッカーバーグが、学内交流サイト「TheFacebook」を公開した。SNSは人のつながり方を変え、後に世界人口の半数近くが使うサービスへ成長する。
+    summary: "ハーバード大学の学生マーク・ザッカーバーグが、学内交流サイト「TheFacebook」を公開した。利用者は急速に増え、2011年には8億人を抱える世界最大のSNSとなった。"
     category: economy
     region: world
     importance: 96
     sources:
       - { label: "Wikipedia: Facebook", url: "https://ja.wikipedia.org/wiki/Facebook" }
+      - { label: "Wikipedia (英語): Facebook", url: "https://en.wikipedia.org/wiki/Facebook" }
     relatedIds: ["2006-07-15-ai-twitter", "2021-10-28-ai-meta"]
 
   # YouTube: 「www.youtube.comのドメインは2005年2月14日に有効化された」, 「2005年2月15日、PayPalの従業員であった…3人によって設立」,
@@ -104,12 +133,13 @@ entries:
   - id: 2006-07-15-ai-twitter
     date: "2006-07-15"
     title: Twitter公開
-    summary: 140文字の短文を投稿するサービスTwitterが一般公開された。速報とつぶやきが交差する「世界の今」のインフラとなり、報道や政治のあり方まで変えていった。
+    summary: "140文字までの短文を投稿するサービス「Twitter」が一般に公開された。のちに名称を「X」に改めた。"
     category: culture
     region: world
     importance: 93
     sources:
       - { label: "Wikipedia: Twitter", url: "https://ja.wikipedia.org/wiki/Twitter" }
+      - { label: "Wikipedia (英語): Twitter", url: "https://en.wikipedia.org/wiki/Twitter" }
     relatedIds: ["2004-02-04-ai-facebook"]
 
   - id: 2009-01-03-ai-bitcoin
@@ -122,23 +152,24 @@ entries:
     sources:
       - { label: "Wikipedia: ビットコイン", url: "https://ja.wikipedia.org/wiki/ビットコイン" }
 
-  # --- 深層学習の時代 ---
+  # --- The deep-learning era ---
   - id: 2011-02-16-ai-watson
     date: "2011-02-16"
     title: IBMワトソン、クイズ王を破る
-    summary: IBMの質問応答システム「ワトソン」が、米クイズ番組「ジェパディ!」で歴代最強の人間チャンピオン2人を破った。自然言語を扱うAIの実力を全米のお茶の間に見せつけた。
+    summary: "IBMの質問応答システム「ワトソン」が、米クイズ番組「ジェパディ!」でかつてのチャンピオン、ブラッド・ラッターとケン・ジェニングスに勝ち、賞金100万ドルを獲得した。"
     category: science
     region: world
     importance: 95
     sources:
       - { label: "Wikipedia: ワトソン (コンピュータ)", url: "https://ja.wikipedia.org/wiki/ワトソン_(コンピュータ)" }
+      - { label: "Wikipedia (英語): IBM Watson", url: "https://en.wikipedia.org/wiki/IBM_Watson" }
     relatedIds: ["1997-05-11-d05df6c0", "2016-03-09-ai-alphago"]
 
   - id: 2012-10-01-ai-alexnet
-    date: "2012-10-01"
-    precision: month
-    title: AlexNet、画像認識で圧勝——深層学習ブームの号砲
-    summary: ヒントン研究室のAlexNetが、画像認識コンテストILSVRCで従来手法に圧倒的な差をつけて優勝した。GPUで訓練した深層ニューラルネットワークの威力が実証され、第3次AIブームが始まった。
+    date: "2012-09-30"
+    precision: day
+    title: "AlexNet、画像認識コンテストで圧勝"
+    summary: "アレックス・クリジェフスキーがイリヤ・サツケバー、ジェフリー・ヒントンと設計した畳み込みニューラルネットワーク「AlexNet」が、画像認識コンテストILSVRC 2012でエラー率15.3%を記録して優勝した。次点を10.8ポイント以上下回り、GPUを使った学習で深いネットワークを実現していた。"
     category: science
     region: world
     importance: 97.5
@@ -147,32 +178,35 @@ entries:
     relatedIds: ["1956-06-18-ai-dartmouth", "2017-06-12-ai-transformer", "2014-06-10-ai-gan"]
 
   - id: 2014-06-10-ai-gan
-    date: "2014-06-10"
+    date: "2014-06-01"
+    precision: month
     title: GAN（敵対的生成ネットワーク）発表
-    summary: イアン・グッドフェローらが、生成器と識別器を競わせて学習するGANを発表した。「実在しない人の顔」を作れるこの技術は、生成AIという分野の扉を開いた。
+    summary: "モントリオール大学のイアン・グッドフェローらが、データを生成するネットワークと本物かどうかを見分けるネットワークを競わせて学習させる「敵対的生成ネットワーク（GAN）」を考案した。生成AIの代表的な枠組みの一つとなった。"
     category: science
     region: world
     importance: 95
     sources:
       - { label: "Wikipedia: 敵対的生成ネットワーク", url: "https://ja.wikipedia.org/wiki/敵対的生成ネットワーク" }
+      - { label: "Wikipedia (英語): Generative adversarial network", url: "https://en.wikipedia.org/wiki/Generative_adversarial_network" }
     relatedIds: ["2012-10-01-ai-alexnet", "2021-01-05-ai-dalle", "2022-08-22-ai-stablediffusion"]
 
   - id: 2016-03-09-ai-alphago
     date: "2016-03-09"
     title: AlphaGo、イ・セドル九段を破る
-    summary: Google DeepMindの囲碁AI「AlphaGo」が、世界最強棋士の一人イ・セドル九段との五番勝負に4勝1敗で勝利した。「あと10年は不可能」とされた囲碁での勝利は、深層学習の到達点として世界を驚かせた。
+    summary: "Google DeepMindの囲碁AI「AlphaGo」と、世界最強の棋士と目されたイ・セドル九段の五番勝負がソウルで始まった。AlphaGoは15日までに4勝1敗で勝ち越し、AIがトップ棋士に勝つにはあと10年かかるとみられていた予想を覆した。"
     category: science
     region: world
     importance: 99.8
     svg: art-alphago
     sources:
-      - { label: "Wikipedia: AlphaGo対李世ドル", url: "https://ja.wikipedia.org/wiki/AlphaGo対李世乭" }
+      - { label: "Wikipedia: AlphaGo対李世ドル", url: "https://ja.wikipedia.org/wiki/AlphaGo対李世ドル" }
+      - { label: "Wikipedia (英語): AlphaGo versus Lee Sedol", url: "https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol" }
     relatedIds: ["1997-05-11-d05df6c0", "2011-02-16-ai-watson", "2020-11-30-ai-alphafold"]
 
   - id: 2017-06-12-ai-transformer
     date: "2017-06-12"
     title: Transformer論文「Attention Is All You Need」発表
-    summary: Googleの研究者らが、注意機構だけで系列を処理するTransformerを発表した。この設計がGPTやBERTなど後の大規模言語モデルすべての土台となり、生成AI時代を用意した。
+    summary: "Googleの研究者らが論文「Attention Is All You Need」で、注意機構を中心とする深層学習モデル「Transformer」を発表した。学習を並列化しやすく大量のデータで訓練できるため、BERTやGPTなど事前学習モデルの開発につながった。"
     category: science
     region: world
     importance: 99.3
@@ -181,14 +215,16 @@ entries:
     relatedIds: ["2012-10-01-ai-alexnet", "2018-10-11-ai-bert", "2019-02-14-ai-gpt2", "2022-11-30-ai-chatgpt"]
 
   - id: 2018-10-11-ai-bert
-    date: "2018-10-11"
+    date: "2018-10-01"
+    precision: month
     title: BERT発表——検索を変えた言語モデル
-    summary: Googleが双方向Transformerによる言語理解モデルBERTを発表した。文脈を双方向から読む事前学習は自然言語処理の標準となり、Google検索にも組み込まれた。
+    summary: "Googleの研究者が、文脈を前後両方向から読み取る言語モデル「BERT」を発表した。2019年10月には、アメリカでの英語のGoogle検索にも使われ始めた。"
     category: science
     region: world
     importance: 93
     sources:
       - { label: "Wikipedia: BERT (言語モデル)", url: "https://ja.wikipedia.org/wiki/BERT_(言語モデル)" }
+      - { label: "Wikipedia (英語): BERT (language model)", url: "https://en.wikipedia.org/wiki/BERT_(language_model)" }
     relatedIds: ["2017-06-12-ai-transformer", "2019-02-14-ai-gpt2"]
 
   - id: 2019-02-14-ai-gpt2
@@ -215,8 +251,8 @@ entries:
 
   - id: 2020-11-30-ai-alphafold
     date: "2020-11-30"
-    title: AlphaFold2、タンパク質構造予測を「解決」
-    summary: DeepMindのAlphaFold2が、構造予測コンテストCASP14で実験に匹敵する精度を達成した。生物学50年の難問への回答は、創薬や基礎研究のあり方を変え、後のノーベル化学賞にもつながった。
+    title: "AlphaFold 2、タンパク質の構造予測で圧倒的な精度"
+    summary: "DeepMindのAlphaFold 2が、タンパク質の構造予測コンテストCASP14でほかの参加チームを大きく上回る精度を示し、約3分の2のタンパク質で実験で決めた構造とよく一致する予測（GDTスコア90以上）を出した。開発チームのデミス・ハサビスとジョン・ジャンパーは、2024年のノーベル化学賞を受賞した。"
     category: science
     region: world
     importance: 98.5
@@ -225,7 +261,7 @@ entries:
       - { label: "Wikipedia: AlphaFold", url: "https://ja.wikipedia.org/wiki/AlphaFold" }
     relatedIds: ["2016-03-09-ai-alphago", "2024-10-08-ai-nobel-physics"]
 
-  # --- 生成AIの時代 ---
+  # --- The generative-AI era ---
   - id: 2021-01-05-ai-dalle
     date: "2021-01-05"
     title: DALL-E発表——文章から画像を生成
@@ -268,12 +304,13 @@ entries:
     importance: 94
     sources:
       - { label: "Wikipedia: DALL-E", url: "https://ja.wikipedia.org/wiki/DALL-E" }
+      - { label: "Wikipedia (英語): DALL-E", url: "https://en.wikipedia.org/wiki/DALL-E" }
     relatedIds: ["2021-01-05-ai-dalle", "2022-07-12-ai-midjourney", "2022-08-22-ai-stablediffusion", "2024-02-15-ai-sora"]
 
   - id: 2022-06-11-ai-lamda
     date: "2022-06-11"
     title: 「AIに意識が宿った」——LaMDA騒動
-    summary: Googleのエンジニアが対話AI「LaMDA」に意識があると主張し、停職処分となった。専門家は否定したが、AIと意識をめぐる議論が一般社会にまで広がる出来事となった。
+    summary: "Googleのエンジニアのブレイク・レモインが、対話AI「LaMDA」に意識があると会社の幹部に伝えたあと休職になったと、ワシントン・ポストが報じた。レモインの主張は、チューリング・テストが汎用人工知能を判断する基準として妥当かという議論も呼んだ。"
     category: science
     region: world
     importance: 90
@@ -290,6 +327,7 @@ entries:
     importance: 95
     sources:
       - { label: "Wikipedia: Midjourney", url: "https://ja.wikipedia.org/wiki/Midjourney" }
+      - { label: "Wikipedia (英語): Midjourney", url: "https://en.wikipedia.org/wiki/Midjourney" }
     relatedIds: ["2022-04-06-ai-dalle2", "2022-08-22-ai-stablediffusion"]
 
   - id: 2022-08-22-ai-stablediffusion
@@ -301,6 +339,7 @@ entries:
     importance: 97.5
     sources:
       - { label: "Wikipedia: Stable Diffusion", url: "https://ja.wikipedia.org/wiki/Stable_Diffusion" }
+      - { label: "Wikipedia (英語): Stable Diffusion", url: "https://en.wikipedia.org/wiki/Stable_Diffusion" }
     relatedIds: ["2014-06-10-ai-gan", "2022-04-06-ai-dalle2", "2022-07-12-ai-midjourney"]
 
   - id: 2022-11-30-ai-chatgpt
@@ -318,7 +357,7 @@ entries:
   - id: 2023-02-24-ai-llama
     date: "2023-02-24"
     title: Meta、LLaMAを研究者向けに公開
-    summary: Metaが大規模言語モデルLLaMAを発表した。程なくモデルが流出しオープンなLLM開発が世界中で加速。「オープン対クローズド」というAI開発の構図を生んだ。
+    summary: "Metaが大規模言語モデル「LLaMA」を論文とブログで発表し、学習済みのパラメータを研究者に限って非商用で使わせる方針を示した。1週間後の3月2日には、そのパラメータが流出して4chan経由で広まった。"
     category: science
     region: world
     importance: 94
@@ -329,7 +368,7 @@ entries:
   - id: 2023-03-14-ai-gpt4
     date: "2023-03-14"
     title: GPT-4発表
-    summary: OpenAIが画像も理解できる大規模言語モデルGPT-4を発表した。司法試験で上位10%に入る性能は「AIが専門職の水準に達した」ことを象徴する出来事として受け止められた。
+    summary: "OpenAIが、画像も入力できる大規模言語モデル「GPT-4」を発表した。司法試験の問題を解かせると、人間の受験者の上位10%に入る成績を収めた。"
     category: science
     region: world
     importance: 99
@@ -338,35 +377,38 @@ entries:
     relatedIds: ["2020-05-28-ai-gpt3", "2022-11-30-ai-chatgpt", "2024-09-12-ai-o1"]
 
   - id: 2023-03-22-ai-pause-letter
-    date: "2023-03-22"
+    date: "2023-03-01"
+    precision: month
     title: 「AI開発を一時停止せよ」公開書簡
-    summary: マスク氏ら著名人・研究者1000人以上が、GPT-4を超えるAIの開発を6か月停止するよう求める公開書簡を発表した。急速な進歩への社会の戸惑いを象徴する出来事となった。
+    summary: "非営利団体フューチャー・オブ・ライフ・インスティテュートが、GPT-4より強力なAIシステムの訓練を少なくとも6か月止めるよう、すべてのAI研究所に求める公開書簡を発表した。イーロン・マスクら3万人以上が署名した。"
     category: society
     region: world
     importance: 93
     sources:
-      - { label: "Wikipedia: 人工知能の規制", url: "https://ja.wikipedia.org/wiki/人工知能の規制" }
+      - { label: "Wikipedia (英語): Pause Giant AI Experiments: An Open Letter", url: "https://en.wikipedia.org/wiki/Pause_Giant_AI_Experiments:_An_Open_Letter" }
     relatedIds: ["2023-03-14-ai-gpt4", "2023-11-01-ai-bletchley", "2024-03-13-ai-eu-act"]
 
   - id: 2023-04-10-ai-altman-japan
     date: "2023-04-10"
     title: OpenAIアルトマンCEO来日、岸田首相と面会
-    summary: OpenAIのサム・アルトマンCEOが来日し、岸田首相と面会。日本への進出拡大とオフィス開設の意向を表明した。ChatGPTブームのなか、日本のAI政策が動き出す転機となった。
+    summary: "ChatGPTを公開した米OpenAIのサム・アルトマンCEOが来日し、首相官邸で岸田文雄首相と面会した。"
     category: politics
     region: japan
     importance: 92
     sources:
+      - { label: "Wikipedia: ChatGPT", url: "https://ja.wikipedia.org/wiki/ChatGPT" }
       - { label: "Wikipedia: サム・アルトマン", url: "https://ja.wikipedia.org/wiki/サム・アルトマン" }
     relatedIds: ["2023-11-17-ai-altman-ousted", "2023-05-19-ai-hiroshima-process"]
 
   - id: 2023-05-19-ai-hiroshima-process
-    date: "2023-05-19"
+    date: "2023-05-20"
     title: G7広島サミットで「広島AIプロセス」始動
-    summary: 広島で開かれたG7サミットで、生成AIの国際ルール作り「広島AIプロセス」の立ち上げが合意された。日本が議長国としてAIガバナンスの国際枠組みを主導する取り組みとなった。
+    summary: "G7広島サミットで首脳宣言がまとまり、AIをめぐるルール作りを話し合う国際的な枠組み「広島AIプロセス」が立ち上げられた。議長国である日本の岸田文雄首相が、サミットでの始動を呼びかけていた。"
     category: politics
     region: both
     importance: 96
     sources:
+      - { label: "Wikipedia: 広島AIプロセス", url: "https://ja.wikipedia.org/wiki/広島AIプロセス" }
       - { label: "Wikipedia: 第49回先進国首脳会議", url: "https://ja.wikipedia.org/wiki/第49回先進国首脳会議" }
     relatedIds: ["2023-04-10-ai-altman-japan", "2023-11-01-ai-bletchley", "2024-03-13-ai-eu-act", "2025-02-10-ai-paris-summit"]
 
@@ -406,12 +448,12 @@ entries:
   - id: 2024-02-15-ai-sora
     date: "2024-02-15"
     title: OpenAI、動画生成AI「Sora」を発表
-    summary: OpenAIが、文章から最長1分の高品質動画を生成する「Sora」を発表した。実写と見分けがつかないデモ映像は、映像制作の未来とディープフェイクへの懸念を同時に突きつけた。
+    summary: "OpenAIが、文章の指示から最長1分の動画を生成するAI「Sora」を発表し、雪の東京を歩く二人などの生成動画を公開した。"
     category: science
     region: world
     importance: 96
     sources:
-      - { label: "Wikipedia: Sora (人工知能)", url: "https://ja.wikipedia.org/wiki/Sora_(人工知能)" }
+      - { label: "Wikipedia: Sora (人工知能モデル)", url: "https://ja.wikipedia.org/wiki/Sora_(人工知能モデル)" }
     relatedIds: ["2022-11-30-ai-chatgpt", "2022-04-06-ai-dalle2", "2005-02-14-ai-youtube"]
 
   - id: 2024-03-13-ai-eu-act
@@ -428,29 +470,32 @@ entries:
   - id: 2024-09-12-ai-o1
     date: "2024-09-12"
     title: OpenAI、推論モデル「o1」を発表
-    summary: OpenAIが、答える前に時間をかけて「考える」推論特化モデルo1を発表した。数学オリンピックや博士級の科学問題で飛躍的な成績を示し、スケーリングの新たな軸を開いた。
+    summary: "OpenAIが、答える前に時間をかけて推論するモデル「o1」のプレビュー版を公開した。物理・化学・生物のベンチマークで博士号レベルに近い成績を示し、アメリカの数学選抜試験AIMEでは問題の83%を解いた（GPT-4oは13%）。"
     category: science
     region: world
     importance: 94
     sources:
       - { label: "Wikipedia: OpenAI o1", url: "https://ja.wikipedia.org/wiki/OpenAI_o1" }
+      - { label: "Wikipedia (英語): OpenAI o1", url: "https://en.wikipedia.org/wiki/OpenAI_o1" }
     relatedIds: ["2023-03-14-ai-gpt4", "2022-11-30-ai-chatgpt"]
 
   - id: 2024-10-08-ai-nobel-physics
     date: "2024-10-08"
     title: ノーベル物理学賞にAI研究者——ホップフィールドとヒントン
-    summary: ニューラルネットワークの基礎を築いたジョン・ホップフィールドとジェフリー・ヒントンにノーベル物理学賞が贈られた。翌日には化学賞もAlphaFoldのハサビスらが受賞し、「AIのノーベル賞」として歴史に刻まれた。
+    summary: "人工ニューラルネットワークによる機械学習を可能にした基礎的な発見と発明により、ジョン・ホップフィールドとジェフリー・ヒントンにノーベル物理学賞が贈られることが決まった。同じ年の化学賞は、AlphaFoldを開発したデミス・ハサビスとジョン・ジャンパーらが受賞した。"
     category: science
     region: world
     importance: 98
     sources:
       - { label: "Wikipedia: ジェフリー・ヒントン", url: "https://ja.wikipedia.org/wiki/ジェフリー・ヒントン" }
+      - { label: "Wikipedia (英語): John Hopfield", url: "https://en.wikipedia.org/wiki/John_Hopfield" }
+      - { label: "Wikipedia: AlphaFold", url: "https://ja.wikipedia.org/wiki/AlphaFold" }
     relatedIds: ["2020-11-30-ai-alphafold", "2017-06-12-ai-transformer"]
 
   - id: 2025-01-27-ai-deepseek
     date: "2025-01-27"
-    title: DeepSeekショック——NVIDIA株が史上最大の下落
-    summary: 中国のDeepSeekが低コストで高性能なAIモデルを公開したことを受け、NVIDIAの時価総額が1日で約6,000億ドル減少する米国株史上最大の下落を記録した。AI覇権と半導体投資の前提を揺るがした。
+    title: "DeepSeekショック——NVIDIAの時価総額が史上最大の減少"
+    summary: "中国のDeepSeekが低コストで高性能なAIモデルを公開したことを受けてNVIDIAの株価が急落し、1日で失った時価総額5890億ドルは米国企業として史上最大となった。"
     category: economy
     region: world
     importance: 97.5
@@ -461,10 +506,10 @@ entries:
   - id: 2025-02-10-ai-paris-summit
     date: "2025-02-10"
     title: パリAIアクションサミット開催
-    summary: パリで各国首脳や企業トップが集うAIアクションサミットが開かれた。安全性中心だった国際議論が投資と競争力へ軸足を移し、米英が共同宣言への署名を見送るなど各国の路線の違いも露わになった。
+    summary: "フランスとインドが共同議長を務めるAIアクションサミットが、パリのグラン・パレで開幕した（11日まで）。アメリカのヴァンス副大統領は過度な規制がAI産業をつぶしかねないと警告し、米英は包摂的で持続可能なAIに関する宣言への署名を拒んだ。"
     category: politics
     region: world
     importance: 90
     sources:
-      - { label: "Wikipedia: 人工知能の規制", url: "https://ja.wikipedia.org/wiki/人工知能の規制" }
+      - { label: "Wikipedia (英語): AI Action Summit", url: "https://en.wikipedia.org/wiki/AI_Action_Summit" }
     relatedIds: ["2023-05-19-ai-hiroshima-process", "2023-11-01-ai-bletchley", "2024-03-13-ai-eu-act"]
