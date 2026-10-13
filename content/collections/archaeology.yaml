@@ -1,0 +1,51 @@
+# Archaeology and fossils (collection)
+# References to existing auto-generated events only (nothing newly written). Cro-Magnon, the Omori shell mound and
+# Java Man; the Venus of Willendorf, Machu Picchu, the Naumann elephant, Tutankhamun's tomb and Ugarit; Akashi Man,
+# the living coelacanth and Lascaux; the skull at Olduvai, the Akishima whale and the Takamatsuzuka murals; the
+# Iceman, the Fuhonsen coins and the exposure of the Palaeolithic hoax; Homo naledi, the Mozu-Furuichi kofun and the
+# finds at Tomio Maruyama.
+# Checked against en: the Cro-Magnon rock shelter at Les Eyzies (1868, "Cro-Magnon"), the Venus of Willendorf (7 Aug
+# 1908, "Venus of Willendorf") and the skull found at Olduvai (17 Jul 1959, "Mary Leakey").
+# Overlaps: Machu Picchu is also in the exploration and Latin America collections, Lascaux and the Takamatsuzuka
+# murals in the art collection.
+# Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
+# articles cannot confirm (dataset vs article: Knossos 16 May 1900 / 1900 only; the burial chamber of Tutankhamun 16
+# Feb 1923 / not dated in the articles; Mohenjo-daro 1923 / not in the articles; the Toro site 10 Jul 1947 / 10 Jul
+# is the discovery of 1943, the excavation of 1947 is not dated; Iwajuku July 1949 / 1949 only; the Inariyama sword
+# 19 Sep 1978 / September 1978 only; Yoshinogari 2 Mar 1989 / the reports began on 23 Feb 1989; Sannai-Maruyama 16
+# Jul 1994, Kurozuka 9 Jan 1998, Kitora 6 Mar 1998, the earlier start of the Yayoi period 19 May 2003, Sunabara 29
+# Sep 2009, Makimuku 10 Nov 2009 and the Indonesian coelacanth 18 Sep 1997 / not dated in the articles;
+# Sahelanthropus 11 Jul 2002 "found" / found on 19 Jul 2001 and described in 2002; Ardipithecus 2 Oct 2009 / not in
+# the article; the Ishigaki skull 4 Feb 2010 "found" / found in 2007 and dated in 2010; the dinosaurs of Sasayama 26
+# Nov 2009 and Tokushima 2 Jul 2022 / not dated in the articles).
+slug: archaeology
+title: 考古学と化石の発見
+lead: 1868年のクロマニョン人の発見から、モースによる大森貝塚の発見、ジャワ原人、ヴィレンドルフのヴィーナス、マチュ・ピチュ遺跡、浜松市でのナウマン象の化石、ツタンカーメン王の墓、ウガリット遺跡、明石原人、現生のシーラカンス、ラスコー洞窟の壁画、オルドヴァイでのアウストラロピテクスの頭蓋骨、アキシマクジラの化石、高松塚古墳の極彩色壁画、アイスマン、富本銭、旧石器の捏造の報道、ホモ・ナレディ、百舌鳥・古市古墳群の世界文化遺産登録、富雄丸山古墳の蛇行剣と銅鏡まで。世界と日本の遺跡や化石の発見をたどる。
+description: クロマニョン人とツタンカーメン王の墓から、ラスコー洞窟の壁画、高松塚古墳の壁画、アイスマン、旧石器の捏造の報道、ホモ・ナレディまで、考古学と化石の発見を年代順にたどる特集。
+icon: art-cromagnon
+entries:
+  # --- From Cro-Magnon to Akashi Man (1868-1931) ---
+  - id: 1868-01-01-9fdfe136 # Cro-Magnon
+  - id: 1877-06-19-e963fc4b # Morse finds the Omori shell mound
+  - id: 1891-01-01-77ef4607 # Java Man
+  - id: 1908-08-07-acb919a8 # The Venus of Willendorf
+  - id: 1911-07-24-9fa1a6bb # Bingham reaches Machu Picchu
+  - id: 1921-01-01-8425e9ff # The Naumann elephant at Hamamatsu
+  - id: 1922-11-04-651fe012 # Tutankhamun's tomb
+  - id: 1928-01-01-60ead127 # Ugarit
+  - id: 1931-04-18-7faa9d53 # Akashi Man
+
+  # --- From the coelacanth to Takamatsuzuka (1938-1972) ---
+  - id: 1938-12-22-6d963ae8 # A living coelacanth
+  - id: 1940-09-12-abb4c3fe # The Lascaux cave paintings
+  - id: 1959-07-17-857c5467 # The skull at Olduvai
+  - id: 1961-08-20-47b9e2d6 # The Akishima whale
+  - id: 1972-03-21-88743619 # The Takamatsuzuka murals
+
+  # --- From the Iceman to Tomio Maruyama (1991-2023) ---
+  - id: 1991-09-19-f8322b1c # The Iceman
+  - id: 1999-01-19-1ff2783d # The Fuhonsen coins
+  - id: 2000-11-05-b1c99a19 # The Palaeolithic hoax exposed
+  - id: 2015-09-10-4e29f0bc # Homo naledi
+  - id: 2019-07-06-daa1e3c7 # The Mozu-Furuichi kofun become World Heritage
+  - id: 2023-01-25-af06455d # The sword and mirror of Tomio Maruyama
