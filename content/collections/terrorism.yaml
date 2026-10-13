@@ -1,18 +1,20 @@
 # Terrorism (collection)
 # References to existing auto-generated events only (nothing newly written). The Lod airport massacre, the Munich
-# Olympics, the Rangoon bombing, Air India 182 and Pan Am 103; the Matsumoto sarin attack, Oklahoma City, the
-# embassy bombings in Kenya and Tanzania and the USS Cole; 11 September, Bali, Beslan and London; the Mumbai
-# attacks, the killing of bin Laden and the attacks in Norway; Boston, Paris, Brussels, Dhaka and Manchester.
+# Olympics, the Rangoon bombing, Air India 182 and Pan Am 103; the Matsumoto and Tokyo subway sarin attacks,
+# Oklahoma City, the embassy bombings in Kenya and Tanzania and the USS Cole; 11 September, Bali, Beslan and London;
+# the Mumbai attacks, the killing of bin Laden and the attacks in Norway; Boston, Charlie Hebdo, Paris, Brussels,
+# Dhaka and Manchester.
+# The Tokyo subway sarin attack (20 Mar 1995) and the Charlie Hebdo shooting (7 Jan 2015) are included with the
+# wording corrected in fixes.yaml (2026-10-13).
 # Overlaps: the Munich Olympics are also in the Olympics collection and the Mumbai attacks in the India and South
 # Asia collection.
 # Left out on purpose: entries whose dataset date or wording disagrees with the topic article, or whose date the
-# articles cannot confirm (dataset vs article: the Tokyo subway sarin attack 20 Mar 1995 "5,510 injured" / about
-# 6,300 (estimate) in the article; Charlie Hebdo 7 Jan 2015 "4 seriously injured" / 11 injured; the ISIL hostage
-# videos 20 Jan 2015 / the quoted statement of 1 Feb and "November 2005" are not in the article).
+# articles cannot confirm (dataset vs article: the ISIL hostage videos 20 Jan 2015 / the quoted statement of 1 Feb
+# and "November 2005" are not in the article).
 slug: terrorism
 title: テロ事件
-lead: 1972年のテルアビブ空港乱射事件とミュンヘンオリンピック事件から、ラングーン事件、エア・インディア182便とパンアメリカン航空103便の爆破、松本サリン事件、オクラホマシティ連邦政府ビル爆破事件、ケニアとタンザニアのアメリカ大使館爆破、米艦コール襲撃、アメリカ同時多発テロ、バリ島の爆弾テロ、ベスラン学校占拠事件、ロンドン同時爆破、ムンバイ同時多発テロ、ビンラディンの殺害、ノルウェー連続テロ、ボストンマラソン爆弾テロ、パリ同時多発テロ、ブリュッセルとダッカの事件、マンチェスター・アリーナの爆破まで。1972年から2017年まで、世界各地で起きたテロ事件をたどる。
-description: テルアビブ空港乱射事件とミュンヘンオリンピック事件から、松本サリン事件、アメリカ同時多発テロ、ロンドン同時爆破、ムンバイ同時多発テロ、パリ同時多発テロまで、世界のテロ事件を年代順にたどる特集。
+lead: 1972年のテルアビブ空港乱射事件とミュンヘンオリンピック事件から、ラングーン事件、エア・インディア182便とパンアメリカン航空103便の爆破、松本サリン事件と地下鉄サリン事件、オクラホマシティ連邦政府ビル爆破事件、ケニアとタンザニアのアメリカ大使館爆破、米艦コール襲撃、アメリカ同時多発テロ、バリ島の爆弾テロ、ベスラン学校占拠事件、ロンドン同時爆破、ムンバイ同時多発テロ、ビンラディンの殺害、ノルウェー連続テロ、ボストンマラソン爆弾テロ、「シャルリー・エブド」本社の銃撃とパリ同時多発テロ、ブリュッセルとダッカの事件、マンチェスター・アリーナの爆破まで。1972年から2017年まで、世界各地で起きたテロ事件をたどる。
+description: テルアビブ空港乱射事件とミュンヘンオリンピック事件から、松本サリン事件と地下鉄サリン事件、アメリカ同時多発テロ、ロンドン同時爆破、ムンバイ同時多発テロ、パリ同時多発テロまで、世界のテロ事件を年代順にたどる特集。
 icon: art-september11
 entries:
   # --- Hijacks, bombs and airliners (1972-1988) ---
@@ -24,6 +26,7 @@ entries:
 
   # --- Sarin, Oklahoma City and al-Qaeda (1994-2000) ---
   - id: 1994-06-27-1f4063bd # The Matsumoto sarin attack
+  - id: 1995-03-20-1c463793 # The Tokyo subway sarin attack
   - id: 1995-04-19-1e5da7cd # The Oklahoma City bombing
   - id: 1998-08-07-71e69c7f # The US embassy bombings in Kenya and Tanzania
   - id: 2000-10-12-a79277fd # The attack on the USS Cole
@@ -39,6 +42,7 @@ entries:
 
   # --- Boston to Manchester (2013-2017) ---
   - id: 2013-04-15-59686514 # The Boston Marathon bombing
+  - id: 2015-01-07-bf32b5d7 # The Charlie Hebdo shooting
   - id: 2015-11-13-797efbd2 # The Paris attacks
   - id: 2016-03-22-d1ae4de5 # The Brussels bombings
   - id: 2016-07-01-82b70ea8 # The attack on a café in Dhaka
