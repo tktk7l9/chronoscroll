@@ -65,8 +65,8 @@ npm run data:build # データ再生成（Wikipedia取得・要ネットワー�
 
 ## 品質指標
 
-- Lighthouse: **mobile 98/100/100/100・desktop 100/100/100/100**（本番URL実測 2026-07-30・mobile perfはmedian-of-3、LCP 2.3s・CLS 0・TBT 0ms）
-  - 特集ページ（JSなしの静的HTML）は mobile **`/c` 99・`/c/anime` 100**（LCP 0.9〜1.1s・CLS 0）
+- Lighthouse 13.5: **mobile 98/100/100/100・desktop 100/100/100/100**（本番URL実測 2026-10-14・mobile perfは近いデータセンターから配信された5回の中央値、LCP 2.3s・CLS 0・TBT 0ms。時間帯によって遠いデータセンター（シアトル、RTT 約100ms）から配信され、その場合は中央値 93（2026-10-14 の22時台は計測58回のうち43回がこちら））
+  - JSなしの静的HTMLは mobile **特集 `/c/space` 100・出来事 `/e/1969-07-20-f868c1bb` 92**（同じ条件の中央値。出来事ページは R2 から返す HTML の TTFB と Wikimedia の画像が LCP を決める）
 - Mozilla Observatory: **A+（score 120・10/10）**（2026-07-30再スキャン）
 - テスト: 575件 / `src/lib`・`pipeline/lib`・`worker`・`scripts/lib` 純関数層 カバレッジ100%・UI層（コンポーネント・ルート）行100%（CIゲート）
 - 実ブラウザスモーク: 120シナリオ（CIでも本番同等CSPで実行。280〜1280pxの横あふれ検証を含む）（`node e2e/smoke.mjs`）
