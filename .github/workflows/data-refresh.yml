@@ -30,6 +30,8 @@ jobs:
             pipeline-cache-
       - run: npm ci
       - run: npx tsx pipeline/run/build.ts
+      # The data-scale numbers quoted in README.md follow the new data (pipeline/content.test.ts checks them)
+      - run: npx tsx pipeline/run/readme-stats.ts --write
       - run: npm run coverage
       - run: npm run build
       - name: Create PR (only when there is a diff)
@@ -40,7 +42,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           BRANCH="data-refresh-$(date +%Y%m)"
           git checkout -B "$BRANCH"
-          git add static/data pipeline/.cache/qids.json pipeline/.cache/sitelinks.json pipeline/.cache/images.json pipeline/.cache/pageviews.json
+          git add README.md static/data pipeline/.cache/qids.json pipeline/.cache/sitelinks.json pipeline/.cache/images.json pipeline/.cache/pageviews.json
           # generatedAt in index.json always changes on every build (the app does not read it).
           # Judging by a plain diff would open a PR every month "even though the content is the same",
           # making it impossible to tell the months when data actually grew, so ignore only this value.

@@ -5,7 +5,9 @@
  *   override must stay in the year of the id (hard fail: this is our own text, see pipeline/lib/residue.ts and
  *   crossYearDateOverrides).
  * - static/data/chunks: the committed data must carry the curated title/summary/date (catches a forgotten
- *   regeneration), and a suppressed event must be gone from every output. Residue in the generated text is only
+ *   regeneration), and a suppressed event must be gone from every output.
+ * - README.md: the data-scale numbers it quotes must match the committed data (fix with
+ *   `npx tsx pipeline/run/readme-stats.ts --write`; data-refresh.yml runs it before the tests). Residue in the generated text is only
  *   reported, so a new case on Wikipedia never blocks the monthly data refresh (data-refresh.yml runs the tests
  *   before it opens the PR); build.ts prints the same report.
  */
@@ -13,9 +15,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import type { NewsEvent } from '../src/lib/types.ts';
-import { parseCollectionYaml } from './lib/collections.ts';
+import type { CollectionsIndex, NewsEvent } from '../src/lib/types.ts';
+import { collectionCuratedEntries, parseCollectionYaml } from './lib/collections.ts';
 import { crossYearDateOverrides, parseCuratedYaml, suppressedIds, type CuratedEntry } from './lib/curate.ts';
+import { computeReadmeStats, syncReadme } from './lib/readme-stats.ts';
 import { findResidue, formatResidueReport, residueOverCeiling, residueSummary } from './lib/residue.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -171,5 +174,23 @@ describe('generated data (static/data/chunks)', () => {
 			return;
 		}
 		expect(over, `residue above the ceiling (${text}); fix the cases in content/curated/fixes.yaml`).toEqual([]);
+	});
+});
+
+describe('README.md', () => {
+	it('quotes the data-scale numbers of the committed data (npx tsx pipeline/run/readme-stats.ts --write)', () => {
+		const sources = yamlFiles('content/collections').map((f) => parseCollectionYaml(readFileSync(f, 'utf8')));
+		const stats = computeReadmeStats({
+			events: loadEvents().values(),
+			curated: yamlFiles('content/curated').reduce((n, f) => n + parseCuratedYaml(readFileSync(f, 'utf8')).length, 0),
+			collectionCounts: readJson<CollectionsIndex>('static/data/collections.json').collections.map((c) => c.count),
+			newlyWritten: collectionCuratedEntries(sources).filter((e) => e.date && e.title && e.summary).length,
+		});
+		const r = syncReadme(readFileSync(join(ROOT, 'README.md'), 'utf8'), stats);
+		expect({ mismatches: r.mismatches, missing: r.missing, listProblems: r.listProblems }).toEqual({
+			mismatches: [],
+			missing: [],
+			listProblems: [],
+		});
 	});
 });
