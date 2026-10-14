@@ -89,6 +89,10 @@ It shows domestic and international news from 1829 to the present, with an impor
   URL state, not internals. jsdom shims (dialog, matchMedia, scrollTo) live in `src/test/setup.ts`;
   `$app/*` is stubbed in `src/test/stubs/`. IO scripts (`pipeline/run/`) stay outside the gate.
 - Isolate code that touches the network in `pipeline/run/`, and test the logic with fixtures.
+- The data-scale numbers that README.md quotes (events, images, related links, curated entries, collections) are
+  checked against the committed data by `pipeline/content.test.ts`. After changing the data or the content files,
+  run `npx tsx pipeline/run/readme-stats.ts --write` (the monthly data refresh runs it too); the per-collection
+  list under データ規模 is written by hand and only checked.
 - `pipeline/run/api.ts` and `build.ts` are written with **Effect 4** (`effect`, devDependency only; nothing ships to the browser).
   API failures are typed (`HttpError` / `ApiError` / `NetworkError`), retries are an Effect `Schedule` whose delays come from
   `retryDelayMs` in `pipeline/lib/throttle.ts` (change the backoff there, not in the schedule), and waits go through `Clock`.
