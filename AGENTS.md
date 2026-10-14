@@ -16,6 +16,12 @@ It shows domestic and international news from 1829 to the present, with an impor
   LCP critical path). `overview.json` is fetched right after it and swaps the previews for full events;
   `byId`/`loadById` never return a preview (the detail dialog needs the body). Both are written by the pipeline
   (`overviewLite` in `pipeline/lib/emit.ts`), so keep them in sync if you edit one by hand.
+- **One JS bundle and one stylesheet** (`output.bundleStrategy: 'single'` in vite.config.ts). Lighthouse 13.5's
+  simulation multiplexes only HTTP/2; it models production's HTTP/3 as six connections per origin, so the old split
+  build (14 modules + 5 stylesheets on the timeline page) queued and cost the mobile score most of its FCP/LCP.
+  Keep the number of requests before the first paint small. `src/hooks.server.ts` preloads the bundle with
+  `fetchpriority="low"` (the first paint needs only the HTML and the CSS), and `static/cf-beacon.js` appends the
+  analytics beacon after the load event.
 - **The LOD threshold is driven by the local density of the visible range** (`eventsPerDayInRange` in `chunks.ts`). The actual density
   varies 12x by decade, from 0.14 to 1.67 events/day, so the all-time average would make the Meiji era sparse and the 2000s onward
   overcrowded. The density comes from the chunk counts in `index.json`, so no extra data is needed.
