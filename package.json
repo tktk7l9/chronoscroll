@@ -45,12 +45,6 @@
   "dependencies": {
     "minisearch": "^7.2.0"
   },
-  "overrides": {
-    "miniflare": {
-      "undici": "7.30.0",
-      "sharp": "0.35.5"
-    }
-  },
   "imports": {
     "#lib": "./src/lib/index.js",
     "#lib/*": "./src/lib/*"
