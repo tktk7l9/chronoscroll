@@ -148,11 +148,13 @@
 	<meta property="og:site_name" content="chronoscroll" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<!-- Fetch the initial data in parallel with JS startup.
-	     No crossorigin attribute (unless the credentials mode matches the same-origin fetch(),
-	     the preload goes unused, causing a double fetch + a held connection so networkidle never comes) -->
-	<link rel="preload" href="/data/index.json" as="fetch" />
+	     crossorigin (anonymous) is required even on the same origin: fetch() requests in cors mode
+	     with credentials "same-origin", and only a crossorigin preload matches that. Without it the
+	     preload is made with credentials "include", Chrome reports "not used because the request
+	     credentials mode does not match" and both files are downloaded twice (measured 2026-10-20) -->
+	<link rel="preload" href="/data/index.json" as="fetch" crossorigin="anonymous" />
 	<!-- Only the card-only overview is preloaded; the full overview.json follows once it arrives -->
-	<link rel="preload" href="/data/overview-lite.json" as="fetch" />
+	<link rel="preload" href="/data/overview-lite.json" as="fetch" crossorigin="anonymous" />
 </svelte:head>
 
 <!-- Skip past the header controls straight to the timeline (SHIG 20, 59) -->
