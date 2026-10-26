@@ -3,7 +3,7 @@
 // - Equivalent to cleanUrls (resolves extensionless paths to .html)
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
-import { extname, join, resolve } from 'node:path';
+import { extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 
 const port = Number(process.argv[2] ?? 5299);
 const root = resolve('build');
@@ -27,7 +27,9 @@ createServer((req, res) => {
 	const isPage = path.startsWith('/e/');
 	const base = isPage ? resolve('build-e') : root;
 	let file = resolve(join(base, isPage ? path.slice('/e'.length) : path === '/' ? 'index.html' : path));
-	if (!file.startsWith(base)) {
+	// A plain startsWith(base) would let a sibling such as build-evil/ through, so compare by relative path
+	const rel = relative(base, file);
+	if (rel === '..' || rel.startsWith(`..${sep}`) || isAbsolute(rel)) {
 		res.writeHead(403);
 		return res.end();
 	}
