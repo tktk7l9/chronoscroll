@@ -129,6 +129,37 @@ describe('apiPost', () => {
 		expect(calls).toHaveLength(3);
 	});
 
+	it('aborts a request that hangs for 60s and retries it as a network error', async () => {
+		let calls = 0;
+		let aborted = false;
+		// The first call never answers until its signal fires; the second answers at once
+		const impl: typeof fetch = (_input, init) =>
+			new Promise((resolve, reject) => {
+				calls++;
+				if (calls > 1) return resolve(new Response('{"ok":1}', { status: 200 }));
+				init?.signal?.addEventListener('abort', () => {
+					aborted = true;
+					reject(new DOMException('aborted', 'AbortError'));
+				});
+			});
+		const program = Effect.gen(function* () {
+			const fiber = yield* Effect.forkChild(apiPost('https://x.test/api', {}));
+			yield* advance(59_999);
+			expect(calls).toBe(1);
+			expect(aborted).toBe(false);
+			yield* advance(1);
+			expect(aborted).toBe(true);
+			// The timeout is a NetworkError, so the first retry follows after the 2s backoff
+			yield* advance(1_999);
+			expect(calls).toBe(1);
+			yield* advance(1);
+			return yield* Fiber.join(fiber);
+		});
+		await expect(run(program, impl)).resolves.toEqual({ ok: 1 });
+		expect(calls).toBe(2);
+		expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('request timed out after 60000ms'));
+	});
+
 	it('keeps 150ms between consecutive requests', async () => {
 		const { impl, calls } = scriptedFetch([{ status: 200, body: {} }]);
 		const program = Effect.gen(function* () {
