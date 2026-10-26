@@ -81,7 +81,10 @@ describe('handle', () => {
 		expect(res.headers.get('content-type')).toBe('text/html; charset=utf-8');
 		expect(res.headers.get('cache-control')).toBe('no-store');
 		expect(res.headers.get('x-frame-options')).toBe('DENY');
-		expect(await res.text()).toContain('href="/"');
+		const html = await res.text();
+		expect(html).toContain('href="/"');
+		// One main landmark holding an h1, so the page is navigable by landmark and heading.
+		expect(html).toMatch(/<main><h1>ページが見つかりません<\/h1>.*<\/main>/);
 	});
 	it('404 for percent-encoding', async () => {
 		const res = await handle(req('/e/%2e%2e/manifest.json'), env);
