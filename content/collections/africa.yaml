@@ -1,0 +1,82 @@
+# Africa from colonial rule to the African Union (collection)
+# Existing events, plus two newly written entries the year pages lack: Ghana's independence and the OAU.
+# Stanley and Livingstone, the Zulu War, Adwa, the Second Boer War and Italy's invasion of Ethiopia; the independence
+# wave of 1957-1964; the Congo crisis, Biafra, Amin, Zaire, Soweto, Zimbabwe; Mandela's release and presidency; Eritrea,
+# Mogadishu, Rwanda, the African Union, South Sudan, the Ebola emergency and TICAD IV. Checked 2026-11-02.
+# Corrected in fixes.yaml: the Amin coup, Mandela's release, Namibia, Rwanda.
+# Overlaps: Mandela's election and presidency are in human-rights; the Ebola emergency is in medicine.
+# Left out on purpose (dataset vs article): Malan as prime minister 28 May 1948 / en 4 June 1948; Libya "independent
+# from Italy" / the article gives Italy and France; Senegal 4 Apr 1960 / independent then as the Mali Federation;
+# Eritrea's independence "recognised by the UN" 24 May 1993 / the article has recognition then, UN membership on the 28th;
+# the Brussels Geographic Conference 12 Sep 1876 and the Fashoda incident 19 Sep 1898 / not dated in the articles;
+# the Berlin Conference closing line / the claims about the Congo and Nigeria were not confirmed.
+slug: africa
+title: アフリカの独立と現代
+lead: スタンリーとリヴィングストンの出会い、ズールー戦争、アドワの戦いから、1957年のガーナ独立と1960年の「アフリカの年」、アフリカ統一機構の設立、コンゴ動乱、アルジェリアの独立、ビアフラ戦争、ソウェト蜂起、ジンバブエの独立、マンデラの釈放と大統領就任、ルワンダ虐殺、アフリカ連合の発足、南スーダンの独立まで。植民地支配から現代までのアフリカをたどる。
+description: ズールー戦争とアドワの戦いから、ガーナ独立、アフリカの年、コンゴ動乱、マンデラの釈放、ルワンダ虐殺、アフリカ連合の発足まで、アフリカの近現代を年代順にたどる特集。
+icon: art-broken-chains
+entries:
+  # --- Colonial rule (1871-1935) ---
+  - id: 1871-11-10-dab4f354 # Stanley finds Livingstone
+  - id: 1879-01-11-f724508b # The Zulu War begins
+  - id: 1896-03-01-b2cd6b54 # The Battle of Adwa
+  - id: 1899-10-11-b1d5a576 # The Second Boer War begins
+  - id: 1935-10-03-b01184c5 # Italy invades Ethiopia
+
+  # --- Independence (1957-1964) ---
+  - id: 1957-03-06-ghana-independence
+    date: "1957-03-06"
+    precision: day
+    title: ガーナがイギリスから独立
+    summary: ガーナがイギリスから独立した。サハラ以南のアフリカで、現地の人々が中心となって宗主国から独立を果たした最初の国となった。
+    category: politics
+    region: world
+    importance: 55
+    sources:
+      - { label: "Wikipedia: ガーナ", url: "https://ja.wikipedia.org/wiki/ガーナ" }
+
+  - id: 1960-01-01-e80ea13a # Cameroon, the first of the Year of Africa
+  - id: 1960-06-30-576b80e3 # Congo independent
+  - id: 1960-10-01-6e3c4586 # Nigeria independent
+  - id: 1961-01-17-084e25f4 # Lumumba killed
+  - id: 1961-09-18-0288e76c # Hammarskjold dies
+  - id: 1962-03-18-ce3a42f6 # The Evian Accords
+  - id: 1962-07-01-b8abe65f # Rwanda and Burundi
+  - id: 1962-07-05-6a0a8070 # Algeria independent
+  - id: 1963-05-25-oau-founded
+    date: "1963-05-25"
+    precision: day
+    title: アフリカ統一機構（OAU）が設立される
+    summary: エチオピアのアディスアベバで、32か国の政府によってアフリカ統一機構（OAU）が設立された。2002年にアフリカ連合へ改組された。
+    category: politics
+    region: world
+    importance: 55
+    sources:
+      - { label: "Wikipedia: アフリカ連合", url: "https://ja.wikipedia.org/wiki/アフリカ連合" }
+
+  - id: 1964-04-26-b20f84d7 # Tanzania
+
+  # --- Wars and dictators (1965-1980) ---
+  - id: 1965-11-11-70acb5eb # Rhodesia declares independence
+  - id: 1965-11-25-92ad2de2 # Mobutu takes power
+  - id: 1967-05-30-a9ba2dc9 # Biafra declared
+  - id: 1970-01-15-2bfacbc0 # Biafra surrenders
+  - id: 1971-01-25-31f75914 # Amin takes power
+  - id: 1971-10-27-e57c8a2e # Zaire
+  - id: 1975-06-25-bf18292e # Mozambique independent
+  - id: 1976-06-16-aeea4b72 # The Soweto uprising
+  - id: 1980-04-18-65a325f8 # Zimbabwe independent
+
+  # --- The end of apartheid and after (1990-2014) ---
+  - id: 1990-02-11-4180b552 # Mandela released
+  - id: 1990-03-21-3665361f # Namibia independent
+  - id: 1991-05-29-60a01242 # Eritrea declares independence
+  - id: 1993-10-03-4f4db4ca # Battle of Mogadishu
+  - id: 1994-04-07-c2c1f7b6 # The Rwandan genocide begins
+  - id: 1994-04-27-62850741 # South Africa first all-race election
+  - id: 1994-05-10-3e3b6610 # Mandela president
+  - id: 2002-07-09-aedd4f4e # The African Union
+  - id: 2008-05-28-dadc1668 # TICAD IV in Yokohama
+  - id: 2011-07-09-318ad173 # South Sudan independent
+  - id: 2013-12-05-1f3eba6f # Mandela dies
+  - id: 2014-08-08-e42ff74b # The Ebola emergency
