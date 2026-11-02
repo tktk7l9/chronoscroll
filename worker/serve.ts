@@ -27,7 +27,10 @@ export interface Env {
 // Event ids start with a date and contain only alphanumerics, dots, hyphens, and underscores (measured on 27,137 events).
 // A leading dot is not allowed, so `..` cannot pass. Neither can `%` or `/`.
 const ID = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
-const CACHE_PAGE = 'public, max-age=3600, stale-while-revalidate=86400';
+// Revalidate on every visit: a deploy replaces the hashed CSS, so an HTML copy kept from before it would reference a
+// file that is gone. The body is not sent again while the page is unchanged (304 through onlyIf in handle), and
+// nothing is lost at the edge because a Worker response does not enter the CDN cache without the Cache API.
+const CACHE_PAGE = 'public, max-age=0, must-revalidate';
 // A main landmark and an h1 let screen-reader users find the message and the way back
 // (axe landmark-one-main / page-has-heading-one / region); the viewport keeps it readable on phones.
 const NOT_FOUND_HTML =

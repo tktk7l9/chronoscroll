@@ -45,7 +45,7 @@ describe('pageHeaders', () => {
 		expect(h.get('strict-transport-security')).toContain('max-age=');
 		expect(h.get('cross-origin-opener-policy')).toBe('same-origin');
 		expect(h.get('content-type')).toBe('text/html; charset=utf-8');
-		expect(h.get('cache-control')).toBe('public, max-age=3600, stale-while-revalidate=86400');
+		expect(h.get('cache-control')).toBe('public, max-age=0, must-revalidate');
 		expect(h.get('etag')).toBe('"abc"');
 	});
 	it('cacheable=false gives no-store without ETag', () => {
