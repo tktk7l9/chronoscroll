@@ -12,8 +12,8 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 
-// Locally this is build/; on Vercel, adapter-static writes directly to .vercel/output/static
-const CANDIDATES = ['build', '.vercel/output/static'];
+// adapter-static output; wrangler deploys it as Workers static assets (wrangler.jsonc)
+const CANDIDATES = ['build'];
 
 function fnv1a(input) {
 	let hash = 0x811c9dc5;
