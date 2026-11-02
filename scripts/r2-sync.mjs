@@ -12,7 +12,7 @@ import {
 	PutObjectCommand,
 	S3Client,
 } from '@aws-sdk/client-s3';
-import { isMassDelete, parseManifest, planSync, sha256, shouldSkipSync } from './lib/r2-plan.mjs';
+import { isMassDelete, parseManifest, planSync, R2_REQUEST_HANDLER, sha256, shouldSkipSync } from './lib/r2-plan.mjs';
 
 // Preview builds on Workers Builds must not touch the production bucket (see shouldSkipSync).
 if (shouldSkipSync(process.env)) {
@@ -41,6 +41,7 @@ const s3 = new S3Client({
 		accessKeyId: process.env.R2_ACCESS_KEY_ID,
 		secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
 	},
+	requestHandler: R2_REQUEST_HANDLER,
 });
 
 const local = {};

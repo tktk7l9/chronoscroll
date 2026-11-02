@@ -46,6 +46,12 @@ import {
 	searchDocs,
 	sortEvents,
 } from '../lib/emit.ts';
+import {
+	eventsToCarry,
+	previousEvent,
+	rebindIds,
+	type IdAliases,
+} from '../lib/id-continuity.ts';
 import { computeRelated, MAX_RELATED } from '../lib/related.ts';
 import { formatResidueReport, residueSummary } from '../lib/residue.ts';
 import { linkScore, percentileByDecade, rawScore } from '../lib/score.ts';
@@ -68,6 +74,7 @@ const CURATED_DIR = join(ROOT, 'content', 'curated');
 const COLLECTIONS_DIR = join(ROOT, 'content', 'collections');
 const BOOKS_PATH = join(ROOT, 'content', 'affiliate', 'books.yaml');
 const SIDECAR_PATH = join(ROOT, 'pipeline', 'sidecar', 'classify.json');
+const ALIASES_PATH = join(ROOT, 'pipeline', 'sidecar', 'id-aliases.json');
 
 /** Minimum importance for fetching and storing an image */
 const IMAGE_MIN_IMPORTANCE = 60;
@@ -285,6 +292,18 @@ function loadCollections(): CollectionSource[] {
 		.map((f) => parseCollectionYaml(readFileSync(join(COLLECTIONS_DIR, f), 'utf8')));
 }
 
+/** The events of the data this build replaces, within the years being built */
+function loadPreviousEvents(args: Args): NewsEvent[] {
+	const dir = join(OUT, 'chunks');
+	if (!existsSync(dir)) return [];
+	return readdirSync(dir)
+		.flatMap((f) => JSON.parse(readFileSync(join(dir, f), 'utf8')) as NewsEvent[])
+		.filter((e) => {
+			const year = Number(e.id.slice(0, 4));
+			return year >= args.from && year <= args.to;
+		});
+}
+
 function percent(n: number, total: number): string {
 	return `${((n / total) * 100).toFixed(1)}%`;
 }
@@ -318,8 +337,29 @@ const main = Effect.gen(function* () {
 	for (const r of rawEvents) {
 		for (const t of new Set(r.links.map((l) => l.target))) df.set(t, (df.get(t) ?? 0) + 1);
 	}
+	// Hand-written entries are loaded here because id continuity must know about them
+	const collectionSources = loadCollections();
+	const curatedEntries = [...loadCurated(), ...collectionCuratedEntries(collectionSources)];
+	const suppressed = suppressedIds(curatedEntries);
+
+	// Ids of edited year-page lines stay what they were (see id-continuity.ts). A complete entry writes up its own event,
+	// which has no year-page line, so it never takes part
+	const writtenUp = new Set(curatedEntries.filter((e) => e.date && e.title && e.summary).map((e) => e.id));
+	const previous = loadPreviousEvents(args).filter((e) => !writtenUp.has(e.id));
+	const continuity = rebindIds(
+		rawEvents.map((r) => ({
+			...eventDateAndId(r),
+			text: r.text,
+			links: r.links.map((l) => l.target),
+		})),
+		previous.map(previousEvent),
+		existsSync(ALIASES_PATH) ? (JSON.parse(readFileSync(ALIASES_PATH, 'utf8')) as IdAliases) : {},
+	);
+	console.log(`Id continuity: kept ${continuity.rebound.size} ids of edited lines, ${continuity.orphans.length} lines gone`);
+
 	const scored = rawEvents.map((r) => {
-		const { id } = eventDateAndId(r);
+		const { id: generatedId } = eventDateAndId(r);
+		const id = continuity.rebound.get(generatedId) ?? generatedId;
 		return {
 			raw: r,
 			id,
@@ -345,10 +385,7 @@ const main = Effect.gen(function* () {
 	// Collection entries have the same shape as CuratedEntry, so they flow through the same path as the curated layer.
 	// That way creating new events, partial overrides, id protection from dedupe, and manual relatedIds
 	// all work for collections as-is (collections come last, so for the same id the collection wins)
-	const collectionSources = loadCollections();
-	const curatedEntries = [...loadCurated(), ...collectionCuratedEntries(collectionSources)];
 	// A suppressed id is dropped after curation, so it must not win a near-duplicate pair either
-	const suppressed = suppressedIds(curatedEntries);
 	const protectedIds = new Set(curatedEntries.map((e) => e.id).filter((id) => !suppressed.has(id)));
 	const dropIds = duplicateIds(
 		unique.map((s) => ({
@@ -389,14 +426,26 @@ const main = Effect.gen(function* () {
 			imp >= IMAGE_MIN_IMPORTANCE && s.raw.links.length > 0
 				? (images.get(s.raw.links[0].target) ?? undefined)
 				: undefined;
-		return buildEvent({
-			raw: s.raw,
-			importance: imp,
-			category: cls.category,
-			region: cls.region,
-			image: image ?? undefined,
-		});
+		return {
+			...buildEvent({
+				raw: s.raw,
+				importance: imp,
+				category: cls.category,
+				region: cls.region,
+				image: image ?? undefined,
+			}),
+			id: s.id,
+		};
 	});
+
+	// A curated event whose year-page line is gone stays as shipped, so a collection never shrinks by itself
+	const carried = eventsToCarry(continuity.orphans, previous, protectedIds);
+	if (carried.length > 0) {
+		console.warn(
+			`⚠️ curated events kept from the previous data (their year-page line is gone): ${carried.map((e) => e.id).join(', ')}`,
+		);
+		events = [...events, ...carried];
+	}
 
 	// 6. Apply curated
 	const curateResult = applyCurated(events, curatedEntries);
@@ -451,6 +500,7 @@ const main = Effect.gen(function* () {
 	const collectionDetails = collectionSources.map((s) => buildCollectionDetail(s, finalById));
 
 	// 8. Output
+	writeFileSync(ALIASES_PATH, `${JSON.stringify(Object.fromEntries(Object.entries(continuity.aliases).sort()), null, 1)}\n`);
 	rmSync(join(OUT, 'decades'), { recursive: true, force: true });
 	rmSync(join(OUT, 'chunks'), { recursive: true, force: true });
 	rmSync(join(OUT, 'collections'), { recursive: true, force: true });

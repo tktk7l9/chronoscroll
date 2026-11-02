@@ -54,10 +54,10 @@ export function linkOverlap(a: readonly string[], b: readonly string[]): number 
 	return overlapCoefficient(new Set(a), new Set(b));
 }
 
-function isDuplicateText(
+export function isDuplicateText(
 	a: Pick<DedupeCandidate, 'text' | 'textLength' | 'links'>,
 	b: Pick<DedupeCandidate, 'text' | 'textLength' | 'links'>,
-	threshold: number,
+	threshold = SIMILARITY_THRESHOLD,
 ): boolean {
 	const bgA = textBigrams(a.text);
 	const bgB = textBigrams(b.text);
