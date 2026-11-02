@@ -1,0 +1,45 @@
+# European integration (collection)
+# References to existing auto-generated events only: the Schuman Declaration, the ECSC and the Treaties of Rome, the merged Communities and
+# each enlargement; Maastricht and the Danish no; the single market, the EU, Norway's second no, the euro; Lisbon, the
+# first European Council president, the Greek bailout, the Nobel Peace Prize, Croatia and Brexit. Checked 2026-11-02
+# against ja and en articles. Corrected in fixes.yaml: the single market, Brexit.
+# Overlaps: the Rome signing is in nuclear-power; the euro and the Greek bailout are in finance.
+# Left out on purpose: Schengen entries (the year-page lines are partial) and yearly council meetings.
+slug: european-integration
+title: ヨーロッパ統合
+lead: 1950年のシューマン宣言と欧州石炭鉄鋼共同体、ローマ条約から、3共同体の統合、イギリスなどの加盟とギリシャ、スペイン、ポルトガルへの拡大、マーストリヒト条約と欧州連合の発足、ユーロの導入、2004年の10か国加盟、リスボン条約、ギリシャ支援、ノーベル平和賞、クロアチアの加盟、そしてイギリスの離脱まで。ヨーロッパ統合の70年をたどる。
+description: 欧州石炭鉄鋼共同体とローマ条約から、マーストリヒト条約、ユーロの導入、東方への拡大、リスボン条約、イギリスの離脱まで、ヨーロッパ統合の歩みを年代順にたどる特集。
+icon: art-esperanto
+entries:
+  # --- From coal and steel to the Communities (1951-1986) ---
+  - id: 1950-05-09-a05394d9 # The Schuman Declaration
+  - id: 1951-04-18-4012e35f # ECSC treaty signed
+  - id: 1952-07-23-41bf667d # ECSC begins
+  - id: 1957-03-25-0a08118c # Treaties of Rome
+  - id: 1958-01-01-ed03af1a # EEC and Euratom
+  - id: 1967-07-01-29caf20a # The merged Communities
+  - id: 1972-01-22-3c00f7ef # UK, Ireland and Denmark sign
+  - id: 1981-01-01-a93e9eed # Greece joins
+  - id: 1986-01-01-e838f258 # Spain and Portugal join
+
+  # --- Maastricht and the euro (1992-2002) ---
+  - id: 1992-02-07-fb32d2a2 # Maastricht signed
+  - id: 1992-06-02-e21842f6 # The Danish no
+  - id: 1993-01-01-52cba806 # The single market
+  - id: 1993-11-01-7b8d1808 # The EU begins
+  - id: 1994-11-28-b57dccad # The Norwegian no
+  - id: 1995-01-01-1da8f516 # Austria, Finland, Sweden
+  - id: 1999-01-01-3dd61886 # The euro
+  - id: 2002-01-01-e6bbb79d # Euro notes and coins
+
+  # --- Enlargement, crisis and Brexit (2004-2020) ---
+  - id: 2004-05-01-6e429646 # Ten new members
+  - id: 2007-01-01-33efa1a4 # Bulgaria and Romania
+  - id: 2007-12-13-53165288 # Lisbon signed
+  - id: 2009-11-19-184079b7 # First European Council president
+  - id: 2009-12-01-152ca13b # Lisbon in force
+  - id: 2010-05-02-c826a7cf # Greek bailout
+  - id: 2012-10-12-8006e3fe # Nobel Peace Prize
+  - id: 2013-07-01-186e1026 # Croatia joins
+  - id: 2016-06-23-76bb9a7b # The Brexit referendum
+  - id: 2020-01-31-2c3f7ccd # The UK leaves

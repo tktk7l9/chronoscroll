@@ -1,0 +1,57 @@
+# Modern Southeast Asia (collection)
+# References to existing auto-generated events only. Rama V and the Philippine revolution; the Siamese revolution of
+# 1932; the fall of Singapore; independence in Indonesia, Vietnam, the Philippines and Burma; Dien Bien Phu and Bandung;
+# the Burmese coup, Tonkin, Singapore's separation, the 30 September Movement and ASEAN; Tet, the Cambodian coup, the US
+# withdrawal, the fall of Saigon and the Sino-Vietnamese War; Aquino, Brunei and the EDSA revolution; Japan's first PKO in
+# Cambodia, the Asian financial crisis, Suharto, East Timor, Lee Kuan Yew, Myanmar's 2015 election and Rama IX. 2026-11-02.
+# Overlaps: the fall of Singapore is in ww2, the fall of Saigon in cold-war, the Asian crisis in finance.
+# Left out on purpose (dataset vs article): the Republic of Vietnam 28 Oct 1955 / 26 Oct 1955; Sukarno president
+# 16 Dec 1949 and the Diem coup entry with its detail on Madame Nhu / not confirmed in the articles; the Katipunan rising
+# "23 Aug" 1896, Vietnam-US normalisation 5 Aug 1995 and the Cambodia Paris Agreements 23 Oct 1991 / not dated, or no topic
+# article found; the 2006 Thai coup entry / its detail on the emergency decree was not confirmed.
+slug: southeast-asia
+title: 東南アジアの近現代
+lead: シャムのラーマ5世の即位とフィリピン独立宣言から、タイ立憲革命、シンガポールの陥落、インドネシア独立宣言、ベトナム民主共和国の成立、ビルマの独立、ディエンビエンフーの戦い、バンドンのアジア・アフリカ会議、ASEANの結成、テト攻勢、サイゴン陥落、エドゥサ革命、自衛隊のカンボジア派遣、アジア通貨危機、スハルトの辞任、東ティモールの独立まで。東南アジアの150年余りをたどる。
+description: タイ立憲革命とインドネシア独立宣言から、ベトナム戦争、ASEANの結成、エドゥサ革命、アジア通貨危機、東ティモールの独立まで、東南アジアの近現代を年代順にたどる特集。
+icon: art-monstera
+entries:
+  # --- Colonial age and war (1868-1945) ---
+  - id: 1868-10-01-9e0cfca4 # Rama V
+  - id: 1898-06-12-c03650a4 # Aguinaldo declares independence
+  - id: 1898-12-10-8eab09f5 # Treaty of Paris
+  - id: 1930-02-03-4afb0f9c # Vietnamese Communist Party
+  - id: 1932-06-24-6fca733b # Siamese revolution
+  - id: 1942-02-15-34781cbe # Fall of Singapore
+
+  # --- Independence (1945-1955) ---
+  - id: 1945-08-17-37ed0619 # Indonesian declaration
+  - id: 1945-09-02-61b264cf # Democratic Republic of Vietnam
+  - id: 1946-07-04-df1dd8e0 # Philippines independent
+  - id: 1948-01-04-ae3f112b # Burma independent
+  - id: 1954-05-07-4d53c748 # Dien Bien Phu
+  - id: 1955-04-18-b91e2ac9 # Bandung
+
+  # --- Coups, ASEAN and the Vietnam War (1962-1979) ---
+  - id: 1962-03-02-95c9ff9a # Ne Win
+  - id: 1964-08-02-9527724c # Tonkin Gulf
+  - id: 1965-08-09-829bf657 # Singapore separates
+  - id: 1965-09-30-e1fd7294 # 30 September Movement
+  - id: 1967-08-08-532a4af8 # ASEAN
+  - id: 1968-01-30-9702dbb1 # Tet offensive
+  - id: 1970-03-18-e3def3e8 # Cambodian coup
+  - id: 1973-03-29-5d16f5a9 # US withdrawal
+  - id: 1975-04-30-7286e8f0 # Fall of Saigon
+  - id: 1979-02-17-e8af1ae3 # Sino-Vietnamese War
+
+  # --- Democracy and growth (1983-2016) ---
+  - id: 1983-08-21-75181fb1 # Aquino assassinated
+  - id: 1984-01-01-cb0c1afc # Brunei independent
+  - id: 1986-02-25-9165dcae # EDSA revolution
+  - id: 1992-09-17-b1ef94f6 # Japan first PKO
+  - id: 1997-07-02-ee64dd53 # Asian financial crisis
+  - id: 1998-05-21-30ba261f # Suharto resigns
+  - id: 1999-08-30-d13f5438 # East Timor referendum
+  - id: 2002-05-20-cb3bd265 # East Timor independent
+  - id: 2015-03-23-b826d9cd # Lee Kuan Yew dies
+  - id: 2015-11-08-4c09ac14 # Myanmar election
+  - id: 2016-10-13-38e88be9 # Rama IX dies
