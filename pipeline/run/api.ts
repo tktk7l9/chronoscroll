@@ -9,6 +9,12 @@ import { isRetryableError, nextDelay, RETRY_MAX_ATTEMPTS, retryDelayMs } from '.
 
 const UA = 'chronoscroll-pipeline/0.1 (https://github.com/tktk7l9/chronoscroll)';
 const MIN_INTERVAL_MS = 150;
+/**
+ * Limit on one request (connection, headers and body). Without it a stalled connection sits until
+ * Node's undici defaults (5 min for the headers, 5 min for the body) inside the 240-minute monthly job.
+ * The timeout surfaces as a NetworkError, so the retry policy treats it like any other network drop.
+ */
+const REQUEST_TIMEOUT_MS = 60_000;
 
 /** The fetch used for API calls. Defaults to the global fetch; tests provide a stub */
 export const Fetch = Context.Reference<typeof fetch>('chronoscroll/Fetch', {
@@ -62,9 +68,9 @@ export function resetThrottle(): void {
 	lastRequestAt = Number.NEGATIVE_INFINITY;
 }
 
-const postOnce = (endpoint: string, body: string): Effect.Effect<unknown, WikiError> =>
+/** One request: fetch, status check and body read. Interrupting it aborts the fetch through `signal` */
+const requestOnce = (endpoint: string, body: string): Effect.Effect<unknown, WikiError> =>
 	Effect.gen(function* () {
-		yield* throttled;
 		const fetchImpl = yield* Fetch;
 		const res = yield* Effect.tryPromise({
 			try: (signal) =>
@@ -89,6 +95,19 @@ const postOnce = (endpoint: string, body: string): Effect.Effect<unknown, WikiEr
 		if (json.error) return yield* new ApiError(json.error);
 		return json;
 	});
+
+const postOnce = (endpoint: string, body: string): Effect.Effect<unknown, WikiError> =>
+	throttled.pipe(
+		Effect.andThen(
+			requestOnce(endpoint, body).pipe(
+				Effect.timeoutOrElse({
+					duration: REQUEST_TIMEOUT_MS,
+					orElse: () =>
+						new NetworkError({ cause: new Error(`request timed out after ${REQUEST_TIMEOUT_MS}ms`) }),
+				}),
+			),
+		),
+	);
 
 /**
  * Retry policy: at most RETRY_MAX_ATTEMPTS retries, each delay taken from retryDelayMs (the
