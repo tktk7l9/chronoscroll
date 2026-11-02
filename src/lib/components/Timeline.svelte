@@ -326,6 +326,11 @@
 		for (let d = first; d >= last; d -= 10) out.push(d);
 		return out;
 	});
+	// The chip's name starts with the year and era it shows, so speech-input users
+	// can say what they see (WCAG 2.5.3 Label in Name), then says what it does.
+	const eraChipLabel = $derived(
+		`${centerLabel.year}${centerLabel.wareki ? ` ${centerLabel.wareki}` : ''} 年代へジャンプ`,
+	);
 	const currentDecade = $derived(Math.floor(Number(centerLabel.year) / 10) * 10);
 	function jumpToDecade(decade: number | null): void {
 		jumpOpen = false;
@@ -429,7 +434,7 @@
 			type="button"
 			class="era-chip"
 			aria-expanded={jumpOpen}
-			aria-label="年代へジャンプ（現在 {centerLabel.year}年）"
+			aria-label={eraChipLabel}
 			onclick={() => (jumpOpen = !jumpOpen)}
 		>
 			<span class="era-year">{centerLabel.year}</span>

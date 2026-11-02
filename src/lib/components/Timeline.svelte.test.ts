@@ -52,7 +52,7 @@ describe('Timeline', () => {
 		const { user, onselect } = await setup();
 		expect(screen.getByRole('button', { name: /長野五輪開幕/ })).toBeInTheDocument();
 		expect(screen.getByRole('button', { name: /阪神・淡路大震災/ })).toBeInTheDocument();
-		expect(screen.getByRole('button', { name: /年代へジャンプ（現在 19\d\d年）/ })).toBeInTheDocument();
+		expect(screen.getByRole('button', { name: /^19\d\d .*年代へジャンプ$/ })).toBeInTheDocument();
 		await user.click(screen.getByRole('button', { name: /長野五輪開幕/ }));
 		expect(onselect).toHaveBeenCalledWith(expect.objectContaining({ id: 'e-1998' }));
 	});
@@ -192,7 +192,7 @@ describe('Timeline', () => {
 		expect(chip).toHaveFocus();
 		expect(window.scrollY).toBeGreaterThan(0);
 		// The jump lands mid-decade, not on its first year
-		await waitFor(() => expect(chip).toHaveAccessibleName(/現在 192[3-7]年/));
+		await waitFor(() => expect(chip).toHaveAccessibleName(/^192[3-7] /));
 
 		await user.click(chip);
 		await user.click(screen.getByRole('button', { name: '最新へ' }));
@@ -216,7 +216,7 @@ describe('Timeline', () => {
 	it('marks the decade currently in view inside the jump panel (SHIG 25, 59)', async () => {
 		const { user } = await setup({ initialCenter: '1950-06-01', initialPxPerDay: 2 });
 		const chip = screen.getByRole('button', { name: /年代へジャンプ/ });
-		await waitFor(() => expect(chip).toHaveAccessibleName(/現在 1950年/));
+		await waitFor(() => expect(chip).toHaveAccessibleName(/^1950 昭和25年 年代へジャンプ$/));
 		await user.click(chip);
 		const panel = screen.getByRole('group', { name: '年代を選択' });
 		expect(within(panel).getByRole('button', { name: /1950s/ })).toHaveAttribute('aria-current', 'true');
@@ -281,7 +281,7 @@ describe('Timeline', () => {
 		await waitFor(() => expect(window.scrollY).toBeGreaterThan(0));
 		expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '年');
 		await waitFor(() =>
-			expect(screen.getByRole('button', { name: /年代へジャンプ/ })).toHaveAccessibleName(/現在 1950年/),
+			expect(screen.getByRole('button', { name: /年代へジャンプ/ })).toHaveAccessibleName(/^1950 昭和25年 年代へジャンプ$/),
 		);
 
 		expect((component as { currentPxPerDay(): number }).currentPxPerDay()).toBe(2);
@@ -289,7 +289,7 @@ describe('Timeline', () => {
 		// Search jumps zoom in to at least the year level
 		expect((component as { currentPxPerDay(): number }).currentPxPerDay()).toBe(8);
 		await waitFor(() =>
-			expect(screen.getByRole('button', { name: /年代へジャンプ/ })).toHaveAccessibleName(/現在 1995年/),
+			expect(screen.getByRole('button', { name: /年代へジャンプ/ })).toHaveAccessibleName(/^1995 平成7年 年代へジャンプ$/),
 		);
 		await act(() => (component as { jumpTo(d: string): Promise<void> }).jumpTo('1920-01-01'));
 		expect((component as { currentPxPerDay(): number }).currentPxPerDay()).toBe(8);

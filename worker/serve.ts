@@ -28,9 +28,13 @@ export interface Env {
 // A leading dot is not allowed, so `..` cannot pass. Neither can `%` or `/`.
 const ID = /^[A-Za-z0-9][A-Za-z0-9._-]*$/;
 const CACHE_PAGE = 'public, max-age=3600, stale-while-revalidate=86400';
+// A main landmark and an h1 let screen-reader users find the message and the way back
+// (axe landmark-one-main / page-has-heading-one / region); the viewport keeps it readable on phones.
 const NOT_FOUND_HTML =
-	'<!doctype html><html lang="ja"><meta charset="utf-8"><title>ページが見つかりません | chronoscroll</title>' +
-	'<p>ページが見つかりません。<a href="/">年表へ戻る</a></p></html>';
+	'<!doctype html><html lang="ja"><meta charset="utf-8">' +
+	'<meta name="viewport" content="width=device-width, initial-scale=1">' +
+	'<title>ページが見つかりません | chronoscroll</title>' +
+	'<main><h1>ページが見つかりません</h1><p><a href="/">年表へ戻る</a></p></main></html>';
 
 export function resolve(pathname: string): Resolution {
 	if (!pathname.startsWith('/e/')) return { kind: 'notFound' };
