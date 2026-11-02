@@ -52,6 +52,14 @@ It shows domestic and international news from 1829 to the present, with an impor
   never raise it. A multi-line `<ref>`/`{{efn}}` case is best fixed with the text the parser gives for the whole
   logical line (the line plus its continuation lines), which restores words that follow `</ref>`; a range such as
   「[[2月8日]] - [[2月15日|15日]] - 本文」 keeps the start date, as the parser does.
+- **An edited year-page line keeps its id** (`pipeline/lib/id-continuity.ts`). The id hashes the text and the Actions cache of
+  year pages expires after 7 days, so every monthly refresh refetches all years and brings a month of Wikipedia edits at
+  once. `build.ts` pairs each id that left the generated set with the most similar new line of the same day (the rules of
+  near-duplicate removal, against the summaries in the committed `static/data/chunks`) and records the pair in
+  `pipeline/sidecar/id-aliases.json` (written by the build, committed by data-refresh; hand edits are fine, it is a plain
+  generated id → stable id map). Without this a refresh loses curated fixes, shrinks collections and orphans `/e/` pages,
+  as the 2026-11-02 run did. A curated or collection id with no successor stays on the timeline as last shipped, with a ⚠️
+  line in the build log: decide then whether to re-point the entry or remove it.
 - `content/affiliate/books.yaml` holds affiliate book links (id → BookRef[]). They are never
   merged into `NewsEvent`; they are served through a separate path as `static/data/books.json` (to keep the CC BY-SA-derived data clean).
 - `content/collections/<slug>.yaml` is a **collection (特集)** (a themed reading list). One file per collection, with metadata +

@@ -164,6 +164,16 @@ describe('generated data (static/data/chunks)', () => {
 		expect(summary.byPattern.size).toBeGreaterThanOrEqual(0);
 	});
 
+	it('ships every entry of every collection, so a refresh cannot shrink one', () => {
+		const shipped = new Map(
+			readJson<CollectionsIndex>('static/data/collections.json').collections.map((c) => [c.slug, c.count]),
+		);
+		for (const file of yamlFiles('content/collections')) {
+			const { slug, entries } = parseCollectionYaml(readFileSync(file, 'utf8'));
+			expect(shipped.get(slug), slug).toBe(new Set(entries.map((e) => e.id)).size);
+		}
+	});
+
 	it('keeps residue per class at or below the committed ceiling', () => {
 		const over = residueOverCeiling(residueSummary([...events.values()]), RESIDUE_CEILING);
 		const text = over.map((x) => `${x.name} ${x.count} > ${x.ceiling}`).join(', ');
