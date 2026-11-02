@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isMassDelete, parseManifest, planSync, sha256, shouldSkipSync } from './r2-plan.mjs';
+import { isMassDelete, parseManifest, planSync, R2_REQUEST_HANDLER, sha256, shouldSkipSync } from './r2-plan.mjs';
 
 describe('planSync', () => {
 	it('put for new/changed, del for removed, skip for unchanged (key order)', () => {
@@ -66,5 +66,13 @@ describe('shouldSkipSync', () => {
 	it('does not skip outside Workers Builds (local / GitHub Actions)', () => {
 		expect(shouldSkipSync({})).toBe(false);
 		expect(shouldSkipSync({ WORKERS_CI_BRANCH: 'feature/x' })).toBe(false);
+	});
+});
+
+describe('R2_REQUEST_HANDLER', () => {
+	it('bounds every request and makes the SDK abort it instead of only logging a warning', () => {
+		expect(R2_REQUEST_HANDLER.connectionTimeout).toBeGreaterThan(0);
+		expect(R2_REQUEST_HANDLER.requestTimeout).toBeGreaterThan(0);
+		expect(R2_REQUEST_HANDLER.throwOnRequestTimeout).toBe(true);
 	});
 });

@@ -1,6 +1,16 @@
 // Diff calculation for the R2 sync (pure function). I/O lives in scripts/r2-sync.mjs.
 import { createHash } from 'node:crypto';
 
+/**
+ * Without limits one stalled connection hangs the sync and the Workers Build around it. The SDK only logs a warning
+ * when requestTimeout passes unless throwOnRequestTimeout is set. A timed-out request is retried by the SDK.
+ */
+export const R2_REQUEST_HANDLER = {
+	connectionTimeout: 10_000,
+	requestTimeout: 60_000,
+	throwOnRequestTimeout: true,
+};
+
 /** @param {Buffer | string} data */
 export function sha256(data) {
 	return createHash('sha256').update(data).digest('hex');
